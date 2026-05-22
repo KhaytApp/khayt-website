@@ -63,64 +63,43 @@
     </p>
   </div>
 
-  <!-- Floating mockup -->
+  <!-- Real app screenshot -->
   <div class="hero-mockup">
-    <div class="mockup-window">
+    <div class="mockup-chrome">
       <div class="mockup-bar">
         <span class="dot dot-red"></span>
         <span class="dot dot-yellow"></span>
         <span class="dot dot-green"></span>
         <span class="mockup-title" data-en="Khayt — Production Queue" data-ar="خيط — قائمة الإنتاج">Khayt — Production Queue</span>
       </div>
-      <div class="mockup-body">
-        <div class="mockup-sidebar">
-          <div class="sidebar-item active">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            <span data-en="Queue" data-ar="القائمة">Queue</span>
-          </div>
-          <div class="sidebar-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            <span data-en="Calculator" data-ar="الحاسبة">Calculator</span>
-          </div>
-          <div class="sidebar-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            <span data-en="Invoices" data-ar="الفواتير">Invoices</span>
-          </div>
-          <div class="sidebar-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            <span data-en="Analytics" data-ar="التحليلات">Analytics</span>
-          </div>
+      <img src="screenshots/screenshot-queue.png" alt="Khayt Production Queue screenshot" class="mockup-screenshot" />
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section" id="screenshots">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag" data-en="See it in action" data-ar="شاهده في العمل">See it in action</span>
+      <h2 data-en="Every screen, purpose-built" data-ar="كل شاشة مصممة بهدف">Every screen, purpose-built</h2>
+    </div>
+    <div class="screenshots-tabs">
+      <button class="ss-tab active" data-screen="queue" data-en="Production Queue" data-ar="قائمة الإنتاج" onclick="switchScreen(this,'queue')">Production Queue</button>
+      <button class="ss-tab" data-screen="dashboard" data-en="Dashboard" data-ar="لوحة التحكم" onclick="switchScreen(this,'dashboard')">Dashboard</button>
+      <button class="ss-tab" data-screen="calculator" data-en="Calculator" data-ar="الحاسبة" onclick="switchScreen(this,'calculator')">Calculator</button>
+      <button class="ss-tab" data-screen="orders" data-en="Orders Log" data-ar="سجل الطلبات" onclick="switchScreen(this,'orders')">Orders Log</button>
+      <button class="ss-tab" data-screen="inventory" data-en="Inventory" data-ar="المخزون" onclick="switchScreen(this,'inventory')">Inventory</button>
+    </div>
+    <div class="screenshots-viewer">
+      <div class="mockup-chrome">
+        <div class="mockup-bar">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+          <span class="mockup-title" id="ssTitle">Khayt — Production Queue</span>
         </div>
-        <div class="mockup-content">
-          <div class="kanban-cols">
-            <div class="kanban-col">
-              <div class="kanban-col-header" data-en="Queued" data-ar="في الانتظار">Queued</div>
-              <div class="kanban-card">
-                <div class="kcard-title" data-en="Bracket × 4" data-ar="حامل × 4">Bracket × 4</div>
-                <div class="kcard-meta">PLA · 180g</div>
-              </div>
-              <div class="kanban-card">
-                <div class="kcard-title" data-en="Phone stand" data-ar="حامل هاتف">Phone stand</div>
-                <div class="kcard-meta">PETG · 95g</div>
-              </div>
-            </div>
-            <div class="kanban-col">
-              <div class="kanban-col-header" data-en="Printing" data-ar="قيد الطباعة">Printing</div>
-              <div class="kanban-card active-card">
-                <div class="kcard-title" data-en="Logo keychain × 10" data-ar="حلقة مفاتيح × 10">Logo keychain × 10</div>
-                <div class="kcard-meta">TPU · 42g</div>
-                <div class="kcard-progress"><div class="kcard-progress-bar" style="width:67%"></div></div>
-              </div>
-            </div>
-            <div class="kanban-col">
-              <div class="kanban-col-header" data-en="Done" data-ar="مكتمل">Done</div>
-              <div class="kanban-card done-card">
-                <div class="kcard-title" data-en="Vase set" data-ar="طقم مزهريات">Vase set</div>
-                <div class="kcard-meta">PLA · 320g ✓</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img id="ssImage" src="screenshots/screenshot-queue.png" alt="App screenshot" class="mockup-screenshot" />
       </div>
     </div>
   </div>
@@ -321,6 +300,21 @@
 </footer>
 
 <script>
+  // Screenshot tab switcher
+  const screenTitles = {
+    queue:      { en: 'Khayt — Production Queue', ar: 'خيط — قائمة الإنتاج' },
+    dashboard:  { en: 'Khayt — Dashboard',        ar: 'خيط — لوحة التحكم' },
+    calculator: { en: 'Khayt — Calculator',       ar: 'خيط — الحاسبة' },
+    orders:     { en: 'Khayt — Orders Log',       ar: 'خيط — سجل الطلبات' },
+    inventory:  { en: 'Khayt — Inventory',        ar: 'خيط — المخزون' },
+  };
+  function switchScreen(btn, key) {
+    document.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('ssImage').src = `screenshots/screenshot-${key}.png`;
+    document.getElementById('ssTitle').textContent = screenTitles[key][isArabic ? 'ar' : 'en'];
+  }
+
   // Language toggle
   const langToggle = document.getElementById('langToggle');
   const langLabel = document.getElementById('langLabel');
@@ -335,6 +329,13 @@
     document.querySelectorAll('[data-en]').forEach(el => {
       el.textContent = ar ? el.getAttribute('data-ar') : el.getAttribute('data-en');
     });
+    // Update screenshot tab titles
+    const activeTab = document.querySelector('.ss-tab.active');
+    if (activeTab) {
+      const key = activeTab.getAttribute('data-screen');
+      const titleEl = document.getElementById('ssTitle');
+      if (titleEl && key) titleEl.textContent = screenTitles[key][ar ? 'ar' : 'en'];
+    }
   }
 
   langToggle.addEventListener('click', () => applyLang(!isArabic));
