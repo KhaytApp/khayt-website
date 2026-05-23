@@ -288,6 +288,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Download counter -->
+    <div class="dl-counter" id="dlCounter" style="display:none">
+      <div class="dl-counter-total">
+        <span class="dl-counter-num" id="dlTotal">0</span>
+        <span class="dl-counter-label" data-en="total downloads" data-ar="إجمالي التنزيلات">total downloads</span>
+      </div>
+      <div class="dl-counter-breakdown" id="dlBreakdown"></div>
+    </div>
     <div class="download-platforms">
 
       <!-- macOS -->
@@ -436,6 +445,83 @@
   }
 
   langToggle.addEventListener('click', () => applyLang(!isArabic));
+
+  // ── Download counter ──
+  const PLATFORM_MAP = {
+    '.dmg':  { label: 'macOS',   icon: '🍎' },
+    '.exe':  { label: 'Windows', icon: '🪟' },
+    '.AppImage': { label: 'Linux', icon: '🐧' },
+    '.deb':  { label: 'Linux',   icon: '🐧' },
+  };
+
+  function animateCount(el, target) {
+    const duration = 900;
+    const start = performance.now();
+    const from = parseInt(el.textContent) || 0;
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (target - from) * ease).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  async function loadDownloadStats() {
+    const CACHE_KEY = 'khayt_dl_stats';
+    const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+    let data;
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && Date.now() - cached.ts < CACHE_TTL) {
+        data = cached.data;
+      } else {
+        const res = await fetch('https://api.github.com/repos/Alballaa/Khayt/releases');
+        if (!res.ok) return;
+        data = await res.json();
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
+      }
+    } catch { return; }
+
+    // Tally totals
+    let total = 0;
+    const byPlatform = {};
+    for (const release of data) {
+      for (const asset of release.assets || []) {
+        const ext = Object.keys(PLATFORM_MAP).find(e => asset.name.endsWith(e));
+        const platform = ext ? PLATFORM_MAP[ext].label : 'Other';
+        byPlatform[platform] = (byPlatform[platform] || 0) + asset.download_count;
+        total += asset.download_count;
+      }
+    }
+
+    if (total === 0) return; // hide until there's something to show
+
+    // Render
+    const counterEl = document.getElementById('dlCounter');
+    const totalEl   = document.getElementById('dlTotal');
+    const breakEl   = document.getElementById('dlBreakdown');
+
+    const platforms = [
+      { key: 'macOS',   icon: '🍎' },
+      { key: 'Windows', icon: '🪟' },
+      { key: 'Linux',   icon: '🐧' },
+    ];
+    breakEl.innerHTML = platforms
+      .filter(p => byPlatform[p.key])
+      .map(p => `<span class="dl-platform-stat">${p.icon} ${p.key} <strong>${byPlatform[p.key].toLocaleString()}</strong></span>`)
+      .join('');
+
+    counterEl.style.display = 'flex';
+    animateCount(totalEl, total);
+
+    // Keep translated
+    counterEl.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    });
+  }
+
+  loadDownloadStats();
 
   // Nav scroll effect
   window.addEventListener('scroll', () => {
