@@ -36,16 +36,17 @@
     <img src="icon_preview.png" alt="Khayt" class="hero-icon" />
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span data-en="v1.0.0 — Free &amp; Open Source" data-ar="الإصدار 1.0.0 — مجاني ومفتوح المصدر">v1.0.0 — Free &amp; Open Source</span>
+      <span data-en="v1.1.0-beta.1 — Free &amp; Open Source" data-ar="الإصدار 1.1.0-beta.1 — مجاني ومفتوح المصدر">v1.1.0-beta.1 — Free &amp; Open Source</span>
     </div>
+    <div class="beta-notice" data-en="⚠️ Beta software — back up your data and verify invoices before sending to clients." data-ar="⚠️ نسخة تجريبية — احتفظ بنسخ احتياطية وراجع الفواتير قبل إرسالها للعملاء.">⚠️ Beta software — back up your data and verify invoices before sending to clients.</div>
     <h1 class="hero-title">
       <span data-en="Khayt" data-ar="خيط">Khayt</span>
     </h1>
     <p class="hero-tagline" data-en="The all-in-one production studio for 3D print shops." data-ar="بيئة الإنتاج الشاملة لمحلات الطباعة ثلاثية الأبعاد.">
       The all-in-one production studio for 3D print shops.
     </p>
-    <p class="hero-sub" data-en="Manage orders, calculate costs, issue ZATCA invoices, track inventory, and grow your business — all offline, all free." data-ar="أدر طلباتك، احسب التكاليف، أصدر فواتير متوافقة مع هيئة الزكاة، تتبع المخزون، وطوّر عملك — دون إنترنت، ومجاناً تماماً.">
-      Manage orders, calculate costs, issue ZATCA invoices, track inventory, and grow your business — all offline, all free.
+    <p class="hero-sub" data-en="Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics — all offline, all free." data-ar="قائمة إنتاج كانبان، تسعير ذكي، فواتير هيئة الزكاة، واجهة API للطابعات، مخزون الفتيل، وتحليلات متقدمة — دون إنترنت، ومجاناً تماماً.">
+      Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics — all offline, all free.
     </p>
     <div class="hero-cta">
       <a href="#download" class="btn btn-primary">
@@ -120,15 +121,15 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
         </div>
         <h3 data-en="Kanban Production Queue" data-ar="قائمة الإنتاج Kanban">Kanban Production Queue</h3>
-        <p data-en="Drag orders across Queued → Printing → Done. See every job at a glance with material, weight, and priority." data-ar="اسحب الطلبات عبر مراحل الانتظار والطباعة والاكتمال. راقب كل مهمة بسهولة مع المادة والوزن والأولوية.">Drag orders across Queued → Printing → Done. See every job at a glance with material, weight, and priority.</p>
+        <p data-en="Drag orders across Pending → Printing → Post-Processing → QC → Done. Multi-machine scheduling, on-hold with reason, and part-level colour assignment." data-ar="اسحب الطلبات عبر مراحل الانتظار والطباعة ومراقبة الجودة والاكتمال. جدولة متعددة الطابعات وتعيين ألوان لكل قطعة.">Drag orders across Pending → Printing → Post-Processing → QC → Done. Multi-machine scheduling, on-hold with reason, and part-level colour assignment.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon" style="--c:#34d399">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
-        <h3 data-en="Filament Cost Calculator" data-ar="حاسبة تكلفة الفتيل">Filament Cost Calculator</h3>
-        <p data-en="Price jobs accurately with per-gram filament costs, machine wear, electricity, labor, and failure rates. Save printer presets." data-ar="سعّر مهامك بدقة مع تكلفة الفتيل لكل جرام والاهتلاك والكهرباء والعمالة ومعدل الفشل. احفظ إعدادات الطابعة.">Price jobs accurately with per-gram filament costs, machine wear, electricity, labor, and failure rates. Save printer presets.</p>
+        <h3 data-en="Smart Cost Calculator" data-ar="حاسبة التكلفة الذكية">Smart Cost Calculator</h3>
+        <p data-en="Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. G-code / 3MF metadata auto-extraction." data-ar="عربة متعددة القطع مع تفصيل مباشر: مادة، وقت الآلة، كهرباء، عمالة، تكاليف عامة ونسبة الفشل. يدعم FDM بالجرام والراتنج بالمليلتر. استخراج تلقائي من ملفات G-code و3MF.">Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. G-code / 3MF metadata auto-extraction.</p>
       </div>
 
       <div class="feature-card">
@@ -136,47 +137,55 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <h3 data-en="ZATCA-Compliant Invoicing" data-ar="فواتير متوافقة مع هيئة الزكاة">ZATCA-Compliant Invoicing</h3>
-        <p data-en="Generate Phase 1 e-invoices with TLV QR codes. Export as PDF, share via WhatsApp. Built for Saudi market requirements." data-ar="أنشئ فواتير إلكترونية المرحلة الأولى مع رموز QR بصيغة TLV. صدّرها PDF وشاركها عبر واتساب. مصممة لمتطلبات السوق السعودي.">Generate Phase 1 e-invoices with TLV QR codes. Export as PDF, share via WhatsApp. Built for Saudi market requirements.</p>
+        <p data-en="Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. PDF export, WhatsApp &amp; email delivery." data-ar="فواتير إلكترونية المرحلة الأولى مع رموز QR، فواتير مبدئية، دفعات جزئية بالمراحل، صفحات الموافقة على العروض وتاريخ المراجعات. تصدير PDF وتسليم عبر واتساب والبريد الإلكتروني.">Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. PDF export, WhatsApp &amp; email delivery.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="--c:#06b6d4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+        </div>
+        <h3 data-en="Live Printer API" data-ar="واجهة الطابعة المباشرة">Live Printer API</h3>
+        <p data-en="Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet, and Repetier. See real-time temperature and print progress directly from the queue." data-ar="اتصل بـ OctoPrint وMoonraker وBambu Lab وPrusaLink وDuet وRepetier. شاهد درجة الحرارة وتقدم الطباعة مباشرةً من قائمة الإنتاج.">Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet, and Repetier. See real-time temperature and print progress directly from the queue.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon" style="--c:#a78bfa">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         </div>
-        <h3 data-en="Inventory + NFC Spool Scanning" data-ar="مخزون + مسح بكرات NFC">Inventory + NFC Spool Scanning</h3>
-        <p data-en="Track filament spools by material, color, and weight. Scan NFC tags to instantly identify and log spool usage." data-ar="تتبع بكرات الفتيل حسب المادة واللون والوزن. امسح علامات NFC للتعرف الفوري على البكرة وتسجيل الاستهلاك.">Track filament spools by material, color, and weight. Scan NFC tags to instantly identify and log spool usage.</p>
+        <h3 data-en="Inventory Management" data-ar="إدارة المخزون">Inventory Management</h3>
+        <p data-en="Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, reorder alerts, price history, and overcommit warnings." data-ar="تتبع بكرات FDM وعبوات الراتنج مع خصم تلقائي عند الاكتمال. سجل التجفيف وطبعات الاختبار وتنبيهات إعادة الطلب وتاريخ الأسعار.">Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, reorder alerts, price history, and overcommit warnings.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon" style="--c:#f472b6">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
-        <h3 data-en="Analytics &amp; Insights" data-ar="التحليلات والإحصاءات">Analytics &amp; Insights</h3>
-        <p data-en="Revenue trends, top materials, job completion rates, and profit margins — visualized clearly so you can make better decisions." data-ar="اتجاهات الإيرادات، أكثر المواد استخداماً، معدلات إتمام المهام، وهوامش الربح — مرئية بوضوح لتتخذ قرارات أفضل.">Revenue trends, top materials, job completion rates, and profit margins — visualized clearly so you can make better decisions.</p>
+        <h3 data-en="Analytics &amp; Break-Even" data-ar="التحليلات ونقطة التعادل">Analytics &amp; Break-Even</h3>
+        <p data-en="Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, and cost trends. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes." data-ar="الإيرادات والطلبات والساعات وربحية الآلات وأداء المشغلين. بطاقة نقطة التعادل ومنشئ استطلاع NPS. أوضاع التقارير البسيطة والمتقدمة.">Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, and cost trends. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon" style="--c:#38bdf8">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3 data-en="Client Management" data-ar="إدارة العملاء">Client Management</h3>
-        <p data-en="Keep a full history of every client's orders, invoices, and preferences. Build relationships, not just transactions." data-ar="احتفظ بسجل كامل لطلبات كل عميل وفواتيره وتفضيلاته. ابنِ علاقات، لا مجرد صفقات.">Keep a full history of every client's orders, invoices, and preferences. Build relationships, not just transactions.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#fb923c">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        </div>
-        <h3 data-en="Portfolio Gallery" data-ar="معرض الأعمال">Portfolio Gallery</h3>
-        <p data-en="Showcase your best prints with photos, descriptions, and tags. Share your portfolio with potential clients." data-ar="اعرض أفضل مطبوعاتك بصور وأوصاف وعلامات. شارك معرض أعمالك مع العملاء المحتملين.">Showcase your best prints with photos, descriptions, and tags. Share your portfolio with potential clients.</p>
+        <h3 data-en="Client CRM &amp; Loyalty" data-ar="إدارة العملاء والولاء">Client CRM &amp; Loyalty</h3>
+        <p data-en="Client profiles with credit limits, bilingual VAT details, loyalty tiers with automatic discounts, intake forms, aged receivables report, and client portal export." data-ar="ملفات تعريف العملاء مع حدود الائتمان ومعلومات الضريبة وأنظمة النقاط والخصومات التلقائية وتقرير الذمم المدينة المتقادمة.">Client profiles with credit limits, bilingual VAT details, loyalty tiers with automatic discounts, intake forms, aged receivables report, and client portal export.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon" style="--c:#4ade80">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h.01M9 8h6"/></svg>
         </div>
-        <h3 data-en="Expense Tracking" data-ar="تتبع المصروفات">Expense Tracking</h3>
-        <p data-en="Log business expenses, categorize costs, and reconcile against revenue so your books stay clean." data-ar="سجّل مصروفات العمل، صنّف التكاليف، ووازنها مع الإيرادات لتبقى حساباتك منظمة.">Log business expenses, categorize costs, and reconcile against revenue so your books stay clean.</p>
+        <h3 data-en="Expenses &amp; Accounting" data-ar="المصروفات والمحاسبة">Expenses &amp; Accounting</h3>
+        <p data-en="Recurring expenses (monthly/quarterly/annually), budget tracking, receipt attachments, purchase orders with partial receiving, and double-entry accounting CSV export." data-ar="مصروفات متكررة (شهرية/ربع سنوية/سنوية)، تتبع الميزانية، فواتير الموردين مع الاستلام الجزئي، وتصدير CSV محاسبي بالقيد المزدوج.">Recurring expenses (monthly/quarterly/annually), budget tracking, receipt attachments, purchase orders with partial receiving, and double-entry accounting CSV export.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="--c:#fb923c">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3 data-en="Integrations &amp; Access Control" data-ar="التكاملات والتحكم في الوصول">Integrations &amp; Access Control</h3>
+        <p data-en="Outbound HMAC-signed webhooks for order events. Embedded LAN REST API — view queue from any device on your network. Operator PIN lock with Admin / Technician / Sales roles." data-ar="ويب هوك HMAC-signed للأحداث. خادم REST API محلي — راقب الطوابير من أي جهاز على شبكتك. قفل PIN للمشغلين مع أدوار الإدارة والتقنية والمبيعات.">Outbound HMAC-signed webhooks for order events. Embedded LAN REST API — view queue from any device on your network. Operator PIN lock with Admin / Technician / Sales roles.</p>
       </div>
 
     </div>
@@ -187,14 +196,14 @@
 <section class="bilingual-section">
   <div class="section-inner bilingual-inner">
     <div class="bilingual-text">
-      <span class="section-tag" data-en="Bilingual-first" data-ar="ثنائي اللغة بالأساس">Bilingual-first</span>
-      <h2 data-en="Built for Arabic makers too" data-ar="مبني لصانعي العرب أيضاً">Built for Arabic makers too</h2>
-      <p data-en="Full Arabic UI with right-to-left layout — not an afterthought, but a core design decision. Switch languages instantly from anywhere in the app." data-ar="واجهة عربية كاملة مع تخطيط من اليمين لليسار — ليست إضافة لاحقة، بل قرار تصميمي أساسي. غيّر اللغة فوراً من أي مكان في التطبيق.">Full Arabic UI with right-to-left layout — not an afterthought, but a core design decision. Switch languages instantly from anywhere in the app.</p>
+      <span class="section-tag" data-en="6 languages" data-ar="6 لغات">6 languages</span>
+      <h2 data-en="Built for global makers" data-ar="مبني لصانعي العالم">Built for global makers</h2>
+      <p data-en="Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, and Chinese. Switch languages instantly from anywhere in the app." data-ar="تخطيط RTL العربي الكامل قرار تصميمي أساسي وليس إضافة لاحقة. كما يتوفر خيط بالألمانية والإسبانية والفرنسية والصينية. غيّر اللغة فوراً من أي مكان في التطبيق.">Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, and Chinese. Switch languages instantly from anywhere in the app.</p>
       <ul class="bilingual-list">
-        <li data-en="Arabic RTL layout throughout" data-ar="تخطيط عربي RTL في كل مكان">Arabic RTL layout throughout</li>
-        <li data-en="All labels, errors, and dialogs translated" data-ar="جميع التسميات والأخطاء والنوافذ مترجمة">All labels, errors, and dialogs translated</li>
-        <li data-en="ZATCA invoices in Arabic &amp; English" data-ar="فواتير هيئة الزكاة بالعربية والإنجليزية">ZATCA invoices in Arabic &amp; English</li>
-        <li data-en="Instant language switch, no restart" data-ar="تبديل فوري للغة دون إعادة تشغيل">Instant language switch, no restart</li>
+        <li data-en="6 UI languages: Arabic, English, German, Spanish, French, Chinese" data-ar="6 لغات: العربية والإنجليزية والألمانية والإسبانية والفرنسية والصينية">6 UI languages: Arabic, English, German, Spanish, French, Chinese</li>
+        <li data-en="Arabic RTL layout throughout the entire app" data-ar="تخطيط عربي RTL في كل أنحاء التطبيق">Arabic RTL layout throughout the entire app</li>
+        <li data-en="ZATCA invoices in bilingual Arabic &amp; English" data-ar="فواتير هيئة الزكاة بالعربية والإنجليزية">ZATCA invoices in bilingual Arabic &amp; English</li>
+        <li data-en="Instant language switch, no restart needed" data-ar="تبديل فوري للغة دون إعادة تشغيل">Instant language switch, no restart needed</li>
       </ul>
     </div>
     <div class="bilingual-demo">
@@ -241,6 +250,11 @@
       </div>
       <div class="os-stat-divider"></div>
       <div class="os-stat">
+        <span class="os-stat-num">6</span>
+        <span class="os-stat-label" data-en="Languages" data-ar="لغات">Languages</span>
+      </div>
+      <div class="os-stat-divider"></div>
+      <div class="os-stat">
         <span class="os-stat-num">0</span>
         <span class="os-stat-label" data-en="Subscriptions" data-ar="اشتراكات">Subscriptions</span>
       </div>
@@ -263,6 +277,7 @@
         <p data-en="Free for everyone. No account. No telemetry. Your data stays on your device." data-ar="مجاني للجميع. لا حساب. لا بيانات مُرسَلة. بياناتك تبقى على جهازك.">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
         <div class="download-meta">
           <span class="meta-pill">v1.0.0</span>
+          <span class="meta-pill beta-pill" data-en="v1.1.0-beta.1 in development" data-ar="v1.1.0-beta.1 قيد التطوير">v1.1.0-beta.1 in development</span>
           <span class="meta-pill" data-en="Open Source" data-ar="مفتوح المصدر">Open Source</span>
           <span class="meta-pill" data-en="No telemetry" data-ar="لا بيانات مُرسَلة">No telemetry</span>
         </div>
