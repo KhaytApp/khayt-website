@@ -360,15 +360,40 @@
   const screenTitles = {
     queue:      { en: 'Khayt — Production Queue', ar: 'خيط — قائمة الإنتاج' },
     dashboard:  { en: 'Khayt — Dashboard',        ar: 'خيط — لوحة التحكم' },
-    calculator: { en: 'Khayt — Calculator',       ar: 'خيط — الحاسبة' },
+    calculator: { en: 'Khayt — Calculator',       ar: 'خيط — حاسبة التسعير' },
     orders:     { en: 'Khayt — Orders Log',       ar: 'خيط — سجل الطلبات' },
     inventory:  { en: 'Khayt — Inventory',        ar: 'خيط — المخزون' },
   };
+
+  function getScreenSrc(key, ar) {
+    return `screenshots/screenshot-${ar ? 'ar-' : ''}${key}.png`;
+  }
+
   function switchScreen(btn, key) {
     document.querySelectorAll('.ss-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('ssImage').src = `screenshots/screenshot-${key}.png`;
+    document.getElementById('ssImage').src = getScreenSrc(key, isArabic);
     document.getElementById('ssTitle').textContent = screenTitles[key][isArabic ? 'ar' : 'en'];
+  }
+
+  function updateAllScreenshots(ar) {
+    // Hero screenshot
+    const heroImg = document.querySelector('.hero-mockup .mockup-screenshot');
+    if (heroImg) heroImg.src = getScreenSrc('queue', ar);
+
+    // Gallery screenshot
+    const ssImg = document.getElementById('ssImage');
+    const activeTab = document.querySelector('.ss-tab.active');
+    const key = activeTab?.getAttribute('data-screen') || 'queue';
+    if (ssImg) ssImg.src = getScreenSrc(key, ar);
+
+    // Window title bar
+    const titleEl = document.getElementById('ssTitle');
+    if (titleEl) titleEl.textContent = screenTitles[key][ar ? 'ar' : 'en'];
+
+    // Hero window title
+    const heroTitle = document.querySelector('.hero-mockup .mockup-title');
+    if (heroTitle) heroTitle.textContent = screenTitles['queue'][ar ? 'ar' : 'en'];
   }
 
   // Language toggle
@@ -385,13 +410,8 @@
     document.querySelectorAll('[data-en]').forEach(el => {
       el.textContent = ar ? el.getAttribute('data-ar') : el.getAttribute('data-en');
     });
-    // Update screenshot tab titles
-    const activeTab = document.querySelector('.ss-tab.active');
-    if (activeTab) {
-      const key = activeTab.getAttribute('data-screen');
-      const titleEl = document.getElementById('ssTitle');
-      if (titleEl && key) titleEl.textContent = screenTitles[key][ar ? 'ar' : 'en'];
-    }
+    // Swap all screenshots to match language
+    updateAllScreenshots(ar);
   }
 
   langToggle.addEventListener('click', () => applyLang(!isArabic));
