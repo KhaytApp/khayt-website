@@ -4,11 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Khayt — 3D Printing Production Manager</title>
-  <meta name="description" content="Free, open-source desktop app for 3D print shop owners. Production queue, invoicing, inventory, and analytics — on macOS, Windows, and Linux." />
+  <meta name="description" content="Free desktop app for 3D print shop owners. Production queue, invoicing, inventory, and analytics — on macOS, Windows, and Linux." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="icon_preview.png" />
 </head>
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar" id="announcementBar">
+  <span class="ann-icon">⚠️</span>
+  <span class="ann-text" data-en="Beta software — back up your data and verify all invoices before sending to clients." data-ar="نسخة تجريبية — احتفظ بنسخ احتياطية وراجع جميع الفواتير قبل إرسالها للعملاء.">Beta software — back up your data and verify all invoices before sending to clients.</span>
+  <a href="https://github.com/Alballaa/Khayt/issues" target="_blank" class="ann-link" data-en="Report issues →" data-ar="الإبلاغ عن مشكلة →">Report issues →</a>
+</div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -36,17 +43,16 @@
     <img src="icon_preview.png" alt="Khayt" class="hero-icon" />
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span data-en="v1.1.0-beta.1 — Free &amp; Open Source" data-ar="الإصدار 1.1.0-beta.1 — مجاني ومفتوح المصدر">v1.1.0-beta.1 — Free &amp; Open Source</span>
+      <span data-en="v1.1.0-beta.1 — Free to Use · Source Available" data-ar="الإصدار 1.1.0-beta.1 — مجاني · المصدر متاح">v1.1.0-beta.1 — Free to Use · Source Available</span>
     </div>
-    <div class="beta-notice" data-en="⚠️ Beta software — back up your data and verify invoices before sending to clients." data-ar="⚠️ نسخة تجريبية — احتفظ بنسخ احتياطية وراجع الفواتير قبل إرسالها للعملاء.">⚠️ Beta software — back up your data and verify invoices before sending to clients.</div>
     <h1 class="hero-title">
       <span data-en="Khayt" data-ar="خيط">Khayt</span>
     </h1>
     <p class="hero-tagline" data-en="The all-in-one production studio for 3D print shops." data-ar="بيئة الإنتاج الشاملة لمحلات الطباعة ثلاثية الأبعاد.">
       The all-in-one production studio for 3D print shops.
     </p>
-    <p class="hero-sub" data-en="Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics — all offline, all free." data-ar="قائمة إنتاج كانبان، تسعير ذكي، فواتير هيئة الزكاة، واجهة API للطابعات، مخزون الفتيل، وتحليلات متقدمة — دون إنترنت، ومجاناً تماماً.">
-      Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics — all offline, all free.
+    <p class="hero-sub" data-en="Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics. Simple or Professional mode — you choose. All offline, all free." data-ar="قائمة إنتاج كانبان، تسعير ذكي، فواتير هيئة الزكاة، واجهة API للطابعات، مخزون الفتيل، وتحليلات متقدمة. وضع بسيط أو احترافي — أنت تختار. كل ذلك دون إنترنت، ومجاناً تماماً.">
+      Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics. Simple or Professional mode — you choose. All offline, all free.
     </p>
     <div class="hero-cta">
       <a href="#download" class="btn btn-primary">
@@ -225,14 +231,14 @@
   </div>
 </section>
 
-<!-- OPEN SOURCE -->
+<!-- SOURCE AVAILABLE -->
 <section class="opensource-section" id="opensource">
   <div class="section-inner opensource-inner">
     <div class="os-icon-wrap">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
     </div>
-    <h2 data-en="Free. Forever. Open Source." data-ar="مجاني. للأبد. مفتوح المصدر.">Free. Forever. Open Source.</h2>
-    <p data-en="Khayt is free to use and will remain free. The source code is public on GitHub. If it helps your business, consider sponsoring to keep development going." data-ar="خيط مجاني للاستخدام وسيبقى مجانياً. الكود المصدري متاح على GitHub. إذا أفاد عملك، فكّر في الدعم للحفاظ على الاستمرار في التطوير.">Khayt is free to use and will remain free. The source code is public on GitHub. If it helps your business, consider sponsoring to keep development going.</p>
+    <h2 data-en="Free to Use. Source Available." data-ar="مجاني للاستخدام. المصدر متاح.">Free to Use. Source Available.</h2>
+    <p data-en="Khayt is free to use and will remain free. The source code is on GitHub — read it, fork it, modify it for your own use. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring." data-ar="خيط مجاني للاستخدام وسيبقى مجانياً. الكود المصدري متاح على GitHub — اقرأه وانسخه وعدّله لاستخدامك الشخصي. مرخص بـ MIT + Commons Clause (لا يُباع). إذا أفاد عملك فكّر في دعم المشروع.">Khayt is free to use and will remain free. The source code is on GitHub — read it, fork it, modify it for your own use. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring.</p>
     <div class="os-actions">
       <a href="https://github.com/Alballaa/Khayt" target="_blank" class="btn btn-ghost">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -246,7 +252,7 @@
     <div class="os-stats">
       <div class="os-stat">
         <span class="os-stat-num">100%</span>
-        <span class="os-stat-label" data-en="Free" data-ar="مجاني">Free</span>
+        <span class="os-stat-label" data-en="Free to Use" data-ar="مجاني للاستخدام">Free to Use</span>
       </div>
       <div class="os-stat-divider"></div>
       <div class="os-stat">
@@ -276,9 +282,8 @@
         <h2 data-en="Download Khayt" data-ar="تحميل خيط">Download Khayt</h2>
         <p data-en="Free for everyone. No account. No telemetry. Your data stays on your device." data-ar="مجاني للجميع. لا حساب. لا بيانات مُرسَلة. بياناتك تبقى على جهازك.">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
         <div class="download-meta">
-          <span class="meta-pill">v1.0.0</span>
-          <span class="meta-pill beta-pill" data-en="v1.1.0-beta.1 in development" data-ar="v1.1.0-beta.1 قيد التطوير">v1.1.0-beta.1 in development</span>
-          <span class="meta-pill" data-en="Open Source" data-ar="مفتوح المصدر">Open Source</span>
+          <span class="meta-pill beta-pill">v1.1.0-beta.1</span>
+          <span class="meta-pill" data-en="Source Available" data-ar="المصدر متاح">Source Available</span>
           <span class="meta-pill" data-en="No telemetry" data-ar="لا بيانات مُرسَلة">No telemetry</span>
         </div>
       </div>
@@ -366,7 +371,7 @@
       <a href="#features" data-en="Features" data-ar="المميزات">Features</a>
       <a href="#download" data-en="Download" data-ar="تحميل">Download</a>
     </div>
-    <div class="footer-copy" data-en="Made with ♥ for the 3D printing community · MIT License" data-ar="صُنع بـ ♥ لمجتمع الطباعة ثلاثية الأبعاد · رخصة MIT">Made with ♥ for the 3D printing community · MIT License</div>
+    <div class="footer-copy" data-en="Made with ♥ for the 3D printing community · MIT + Commons Clause" data-ar="صُنع بـ ♥ لمجتمع الطباعة ثلاثية الأبعاد · MIT + Commons Clause">Made with ♥ for the 3D printing community · MIT + Commons Clause</div>
   </div>
 </footer>
 
@@ -433,14 +438,18 @@
 
   // Nav scroll effect
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Smooth scroll for anchor links
+  // Smooth scroll for anchor links (offset for fixed bar + nav = 100px)
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
     });
   });
 </script>
