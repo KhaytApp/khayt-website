@@ -1,0 +1,53 @@
+name: Sync Khayt release
+
+on:
+  # Triggered instantly by the app repo when a release is published
+  repository_dispatch:
+    types: [khayt-release]
+
+  # Hourly fallback in case the dispatch was missed
+  schedule:
+    - cron: '0 * * * *'
+
+  # Manual trigger from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Fetch latest Khayt release tag
+        id: release
+        run: |
+          TAG=$(curl -s "https://api.github.com/repos/Alballaa/Khayt/releases" \
+            | python3 -c "
+          import json, sys
+          releases = json.load(sys.stdin)
+          for r in releases:
+              if not r['draft']:
+                  print(r['tag_name'])
+                  break
+          ")
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Detected latest release: $TAG"
+
+      - name: Update index.html
+        run: python3 .github/scripts/update_version.py "${{ steps.release.outputs.tag }}"
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --staged --quiet; then
+            echo "index.html already up to date — nothing to commit"
+          else
+            git commit -m "chore: auto-sync download links to ${{ steps.release.outputs.tag }}"
+            git push
+          fi
