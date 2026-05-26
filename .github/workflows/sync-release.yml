@@ -20,12 +20,13 @@ jobs:
 
     steps:
       - name: Checkout website
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # actions/checkout v4.2.2
 
       - name: Fetch latest Khayt release tag
         id: release
         run: |
-          TAG=$(curl -s "https://api.github.com/repos/Alballaa/Khayt/releases" \
+          TAG=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/Alballaa/Khayt/releases" \
             | python3 -c "
           import json, sys
           releases = json.load(sys.stdin)
@@ -38,7 +39,13 @@ jobs:
           echo "Detected latest release: $TAG"
 
       - name: Update index.html
-        run: python3 .github/scripts/update_version.py "${{ steps.release.outputs.tag }}"
+        run: |
+          TAG="${{ steps.release.outputs.tag }}"
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "No valid semver release tag found (got: '$TAG') — skipping update"
+            exit 0
+          fi
+          python3 .github/scripts/update_version.py "$TAG"
 
       - name: Commit and push if changed
         run: |

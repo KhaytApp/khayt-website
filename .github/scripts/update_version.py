@@ -7,7 +7,7 @@ Fetches real asset names from the GitHub API so that filename-format changes
 
 Usage: python3 update_version.py v2.0.2
 """
-import sys, re, json, urllib.request
+import sys, re, json, urllib.request, urllib.error
 
 REPO = "Alballaa/Khayt"
 
@@ -18,7 +18,7 @@ def gh_api(path):
     req = urllib.request.Request(url, headers={"Accept": "application/vnd.github+json",
                                                 "X-GitHub-Api-Version": "2022-11-28",
                                                 "User-Agent": "khayt-website-sync/1"})
-    with urllib.request.urlopen(req) as r:
+    with urllib.request.urlopen(req, timeout=10) as r:
         return json.loads(r.read())
 
 
@@ -33,6 +33,12 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 new_tag = sys.argv[1]           # e.g. "v2.0.2"
+
+# Validate tag format to prevent path traversal or shell injection downstream
+if not re.fullmatch(r'v\d+\.\d+\.\d+', new_tag):
+    print(f'ERROR: invalid tag format "{new_tag}" — expected vX.Y.Z')
+    sys.exit(1)
+
 new_ver = new_tag.lstrip('v')   # e.g. "2.0.2"
 
 # Detect current version from any download URL in the HTML
@@ -99,13 +105,13 @@ if release:
     if 'deb' in asset_map:
         html = replace_url(html, old_tag, old_ver, r'\.deb', asset_map['deb'])
 
-    # Now do a plain string replace for everything else (version badges, JSON-LD, etc.)
-    # but NOT inside URLs we already fixed
-    html = html.replace(old_ver, new_ver)
+    # Now replace version in non-URL text (version badges, JSON-LD, etc.).
+    # Use digit boundary guards so e.g. "2.0.1" won't corrupt "2.0.11" in newer URLs.
+    html = re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, html)
 
 else:
     # Fallback: plain string replace (may break if filename format changed)
-    html = html.replace(old_ver, new_ver)
+    html = re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, html)
 
 with open('index.html', 'w') as f:
     f.write(html)
