@@ -41,7 +41,7 @@
     "downloadUrl": "https://github.com/Alballaa/Khayt/releases",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "macOS, Windows, Linux",
-    "softwareVersion": "1.2.0-beta.1",
+    "softwareVersion": "2.0.2",
     "description": "Free desktop app for 3D print shop owners. Kanban production queue, smart cost calculator, ZATCA-compliant invoicing, live printer API (OctoPrint, Moonraker, Bambu Lab), filament inventory, client CRM, and analytics.",
     "screenshot": "https://khaytapp.com/screenshots/screenshot-dashboard.png",
     "featureList": "Kanban production queue, Cost calculator, ZATCA invoicing, Live printer API, Filament inventory, Client CRM, Analytics, Arabic RTL support",
@@ -65,13 +65,6 @@
   <link rel="icon" type="image/png" href="icon_preview.png" />
 </head>
 <body>
-
-<!-- ANNOUNCEMENT BAR -->
-<div class="announcement-bar" id="announcementBar">
-  <span class="ann-icon">⚠️</span>
-  <span class="ann-text" data-en="Beta software — back up your data and verify all invoices before sending to clients." data-ar="نسخة تجريبية — احتفظ بنسخ احتياطية وراجع جميع الفواتير قبل إرسالها للعملاء.">Beta software — back up your data and verify all invoices before sending to clients.</span>
-  <a href="https://github.com/Alballaa/Khayt/issues" target="_blank" class="ann-link" data-en="Report issues →" data-ar="الإبلاغ عن مشكلة →">Report issues →</a>
-</div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -99,7 +92,7 @@
     <img src="icon_preview.png" alt="Khayt" class="hero-icon" />
     <div class="hero-badge">
       <span class="badge-dot"></span>
-      <span data-en="v1.11.1-beta.1 — Free to Use · Source Available" data-ar="الإصدار 1.1.0-beta.1 — مجاني · المصدر متاح">v1.11.1-beta.1 — Free to Use · Source Available</span>
+      <span data-en="v2.0.2 — Free to Use · Source Available" data-ar="الإصدار 2.0.2 — مجاني · المصدر متاح">v2.0.2 — Free to Use · Source Available</span>
     </div>
     <h1 class="hero-title">
       <span data-en="Khayt" data-ar="خيط">Khayt</span>
@@ -183,7 +176,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
         </div>
         <h3 data-en="Kanban Production Queue" data-ar="قائمة الإنتاج Kanban">Kanban Production Queue</h3>
-        <p data-en="Drag orders across Pending → Printing → Post-Processing → QC → Done. Multi-machine scheduling, on-hold with reason, and part-level colour assignment." data-ar="اسحب الطلبات عبر مراحل الانتظار والطباعة ومراقبة الجودة والاكتمال. جدولة متعددة الطابعات وتعيين ألوان لكل قطعة.">Drag orders across Pending → Printing → Post-Processing → QC → Done. Multi-machine scheduling, on-hold with reason, and part-level colour assignment.</p>
+        <p data-en="Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print failure photo capture, on-hold with reason, and part-level colour assignment." data-ar="اسحب الطلبات عبر مراحل الإنتاج. عروض قائمة لكل طابعة، قوائم تفقد بداية الوردية، التقاط صور أعطال الطباعة، وتعيين ألوان لكل قطعة.">Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print failure photo capture, on-hold with reason, and part-level colour assignment.</p>
       </div>
 
       <div class="feature-card">
@@ -191,7 +184,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <h3 data-en="Smart Cost Calculator" data-ar="حاسبة التكلفة الذكية">Smart Cost Calculator</h3>
-        <p data-en="Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. G-code / 3MF metadata auto-extraction." data-ar="عربة متعددة القطع مع تفصيل مباشر: مادة، وقت الآلة، كهرباء، عمالة، تكاليف عامة ونسبة الفشل. يدعم FDM بالجرام والراتنج بالمليلتر. استخراج تلقائي من ملفات G-code و3MF.">Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. G-code / 3MF metadata auto-extraction.</p>
+        <p data-en="Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. Multi-material AMS/MMU costing. G-code / 3MF metadata auto-extraction." data-ar="عربة متعددة القطع مع تفصيل مباشر: مادة، وقت الآلة، كهرباء، عمالة، تكاليف عامة ونسبة الفشل. يدعم FDM والراتنج. دعم تكلفة متعدد المواد AMS/MMU. استخراج تلقائي من ملفات G-code و3MF.">Multi-part cart with live breakdown: material, machine time, electricity, labour, overhead, failure rate &amp; margin. FDM (grams) and Resin (mL) support. Multi-material AMS/MMU costing. G-code / 3MF metadata auto-extraction.</p>
       </div>
 
       <div class="feature-card">
@@ -199,7 +192,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <h3 data-en="ZATCA-Compliant Invoicing" data-ar="فواتير متوافقة مع هيئة الزكاة">ZATCA-Compliant Invoicing</h3>
-        <p data-en="Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. PDF export, WhatsApp &amp; email delivery." data-ar="فواتير إلكترونية المرحلة الأولى مع رموز QR، فواتير مبدئية، دفعات جزئية بالمراحل، صفحات الموافقة على العروض وتاريخ المراجعات. تصدير PDF وتسليم عبر واتساب والبريد الإلكتروني.">Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. PDF export, WhatsApp &amp; email delivery.</p>
+        <p data-en="Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. GAZT VAT return export, gift cards &amp; store credit. PDF export, WhatsApp &amp; email delivery." data-ar="فواتير إلكترونية المرحلة الأولى مع رموز QR، فواتير مبدئية، دفعات جزئية بالمراحل وتاريخ المراجعات. تصدير إقرار ضريبة القيمة المضافة لهيئة الزكاة، بطاقات الهدايا ورصيد المتجر. تصدير PDF وتسليم عبر واتساب والبريد الإلكتروني.">Phase 1 e-invoices with TLV QR codes, proforma invoices, milestone-based partial billing, quote approval pages, and revision history. GAZT VAT return export, gift cards &amp; store credit. PDF export, WhatsApp &amp; email delivery.</p>
       </div>
 
       <div class="feature-card">
@@ -215,7 +208,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         </div>
         <h3 data-en="Inventory Management" data-ar="إدارة المخزون">Inventory Management</h3>
-        <p data-en="Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, reorder alerts, price history, and overcommit warnings." data-ar="تتبع بكرات FDM وعبوات الراتنج مع خصم تلقائي عند الاكتمال. سجل التجفيف وطبعات الاختبار وتنبيهات إعادة الطلب وتاريخ الأسعار.">Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, reorder alerts, price history, and overcommit warnings.</p>
+        <p data-en="Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, smart reorder alerts with draft PO auto-generation, price history, and overcommit warnings." data-ar="تتبع بكرات FDM وعبوات الراتنج مع خصم تلقائي عند الاكتمال. سجل التجفيف وطبعات الاختبار وتنبيهات إعادة الطلب الذكية مع إنشاء أوامر الشراء تلقائياً وتاريخ الأسعار.">Track FDM spools and Resin bottles with auto-deduction on completion. Spool drying log, test prints, smart reorder alerts with draft PO auto-generation, price history, and overcommit warnings.</p>
       </div>
 
       <div class="feature-card">
@@ -223,7 +216,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
         <h3 data-en="Analytics &amp; Break-Even" data-ar="التحليلات ونقطة التعادل">Analytics &amp; Break-Even</h3>
-        <p data-en="Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, and cost trends. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes." data-ar="الإيرادات والطلبات والساعات وربحية الآلات وأداء المشغلين. بطاقة نقطة التعادل ومنشئ استطلاع NPS. أوضاع التقارير البسيطة والمتقدمة.">Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, and cost trends. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes.</p>
+        <p data-en="Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, cost trends, referral analytics, and end-of-day PDF reports. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes." data-ar="الإيرادات والطلبات والساعات وربحية الآلات وأداء المشغلين، تحليلات الإحالة وتقارير PDF لنهاية اليوم. بطاقة نقطة التعادل ومنشئ استطلاع NPS. أوضاع التقارير البسيطة والمتقدمة.">Revenue, orders, hours, machine P&amp;L, operator performance, retention rates, production heatmap, cost trends, referral analytics, and end-of-day PDF reports. Break-even dashboard card. NPS survey generator. Simple and Professional reporting modes.</p>
       </div>
 
       <div class="feature-card">
@@ -231,7 +224,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3 data-en="Client CRM &amp; Loyalty" data-ar="إدارة العملاء والولاء">Client CRM &amp; Loyalty</h3>
-        <p data-en="Client profiles with credit limits, bilingual VAT details, loyalty tiers with automatic discounts, intake forms, aged receivables report, and client portal export." data-ar="ملفات تعريف العملاء مع حدود الائتمان ومعلومات الضريبة وأنظمة النقاط والخصومات التلقائية وتقرير الذمم المدينة المتقادمة.">Client profiles with credit limits, bilingual VAT details, loyalty tiers with automatic discounts, intake forms, aged receivables report, and client portal export.</p>
+        <p data-en="Client profiles with credit limits, multi-currency support, bilingual VAT details, loyalty tiers with automatic discounts, customer portal QR order tracking, waiting list funnel, intake forms, and aged receivables report." data-ar="ملفات تعريف العملاء مع حدود الائتمان، دعم متعدد العملات، معلومات ضريبة القيمة المضافة، أنظمة النقاط والخصومات التلقائية، تتبع QR لبوابة العملاء، قائمة انتظار الطلبات، وتقرير الذمم المدينة المتقادمة.">Client profiles with credit limits, multi-currency support, bilingual VAT details, loyalty tiers with automatic discounts, customer portal QR order tracking, waiting list funnel, intake forms, and aged receivables report.</p>
       </div>
 
       <div class="feature-card">
@@ -247,7 +240,7 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         </div>
         <h3 data-en="Integrations &amp; Access Control" data-ar="التكاملات والتحكم في الوصول">Integrations &amp; Access Control</h3>
-        <p data-en="Outbound HMAC-signed webhooks for order events. Embedded LAN REST API — view queue from any device on your network. Operator PIN lock with Admin / Technician / Sales roles." data-ar="ويب هوك HMAC-signed للأحداث. خادم REST API محلي — راقب الطوابير من أي جهاز على شبكتك. قفل PIN للمشغلين مع أدوار الإدارة والتقنية والمبيعات.">Outbound HMAC-signed webhooks for order events. Embedded LAN REST API — view queue from any device on your network. Operator PIN lock with Admin / Technician / Sales roles.</p>
+        <p data-en="Salla/Zid webhooks, Telegram notifications, iCal calendar feed, and public intake form. Embedded LAN REST API — view queue from any device on your network. Built-in auto-updater. Operator PIN lock with Admin / Technician / Sales roles." data-ar="ويب هوك Salla/Zid، إشعارات Telegram، تغذية تقويم iCal، ونموذج استقبال عام. خادم REST API محلي — راقب الطوابير من أي جهاز. محدّث تلقائي مدمج. قفل PIN للمشغلين مع أدوار الإدارة والتقنية والمبيعات.">Salla/Zid webhooks, Telegram notifications, iCal calendar feed, and public intake form. Embedded LAN REST API — view queue from any device on your network. Built-in auto-updater. Operator PIN lock with Admin / Technician / Sales roles.</p>
       </div>
 
     </div>
@@ -338,7 +331,7 @@
         <h2 data-en="Download Khayt" data-ar="تحميل خيط">Download Khayt</h2>
         <p data-en="Free for everyone. No account. No telemetry. Your data stays on your device." data-ar="مجاني للجميع. لا حساب. لا بيانات مُرسَلة. بياناتك تبقى على جهازك.">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
         <div class="download-meta">
-          <span class="meta-pill beta-pill">v1.11.1-beta.1</span>
+          <span class="meta-pill">v2.0.2</span>
           <span class="meta-pill" data-en="Source Available" data-ar="المصدر متاح">Source Available</span>
           <span class="meta-pill" data-en="No telemetry" data-ar="لا بيانات مُرسَلة">No telemetry</span>
         </div>
@@ -362,11 +355,11 @@
           <span class="platform-name">macOS</span>
         </div>
         <div class="platform-downloads">
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v1.11.1-beta.1/Khayt-1.11.1-beta.1-universal.dmg" class="dl-btn dl-btn-primary">
+          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.0.2/Khayt-2.0.2-universal.dmg" class="dl-btn dl-btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <div>
               <span data-en="Universal (Intel + Apple Silicon)" data-ar="Universal (Intel + Apple Silicon)">Universal (Intel + Apple Silicon)</span>
-              <small>universal · 182 MB</small>
+              <small>universal · 218 MB</small>
             </div>
           </a>
         </div>
@@ -380,11 +373,11 @@
           <span class="platform-name">Windows</span>
         </div>
         <div class="platform-downloads">
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v1.11.1-beta.1/Khayt.Setup.1.11.1-beta.1.exe" class="dl-btn dl-btn-primary">
+          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.0.2/Khayt-Setup-2.0.2.exe" class="dl-btn dl-btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <div>
               <span data-en="Installer (.exe)" data-ar="مثبت (.exe)">Installer (.exe)</span>
-              <small>x64 · 84 MB</small>
+              <small>x64 · 106 MB</small>
             </div>
           </a>
         </div>
@@ -397,18 +390,18 @@
           <span class="platform-name">Linux</span>
         </div>
         <div class="platform-downloads">
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v1.11.1-beta.1/Khayt-1.11.1-beta.1.AppImage" class="dl-btn dl-btn-primary">
+          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.0.2/Khayt-2.0.2.AppImage" class="dl-btn dl-btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <div>
               <span>AppImage</span>
-              <small>x64 · 113 MB</small>
+              <small>x64 · 127 MB</small>
             </div>
           </a>
-          <a href="https://github.com/Alballaa/Khayt/releases/download/v1.11.1-beta.1/khayt_1.11.1-beta.1_amd64.deb" class="dl-btn">
+          <a href="https://github.com/Alballaa/Khayt/releases/download/v2.0.2/khayt_2.0.2_amd64.deb" class="dl-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <div>
               <span>Debian / Ubuntu (.deb)</span>
-              <small>amd64 · 78 MB</small>
+              <small>amd64 · 99 MB</small>
             </div>
           </a>
         </div>
@@ -581,16 +574,16 @@
 
   // Nav scroll effect
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
   });
 
-  // Smooth scroll for anchor links (offset for fixed bar + nav = 100px)
+  // Smooth scroll for anchor links (offset for fixed nav = 80px)
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - 100;
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });
