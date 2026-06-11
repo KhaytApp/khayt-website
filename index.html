@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khayt — Free 3D Print Shop Management Software</title>
-<meta name="description" content="Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA invoicing, live printer API (OctoPrint, Bambu, Klipper), filament inventory and analytics. macOS, Windows, Linux.">
+<meta name="description" content="Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, product catalog, gift cards, customer portal, live printer API, filament inventory and analytics. macOS, Windows, Linux.">
 <meta property="og:title" content="Khayt — Free 3D Print Shop Management Software">
-<meta property="og:description" content="Kanban queue, cost calculator, ZATCA invoicing, live printer API and filament inventory — all offline, all free. macOS · Windows · Linux.">
-<meta property="og:image" content="screenshots/screenshot-dashboard.png">
+<meta property="og:description" content="Kanban queue, cost calculator, ZATCA e-invoicing, catalog, gift cards, customer portal, live printer API and inventory — all offline, all free. macOS · Windows · Linux.">
+<meta property="og:image" content="screenshots/screenshot-queue.png">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="khayt-favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="khayt-favicon-16.png">
@@ -26,8 +26,8 @@
     <nav class="nav-links" id="navLinks">
       <a href="#screens" data-i18n="nav.screens">Screens</a>
       <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#whatsnew" data-i18n="nav.whatsnew">What's New</a>
       <a href="#languages" data-i18n="nav.languages">Languages</a>
-      <a href="#open-source" data-i18n="nav.oss">Open Source</a>
       <a href="#download" data-i18n="nav.download">Download</a>
     </nav>
     <div class="nav-right">
@@ -43,30 +43,59 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="wrap hero-in">
-    <span class="pill"><span class="tag ver-tag">v2.3.2</span> <span data-i18n="hero.pill">Free to use · Source available</span></span>
-    <h1 data-i18n="hero.h1">Run your print shop like a studio</h1>
-    <p class="sub" data-i18n="hero.sub">The all-in-one production desk for 3D print shops.</p>
-    <p class="desc" data-i18n="hero.desc">Kanban queue, smart costing, ZATCA invoices, live printer API, filament inventory, and deep analytics. Simple or Professional mode — you choose. All offline, all free.</p>
-    <div class="hero-cta">
-      <a href="#download" class="btn btn-accent btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span data-i18n="hero.dl">Download Free</span></a>
-      <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="hero.github">View on GitHub</span></a>
+    <div class="hero-l">
+      <span class="hero-tag">● <span class="v ver-tag">v2.3.3</span> · <span data-i18n="hero.pill">Free to use · Source available</span></span>
+      <h1 data-i18n-html="hero.h1">Run your print shop like a <span class="hl">studio</span></h1>
+      <p class="sub" data-i18n="hero.desc">The all-in-one production desk for 3D print shops — quoting, queue, ZATCA invoicing and inventory, entirely offline.</p>
+      <div class="hero-pills">
+        <span data-i18n="pill.queue">Kanban queue</span>
+        <span data-i18n="pill.zatca">ZATCA e-invoicing</span>
+        <span data-i18n="pill.catalog">Catalog</span>
+        <span data-i18n="pill.gift">Gift cards</span>
+        <span data-i18n="pill.portal">Customer portal</span>
+        <span data-i18n="pill.analytics">Analytics</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#download" class="btn btn-primary btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span data-i18n="hero.dl">Download Free</span></a>
+        <a href="https://github.com/Alballaa/Khayt" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="hero.github">View on GitHub</span></a>
+      </div>
+      <div class="hero-stat">
+        <div class="s"><b>100%</b><span data-i18n="stat.free">Free to use</span></div>
+        <div class="s"><b>7</b><span data-i18n="stat.langs">Languages</span></div>
+        <div class="s"><b>0</b><span data-i18n="stat.subs">Subscriptions</span></div>
+      </div>
+      <div class="os-line"><span>macOS</span><span class="sep"></span><span>Windows</span><span class="sep"></span><span>Linux</span><span class="sep"></span><span data-i18n="hero.os">No account · No telemetry</span></div>
     </div>
-    <div class="os-line">
-      <span>macOS</span><span class="sep"></span><span>Windows</span><span class="sep"></span><span>Linux</span><span class="sep"></span><span data-i18n="hero.os">No account · No telemetry</span>
+
+    <div class="hero-r">
+      <div class="hero-rbg"></div>
+      <div class="hero-shot">
+        <div class="hero-badge"><span class="dot"></span><span class="bt" data-i18n="hero.live">3 printers live</span></div>
+        <div class="frame">
+          <div class="frame-bar">
+            <div class="frame-dots"><i></i><i></i><i></i></div>
+            <div class="frame-title">Khayt — <b>Production Queue</b></div>
+            <div class="frame-chip"><span class="dot"></span><span data-i18n="hero.live">3 printers live</span></div>
+          </div>
+          <div class="frame-img-wrap">
+            <img class="shot" src="screenshots/screenshot-queue.png" alt="Khayt production queue — Kanban board with live printer status" loading="eager">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="wrap hero-shot">
-    <div class="frame">
-      <div class="frame-bar">
-        <div class="frame-dots"><i></i><i></i><i></i></div>
-        <div class="frame-title">Khayt — <b>Production Queue</b></div>
-        <div class="frame-chip"><span class="dot"></span><span data-i18n="hero.live">3 printers live</span></div>
-      </div>
-      <div class="frame-img-wrap">
-        <img class="shot" src="screenshots/screenshot-queue.png" alt="Khayt production queue — Kanban board with live printer status" loading="eager">
-      </div>
-    </div>
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust">
+  <div class="wrap trust-in">
+    <span class="trust-lab" data-i18n="trust.lab">Talks live to your printers</span>
+    <span class="trust-item">OctoPrint</span>
+    <span class="trust-item">Bambu Lab</span>
+    <span class="trust-item">Klipper</span>
+    <span class="trust-item">PrusaLink</span>
+    <span class="trust-item">Duet</span>
+    <span class="trust-item">Repetier</span>
   </div>
 </section>
 
@@ -87,6 +116,10 @@
       <button class="tab" role="tab" aria-selected="false" data-key="calculator" data-i18n="tab.calculator">Calculator</button>
       <button class="tab" role="tab" aria-selected="false" data-key="orders" data-i18n="tab.orders">Orders Log</button>
       <button class="tab" role="tab" aria-selected="false" data-key="inventory" data-i18n="tab.inventory">Inventory</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="catalog" data-i18n="tab.catalog">Catalog</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="giftcards" data-i18n="tab.giftcards">Gift Cards</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="portfolio" data-i18n="tab.portfolio">Portfolio</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="waste" data-i18n="tab.waste">Waste Log</button>
       <button class="tab" role="tab" aria-selected="false" data-key="analytics" data-i18n="tab.analytics">Analytics</button>
       <button class="tab" role="tab" aria-selected="false" data-key="clients" data-i18n="tab.clients">Clients</button>
     </div>
@@ -123,6 +156,93 @@
   </div>
 </section>
 
+<!-- ============ WHAT'S NEW (bento) ============ -->
+<section class="section whatsnew" id="whatsnew">
+  <div class="wrap">
+    <div class="wn-head">
+      <div>
+        <span class="eyebrow" data-i18n="wn.eyebrow">Shipped recently</span>
+        <h2 class="h2" style="margin-top:16px" data-i18n="wn.h2">New since you last looked</h2>
+        <p class="lede" style="margin-top:16px" data-i18n="wn.lede">Khayt grew up. The latest releases add a full sales toolkit — a customer portal, gift cards, a product catalog and more — on top of the production core.</p>
+      </div>
+      <span class="wn-ver"><span class="ver-tag">v2.3.3</span> · <span data-i18n="wn.verlab">latest stable</span></span>
+    </div>
+
+    <div class="bento">
+      <!-- Customer portal (large) -->
+      <article class="bt b-portal">
+        <span class="tag" data-i18n="bento.portal.tag">Customer portal</span>
+        <h3 data-i18n="bento.portal.t">Quote approval &amp; live order tracking</h3>
+        <p data-i18n="bento.portal.d">Send a link and your customer approves the quote, watches the print move through the queue, and tracks delivery — from any phone. No app, no account, runs on your shop's own LAN server.</p>
+        <div class="mk mk-portal">
+          <div class="mk-steps">
+            <div class="mk-step done"><span class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="bento.portal.s1">Quote approved</span></div>
+            <div class="mk-step now"><span class="pt"></span><span data-i18n="bento.portal.s2">Printing — 62%</span></div>
+            <div class="mk-step"><span class="pt"></span><span data-i18n="bento.portal.s3">Ready for pickup</span></div>
+          </div>
+          <div>
+            <div class="mk-qr"></div>
+            <div class="qcap" data-i18n="bento.portal.qr">Scan to track</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Gift cards -->
+      <article class="bt b-gift">
+        <span class="tag" data-i18n="bento.gift.tag">Gift cards &amp; store credit</span>
+        <h3 data-i18n="bento.gift.t">Sell credit, redeem at checkout</h3>
+        <div class="mk-gift">
+          <div class="gl">Khayt · Gift Card</div>
+          <div class="gc">KHYT-4F2A-9C71</div>
+          <div class="gb"><b>250.00</b><span>SAR balance</span></div>
+        </div>
+      </article>
+
+      <!-- Catalog -->
+      <article class="bt b-catalog">
+        <span class="tag" data-i18n="bento.catalog.tag">Product catalog</span>
+        <h3 data-i18n="bento.catalog.t">Reusable SKUs &amp; one-tap quotes</h3>
+        <div class="mk-list">
+          <div class="mk-row"><span class="sw" style="background:#222"></span><span class="nm">Gridfinity bin 2×2</span><span class="qty">PLA+</span><span class="pr">18.00</span></div>
+          <div class="mk-row"><span class="sw" style="background:#c0392b"></span><span class="nm">Phone stand</span><span class="qty">PETG</span><span class="pr">25.00</span></div>
+        </div>
+      </article>
+
+      <!-- Waste log -->
+      <article class="bt b-waste">
+        <span class="tag" data-i18n="bento.waste.tag">Waste log</span>
+        <h3 data-i18n="bento.waste.t">Track failures &amp; real cost</h3>
+        <div class="mk-waste">
+          <span class="wi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></span>
+          <div class="wt"><b data-i18n="bento.waste.item">Warped base — re-print</b><span data-i18n="bento.waste.reason">PLA Black · 148 g scrapped</span></div>
+          <span class="wc">−7.40</span>
+        </div>
+      </article>
+
+      <!-- Notifications -->
+      <article class="bt b-notif">
+        <span class="tag" data-i18n="bento.notif.tag">Notifications</span>
+        <h3 data-i18n="bento.notif.t">Telegram &amp; email alerts</h3>
+        <div class="mk-notif">
+          <div class="mk-toast"><span class="ti" style="background:#229ED9"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m21.7 3.3-3.1 15c-.2 1-.9 1.2-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.6 12.8 2 11.4c-1-.3-1-1 .2-1.5L20.4 2.8c.8-.3 1.5.2 1.3 1.5z"/></svg></span><span class="tx"><b>QC passed</b> · O-1042</span><span class="tm">now</span></div>
+          <div class="mk-toast"><span class="ti" style="background:#0a7d8f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="tx"><b>Low stock</b> · PLA Gold</span><span class="tm">2m</span></div>
+        </div>
+      </article>
+
+      <!-- Multi-location & roles -->
+      <article class="bt b-multi">
+        <span class="tag" data-i18n="bento.multi.tag">Multi-location &amp; roles</span>
+        <h3 data-i18n="bento.multi.t">Run more than one shop</h3>
+        <div class="mk-locs">
+          <span class="mk-loc on"><span class="d"></span>Riyadh HQ</span>
+          <span class="mk-loc">Jeddah</span>
+        </div>
+        <div class="mk-roles"><span>Admin</span><span>Technician</span><span>Sales</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ BILINGUAL ============ -->
 <section class="section" id="languages">
   <div class="wrap">
@@ -134,7 +254,7 @@
           <p class="lede" data-i18n="lang.lede">Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Chinese and Japanese, with instant switching from anywhere in the app.</p>
           <ul class="lang-feats">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li1">Arabic RTL layout throughout the entire app</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li2">ZATCA invoices in bilingual Arabic &amp; English</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li2">ZATCA Phase 2 e-invoices — signed, bilingual AR &amp; EN</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li3">Instant language switch, no restart needed</span></li>
           </ul>
           <div class="lang-chips">
@@ -167,7 +287,7 @@
               <div class="r-row"><span class="k">Print time</span><span class="v">4h 22m</span></div>
               <div class="r-row"><span class="k">VAT (15%)</span><span class="v">SAR 5.02</span></div>
               <div class="r-total"><span class="k">Total cost</span><span class="v">SAR 38.50</span></div>
-              <div class="r-qr"><span class="qr"></span><span class="qt">ZATCA Phase 1<br>TLV QR · verified</span></div>
+              <div class="r-qr"><span class="qr"></span><span class="qt">ZATCA Phase 2<br>Signed · FATOORA cleared</span></div>
             </div>
             <div class="flip-face back" dir="rtl">
               <div class="receipt-top">
@@ -179,7 +299,7 @@
               <div class="r-row"><span class="k">وقت الطباعة</span><span class="v">٤س ٢٢د</span></div>
               <div class="r-row"><span class="k">ضريبة القيمة المضافة (١٥٪)</span><span class="v">٥٫٠٢ ر.س</span></div>
               <div class="r-total"><span class="k">التكلفة الإجمالية</span><span class="v">٣٨٫٥٠ ر.س</span></div>
-              <div class="r-qr"><span class="qr"></span><span class="qt">هيئة الزكاة · المرحلة الأولى<br>رمز QR موثّق</span></div>
+              <div class="r-qr"><span class="qr"></span><span class="qt">هيئة الزكاة · المرحلة الثانية<br>موقّعة · مُجازة من فاتورة</span></div>
             </div>
           </div>
         </div>
@@ -214,9 +334,14 @@
 <!-- ============ DOWNLOAD ============ -->
 <section class="section dl" id="download">
   <div class="wrap" style="text-align:center">
-    <span class="eyebrow" style="justify-content:center"><span data-i18n="dl.eyebrow">Download Khayt</span>&nbsp;<span class="ver-tag">v2.3.2</span></span>
+    <span class="eyebrow" style="justify-content:center"><span data-i18n="dl.eyebrow">Download Khayt</span></span>
     <h2 class="h2" style="margin-top:16px" data-i18n="dl.h2">Set up shop in two minutes</h2>
     <p class="lede" style="margin:16px auto 0;text-align:center" data-i18n="dl.lede">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
+
+    <div class="dl-channel" id="dlChannel" role="tablist">
+      <button class="on" data-channel="stable" role="tab"><span class="bdot"></span><span data-i18n="dl.stable">Stable</span> <span class="ver-tag" style="opacity:.7">v2.3.3</span></button>
+      <button class="beta-btn" data-channel="beta" role="tab"><span class="bdot"></span><span data-i18n="dl.beta">Beta</span> <span class="ver-beta" style="opacity:.7">—</span></button>
+    </div>
 
     <div class="dl-grid" style="text-align:start">
       <div class="dl-card">
@@ -226,7 +351,7 @@
         </div>
         <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.mac">Signed &amp; Notarized — opens cleanly</span></div>
         <div class="dl-btns">
-          <a class="dl-link" data-dl="mac-dmg" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.2/Khayt-2.3.2-arm64.dmg"><div><div class="a" data-i18n="dl.dmg">Download .dmg</div><div class="b">arm64 · 128 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="mac-dmg" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.3/Khayt-2.3.3-arm64.dmg"><div><div class="a" data-i18n="dl.dmg">Download .dmg</div><div class="b">arm64 · 128 MB</div></div><span class="arr">→</span></a>
         </div>
       </div>
       <div class="dl-card">
@@ -236,7 +361,7 @@
         </div>
         <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.win">Built-in auto-updater</span></div>
         <div class="dl-btns">
-          <a class="dl-link" data-dl="win-exe" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.2/Khayt-Setup-2.3.2.exe"><div><div class="a" data-i18n="dl.exe">Installer (.exe)</div><div class="b">x64 · 108 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="win-exe" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.3/Khayt-Setup-2.3.3.exe"><div><div class="a" data-i18n="dl.exe">Installer (.exe)</div><div class="b">x64 · 108 MB</div></div><span class="arr">→</span></a>
           <a class="dl-link" data-dl="win-portable" href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener"><div><div class="a" data-i18n="dl.portable">Portable (.exe)</div><div class="b">x64 · 108 MB</div></div><span class="arr">→</span></a>
         </div>
       </div>
@@ -247,17 +372,26 @@
         </div>
         <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.linux">Runs anywhere, no install</span></div>
         <div class="dl-btns">
-          <a class="dl-link" data-dl="linux-appimage" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.2/Khayt-2.3.2.AppImage"><div><div class="a">AppImage</div><div class="b">x64 · 130 MB</div></div><span class="arr">→</span></a>
-          <a class="dl-link" data-dl="linux-deb" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.2/khayt_2.3.2_amd64.deb"><div><div class="a" data-i18n="dl.deb">Debian / Ubuntu (.deb)</div><div class="b">amd64 · 101 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="linux-appimage" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.3/Khayt-2.3.3.AppImage"><div><div class="a">AppImage</div><div class="b">x64 · 130 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="linux-deb" href="https://github.com/Alballaa/Khayt/releases/download/v2.3.3/khayt_2.3.3_amd64.deb"><div><div class="a" data-i18n="dl.deb">Debian / Ubuntu (.deb)</div><div class="b">amd64 · 101 MB</div></div><span class="arr">→</span></a>
         </div>
       </div>
     </div>
 
     <div class="dl-meta">
-      <span class="meta-chip"><span class="dot"></span><span class="ver-tag">v2.3.2</span>&nbsp;<span data-i18n="dl.latest">latest</span></span>
+      <span class="meta-chip" id="dlMetaVer"><span class="dot"></span><span class="ver-tag">v2.3.3</span>&nbsp;<span data-i18n="dl.latest">latest</span></span>
       <span class="meta-chip" data-i18n="dl.srcavail">Source available</span>
       <span class="meta-chip" data-i18n="dl.notel">No telemetry</span>
-      <a class="meta-chip" href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener" style="color:var(--accent-2)" data-i18n="dl.allrel">All releases on GitHub →</a>
+      <a class="meta-chip" href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener" style="color:var(--teal-2)" data-i18n="dl.allrel">All releases on GitHub →</a>
+    </div>
+
+    <!-- changelog -->
+    <div class="changelog" id="changelog">
+      <div class="cl-head">
+        <span class="clt" data-i18n="cl.title">Release history</span>
+        <a href="https://github.com/Alballaa/Khayt/releases" target="_blank" rel="noopener" data-i18n="cl.all">View all →</a>
+      </div>
+      <div id="clList"></div>
     </div>
   </div>
 </section>
@@ -278,6 +412,7 @@
           <h4 data-i18n="foot.product">Product</h4>
           <a href="#screens" data-i18n="nav.screens">Screens</a>
           <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="#whatsnew" data-i18n="nav.whatsnew">What's New</a>
           <a href="#languages" data-i18n="nav.languages">Languages</a>
           <a href="#download" data-i18n="nav.download">Download</a>
         </div>
