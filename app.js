@@ -82,6 +82,8 @@
     'lang.li2':{ en: 'ZATCA Phase 2 e-invoices — signed, bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
+    'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
+    'theme.note':{ en: '7 in-app themes · light & dark · 7 languages', ar: '٧ سمات داخل التطبيق · فاتح وداكن · ٧ لغات' },
 
     'oss.eyebrow':{ en: 'Source available', ar: 'المصدر متاح' },
     'oss.h2':    { en: 'Free to use.<br>Yours to inspect.', ar: 'مجاني للاستخدام.<br>وملكك لتفحّصه.' },
@@ -167,10 +169,25 @@
     { v: '2.1.0', date: '2026-05-30', beta: false, d: { en: 'Modular renderer, store validation, expanded tests', ar: 'بنية معيارية، التحقق من البيانات، اختبارات موسّعة' } }
   ];
 
-  var lang = 'en', curKey = 'queue', channel = 'stable';
+  var lang = 'en', curKey = 'queue', channel = 'stable', curTheme = 'console-light';
   var CHANNELS = { stable: null, beta: null }; // filled from GitHub
 
+  // In-app theme demo (a curated subset of the app's 7 themes).
+  var THEMES = [
+    { id: 'console-light', label: { en: 'Console', ar: 'كونسول' }, tone: 'light' },
+    { id: 'studio-light',  label: { en: 'Studio',  ar: 'استوديو' }, tone: 'light' },
+    { id: 'vitrine-light', label: { en: 'Vitrine', ar: 'فاترين' }, tone: 'light' },
+    { id: 'atlas-dark',    label: { en: 'Dark',    ar: 'داكن' }, tone: 'dark' }
+  ];
+
   function t(key) { return DICT[key] ? DICT[key][lang] : key; }
+
+  // Screenshot path — themed; Arabic RTL captures exist for the default theme.
+  function shotPath(key) {
+    if (curTheme === 'console-light') return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + key + '.png';
+    return 'screenshots/themes/' + curTheme + '/screenshot-' + key + '.png';
+  }
+  function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
 
   function buildFeatures() {
     var grid = document.getElementById('featGrid');
@@ -232,12 +249,42 @@
     buildFeatures();
     buildChangelog();
     paintCaption();
+    // swap gallery + hero screenshots to match language (EN / AR-RTL)
+    var gi = document.getElementById('galImg'); if (gi) gi.src = shotPath(curKey);
+    var hs = document.getElementById('heroShot'); if (hs) hs.src = heroPath();
+    buildThemeChips();
     var btn = document.getElementById('navLang');
     if (btn) btn.innerHTML = lang === 'ar' ? '<span>🌐</span> English' : '<span>🌐</span> العربية';
     var card = document.getElementById('flipCard');
     var sw = document.getElementById('flipSwitch');
     if (card && sw) setFlip(card, sw, lang === 'ar');
     try { localStorage.setItem('khayt-lang', lang); } catch (e) {}
+  }
+
+  /* ---------- Theme switcher (in-app theme demo) ---------- */
+  function buildThemeChips() {
+    var bar = document.getElementById('themeChips');
+    if (!bar) return;
+    var html = '';
+    for (var i = 0; i < THEMES.length; i++) {
+      var th = THEMES[i];
+      html += '<button class="theme-chip tone-' + th.tone + (th.id === curTheme ? ' on' : '') + '" data-theme="' + th.id + '">' +
+        '<span class="sw"></span>' + th.label[lang] + '</button>';
+    }
+    bar.innerHTML = html;
+  }
+  function themeSwitch() {
+    var bar = document.getElementById('themeChips');
+    if (!bar) return;
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.theme-chip');
+      if (!btn) return;
+      curTheme = btn.getAttribute('data-theme');
+      var all = bar.querySelectorAll('.theme-chip');
+      for (var i = 0; i < all.length; i++) all[i].classList.toggle('on', all[i] === btn);
+      var img = document.getElementById('galImg');
+      if (img) { img.style.opacity = '0'; setTimeout(function () { img.src = shotPath(curKey); img.style.opacity = '1'; }, 160); }
+    });
   }
 
   /* ---------- Screen gallery ---------- */
@@ -256,7 +303,7 @@
       btn.setAttribute('aria-selected', 'true');
       img.style.opacity = '0';
       setTimeout(function () {
-        img.src = 'screenshots/screenshot-' + key + '.png';
+        img.src = shotPath(key);
         img.alt = 'Khayt ' + SCREENS[key].name.en + ' screenshot';
         img.style.opacity = '1';
       }, 180);
@@ -408,6 +455,7 @@
     nav();
     langToggle();
     channelToggle();
+    themeSwitch();
     applyLang(saved);
     fetchReleases();
   });
