@@ -33,7 +33,7 @@
 
     'gal.eyebrow':{ en: 'See it in action', ar: 'شاهده أثناء العمل' },
     'gal.h2':     { en: 'Every screen, purpose-built', ar: 'كل شاشة مصمّمة لغرضها' },
-    'gal.lede':   { en: 'One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. These are real screens, not mockups.', ar: 'تطبيق واحد يدير المطبعة بالكامل — التسعير والإنتاج والفوترة والمخزون والأرقام خلفها جميعاً. هذه شاشات حقيقية وليست تصاميم وهمية.' },
+    'gal.lede':   { en: 'One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. Real screens, not mockups — preview them in the Workbench, Command or Vivid theme.', ar: 'تطبيق واحد يدير المطبعة بالكامل — التسعير والإنتاج والفوترة والمخزون والأرقام خلفها جميعاً. شاشات حقيقية وليست تصاميم وهمية — استعرضها بثيمات وركبنش أو كوماند أو فيفِد.' },
     'tab.queue':      { en: 'Production Queue', ar: 'قائمة الإنتاج' },
     'tab.dashboard':  { en: 'Dashboard', ar: 'لوحة التحكم' },
     'tab.calculator': { en: 'Calculator', ar: 'الحاسبة' },
@@ -132,9 +132,9 @@
       i: '<rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2"/>' },
     { t: { en: 'ZATCA Phase 2 Invoicing', ar: 'فوترة المرحلة الثانية' }, d: { en: 'Cryptographically signed e-invoices auto-submitted to FATOORA, with TLV QR codes, proforma invoices, milestone billing, BNPL links (Tabby, Tamara, Stripe) and VAT export.', ar: 'فواتير إلكترونية موقّعة تُرسل تلقائياً إلى فاتورة، برموز QR، فواتير مبدئية، فوترة بالمراحل، روابط دفع آجل (تابي، تمارا، سترايب) وتصدير ضريبي.' },
       i: '<path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2V3z"/><path d="M9 8h6M9 12h6"/>' },
-    { t: { en: 'Live Printer API', ar: 'ربط مباشر بالطابعات' }, d: { en: 'Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet and Repetier. Real-time temperature and print progress, right inside the queue.', ar: 'اربط OctoPrint وMoonraker وBambu Lab وPrusaLink وDuet وRepetier. حرارة وتقدّم الطباعة لحظياً داخل القائمة.' },
+    { t: { en: 'Live Printer API', ar: 'ربط مباشر بالطابعات' }, d: { en: 'Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet and Repetier. Real-time temperature and print progress inside the queue, plus error / offline / stall alerts over Telegram, webhook or email.', ar: 'اربط OctoPrint وMoonraker وBambu Lab وPrusaLink وDuet وRepetier. حرارة وتقدّم الطباعة لحظياً داخل القائمة، مع تنبيهات الأعطال والانقطاع والتوقف عبر تيليجرام أو ويب هوك أو البريد.' },
       i: '<rect x="4" y="4" width="16" height="11" rx="2"/><path d="M8 19h8M12 15v4"/><circle cx="12" cy="9.5" r="2.4"/>' },
-    { t: { en: 'Inventory Management', ar: 'إدارة المخزون' }, d: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, drying logs, smart reorder alerts with draft POs, price history and overcommit warnings.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، سجلات التجفيف، تنبيهات إعادة الطلب بأوامر شراء، سجل الأسعار وتنبيهات التجاوز.' },
+    { t: { en: 'Inventory Management', ar: 'إدارة المخزون' }, d: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, drying logs, smart reorder alerts with draft POs, price history, per-location stock and overcommit warnings.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، سجلات التجفيف، تنبيهات إعادة الطلب بأوامر شراء، سجل الأسعار، مخزون متعدد المواقع وتنبيهات التجاوز.' },
       i: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>' },
     { t: { en: 'Analytics & Break-Even', ar: 'تحليلات ونقطة التعادل' }, d: { en: 'Revenue, machine P&L, operator performance, retention, production heatmap, cost trends and end-of-day PDF reports. Break-even card and NPS surveys.', ar: 'الإيرادات، أرباح كل آلة، أداء المشغّلين، الاحتفاظ، خريطة حرارية للإنتاج، اتجاهات التكلفة وتقارير PDF لنهاية اليوم. بطاقة التعادل واستبيانات الرضا.' },
       i: '<path d="M4 20V4M4 20h16"/><path d="M7 16l3-4 3 2 4-7"/>' },
@@ -142,7 +142,7 @@
       i: '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 14h3"/><circle cx="16" cy="14" r="1.4"/>' },
     { t: { en: 'Client CRM & Customer Portal', ar: 'علاقات العملاء والبوابة' }, d: { en: 'Profiles with credit limits, multi-currency, loyalty tiers and automatic discounts, plus a live LAN customer portal with quote approval and QR order tracking.', ar: 'ملفات بحدود ائتمانية، تعدد العملات، مستويات ولاء وخصومات تلقائية، مع بوابة عملاء محلية حيّة لاعتماد العروض وتتبّع الطلبات برمز QR.' },
       i: '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.6M18 20a5.5 5.5 0 0 0-3-4.9"/>' },
-    { t: { en: 'Integrations & Access', ar: 'التكاملات والوصول' }, d: { en: 'Salla/Zid webhooks, Telegram notifications, iCal feed and a public intake form. Embedded LAN server, mobile access, auto-updater and operator PIN lock with Admin/Tech/Sales roles.', ar: 'ويب هوك لسلة وزد، إشعارات تيليجرام، تقويم iCal ونموذج استقبال عام. خادم محلي، وصول من الجوال، محدّث تلقائي وقفل PIN بأدوار مدير/فني/مبيعات.' },
+    { t: { en: 'Integrations & Access', ar: 'التكاملات والوصول' }, d: { en: 'Salla/Zid webhooks, Telegram notifications, iCal feed and a public intake form. Embedded LAN server, a native iOS companion app (queue, inventory, live printer monitoring, NFC spool scanning), auto-updater and operator PIN lock with Admin/Tech/Sales roles.', ar: 'ويب هوك لسلة وزد، إشعارات تيليجرام، تقويم iCal ونموذج استقبال عام. خادم محلي، تطبيق iOS مرافق (قائمة الإنتاج والمخزون ومتابعة الطابعات وقراءة وسوم NFC)، محدّث تلقائي وقفل PIN بأدوار مدير/فني/مبيعات.' },
       i: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7M8.2 13.2 15.8 17"/>' }
   ];
 
@@ -169,23 +169,24 @@
     { v: '2.1.0', date: '2026-05-30', beta: false, d: { en: 'Modular renderer, store validation, expanded tests', ar: 'بنية معيارية، التحقق من البيانات، اختبارات موسّعة' } }
   ];
 
-  var lang = 'en', curKey = 'queue', channel = 'stable', curTheme = 'console-light';
+  var lang = 'en', curKey = 'queue', channel = 'stable', curTheme = 'workbench';
   var CHANNELS = { stable: null, beta: null }; // filled from GitHub
 
-  // In-app theme demo (a curated subset of the app's 7 themes).
+  // In-app theme demo — Khayt's three redesigned themes.
   var THEMES = [
-    { id: 'console-light', label: { en: 'Console', ar: 'كونسول' }, tone: 'light' },
-    { id: 'studio-light',  label: { en: 'Studio',  ar: 'استوديو' }, tone: 'light' },
-    { id: 'vitrine-light', label: { en: 'Vitrine', ar: 'فاترين' }, tone: 'light' },
-    { id: 'atlas-dark',    label: { en: 'Dark',    ar: 'داكن' }, tone: 'dark' }
+    { id: 'workbench', label: { en: 'Workbench', ar: 'وركبنش' }, tone: 'light' },
+    { id: 'command',   label: { en: 'Command',   ar: 'كوماند' }, tone: 'light' },
+    { id: 'vivid',     label: { en: 'Vivid',     ar: 'فيفِد' }, tone: 'light' }
   ];
 
   function t(key) { return DICT[key] ? DICT[key][lang] : key; }
 
-  // Screenshot path — themed; Arabic RTL captures exist for the default theme.
+  // Screenshot path — themed, with Arabic RTL captures for every theme.
+  // Workbench (default) uses the flat set; the others live under themes/<id>/.
   function shotPath(key) {
-    if (curTheme === 'console-light') return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + key + '.png';
-    return 'screenshots/themes/' + curTheme + '/screenshot-' + key + '.png';
+    var pre = lang === 'ar' ? 'ar-' : '';
+    if (curTheme === 'workbench') return 'screenshots/screenshot-' + pre + key + '.png';
+    return 'screenshots/themes/' + curTheme + '/screenshot-' + pre + key + '.png';
   }
   function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
 
