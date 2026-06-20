@@ -9,7 +9,7 @@ Usage: python3 update_version.py v2.0.2
 """
 import sys, re, json, urllib.request, urllib.error
 
-REPO = "Alballaa/Khayt"
+REPO = "khaytapp/Khayt"
 
 # ── Helpers ────────────────────────────────────────────────────────────────
 

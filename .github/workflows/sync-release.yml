@@ -26,7 +26,7 @@ jobs:
         id: release
         run: |
           TAG=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/Alballaa/Khayt/releases" \
+            "https://api.github.com/repos/khaytapp/Khayt/releases" \
             | python3 -c "
           import json, sys
           releases = json.load(sys.stdin)

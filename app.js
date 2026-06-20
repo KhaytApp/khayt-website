@@ -415,7 +415,7 @@
 
   function fetchReleases() {
     if (!window.fetch) return;
-    fetch('https://api.github.com/repos/Alballaa/Khayt/releases?per_page=12', { headers: { 'Accept': 'application/vnd.github+json' } })
+    fetch('https://api.github.com/repos/khaytapp/Khayt/releases?per_page=12', { headers: { 'Accept': 'application/vnd.github+json' } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rels) {
         if (!rels || !rels.length) return;
