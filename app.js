@@ -52,7 +52,7 @@
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt grew up. The latest releases add a full sales toolkit — a customer portal, gift cards, a product catalog and more — on top of the production core.', ar: 'تطوّر خيط كثيراً. تضيف الإصدارات الأخيرة منظومة مبيعات كاملة — بوابة عملاء، بطاقات هدايا، كتالوج منتجات وأكثر — فوق نواة الإنتاج.' },
+    'wn.lede':    { en: 'Khayt grew up. The 3.0 beta adds an optional, end-to-end-encrypted cloud — sync across devices, multi-user team accounts, an online storefront with checkout & deposits, customer order tracking, and an AI assistant — all on top of the offline production core. The app still runs fully without the cloud.', ar: 'تطوّر خيط كثيراً. تضيف نسخة 3.0 التجريبية سحابة اختيارية مشفّرة طرفياً — مزامنة بين الأجهزة، حسابات فريق متعددة المستخدمين، متجر إلكتروني بالدفع والعربون، تتبّع طلبات العملاء، ومساعد ذكاء اصطناعي — فوق نواة الإنتاج التي تعمل دون إنترنت. ويبقى التطبيق يعمل بالكامل دون السحابة.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.portal.tag': { en: 'Customer portal', ar: 'بوابة العملاء' },
