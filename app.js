@@ -50,6 +50,12 @@
     'feat.h2':     { en: 'Built for print shop owners', ar: 'مصمّم لأصحاب المطابع' },
     'feat.lede':   { en: 'One app handles your entire workflow — from first quote to final invoice, entirely offline.', ar: 'تطبيق واحد يدير سير عملك بالكامل — من أول عرض سعر إلى آخر فاتورة، دون اتصال تماماً.' },
 
+    'nav.beta':    { en: '3.0 Beta', ar: 'نسخة 3.0' },
+    'beta.eyebrow':{ en: 'Now in beta', ar: 'الآن في النسخة التجريبية' },
+    'beta.h2':     { en: 'New in 3.0 — an optional cloud', ar: 'الجديد في 3.0 — سحابة اختيارية' },
+    'beta.lede':   { en: 'The 3.0 beta adds an opt-in, end-to-end-encrypted cloud on top of the offline core. Everything below is in beta — try it, and please keep backups. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'تضيف نسخة 3.0 التجريبية سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. كل ما يلي تجريبي — جرّبه واحتفظ بنسخ احتياطية. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
+    'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
+
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
     'wn.lede':    { en: 'Khayt grew up. The 3.0 beta adds an optional, end-to-end-encrypted cloud — sync across devices, multi-user team accounts, an online storefront with checkout & deposits, customer order tracking, and an AI assistant — all on top of the offline production core. The app still runs fully without the cloud.', ar: 'تطوّر خيط كثيراً. تضيف نسخة 3.0 التجريبية سحابة اختيارية مشفّرة طرفياً — مزامنة بين الأجهزة، حسابات فريق متعددة المستخدمين، متجر إلكتروني بالدفع والعربون، تتبّع طلبات العملاء، ومساعد ذكاء اصطناعي — فوق نواة الإنتاج التي تعمل دون إنترنت. ويبقى التطبيق يعمل بالكامل دون السحابة.' },
@@ -87,7 +93,7 @@
 
     'oss.eyebrow':{ en: 'Source available', ar: 'المصدر متاح' },
     'oss.h2':    { en: 'Free to use.<br>Yours to inspect.', ar: 'مجاني للاستخدام.<br>وملكك لتفحّصه.' },
-    'oss.lede':  { en: 'Khayt is free to use and will remain free. The source is on GitHub — read it, fork it, modify it for your own shop. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring.', ar: 'خيط مجاني وسيبقى مجانياً. المصدر على GitHub — اقرأه وانسخه وعدّله لمطبعتك. مرخّص بموجب MIT + Commons Clause (دون إعادة بيع). إن ساعد عملك فكّر في الدعم.' },
+    'oss.lede':  { en: 'Khayt is free to use and will remain free. The source is on GitHub — read it, fork it, run it and modify it for your own shop. Licensed under the Functional Source License (FSL-1.1-Apache-2.0): the only thing you can’t do is repackage it to compete with Khayt — and each release converts to the permissive Apache-2.0 license two years after it ships. If it helps your business, consider sponsoring.', ar: 'خيط مجاني وسيبقى مجانياً. المصدر على GitHub — اقرأه وانسخه وشغّله وعدّله لمطبعتك. مرخّص بموجب رخصة Functional Source License‏ (FSL-1.1-Apache-2.0): الممنوع الوحيد هو إعادة تغليفه لمنافسة خيط — ويتحوّل كل إصدار إلى رخصة Apache-2.0 المتساهلة بعد عامين من صدوره. إن ساعد عملك فكّر في الدعم.' },
     'oss.star':   { en: 'Star on GitHub', ar: 'أضِف نجمة على GitHub' },
     'oss.sponsor':{ en: 'Sponsor', ar: 'ادعم' },
     'stat.free': { en: 'Free to use', ar: 'مجاني للاستخدام' },
@@ -144,6 +150,28 @@
       i: '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.6M18 20a5.5 5.5 0 0 0-3-4.9"/>' },
     { t: { en: 'Integrations & Access', ar: 'التكاملات والوصول' }, d: { en: 'Salla/Zid webhooks, Telegram notifications, iCal feed and a public intake form. Embedded LAN server, a native iOS companion app (queue, inventory, live printer monitoring, NFC spool scanning), auto-updater and operator PIN lock with Admin/Tech/Sales roles.', ar: 'ويب هوك لسلة وزد، إشعارات تيليجرام، تقويم iCal ونموذج استقبال عام. خادم محلي، تطبيق iOS مرافق (قائمة الإنتاج والمخزون ومتابعة الطابعات وقراءة وسوم NFC)، محدّث تلقائي وقفل PIN بأدوار مدير/فني/مبيعات.' },
       i: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7M8.2 13.2 15.8 17"/>' }
+  ];
+
+  /* ---------- New in 3.0 (beta) — all opt-in; app still runs fully offline ---------- */
+  var BETA_FEATURES = [
+    { t: { en: 'Encrypted cloud sync', ar: 'مزامنة سحابية مشفّرة' }, d: { en: 'Opt-in sync across your devices, end-to-end encrypted — the server only ever sees ciphertext. Your sync passphrase never leaves your machine. Turn it off and Khayt runs 100% offline as before.', ar: 'مزامنة اختيارية بين أجهزتك مشفّرة طرفياً — لا يرى الخادم سوى نص مُعمّى. لا تغادر عبارة المزامنة جهازك. أوقفها ويعمل خيط دون اتصال بالكامل كالسابق.' },
+      i: '<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 18 18z"/><path d="M12 12v5M12 17l-2-2M12 17l2-2"/>' },
+    { t: { en: 'Team accounts', ar: 'حسابات الفريق' }, d: { en: 'Invite staff to your shop with roles (manager / operator / viewer). Everyone shares the same live cloud data; the desktop enforces what each role can do.', ar: 'ادعُ موظفيك إلى مطبعتك بأدوار (مدير / مشغّل / مشاهد). يشارك الجميع البيانات السحابية نفسها، ويفرض التطبيق صلاحيات كل دور.' },
+      i: '<circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a3 3 0 0 1 0 5.6M18.5 19a5.5 5.5 0 0 0-3-4.9"/>' },
+    { t: { en: 'Online storefront', ar: 'متجر إلكتروني' }, d: { en: 'Publish a public shop page customers can browse — prices, a cart, deposits and promo codes. Orders land straight in your queue as draft quotes; checkout can take a deposit via your own payment link.', ar: 'انشر صفحة متجر عامة يتصفحها العملاء — أسعار وسلة وعربون ورموز خصم. تصل الطلبات مباشرة إلى قائمتك كعروض مبدئية، ويمكن أخذ عربون عبر رابط دفعك الخاص.' },
+      i: '<path d="M4 8h16l-1 12H5L4 8z"/><path d="M8 8a4 4 0 0 1 8 0"/>' },
+    { t: { en: 'Customer order tracking', ar: 'تتبّع طلبات العملاء' }, d: { en: 'Share a link and your customer follows a live progress timeline — received → printing → finishing → ready — in their own language, updating as you advance the order.', ar: 'شارك رابطاً ليتابع عميلك مخطط تقدّم حيّاً — استُلم ← طباعة ← لمسات أخيرة ← جاهز — بلغته، ويتحدّث مع تقدّم الطلب.' },
+      i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
+    { t: { en: 'Reviews & ratings', ar: 'التقييمات' }, d: { en: 'Collect a star rating + comment after each order via a simple link; your average rating shows on the storefront and in the app.', ar: 'اجمع تقييماً بالنجوم وتعليقاً بعد كل طلب عبر رابط بسيط؛ ويظهر متوسط تقييمك على المتجر وداخل التطبيق.' },
+      i: '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/>' },
+    { t: { en: 'WhatsApp & SMS', ar: 'واتساب ورسائل' }, d: { en: 'Send automated order updates over WhatsApp or SMS (Twilio, WhatsApp Cloud API, Unifonic or your own webhook), and run marketing campaigns to a customer segment.', ar: 'أرسل تحديثات الطلبات تلقائياً عبر واتساب أو الرسائل (Twilio أو واجهة واتساب السحابية أو Unifonic أو ويب هوك خاص)، وأطلق حملات تسويقية لشريحة من العملاء.' },
+      i: '<path d="M4 18l1.2-3.2A7 7 0 1 1 9 19.5z"/><path d="M9 10c.5 2 2.5 4 4.5 4.5"/>' },
+    { t: { en: 'AI shop assistant', ar: 'مساعد ذكاء اصطناعي' }, d: { en: 'Ask questions about your own shop — “what’s overdue?”, “revenue vs last month?” — in a chat that answers only from your data. Bring your own key; it stays on your machine.', ar: 'اسأل عن مطبعتك — «ما المتأخر؟»، «الإيراد مقابل الشهر الماضي؟» — في محادثة تجيب من بياناتك فقط. مفتاحك الخاص يبقى على جهازك.' },
+      i: '<rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M8 21l2-4M16 21l-2-4M9 10h.01M15 10h.01"/>' },
+    { t: { en: 'Smart reorder & POs', ar: 'إعادة طلب ذكية' }, d: { en: 'Forecasts when each material runs out from real usage and the grams already committed to open orders, then drafts purchase orders ahead of time.', ar: 'يتوقّع نفاد كل مادة من الاستهلاك الفعلي والغرامات المحجوزة لطلبات مفتوحة، ثم يجهّز أوامر شراء مسبقاً.' },
+      i: '<path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15v6M15 18h6"/>' },
+    { t: { en: 'Label & QR printing', ar: 'طباعة الملصقات و QR' }, d: { en: 'Print QR labels for orders (scan to the tracking page) and spools (scan to inventory), plus a one-way accounting webhook to push paid invoices to QuickBooks, Zoho or Xero.', ar: 'اطبع ملصقات QR للطلبات (مسح لصفحة التتبّع) والبكرات (مسح للمخزون)، مع ويب هوك محاسبي أحادي الاتجاه لدفع الفواتير المسددة إلى QuickBooks أو Zoho أو Xero.' },
+      i: '<rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 4h7v7h-7zM14 15h3M20 15v5M14 20h6"/>' }
   ];
 
   /* ---------- Screen gallery data ---------- */
@@ -205,6 +233,21 @@
     grid.innerHTML = html;
   }
 
+  function buildBetaFeatures() {
+    var grid = document.getElementById('betaGrid');
+    if (!grid) return;
+    var betaLab = t('beta.pill');
+    var html = '';
+    for (var k = 0; k < BETA_FEATURES.length; k++) {
+      var f = BETA_FEATURES[k];
+      html += '<article class="feat feat-beta">' +
+        '<span class="beta-pill">' + betaLab + '</span>' +
+        '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></div>' +
+        '<h3>' + f.t[lang] + '</h3><p>' + f.d[lang] + '</p></article>';
+    }
+    grid.innerHTML = html;
+  }
+
   function buildChangelog() {
     var list = document.getElementById('clList');
     if (!list) return;
@@ -248,6 +291,7 @@
       if (DICT[hk]) htmlNodes[j].innerHTML = DICT[hk][lang];
     }
     buildFeatures();
+    buildBetaFeatures();
     buildChangelog();
     paintCaption();
     // swap gallery + hero screenshots to match language (EN / AR-RTL)

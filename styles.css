@@ -195,6 +195,19 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .feat p { color: var(--muted); font-size: 14px; margin-top: 8px; line-height: 1.5; text-wrap: pretty; }
 .feat .num { position: absolute; top: 16px; inset-inline-end: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--line); font-weight: 600; }
 
+/* New-in-3.0 beta cards */
+.beta-section .feat-ico { background: rgba(233,196,106,.16); color: #b88a1e; }
+.feat-beta { border-color: rgba(233,196,106,.45); }
+.feat-beta:hover { border-color: #e9c46a; }
+.beta-pill {
+  position: absolute; top: 14px; inset-inline-end: 16px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  color: #8a6512; background: rgba(233,196,106,.22); border: 1px solid rgba(233,196,106,.5);
+  padding: 2px 7px; border-radius: 999px;
+}
+.eyebrow-beta { color: #b88a1e; }
+.eyebrow-beta::before { background: #e9c46a; }
+
 /* ===================== WHAT'S NEW (bento) ===================== */
 .whatsnew { background: var(--paper-2); border-block: 1px solid var(--line); }
 .wn-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; flex-wrap: wrap; margin-bottom: 34px; }

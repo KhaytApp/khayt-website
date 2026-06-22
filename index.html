@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khayt — Free 3D Print Shop Management Software</title>
-<meta name="description" content="Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, product catalog, gift cards, customer portal, live printer API, filament inventory and analytics. macOS, Windows, Linux.">
+<meta name="description" content="Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, live printer API, filament inventory and analytics — fully offline. The 3.0 beta adds an optional, end-to-end-encrypted cloud: sync, team accounts, an online storefront and an AI assistant. macOS, Windows, Linux.">
 <meta property="og:title" content="Khayt — Free 3D Print Shop Management Software">
-<meta property="og:description" content="Kanban queue, cost calculator, ZATCA e-invoicing, catalog, gift cards, customer portal, live printer API and inventory — all offline, all free. macOS · Windows · Linux.">
+<meta property="og:description" content="Run the whole shop: quoting, queue, ZATCA invoicing, inventory and analytics — offline and free. The 3.0 beta adds an optional E2E-encrypted cloud (sync, teams, storefront, AI). macOS · Windows · Linux.">
 <meta property="og:image" content="screenshots/screenshot-queue.png">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="khayt-favicon-32.png">
@@ -26,6 +26,7 @@
     <nav class="nav-links" id="navLinks">
       <a href="#screens" data-i18n="nav.screens">Screens</a>
       <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#beta" data-i18n="nav.beta">3.0 Beta</a>
       <a href="#whatsnew" data-i18n="nav.whatsnew">What's New</a>
       <a href="#languages" data-i18n="nav.languages">Languages</a>
       <a href="#download" data-i18n="nav.download">Download</a>
@@ -243,6 +244,16 @@
   </div>
 </section>
 
+<!-- ============ NEW IN 3.0 (BETA) ============ -->
+<section class="section beta-section" id="beta" style="background:var(--paper-2); border-block:1px solid var(--line);">
+  <div class="wrap">
+    <span class="eyebrow eyebrow-beta" data-i18n="beta.eyebrow">Now in beta</span>
+    <h2 class="h2" style="margin-top:16px" data-i18n="beta.h2">New in 3.0 — an optional cloud</h2>
+    <p class="lede" style="margin-top:16px" data-i18n="beta.lede">The 3.0 beta adds an opt-in, end-to-end-encrypted cloud on top of the offline core. Everything below is in beta — try it, and please keep backups. None of it is required.</p>
+    <div class="feat-grid" id="betaGrid"></div>
+  </div>
+</section>
+
 <!-- ============ BILINGUAL ============ -->
 <section class="section" id="languages">
   <div class="wrap">
@@ -315,7 +326,7 @@
       <div>
         <span class="eyebrow" data-i18n="oss.eyebrow">Source available</span>
         <h2 class="h2" style="margin-top:16px" data-i18n-html="oss.h2">Free to use.<br>Yours to inspect.</h2>
-        <p class="lede" style="margin-top:18px" data-i18n="oss.lede">Khayt is free to use and will remain free. The source is on GitHub — read it, fork it, modify it for your own shop. Licensed under MIT + Commons Clause (no reselling). If it helps your business, consider sponsoring.</p>
+        <p class="lede" style="margin-top:18px" data-i18n="oss.lede">Khayt is free to use and will remain free. The source is on GitHub — read it, fork it, run it and modify it for your own shop. Licensed under the Functional Source License (FSL-1.1-Apache-2.0): the only thing you can’t do is repackage it to compete with Khayt — and each release converts to the permissive Apache-2.0 license two years after it ships. If it helps your business, consider sponsoring.</p>
         <div class="hero-cta" style="justify-content:flex-start;margin-top:26px">
           <a href="https://github.com/khaytapp/Khayt" target="_blank" rel="noopener" class="btn btn-primary btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="oss.star">Star on GitHub</span></a>
           <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg><span data-i18n="oss.sponsor">Sponsor</span></a>
@@ -427,7 +438,7 @@
     </div>
     <div class="foot-bottom">
       <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
-      <span>MIT + Commons Clause · © 2026 Khayt</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
     </div>
   </div>
 </footer>
