@@ -449,6 +449,22 @@
   }
 
   /* ---------- GitHub releases (stable + beta + changelog) ---------- */
+  // Compare versions like "3.0.0-beta.11" — numeric core, then a stable release
+  // ranks above a prerelease of the same core, then beta number. Returns >0 if a>b.
+  // (The GitHub API does NOT return releases in version order, so we must sort.)
+  function cmpVer(a, b) {
+    function parse(v) {
+      var m = /^(\d+)\.(\d+)\.(\d+)(?:-([a-z]+)\.?(\d+)?)?$/i.exec(String(v).replace(/^v/, ''));
+      if (!m) return null;
+      return { core: [+m[1], +m[2], +m[3]], pre: m[4] ? (m[4] + '.' + (m[5] || 0)) : '', preNum: m[5] ? +m[5] : 0, isPre: !!m[4] };
+    }
+    var pa = parse(a), pb = parse(b);
+    if (!pa || !pb) return String(b).localeCompare(String(a));
+    for (var i = 0; i < 3; i++) if (pa.core[i] !== pb.core[i]) return pa.core[i] - pb.core[i];
+    if (pa.isPre !== pb.isPre) return pa.isPre ? -1 : 1; // stable > prerelease of same core
+    return pa.preNum - pb.preNum;
+  }
+
   function shortNote(rel) {
     var body = (rel.body || '').replace(/\r/g, '');
     var line = body.split('\n').find(function (l) { return l.trim().length > 0 && !/^#/.test(l); });
@@ -463,18 +479,22 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rels) {
         if (!rels || !rels.length) return;
-        var stable = null, beta = null, cl = [];
+        // The API does not guarantee version order — collect, then sort by semver.
+        var pub = [];
         for (var i = 0; i < rels.length; i++) {
           var rel = rels[i];
           if (rel.draft) continue;
-          var v = String(rel.tag_name).replace(/^v/, '');
-          var entry = { v: v, rel: rel, beta: !!rel.prerelease };
-          if (rel.prerelease) { if (!beta) beta = entry; }
-          else { if (!stable) stable = entry; }
-          if (cl.length < 5) {
-            cl.push({ v: v, date: (rel.published_at || '').slice(0, 10), beta: !!rel.prerelease, d: shortNote(rel) });
-          }
+          pub.push({ v: String(rel.tag_name).replace(/^v/, ''), rel: rel, beta: !!rel.prerelease });
         }
+        pub.sort(function (a, b) { return cmpVer(b.v, a.v); }); // newest first
+        var stable = null, beta = null;
+        for (var j = 0; j < pub.length; j++) {
+          if (!stable && !pub[j].beta) stable = pub[j];
+          if (!beta && pub[j].beta) beta = pub[j];
+        }
+        var cl = pub.slice(0, 5).map(function (e) {
+          return { v: e.v, date: (e.rel.published_at || '').slice(0, 10), beta: e.beta, d: shortNote(e.rel) };
+        });
         if (stable) { CHANNELS.stable = { v: stable.v, assets: stable.rel.assets }; }
         if (beta) {
           CHANNELS.beta = { v: beta.v, assets: beta.rel.assets };
