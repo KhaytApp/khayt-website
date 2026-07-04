@@ -50,15 +50,15 @@
     'feat.h2':     { en: 'Built for print shop owners', ar: 'مصمّم لأصحاب المطابع' },
     'feat.lede':   { en: 'One app handles your entire workflow — from first quote to final invoice, entirely offline.', ar: 'تطبيق واحد يدير سير عملك بالكامل — من أول عرض سعر إلى آخر فاتورة، دون اتصال تماماً.' },
 
-    'nav.beta':    { en: '3.0 Beta', ar: 'نسخة 3.0' },
-    'beta.eyebrow':{ en: 'Now in beta', ar: 'الآن في النسخة التجريبية' },
+    'nav.beta':    { en: 'New in 3.0', ar: 'الجديد في 3.0' },
+    'beta.eyebrow':{ en: 'Version 3.0', ar: 'الإصدار 3.0' },
     'beta.h2':     { en: 'New in 3.0 — an optional cloud', ar: 'الجديد في 3.0 — سحابة اختيارية' },
-    'beta.lede':   { en: 'The 3.0 beta adds an opt-in, end-to-end-encrypted cloud on top of the offline core. Everything below is in beta — try it, and please keep backups. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'تضيف نسخة 3.0 التجريبية سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. كل ما يلي تجريبي — جرّبه واحتفظ بنسخ احتياطية. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
+    'beta.lede':   { en: 'Khayt 3.0 adds an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt grew up. The 3.0 beta adds an optional, end-to-end-encrypted cloud — sync across devices, multi-user team accounts, an online storefront with checkout & deposits, customer order tracking, and an AI assistant — all on top of the offline production core. The app still runs fully without the cloud.', ar: 'تطوّر خيط كثيراً. تضيف نسخة 3.0 التجريبية سحابة اختيارية مشفّرة طرفياً — مزامنة بين الأجهزة، حسابات فريق متعددة المستخدمين، متجر إلكتروني بالدفع والعربون، تتبّع طلبات العملاء، ومساعد ذكاء اصطناعي — فوق نواة الإنتاج التي تعمل دون إنترنت. ويبقى التطبيق يعمل بالكامل دون السحابة.' },
+    'wn.lede':    { en: 'Khayt grew up. Khayt 3.0 adds an optional, end-to-end-encrypted cloud — sync across devices, multi-user team accounts, an online storefront with checkout & deposits, customer order tracking, and an AI assistant — all on top of the offline production core. The app still runs fully without the cloud.', ar: 'تطوّر خيط كثيراً. يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً — مزامنة بين الأجهزة، حسابات فريق متعددة المستخدمين، متجر إلكتروني بالدفع والعربون، تتبّع طلبات العملاء، ومساعد ذكاء اصطناعي — فوق نواة الإنتاج التي تعمل دون إنترنت. ويبقى التطبيق يعمل بالكامل دون السحابة.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.portal.tag': { en: 'Customer portal', ar: 'بوابة العملاء' },
@@ -191,6 +191,7 @@
 
   /* ---------- Release history (fallback; refreshed from GitHub) ---------- */
   var CHANGELOG = [
+    { v: '3.0.0', date: '2026-07-04', beta: false, d: { en: 'Khayt 3.0 stable — optional E2E-encrypted cloud: sync, teams, storefront, portal & AI assistant', ar: 'خيط 3.0 مستقر — سحابة اختيارية مشفّرة: مزامنة، فِرق، متجر، بوابة ومساعد ذكي' } },
     { v: '2.3.3', date: '2026-06-11', beta: false, d: { en: 'LAN tunnel & customer-portal hardening', ar: 'تحسين نفق الشبكة وبوابة العملاء' } },
     { v: '2.3.0', date: '2026-06-04', beta: false, d: { en: 'Security & stability release — LAN order tracking tokens', ar: 'إصدار أمان واستقرار — رموز تتبّع الطلبات' } },
     { v: '2.2.0', date: '2026-05-30', beta: false, d: { en: 'Gift cards, ZATCA Phase 2 FATOORA, LAN quote approval', ar: 'بطاقات هدايا، فاتورة المرحلة الثانية، اعتماد العروض' } },
@@ -411,14 +412,14 @@
     var rel = CHANNELS[channel];
     // update headline version chips for stable; beta uses its own tag
     if (channel === 'stable') {
-      var v = (CHANNELS.stable && CHANNELS.stable.v) || '2.3.3';
+      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.0.0';
       setVersionTags(v);
       var metaV = document.getElementById('dlMetaVer');
       if (metaV) metaV.querySelector('.ver-tag').textContent = 'v' + v;
     } else {
       var bv = (CHANNELS.beta && CHANNELS.beta.v) || null;
       var metaB = document.getElementById('dlMetaVer');
-      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v2.3.3';
+      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.0.0';
       if (!bv) {
         // no beta available — keep links on stable, note in console
       }
@@ -492,6 +493,9 @@
           if (!stable && !pub[j].beta) stable = pub[j];
           if (!beta && pub[j].beta) beta = pub[j];
         }
+        // Only surface the beta channel when a prerelease is actually newer than
+        // stable — after a stable release the latest beta is older, so hide it.
+        if (beta && stable && cmpVer(beta.v, stable.v) <= 0) beta = null;
         var cl = pub.slice(0, 5).map(function (e) {
           return { v: e.v, date: (e.rel.published_at || '').slice(0, 10), beta: e.beta, d: shortNote(e.rel) };
         });
