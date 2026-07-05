@@ -61,6 +61,9 @@
     'modes.pro.pill':{ en: 'Professional', ar: 'احترافي' },
     'modes.pro.t': { en: 'The whole production floor', ar: 'أرضية الإنتاج بالكامل' },
     'modes.pro.d': { en: 'The full toolkit — profit margins, expenses, multi-location, team roles, deep analytics, forecasting and every integration. Built for a real print shop running at scale.', ar: 'العدّة الكاملة — هوامش الربح، المصاريف، تعدد المواقع، أدوار الفريق، تحليلات عميقة، تنبؤ وكل التكاملات. مصمّم لمطبعة حقيقية تعمل على نطاق واسع.' },
+    'modes.cmp.h':  { en: 'What’s in each mode', ar: 'ما الذي يتضمّنه كل وضع' },
+    'modes.cmp.sub':{ en: 'Every mode keeps the personal core. Simple adds selling and invoicing; Professional adds the full production-business depth. Nothing is locked behind a paywall — it’s all free.', ar: 'كل وضع يحتفظ بالأساسيات الشخصية. «بسيط» يضيف البيع والفوترة، و«احترافي» يضيف عمق أعمال الإنتاج الكامل. لا شيء محجوب خلف اشتراك — كل شيء مجاني.' },
+    'modes.cmp.feature':{ en: 'Feature', ar: 'الميزة' },
 
     'feat.eyebrow':{ en: 'Everything you need', ar: 'كل ما تحتاجه' },
     'feat.h2':     { en: 'Built for print shop owners', ar: 'مصمّم لأصحاب المطابع' },
@@ -237,6 +240,64 @@
   }
   function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
 
+  /* ---------- Mode comparison (mirrors lib/feature-tiers.js) ---------- */
+  // t = [enthusiast, simple, professional]. Additive: personal core is on
+  // everywhere, business rows add in Simple, production depth adds in Professional.
+  var MODE_COMPARE = [
+    { g: { en: 'Personal core', ar: 'الأساسيات الشخصية' }, rows: [
+      { l: { en: 'Cost calculator (FDM + resin)', ar: 'حاسبة التكلفة (FDM والراتنج)' }, t: [1, 1, 1] },
+      { l: { en: 'Production queue (Kanban)', ar: 'قائمة الإنتاج (كانبان)' }, t: [1, 1, 1] },
+      { l: { en: 'Print-file library & 3MF converter', ar: 'مكتبة ملفات الطباعة ومحوّل 3MF' }, t: [1, 1, 1] },
+      { l: { en: 'Colour mixer & matcher', ar: 'مازج ومطابق الألوان' }, t: [1, 1, 1] },
+      { l: { en: 'Filament inventory', ar: 'مخزون الخيوط' }, t: [1, 1, 1] },
+      { l: { en: 'Printers, monitoring & waste log', ar: 'الطابعات والمراقبة وسجل الهدر' }, t: [1, 1, 1] }
+    ] },
+    { g: { en: 'Selling & invoicing', ar: 'البيع والفوترة' }, rows: [
+      { l: { en: 'Clients & customer orders', ar: 'العملاء وطلبات العملاء' }, t: [0, 1, 1] },
+      { l: { en: 'Invoices & payments', ar: 'الفواتير والمدفوعات' }, t: [0, 1, 1] },
+      { l: { en: 'Online storefront & customer portal', ar: 'المتجر الإلكتروني وبوابة العملاء' }, t: [0, 1, 1] },
+      { l: { en: 'Gift cards & store credit', ar: 'بطاقات الهدايا ورصيد المتجر' }, t: [0, 1, 1] },
+      { l: { en: 'Sales reports', ar: 'تقارير المبيعات' }, t: [0, 1, 1] }
+    ] },
+    { g: { en: 'Production business', ar: 'أعمال الإنتاج' }, rows: [
+      { l: { en: 'Full analytics & forecasting', ar: 'تحليلات وتوقّعات كاملة' }, t: [0, 0, 1] },
+      { l: { en: 'ZATCA Phase 2 e-invoicing', ar: 'فوترة هيئة الزكاة (المرحلة الثانية)' }, t: [0, 0, 1] },
+      { l: { en: 'Proforma, milestone & credit notes', ar: 'فواتير مبدئية ومراحل وإشعارات دائنة' }, t: [0, 0, 1] },
+      { l: { en: 'Purchase orders & payables', ar: 'أوامر الشراء والذمم الدائنة' }, t: [0, 0, 1] },
+      { l: { en: 'Multiple locations & print-farm view', ar: 'فروع متعددة وعرض مزرعة الطباعة' }, t: [0, 0, 1] },
+      { l: { en: 'Team accounts & roles', ar: 'حسابات الفريق والأدوار' }, t: [0, 0, 1] },
+      { l: { en: 'Machine maintenance & downtime', ar: 'صيانة الأجهزة والتوقّف' }, t: [0, 0, 1] },
+      { l: { en: 'Loyalty tiers & break-even', ar: 'مستويات الولاء ونقطة التعادل' }, t: [0, 0, 1] },
+      { l: { en: 'Expense tracking & accounting sync', ar: 'تتبّع المصروفات ومزامنة المحاسبة' }, t: [0, 0, 1] }
+    ] }
+  ];
+
+  function buildModesTable() {
+    var el = document.getElementById('modesTable');
+    if (!el) return;
+    var cols = [t('modes.ent.pill'), t('modes.sim.pill'), t('modes.pro.pill')];
+    var yes = '<svg class="cmp-yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+    var no = '<span class="cmp-no" aria-hidden="true">–</span>';
+    var h = '<table class="cmp"><thead><tr><th class="cmp-feat">' + t('modes.cmp.feature') + '</th>';
+    for (var c = 0; c < 3; c++) h += '<th class="cmp-col' + (c === 2 ? ' cmp-col-hl' : '') + '">' + cols[c] + '</th>';
+    h += '</tr></thead><tbody>';
+    for (var g = 0; g < MODE_COMPARE.length; g++) {
+      var grp = MODE_COMPARE[g];
+      h += '<tr class="cmp-grouprow"><td colspan="4">' + grp.g[lang] + '</td></tr>';
+      for (var r = 0; r < grp.rows.length; r++) {
+        var row = grp.rows[r];
+        h += '<tr><td class="cmp-feat">' + row.l[lang] + '</td>';
+        for (var m = 0; m < 3; m++) {
+          var on = row.t[m];
+          h += '<td class="cmp-cell' + (m === 2 ? ' cmp-col-hl' : '') + '">' + (on ? yes : no) + '</td>';
+        }
+        h += '</tr>';
+      }
+    }
+    h += '</tbody></table>';
+    el.innerHTML = h;
+  }
+
   function buildFeatures() {
     var grid = document.getElementById('featGrid');
     if (!grid) return;
@@ -311,6 +372,7 @@
     }
     buildFeatures();
     buildBetaFeatures();
+    buildModesTable();
     buildChangelog();
     paintCaption();
     // swap gallery + hero screenshots to match language (EN / AR-RTL)
