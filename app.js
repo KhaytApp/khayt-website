@@ -276,14 +276,15 @@
     var el = document.getElementById('modesTable');
     if (!el) return;
     var cols = [t('modes.ent.pill'), t('modes.sim.pill'), t('modes.pro.pill')];
-    var yes = '<svg class="cmp-yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
-    var no = '<span class="cmp-no" aria-hidden="true">–</span>';
-    var h = '<table class="cmp"><thead><tr><th class="cmp-feat">' + t('modes.cmp.feature') + '</th>';
-    for (var c = 0; c < 3; c++) h += '<th class="cmp-col' + (c === 2 ? ' cmp-col-hl' : '') + '">' + cols[c] + '</th>';
+    var yes = '<span class="cmp-yes" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
+    var no = '<span class="cmp-no" aria-hidden="true"></span>';
+    var h = '<table class="cmp"><colgroup><col class="cmp-c-feat"><col class="cmp-c"><col class="cmp-c"><col class="cmp-c cmp-c-hl"></colgroup>';
+    h += '<thead><tr><th class="cmp-feat"></th>';
+    for (var c = 0; c < 3; c++) h += '<th class="cmp-col' + (c === 2 ? ' cmp-col-hl' : '') + '"><span class="cmp-chip">' + cols[c] + '</span></th>';
     h += '</tr></thead><tbody>';
     for (var g = 0; g < MODE_COMPARE.length; g++) {
       var grp = MODE_COMPARE[g];
-      h += '<tr class="cmp-grouprow"><td colspan="4">' + grp.g[lang] + '</td></tr>';
+      h += '<tr class="cmp-grouprow"><td colspan="4"><span>' + grp.g[lang] + '</span></td></tr>';
       for (var r = 0; r < grp.rows.length; r++) {
         var row = grp.rows[r];
         h += '<tr><td class="cmp-feat">' + row.l[lang] + '</td>';
