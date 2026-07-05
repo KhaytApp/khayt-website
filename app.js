@@ -77,7 +77,7 @@
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt grew up. Khayt 3.0 adds an optional, end-to-end-encrypted cloud — sync across devices, multi-user team accounts, an online storefront with checkout & deposits, customer order tracking, and an AI assistant — all on top of the offline production core. The app still runs fully without the cloud.', ar: 'تطوّر خيط كثيراً. يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً — مزامنة بين الأجهزة، حسابات فريق متعددة المستخدمين، متجر إلكتروني بالدفع والعربون، تتبّع طلبات العملاء، ومساعد ذكاء اصطناعي — فوق نواة الإنتاج التي تعمل دون إنترنت. ويبقى التطبيق يعمل بالكامل دون السحابة.' },
+    'wn.lede':    { en: 'Khayt 3.1 opens the app up to makers, not just print shops: a new Enthusiast mode that hides everything commercial, a visual Print-File Library for your STL / 3MF / G-code, a Colour Mixer suite (stock matcher, blend & gradient, multicolour planner), support for every slicer on your machine, and a 3MF Converter that retargets a file to another printer. All local, in every one of the three modes. On top of 3.0’s optional end-to-end-encrypted cloud — sync, teams, storefront and AI assistant — which the app never requires.', ar: 'يفتح خيط 3.1 التطبيق للهواة لا للمطابع فقط: وضع «هواة» جديد يخفي كل ما هو تجاري، مكتبة مرئية لملفات STL و3MF وG-code، أدوات مزج الألوان (مطابقة المخزون، المزج والتدرّج، مخطط الألوان المتعددة)، دعم كل برامج التقطيع على جهازك، ومحوّل 3MF يعيد توجيه الملف لطابعة أخرى. كله محلي، في الأوضاع الثلاثة. فوق سحابة 3.0 الاختيارية المشفّرة طرفياً — مزامنة وفِرق ومتجر ومساعد ذكي — والتي لا يشترطها التطبيق أبداً.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.portal.tag': { en: 'Customer portal', ar: 'بوابة العملاء' },
@@ -212,6 +212,7 @@
 
   /* ---------- Release history (fallback; refreshed from GitHub) ---------- */
   var CHANGELOG = [
+    { v: '3.1.0', date: '2026-07-05', beta: false, d: { en: 'Enthusiast mode, Print-File Library, Colour Mixer suite, multi-slicer & 3MF Converter', ar: 'وضع الهواة، مكتبة ملفات الطباعة، أدوات مزج الألوان، تعدد برامج التقطيع ومحوّل 3MF' } },
     { v: '3.0.0', date: '2026-07-04', beta: false, d: { en: 'Khayt 3.0 stable — optional E2E-encrypted cloud: sync, teams, storefront, portal & AI assistant', ar: 'خيط 3.0 مستقر — سحابة اختيارية مشفّرة: مزامنة، فِرق، متجر، بوابة ومساعد ذكي' } },
     { v: '2.3.3', date: '2026-06-11', beta: false, d: { en: 'LAN tunnel & customer-portal hardening', ar: 'تحسين نفق الشبكة وبوابة العملاء' } },
     { v: '2.3.0', date: '2026-06-04', beta: false, d: { en: 'Security & stability release — LAN order tracking tokens', ar: 'إصدار أمان واستقرار — رموز تتبّع الطلبات' } },
@@ -493,14 +494,14 @@
     var rel = CHANNELS[channel];
     // update headline version chips for stable; beta uses its own tag
     if (channel === 'stable') {
-      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.0.0';
+      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.1.0';
       setVersionTags(v);
       var metaV = document.getElementById('dlMetaVer');
       if (metaV) metaV.querySelector('.ver-tag').textContent = 'v' + v;
     } else {
       var bv = (CHANNELS.beta && CHANNELS.beta.v) || null;
       var metaB = document.getElementById('dlMetaVer');
-      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.0.0';
+      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.1.0';
       if (!bv) {
         // no beta available — keep links on stable, note in console
       }
