@@ -49,12 +49,9 @@
     'tab.analytics':  { en: 'Analytics', ar: 'التحليلات' },
     'tab.clients':    { en: 'Clients', ar: 'العملاء' },
 
-    'modes.eyebrow':{ en: 'One app, three ways to run it', ar: 'تطبيق واحد بثلاث طرق للاستخدام' },
-    'modes.h2':     { en: 'From hobby bench to production floor', ar: 'من طاولة الهواية إلى أرضية الإنتاج' },
+    'modes.eyebrow':{ en: 'One app, two ways to run it', ar: 'تطبيق واحد بطريقتين للاستخدام' },
+    'modes.h2':     { en: 'From side-business to production floor', ar: 'من عمل جانبي إلى أرضية إنتاج' },
     'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a personal print log to a full production business, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من سجل طباعة شخصي إلى منشأة إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
-    'modes.ent.pill':{ en: 'Enthusiast', ar: 'هاوٍ' },
-    'modes.ent.t': { en: 'Just my prints', ar: 'مطبوعاتي فقط' },
-    'modes.ent.d': { en: 'A clean personal workspace for hobbyists — print queue, cost calculator, filament inventory, a file library and colour tools. No invoices, clients or prices. Track what you print, not what you charge.', ar: 'مساحة عمل شخصية نظيفة للهواة — قائمة طباعة، حاسبة تكلفة، مخزون خيوط، مكتبة ملفات وأدوات ألوان. بلا فواتير أو عملاء أو أسعار. تتبّع ما تطبعه لا ما تتقاضاه.' },
     'modes.sim.pill':{ en: 'Simple', ar: 'بسيط' },
     'modes.sim.t': { en: 'A small shop, made easy', ar: 'متجر صغير بسهولة' },
     'modes.sim.d': { en: 'Everything a side-business needs — orders, clients, invoicing and revenue, plus focused sales reports. The advanced production and accounting depth stays out of the way until you want it.', ar: 'كل ما يحتاجه مشروع جانبي — طلبات، عملاء، فوترة وإيرادات، مع تقارير مبيعات مركّزة. يبقى العمق الإنتاجي والمحاسبي المتقدّم بعيداً حتى تطلبه.' },
@@ -243,56 +240,58 @@
   function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
 
   /* ---------- Mode comparison (mirrors lib/feature-tiers.js) ---------- */
-  // t = [enthusiast, simple, professional]. Additive: personal core is on
-  // everywhere, business rows add in Simple, production depth adds in Professional.
+  // t = [simple, professional]. Additive: the personal core is on in both,
+  // production depth adds in Professional.
+  // Enthusiast was removed as a Khayt mode — that audience is served by the
+  // separate Bed Ready app, so the site must not offer it as a choice here.
   var MODE_COMPARE = [
     { g: { en: 'Personal core', ar: 'الأساسيات الشخصية' }, rows: [
-      { l: { en: 'Cost calculator (FDM + resin)', ar: 'حاسبة التكلفة (FDM والراتنج)' }, t: [1, 1, 1] },
-      { l: { en: 'Production queue (Kanban)', ar: 'قائمة الإنتاج (كانبان)' }, t: [1, 1, 1] },
-      { l: { en: 'Print-file library & 3MF converter', ar: 'مكتبة ملفات الطباعة ومحوّل 3MF' }, t: [1, 1, 1] },
-      { l: { en: 'Colour mixer & matcher', ar: 'مازج ومطابق الألوان' }, t: [1, 1, 1] },
-      { l: { en: 'Filament inventory', ar: 'مخزون الخيوط' }, t: [1, 1, 1] },
-      { l: { en: 'Printers, monitoring & waste log', ar: 'الطابعات والمراقبة وسجل الهدر' }, t: [1, 1, 1] }
+      { l: { en: 'Cost calculator (FDM + resin)', ar: 'حاسبة التكلفة (FDM والراتنج)' }, t: [1, 1] },
+      { l: { en: 'Production queue (Kanban)', ar: 'قائمة الإنتاج (كانبان)' }, t: [1, 1] },
+      { l: { en: 'Print-file library & 3MF converter', ar: 'مكتبة ملفات الطباعة ومحوّل 3MF' }, t: [1, 1] },
+      { l: { en: 'Colour mixer & matcher', ar: 'مازج ومطابق الألوان' }, t: [1, 1] },
+      { l: { en: 'Filament inventory', ar: 'مخزون الخيوط' }, t: [1, 1] },
+      { l: { en: 'Printers, monitoring & waste log', ar: 'الطابعات والمراقبة وسجل الهدر' }, t: [1, 1] }
     ] },
     { g: { en: 'Selling & invoicing', ar: 'البيع والفوترة' }, rows: [
-      { l: { en: 'Clients & customer orders', ar: 'العملاء وطلبات العملاء' }, t: [0, 1, 1] },
-      { l: { en: 'Invoices & payments', ar: 'الفواتير والمدفوعات' }, t: [0, 1, 1] },
-      { l: { en: 'Online storefront & customer portal', ar: 'المتجر الإلكتروني وبوابة العملاء' }, t: [0, 1, 1] },
-      { l: { en: 'Gift cards & store credit', ar: 'بطاقات الهدايا ورصيد المتجر' }, t: [0, 1, 1] },
-      { l: { en: 'Sales reports', ar: 'تقارير المبيعات' }, t: [0, 1, 1] }
+      { l: { en: 'Clients & customer orders', ar: 'العملاء وطلبات العملاء' }, t: [1, 1] },
+      { l: { en: 'Invoices & payments', ar: 'الفواتير والمدفوعات' }, t: [1, 1] },
+      { l: { en: 'Online storefront & customer portal', ar: 'المتجر الإلكتروني وبوابة العملاء' }, t: [1, 1] },
+      { l: { en: 'Gift cards & store credit', ar: 'بطاقات الهدايا ورصيد المتجر' }, t: [1, 1] },
+      { l: { en: 'Sales reports', ar: 'تقارير المبيعات' }, t: [1, 1] }
     ] },
     { g: { en: 'Production business', ar: 'أعمال الإنتاج' }, rows: [
-      { l: { en: 'Full analytics & forecasting', ar: 'تحليلات وتوقّعات كاملة' }, t: [0, 0, 1] },
-      { l: { en: 'ZATCA Phase 2 e-invoicing', ar: 'فوترة هيئة الزكاة (المرحلة الثانية)' }, t: [0, 0, 1] },
-      { l: { en: 'Proforma, milestone & credit notes', ar: 'فواتير مبدئية ومراحل وإشعارات دائنة' }, t: [0, 0, 1] },
-      { l: { en: 'Purchase orders & payables', ar: 'أوامر الشراء والذمم الدائنة' }, t: [0, 0, 1] },
-      { l: { en: 'Multiple locations & print-farm view', ar: 'فروع متعددة وعرض مزرعة الطباعة' }, t: [0, 0, 1] },
-      { l: { en: 'Team accounts & roles', ar: 'حسابات الفريق والأدوار' }, t: [0, 0, 1] },
-      { l: { en: 'Machine maintenance & downtime', ar: 'صيانة الأجهزة والتوقّف' }, t: [0, 0, 1] },
-      { l: { en: 'Loyalty tiers & break-even', ar: 'مستويات الولاء ونقطة التعادل' }, t: [0, 0, 1] },
-      { l: { en: 'Expense tracking & accounting sync', ar: 'تتبّع المصروفات ومزامنة المحاسبة' }, t: [0, 0, 1] }
+      { l: { en: 'Full analytics & forecasting', ar: 'تحليلات وتوقّعات كاملة' }, t: [0, 1] },
+      { l: { en: 'ZATCA Phase 2 e-invoicing', ar: 'فوترة هيئة الزكاة (المرحلة الثانية)' }, t: [0, 1] },
+      { l: { en: 'Proforma, milestone & credit notes', ar: 'فواتير مبدئية ومراحل وإشعارات دائنة' }, t: [0, 1] },
+      { l: { en: 'Purchase orders & payables', ar: 'أوامر الشراء والذمم الدائنة' }, t: [0, 1] },
+      { l: { en: 'Multiple locations & print-farm view', ar: 'فروع متعددة وعرض مزرعة الطباعة' }, t: [0, 1] },
+      { l: { en: 'Team accounts & roles', ar: 'حسابات الفريق والأدوار' }, t: [0, 1] },
+      { l: { en: 'Machine maintenance & downtime', ar: 'صيانة الأجهزة والتوقّف' }, t: [0, 1] },
+      { l: { en: 'Loyalty tiers & break-even', ar: 'مستويات الولاء ونقطة التعادل' }, t: [0, 1] },
+      { l: { en: 'Expense tracking & accounting sync', ar: 'تتبّع المصروفات ومزامنة المحاسبة' }, t: [0, 1] }
     ] }
   ];
 
   function buildModesTable() {
     var el = document.getElementById('modesTable');
     if (!el) return;
-    var cols = [t('modes.ent.pill'), t('modes.sim.pill'), t('modes.pro.pill')];
+    var cols = [t('modes.sim.pill'), t('modes.pro.pill')];
     var yes = '<span class="cmp-yes" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
     var no = '<span class="cmp-no" aria-hidden="true"></span>';
-    var h = '<table class="cmp"><colgroup><col class="cmp-c-feat"><col class="cmp-c"><col class="cmp-c"><col class="cmp-c cmp-c-hl"></colgroup>';
+    var h = '<table class="cmp"><colgroup><col class="cmp-c-feat"><col class="cmp-c"><col class="cmp-c cmp-c-hl"></colgroup>';
     h += '<thead><tr><th class="cmp-feat"></th>';
-    for (var c = 0; c < 3; c++) h += '<th class="cmp-col' + (c === 2 ? ' cmp-col-hl' : '') + '"><span class="cmp-chip">' + cols[c] + '</span></th>';
+    for (var c = 0; c < 2; c++) h += '<th class="cmp-col' + (c === 1 ? ' cmp-col-hl' : '') + '"><span class="cmp-chip">' + cols[c] + '</span></th>';
     h += '</tr></thead><tbody>';
     for (var g = 0; g < MODE_COMPARE.length; g++) {
       var grp = MODE_COMPARE[g];
-      h += '<tr class="cmp-grouprow"><td colspan="4"><span>' + grp.g[lang] + '</span></td></tr>';
+      h += '<tr class="cmp-grouprow"><td colspan="3"><span>' + grp.g[lang] + '</span></td></tr>';
       for (var r = 0; r < grp.rows.length; r++) {
         var row = grp.rows[r];
         h += '<tr><td class="cmp-feat">' + row.l[lang] + '</td>';
-        for (var m = 0; m < 3; m++) {
+        for (var m = 0; m < 2; m++) {
           var on = row.t[m];
-          h += '<td class="cmp-cell' + (m === 2 ? ' cmp-col-hl' : '') + '">' + (on ? yes : no) + '</td>';
+          h += '<td class="cmp-cell' + (m === 1 ? ' cmp-col-hl' : '') + '">' + (on ? yes : no) + '</td>';
         }
         h += '</tr>';
       }
