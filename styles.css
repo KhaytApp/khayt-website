@@ -428,6 +428,25 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 @media (max-width: 900px) { .modes-grid { grid-template-columns: 1fr; } }
 
 /* ============ Mode comparison table ============ */
+/* Hobbyist pointer — the audience the removed third mode used to speak to.
+   Deliberately not a third mode card: it is a different product, not another
+   way to run this one, and dressing it as a peer choice is what made the old
+   three-mode layout confusing. */
+.modes-elsewhere {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+.modes-elsewhere p { margin: 0; flex: 1 1 380px; color: var(--muted); line-height: 1.6; }
+.modes-elsewhere strong { display: block; color: var(--ink); margin-bottom: 4px; }
+.modes-elsewhere .btn { flex: 0 0 auto; }
+
 .modes-compare { margin-top: 52px; }
 .modes-compare-head { max-width: 62ch; margin-bottom: 22px; }
 .modes-compare-head h3 { font-size: clamp(21px, 2.2vw, 26px); font-weight: 800; letter-spacing: -0.015em; color: var(--ink); font-family: 'Archivo', system-ui, sans-serif; }

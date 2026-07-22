@@ -49,6 +49,9 @@
     'tab.analytics':  { en: 'Analytics', ar: 'التحليلات' },
     'tab.clients':    { en: 'Clients', ar: 'العملاء' },
 
+    'modes.hobby.t':{ en: 'Printing for yourself, not for customers?', ar: 'تطبع لنفسك لا لعملاء؟' },
+    'modes.hobby.d':{ en: 'Khayt is built around orders, clients and invoicing. If you just want to prep files, plan colours and keep track of filament, that\u2019s Bed Ready \u2014 a separate free app from the same workshop.', ar: '\u062e\u064a\u0637 \u0645\u0628\u0646\u064a\u0651 \u062d\u0648\u0644 \u0627\u0644\u0637\u0644\u0628\u0627\u062a \u0648\u0627\u0644\u0639\u0645\u0644\u0627\u0621 \u0648\u0627\u0644\u0641\u0648\u062a\u0631\u0629. \u0625\u0646 \u0643\u0646\u062a \u062a\u0631\u064a\u062f \u0641\u0642\u0637 \u062a\u062c\u0647\u064a\u0632 \u0627\u0644\u0645\u0644\u0641\u0627\u062a \u0648\u062a\u062e\u0637\u064a\u0637 \u0627\u0644\u0623\u0644\u0648\u0627\u0646 \u0648\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u062e\u064a\u0648\u0637\u060c \u0641\u0647\u0630\u0627 \u0647\u0648 Bed Ready \u2014 \u062a\u0637\u0628\u064a\u0642 \u0645\u062c\u0627\u0646\u064a \u0645\u0646\u0641\u0635\u0644 \u0645\u0646 \u0627\u0644\u0648\u0631\u0634\u0629 \u0646\u0641\u0633\u0647\u0627.' },
+    'modes.hobby.cta':{ en: 'Take a look at Bed Ready', ar: '\u0627\u0637\u0651\u0644\u0639 \u0639\u0644\u0649 Bed Ready' },
     'modes.eyebrow':{ en: 'One app, two ways to run it', ar: 'تطبيق واحد بطريقتين للاستخدام' },
     'modes.h2':     { en: 'From side-business to production floor', ar: 'من عمل جانبي إلى أرضية إنتاج' },
     'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a personal print log to a full production business, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من سجل طباعة شخصي إلى منشأة إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
