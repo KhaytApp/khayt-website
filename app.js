@@ -212,6 +212,7 @@
 
   /* ---------- Release history (fallback; refreshed from GitHub) ---------- */
   var CHANGELOG = [
+    { v: '3.2.0', date: '2026-07-22', beta: false, d: { en: 'Quoting now counts part quantities correctly; assembly tracking, printer discovery, per-printer camera and scoped API tokens', ar: 'التسعير يحتسب كميات القطع بشكل صحيح؛ تتبّع التجميع، اكتشاف الطابعات، كاميرا لكل طابعة، ورموز API محدودة الصلاحية' } },
     { v: '3.1.0', date: '2026-07-05', beta: false, d: { en: 'Enthusiast mode, Print-File Library, Colour Mixer suite, multi-slicer & 3MF Converter', ar: 'وضع الهواة، مكتبة ملفات الطباعة، أدوات مزج الألوان، تعدد برامج التقطيع ومحوّل 3MF' } },
     { v: '3.0.0', date: '2026-07-04', beta: false, d: { en: 'Khayt 3.0 stable — optional E2E-encrypted cloud: sync, teams, storefront, portal & AI assistant', ar: 'خيط 3.0 مستقر — سحابة اختيارية مشفّرة: مزامنة، فِرق، متجر، بوابة ومساعد ذكي' } },
     { v: '2.3.3', date: '2026-06-11', beta: false, d: { en: 'LAN tunnel & customer-portal hardening', ar: 'تحسين نفق الشبكة وبوابة العملاء' } },
@@ -494,14 +495,14 @@
     var rel = CHANNELS[channel];
     // update headline version chips for stable; beta uses its own tag
     if (channel === 'stable') {
-      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.1.0';
+      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.2.0';
       setVersionTags(v);
       var metaV = document.getElementById('dlMetaVer');
       if (metaV) metaV.querySelector('.ver-tag').textContent = 'v' + v;
     } else {
       var bv = (CHANNELS.beta && CHANNELS.beta.v) || null;
       var metaB = document.getElementById('dlMetaVer');
-      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.1.0';
+      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.2.0';
       if (!bv) {
         // no beta available — keep links on stable, note in console
       }
