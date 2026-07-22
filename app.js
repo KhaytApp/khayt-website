@@ -69,15 +69,15 @@
     'feat.h2':     { en: 'Built for print shop owners', ar: 'مصمّم لأصحاب المطابع' },
     'feat.lede':   { en: 'One app handles your entire workflow — from first quote to final invoice, entirely offline.', ar: 'تطبيق واحد يدير سير عملك بالكامل — من أول عرض سعر إلى آخر فاتورة، دون اتصال تماماً.' },
 
-    'nav.beta':    { en: 'New in 3.0', ar: 'الجديد في 3.0' },
+    'nav.beta':    { en: 'Cloud', ar: 'السحابة' },
     'beta.eyebrow':{ en: 'Version 3.0', ar: 'الإصدار 3.0' },
-    'beta.h2':     { en: 'New in 3.0 — an optional cloud', ar: 'الجديد في 3.0 — سحابة اختيارية' },
-    'beta.lede':   { en: 'Khayt 3.0 adds an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
+    'beta.h2':     { en: 'An optional cloud', ar: 'سحابة اختيارية' },
+    'beta.lede':   { en: 'Khayt has an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt 3.1 opens the app up to makers, not just print shops: a new Enthusiast mode that hides everything commercial, a visual Print-File Library for your STL / 3MF / G-code, a Colour Mixer suite (stock matcher, blend & gradient, multicolour planner), support for every slicer on your machine, and a 3MF Converter that retargets a file to another printer. All local, in every one of the three modes. On top of 3.0’s optional end-to-end-encrypted cloud — sync, teams, storefront and AI assistant — which the app never requires.', ar: 'يفتح خيط 3.1 التطبيق للهواة لا للمطابع فقط: وضع «هواة» جديد يخفي كل ما هو تجاري، مكتبة مرئية لملفات STL و3MF وG-code، أدوات مزج الألوان (مطابقة المخزون، المزج والتدرّج، مخطط الألوان المتعددة)، دعم كل برامج التقطيع على جهازك، ومحوّل 3MF يعيد توجيه الملف لطابعة أخرى. كله محلي، في الأوضاع الثلاثة. فوق سحابة 3.0 الاختيارية المشفّرة طرفياً — مزامنة وفِرق ومتجر ومساعد ذكي — والتي لا يشترطها التطبيق أبداً.' },
+    'wn.lede':    { en: 'Khayt 3.2 is a correctness release. Quoting now counts part quantities properly, Arabic reads the way Saudi apps do, and a printer that blips off the network no longer looks dead. It also adds assembly tracking, printer discovery on your LAN, per-printer cameras and scoped API tokens.', ar: 'خيط 3.2 إصدار تصحيحي. صار التسعير يحتسب كميات القطع بشكل صحيح، والعربية تُعرض كما في تطبيقات السعودية، ولم تعد الطابعة التي تنقطع لحظياً عن الشبكة تبدو معطّلة. ويضيف أيضاً تتبّع التجميع، واكتشاف الطابعات على شبكتك، وكاميرا لكل طابعة، ورموز API محدودة الصلاحية.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.portal.tag': { en: 'Customer portal', ar: 'بوابة العملاء' },
@@ -100,15 +100,15 @@
     'bento.multi.tag':  { en: 'Multi-location & roles', ar: 'فروع متعددة وأدوار' },
     'bento.multi.t':    { en: 'Run more than one shop', ar: 'أدِر أكثر من مطبعة' },
 
-    'lang.eyebrow':{ en: '7 languages', ar: '٧ لغات' },
+    'lang.eyebrow':{ en: '8 languages', ar: '8 لغات' },
     'lang.h2':     { en: 'Built for global makers', ar: 'مصمّم لصُنّاع العالم' },
-    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Chinese and Japanese, with instant switching from anywhere in the app.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق.' },
+    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق.' },
     'lang.li1':{ en: 'Arabic RTL layout throughout the entire app', ar: 'تخطيط عربي من اليمين لليسار في كامل التطبيق' },
     'lang.li2':{ en: 'ZATCA Phase 2 e-invoices — signed, bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
-    'theme.note':{ en: '7 in-app themes · light & dark · 7 languages', ar: '٧ سمات داخل التطبيق · فاتح وداكن · ٧ لغات' },
+    'theme.note':{ en: '10 in-app themes · light & dark · 8 languages', ar: '10 سمات داخل التطبيق · فاتح وداكن · 8 لغات' },
 
     'oss.eyebrow':{ en: 'Source available', ar: 'المصدر متاح' },
     'oss.h2':    { en: 'Free to use.<br>Yours to inspect.', ar: 'مجاني للاستخدام.<br>وملكك لتفحّصه.' },
@@ -171,7 +171,7 @@
       i: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7M8.2 13.2 15.8 17"/>' }
   ];
 
-  /* ---------- New in 3.0 (beta) — all opt-in; app still runs fully offline ---------- */
+  /* ---------- Optional cloud — all opt-in; app still runs fully offline ---------- */
   var BETA_FEATURES = [
     { t: { en: 'Encrypted cloud sync', ar: 'مزامنة سحابية مشفّرة' }, d: { en: 'Opt-in sync across your devices, end-to-end encrypted — the server only ever sees ciphertext. Your sync passphrase never leaves your machine. Turn it off and Khayt runs 100% offline as before.', ar: 'مزامنة اختيارية بين أجهزتك مشفّرة طرفياً — لا يرى الخادم سوى نص مُعمّى. لا تغادر عبارة المزامنة جهازك. أوقفها ويعمل خيط دون اتصال بالكامل كالسابق.' },
       i: '<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 18 18z"/><path d="M12 12v5M12 17l-2-2M12 17l2-2"/>' },
