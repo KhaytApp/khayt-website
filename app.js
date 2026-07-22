@@ -70,7 +70,7 @@
     'feat.lede':   { en: 'One app handles your entire workflow — from first quote to final invoice, entirely offline.', ar: 'تطبيق واحد يدير سير عملك بالكامل — من أول عرض سعر إلى آخر فاتورة، دون اتصال تماماً.' },
 
     'nav.beta':    { en: 'Cloud', ar: 'السحابة' },
-    'beta.eyebrow':{ en: 'Version 3.0', ar: 'الإصدار 3.0' },
+    'beta.eyebrow':{ en: 'Opt-in', ar: 'اختياري' },
     'beta.h2':     { en: 'An optional cloud', ar: 'سحابة اختيارية' },
     'beta.lede':   { en: 'Khayt has an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
