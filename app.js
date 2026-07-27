@@ -34,7 +34,7 @@
 
     'gal.eyebrow':{ en: 'See it in action', ar: 'شاهده أثناء العمل' },
     'gal.h2':     { en: 'Every screen, purpose-built', ar: 'كل شاشة مصمّمة لغرضها' },
-    'gal.lede':   { en: 'One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. Real screens, not mockups — preview them in the Workbench, Command or Vivid theme.', ar: 'تطبيق واحد يدير المطبعة بالكامل — التسعير والإنتاج والفوترة والمخزون والأرقام خلفها جميعاً. شاشات حقيقية وليست تصاميم وهمية — استعرضها بثيمات وركبنش أو كوماند أو فيفِد.' },
+    'gal.lede':   { en: 'One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. Real screens, not mockups — preview them in any of Khayt’s designs.', ar: 'تطبيق واحد يدير المطبعة بالكامل — التسعير والإنتاج والفوترة والمخزون والأرقام خلفها جميعاً. شاشات حقيقية وليست تصاميم وهمية — استعرضها بأي من تصاميم خيط.' },
     'tab.queue':      { en: 'Production Queue', ar: 'قائمة الإنتاج' },
     'tab.dashboard':  { en: 'Dashboard', ar: 'لوحة التحكم' },
     'tab.calculator': { en: 'Calculator', ar: 'الحاسبة' },
@@ -77,7 +77,7 @@
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt 3.2 is a correctness release. Quoting now counts part quantities properly, Arabic reads the way Saudi apps do, and a printer that blips off the network no longer looks dead. It also adds assembly tracking, printer discovery on your LAN, per-printer cameras and scoped API tokens.', ar: 'خيط 3.2 إصدار تصحيحي. صار التسعير يحتسب كميات القطع بشكل صحيح، والعربية تُعرض كما في تطبيقات السعودية، ولم تعد الطابعة التي تنقطع لحظياً عن الشبكة تبدو معطّلة. ويضيف أيضاً تتبّع التجميع، واكتشاف الطابعات على شبكتك، وكاميرا لكل طابعة، ورموز API محدودة الصلاحية.' },
+    'wn.lede':    { en: 'Khayt 3.3 is about the numbers being right. A voided invoice and a refund now both reduce revenue, saving an order can no longer wipe its deposit, an automatic reorder is priced correctly, and an archived order releases the filament it was holding. It also closes a hole where the updater could leak its credentials, and fixes a first run that could strand you on “Choose your look”. The 3.4 beta adds five more designs, a ninth language, and dates that follow the language you chose rather than your computer’s.', ar: 'خيط 3.3 يدور حول صحّة الأرقام. صارت الفاتورة الملغاة والمبلغ المسترد يخفضان الإيراد، ولم يعد حفظ الطلب يمحو عربونه، وصار طلب الشراء التلقائي يُسعّر بشكل صحيح، والطلب المؤرشف يحرّر الخيط المحجوز له. ويسدّ أيضاً ثغرة كان المحدّث يسرّب فيها بيانات اعتماده، ويصلح تشغيلاً أول كان يعلق عند «اختر مظهرك». وتضيف نسخة 3.4 التجريبية خمسة تصاميم أخرى، ولغة تاسعة، وتواريخ تتبع اللغة التي اخترتها بدل لغة جهازك.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.portal.tag': { en: 'Customer portal', ar: 'بوابة العملاء' },
@@ -100,15 +100,16 @@
     'bento.multi.tag':  { en: 'Multi-location & roles', ar: 'فروع متعددة وأدوار' },
     'bento.multi.t':    { en: 'Run more than one shop', ar: 'أدِر أكثر من مطبعة' },
 
-    'lang.eyebrow':{ en: '8 languages', ar: '8 لغات' },
+    'lang.eyebrow':{ en: '8 languages, 9 in beta', ar: '8 لغات، و9 في التجريبية' },
     'lang.h2':     { en: 'Built for global makers', ar: 'مصمّم لصُنّاع العالم' },
-    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق.' },
+    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) joins them in the 3.4 beta, which also makes dates and numbers follow the language you picked.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) في نسخة 3.4 التجريبية، التي تجعل أيضاً التواريخ والأرقام تتبع اللغة التي اخترتها.' },
     'lang.li1':{ en: 'Arabic RTL layout throughout the entire app', ar: 'تخطيط عربي من اليمين لليسار في كامل التطبيق' },
     'lang.li2':{ en: 'ZATCA Phase 2 e-invoices — signed, bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
-    'theme.note':{ en: '10 in-app themes · light & dark · 8 languages', ar: '10 سمات داخل التطبيق · فاتح وداكن · 8 لغات' },
+    'theme.note':{ en: '3 designs in 3.3 · 5 more in the 3.4 beta · light & dark', ar: '3 تصاميم في 3.3 · و5 أخرى في نسخة 3.4 التجريبية · فاتح وداكن' },
+    'chip.beta': { en: 'beta', ar: 'تجريبي' },
 
     'oss.eyebrow':{ en: 'Source available', ar: 'المصدر متاح' },
     'oss.h2':    { en: 'Free to use.<br>Yours to inspect.', ar: 'مجاني للاستخدام.<br>وملكك لتفحّصه.' },
@@ -212,6 +213,8 @@
 
   /* ---------- Release history (fallback; refreshed from GitHub) ---------- */
   var CHANGELOG = [
+    { v: '3.4.0-beta.4', date: '2026-07-27', beta: true, d: { en: 'Eight designs including the new board-first Flow, a ninth language, and dates that follow your language', ar: 'ثمانية تصاميم منها «فلو» القائم على اللوحة، ولغة تاسعة، وتواريخ تتبع لغتك' } },
+    { v: '3.3.0', date: '2026-07-26', beta: false, d: { en: 'Money integrity — voided invoices and refunds reduce revenue, deposits survive edits, archived orders release stock', ar: 'سلامة الأرقام — الفواتير الملغاة والمبالغ المستردة تخفض الإيراد، والعرابين تبقى، والطلبات المؤرشفة تحرّر المخزون' } },
     { v: '3.2.0', date: '2026-07-22', beta: false, d: { en: 'Quoting now counts part quantities correctly; assembly tracking, printer discovery, per-printer camera and scoped API tokens', ar: 'التسعير يحتسب كميات القطع بشكل صحيح؛ تتبّع التجميع، اكتشاف الطابعات، كاميرا لكل طابعة، ورموز API محدودة الصلاحية' } },
     { v: '3.1.0', date: '2026-07-05', beta: false, d: { en: 'Enthusiast mode, Print-File Library, Colour Mixer suite, multi-slicer & 3MF Converter', ar: 'وضع الهواة، مكتبة ملفات الطباعة، أدوات مزج الألوان، تعدد برامج التقطيع ومحوّل 3MF' } },
     { v: '3.0.0', date: '2026-07-04', beta: false, d: { en: 'Khayt 3.0 stable — optional E2E-encrypted cloud: sync, teams, storefront, portal & AI assistant', ar: 'خيط 3.0 مستقر — سحابة اختيارية مشفّرة: مزامنة، فِرق، متجر، بوابة ومساعد ذكي' } },
@@ -224,11 +227,17 @@
   var lang = 'en', curKey = 'queue', channel = 'stable', curTheme = 'workbench';
   var CHANNELS = { stable: null, beta: null }; // filled from GitHub
 
-  // In-app theme demo — Khayt's three redesigned themes.
+  // In-app design demo — every design a user can pick, in the order the app
+  // presents them. Nocturne is captured dark because that is what it is for.
   var THEMES = [
     { id: 'workbench', label: { en: 'Workbench', ar: 'وركبنش' }, tone: 'light' },
     { id: 'command',   label: { en: 'Command',   ar: 'كوماند' }, tone: 'light' },
-    { id: 'vivid',     label: { en: 'Vivid',     ar: 'فيفِد' }, tone: 'light' }
+    { id: 'vivid',     label: { en: 'Vivid',     ar: 'فيفِد' }, tone: 'light' },
+    { id: 'blueprint', label: { en: 'Blueprint', ar: 'بلوبرنت' }, tone: 'light', beta: true },
+    { id: 'nocturne',  label: { en: 'Nocturne',  ar: 'نوكتيرن' }, tone: 'dark',  beta: true },
+    { id: 'meridian',  label: { en: 'Meridian',  ar: 'ميريديان' }, tone: 'light', beta: true },
+    { id: 'foreman',   label: { en: 'Foreman',   ar: 'فورمان' }, tone: 'light', beta: true },
+    { id: 'flow',      label: { en: 'Flow',      ar: 'فلو' }, tone: 'light', beta: true }
   ];
 
   function t(key) { return DICT[key] ? DICT[key][lang] : key; }
@@ -400,7 +409,8 @@
     for (var i = 0; i < THEMES.length; i++) {
       var th = THEMES[i];
       html += '<button class="theme-chip tone-' + th.tone + (th.id === curTheme ? ' on' : '') + '" data-theme="' + th.id + '">' +
-        '<span class="sw"></span>' + th.label[lang] + '</button>';
+        '<span class="sw"></span>' + th.label[lang] +
+        (th.beta ? '<span class="chip-beta">' + t('chip.beta') + '</span>' : '') + '</button>';
     }
     bar.innerHTML = html;
   }
@@ -497,14 +507,14 @@
     var rel = CHANNELS[channel];
     // update headline version chips for stable; beta uses its own tag
     if (channel === 'stable') {
-      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.2.0';
+      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.3.0';
       setVersionTags(v);
       var metaV = document.getElementById('dlMetaVer');
       if (metaV) metaV.querySelector('.ver-tag').textContent = 'v' + v;
     } else {
       var bv = (CHANNELS.beta && CHANNELS.beta.v) || null;
       var metaB = document.getElementById('dlMetaVer');
-      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.2.0';
+      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.4.0-beta.4';
       if (!bv) {
         // no beta available — keep links on stable, note in console
       }

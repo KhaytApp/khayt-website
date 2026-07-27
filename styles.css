@@ -289,6 +289,32 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .lang-feats { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
 .lang-feats li { list-style: none; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: rgba(230,247,250,0.9); }
 .lang-feats svg { flex: none; margin-top: 2px; color: var(--teal); width: 18px; height: 18px; }
+/* Design switcher above the screen gallery. The markup for this existed in
+   app.js from the start but the container was never added to the page, so the
+   whole design demo silently did nothing. */
+.theme-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+.theme-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  padding: 6px 12px; border-radius: 100px; cursor: pointer;
+  border: 1px solid var(--line); background: #fff; color: #4a545e;
+}
+.theme-chip:hover { border-color: #b9c2cb; color: #202830; }
+.theme-chip.on { background: #10222c; border-color: #10222c; color: #eaf6f8; }
+.theme-chip .sw { width: 11px; height: 11px; border-radius: 3px; flex: none; border: 1px solid rgba(0,0,0,.14); }
+.theme-chip.tone-light .sw { background: linear-gradient(135deg,#f6f8fa,#dfe5eb); }
+.theme-chip.tone-dark  .sw { background: linear-gradient(135deg,#2b3440,#11161c); }
+/* Amber marks anything that is only in the beta channel — the same colour the
+   beta section already uses, so it reads as one idea across the page. */
+.chip-beta {
+  font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: #8a6512; background: rgba(233,196,106,.24); border: 1px solid rgba(233,196,106,.5);
+  padding: 1px 5px; border-radius: 999px;
+}
+.theme-chip.on .chip-beta { color: #f3d68f; background: rgba(233,196,106,.18); border-color: rgba(233,196,106,.42); }
+.theme-note { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); margin: 0 0 18px; }
+.lang-chip.is-beta { border-style: dashed; }
+
 .lang-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
 .lang-chip { font-family: var(--font-mono); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); color: rgba(230,247,250,0.85); }
 .lang-chip.on { background: var(--teal); border-color: var(--teal); color: #04282e; }
