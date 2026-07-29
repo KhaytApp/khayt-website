@@ -77,7 +77,7 @@
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt 3.3 is about the numbers being right. A voided invoice and a refund now both reduce revenue, saving an order can no longer wipe its deposit, an automatic reorder is priced correctly, and an archived order releases the filament it was holding. It also closes a hole where the updater could leak its credentials, and fixes a first run that could strand you on “Choose your look”. The 3.4 beta adds five more designs, a ninth language, and dates that follow the language you chose rather than your computer’s.', ar: 'خيط 3.3 يدور حول صحّة الأرقام. صارت الفاتورة الملغاة والمبلغ المسترد يخفضان الإيراد، ولم يعد حفظ الطلب يمحو عربونه، وصار طلب الشراء التلقائي يُسعّر بشكل صحيح، والطلب المؤرشف يحرّر الخيط المحجوز له. ويسدّ أيضاً ثغرة كان المحدّث يسرّب فيها بيانات اعتماده، ويصلح تشغيلاً أول كان يعلق عند «اختر مظهرك». وتضيف نسخة 3.4 التجريبية خمسة تصاميم أخرى، ولغة تاسعة، وتواريخ تتبع اللغة التي اخترتها بدل لغة جهازك.' },
+    'wn.lede':    { en: 'Khayt 3.4 makes the app speak your language and keep your calendar. Brazilian Portuguese joins as a complete translation — nine in all — and dates, times and numbers now follow the language you chose rather than defaulting to English. Five new designs bring the total to eight, two of them new ways to work rather than new colours. And Khayt no longer works out “today” from UTC: outside London that quietly put the first hours after midnight on the wrong day, which is how an expired quote stayed approvable and an early-morning order landed in yesterday’s takings.', ar: 'خيط 3.4 يجعل التطبيق يتحدّث لغتك ويلتزم بتقويمك. تنضمّ البرتغالية (البرازيل) كترجمة كاملة — تسع لغات — وصارت التواريخ والأوقات والأرقام تتبع اللغة التي اخترتها بدل الإنجليزية. وخمسة تصاميم جديدة ترفع المجموع إلى ثمانية، اثنان منها طرق عمل جديدة لا ألواناً جديدة. ولم يعد خيط يستنتج «اليوم» من توقيت UTC؛ خارج لندن كان ذلك يضع الساعات الأولى بعد منتصف الليل في اليوم الخطأ، ولهذا بقي عرض سعر منتهٍ قابلاً للقبول، ووقع طلب الصباح الباكر في حصيلة الأمس.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.portal.tag': { en: 'Customer portal', ar: 'بوابة العملاء' },
@@ -100,15 +100,15 @@
     'bento.multi.tag':  { en: 'Multi-location & roles', ar: 'فروع متعددة وأدوار' },
     'bento.multi.t':    { en: 'Run more than one shop', ar: 'أدِر أكثر من مطبعة' },
 
-    'lang.eyebrow':{ en: '8 languages, 9 in beta', ar: '8 لغات، و9 في التجريبية' },
+    'lang.eyebrow':{ en: '9 languages', ar: '9 لغات' },
     'lang.h2':     { en: 'Built for global makers', ar: 'مصمّم لصُنّاع العالم' },
-    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) joins them in the 3.4 beta, which also makes dates and numbers follow the language you picked.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) في نسخة 3.4 التجريبية، التي تجعل أيضاً التواريخ والأرقام تتبع اللغة التي اخترتها.' },
+    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) makes nine, and dates and numbers now follow the language you picked rather than defaulting to English.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) لتصبح تسع لغات، وصارت التواريخ والأرقام تتبع اللغة التي اخترتها بدل الإنجليزية.' },
     'lang.li1':{ en: 'Arabic RTL layout throughout the entire app', ar: 'تخطيط عربي من اليمين لليسار في كامل التطبيق' },
     'lang.li2':{ en: 'ZATCA Phase 2 e-invoices — signed, bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
-    'theme.note':{ en: '3 designs in 3.3 · 5 more in the 3.4 beta · light & dark', ar: '3 تصاميم في 3.3 · و5 أخرى في نسخة 3.4 التجريبية · فاتح وداكن' },
+    'theme.note':{ en: '8 designs · light & dark · switch any time', ar: '8 تصاميم · فاتح وداكن · بدّل في أي وقت' },
     'chip.beta': { en: 'beta', ar: 'تجريبي' },
 
     'oss.eyebrow':{ en: 'Source available', ar: 'المصدر متاح' },
@@ -213,6 +213,7 @@
 
   /* ---------- Release history (fallback; refreshed from GitHub) ---------- */
   var CHANGELOG = [
+    { v: '3.4.0', date: '2026-07-29', beta: false, d: { en: 'Nine languages with dates and numbers that follow them, eight designs, and “today” taken from your calendar rather than UTC', ar: 'تسع لغات مع تواريخ وأرقام تتبعها، وثمانية تصاميم، و«اليوم» من تقويمك لا من UTC' } },
     { v: '3.4.0-beta.4', date: '2026-07-27', beta: true, d: { en: 'Eight designs including the new board-first Flow, a ninth language, and dates that follow your language', ar: 'ثمانية تصاميم منها «فلو» القائم على اللوحة، ولغة تاسعة، وتواريخ تتبع لغتك' } },
     { v: '3.3.0', date: '2026-07-26', beta: false, d: { en: 'Money integrity — voided invoices and refunds reduce revenue, deposits survive edits, archived orders release stock', ar: 'سلامة الأرقام — الفواتير الملغاة والمبالغ المستردة تخفض الإيراد، والعرابين تبقى، والطلبات المؤرشفة تحرّر المخزون' } },
     { v: '3.2.0', date: '2026-07-22', beta: false, d: { en: 'Quoting now counts part quantities correctly; assembly tracking, printer discovery, per-printer camera and scoped API tokens', ar: 'التسعير يحتسب كميات القطع بشكل صحيح؛ تتبّع التجميع، اكتشاف الطابعات، كاميرا لكل طابعة، ورموز API محدودة الصلاحية' } },
@@ -507,14 +508,14 @@
     var rel = CHANNELS[channel];
     // update headline version chips for stable; beta uses its own tag
     if (channel === 'stable') {
-      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.3.0';
+      var v = (CHANNELS.stable && CHANNELS.stable.v) || '3.4.0';
       setVersionTags(v);
       var metaV = document.getElementById('dlMetaVer');
       if (metaV) metaV.querySelector('.ver-tag').textContent = 'v' + v;
     } else {
       var bv = (CHANNELS.beta && CHANNELS.beta.v) || null;
       var metaB = document.getElementById('dlMetaVer');
-      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.4.0-beta.4';
+      if (metaB) metaB.querySelector('.ver-tag').textContent = bv ? ('v' + bv) : 'v3.4.0-beta.5';
       if (!bv) {
         // no beta available — keep links on stable, note in console
       }
