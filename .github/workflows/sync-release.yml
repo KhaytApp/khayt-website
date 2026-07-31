@@ -43,8 +43,18 @@ jobs:
             | python3 -c "
           import json, sys
           releases = json.load(sys.stdin)
+          # Skip pre-releases explicitly. The download button on khayt.app is for
+          # the stable channel, and a beta must never become it.
+          #
+          # This used to test only `draft`, and was saved by the semver check in
+          # the next step rejecting a '-beta.N' suffix. That worked, but only by
+          # accident, and it hid a real failure: GitHub returns releases newest
+          # first, so once a beta is published it is picked EVERY run and the sync
+          # skips EVERY time — including for a stable release that shipped just
+          # before it and had not synced yet. The site would then sit on an old
+          # version indefinitely, with every run reporting success.
           for r in releases:
-              if not r['draft']:
+              if not r['draft'] and not r['prerelease']:
                   print(r['tag_name'])
                   break
           ")
