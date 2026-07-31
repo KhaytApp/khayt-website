@@ -12,6 +12,19 @@ on:
   # Manual trigger from the Actions tab
   workflow_dispatch:
 
+# Two triggers can fire at once — the app repo dispatches on release while the
+# hourly cron is already running — and both rewrite index.html and push. The
+# loser dies on `! [rejected] main -> main (fetch first)`. Seen for real on
+# 2026-07-30: runs 30517319523 (failed) and 30517321586 (succeeded), seconds
+# apart at this repository.
+#
+# Queue them instead. cancel-in-progress is false on purpose: a sync that is
+# already writing the right tag is worth letting finish, and the one behind it
+# then finds nothing to commit.
+concurrency:
+  group: sync-release
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -56,5 +69,35 @@ jobs:
             echo "index.html already up to date — nothing to commit"
           else
             git commit -m "chore: auto-sync download links to ${{ steps.release.outputs.tag }}"
-            git push
+            # The concurrency group above stops this workflow racing ITSELF; it
+            # says nothing about a commit landing between the checkout and the
+            # push. On rejection, REPLAY rather than merge.
+            #
+            # A rebase is the wrong tool here and was tried first: both sides
+            # rewrite index.html, so replaying our commit conflicts on the one
+            # file every run touches, and `git pull --rebase` stops dead. Proven
+            # locally before this was written.
+            #
+            # index.html is DERIVED from the latest release tag, so there is
+            # nothing to merge — the newest generation simply wins. reset --soft
+            # keeps our generated file staged while moving onto origin/main; if it
+            # already matches what the other run wrote, there is nothing to commit
+            # and we are done.
+            for attempt in 1 2 3; do
+              if git push; then
+                echo "pushed on attempt $attempt"
+                exit 0
+              fi
+              echo "push rejected — replaying our generated index.html onto origin/main"
+              git fetch origin main || exit 1
+              git reset --soft origin/main
+              if git diff --staged --quiet; then
+                echo "the other run already wrote the same links — nothing left to do"
+                exit 0
+              fi
+              git commit -m "chore: auto-sync download links to ${{ steps.release.outputs.tag }}"
+              sleep $((attempt * 2))
+            done
+            echo "::error::could not push after 3 attempts"
+            exit 1
           fi
