@@ -146,6 +146,7 @@
     'foot.product': { en: 'Product', ar: 'المنتج' },
     'foot.project': { en: 'Project', ar: 'المشروع' },
     'foot.releases':{ en: 'Releases', ar: 'الإصدارات' },
+    'foot.community':{ en: 'Community', ar: 'المجتمع' },
     'foot.license': { en: 'License', ar: 'الرخصة' },
     'foot.made':    { en: 'Made with ♥ for the 3D printing community · Built with the help of AI', ar: 'صُنع بحب لمجتمع الطباعة ثلاثية الأبعاد · بُني بمساعدة الذكاء الاصطناعي' }
   };
