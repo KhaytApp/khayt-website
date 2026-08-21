@@ -246,6 +246,12 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .mk-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 11px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; background: rgba(27,181,92,.14); color: #0b6e33; }
 .mk-badge .d { width: 5px; height: 5px; border-radius: 50%; background: var(--live); flex: none; }
 
+/* The costing card spans two rows; let its panel fill that height rather than
+   leaving a dead zone under it, with the badge pinned to the foot. */
+.b-quote .mk-quote { flex: 1; display: flex; flex-direction: column; }
+.b-quote .mk-fig { flex: 1; justify-content: center; }
+.b-quote .mk-badge { margin-top: auto; align-self: flex-start; }
+
 /* Calibration card — estimate closing on the measured figure */
 .mk-calib { margin-top: 16px; display: flex; align-items: stretch; gap: 9px; }
 .mk-cal { flex: 1; background: var(--paper-2); border: 1px solid var(--line); border-radius: 11px; padding: 11px 12px; min-width: 0; }
@@ -256,6 +262,16 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .mk-arrow { display: grid; place-items: center; color: var(--muted); flex: none; }
 .mk-arrow svg { width: 16px; height: 16px; }
 [dir="rtl"] .mk-arrow svg { transform: scaleX(-1); }
+
+/* Latin/numeric values (148 g, 4.2 MB, //shop-nas/models) are LTR runs. In an
+   RTL paragraph the bidi algorithm reorders them — "148 g" renders as "g 148"
+   and the leading slashes jump to the end. Isolate them so they read as written;
+   placement still follows the inline direction. */
+[dir="rtl"] .mk-fig .fv,
+[dir="rtl"] .mk-cal .cv,
+[dir="rtl"] .mk-drop .fn,
+[dir="rtl"] .mk-drop .fs,
+[dir="rtl"] .mk-row .qty { direction: ltr; unicode-bidi: isolate; }
 
 /* Data-safety card — the positive counterpart of the old waste mock */
 .mk-safe { margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 12px 13px; background: #eefaf3; border: 1px solid #cfeddd; border-radius: 11px; }
