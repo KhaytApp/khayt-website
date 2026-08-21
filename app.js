@@ -225,8 +225,15 @@
     waste:      { name: { en: 'Waste Log', ar: 'سجل الهدر' }, cap: { en: 'Every failed print, counted', ar: 'كل طباعة فاشلة، محسوبة' }, text: { en: 'Log failed prints with a failure category, scrapped weight and the real material cost lost — so waste shows up in analytics instead of quietly eating your margin.', ar: 'سجّل الطبعات الفاشلة بفئة العطل والوزن المهدور والتكلفة الفعلية المفقودة — ليظهر الهدر في التحليلات بدل أن يلتهم هامشك بصمت.' } }
   };
 
-  /* ---------- Release history (fallback; refreshed from GitHub) ---------- */
+  /* ---------- Release history (descriptions; dates refreshed from GitHub) ----------
+     Keep this list current when a stable version ships. It is not a fallback that
+     only shows when the network fails: every GitHub release body is the same
+     "See [README] for full release notes." boilerplate, so the API can say which
+     versions exist and when, and never what changed. The words below are the only
+     description a visitor ever reads, and the only Arabic one. */
   var CHANGELOG = [
+    { v: '3.6.0', date: '2026-08-21', beta: false, d: { en: 'Costs measured, not guessed — a model on the calculator becomes a quote, and a finished job reports the filament and hours it actually used so the next estimate corrects itself', ar: 'تكاليف مقاسة لا مُخمَّنة — يتحول المجسم في الحاسبة إلى عرض سعر، وتُبلّغ المهمة المنتهية بما استُهلك فعلاً من خيط وساعات فيصحّح التقدير التالي نفسه' } },
+    { v: '3.5.0', date: '2026-07-30', beta: false, d: { en: 'Organisations — one passphrase across every branch, and an operator-lock recovery code that survives long enough to read', ar: 'المنشآت — عبارة مرور واحدة لكل فرع، ورمز استرداد لقفل المشغّل يبقى مدة تكفي لقراءته' } },
     { v: '3.4.0', date: '2026-07-29', beta: false, d: { en: 'Nine languages with dates and numbers that follow them, eight designs, and “today” taken from your calendar rather than UTC', ar: 'تسع لغات مع تواريخ وأرقام تتبعها، وثمانية تصاميم، و«اليوم» من تقويمك لا من UTC' } },
     { v: '3.4.0-beta.4', date: '2026-07-27', beta: true, d: { en: 'Eight designs including the new board-first Flow, a ninth language, and dates that follow your language', ar: 'ثمانية تصاميم منها «فلو» القائم على اللوحة، ولغة تاسعة، وتواريخ تتبع لغتك' } },
     { v: '3.3.0', date: '2026-07-26', beta: false, d: { en: 'Money integrity — voided invoices and refunds reduce revenue, deposits survive edits, archived orders release stock', ar: 'سلامة الأرقام — الفواتير الملغاة والمبالغ المستردة تخفض الإيراد، والعرابين تبقى، والطلبات المؤرشفة تحرّر المخزون' } },
@@ -580,13 +587,20 @@
     var body = (rel.body || '').replace(/\r/g, '');
     var line = body.split('\n').find(function (l) { return l.trim().length > 0 && !/^#/.test(l); });
     if (!line) return { en: rel.name || rel.tag_name, ar: rel.name || rel.tag_name };
-    line = line.replace(/^[-*\s]+/, '').replace(/\*\*/g, '').replace(/`/g, '').slice(0, 90);
+    // Unwrap markdown links to their text. The body is rendered as plain text, so
+    // an un-stripped `[README](https://…)` printed its own brackets and URL on the
+    // page — which is exactly what the boilerplate body is made of.
+    line = line.replace(/^[-*\s]+/, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+               .replace(/\*\*/g, '').replace(/`/g, '').slice(0, 90);
     return { en: line, ar: line };
   }
 
   function fetchReleases() {
     if (!window.fetch) return;
-    fetch('https://api.github.com/repos/khaytapp/Khayt/releases?per_page=12', { headers: { 'Accept': 'application/vnd.github+json' } })
+    // 30, not 12: a long beta run pushes the newest STABLE out of a 12-release
+    // window, and then there is no stable to point the download buttons at.
+    // 3.6.0 alone shipped 19 betas plus 4 rcs.
+    fetch('https://api.github.com/repos/khaytapp/Khayt/releases?per_page=30', { headers: { 'Accept': 'application/vnd.github+json' } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rels) {
         if (!rels || !rels.length) return;
@@ -606,9 +620,36 @@
         // Only surface the beta channel when a prerelease is actually newer than
         // stable — after a stable release the latest beta is older, so hide it.
         if (beta && stable && cmpVer(beta.v, stable.v) <= 0) beta = null;
-        var cl = pub.slice(0, 5).map(function (e) {
-          return { v: e.v, date: (e.rel.published_at || '').slice(0, 10), beta: e.beta, d: shortNote(e.rel) };
+        // The curated list is the BACKBONE of the release history, not a fallback.
+        // GitHub supplies only what it is authoritative about: publish dates, and
+        // any stable release newer than the newest one written up here.
+        //
+        // Two things this avoids. Overwriting wholesale put the same boilerplate
+        // body on every row, in English even in Arabic. And filtering that same
+        // window down to stable leaves almost nothing — a beta run fills the page,
+        // so after 3.6.0 shipped a 12-release window held exactly one stable.
+        //
+        // Prereleases are deliberately absent: the beta button on the download card
+        // is where they belong. Listing them here buried every stable release.
+        var dates = {}, known = {}, newest = '';
+        for (var d = 0; d < pub.length; d++) { dates[pub[d].v] = (pub[d].rel.published_at || '').slice(0, 10); }
+        for (var c = 0; c < CHANGELOG.length; c++) {
+          known[CHANGELOG[c].v] = true;
+          if (!CHANGELOG[c].beta && (!newest || cmpVer(CHANGELOG[c].v, newest) > 0)) newest = CHANGELOG[c].v;
+        }
+        // Only a stable release NEWER than anything written up above earns a row of
+        // its own, so a release that ships before someone writes the copy still
+        // appears (with its boilerplate body) instead of silently missing. Older
+        // uncurated patches are left out rather than padding the list with rows
+        // that all read "See README for full release notes."
+        var fresh = pub.filter(function (e) {
+          return !e.beta && !known[e.v] && cmpVer(e.v, newest) > 0;
+        }).map(function (e) {
+          return { v: e.v, date: dates[e.v] || '', beta: false, d: shortNote(e.rel) };
         });
+        var cl = fresh.concat(CHANGELOG.filter(function (e) { return !e.beta; }).map(function (e) {
+          return { v: e.v, date: dates[e.v] || e.date, beta: false, d: e.d };
+        })).sort(function (a, b) { return cmpVer(b.v, a.v); }).slice(0, 5);
         if (stable) { CHANNELS.stable = { v: stable.v, assets: stable.rel.assets }; }
         if (beta) {
           CHANNELS.beta = { v: beta.v, assets: beta.rel.assets };
