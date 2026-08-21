@@ -43,7 +43,7 @@ jobs:
             | python3 -c "
           import json, sys
           releases = json.load(sys.stdin)
-          # Skip pre-releases explicitly. The download button on khayt.app is for
+          # Skip pre-releases explicitly. The download button on khaytapp.com is for
           # the stable channel, and a beta must never become it.
           #
           # This used to test only `draft`, and was saved by the semver check in
