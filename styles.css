@@ -445,16 +445,41 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
   .biling-in { gap: 34px; } .flip-card { min-height: 320px; }
   .b-quote, .b-calib, .b-tax, .b-docs, .b-library, .b-safety { grid-column: span 3; grid-row: auto; }
 }
-@media (max-width: 760px) {
+
+/* ---- Nav: two steps down to the burger ----
+   .nav-in is a single flex row whose items all size to their content, so below
+   the width where that content stops fitting, the row does not shrink — it
+   overflows the viewport, and in RTL the overhang lands on the inline-start
+   edge where the accent button visibly hangs off the page.
+   Both steps below are sized to ENGLISH, which is the wider of the two
+   languages here (measured at 900px: 564px of links in en vs 474px in ar).
+   Sizing them to Arabic is the original bug.
+
+   Step 1 — compact the row. At full size it needs ~1036px, so this has to
+   start above that or the gap between the two just moves rather than closes.
+   The label beside the download icon is the cheapest thing to drop: the
+   arrow-into-tray glyph already reads as "download" on its own. */
+@media (max-width: 1060px) {
+  .nav-in { gap: 14px; }
+  .nav-links { gap: 0; margin-inline-start: 0; }
+  .nav-links a { padding: 8px 9px; }
+  .nav-right { gap: 8px; }
+  .nav-right .btn .hide-sm { display: none; }
+}
+
+/* Step 2 — give up on the row and show the burger. The compacted row needs
+   ~865px, so 900px is the last width that can still show it, with headroom. */
+@media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-burger { display: grid; }
   .nav.open .nav-links { display: flex; position: absolute; top: 100%; inset-inline: 0; flex-direction: column; align-items: stretch; background: #fff; border-bottom: 1px solid var(--line); padding: 12px var(--pad); gap: 2px; box-shadow: var(--shadow-md); }
   .nav.open .nav-links a { padding: 12px 14px; }
+}
+@media (max-width: 760px) {
   .feat-grid, .stats { grid-template-columns: 1fr; }
   .dl-grid { grid-template-columns: 1fr; }
   .bento { grid-template-columns: 1fr; }
   .b-quote, .b-calib, .b-tax, .b-docs, .b-library, .b-safety { grid-column: 1 / -1; }
-  .nav-right .btn .hide-sm { display: none; }
 }
 @media (max-width: 460px) {
   .lang-toggle { display: none; }
