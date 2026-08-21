@@ -86,6 +86,8 @@
     'bento.quote.f1':    { en: 'Filament', ar: 'الخيط' },
     'bento.quote.f2':    { en: 'Print time', ar: 'زمن الطباعة' },
     'bento.quote.f3':    { en: 'Quote', ar: 'عرض السعر' },
+    'bento.quote.f4':    { en: 'Machine & labour', ar: 'الآلة والعمالة' },
+    'bento.quote.f5':    { en: 'Costs you', ar: 'يكلّفك' },
     'bento.quote.badge': { en: 'Measured, not assumed', ar: 'مقيس لا مفترض' },
     'bento.calib.tag':   { en: 'Self-correcting estimates', ar: 'تقديرات تصحّح نفسها' },
     'bento.calib.t':     { en: 'The more you print, the closer it gets', ar: 'كلما طبعت أكثر، اقترب أكثر' },
