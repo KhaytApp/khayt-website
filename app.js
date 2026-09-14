@@ -281,12 +281,59 @@
   function calmed() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
+  // Every screenshot ships as a WebP beside its PNG (scripts/make-webp.js);
+  // <picture> picks. Setting img.src alone does NOT move a <picture> off its
+  // <source>, so both have to change or the browser keeps serving the old
+  // WebP under the new PNG's alt text.
   function swapShot(img, src, alt) {
     if (!img) return;
-    function set() { img.src = src; if (alt) img.alt = alt; img.style.opacity = '1'; }
+    var source = img.parentElement && img.parentElement.tagName === 'PICTURE'
+      ? img.parentElement.querySelector('source[type="image/webp"]') : null;
+    var webp = src.replace(/\.png$/, '.webp');
+
+    function set() {
+      if (source) source.srcset = webp;
+      img.src = src;
+      if (alt) img.alt = alt;
+      img.style.opacity = '1';
+    }
+
     if (calmed()) { set(); return; }
+
+    // The old code faded out, waited a fixed 170ms, then set src — so the
+    // network fetch started at the moment the image became visible again and
+    // the frame in between was blank or stale. Fetch first, swap when it is
+    // decoded, and the fade covers a picture that is already there.
     img.style.opacity = '0';
-    setTimeout(set, 170);
+    var pre = new Image();
+    pre.src = supportsWebp ? webp : src;
+    var done = false;
+    function go() { if (!done) { done = true; set(); } }
+    var decoded = pre.decode ? pre.decode() : Promise.reject();
+    decoded.then(go, go);
+    // A decode that never settles must not leave the gallery blank.
+    setTimeout(go, 1200);
+  }
+
+  // One synchronous check, not a fetch: a browser that renders this 2x2 WebP
+  // reports a natural width. Used only to decide which file to prefetch —
+  // <picture> makes the real decision on its own.
+  var supportsWebp = (function () {
+    try {
+      var c = document.createElement('canvas');
+      return c.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    } catch (e) { return false; }
+  })();
+
+  // Warm the image while the pointer is still travelling to the tab. Costs
+  // nothing for anyone who does not reach for one, and removes the wait for
+  // everyone who does.
+  var warmed = {};
+  function warm(src) {
+    if (!src || warmed[src]) return;
+    warmed[src] = true;
+    var i = new Image();
+    i.src = supportsWebp ? src.replace(/\.png$/, '.webp') : src;
   }
 
   // Screenshot path — themed, with Arabic RTL captures for every theme.
@@ -402,8 +449,18 @@
     buildChangelog();
     paintCaption();
     // swap gallery + hero screenshots to match language (EN / AR-RTL)
-    var gi = document.getElementById('galImg'); if (gi) gi.src = shotPath(curKey);
-    var hs = document.getElementById('heroShot'); if (hs) hs.src = heroPath();
+    var gi = document.getElementById('galImg');
+    if (gi) {
+      gi.src = shotPath(curKey);
+      var gsrc = document.getElementById('galSrc');
+      if (gsrc) gsrc.srcset = shotPath(curKey).replace(/\.png$/, '.webp');
+    }
+    var hs = document.getElementById('heroShot');
+    if (hs) {
+      hs.src = heroPath();
+      var hsrc = document.getElementById('heroSrc');
+      if (hsrc) hsrc.srcset = heroPath().replace(/\.png$/, '.webp');
+    }
     buildThemeChips();
     var btn = document.getElementById('navLang');
     if (btn) {
@@ -474,6 +531,18 @@
       for (var j = 0; j < all.length; j++) all[j].setAttribute('aria-pressed', all[j] === btn ? 'true' : 'false');
       swapShot(document.getElementById('galImg'), shotPath(curKey));
     });
+
+    function hint(e) {
+      var chip = e.target.closest && e.target.closest('.theme-chip');
+      if (!chip) return;
+      var id = chip.getAttribute('data-theme');
+      var pre = lang === 'ar' ? 'ar-' : '';
+      warm(id === 'workbench'
+        ? 'screenshots/screenshot-' + pre + curKey + '.png'
+        : 'screenshots/themes/' + id + '/screenshot-' + pre + curKey + '.png');
+    }
+    bar.addEventListener('pointerover', hint);
+    bar.addEventListener('focusin', hint);
   }
 
   /* ---------- Screen gallery ---------- */
@@ -493,6 +562,14 @@
       swapShot(img, shotPath(key), 'Khayt ' + SCREENS[key].name.en + ' screenshot');
       paintCaption();
     });
+
+    // Pointer travel and keyboard focus both give a head start on the fetch.
+    function hint(e) {
+      var btn = e.target.closest && e.target.closest('.tab');
+      if (btn) warm(shotPath(btn.getAttribute('data-key')));
+    }
+    bar.addEventListener('pointerover', hint);
+    bar.addEventListener('focusin', hint);
   }
 
   /* ---------- Bilingual flip card ---------- */

@@ -119,7 +119,10 @@
             <div class="frame-chip"><span class="dot"></span><span data-i18n="hero.live">3 printers live</span></div>
           </div>
           <div class="frame-img-wrap">
-            <img class="shot" id="heroShot" src="screenshots/screenshot-queue.png" width="1440" height="940" alt="Khayt production queue — Kanban board with live printer status" loading="eager" fetchpriority="high">
+            <picture>
+              <source id="heroSrc" type="image/webp" srcset="screenshots/screenshot-queue.webp">
+              <img class="shot" id="heroShot" src="screenshots/screenshot-queue.png" width="1440" height="940" alt="Khayt production queue — Kanban board with live printer status" loading="eager" fetchpriority="high">
+            </picture>
           </div>
         </div>
       </div>
@@ -177,7 +180,10 @@
           <div class="frame-title" id="galTitle">Khayt — <b>Production Queue</b></div>
         </div>
         <div class="frame-img-wrap">
-          <img class="shot" id="galImg" src="screenshots/screenshot-queue.png" width="1440" height="940" alt="Khayt production queue screenshot" loading="lazy" decoding="async">
+          <picture>
+            <source id="galSrc" type="image/webp" srcset="screenshots/screenshot-queue.webp">
+            <img class="shot" id="galImg" src="screenshots/screenshot-queue.png" width="1440" height="940" alt="Khayt production queue screenshot" loading="lazy" decoding="async">
+          </picture>
         </div>
       </div>
     </div>
@@ -204,7 +210,7 @@
     </div>
     <div class="modes-grid">
       <article class="mode-card">
-        <div class="mode-shot"><img src="screenshots/modes/dashboard-simple.png" width="1440" height="940" alt="Khayt Simple mode dashboard" loading="lazy" decoding="async"></div>
+        <div class="mode-shot"><picture><source type="image/webp" srcset="screenshots/modes/dashboard-simple.webp"><img src="screenshots/modes/dashboard-simple.png" width="1440" height="940" alt="Khayt Simple mode dashboard" loading="lazy" decoding="async"></picture></div>
         <div class="mode-body">
           <span class="mode-pill" data-i18n="modes.sim.pill">Simple</span>
           <h3 data-i18n="modes.sim.t">A small shop, made easy</h3>
@@ -212,7 +218,7 @@
         </div>
       </article>
       <article class="mode-card">
-        <div class="mode-shot"><img src="screenshots/modes/dashboard-professional.png" width="1440" height="940" alt="Khayt Professional mode dashboard" loading="lazy" decoding="async"></div>
+        <div class="mode-shot"><picture><source type="image/webp" srcset="screenshots/modes/dashboard-professional.webp"><img src="screenshots/modes/dashboard-professional.png" width="1440" height="940" alt="Khayt Professional mode dashboard" loading="lazy" decoding="async"></picture></div>
         <div class="mode-body">
           <span class="mode-pill" data-i18n="modes.pro.pill">Professional</span>
           <h3 data-i18n="modes.pro.t">The whole production floor</h3>

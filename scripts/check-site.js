@@ -174,6 +174,31 @@ check('Images carry intrinsic dimensions', () => {
   return 'all sized';
 });
 
+check('Every screenshot has an up-to-date WebP', () => {
+  // <picture> asks for the WebP first. A PNG with no sibling, or with one
+  // older than itself after a re-capture, means visitors are served either a
+  // 404 fallback or last month's screenshot under this month's caption.
+  const pngs = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const rel = path.join(dir, e.name);
+      if (e.isDirectory()) walk(rel);
+      else if (e.name.endsWith('.png')) pngs.push(rel);
+    }
+  })('screenshots');
+  const stale = [];
+  for (const png of pngs) {
+    const webp = png.replace(/\.png$/, '.webp');
+    if (!fs.existsSync(webp)) { stale.push(webp + ' (missing)'); continue; }
+    if (fs.statSync(png).mtimeMs > fs.statSync(webp).mtimeMs + 1000) stale.push(webp + ' (older than its PNG)');
+  }
+  if (stale.length) {
+    throw new Error('run `node scripts/make-webp.js`:\n' + stale.slice(0, 10).join('\n') +
+      (stale.length > 10 ? `\n...and ${stale.length - 10} more` : ''));
+  }
+  return pngs.length + ' pairs';
+});
+
 check('Focus and reduced-motion rules exist', () => {
   // There were none in 45KB of CSS: keyboard users got the UA default outline
   // on custom dark buttons, and nineteen transitions ran regardless.
