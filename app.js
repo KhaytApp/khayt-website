@@ -210,32 +210,14 @@
      section's own copy and chips said nine. One list; the tiles count it. */
   var LANGS = ['ar', 'en', 'de', 'es', 'fr', 'pt', 'tr', 'zh', 'ja'];
 
-  /* ---------- Feature grid ---------- */
-  var FEATURES = [
-    { t: { en: 'Kanban Production Queue', ar: 'قائمة إنتاج كانبان' }, d: { en: 'Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine views, shift checklists, failure photo capture and part-level colour assignment.', ar: 'اسحب الطلبات عبر: قيد الانتظار ← الطباعة ← المعالجة ← الفحص ← مكتمل. عروض لكل طابعة، قوائم بدء الوردية، التقاط صور الأعطال وتعيين ألوان القطع.' },
-      i: '<rect x="3" y="4" width="5" height="16" rx="1.4"/><rect x="9.5" y="4" width="5" height="11" rx="1.4"/><rect x="16" y="4" width="5" height="8" rx="1.4"/>' },
-    { t: { en: 'Smart Cost Calculator', ar: 'حاسبة تكلفة ذكية' }, d: { en: 'Drop in an STL, 3MF or g-code and it prices the geometry itself, then learns from what the printer reports when the job finishes. Live breakdown of material, machine time, electricity, labour, overhead, failure rate and margin — and every estimate says whether the rate behind it was measured or assumed. FDM, Resin and multi-material AMS/MMU costing.', ar: 'أسقِط ملف STL أو 3MF أو G-code ليسعّر الشكل نفسه، ثم يتعلّم مما تُبلغ به الطابعة عند انتهاء المهمة. تفصيل مباشر للمادة ووقت التشغيل والكهرباء والعمالة والمصاريف ونسبة الفشل والهامش — ويذكر كل تقدير إن كان معدّله مقيساً أم مفترضاً. تسعير FDM والراتنج والمواد المتعددة AMS/MMU.' },
-      i: '<rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2"/>' },
-    { t: { en: 'E-Invoicing & Worldwide Tax', ar: 'الفوترة الإلكترونية والضرائب' }, d: { en: 'Cryptographically signed ZATCA e-invoices auto-submitted to FATOORA, with TLV QR codes, proforma invoices, milestone billing, BNPL links (Tabby, Tamara, Stripe) and VAT export. Outside the Gulf, tax is added to a price rather than folded into it, with thirty country presets — and documents print in the language you chose.', ar: 'فواتير إلكترونية موقّعة تُرسل تلقائياً إلى فاتورة، برموز QR، فواتير مبدئية، فوترة بالمراحل، روابط دفع آجل (تابي، تمارا، سترايب) وتصدير ضريبي. وخارج الخليج تُضاف الضريبة إلى السعر بدل أن تكون مضمّنة فيه، مع ثلاثين إعداداً جاهزاً للدول — وتُطبع المستندات باللغة التي اخترتها.' },
-      i: '<path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2V3z"/><path d="M9 8h6M9 12h6"/>' },
-    { t: { en: 'Live Printer API', ar: 'ربط مباشر بالطابعات' }, d: { en: 'Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet and Repetier. Real-time temperature and print progress inside the queue, plus error / offline / stall alerts over Telegram, webhook or email.', ar: 'اربط OctoPrint وMoonraker وBambu Lab وPrusaLink وDuet وRepetier. حرارة وتقدّم الطباعة لحظياً داخل القائمة، مع تنبيهات الأعطال والانقطاع والتوقف عبر تيليجرام أو ويب هوك أو البريد.' },
-      i: '<rect x="4" y="4" width="16" height="11" rx="2"/><path d="M8 19h8M12 15v4"/><circle cx="12" cy="9.5" r="2.4"/>' },
-    { t: { en: 'Inventory Management', ar: 'إدارة المخزون' }, d: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, drying logs, smart reorder alerts with draft POs, price history, per-location stock and overcommit warnings.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، سجلات التجفيف، تنبيهات إعادة الطلب بأوامر شراء، سجل الأسعار، مخزون متعدد المواقع وتنبيهات التجاوز.' },
-      i: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>' },
-    { t: { en: 'Analytics & Break-Even', ar: 'تحليلات ونقطة التعادل' }, d: { en: 'Revenue, machine P&L, operator performance, retention, production heatmap, cost trends and end-of-day PDF reports. Break-even card and NPS surveys.', ar: 'الإيرادات، أرباح كل آلة، أداء المشغّلين، الاحتفاظ، خريطة حرارية للإنتاج، اتجاهات التكلفة وتقارير PDF لنهاية اليوم. بطاقة التعادل واستبيانات الرضا.' },
-      i: '<path d="M4 20V4M4 20h16"/><path d="M7 16l3-4 3 2 4-7"/>' },
-    { t: { en: 'Catalog, Gift Cards & Portfolio', ar: 'كتالوج وبطاقات هدايا ومعرض' }, d: { en: 'Reusable product SKUs for one-tap quotes, sellable gift cards and store credit, plus a finished-print portfolio gallery to show off your best work.', ar: 'منتجات جاهزة لتسعير بلمسة، بطاقات هدايا ورصيد قابل للبيع، ومعرض أعمال للمطبوعات المنتهية لعرض أفضل أعمالك.' },
-      i: '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 14h3"/><circle cx="16" cy="14" r="1.4"/>' },
-    { t: { en: 'Client CRM & Customer Portal', ar: 'علاقات العملاء والبوابة' }, d: { en: 'Profiles with credit limits, multi-currency, loyalty tiers and automatic discounts, plus a live LAN customer portal with quote approval and QR order tracking.', ar: 'ملفات بحدود ائتمانية، تعدد العملات، مستويات ولاء وخصومات تلقائية، مع بوابة عملاء محلية حيّة لاعتماد العروض وتتبّع الطلبات برمز QR.' },
-      i: '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.6M18 20a5.5 5.5 0 0 0-3-4.9"/>' },
-    { t: { en: 'Integrations & Access', ar: 'التكاملات والوصول' }, d: { en: 'Salla/Zid webhooks, Telegram notifications, iCal feed and a public intake form. Embedded LAN server, a native iOS companion app (queue, inventory, live printer monitoring, NFC spool scanning), auto-updater and operator PIN lock with Admin/Tech/Sales roles.', ar: 'ويب هوك لسلة وزد، إشعارات تيليجرام، تقويم iCal ونموذج استقبال عام. خادم محلي، تطبيق iOS مرافق (قائمة الإنتاج والمخزون ومتابعة الطابعات وقراءة وسوم NFC)، محدّث تلقائي وقفل PIN بأدوار مدير/فني/مبيعات.' },
-      i: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7M8.2 13.2 15.8 17"/>' }
-  ];
+  /* ---------- The page's content ----------
+     FEATURES, MODE_COMPARE and the cloud list moved to data.js, which
+     services.html and scripts/prerender.js also read. Same lists, one copy. */
+  var DATA = (window.KHAYT_DATA || { features: [], modes: [], cloud: [] });
+  var RENDER = window.KHAYT_RENDER;
+  var FEATURES = DATA.features;
 
-  /* ---------- Optional cloud — all opt-in; app still runs fully offline ----------
-     The list itself lives in cloud-features.js, because services.html
-     describes the same nine services and a second copy would drift. */
-  var BETA_FEATURES = window.KHAYT_CLOUD || [];
+  var BETA_FEATURES = DATA.cloud;
 
   /* ---------- Screen gallery data ---------- */
   var SCREENS = {
@@ -316,69 +298,16 @@
   }
   function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
 
-  /* ---------- Mode comparison (mirrors lib/feature-tiers.js) ---------- */
-  // t = [simple, professional]. Additive: the personal core is on in both,
-  // production depth adds in Professional.
-  // Enthusiast was removed as a Khayt mode — that audience is served by the
-  // separate Bed Ready app, so the site must not offer it as a choice here.
-  var MODE_COMPARE = [
-    { g: { en: 'Personal core', ar: 'الأساسيات الشخصية' }, rows: [
-      { l: { en: 'Cost calculator (FDM + resin)', ar: 'حاسبة التكلفة (FDM والراتنج)' }, t: [1, 1] },
-      { l: { en: 'Production queue (Kanban)', ar: 'قائمة الإنتاج (كانبان)' }, t: [1, 1] },
-      { l: { en: 'Print-file library & 3MF converter', ar: 'مكتبة ملفات الطباعة ومحوّل 3MF' }, t: [1, 1] },
-      { l: { en: 'Colour mixer & matcher', ar: 'مازج ومطابق الألوان' }, t: [1, 1] },
-      { l: { en: 'Filament inventory', ar: 'مخزون الخيوط' }, t: [1, 1] },
-      { l: { en: 'Printers, monitoring & waste log', ar: 'الطابعات والمراقبة وسجل الهدر' }, t: [1, 1] }
-    ] },
-    { g: { en: 'Selling & invoicing', ar: 'البيع والفوترة' }, rows: [
-      { l: { en: 'Clients & customer orders', ar: 'العملاء وطلبات العملاء' }, t: [1, 1] },
-      { l: { en: 'Invoices & payments', ar: 'الفواتير والمدفوعات' }, t: [1, 1] },
-      { l: { en: 'Online storefront & customer portal', ar: 'المتجر الإلكتروني وبوابة العملاء' }, t: [1, 1] },
-      { l: { en: 'Gift cards & store credit', ar: 'بطاقات الهدايا ورصيد المتجر' }, t: [1, 1] },
-      { l: { en: 'Sales reports', ar: 'تقارير المبيعات' }, t: [1, 1] }
-    ] },
-    { g: { en: 'Production business', ar: 'أعمال الإنتاج' }, rows: [
-      { l: { en: 'Full analytics & forecasting', ar: 'تحليلات وتوقّعات كاملة' }, t: [0, 1] },
-      { l: { en: 'ZATCA Phase 2 e-invoicing', ar: 'فوترة هيئة الزكاة (المرحلة الثانية)' }, t: [0, 1] },
-      { l: { en: 'Proforma, milestone & credit notes', ar: 'فواتير مبدئية ومراحل وإشعارات دائنة' }, t: [0, 1] },
-      { l: { en: 'Purchase orders & payables', ar: 'أوامر الشراء والذمم الدائنة' }, t: [0, 1] },
-      { l: { en: 'Multiple locations & print-farm view', ar: 'فروع متعددة وعرض مزرعة الطباعة' }, t: [0, 1] },
-      { l: { en: 'Team accounts & roles', ar: 'حسابات الفريق والأدوار' }, t: [0, 1] },
-      { l: { en: 'Machine maintenance & downtime', ar: 'صيانة الأجهزة والتوقّف' }, t: [0, 1] },
-      { l: { en: 'Loyalty tiers & break-even', ar: 'مستويات الولاء ونقطة التعادل' }, t: [0, 1] },
-      { l: { en: 'Expense tracking & accounting sync', ar: 'تتبّع المصروفات ومزامنة المحاسبة' }, t: [0, 1] }
-    ] }
-  ];
+  var MODE_COMPARE = DATA.modes;
 
   function buildModesTable() {
     var el = document.getElementById('modesTable');
     if (!el) return;
-    var cols = [t('modes.sim.pill'), t('modes.pro.pill')];
-    var yes = '<span class="cmp-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="sr-only">' + t('modes.cmp.yes') + '</span></span>';
-    var no = '<span class="cmp-no" aria-hidden="true"></span><span class="sr-only">' + t('modes.cmp.no') + '</span>';
-    var h = '<table class="cmp">';
-    h += '<caption class="sr-only">' + t('modes.cmp.caption') + '</caption>';
-    h += '<colgroup><col class="cmp-c-feat"><col class="cmp-c"><col class="cmp-c cmp-c-hl"></colgroup>';
-    // The first header is blank by design; blank to a screen reader is not the
-    // same as absent, so it carries the label the visual column never needs.
-    h += '<thead><tr><th class="cmp-feat" scope="col"><span class="sr-only">' + t('modes.cmp.featcol') + '</span></th>';
-    for (var c = 0; c < 2; c++) h += '<th class="cmp-col' + (c === 1 ? ' cmp-col-hl' : '') + '" scope="col"><span class="cmp-chip">' + cols[c] + '</span></th>';
-    h += '</tr></thead><tbody>';
-    for (var g = 0; g < MODE_COMPARE.length; g++) {
-      var grp = MODE_COMPARE[g];
-      h += '<tr class="cmp-grouprow"><td colspan="3"><span>' + grp.g[lang] + '</span></td></tr>';
-      for (var r = 0; r < grp.rows.length; r++) {
-        var row = grp.rows[r];
-        h += '<tr><th class="cmp-feat" scope="row">' + row.l[lang] + '</th>';
-        for (var m = 0; m < 2; m++) {
-          var on = row.t[m];
-          h += '<td class="cmp-cell' + (m === 1 ? ' cmp-col-hl' : '') + '">' + (on ? yes : no) + '</td>';
-        }
-        h += '</tr>';
-      }
-    }
-    h += '</tbody></table>';
-    el.innerHTML = h;
+    el.innerHTML = RENDER.modesTable(MODE_COMPARE, lang, {
+      simple: t('modes.sim.pill'), professional: t('modes.pro.pill'),
+      caption: t('modes.cmp.caption'), featcol: t('modes.cmp.featcol'),
+      yes: t('modes.cmp.yes'), no: t('modes.cmp.no')
+    });
     // An overflow-x container is not focusable by default, so a keyboard user
     // cannot scroll it at all. Labelled, because a bare focusable region
     // announces nothing.
@@ -416,31 +345,13 @@
   function buildFeatures() {
     var grid = document.getElementById('featGrid');
     if (!grid) return;
-    var html = '';
-    for (var k = 0; k < FEATURES.length; k++) {
-      var f = FEATURES[k];
-      var n = (k + 1 < 10 ? '0' : '') + (k + 1);
-      html += '<article class="feat">' +
-        '<span class="num">' + n + '</span>' +
-        '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></div>' +
-        '<h3>' + f.t[lang] + '</h3><p>' + f.d[lang] + '</p></article>';
-    }
-    grid.innerHTML = html;
+    grid.innerHTML = RENDER.features(FEATURES, lang);
   }
 
   function buildBetaFeatures() {
     var grid = document.getElementById('betaGrid');
     if (!grid) return;
-    var betaLab = t('beta.pill');
-    var html = '';
-    for (var k = 0; k < BETA_FEATURES.length; k++) {
-      var f = BETA_FEATURES[k];
-      html += '<article class="feat feat-beta">' +
-        '<span class="beta-pill">' + betaLab + '</span>' +
-        '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></div>' +
-        '<h3>' + f.t[lang] + '</h3><p>' + f.d[lang] + '</p></article>';
-    }
-    grid.innerHTML = html;
+    grid.innerHTML = RENDER.cloud(BETA_FEATURES, lang, t('beta.pill'));
   }
 
   function buildChangelog() {

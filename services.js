@@ -113,21 +113,15 @@
 
   function render() {
     var L = lang();
-    var list = window.KHAYT_CLOUD || [];
+    var list = (window.KHAYT_DATA && window.KHAYT_DATA.cloud) || [];
 
     var grid = document.getElementById('svcGrid');
     if (grid) {
-      var h = '';
-      for (var i = 0; i < list.length; i++) {
-        var f = list[i];
-        h += '<article class="feat feat-beta" id="svc-' + i + '">' +
-          '<span class="beta-pill">' + BETA[L] + '</span>' +
-          '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + f.i + '</svg></div>' +
-          '<h3>' + esc(f.t[L]) + '</h3>' +
-          '<p>' + esc(f.d[L]) + '</p>' +
-          '</article>';
-      }
-      grid.innerHTML = h;
+      // The same renderer the home page uses, so the nine cards are the same
+      // nine cards. Ids are added afterwards for the sends table to link to.
+      grid.innerHTML = window.KHAYT_RENDER.cloud(list, L, BETA[L]);
+      var cards = grid.children;
+      for (var i = 0; i < cards.length; i++) cards[i].id = 'svc-' + i;
     }
 
     var body = document.getElementById('sendsBody');

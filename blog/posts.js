@@ -7,7 +7,9 @@
    `date` is the date the thing being written about actually happened — a
    release date comes from the release, not from when the post was typed.
    ============================================================ */
-window.KHAYT_POSTS = [
+(function (root) {
+  'use strict';
+  root.KHAYT_POSTS = [
   {
     slug: 'native-mac-alpha',
     date: '2026-09-14',
@@ -47,4 +49,5 @@ window.KHAYT_POSTS = [
       ar: 'نموذج تُسقطه على الحاسبة يصير عرض سعر؛ ومهمة منتهية تُبلّغ بالخيط والساعات التي استُهلكت فعلاً، فيصحّح التقدير التالي نفسه. وضريبة تتصرّف كما تتصرّف في بلدك، بثلاثين إعداداً جاهزاً.'
     }
   }
-];
+  ];
+})(typeof window !== 'undefined' ? window : globalThis);

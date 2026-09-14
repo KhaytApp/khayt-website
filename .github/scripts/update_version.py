@@ -29,9 +29,26 @@ def asset_url(tag, name):
 MAC_START = '<!-- MAC-NATIVE:START'
 MAC_END   = '<!-- MAC-NATIVE:END -->'
 
+# Regions this script must not rewrite, as (start-marker, end-marker) pairs.
+#
+# The native Mac block, for the reason spelled out below. And the three
+# PRERENDER blocks, for a different one: they are DERIVED. scripts/prerender.js
+# owns them and regenerates them from data.js, so there is nothing in them this
+# script could usefully update — and there is something in them it could break.
+# They carry inline SVG path data, and a path reads "5.3 5.9.9-4.3" in exactly
+# the shape of a version number. A blanket replace on the day this app releases
+# v5.9.9 would rewrite a star icon's geometry into a shape nobody drew, on a
+# page that still looks right in the diff.
+FROZEN = [
+    (MAC_START, MAC_END),
+    ('<!-- PRERENDER:featGrid:START -->',   '<!-- PRERENDER:featGrid:END -->'),
+    ('<!-- PRERENDER:betaGrid:START -->',   '<!-- PRERENDER:betaGrid:END -->'),
+    ('<!-- PRERENDER:modesTable:START -->', '<!-- PRERENDER:modesTable:END -->'),
+]
+
 
 def replace_version_outside_mac_block(html, old_ver, new_ver):
-    """Rewrite the version everywhere EXCEPT the native Mac block.
+    """Rewrite the version everywhere EXCEPT the frozen regions.
 
     The digit guards below stop "2.0.1" corrupting "2.0.11". They do NOT stop
     this app's version corrupting the MAC app's, because the two lines can
@@ -45,14 +62,33 @@ def replace_version_outside_mac_block(html, old_ver, new_ver):
     missing them is handled as it always was, with a warning rather than a
     failure, because an older index.html is still a valid one.
     """
-    if MAC_START not in html or MAC_END not in html:
-        print('NOTE: no MAC-NATIVE block found — rewriting the whole page')
-        return re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, html)
-
-    head, rest = html.split(MAC_START, 1)
-    mac, tail = rest.split(MAC_END, 1)
     sub = lambda t: re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, t)
-    return sub(head) + MAC_START + mac + MAC_END + sub(tail)
+
+    # Split the page into the parts that may be rewritten and the parts that
+    # may not, then rewrite only the first kind. A page missing a marker is
+    # handled as it always was, with a warning rather than a failure, because
+    # an older index.html is still a valid one.
+    #
+    # Walked in the order the markers appear in the PAGE, not the order they
+    # are listed above: the list is grouped by what each block is for, while
+    # the page has modesTable first and the Mac block last. Splitting in list
+    # order consumes a later block inside an earlier block's `head` and then
+    # cannot find it, so it would silently stop freezing it.
+    found = []
+    for start, end in FROZEN:
+        i = html.find(start)
+        j = html.find(end)
+        if i == -1 or j == -1 or j < i:
+            print('NOTE: no %s block found — that region is not frozen' % start.strip('<!- '))
+            continue
+        found.append((i, j + len(end)))
+    found.sort()
+
+    out, cursor = '', 0
+    for i, j in found:
+        out += sub(html[cursor:i]) + html[i:j]
+        cursor = j
+    return out + sub(html[cursor:])
 
 
 # ── Main ───────────────────────────────────────────────────────────────────
