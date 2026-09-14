@@ -225,6 +225,35 @@ check('Images carry intrinsic dimensions', () => {
   return 'all sized';
 });
 
+check('Sized images are not squashed by their own attributes', () => {
+  // The other half of the check above, and the reason it needs one.
+  //
+  // width="1440" height="940" are PRESENTATION ATTRIBUTES: they set the width
+  // and height properties at zero specificity. A rule like
+  // `.frame img.shot { width: 100% }` beats the width one and leaves the
+  // height one standing, so the image renders at its full intrinsic height
+  // against a scaled width — the hero and the gallery shipped at 611x940
+  // instead of 611x399, squashed and running under the next section.
+  //
+  // So: any selector that sets width on an <img> must also settle height.
+  const css = fs.readFileSync('styles.css', 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '');           // comments carry example code
+  const offenders = [];
+  for (const m of css.matchAll(/([^{}]+)\{([^}]*)\}/g)) {
+    const sel = m[1].trim(), body = m[2];
+    if (!/\bimg\b/.test(sel)) continue;
+    if (!/(^|;|\s)width\s*:/.test(body)) continue;
+    if (/(^|;|\s)height\s*:/.test(body)) continue;
+    if (/(^|;|\s)aspect-ratio\s*:/.test(body)) continue;
+    offenders.push(sel);
+  }
+  if (offenders.length) {
+    throw new Error('these set width on an img without settling height ' +
+      '(add `height: auto`):\n  ' + offenders.join('\n  '));
+  }
+  return 'width always paired with height';
+});
+
 check('Every screenshot has an up-to-date WebP', () => {
   // <picture> asks for the WebP first. A PNG with no sibling, or with one
   // older than itself after a re-capture, means visitors are served either a

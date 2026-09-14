@@ -153,7 +153,7 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .frame-chip { font-family: var(--font-mono); font-size: 11px; color: var(--live-ink); display: inline-flex; align-items: center; gap: 6px; }
 .frame-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 3px rgba(27,181,92,.18); animation: pulse 2s infinite; }
 .frame-img-wrap { position: relative; background: #0c1320; }
-.frame img.shot { width: 100%; display: block; transition: opacity .25s ease; }
+.frame img.shot { width: 100%; height: auto; display: block; transition: opacity .25s ease; }
 @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.4 } }
 
 /* ===================== HERO (Console) ===================== */
