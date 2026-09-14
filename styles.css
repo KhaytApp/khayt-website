@@ -38,7 +38,11 @@
      on .cl-ver.beta and #df6011 is 3.61:1 on white, under what AA asks of
      body copy. 4.77:1 at the same hue.                                    */
   --amber:      #be520e;   /* warm secondary, sparing  4.77:1 on white     */
-  --live:       #1bb55c;
+  --live:       #1bb55c;   /* the DOT fill — decorative, any ratio is fine */
+  /* --live is 2.69:1 on white, which is under what AA asks of the 12px
+     assurance lines on the download cards. Same problem --amber already had
+     and the same fix: keep the hue, darken it for text only. 4.62:1.        */
+  --live-ink:   #0d7a3c;   /* the green as TEXT        4.62:1 on white     */
 
   --line:       rgba(16,20,23,0.10);
   --line-soft:  rgba(16,20,23,0.06);
@@ -117,7 +121,15 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .brand img { width: 33px; height: 33px; border-radius: 9px; flex: none; }
 .brand .ar { font-family: var(--font-wordmark); font-weight: 700; color: var(--muted); font-size: 17px; }
 .nav-links { display: flex; align-items: center; gap: 2px; margin-inline-start: 8px; }
-.nav-links a { font-size: 14.5px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 8px; transition: background .15s, color .15s; }
+.nav-links a { font-size: 14.5px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 8px; white-space: nowrap; transition: background .15s, color .15s; }
+/* An icon inside a button is not a thing that should give way when the row
+   runs out of room. It is a flex item with the default flex-shrink: 1, so
+   when Services and Blog joined the nav it silently collapsed to 0 wide at
+   EVERY width — the row looked fine because the icon had quietly absorbed the
+   overflow, and a check for wrapping found nothing wrong. Pinning it means the
+   row now overflows honestly, and the breakpoints below are measured against
+   that rather than against a nav that was hiding its own problem. */
+.btn svg, .lang-toggle svg, .nav-right svg { flex: none; }
 .nav-links a:hover { background: var(--paper-3); color: var(--ink); }
 .nav-right { margin-inline-start: auto; display: flex; align-items: center; gap: 10px; }
 .lang-toggle {
@@ -138,7 +150,7 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .frame-dots i:nth-child(1){ background:#ed6a5e; } .frame-dots i:nth-child(2){ background:#f5bf4f; } .frame-dots i:nth-child(3){ background:#61c554; }
 .frame-title { font-family: var(--font-mono); font-size: 12px; color: #8a9097; margin-inline: auto; padding-inline: 12px; }
 .frame-title b { color: #424850; font-weight: 600; }
-.frame-chip { font-family: var(--font-mono); font-size: 11px; color: var(--live); display: inline-flex; align-items: center; gap: 6px; }
+.frame-chip { font-family: var(--font-mono); font-size: 11px; color: var(--live-ink); display: inline-flex; align-items: center; gap: 6px; }
 .frame-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 3px rgba(27,181,92,.18); animation: pulse 2s infinite; }
 .frame-img-wrap { position: relative; background: #0c1320; }
 .frame img.shot { width: 100%; display: block; transition: opacity .25s ease; }
@@ -160,6 +172,18 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .hero .sub { font-size: clamp(17px, 1.7vw, 19px); color: var(--ink-soft); margin: 20px 0 0; max-width: 44ch; text-wrap: pretty; }
 .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; max-width: 42ch; }
 .hero-pills span { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--ink-soft); background: var(--paper-2); border: 1px solid var(--line); border-radius: 100px; padding: 6px 12px; }
+/* The native Mac app is the headline announcement on this page, and it was a
+   <p class="sub"> with an inline negative margin — grey body copy crashing into
+   the pill row above it, with no link affordance but a trailing arrow. */
+.hero-mac { margin-top: 20px; max-width: 46ch; }
+.hero-mac a { display: inline-flex; align-items: baseline; gap: 8px; font-size: 15px; line-height: 1.5;
+  color: var(--brand-2); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--tint-2);
+  padding-bottom: 2px; transition: border-color .15s, color .15s; }
+.hero-mac a:hover { color: var(--ink-panel); border-bottom-color: var(--brand); }
+.hero-mac .tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--on-brand); background: var(--brand); border-radius: 4px;
+  padding: 2px 6px; align-self: center; flex: none; }
+
 .hero-cta { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
 .hero-stat { display: flex; gap: 26px; margin-top: 28px; flex-wrap: wrap; }
 .hero-stat .s b { font-family: var(--font-display); font-weight: 900; font-size: 26px; letter-spacing: -0.02em; display: block; line-height: 1; }
@@ -173,10 +197,11 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px calc(-1 * var(--pad)); }
 .hero-shot { position: absolute; top: 46px; inset-inline-start: 26px; inset-inline-end: calc(-1 * var(--pad)); }
 .hero-shot .frame { box-shadow: 0 44px 100px rgba(12,42,48,0.28), 0 14px 36px rgba(12,42,48,0.16); }
-.hero-badge { position: absolute; top: -16px; inset-inline-start: 4px; z-index: 5; background: #fff; border: 1px solid var(--line);
-  box-shadow: 0 14px 34px rgba(12,42,48,0.16); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
-.hero-badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 4px rgba(27,181,92,.16); animation: pulse 2.4s infinite; }
-.hero-badge .bt { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: #2a3138; }
+/* The hero used to carry a floating "3 printers live" card pinned over the top-
+   left of the window frame. It said exactly what .frame-chip already says inside
+   the window bar, and it covered the frame title ("Khayt — Production Queue") at
+   every width — worse in RTL, where it mirrors directly onto the title. One
+   statement, in the bar, where a real window would put it. */
 
 /* ===================== TRUST STRIP ===================== */
 .trust { border-block: 1px solid var(--line); background: var(--paper-2); }
@@ -419,7 +444,7 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .dl-link .arr { margin-inline-start: auto; color: var(--muted); transition: transform .15s; }
 .dl-link:hover .arr { transform: translateX(3px); color: var(--brand-2); }
 body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
-.dl-note { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--live); font-weight: 600; }
+.dl-note { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--live-ink); font-weight: 600; }
 .dl-meta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 22px; }
 .meta-chip { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--ink-soft); background: #fff; border: 1px solid var(--line); border-radius: 100px; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px; }
 .meta-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
@@ -484,8 +509,18 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
   .nav-right .btn .hide-sm { display: none; }
 }
 
-/* Step 2 — give up on the row and show the burger. The compacted row needs
-   ~865px, so 900px is the last width that can still show it, with headroom. */
+/* Step 2 — give up on the row and show the burger.
+
+   Re-measured properly, after the download icon was pinned with flex:none.
+   The first measurement was worthless: the icon could shrink, so it collapsed
+   to 0 wide and the row "fitted" at every width while actually overflowing by
+   up to 130px. Checking for wrapping found nothing, because nothing wrapped.
+
+   With seven links and nothing able to give, .nav-in has zero overflow and a
+   positive gap at every width from 901px to 1440px — 14px of clearance at
+   901px, which is the tightest. So 900 remains the last width that cannot
+   show the row. Two things keep that true: the nowrap on .nav-links a, and
+   there being seven links. A ninth does not fit, which is how this was found. */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-burger { display: grid; }
@@ -493,7 +528,7 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
   .nav.open .nav-links a { padding: 12px 14px; }
 }
 @media (max-width: 760px) {
-  .feat-grid, .stats { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr; }
   .dl-grid { grid-template-columns: 1fr; }
   .bento { grid-template-columns: 1fr; }
   .b-quote, .b-calib, .b-tax, .b-docs, .b-library, .b-safety { grid-column: 1 / -1; }
@@ -507,7 +542,7 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 /* direct-edit overrides */
 
 /* ============ Three modes ============ */
-.modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
+.modes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 30px; }
 .mode-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 2px rgba(16,20,23,0.04); transition: transform .2s ease, box-shadow .2s ease; }
 .mode-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(16,20,23,0.11); }
 .mode-shot { background: var(--paper-3); border-bottom: 1px solid var(--line); aspect-ratio: 16 / 10; overflow: hidden; }
@@ -543,10 +578,42 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 .modes-compare-head h3 { font-size: clamp(21px, 2.2vw, 26px); font-weight: 800; letter-spacing: -0.015em; color: var(--ink); font-family: 'Archivo', system-ui, sans-serif; }
 .modes-compare-head p { margin-top: 10px; font-size: 15px; color: var(--muted); line-height: 1.55; }
 
-.cmp-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: 0 1px 2px rgba(16,20,23,0.04); -webkit-overflow-scrolling: touch; }
-.cmp { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 14.5px; table-layout: fixed; }
+/* The table is 620px wide and a phone gives it about 348. It was in a plain
+   overflow-x scroller with nothing sticky and no scroll cue, so a phone visitor
+   saw the feature names, a blank header row, and none of the two columns the
+   table exists to compare. Three things fix that, in order of how much they
+   matter: the feature column sticks so the labels survive the swipe, the header
+   sticks so you can still tell which column you are reading, and the right edge
+   fades so it is visible there is more table off-screen. */
+.cmp-frame { position: relative; }
+.cmp-wrap { overflow-x: auto; overflow-y: visible; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: 0 1px 2px rgba(16,20,23,0.04); -webkit-overflow-scrolling: touch; }
+.cmp { width: 100%; min-width: 620px; border-collapse: separate; border-spacing: 0; font-size: 14.5px; table-layout: fixed; }
 .cmp col.cmp-c-feat { width: 40%; }
 .cmp col.cmp-c { width: 20%; }
+
+/* Sticky label column. It needs an opaque background of its own — the cells it
+   slides over are white and tinted, and a transparent sticky cell shows both. */
+.cmp th.cmp-feat { position: sticky; inset-inline-start: 0; z-index: 2; background: var(--paper); }
+/* The divider that shows the label column is a frozen pane, drawn only while
+   there is somewhere to scroll to. */
+.cmp-frame.is-scrollable th.cmp-feat { box-shadow: inset -1px 0 0 var(--line); }
+body[dir="rtl"] .cmp-frame.is-scrollable th.cmp-feat { box-shadow: inset 1px 0 0 var(--line); }
+
+/* Edge fade: present only when the table overflows, and it withdraws as you
+   reach the end, so it never sits there lying about content that isn't there. */
+.cmp-fade { position: absolute; top: 1px; bottom: 1px; inset-inline-end: 0; width: 46px; pointer-events: none;
+  opacity: 0; transition: opacity .18s ease; border-start-end-radius: var(--radius); border-end-end-radius: var(--radius);
+  background: linear-gradient(to left, rgba(255,255,255,0.98), rgba(255,255,255,0)); }
+body[dir="rtl"] .cmp-fade { background: linear-gradient(to right, rgba(255,255,255,0.98), rgba(255,255,255,0)); }
+.cmp-frame.is-scrollable .cmp-fade { opacity: 1; }
+.cmp-frame.at-end .cmp-fade { opacity: 0; }
+
+/* Said in words as well as in gradient, because a fade is not an instruction. */
+.cmp-hint { display: flex; align-items: center; gap: 7px; margin-top: 12px; font-family: var(--font-mono);
+  font-size: 11.5px; letter-spacing: .03em; color: var(--muted); }
+.cmp-hint svg { width: 14px; height: 14px; flex: none; }
+body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
+.cmp-hint[hidden] { display: none; }
 
 /* Header */
 .cmp thead th { background: var(--paper); text-align: center; vertical-align: bottom; padding: 18px 12px 16px; border-bottom: 1px solid var(--line); }
@@ -560,22 +627,47 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 .cmp tbody tr:last-child td.cmp-col-hl { border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
 
 /* Group band */
-.cmp .cmp-grouprow td { padding: 0; background: transparent; border-bottom: 0; }
+/* Centred inside 496px is off-screen inside a 348px window, which is why
+   "PERSONAL CORE" read as "PERSONAL CO" against the right edge on a phone. */
+.cmp .cmp-grouprow td { padding: 0; background: transparent; border-bottom: 0; text-align: start; }
 .cmp .cmp-grouprow span { display: block; margin-top: 14px; padding: 9px 16px; font-size: 11.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--brand-2); background: var(--paper-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); border-inline-start: 3px solid var(--brand); }
 
 /* Body rows */
 .cmp tbody td { padding: 13px 12px; border-bottom: 1px solid var(--line-soft); text-align: center; vertical-align: middle; }
-.cmp td.cmp-feat { text-align: start; color: var(--ink-soft); font-weight: 500; padding-inline-start: 18px; }
-.cmp tbody tr:not(.cmp-grouprow):hover td { background: var(--paper-2); }
+.cmp tbody th.cmp-feat { text-align: start; color: var(--ink-soft); font-weight: 500; padding: 13px 12px; padding-inline-start: 18px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+.cmp tbody tr:not(.cmp-grouprow):hover td, .cmp tbody tr:not(.cmp-grouprow):hover th { background: var(--paper-2); }
 .cmp tbody tr:not(.cmp-grouprow):hover td.cmp-col-hl { background: rgba(17,174,195,0.10); }
 
 /* Cell marks */
 .cmp-yes { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 999px; background: rgba(17,174,195,0.14); color: var(--brand-2); }
 .cmp-yes svg { width: 14px; height: 14px; }
 .cmp-no { display: inline-block; width: 12px; height: 2px; border-radius: 2px; background: var(--line); vertical-align: middle; }
-.cmp thead th.cmp-feat, .cmp td.cmp-feat { text-align: start; }
+.cmp thead th.cmp-feat, .cmp tbody th.cmp-feat { text-align: start; }
 
-@media (max-width: 600px) { .cmp { font-size: 13.5px; } .cmp-chip { font-size: 12px; padding: 5px 11px; } }
+@media (max-width: 600px) {
+  /* A sticky label column only helps if what is left over can hold BOTH tick
+     columns, and at 620px — or even 496 — it cannot: the labels alone eat 258
+     of the 348 a phone gives, so one of the two columns being compared is
+     always off-screen no matter how far you swipe. A comparison table that can
+     only ever show one side is not a comparison.
+
+     So on a phone the table stops overflowing at all. min-width goes away, the
+     feature names wrap to two lines where they need to, and the whole thing —
+     label, Simple, Professional — is on screen at once with nothing to swipe.
+     The sticky column, the fade and the hint all stay in the stylesheet for the
+     widths between this and the point the table fits naturally, and all three
+     switch themselves off here because syncCmpScroll finds no slack. */
+  .cmp { font-size: 13px; min-width: 0; }
+  .cmp col.cmp-c-feat { width: 48%; }
+  .cmp col.cmp-c { width: 26%; }
+  .cmp-chip { font-size: 11px; padding: 5px 8px; letter-spacing: 0; }
+  .cmp thead th { padding: 14px 6px 12px; }
+  .cmp tbody td { padding: 11px 6px; }
+  .cmp tbody th.cmp-feat { padding: 11px 6px; padding-inline-start: 13px; line-height: 1.35; }
+  .cmp .cmp-grouprow span { padding: 8px 13px; font-size: 10.5px; letter-spacing: .05em; }
+  /* The frozen-pane divider is noise once nothing scrolls. */
+  .cmp th.cmp-feat { position: static; }
+}
 
 /* ── The native Mac app ────────────────────────────────────────────────────
    Its own surface rather than a fourth download card, because it is not a
@@ -608,3 +700,238 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
   .mac-native { padding: 20px 18px; }
   .mn-dl { min-width: 0; width: 100%; }
 }
+
+
+/* ============================================================================
+   FOCUS, MOTION, AND THE THINGS A KEYBOARD OR A VESTIBULAR DISORDER NEEDS
+   ------------------------------------------------------------------------
+   This stylesheet had no :focus, :focus-visible or outline rule anywhere in
+   45KB, against nineteen transition/animation declarations. Both halves of
+   that are fixed here rather than scattered per component, because the rule
+   is the same everywhere: one ring, drawn outside the element, in the brand.
+   ============================================================================ */
+
+/* One visible ring for every focusable thing. :focus-visible means a mouse
+   click never draws it, so this costs the pointer user nothing. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+/* On the dark fills the brand blue is not separable from the surface, so the
+   ring goes white there and the offset does the separating. */
+.btn-primary:focus-visible, .tab[aria-selected="true"]:focus-visible,
+.theme-chip.on:focus-visible, .dl-channel button.on:focus-visible {
+  outline-color: #fff; outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(33,109,202,0.55);
+}
+/* The scroller itself is focusable for keyboard users (tabindex="0" in JS),
+   and its ring belongs on the border box, not 3px outside a full-width card. */
+.cmp-wrap:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+
+/* Skip link: off-screen until focused, then a real target at the top-start. */
+.skip-link {
+  position: absolute; inset-inline-start: 12px; top: -60px; z-index: 200;
+  background: var(--ink); color: #fff; font-weight: 600; font-size: 14px;
+  padding: 11px 18px; border-radius: 10px; text-decoration: none;
+  transition: top .15s ease;
+}
+.skip-link:focus { top: 12px; }
+
+/* Screen-reader-only. Used for the comparison table's caption and for the
+   column headers the visual design leaves blank. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* Motion. The pulsing live dots, the scroll reveals, the flip card and every
+   hover lift are decorative — none of them carries meaning that survives only
+   in the movement, so all of them can simply stop. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  /* The one JS-driven fade on the page is the gallery image swap. app.js
+     checks the same query and skips the fade outright, so the image is never
+     left at opacity 0 when the transition that was going to restore it is
+     reduced to nothing. */
+  .mode-card:hover, .feat:hover, .beta-card:hover { transform: none; }
+}
+
+/* ============================================================================
+   NARROW-VIEWPORT LAYOUT
+   Four one-fact cards stacked into ~1000px of scrolling, and three hero stats
+   on one cramped row. Both want a 2-up grid, not a stack and not a flex row.
+   ============================================================================ */
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat-card { padding: 18px 16px; }
+  .stat-card .big { font-size: clamp(28px, 9vw, 38px); }
+  .stat-card .cap { font-size: 11px; margin-top: 6px; }
+
+  .hero-stat { display: grid; grid-template-columns: repeat(3, auto); gap: 18px; justify-content: start; }
+
+  /* The logo row wrapped into three ragged centred lines with "OctoPrint"
+     orphaned onto the label's line. Give the label its own line. */
+  .trust-in { gap: 12px 24px; }
+  .trust-lab { flex: 1 0 100%; text-align: center; }
+}
+
+
+/* ============================================================================
+   PAGES THAT ARE NOT THE LANDING PAGE  ·  services.html, blog/
+   ------------------------------------------------------------------------
+   These reuse the landing page's own components wherever one exists — .wrap,
+   .section, .eyebrow, .lede, .feat, .cmp — so the sub-pages cannot drift into
+   a second design. What follows is only the handful of shapes the landing page
+   has no equivalent for: a page header without a hero, a post body, and the
+   two small panels the services page needs.
+   ============================================================================ */
+
+/* The sub-pages have no hero, so the fixed nav would sit on top of their first
+   line. This is the hero's top padding, doing the hero's job. */
+.page-head { padding-block: clamp(96px, 11vw, 150px) clamp(24px, 3vw, 40px); background: var(--paper); }
+.page-head h1 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.035em;
+  line-height: 1.02; font-size: clamp(38px, 5.4vw, 64px); margin: 18px 0 0; text-wrap: balance; }
+.page-head .lede { margin-top: 20px; font-size: clamp(17px, 1.6vw, 19px); color: var(--ink-soft); max-width: 62ch; }
+.section.tight { padding-block: clamp(28px, 4vw, 48px); }
+.section.alt { background: var(--paper-2); border-block: 1px solid var(--line); }
+.nav-links a.here { color: var(--ink); background: var(--paper-3); }
+
+/* A two-column split that stacks. Used for prose beside a summary panel. */
+.split { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; margin-top: 30px; }
+.split > div > p { color: var(--ink-soft); font-size: 16px; line-height: 1.65; margin-top: 14px; text-wrap: pretty; }
+.split > div > p:first-child { margin-top: 18px; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
+/* The offline promise — the one claim the whole services page rests on. */
+.promise { display: flex; gap: 20px; align-items: flex-start; background: var(--wash);
+  border: 1px solid var(--tint-2); border-radius: var(--radius); padding: clamp(22px, 3vw, 32px); }
+.promise-mark { width: 44px; height: 44px; border-radius: 12px; flex: none; display: grid; place-items: center;
+  background: var(--brand); color: var(--on-brand); }
+.promise-mark svg { width: 24px; height: 24px; }
+.promise h2 { font-family: var(--font-display); font-size: clamp(19px, 2.2vw, 24px); font-weight: 800; letter-spacing: -0.02em; }
+.promise p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; margin-top: 9px; text-wrap: pretty; max-width: 74ch; }
+@media (max-width: 560px) { .promise { flex-direction: column; gap: 14px; } }
+
+.fineprint { margin-top: 20px; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 88ch; text-wrap: pretty; }
+
+/* The sends table reuses .cmp wholesale — it only needs its own column widths
+   and left-aligned body cells, since .cmp centres its tick columns. */
+.cmp.sends { min-width: 760px; }
+.cmp.sends col.s-c1 { width: 24%; } .cmp.sends col.s-c2 { width: 42%; } .cmp.sends col.s-c3 { width: 34%; }
+.cmp.sends thead th { text-align: start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 16px 16px 13px; }
+.cmp.sends tbody th { position: sticky; inset-inline-start: 0; z-index: 2; background: var(--paper);
+  text-align: start; font-weight: 600; color: var(--ink); font-size: 14px; padding: 15px 16px;
+  border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.cmp.sends tbody th a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--line); }
+.cmp.sends tbody th a:hover { color: var(--brand-2); border-bottom-color: var(--brand); }
+.cmp.sends tbody td { text-align: start; vertical-align: top; color: var(--ink-soft); font-size: 14px;
+  line-height: 1.55; padding: 15px 16px; text-wrap: pretty; }
+.cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset -1px 0 0 var(--line); }
+body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset 1px 0 0 var(--line); }
+@media (max-width: 700px) {
+  /* Three columns of prose cannot fit a phone, and unlike the mode comparison
+     these cells are sentences, not ticks — so this one keeps its scroller and
+     its sticky service name, which is the column you navigate by. */
+  .cmp.sends { min-width: 620px; font-size: 13px; }
+  .cmp.sends col.s-c1 { width: 26%; }
+  .cmp.sends tbody th, .cmp.sends tbody td, .cmp.sends thead th { padding: 12px 11px; font-size: 13px; }
+}
+
+/* Key/value panel beside the encryption prose. */
+.enc-list { list-style: none; margin: 18px 0 0; padding: 0; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--paper); overflow: hidden; }
+.enc-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding: 14px 18px; border-bottom: 1px solid var(--line-soft); }
+.enc-list li:last-child { border-bottom: 0; }
+.enc-list .k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); flex: none; }
+.enc-list .v { font-size: 14px; font-weight: 600; color: var(--ink); text-align: end; }
+
+.status-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper);
+  padding: 22px; display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.status-row { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--ink-soft); font-weight: 500; }
+.status-row .dot { width: 9px; height: 9px; border-radius: 50%; background: #e9c46a; flex: none; }
+.status-row .dot.stable { background: var(--live); }
+.status-card .btn { justify-content: center; margin-top: 4px; }
+
+/* ---------- Blog ---------- */
+
+.post-list { display: grid; gap: 14px; margin-top: 34px; }
+.post-card { display: block; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: clamp(20px, 2.6vw, 28px); text-decoration: none; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.post-card:hover { transform: translateY(-2px); border-color: var(--tint-2); box-shadow: 0 14px 34px rgba(16,20,23,0.09); }
+.post-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.post-meta .tag { color: var(--brand-2); background: var(--tint); border-radius: 999px; padding: 3px 10px; letter-spacing: .04em; }
+.post-card h2 { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); font-weight: 800;
+  letter-spacing: -0.025em; margin-top: 12px; color: var(--ink); text-wrap: balance; }
+.post-card p { color: var(--muted); font-size: 15px; line-height: 1.6; margin-top: 9px; max-width: 76ch; text-wrap: pretty; }
+.post-card .more { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--brand-2); }
+
+.post { padding-block: clamp(96px, 11vw, 140px) clamp(48px, 6vw, 80px); }
+.post-in { max-width: 74ch; margin-inline: auto; }
+.post-in h1 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.035em; line-height: 1.06;
+  font-size: clamp(32px, 4.4vw, 50px); margin: 16px 0 0; text-wrap: balance; }
+.post-body { margin-top: 30px; }
+.post-body p { color: var(--ink-soft); font-size: 17px; line-height: 1.72; margin-top: 20px; text-wrap: pretty; }
+.post-body h2 { font-family: var(--font-display); font-size: clamp(21px, 2.4vw, 27px); font-weight: 800;
+  letter-spacing: -0.02em; margin-top: 42px; color: var(--ink); }
+.post-body h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-top: 30px; color: var(--ink); }
+.post-body ul { margin: 18px 0 0; padding-inline-start: 22px; }
+.post-body li { color: var(--ink-soft); font-size: 16.5px; line-height: 1.65; margin-top: 10px; text-wrap: pretty; }
+.post-body a { color: var(--brand-2); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--tint-2); }
+.post-body a:hover { border-bottom-color: var(--brand); }
+.post-body strong { color: var(--ink); font-weight: 700; }
+.post-body code { font-family: var(--font-mono); font-size: .88em; background: var(--paper-2);
+  border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
+.post-body blockquote { margin: 26px 0 0; padding-inline-start: 18px; border-inline-start: 3px solid var(--brand);
+  color: var(--ink-soft); font-size: 16.5px; line-height: 1.65; }
+.post-back { display: inline-block; font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
+  color: var(--brand-2); text-decoration: none; letter-spacing: .03em; }
+.post-back:hover { color: var(--ink-panel); }
+.post-foot { max-width: 74ch; margin: 48px auto 0; padding-top: 26px; border-top: 1px solid var(--line);
+  display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+
+/* The "New since you last looked" section summarises a release the blog
+   explains at length; this is the only thing that connected them. */
+.wn-more { margin-top: 18px; }
+.wn-more a { font-size: 15px; font-weight: 600; color: var(--brand-2); text-decoration: none;
+  border-bottom: 1px solid var(--tint-2); padding-bottom: 2px; transition: border-color .15s, color .15s; }
+.wn-more a:hover { color: var(--ink-panel); border-bottom-color: var(--brand); }
+
+/* Blog index footer: the feed link, then the note. */
+.blog-foot { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line);
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: space-between; }
+.blog-foot .fineprint { margin-top: 0; flex: 1 1 34ch; }
+.feed-link { display: inline-flex; align-items: center; gap: 9px; flex: none;
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+  color: var(--ink-soft); text-decoration: none;
+  border: 1px solid var(--line); border-radius: 100px; padding: 9px 16px;
+  transition: border-color .15s, color .15s; }
+.feed-link:hover { color: var(--amber); border-color: var(--amber); }
+.feed-link svg { width: 14px; height: 14px; flex: none; color: var(--amber); }
+
+/* ---------- 404 ---------- */
+
+.page-head.nf { padding-block: clamp(110px, 13vw, 170px) clamp(56px, 7vw, 90px); }
+.page-head.nf .eyebrow { font-size: 13px; letter-spacing: .12em; }
+.nf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 38px; max-width: 760px; }
+.nf-card { display: block; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px 22px; text-decoration: none; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.nf-card:hover { transform: translateY(-2px); border-color: var(--tint-2); box-shadow: 0 12px 30px rgba(16,20,23,0.09); }
+.nf-ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+  background: var(--tint); color: var(--brand-2); margin-bottom: 13px; }
+.nf-ico svg { width: 19px; height: 19px; }
+.nf-t { display: block; font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  letter-spacing: -0.015em; color: var(--ink); }
+.nf-d { display: block; color: var(--muted); font-size: 14px; line-height: 1.5; margin-top: 6px; text-wrap: pretty; }
+@media (max-width: 620px) { .nf-grid { grid-template-columns: 1fr; } }

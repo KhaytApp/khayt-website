@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online services — Khayt</title>
+<meta name="description" content="Khayt's online services: an opt-in, end-to-end-encrypted cloud for sync, team accounts, an online storefront, customer order tracking and more. Every one of them is off by default, and the desktop app runs fully offline without any of them.">
+<meta property="og:title" content="Online services — Khayt">
+<meta property="og:description" content="An opt-in, end-to-end-encrypted cloud on top of an offline app. Nine services, each off by default, and a plain list of what each one sends.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://khaytapp.com/services.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="canonical" href="https://khaytapp.com/services.html">
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/services.html">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/services.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://khaytapp.com/services.html">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="khayt-apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+<span hidden
+  data-page-title-en="Online services — Khayt"
+  data-page-title-ar="الخدمات السحابية — خيط"
+  data-page-desc-en="Khayt's online services: an opt-in, end-to-end-encrypted cloud for sync, team accounts, an online storefront, customer order tracking and more. Every one of them is off by default."
+  data-page-desc-ar="خدمات خيط السحابية: سحابة اختيارية مشفّرة من طرف إلى طرف للمزامنة وحسابات الفريق والمتجر الإلكتروني وتتبّع طلبات العملاء وغيرها. كلها معطّلة افتراضياً."></span>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="brand"><img src="khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#screens" data-i18n="nav.screens">Screens</a>
+      <a href="index.html#modes" data-i18n="nav.modes">Modes</a>
+      <a href="index.html#features" data-i18n="nav.features">Features</a>
+      <a href="index.html#languages" data-i18n="nav.languages">Languages</a>
+      <a href="services.html" class="here" aria-current="page" data-i18n="nav.services">Services</a>
+      <a href="blog/" data-i18n="nav.blog">Blog</a>
+      <a href="index.html#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang" aria-label="Switch language to Arabic"><span aria-hidden="true">🌐</span> <span lang="ar">العربية</span></button>
+      <a href="index.html#download" class="btn btn-accent"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ PAGE HEAD ============ -->
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="sv.eyebrow">Opt-in · Beta</span>
+    <h1 data-i18n="sv.h1">Online services</h1>
+    <p class="lede" data-i18n="sv.lede">Khayt is a desktop app that works with no account, no server and no internet. On top of that there is an optional, end-to-end-encrypted cloud. This page is what it is, what each part of it sends, and how to switch any of it off.</p>
+  </div>
+</section>
+
+<!-- ============ THE PROMISE ============ -->
+<section class="section tight">
+  <div class="wrap">
+    <div class="promise">
+      <div class="promise-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.4-3 8.2-7.5 9.5-4.5-1.3-7.5-5.1-7.5-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <h2 data-i18n="sv.promise.t">Off is the default, not a fallback</h2>
+        <p data-i18n="sv.promise.d">Every service below ships switched off. A shop that never turns one on gets the whole app — queue, quoting, invoicing, inventory, analytics — running on its own machine, with no account to create and nothing leaving the building. Turning a service off again returns the app to exactly that.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SERVICES ============ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="sv.list.eyebrow">What's on offer</span>
+    <h2 data-i18n="sv.list.h2">Nine services, each on its own switch</h2>
+    <p class="lede" data-i18n="sv.list.sub">These are the same nine described on the home page — one list, so the two pages cannot drift apart. All are in beta.</p>
+    <div class="feat-grid beta-section" id="svcGrid"></div>
+  </div>
+</section>
+
+<!-- ============ WHAT LEAVES THE MACHINE ============ -->
+<section class="section alt" id="sends">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="sv.sends.eyebrow">Plainly</span>
+    <h2 data-i18n="sv.sends.h2">What each one actually sends</h2>
+    <p class="lede" data-i18n="sv.sends.sub">A service being "in the cloud" is not one thing. Some never send readable data at all; some send a single link; some talk to a third party you chose and paid for yourself. The difference matters, so here it is by row.</p>
+
+    <div class="cmp-frame" id="sendsFrame">
+      <div class="cmp-wrap" id="sendsWrap">
+        <table class="cmp sends">
+          <caption class="sr-only" data-i18n="sv.sends.caption">What each online service transmits and to where</caption>
+          <colgroup><col class="s-c1"><col class="s-c2"><col class="s-c3"></colgroup>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="sv.sends.col1">Service</th>
+              <th scope="col" data-i18n="sv.sends.col2">What leaves your machine</th>
+              <th scope="col" data-i18n="sv.sends.col3">Who receives it</th>
+            </tr>
+          </thead>
+          <tbody id="sendsBody"></tbody>
+        </table>
+      </div>
+      <div class="cmp-fade" aria-hidden="true"></div>
+    </div>
+    <p class="cmp-hint" id="sendsHint" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span data-i18n="sv.sends.hint">Swipe the table to read every column</span></p>
+
+    <p class="fineprint" data-i18n="sv.sends.note">Every row above restates what the app itself does; none of it is a promise made only on this page. Where a row names a third party — Twilio, the WhatsApp Cloud API, Unifonic, QuickBooks, Zoho, Xero, an AI provider — that is an account you open and control, and Khayt sends nothing to it until you have entered your own credentials.</p>
+  </div>
+</section>
+
+<!-- ============ ENCRYPTION ============ -->
+<section class="section" id="encryption">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow" data-i18n="sv.enc.eyebrow">The sync model</span>
+        <h2 data-i18n="sv.enc.h2">The server holds ciphertext it cannot read</h2>
+        <div data-lang="en">
+          <p>Sync is end-to-end encrypted. Your shop's data is encrypted on your own machine, with a sync passphrase that never leaves it, and the server stores the result. That is the whole arrangement: the server's copy is what lets a second machine catch up, and it is not a copy anyone at the other end can open.</p>
+          <p>The consequence worth knowing before you switch it on is the one that follows from the design: <strong>a lost passphrase cannot be reset for you.</strong> There is no recovery path that does not involve you, because a recovery path that did not would mean the server could read the data.</p>
+        </div>
+        <div data-lang="ar" hidden>
+          <p>المزامنة مشفّرة من طرف إلى طرف. تُشفَّر بيانات مطبعتك على جهازك نفسه بعبارة مرور لا تغادره أبداً، ويخزّن الخادم الناتج. هذا هو الترتيب كاملاً: نسخة الخادم هي ما يسمح لجهاز ثانٍ باللحاق، وليست نسخة يستطيع أحد في الطرف الآخر فتحها.</p>
+          <p>والنتيجة التي يجدر معرفتها قبل التشغيل هي ما يترتب على هذا التصميم مباشرة: <strong>عبارة المرور المفقودة لا يمكن إعادة تعيينها نيابةً عنك.</strong> لا يوجد مسار استرداد لا يمرّ بك، لأن مساراً كهذا يعني أن الخادم قادر على قراءة البيانات.</p>
+        </div>
+      </div>
+      <ul class="enc-list">
+        <li><span class="k" data-i18n="sv.enc.k1">Encrypted where</span><span class="v" data-i18n="sv.enc.v1">On your machine, before anything is sent</span></li>
+        <li><span class="k" data-i18n="sv.enc.k2">Passphrase</span><span class="v" data-i18n="sv.enc.v2">Never leaves your machine</span></li>
+        <li><span class="k" data-i18n="sv.enc.k3">Server sees</span><span class="v" data-i18n="sv.enc.v3">Ciphertext only</span></li>
+        <li><span class="k" data-i18n="sv.enc.k4">If you lose it</span><span class="v" data-i18n="sv.enc.v4">No reset — by design</span></li>
+        <li><span class="k" data-i18n="sv.enc.k5">Turn it off</span><span class="v" data-i18n="sv.enc.v5">App returns to 100% offline</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATUS ============ -->
+<section class="section alt" id="status">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="sv.status.eyebrow">Where this stands</span>
+    <h2 data-i18n="sv.status.h2">All of it is beta, and labelled that way in the app</h2>
+    <div class="split">
+      <div data-lang="en">
+        <p>The cloud is marked BETA on the home page, in the app and here, and the word is meant literally rather than as a disclaimer: these services are newer than the offline core, they change between releases, and a shop that needs its book to be boring should run the offline core and leave them alone.</p>
+        <p>Nothing about them is paywalled. There is no subscription, no seat count and no upgrade tier — the comparison on the home page exists to describe what each <em>mode</em> shows you, not what you have paid for.</p>
+        <p>If you are weighing one of these up, the honest order is: run Khayt offline first, decide whether the thing you want is worth an account at all, and switch on only that one.</p>
+      </div>
+      <div data-lang="ar" hidden>
+        <p>السحابة موسومة بـ BETA في الصفحة الرئيسية وداخل التطبيق وهنا، والكلمة مقصودة حرفياً لا كإخلاء مسؤولية: هذه الخدمات أحدث من النواة العاملة دون اتصال، وتتغيّر بين الإصدارات، والمطبعة التي تحتاج دفترها أن يكون مملاً يجدر بها أن تشغّل النواة وتترك هذه الخدمات.</p>
+        <p>لا شيء منها خلف جدار دفع. لا اشتراك ولا عدّ مقاعد ولا فئة ترقية — والمقارنة في الصفحة الرئيسية موجودة لتصف ما يعرضه كل <em>وضع</em>، لا ما دفعت مقابله.</p>
+        <p>وإن كنت توازن بين هذه الخدمات، فالترتيب الصادق هو: شغّل خيط دون اتصال أولاً، وقرّر إن كان ما تريده يستحق حساباً أصلاً، ثم شغّل ذلك وحده.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-row"><span class="dot" aria-hidden="true"></span><span data-i18n="sv.status.r1">Cloud services — beta</span></div>
+        <div class="status-row"><span class="dot stable" aria-hidden="true"></span><span data-i18n="sv.status.r2">Offline core — stable</span></div>
+        <div class="status-row"><span class="dot stable" aria-hidden="true"></span><span data-i18n="sv.status.r3">Price — free, no subscription</span></div>
+        <a class="btn btn-primary" href="index.html#download" data-i18n="sv.status.cta">Download Khayt</a>
+        <a class="btn btn-ghost" href="blog/" data-i18n="sv.status.blog">Read the blog</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand"><img src="khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4 data-i18n="foot.product">Product</h4>
+          <a href="index.html#screens" data-i18n="nav.screens">Screens</a>
+          <a href="index.html#features" data-i18n="nav.features">Features</a>
+          <a href="index.html#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="index.html#whatsnew" data-i18n="nav.whatsnew">What's New</a>
+          <a href="services.html" data-i18n="nav.services">Services</a>
+          <a href="blog/" data-i18n="nav.blog">Blog</a>
+          <a href="index.html#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="foot.project">Project</h4>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="index.html#open-source" data-i18n="foot.license">License</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="render.js"></script>
+<script src="services.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

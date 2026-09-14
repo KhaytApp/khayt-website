@@ -1,0 +1,30 @@
+name: Check
+
+# The site is three hand-written HTML pages and five scripts on GitHub Pages.
+# There is no build, so nothing was checking any of it — a syntax error in
+# app.js or a stale prerender would ship and only be noticed by a visitor.
+#
+# These are the checks that can actually fail: everything here has caught a
+# real mistake, or guards one that has already happened once.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run the site checks
+        run: node scripts/check-site.js

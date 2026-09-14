@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What the optional cloud actually sends — Khayt</title>
+<meta name="description" content=""In the cloud" is not one thing. Some of Khayt's nine online services never transmit readable data at all; some send a single link; some talk to an account you opened yourself. Here is the difference, service by service.">
+<meta property="og:title" content="What the optional cloud actually sends — Khayt">
+<meta property="og:description" content=""In the cloud" is not one thing. Some of Khayt's nine online services never transmit readable data at all; some send a single link; some talk to an account you opened yourself. Here is the difference, service by service.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://khaytapp.com/blog/what-the-cloud-sends.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Khayt">
+<meta property="article:published_time" content="2026-09-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="canonical" href="https://khaytapp.com/blog/what-the-cloud-sends.html">
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/what-the-cloud-sends.html">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/what-the-cloud-sends.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://khaytapp.com/blog/what-the-cloud-sends.html">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="feed.xml">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../khayt-apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What the optional cloud actually sends",
+  "description": "\"In the cloud\" is not one thing. Some of Khayt's nine online services never transmit readable data at all; some send a single link; some talk to an account you opened yourself. Here is the difference, service by service.",
+  "datePublished": "2026-09-14",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "image": "https://khaytapp.com/og-image.png",
+  "mainEntityOfPage": "https://khaytapp.com/blog/what-the-cloud-sends.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Khayt",
+    "url": "https://github.com/KhaytApp"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Khayt",
+    "url": "https://khaytapp.com/"
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+<span hidden
+  data-page-title-en="What the optional cloud actually sends — Khayt"
+  data-page-title-ar="ما تُرسله السحابة الاختيارية فعلياً — خيط"
+  data-page-desc-en=""In the cloud" is not one thing. Some of Khayt's nine online services never transmit readable data at all; some send a single link; some talk to an account you opened yourself. Here is the difference, service by service."
+  data-page-desc-ar="«سحابي» ليس وصفاً واحداً. فبعض خدمات خيط التسع لا ترسل بيانات مقروءة أبداً، وبعضها يرسل رابطاً واحداً، وبعضها يخاطب حساباً فتحته أنت. إليك الفرق، خدمةً خدمة."></span>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="brand"><img src="../khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../index.html#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../index.html#features" data-i18n="nav.features">Features</a>
+      <a href="../index.html#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../services.html" data-i18n="nav.services">Services</a>
+      <a href="./" class="here" data-i18n="nav.blog">Blog</a>
+      <a href="../index.html#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang" aria-label="Switch language to Arabic"><span aria-hidden="true">🌐</span> <span lang="ar">العربية</span></button>
+      <a href="../index.html#download" class="btn btn-accent"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<article class="post">
+  <div class="wrap">
+    <div class="post-in">
+      <a class="post-back" href="./" data-i18n="back.blog">← All posts</a>
+      <div class="post-meta" style="margin-top:16px">
+        <span class="tag" data-lang="en">Cloud</span><span class="tag" data-lang="ar" hidden>السحابة</span>
+        <time datetime="2026-09-14">14 September 2026</time>
+      </div>
+      <h1 data-lang="en">What the optional cloud actually sends</h1>
+      <h1 data-lang="ar" hidden>ما تُرسله السحابة الاختيارية فعلياً</h1>
+
+      <div class="post-body" data-lang="en">
+        <p>Khayt is a desktop app. It works with no account, no server and no internet, and that is not a degraded mode — it is the product. On top of it there is an optional, end-to-end-encrypted cloud, and everything in it ships switched off.</p>
+
+        <p>The trouble with describing that honestly is that <strong>“in the cloud” is not one thing.</strong> Lumping nine different services under one word hides the only question a shop owner actually has, which is: if I turn this one on, what leaves my machine, and who can read it?</p>
+
+        <h2>Three different answers</h2>
+
+        <p>Across the nine services, there are really three shapes.</p>
+
+        <h3>1. Ciphertext the server cannot read</h3>
+
+        <p>Sync and team accounts. Your shop's data is encrypted on your own machine, with a sync passphrase that never leaves it, and the server stores the result. The server's copy is what lets a second machine catch up; it is not a copy anyone at the other end can open.</p>
+
+        <p>The consequence follows from the design and is worth knowing before you switch it on: <strong>a lost passphrase cannot be reset for you.</strong> A recovery path that did not involve you would mean the server could read the data.</p>
+
+        <h3>2. One link, to one person</h3>
+
+        <p>Customer order tracking, reviews, the storefront. These send something small and specific to someone you chose: the stage of one order to the customer you sent that order's link to; a star rating and comment back from them; the products and prices you deliberately published on a page that is meant to be public.</p>
+
+        <p>Nothing here reaches beyond the thing you shared. The customer following an order sees that order.</p>
+
+        <h3>3. A third party you opened an account with</h3>
+
+        <p>WhatsApp and SMS, the AI assistant, the accounting webhook. These talk to a vendor you chose and pay yourself — Twilio, the WhatsApp Cloud API, Unifonic, QuickBooks, Zoho, Xero, or an AI provider whose key you entered. Khayt sends nothing to any of them until you have put your own credentials in, and the AI key itself stays on your machine.</p>
+
+        <p>This is the category to think hardest about, because the terms are the vendor's, not ours.</p>
+
+        <h2>The full table</h2>
+
+        <p>Rather than repeat all nine here, they are laid out row by row — service, what leaves your machine, who receives it — on <a href="../services.html#sends">the online services page</a>. Every row restates what the app itself does; none of it is a promise made only on a marketing page.</p>
+
+        <h2>All of it is beta</h2>
+
+        <p>And the word is meant literally rather than as a disclaimer. These services are newer than the offline core, they change between releases, and a shop that needs its book to be boring should run the offline core and leave them alone.</p>
+
+        <p>None of it is paywalled either. There is no subscription, no seat count and no upgrade tier. If you are weighing one of these up, the honest order is: run Khayt offline first, decide whether the thing you want is worth an account at all, and switch on only that one.</p>
+      </div>
+      <div class="post-body" data-lang="ar" hidden>
+        <p>خيط تطبيق سطح مكتب. يعمل بلا حساب ولا خادم ولا إنترنت، وهذا ليس وضعاً منقوصاً — بل هو المنتج. وفوقه توجد سحابة اختيارية مشفّرة من طرف إلى طرف، وكل ما فيها يأتي معطّلاً.</p>
+
+        <p>والمشكلة في وصف ذلك بصدق أن <strong>«سحابي» ليس شيئاً واحداً.</strong> فجمع تسع خدمات مختلفة تحت كلمة واحدة يُخفي السؤال الوحيد الذي يشغل صاحب المطبعة فعلاً: إن شغّلت هذه، ما الذي يغادر جهازي، ومن يستطيع قراءته؟</p>
+
+        <h2>ثلاث إجابات مختلفة</h2>
+
+        <p>عبر الخدمات التسع، هناك في الحقيقة ثلاثة أشكال.</p>
+
+        <h3>١. نص مشفّر لا يستطيع الخادم قراءته</h3>
+
+        <p>المزامنة وحسابات الفريق. تُشفَّر بيانات مطبعتك على جهازك نفسه بعبارة مرور لا تغادره أبداً، ويخزّن الخادم الناتج. نسخة الخادم هي ما يسمح لجهاز ثانٍ باللحاق، وليست نسخة يستطيع أحد في الطرف الآخر فتحها.</p>
+
+        <p>والنتيجة تترتّب على التصميم مباشرة، ويجدر معرفتها قبل التشغيل: <strong>عبارة المرور المفقودة لا يمكن إعادة تعيينها نيابةً عنك.</strong> فمسار استرداد لا يمرّ بك يعني أن الخادم قادر على قراءة البيانات.</p>
+
+        <h3>٢. رابط واحد، إلى شخص واحد</h3>
+
+        <p>تتبّع طلبات العملاء والتقييمات وواجهة المتجر. هذه تُرسل شيئاً صغيراً محدّداً إلى شخص اخترته: مرحلة طلب واحد إلى العميل الذي أرسلت إليه رابط ذلك الطلب؛ وتقييماً بالنجوم وتعليقاً يعودان منه؛ والمنتجات والأسعار التي نشرتها عمداً على صفحة يُقصد بها أن تكون عامة.</p>
+
+        <p>ولا شيء هنا يتجاوز ما شاركته. فالعميل الذي يتابع طلباً يرى ذلك الطلب.</p>
+
+        <h3>٣. طرف ثالث فتحت لديه حساباً</h3>
+
+        <p>واتساب والرسائل النصية، ومساعد الذكاء الاصطناعي، وويب هوك المحاسبة. هذه تخاطب مزوّداً اخترته وتدفع له بنفسك — Twilio أو WhatsApp Cloud API أو Unifonic أو QuickBooks أو Zoho أو Xero أو مزوّد ذكاء اصطناعي أدخلت مفتاحه. ولا يرسل خيط إلى أيٍّ منها شيئاً حتى تُدخل بياناتك، ومفتاح الذكاء الاصطناعي نفسه يبقى على جهازك.</p>
+
+        <p>وهذه هي الفئة التي تستحق أشدّ التفكير، لأن الشروط شروط المزوّد لا شروطنا.</p>
+
+        <h2>الجدول كاملاً</h2>
+
+        <p>بدل تكرار التسع هنا، فهي مبسوطة صفّاً صفّاً — الخدمة، وما يغادر جهازك، ومن يستلمه — في <a href="../services.html?lang=ar#sends">صفحة الخدمات السحابية</a>. وكل صفّ يعيد صياغة ما يفعله التطبيق نفسه؛ وليس فيه وعد يُقطع في صفحة تسويقية وحدها.</p>
+
+        <h2>جميعها تجريبية</h2>
+
+        <p>والكلمة مقصودة حرفياً لا كإخلاء مسؤولية. فهذه الخدمات أحدث من النواة العاملة دون اتصال، وتتغيّر بين الإصدارات، والمطبعة التي تحتاج دفترها أن يكون مملاً يجدر بها أن تشغّل النواة وتترك هذه الخدمات.</p>
+
+        <p>ولا شيء منها خلف جدار دفع أيضاً. لا اشتراك ولا عدّ مقاعد ولا فئة ترقية. وإن كنت توازن بين هذه الخدمات، فالترتيب الصادق هو: شغّل خيط دون اتصال أولاً، وقرّر إن كان ما تريده يستحق حساباً أصلاً، ثم شغّل ذلك وحده.</p>
+      </div>
+    </div>
+
+    <div class="post-foot">
+      <a class="post-back" href="./" data-i18n="back.blog">← All posts</a>
+      <a class="btn btn-primary" href="../index.html#download" data-i18n="post.dl">Download Khayt</a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../index.html" class="brand"><img src="../khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4 data-i18n="foot.product">Product</h4>
+          <a href="../index.html#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../index.html#features" data-i18n="nav.features">Features</a>
+          <a href="../index.html#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../index.html#whatsnew" data-i18n="nav.whatsnew">What's New</a>
+          <a href="../services.html" data-i18n="nav.services">Services</a>
+          <a href="./" data-i18n="nav.blog">Blog</a>
+          <a href="../index.html#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="foot.project">Project</h4>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../index.html#open-source" data-i18n="foot.license">License</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.PAGE_STRINGS = {
+  'post.dl': { en: 'Download Khayt', ar: 'حمّل خيط' }
+};
+</script>
+<script src="../site.js"></script>
+</body>
+</html>
