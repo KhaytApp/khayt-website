@@ -35,6 +35,13 @@ function blogPosts() {
   return fs.readdirSync('blog').filter(f => f.endsWith('.html') && f !== 'index.html');
 }
 
+// Every HTML page the site serves. 404.html is one of them — GitHub Pages
+// hands it to anyone who mistypes a URL, and it was not being checked.
+function pages() {
+  return ['index.html', 'services.html', '404.html', 'blog/index.html',
+    ...blogPosts().map(b => 'blog/' + b)];
+}
+
 /* ---------- 1. Everything parses ---------- */
 
 check('JavaScript parses', () => {
@@ -46,7 +53,7 @@ check('JavaScript parses', () => {
 
 check('JSON-LD parses', () => {
   let n = 0;
-  for (const f of ['index.html', 'services.html', ...blogPosts().map(b => 'blog/' + b)]) {
+  for (const f of pages()) {
     for (const m of fs.readFileSync(f, 'utf8').matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
       JSON.parse(m[1]);
       n++;
@@ -70,6 +77,23 @@ check('index.html is rendered from data.js', () => {
     throw new Error('stale. Run `node scripts/prerender.js` and commit the result.');
   }
   return 'in sync';
+});
+
+check('blog/feed.xml matches posts.js', () => {
+  // A post added without regenerating the feed is a post published to nobody
+  // who subscribed.
+  try {
+    execFileSync(process.execPath, ['scripts/make-feed.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error('stale. Run `node scripts/make-feed.js` and commit the result.');
+  }
+  return 'in sync';
+});
+
+check('The feed is discoverable from every page', () => {
+  const bad = pages().filter(p => !/application\/atom\+xml/.test(fs.readFileSync(p, 'utf8')));
+  if (bad.length) throw new Error('no feed autodiscovery link: ' + bad.join(', '));
+  return pages().length + ' pages';
 });
 
 /* ---------- 3. The dictionary ---------- */
@@ -104,10 +128,9 @@ check('Every dictionary entry has both languages', () => {
 /* ---------- 4. Links ---------- */
 
 check('Every internal link resolves', () => {
-  const pages = ['index.html', 'services.html', 'blog/index.html', ...blogPosts().map(b => 'blog/' + b)];
   const bad = [];
   let n = 0;
-  for (const p of pages) {
+  for (const p of pages()) {
     const dir = path.dirname(p);
     const html = fs.readFileSync(p, 'utf8');
     const ids = new Set([...html.matchAll(/id="([^"]+)"/g)].map(m => m[1]));
@@ -122,9 +145,11 @@ check('Every internal link resolves', () => {
         if (a && a !== 'top' && !ids.has(a)) bad.push(`${p}: dead anchor ${u}`);
         continue;
       }
-      let t = path.join(dir, u.split('#')[0].split('?')[0]);
-      if (!t || t === dir || t === '.') continue;
-      if (u.endsWith('/') || u === './') t = path.join(t, 'index.html');
+      const clean = u.split('#')[0].split('?')[0];
+      // A leading slash is site-root-relative, not filesystem-absolute.
+      let t = clean.startsWith('/') ? path.join(ROOT, clean) : path.join(dir, clean);
+      if (!clean || t === dir || t === '.' || t === ROOT) continue;
+      if (clean.endsWith('/')) t = path.join(t, 'index.html');
       if (!fs.existsSync(t)) bad.push(`${p}: missing ${u}`);
     }
   }
@@ -162,10 +187,36 @@ check('Every blog post is in the index', () => {
 
 /* ---------- 6. The things a review already found once ---------- */
 
+check('Every page carries the same nav', () => {
+  // Two failures at once, both of which happened. index.html drifted to nine
+  // links while every other page had seven, so the site had two navigations.
+  // And nine did not fit: the row absorbed the overflow by collapsing the
+  // download button's icon to zero width rather than wrapping, so it looked
+  // fine. A count is the cheap half of that guard; the layout half needs a
+  // browser, and the CSS comment above .nav-burger records the measurement.
+  const navs = {};
+  for (const p of pages()) {
+    const html = fs.readFileSync(p, 'utf8');
+    const nav = html.split('id="navLinks"')[1];
+    if (!nav) throw new Error(p + ' has no nav');
+    const labels = [...nav.split('</nav>')[0].matchAll(/data-i18n="(nav\.[a-z]+)"/g)].map(m => m[1]);
+    navs[p] = labels.join(' ');
+  }
+  const shapes = [...new Set(Object.values(navs))];
+  if (shapes.length > 1) {
+    throw new Error('pages disagree about the nav:\n' +
+      Object.entries(navs).map(([p, n]) => '  ' + p + ': ' + n).join('\n'));
+  }
+  const count = shapes[0].split(' ').length;
+  // Seven is what was measured to fit down to 901px. Eight has not been.
+  if (count > 7) throw new Error(count + ' nav links — only seven have been measured to fit; re-measure before adding another');
+  return count + ' links, identical everywhere';
+});
+
 check('Images carry intrinsic dimensions', () => {
   // Without width/height the page reflows when each one loads.
   const bad = [];
-  for (const p of ['index.html', 'services.html', 'blog/index.html', ...blogPosts().map(b => 'blog/' + b)]) {
+  for (const p of pages()) {
     for (const m of fs.readFileSync(p, 'utf8').matchAll(/<img\b[^>]*>/g)) {
       if (!/\bwidth=/.test(m[0]) || !/\bheight=/.test(m[0])) bad.push(p + ': ' + m[0].slice(0, 70));
     }
@@ -214,7 +265,8 @@ check('Every page can be linked in Arabic', () => {
   // Arabic used to be a localStorage flag with no URL, so it could not be
   // shared or indexed. Each page needs its ?lang=ar alternate declared.
   const bad = [];
-  for (const p of ['index.html', 'services.html', 'blog/index.html', ...blogPosts().map(b => 'blog/' + b)]) {
+  // 404.html is excluded: it is noindex, so it has no canonical to alternate.
+  for (const p of pages().filter(f => f !== '404.html')) {
     const html = fs.readFileSync(p, 'utf8');
     if (!/hreflang="ar"[^>]*lang=ar/.test(html)) bad.push(p);
   }

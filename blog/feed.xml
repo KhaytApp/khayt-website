@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Khayt — blog</title>
+  <subtitle>Release notes, what changed and why, and how Khayt's parts actually work.</subtitle>
+  <link href="https://khaytapp.com/blog/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://khaytapp.com/blog/" rel="alternate" type="text/html"/>
+  <id>https://khaytapp.com/blog/</id>
+  <updated>2026-09-14T12:00:00Z</updated>
+  <author><name>Khayt</name><uri>https://khaytapp.com/</uri></author>
+  <rights>FSL-1.1-Apache-2.0 · © 2026 Khayt</rights>
+
+  <entry xml:lang="en">
+    <title>Khayt for macOS, rebuilt native — where the alpha stands</title>
+    <link href="https://khaytapp.com/blog/native-mac-alpha.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-14:/blog/native-mac-alpha/en</id>
+    <published>2026-09-14T12:00:00Z</published>
+    <updated>2026-09-14T12:00:00Z</updated>
+    <category term="Mac"/>
+    <summary type="text">Not Electron in a Mac costume: real Mac windows, the menu bar, Quick Look, Shortcuts. What it already does, what an alpha means for a shop’s book, and why the Windows and Linux app is not going anywhere.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>خيط لماك، مبنيّ من جديد — أين وصل إصدار الألفا</title>
+    <link href="https://khaytapp.com/blog/native-mac-alpha.html?lang=ar" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-14:/blog/native-mac-alpha/ar</id>
+    <published>2026-09-14T12:00:00Z</published>
+    <updated>2026-09-14T12:00:00Z</updated>
+    <category term="ماك"/>
+    <summary type="text">ليس إلكترون بزيّ ماك: نوافذ ماك حقيقية، وشريط القوائم، وQuick Look، والاختصارات. ما يفعله الآن، وماذا يعني وصف &quot;ألفا&quot; لدفتر مطبعة، ولماذا لن يختفي تطبيق ويندوز ولينكس.</summary>
+  </entry>
+
+  <entry xml:lang="en">
+    <title>What the optional cloud actually sends</title>
+    <link href="https://khaytapp.com/blog/what-the-cloud-sends.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-14:/blog/what-the-cloud-sends/en</id>
+    <published>2026-09-14T12:00:00Z</published>
+    <updated>2026-09-14T12:00:00Z</updated>
+    <category term="Cloud"/>
+    <summary type="text">&quot;In the cloud&quot; is not one thing. Some of Khayt’s nine online services never transmit readable data at all; some send a single link; some talk to an account you opened yourself. Here is the difference, service by service.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>ما تُرسله السحابة الاختيارية فعلياً</title>
+    <link href="https://khaytapp.com/blog/what-the-cloud-sends.html?lang=ar" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-14:/blog/what-the-cloud-sends/ar</id>
+    <published>2026-09-14T12:00:00Z</published>
+    <updated>2026-09-14T12:00:00Z</updated>
+    <category term="السحابة"/>
+    <summary type="text">&quot;سحابي&quot; ليس وصفاً واحداً. فبعض خدمات خيط التسع لا ترسل بيانات مقروءة أبداً، وبعضها يرسل رابطاً واحداً، وبعضها يخاطب حساباً فتحته أنت. إليك الفرق، خدمةً خدمة.</summary>
+  </entry>
+
+  <entry xml:lang="en">
+    <title>Khayt 3.7: costs measured, not guessed</title>
+    <link href="https://khaytapp.com/blog/khayt-3-7.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-11:/blog/khayt-3-7/en</id>
+    <published>2026-09-11T12:00:00Z</published>
+    <updated>2026-09-11T12:00:00Z</updated>
+    <category term="Release"/>
+    <summary type="text">A model dropped on the calculator becomes a quote; a finished job reports the filament and hours it actually used, and the next estimate corrects itself. Plus tax that behaves the way your country does, in thirty presets.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>خيط 3.7: تكاليف مقيسة، لا مخمَّنة</title>
+    <link href="https://khaytapp.com/blog/khayt-3-7.html?lang=ar" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-11:/blog/khayt-3-7/ar</id>
+    <published>2026-09-11T12:00:00Z</published>
+    <updated>2026-09-11T12:00:00Z</updated>
+    <category term="إصدار"/>
+    <summary type="text">نموذج تُسقطه على الحاسبة يصير عرض سعر؛ ومهمة منتهية تُبلّغ بالخيط والساعات التي استُهلكت فعلاً، فيصحّح التقدير التالي نفسه. وضريبة تتصرّف كما تتصرّف في بلدك، بثلاثين إعداداً جاهزاً.</summary>
+  </entry>
+</feed>

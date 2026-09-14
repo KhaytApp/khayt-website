@@ -107,6 +107,7 @@
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
     'wn.lede':    { en: 'Khayt <span class="ver-mm">3.7</span> stops guessing what your prints cost. Drop a model on the calculator and it becomes a quote; when the job finishes, the printer reports the filament and the hours it actually used, and the estimator corrects itself against them. Every estimate now says whether the rate behind it was measured or assumed. Khayt also works outside the Gulf for the first time — tax added to a price rather than folded into it, thirty country presets, and documents printed in the language you chose rather than that language and Arabic.', ar: 'خيط <span class="ver-mm">3.7</span> يتوقّف عن تخمين تكلفة مطبوعاتك. أسقِط مجسّماً على الحاسبة ليتحوّل إلى عرض سعر، وعند انتهاء المهمة تُبلغ الطابعة بما استُهلك فعلاً من خيط وساعات، فيصحّح المقدّر نفسه بناءً عليها. وصار كل تقدير يذكر إن كان معدّله مقيساً أم مفترضاً. كما يعمل خيط خارج الخليج لأول مرة — ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه، وثلاثون إعداداً جاهزاً للدول، ومستندات تُطبع باللغة التي اخترتها بدل تلك اللغة والعربية معاً.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
+    'wn.readmore':{ en: 'Read the release in full on the blog →', ar: 'اقرأ الإصدار كاملاً في المدوّنة ←' },
 
     'bento.quote.tag':   { en: 'Costing', ar: 'التسعير' },
     'bento.quote.t':     { en: 'Drop a model in, get a price out', ar: 'أسقِط مجسّماً، واحصل على سعر' },

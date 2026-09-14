@@ -122,6 +122,14 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .brand .ar { font-family: var(--font-wordmark); font-weight: 700; color: var(--muted); font-size: 17px; }
 .nav-links { display: flex; align-items: center; gap: 2px; margin-inline-start: 8px; }
 .nav-links a { font-size: 14.5px; font-weight: 500; color: var(--ink-soft); padding: 8px 13px; border-radius: 8px; white-space: nowrap; transition: background .15s, color .15s; }
+/* An icon inside a button is not a thing that should give way when the row
+   runs out of room. It is a flex item with the default flex-shrink: 1, so
+   when Services and Blog joined the nav it silently collapsed to 0 wide at
+   EVERY width — the row looked fine because the icon had quietly absorbed the
+   overflow, and a check for wrapping found nothing wrong. Pinning it means the
+   row now overflows honestly, and the breakpoints below are measured against
+   that rather than against a nav that was hiding its own problem. */
+.btn svg, .lang-toggle svg, .nav-right svg { flex: none; }
 .nav-links a:hover { background: var(--paper-3); color: var(--ink); }
 .nav-right { margin-inline-start: auto; display: flex; align-items: center; gap: 10px; }
 .lang-toggle {
@@ -501,11 +509,18 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
   .nav-right .btn .hide-sm { display: none; }
 }
 
-/* Step 2 — give up on the row and show the burger. Re-measured after Services
-   and Blog joined the row: the compacted links are 648px wide and still clear
-   the right-hand group by 14px at 901px, so 900 is still the last width that
-   cannot show it. The nowrap on .nav-links a is what keeps that true — without
-   it "What's New" breaks over two lines long before the row runs out of room. */
+/* Step 2 — give up on the row and show the burger.
+
+   Re-measured properly, after the download icon was pinned with flex:none.
+   The first measurement was worthless: the icon could shrink, so it collapsed
+   to 0 wide and the row "fitted" at every width while actually overflowing by
+   up to 130px. Checking for wrapping found nothing, because nothing wrapped.
+
+   With seven links and nothing able to give, .nav-in has zero overflow and a
+   positive gap at every width from 901px to 1440px — 14px of clearance at
+   901px, which is the tightest. So 900 remains the last width that cannot
+   show the row. Two things keep that true: the nowrap on .nav-links a, and
+   there being seven links. A ninth does not fit, which is how this was found. */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-burger { display: grid; }
@@ -884,3 +899,39 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
 .post-back:hover { color: var(--ink-panel); }
 .post-foot { max-width: 74ch; margin: 48px auto 0; padding-top: 26px; border-top: 1px solid var(--line);
   display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+
+/* The "New since you last looked" section summarises a release the blog
+   explains at length; this is the only thing that connected them. */
+.wn-more { margin-top: 18px; }
+.wn-more a { font-size: 15px; font-weight: 600; color: var(--brand-2); text-decoration: none;
+  border-bottom: 1px solid var(--tint-2); padding-bottom: 2px; transition: border-color .15s, color .15s; }
+.wn-more a:hover { color: var(--ink-panel); border-bottom-color: var(--brand); }
+
+/* Blog index footer: the feed link, then the note. */
+.blog-foot { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line);
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: space-between; }
+.blog-foot .fineprint { margin-top: 0; flex: 1 1 34ch; }
+.feed-link { display: inline-flex; align-items: center; gap: 9px; flex: none;
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
+  color: var(--ink-soft); text-decoration: none;
+  border: 1px solid var(--line); border-radius: 100px; padding: 9px 16px;
+  transition: border-color .15s, color .15s; }
+.feed-link:hover { color: var(--amber); border-color: var(--amber); }
+.feed-link svg { width: 14px; height: 14px; flex: none; color: var(--amber); }
+
+/* ---------- 404 ---------- */
+
+.page-head.nf { padding-block: clamp(110px, 13vw, 170px) clamp(56px, 7vw, 90px); }
+.page-head.nf .eyebrow { font-size: 13px; letter-spacing: .12em; }
+.nf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 38px; max-width: 760px; }
+.nf-card { display: block; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px 22px; text-decoration: none; color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.nf-card:hover { transform: translateY(-2px); border-color: var(--tint-2); box-shadow: 0 12px 30px rgba(16,20,23,0.09); }
+.nf-ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+  background: var(--tint); color: var(--brand-2); margin-bottom: 13px; }
+.nf-ico svg { width: 19px; height: 19px; }
+.nf-t { display: block; font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  letter-spacing: -0.015em; color: var(--ink); }
+.nf-d { display: block; color: var(--muted); font-size: 14px; line-height: 1.5; margin-top: 6px; text-wrap: pretty; }
+@media (max-width: 620px) { .nf-grid { grid-template-columns: 1fr; } }
