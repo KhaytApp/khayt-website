@@ -11,6 +11,38 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://khaytapp.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="ar">
+<meta name="theme-color" content="#0a2a50">
+<link rel="canonical" href="https://khaytapp.com/">
+<!-- Arabic is a real URL now, not just a localStorage flag, so it can be linked,
+     shared and indexed. app.js reads ?lang= on load and writes it on toggle. -->
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://khaytapp.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Khayt",
+  "alternateName": "\u062e\u064a\u0637",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "3D print shop management",
+  "operatingSystem": "macOS, Windows, Linux",
+  "url": "https://khaytapp.com/",
+  "downloadUrl": "https://khaytapp.com/#download",
+  "image": "https://khaytapp.com/og-image.png",
+  "inLanguage": ["en", "ar", "de", "es", "fr", "pt", "tr", "zh", "ja"],
+  "description": "Free desktop app for 3D print shop owners: Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.",
+  "license": "https://github.com/KhaytApp/Khayt/blob/main/LICENSE",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "Khayt", "url": "https://github.com/KhaytApp" }
+}
+</script>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="khayt-favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="khayt-favicon-16.png">
@@ -22,10 +54,12 @@
 </head>
 <body>
 
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#top" class="brand"><img src="khayt-icon.png" alt="Khayt icon">Khayt <span class="ar">خيط</span></a>
+    <a href="#top" class="brand"><img src="khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
     <nav class="nav-links" id="navLinks">
       <a href="#screens" data-i18n="nav.screens">Screens</a>
       <a href="#modes" data-i18n="nav.modes">Modes</a>
@@ -33,12 +67,14 @@
       <a href="#beta" data-i18n="nav.beta">Cloud</a>
       <a href="#whatsnew" data-i18n="nav.whatsnew">What's New</a>
       <a href="#languages" data-i18n="nav.languages">Languages</a>
+      <a href="services.html" data-i18n="nav.services">Services</a>
+      <a href="blog/" data-i18n="nav.blog">Blog</a>
       <a href="#download" data-i18n="nav.download">Download</a>
     </nav>
     <div class="nav-right">
-      <button class="lang-toggle" id="navLang"><span>🌐</span> العربية</button>
+      <button class="lang-toggle" id="navLang" aria-label="Switch language to Arabic"><span aria-hidden="true">🌐</span> <span lang="ar">العربية</span></button>
       <a href="#download" class="btn btn-accent"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
-      <button class="nav-burger" id="burger" aria-label="Menu"><span></span></button>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
     </div>
   </div>
 </header>
@@ -60,14 +96,14 @@
         <span data-i18n="pill.portal">Customer portal</span>
         <span data-i18n="pill.analytics">Analytics</span>
       </div>
-      <p class="sub hero-mac" style="margin-top:-4px"><a href="#download" data-i18n="hero.mac">Khayt for macOS is being rebuilt as a native Mac app — the alpha is downloadable now →</a></p>
+      <p class="hero-mac"><a href="#download"><span class="tag" data-i18n="mn.badge">Alpha</span><span data-i18n="hero.mac">Khayt for macOS is being rebuilt as a native Mac app — download it now →</span></a></p>
       <div class="hero-cta">
         <a href="#download" class="btn btn-primary btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span data-i18n="hero.dl">Download Free</span></a>
         <a href="https://github.com/khaytapp/Khayt" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="hero.github">View on GitHub</span></a>
       </div>
       <div class="hero-stat">
         <div class="s"><b>100%</b><span data-i18n="stat.free">Free to use</span></div>
-        <div class="s"><b>8</b><span data-i18n="stat.langs">Languages</span></div>
+        <div class="s"><b data-stat="langs">9</b><span data-i18n="stat.langs">Languages</span></div>
         <div class="s"><b>0</b><span data-i18n="stat.subs">Subscriptions</span></div>
       </div>
       <div class="os-line"><span>macOS</span><span class="sep"></span><span>Windows</span><span class="sep"></span><span>Linux</span><span class="sep"></span><span data-i18n="hero.os">No account · No telemetry</span></div>
@@ -76,7 +112,6 @@
     <div class="hero-r">
       <div class="hero-rbg"></div>
       <div class="hero-shot">
-        <div class="hero-badge"><span class="dot"></span><span class="bt" data-i18n="hero.live">3 printers live</span></div>
         <div class="frame">
           <div class="frame-bar">
             <div class="frame-dots"><i></i><i></i><i></i></div>
@@ -84,7 +119,7 @@
             <div class="frame-chip"><span class="dot"></span><span data-i18n="hero.live">3 printers live</span></div>
           </div>
           <div class="frame-img-wrap">
-            <img class="shot" src="screenshots/screenshot-queue.png" alt="Khayt production queue — Kanban board with live printer status" loading="eager">
+            <img class="shot" id="heroShot" src="screenshots/screenshot-queue.png" width="1440" height="940" alt="Khayt production queue — Kanban board with live printer status" loading="eager" fetchpriority="high">
           </div>
         </div>
       </div>
@@ -142,7 +177,7 @@
           <div class="frame-title" id="galTitle">Khayt — <b>Production Queue</b></div>
         </div>
         <div class="frame-img-wrap">
-          <img class="shot" id="galImg" src="screenshots/screenshot-queue.png" alt="Khayt production queue screenshot" loading="lazy">
+          <img class="shot" id="galImg" src="screenshots/screenshot-queue.png" width="1440" height="940" alt="Khayt production queue screenshot" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -169,7 +204,7 @@
     </div>
     <div class="modes-grid">
       <article class="mode-card">
-        <div class="mode-shot"><img src="screenshots/modes/dashboard-simple.png" alt="Khayt Simple mode dashboard" loading="lazy"></div>
+        <div class="mode-shot"><img src="screenshots/modes/dashboard-simple.png" width="1440" height="940" alt="Khayt Simple mode dashboard" loading="lazy" decoding="async"></div>
         <div class="mode-body">
           <span class="mode-pill" data-i18n="modes.sim.pill">Simple</span>
           <h3 data-i18n="modes.sim.t">A small shop, made easy</h3>
@@ -177,7 +212,7 @@
         </div>
       </article>
       <article class="mode-card">
-        <div class="mode-shot"><img src="screenshots/modes/dashboard-professional.png" alt="Khayt Professional mode dashboard" loading="lazy"></div>
+        <div class="mode-shot"><img src="screenshots/modes/dashboard-professional.png" width="1440" height="940" alt="Khayt Professional mode dashboard" loading="lazy" decoding="async"></div>
         <div class="mode-body">
           <span class="mode-pill" data-i18n="modes.pro.pill">Professional</span>
           <h3 data-i18n="modes.pro.t">The whole production floor</h3>
@@ -201,7 +236,11 @@
         <h3 data-i18n="modes.cmp.h">What's in each mode</h3>
         <p data-i18n="modes.cmp.sub">Every mode keeps the personal core. Simple adds selling and invoicing; Professional adds the full production-business depth. Nothing is locked behind a paywall — it's all free.</p>
       </div>
-      <div class="cmp-wrap" id="modesTable"></div>
+      <div class="cmp-frame" id="cmpFrame">
+        <div class="cmp-wrap" id="modesTable"></div>
+        <div class="cmp-fade" aria-hidden="true"></div>
+      </div>
+      <p class="cmp-hint" id="cmpHint" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span data-i18n="modes.cmp.hint">Swipe the table to see both columns</span></p>
     </div>
   </div>
 </section>
@@ -223,7 +262,7 @@
       <div>
         <span class="eyebrow" data-i18n="wn.eyebrow">Shipped recently</span>
         <h2 class="h2" style="margin-top:16px" data-i18n="wn.h2">New since you last looked</h2>
-        <p class="lede" style="margin-top:16px" data-i18n="wn.lede">Khayt 3.6 stops guessing what your prints cost. Drop a model on the calculator and it becomes a quote; when the job finishes, the printer reports the filament and the hours it actually used, and the estimator corrects itself against them. Every estimate now says whether the rate behind it was measured or assumed. Khayt also works outside the Gulf for the first time — tax added to a price rather than folded into it, thirty country presets, and documents printed in the language you chose rather than that language and Arabic.</p>
+        <p class="lede" style="margin-top:16px" data-i18n-html="wn.lede">Khayt <span class="ver-mm">3.7</span> stops guessing what your prints cost. Drop a model on the calculator and it becomes a quote; when the job finishes, the printer reports the filament and the hours it actually used, and the estimator corrects itself against them. Every estimate now says whether the rate behind it was measured or assumed. Khayt also works outside the Gulf for the first time — tax added to a price rather than folded into it, thirty country presets, and documents printed in the language you chose rather than that language and Arabic.</p>
       </div>
       <span class="wn-ver"><span class="ver-tag">v3.7.0</span> · <span data-i18n="wn.verlab">latest stable</span></span>
     </div>
@@ -368,7 +407,7 @@
           <div class="flip-card" id="flipCard">
             <div class="flip-face front">
               <div class="receipt-top">
-                <div class="r-brand"><img src="khayt-icon.png" alt="">Khayt</div>
+                <div class="r-brand"><img src="khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt</div>
                 <span class="r-tag">TAX INVOICE · #INV-1042</span>
               </div>
               <div class="r-row"><span class="k">Material</span><span class="v"><span class="sw"></span>PLA Black</span></div>
@@ -380,7 +419,7 @@
             </div>
             <div class="flip-face back" dir="rtl">
               <div class="receipt-top">
-                <div class="r-brand"><img src="khayt-icon.png" alt=""><span class="ar">خيط</span></div>
+                <div class="r-brand"><img src="khayt-icon.png" width="256" height="256" alt="" aria-hidden="true"><span class="ar">خيط</span></div>
                 <span class="r-tag">فاتورة ضريبية · 1042#</span>
               </div>
               <div class="r-row"><span class="k">المادة</span><span class="v"><span class="sw"></span>PLA أسود</span></div>
@@ -412,7 +451,7 @@
       </div>
       <div class="stats">
         <div class="stat-card"><div class="big">100%</div><div class="cap" data-i18n="stat.free">Free to use</div></div>
-        <div class="stat-card"><div class="big">8</div><div class="cap" data-i18n="stat.langs">Languages</div></div>
+        <div class="stat-card"><div class="big" data-stat="langs">9</div><div class="cap" data-i18n="stat.langs">Languages</div></div>
         <div class="stat-card"><div class="big">0</div><div class="cap" data-i18n="stat.subs">Subscriptions</div></div>
         <div class="stat-card"><div class="big">∞</div><div class="cap" data-i18n="stat.keep">Yours to keep</div></div>
       </div>
@@ -427,9 +466,9 @@
     <h2 class="h2" style="margin-top:16px" data-i18n="dl.h2">Set up shop in two minutes</h2>
     <p class="lede" style="margin:16px auto 0;text-align:center" data-i18n="dl.lede">Free for everyone. No account. No telemetry. Your data stays on your device.</p>
 
-    <div class="dl-channel" id="dlChannel" role="tablist">
-      <button class="on" data-channel="stable" role="tab"><span class="bdot"></span><span data-i18n="dl.stable">Stable</span> <span class="ver-tag" style="opacity:.7">v3.7.0</span></button>
-      <button class="beta-btn" data-channel="beta" role="tab"><span class="bdot"></span><span data-i18n="dl.beta">Beta</span> <span class="ver-beta" style="opacity:.7">—</span></button>
+    <div class="dl-channel" id="dlChannel" role="tablist" aria-label="Release channel">
+      <button class="on" data-channel="stable" role="tab" aria-selected="true"><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.stable">Stable</span> <span class="ver-tag" style="opacity:.7">v3.7.0</span></button>
+      <button class="beta-btn" data-channel="beta" role="tab" aria-selected="false" disabled><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.beta">Beta</span> <span class="ver-beta" style="opacity:.7">—</span></button>
     </div>
 
     <div class="dl-grid" style="text-align:start">
@@ -515,7 +554,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#top" class="brand"><img src="khayt-icon.png" alt="Khayt icon">Khayt <span class="ar">خيط</span></a>
+        <a href="#top" class="brand"><img src="khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
         <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
         <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
       </div>
@@ -526,6 +565,8 @@
           <a href="#features" data-i18n="nav.features">Features</a>
           <a href="#whatsnew" data-i18n="nav.whatsnew">What's New</a>
           <a href="#languages" data-i18n="nav.languages">Languages</a>
+          <a href="services.html" data-i18n="nav.services">Services</a>
+          <a href="blog/" data-i18n="nav.blog">Blog</a>
           <a href="#download" data-i18n="nav.download">Download</a>
         </div>
         <div class="foot-col">
@@ -545,6 +586,7 @@
   </div>
 </footer>
 
+<script src="cloud-features.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

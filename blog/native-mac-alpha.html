@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khayt for macOS, rebuilt native — where the alpha stands — Khayt</title>
+<meta name="description" content="Not Electron in a Mac costume: real Mac windows, the menu bar, Quick Look, Shortcuts. What the alpha already does, what an alpha means for a shop's book, and why the Windows and Linux app is not going anywhere.">
+<meta property="og:title" content="Khayt for macOS, rebuilt native — where the alpha stands — Khayt">
+<meta property="og:description" content="Not Electron in a Mac costume: real Mac windows, the menu bar, Quick Look, Shortcuts. What the alpha already does, what an alpha means for a shop's book, and why the Windows and Linux app is not going anywhere.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://khaytapp.com/blog/native-mac-alpha.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Khayt">
+<meta property="article:published_time" content="2026-09-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="canonical" href="https://khaytapp.com/blog/native-mac-alpha.html">
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/native-mac-alpha.html">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/native-mac-alpha.html?lang=ar">
+<link rel="alternate" hreflang="x-default" href="https://khaytapp.com/blog/native-mac-alpha.html">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../khayt-apple-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Khayt for macOS, rebuilt native — where the alpha stands",
+  "description": "Not Electron in a Mac costume: real Mac windows, the menu bar, Quick Look, Shortcuts. What the alpha already does, what an alpha means for a shop's book, and why the Windows and Linux app is not going anywhere.",
+  "datePublished": "2026-09-14",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "image": "https://khaytapp.com/og-image.png",
+  "mainEntityOfPage": "https://khaytapp.com/blog/native-mac-alpha.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Khayt",
+    "url": "https://github.com/KhaytApp"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Khayt",
+    "url": "https://khaytapp.com/"
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+<span hidden
+  data-page-title-en="Khayt for macOS, rebuilt native — where the alpha stands — Khayt"
+  data-page-title-ar="خيط لماك، مبنيّ من جديد — أين وصل إصدار الألفا — خيط"
+  data-page-desc-en="Not Electron in a Mac costume: real Mac windows, the menu bar, Quick Look, Shortcuts. What the alpha already does, what an alpha means for a shop's book, and why the Windows and Linux app is not going anywhere."
+  data-page-desc-ar="ليس إلكترون بزيّ ماك: نوافذ ماك حقيقية، وشريط القوائم، وQuick Look، والاختصارات. ما يفعله إصدار الألفا الآن، وماذا يعني وصف «ألفا» لدفتر مطبعة، ولماذا لن يختفي تطبيق ويندوز ولينكس."></span>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="brand"><img src="../khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../index.html#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../index.html#features" data-i18n="nav.features">Features</a>
+      <a href="../index.html#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../services.html" data-i18n="nav.services">Services</a>
+      <a href="./" class="here" data-i18n="nav.blog">Blog</a>
+      <a href="../index.html#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang" aria-label="Switch language to Arabic"><span aria-hidden="true">🌐</span> <span lang="ar">العربية</span></button>
+      <a href="../index.html#download" class="btn btn-accent"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<article class="post">
+  <div class="wrap">
+    <div class="post-in">
+      <a class="post-back" href="./" data-i18n="back.blog">← All posts</a>
+      <div class="post-meta" style="margin-top:16px">
+        <span class="tag" data-lang="en">Mac</span><span class="tag" data-lang="ar" hidden>ماك</span>
+        <time datetime="2026-09-14">14 September 2026</time>
+      </div>
+      <h1 data-lang="en">Khayt for macOS, rebuilt native — where the alpha stands</h1>
+      <h1 data-lang="ar" hidden>خيط لماك، مبنيّ من جديد — أين وصل إصدار الألفا</h1>
+
+      <div class="post-body" data-lang="en">
+        <p>Khayt has run on macOS since the beginning, as the same cross-platform build that runs on Windows and Linux. That build is not going away. But it has never felt like a Mac app, and the gap between <em>runs on a Mac</em> and <em>is a Mac app</em> turns out to be most of what people notice.</p>
+
+        <p>So there is now a second one: <strong>Khayt for macOS</strong>, written native, downloadable today as an alpha. Native windows, the menu bar, Quick Look, Shortcuts — the things a Mac user reaches for without thinking about it, working the way they work everywhere else.</p>
+
+        <h2>It reads the same book</h2>
+
+        <p>The important part is not the windows. The native app runs the same tax, pricing and estimator rules as the cross-platform app, unchanged, and proved against them test for test. It reads the same file and gets the same answers.</p>
+
+        <p>That is deliberate, and it is the reason the two can sit on one machine at the same time. A quote is not worth less because you raised it on the Mac app; a VAT figure is not a different number on a different build. The rules live in one place and both apps call into them.</p>
+
+        <h2>What “alpha” means here</h2>
+
+        <p>Literally what it says. Keep the stable app installed alongside it — they read the same file, so nothing is lost either way, but <strong>an alpha is not what a shop should be billing from yet</strong>. Open it, use it, tell us where it is wrong, and raise the invoice that pays your rent from the stable app.</p>
+
+        <p>It is signed and notarized, so it opens cleanly rather than arguing with Gatekeeper, and it updates itself. It needs a recent macOS and Apple silicon.</p>
+
+        <h2>What has landed recently</h2>
+
+        <ul>
+          <li><strong>The Mac signs in to the cloud itself.</strong> Until alpha.9, a shop's book carried to a new Mac arrived with a cloud token that machine could not read, every cloud feature went quiet, and the only cure was to open the other app. It now asks for the server, the account, the password and the sync passphrase, and does the rest itself — checking the passphrase <em>before</em> anything is written.</li>
+          <li><strong>A job from something you already make.</strong> A product in the catalogue has “New Job from This”: its parts, its components, its margin and its name, filled in. The job names the product, which is what the catalogue counts when it tells you a thing has been made fourteen times.</li>
+          <li><strong>The AI assist screen.</strong> Khayt's AI features could be switched on in one app and not the other, so a shop on a Mac could be told a feature was running with no way to see — let alone refuse — what it sends. There is now one screen carrying both halves: which provider you use, and a switch per feature with what that feature transmits written next to it.</li>
+          <li><strong>Quick Look no longer takes the app down.</strong> Pressing ⌘Y through the library, the app disappeared on the second model — no error, no crash report, nothing to look at afterwards. Every look is a fresh one now, and both ways in go through the same door.</li>
+        </ul>
+
+        <h2>Where this goes</h2>
+
+        <p>The native Mac app becomes the main Khayt on macOS. A native Windows app follows it. And the cross-platform app keeps running everywhere — on Windows, on Linux, and on macOS for as long as anyone wants it there. It is not going away, and nothing you have in it is stranded.</p>
+
+        <p>The alpha, and every alpha before it, is on <a href="https://github.com/KhaytApp/khayt-mac/releases" target="_blank" rel="noopener">the Mac releases page</a>. The stable app for all three platforms is <a href="../index.html#download">on the download page</a>.</p>
+      </div>
+      <div class="post-body" data-lang="ar" hidden>
+        <p>يعمل خيط على ماك منذ البداية، بنفس النسخة العابرة للمنصّات التي تعمل على ويندوز ولينكس. وتلك النسخة لن تختفي. لكنها لم تبدُ يوماً كتطبيق ماك، والفرق بين «يعمل على ماك» و«هو تطبيق ماك» هو — كما تبيّن — معظم ما يلاحظه الناس.</p>
+
+        <p>فصار هناك تطبيق ثانٍ: <strong>خيط لماك</strong>، مكتوب بشكل أصلي، ومتاح للتحميل اليوم كإصدار ألفا. نوافذ ماك أصلية، وشريط القوائم، وQuick Look، والاختصارات — الأشياء التي يمدّ مستخدم ماك يده إليها دون تفكير، تعمل كما تعمل في كل مكان آخر.</p>
+
+        <h2>يقرأ الدفتر نفسه</h2>
+
+        <p>الجزء المهم ليس النوافذ. فالتطبيق الأصلي يشغّل قواعد الضريبة والتسعير والتقدير نفسها التي يشغّلها التطبيق العابر للمنصّات، دون تغيير، ومُثبتة في مواجهتها اختباراً باختبار. يقرأ الملف نفسه ويصل إلى الإجابات نفسها.</p>
+
+        <p>وهذا مقصود، وهو سبب إمكان وجود الاثنين على جهاز واحد في الوقت نفسه. فعرض السعر لا يقلّ قيمةً لأنك أصدرته من تطبيق ماك، ورقم ضريبة القيمة المضافة ليس رقماً آخر في نسخة أخرى. القواعد تسكن في مكان واحد وكلا التطبيقين يستدعيها.</p>
+
+        <h2>ماذا تعني «ألفا» هنا</h2>
+
+        <p>حرفياً ما تقوله. أبقِ التطبيق المستقر مثبّتاً إلى جانبه — فكلاهما يقرأ الملف نفسه، ولا شيء يُفقد في الحالتين، لكن <strong>إصدار الألفا ليس ما ينبغي لمطبعة أن تُصدر فواتيرها منه بعد</strong>. افتحه واستعمله وأخبرنا أين يُخطئ، وأصدر الفاتورة التي تدفع إيجارك من التطبيق المستقر.</p>
+
+        <p>وهو موقّع ومُوثَّق لدى أبل، فيُفتح بسلاسة بدل أن يجادل Gatekeeper، ويحدّث نفسه. ويحتاج نسخة حديثة من macOS ومعالج Apple silicon.</p>
+
+        <h2>ما وصل مؤخّراً</h2>
+
+        <ul>
+          <li><strong>الماك يسجّل دخوله إلى السحابة بنفسه.</strong> حتى الإصدار alpha.9، كان دفتر المطبعة إن نُقل إلى ماك جديد يصل برمز سحابي لا يستطيع ذلك الجهاز قراءته، فتصمت كل مزايا السحابة، ولا علاج إلا فتح التطبيق الآخر. صار يسأل الآن عن الخادم والحساب وكلمة المرور وعبارة مرور المزامنة، ويتولّى الباقي بنفسه — ويتحقّق من عبارة المرور <em>قبل</em> كتابة أي شيء.</li>
+          <li><strong>مهمة من شيء تصنعه أصلاً.</strong> صار للمنتج في الكتالوج أمر «مهمة جديدة من هذا»: أجزاؤه ومكوّناته وهامشه واسمه، معبّأة. والمهمة تُسمّي المنتج، وهو ما يعدّه الكتالوج حين يخبرك أن شيئاً صُنع أربع عشرة مرة.</li>
+          <li><strong>شاشة مساعدة الذكاء الاصطناعي.</strong> كان يمكن تشغيل مزايا الذكاء الاصطناعي في تطبيق دون الآخر، فتُخبَر مطبعة على ماك أن ميزة تعمل دون أن ترى — فضلاً عن أن ترفض — ما تُرسله. صارت هناك شاشة واحدة تحمل النصفين: أي مزوّد تستخدم، ومفتاح لكل ميزة مكتوب بجانبه ما تنقله تلك الميزة.</li>
+          <li><strong>Quick Look لم يعد يُسقط التطبيق.</strong> عند الضغط ⌘Y عبر المكتبة كان التطبيق يختفي عند النموذج الثاني — بلا خطأ ولا تقرير تعطّل ولا شيء يُنظر فيه بعدها. صارت كل معاينة معاينةً جديدة، وكلا الطريقين إليها يمرّان من الباب نفسه.</li>
+        </ul>
+
+        <h2>إلى أين يمضي هذا</h2>
+
+        <p>سيصير تطبيق ماك الأصلي هو خيط الأساسي على macOS، ويتبعه تطبيق ويندوز أصلي. ويبقى التطبيق العابر للمنصّات يعمل في كل مكان — على ويندوز ولينكس، وعلى ماك ما دام أحد يريده هناك. فهو لن يختفي، ولا شيء لديك فيه سيُترك وحيداً.</p>
+
+        <p>إصدار الألفا، وكل ألفا قبله، على <a href="https://github.com/KhaytApp/khayt-mac/releases" target="_blank" rel="noopener">صفحة إصدارات ماك</a>. والتطبيق المستقر للمنصّات الثلاث <a href="../index.html#download">في صفحة التحميل</a>.</p>
+      </div>
+    </div>
+
+    <div class="post-foot">
+      <a class="post-back" href="./" data-i18n="back.blog">← All posts</a>
+      <a class="btn btn-primary" href="../index.html#download" data-i18n="post.dl">Download Khayt</a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../index.html" class="brand"><img src="../khayt-icon.png" width="256" height="256" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4 data-i18n="foot.product">Product</h4>
+          <a href="../index.html#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../index.html#features" data-i18n="nav.features">Features</a>
+          <a href="../services.html" data-i18n="nav.services">Services</a>
+          <a href="./" data-i18n="nav.blog">Blog</a>
+          <a href="../index.html#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="foot.project">Project</h4>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../index.html#open-source" data-i18n="foot.license">License</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.PAGE_STRINGS = {
+  'post.dl': { en: 'Download Khayt', ar: 'حمّل خيط' }
+};
+</script>
+<script src="../site.js"></script>
+</body>
+</html>

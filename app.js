@@ -14,6 +14,34 @@
     'nav.languages': { en: 'Languages', ar: 'اللغات' },
     'nav.oss':       { en: 'Open Source', ar: 'مفتوح المصدر' },
     'nav.download':  { en: 'Download', ar: 'تحميل' },
+    'nav.services':  { en: 'Services', ar: 'الخدمات' },
+    'nav.blog':      { en: 'Blog', ar: 'المدوّنة' },
+
+    'meta.title': {
+      en: 'Khayt \u2014 Free 3D Print Shop Management Software',
+      ar: 'خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد'
+    },
+    'meta.desc': {
+      en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
+      ar: 'تطبيق مجاني لأصحاب مطابع الطباعة ثلاثية الأبعاد. قائمة إنتاج كانبان، حاسبة تكلفة، فوترة إلكترونية للمرحلة الثانية من هيئة الزكاة، ربط مباشر بالطابعات، مخزون الخيوط وتحليلات — دون اتصال تماماً.'
+    },
+
+    'a11y.skip': { en: 'Skip to content', ar: 'تخطّ إلى المحتوى' },
+    'a11y.toAr': { en: 'Switch language to Arabic', ar: 'تغيير اللغة إلى العربية' },
+    'a11y.toEn': { en: 'Switch language to English', ar: 'تغيير اللغة إلى الإنجليزية' },
+
+    'dl.nobeta': { en: 'No beta build published yet', ar: 'لا يوجد إصدار تجريبي منشور بعد' },
+
+    'modes.cmp.caption': { en: 'What Simple and Professional each include', ar: 'ما يشمله وضع بسيط ووضع احترافي' },
+    'modes.cmp.featcol': { en: 'Feature', ar: 'الميزة' },
+    'modes.cmp.yes':  { en: 'Included', ar: 'متوفر' },
+    'modes.cmp.no':   { en: 'Not included', ar: 'غير متوفر' },
+    'modes.cmp.hint': { en: 'Swipe the table to see both columns', ar: 'اسحب الجدول لرؤية العمودين' },
+
+    'hero.mac': {
+      en: 'Khayt for macOS is being rebuilt as a native Mac app \u2014 download it now \u2192',
+      ar: 'يُعاد بناء خيط لماك كتطبيق ماك أصلي — حمّله الآن ←'
+    },
 
     'hero.pill':  { en: 'Free to use · Source available', ar: 'مجاني · المصدر متاح' },
     'hero.h1':    { en: 'Run your print shop like a <span class="hl">studio</span>', ar: 'أدِر مطبعتك <span class="hl">كأنها استوديو</span>' },
@@ -77,7 +105,7 @@
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
-    'wn.lede':    { en: 'Khayt 3.6 stops guessing what your prints cost. Drop a model on the calculator and it becomes a quote; when the job finishes, the printer reports the filament and the hours it actually used, and the estimator corrects itself against them. Every estimate now says whether the rate behind it was measured or assumed. Khayt also works outside the Gulf for the first time — tax added to a price rather than folded into it, thirty country presets, and documents printed in the language you chose rather than that language and Arabic.', ar: 'خيط 3.6 يتوقّف عن تخمين تكلفة مطبوعاتك. أسقِط مجسّماً على الحاسبة ليتحوّل إلى عرض سعر، وعند انتهاء المهمة تُبلغ الطابعة بما استُهلك فعلاً من خيط وساعات، فيصحّح المقدّر نفسه بناءً عليها. وصار كل تقدير يذكر إن كان معدّله مقيساً أم مفترضاً. كما يعمل خيط خارج الخليج لأول مرة — ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه، وثلاثون إعداداً جاهزاً للدول، ومستندات تُطبع باللغة التي اخترتها بدل تلك اللغة والعربية معاً.' },
+    'wn.lede':    { en: 'Khayt <span class="ver-mm">3.7</span> stops guessing what your prints cost. Drop a model on the calculator and it becomes a quote; when the job finishes, the printer reports the filament and the hours it actually used, and the estimator corrects itself against them. Every estimate now says whether the rate behind it was measured or assumed. Khayt also works outside the Gulf for the first time — tax added to a price rather than folded into it, thirty country presets, and documents printed in the language you chose rather than that language and Arabic.', ar: 'خيط <span class="ver-mm">3.7</span> يتوقّف عن تخمين تكلفة مطبوعاتك. أسقِط مجسّماً على الحاسبة ليتحوّل إلى عرض سعر، وعند انتهاء المهمة تُبلغ الطابعة بما استُهلك فعلاً من خيط وساعات، فيصحّح المقدّر نفسه بناءً عليها. وصار كل تقدير يذكر إن كان معدّله مقيساً أم مفترضاً. كما يعمل خيط خارج الخليج لأول مرة — ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه، وثلاثون إعداداً جاهزاً للدول، ومستندات تُطبع باللغة التي اخترتها بدل تلك اللغة والعربية معاً.' },
     'wn.verlab':  { en: 'latest stable', ar: 'أحدث إصدار مستقر' },
 
     'bento.quote.tag':   { en: 'Costing', ar: 'التسعير' },
@@ -134,8 +162,6 @@
     'stat.subs': { en: 'Subscriptions', ar: 'اشتراكات' },
     'stat.keep': { en: 'Yours to keep', ar: 'ملك لك للأبد' },
 
-    'hero.mac':  { en: 'Khayt for macOS is being rebuilt as a native Mac app — the alpha is downloadable now →',
-                   ar: 'يُعاد بناء خيط لماك كتطبيق ماك أصلي — إصدار الألفا متاح للتحميل الآن ←' },
     'mn.badge':  { en: 'Alpha', ar: 'ألفا' },
     'mn.h':      { en: 'Khayt for macOS, rebuilt native', ar: 'خيط لماك، مُعاد بناؤه أصليًا' },
     'mn.p':      { en: 'Not Electron in a Mac costume — a real Mac app: native windows, the menu bar, Quick Look, Shortcuts. It runs the same tax, pricing and estimator rules as the app above, unchanged and proved against them test for test, so it reads the same book and gets the same answers.',
@@ -179,6 +205,11 @@
     'foot.made':    { en: 'Made with ♥ for the 3D printing community · Built with the help of AI', ar: 'صُنع بحب لمجتمع الطباعة ثلاثية الأبعاد · بُني بمساعدة الذكاء الاصطناعي' }
   };
 
+  /* ---------- The languages Khayt ships in ----------
+     The two hero/open-source stat tiles used to hardcode "8" while this
+     section's own copy and chips said nine. One list; the tiles count it. */
+  var LANGS = ['ar', 'en', 'de', 'es', 'fr', 'pt', 'tr', 'zh', 'ja'];
+
   /* ---------- Feature grid ---------- */
   var FEATURES = [
     { t: { en: 'Kanban Production Queue', ar: 'قائمة إنتاج كانبان' }, d: { en: 'Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine views, shift checklists, failure photo capture and part-level colour assignment.', ar: 'اسحب الطلبات عبر: قيد الانتظار ← الطباعة ← المعالجة ← الفحص ← مكتمل. عروض لكل طابعة، قوائم بدء الوردية، التقاط صور الأعطال وتعيين ألوان القطع.' },
@@ -201,27 +232,10 @@
       i: '<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7M8.2 13.2 15.8 17"/>' }
   ];
 
-  /* ---------- Optional cloud — all opt-in; app still runs fully offline ---------- */
-  var BETA_FEATURES = [
-    { t: { en: 'Encrypted cloud sync', ar: 'مزامنة سحابية مشفّرة' }, d: { en: 'Opt-in sync across your devices, end-to-end encrypted — the server only ever sees ciphertext. Your sync passphrase never leaves your machine. Turn it off and Khayt runs 100% offline as before.', ar: 'مزامنة اختيارية بين أجهزتك مشفّرة طرفياً — لا يرى الخادم سوى نص مُعمّى. لا تغادر عبارة المزامنة جهازك. أوقفها ويعمل خيط دون اتصال بالكامل كالسابق.' },
-      i: '<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 18 18z"/><path d="M12 12v5M12 17l-2-2M12 17l2-2"/>' },
-    { t: { en: 'Team accounts', ar: 'حسابات الفريق' }, d: { en: 'Invite staff to your shop with roles (manager / operator / viewer). Everyone shares the same live cloud data; the desktop enforces what each role can do.', ar: 'ادعُ موظفيك إلى مطبعتك بأدوار (مدير / مشغّل / مشاهد). يشارك الجميع البيانات السحابية نفسها، ويفرض التطبيق صلاحيات كل دور.' },
-      i: '<circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a3 3 0 0 1 0 5.6M18.5 19a5.5 5.5 0 0 0-3-4.9"/>' },
-    { t: { en: 'Online storefront', ar: 'متجر إلكتروني' }, d: { en: 'Publish a public shop page customers can browse — prices, a cart, deposits and promo codes. Orders land straight in your queue as draft quotes; checkout can take a deposit via your own payment link.', ar: 'انشر صفحة متجر عامة يتصفحها العملاء — أسعار وسلة وعربون ورموز خصم. تصل الطلبات مباشرة إلى قائمتك كعروض مبدئية، ويمكن أخذ عربون عبر رابط دفعك الخاص.' },
-      i: '<path d="M4 8h16l-1 12H5L4 8z"/><path d="M8 8a4 4 0 0 1 8 0"/>' },
-    { t: { en: 'Customer order tracking', ar: 'تتبّع طلبات العملاء' }, d: { en: 'Share a link and your customer follows a live progress timeline — received → printing → finishing → ready — in their own language, updating as you advance the order.', ar: 'شارك رابطاً ليتابع عميلك مخطط تقدّم حيّاً — استُلم ← طباعة ← لمسات أخيرة ← جاهز — بلغته، ويتحدّث مع تقدّم الطلب.' },
-      i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
-    { t: { en: 'Reviews & ratings', ar: 'التقييمات' }, d: { en: 'Collect a star rating + comment after each order via a simple link; your average rating shows on the storefront and in the app.', ar: 'اجمع تقييماً بالنجوم وتعليقاً بعد كل طلب عبر رابط بسيط؛ ويظهر متوسط تقييمك على المتجر وداخل التطبيق.' },
-      i: '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/>' },
-    { t: { en: 'WhatsApp & SMS', ar: 'واتساب ورسائل' }, d: { en: 'Send automated order updates over WhatsApp or SMS (Twilio, WhatsApp Cloud API, Unifonic or your own webhook), and run marketing campaigns to a customer segment.', ar: 'أرسل تحديثات الطلبات تلقائياً عبر واتساب أو الرسائل (Twilio أو واجهة واتساب السحابية أو Unifonic أو ويب هوك خاص)، وأطلق حملات تسويقية لشريحة من العملاء.' },
-      i: '<path d="M4 18l1.2-3.2A7 7 0 1 1 9 19.5z"/><path d="M9 10c.5 2 2.5 4 4.5 4.5"/>' },
-    { t: { en: 'AI shop assistant', ar: 'مساعد ذكاء اصطناعي' }, d: { en: 'Ask questions about your own shop — “what’s overdue?”, “revenue vs last month?” — in a chat that answers only from your data. Bring your own key; it stays on your machine.', ar: 'اسأل عن مطبعتك — «ما المتأخر؟»، «الإيراد مقابل الشهر الماضي؟» — في محادثة تجيب من بياناتك فقط. مفتاحك الخاص يبقى على جهازك.' },
-      i: '<rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M8 21l2-4M16 21l-2-4M9 10h.01M15 10h.01"/>' },
-    { t: { en: 'Smart reorder & POs', ar: 'إعادة طلب ذكية' }, d: { en: 'Forecasts when each material runs out from real usage and the grams already committed to open orders, then drafts purchase orders ahead of time.', ar: 'يتوقّع نفاد كل مادة من الاستهلاك الفعلي والغرامات المحجوزة لطلبات مفتوحة، ثم يجهّز أوامر شراء مسبقاً.' },
-      i: '<path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15v6M15 18h6"/>' },
-    { t: { en: 'Label & QR printing', ar: 'طباعة الملصقات و QR' }, d: { en: 'Print QR labels for orders (scan to the tracking page) and spools (scan to inventory), plus a one-way accounting webhook to push paid invoices to QuickBooks, Zoho or Xero.', ar: 'اطبع ملصقات QR للطلبات (مسح لصفحة التتبّع) والبكرات (مسح للمخزون)، مع ويب هوك محاسبي أحادي الاتجاه لدفع الفواتير المسددة إلى QuickBooks أو Zoho أو Xero.' },
-      i: '<rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 4h7v7h-7zM14 15h3M20 15v5M14 20h6"/>' }
-  ];
+  /* ---------- Optional cloud — all opt-in; app still runs fully offline ----------
+     The list itself lives in cloud-features.js, because services.html
+     describes the same nine services and a second copy would drift. */
+  var BETA_FEATURES = window.KHAYT_CLOUD || [];
 
   /* ---------- Screen gallery data ---------- */
   var SCREENS = {
@@ -279,6 +293,20 @@
 
   function t(key) { return DICT[key] ? DICT[key][lang] : key; }
 
+  // The CSS reduces every transition to ~0 under prefers-reduced-motion, which
+  // would leave the gallery image sitting at opacity 0 for the length of the
+  // timeout that was going to restore it. Swap straight through instead.
+  function calmed() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  function swapShot(img, src, alt) {
+    if (!img) return;
+    function set() { img.src = src; if (alt) img.alt = alt; img.style.opacity = '1'; }
+    if (calmed()) { set(); return; }
+    img.style.opacity = '0';
+    setTimeout(set, 170);
+  }
+
   // Screenshot path — themed, with Arabic RTL captures for every theme.
   // Workbench (default) uses the flat set; the others live under themes/<id>/.
   function shotPath(key) {
@@ -326,18 +354,22 @@
     var el = document.getElementById('modesTable');
     if (!el) return;
     var cols = [t('modes.sim.pill'), t('modes.pro.pill')];
-    var yes = '<span class="cmp-yes" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
-    var no = '<span class="cmp-no" aria-hidden="true"></span>';
-    var h = '<table class="cmp"><colgroup><col class="cmp-c-feat"><col class="cmp-c"><col class="cmp-c cmp-c-hl"></colgroup>';
-    h += '<thead><tr><th class="cmp-feat"></th>';
-    for (var c = 0; c < 2; c++) h += '<th class="cmp-col' + (c === 1 ? ' cmp-col-hl' : '') + '"><span class="cmp-chip">' + cols[c] + '</span></th>';
+    var yes = '<span class="cmp-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="sr-only">' + t('modes.cmp.yes') + '</span></span>';
+    var no = '<span class="cmp-no" aria-hidden="true"></span><span class="sr-only">' + t('modes.cmp.no') + '</span>';
+    var h = '<table class="cmp">';
+    h += '<caption class="sr-only">' + t('modes.cmp.caption') + '</caption>';
+    h += '<colgroup><col class="cmp-c-feat"><col class="cmp-c"><col class="cmp-c cmp-c-hl"></colgroup>';
+    // The first header is blank by design; blank to a screen reader is not the
+    // same as absent, so it carries the label the visual column never needs.
+    h += '<thead><tr><th class="cmp-feat" scope="col"><span class="sr-only">' + t('modes.cmp.featcol') + '</span></th>';
+    for (var c = 0; c < 2; c++) h += '<th class="cmp-col' + (c === 1 ? ' cmp-col-hl' : '') + '" scope="col"><span class="cmp-chip">' + cols[c] + '</span></th>';
     h += '</tr></thead><tbody>';
     for (var g = 0; g < MODE_COMPARE.length; g++) {
       var grp = MODE_COMPARE[g];
       h += '<tr class="cmp-grouprow"><td colspan="3"><span>' + grp.g[lang] + '</span></td></tr>';
       for (var r = 0; r < grp.rows.length; r++) {
         var row = grp.rows[r];
-        h += '<tr><td class="cmp-feat">' + row.l[lang] + '</td>';
+        h += '<tr><th class="cmp-feat" scope="row">' + row.l[lang] + '</th>';
         for (var m = 0; m < 2; m++) {
           var on = row.t[m];
           h += '<td class="cmp-cell' + (m === 1 ? ' cmp-col-hl' : '') + '">' + (on ? yes : no) + '</td>';
@@ -347,6 +379,38 @@
     }
     h += '</tbody></table>';
     el.innerHTML = h;
+    // An overflow-x container is not focusable by default, so a keyboard user
+    // cannot scroll it at all. Labelled, because a bare focusable region
+    // announces nothing.
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'region');
+    el.setAttribute('aria-label', t('modes.cmp.caption'));
+    syncCmpScroll(el);
+  }
+
+  // Drives the fade, the frozen-pane divider and the worded hint off one
+  // measurement, on load, on scroll and on resize — a phone that rotates is a
+  // phone whose table may now fit. All three are suppressed when it does fit,
+  // so nothing ever points at content that is not off-screen.
+  function syncCmpScroll(el) {
+    el = el || document.getElementById('modesTable');
+    if (!el) return;
+    var frame = document.getElementById('cmpFrame') || el.parentElement;
+    var hint = document.getElementById('cmpHint');
+    function paint() {
+      var slack = el.scrollWidth - el.clientWidth;
+      var scrollable = slack > 2;
+      frame.classList.toggle('is-scrollable', scrollable);
+      // scrollLeft runs negative in RTL in every engine that matters now.
+      frame.classList.toggle('at-end', scrollable && Math.abs(el.scrollLeft) >= slack - 2);
+      if (hint) hint.hidden = !scrollable;
+    }
+    if (!el.__cmpWired) {
+      el.addEventListener('scroll', paint, { passive: true });
+      window.addEventListener('resize', paint, { passive: true });
+      el.__cmpWired = true;
+    }
+    paint();
   }
 
   function buildFeatures() {
@@ -431,7 +495,43 @@
     var hs = document.getElementById('heroShot'); if (hs) hs.src = heroPath();
     buildThemeChips();
     var btn = document.getElementById('navLang');
-    if (btn) btn.innerHTML = lang === 'ar' ? '<span>🌐</span> English' : '<span>🌐</span> العربية';
+    if (btn) {
+      // The label is the language you are switching TO, written in that
+      // language, so it carries its own lang or an English screen reader
+      // voices Arabic glyphs with an English voice.
+      var toAr = lang !== 'ar';
+      btn.innerHTML = '<span aria-hidden="true">🌐</span> ' +
+        (toAr ? '<span lang="ar">العربية</span>' : '<span lang="en">English</span>');
+      btn.setAttribute('aria-label', t(toAr ? 'a11y.toAr' : 'a11y.toEn'));
+    }
+
+    // The page's own metadata was staying English while the page turned
+    // Arabic — so a shared link, a search result and a social card all
+    // described a page nobody was looking at.
+    document.title = t('meta.title');
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', t('meta.desc'));
+    var ogt = document.querySelector('meta[property="og:title"]');
+    if (ogt) ogt.setAttribute('content', t('meta.title'));
+    var ogd = document.querySelector('meta[property="og:description"]');
+    if (ogd) ogd.setAttribute('content', t('meta.desc'));
+    var ogl = document.querySelector('meta[property="og:locale"]');
+    if (ogl) ogl.setAttribute('content', lang);
+
+    // Arabic becomes a URL rather than a private localStorage flag: linkable,
+    // shareable, and the thing the hreflang tags in <head> actually point at.
+    try {
+      var u = new URL(window.location.href);
+      if (lang === 'ar') u.searchParams.set('lang', 'ar'); else u.searchParams.delete('lang');
+      history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    } catch (e) {}
+
+    // The lede was just re-rendered from the dictionary; put the resolved
+    // version back over the placeholder it carries.
+    if (curVer) setVersionTags(curVer);
+
+    var counts = document.querySelectorAll('[data-stat="langs"]');
+    for (var k = 0; k < counts.length; k++) counts[k].textContent = String(LANGS.length);
     var card = document.getElementById('flipCard');
     var sw = document.getElementById('flipSwitch');
     if (card && sw) setFlip(card, sw, lang === 'ar');
@@ -460,8 +560,8 @@
       curTheme = btn.getAttribute('data-theme');
       var all = bar.querySelectorAll('.theme-chip');
       for (var i = 0; i < all.length; i++) all[i].classList.toggle('on', all[i] === btn);
-      var img = document.getElementById('galImg');
-      if (img) { img.style.opacity = '0'; setTimeout(function () { img.src = shotPath(curKey); img.style.opacity = '1'; }, 160); }
+      for (var j = 0; j < all.length; j++) all[j].setAttribute('aria-pressed', all[j] === btn ? 'true' : 'false');
+      swapShot(document.getElementById('galImg'), shotPath(curKey));
     });
   }
 
@@ -479,12 +579,7 @@
       var all = bar.querySelectorAll('.tab');
       for (var i = 0; i < all.length; i++) all[i].setAttribute('aria-selected', 'false');
       btn.setAttribute('aria-selected', 'true');
-      img.style.opacity = '0';
-      setTimeout(function () {
-        img.src = shotPath(key);
-        img.alt = 'Khayt ' + SCREENS[key].name.en + ' screenshot';
-        img.style.opacity = '1';
-      }, 180);
+      swapShot(img, shotPath(key), 'Khayt ' + SCREENS[key].name.en + ' screenshot');
       paintCaption();
     });
   }
@@ -514,9 +609,13 @@
     function onScroll() { el.classList.toggle('scrolled', window.scrollY > 8); }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    if (burger) burger.addEventListener('click', function () { el.classList.toggle('open'); });
+    function setOpen(open) {
+      el.classList.toggle('open', open);
+      if (burger) burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    if (burger) burger.addEventListener('click', function () { setOpen(!el.classList.contains('open')); });
     var links = document.getElementById('navLinks');
-    if (links) links.addEventListener('click', function (e) { if (e.target.tagName === 'A') el.classList.remove('open'); });
+    if (links) links.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
   }
 
   /* ---------- Language toggle ---------- */
@@ -532,10 +631,14 @@
     if (!bar) return;
     bar.addEventListener('click', function (e) {
       var btn = e.target.closest('button');
-      if (!btn) return;
+      if (!btn || btn.disabled) return;
       channel = btn.getAttribute('data-channel');
       var btns = bar.querySelectorAll('button');
-      for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i] === btn);
+      for (var i = 0; i < btns.length; i++) {
+        var on = btns[i] === btn;
+        btns[i].classList.toggle('on', on);
+        btns[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      }
       applyChannel();
     });
   }
@@ -559,9 +662,23 @@
     wireDownloadLinks(rel || CHANNELS.stable);
   }
 
+  // Remembered so applyLang can re-apply it: switching language rewrites the
+  // "What's new" lede from the dictionary, which would otherwise put the
+  // hardcoded version back over the one the release fetch resolved.
+  var curVer = null;
+
   function setVersionTags(v) {
+    curVer = v;
     var tags = document.querySelectorAll('.ver-tag');
     for (var i = 0; i < tags.length; i++) tags[i].textContent = 'v' + v;
+    // The "What's new" lede names the release in prose. It said 3.6 while the
+    // chip beside it said v3.7.0, because the release-sync workflow rewrites
+    // "3.7.0" and this sentence had been written "3.6" by hand. Deriving the
+    // major.minor from the same version the chips use is the only spelling
+    // that cannot go stale.
+    var mm = v.split('.').slice(0, 2).join('.');
+    var mms = document.querySelectorAll('.ver-mm');
+    for (var j = 0; j < mms.length; j++) mms[j].textContent = mm;
   }
 
   function fmtMB(b) { return Math.round(b / 1048576) + ' MB'; }
@@ -570,12 +687,24 @@
     if (!rel || !rel.assets) return;
     var assets = rel.assets;
     function find(re) { for (var i = 0; i < assets.length; i++) if (re.test(assets[i].name)) return assets[i]; return null; }
-    var map = { 'mac-dmg': find(/arm64\.dmg$/i), 'win-exe': find(/setup.*\.exe$/i), 'win-portable': find(/portable.*\.exe$/i), 'linux-appimage': find(/\.AppImage$/i), 'linux-deb': find(/\.deb$/i) };
+    // electron-builder names the portable target "Khayt-<version>.exe" and the
+    // NSIS installer "Khayt-Setup-<version>.exe". Neither carries the word
+    // "portable", so the portable build is identified by exclusion.
+    function findPortable() {
+      for (var i = 0; i < assets.length; i++) {
+        var n = assets[i].name;
+        if (/\.exe$/i.test(n) && !/setup/i.test(n) && !/\.blockmap$/i.test(n)) return assets[i];
+      }
+      return null;
+    }
+    var map = { 'mac-dmg': find(/arm64\.dmg$/i), 'win-exe': find(/setup.*\.exe$/i), 'win-portable': findPortable(), 'linux-appimage': find(/\.AppImage$/i), 'linux-deb': find(/\.deb$/i) };
     Object.keys(map).forEach(function (key) {
       var a = map[key]; if (!a) return;
       var link = document.querySelector('[data-dl="' + key + '"]');
       if (!link) return;
       link.setAttribute('href', a.browser_download_url);
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
       var sz = link.querySelector('.b');
       if (sz) { var arch = sz.textContent.split('\u00b7')[0].trim(); sz.textContent = arch + ' \u00b7 ' + fmtMB(a.size); }
     });
@@ -670,10 +799,15 @@
           CHANNELS.beta = { v: beta.v, assets: beta.rel.assets };
           var bbtn = document.querySelector('#dlChannel .ver-beta');
           if (bbtn) bbtn.textContent = 'v' + beta.v;
+          // The markup ships the beta tab disabled, because "no beta" is the
+          // normal state and a tab that is live before the fetch resolves is a
+          // tab that can be clicked into an empty channel.
+          var betaOn = document.querySelector('#dlChannel [data-channel="beta"]');
+          if (betaOn) { betaOn.disabled = false; betaOn.style.opacity = ''; betaOn.removeAttribute('title'); }
         } else {
           // no beta channel published — disable beta button gracefully
           var betaBtn = document.querySelector('#dlChannel [data-channel="beta"]');
-          if (betaBtn) { betaBtn.style.opacity = '0.5'; betaBtn.querySelector('.ver-beta').textContent = '—'; betaBtn.title = 'No beta build published yet'; }
+          if (betaBtn) { betaBtn.disabled = true; betaBtn.style.opacity = '0.5'; betaBtn.querySelector('.ver-beta').textContent = '—'; betaBtn.title = t('dl.nobeta'); }
         }
         if (cl.length) { CHANGELOG = cl; buildChangelog(); }
         // refresh visible channel
@@ -683,8 +817,15 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    // An explicit ?lang= in the link beats whatever this browser last chose:
+    // someone following an Arabic link wants the Arabic page, even if they
+    // read the site in English yesterday.
     var saved = 'en';
     try { saved = localStorage.getItem('khayt-lang') || 'en'; } catch (e) {}
+    try {
+      var q = new URL(window.location.href).searchParams.get('lang');
+      if (q === 'ar' || q === 'en') saved = q;
+    } catch (e) {}
     tabs();
     flip();
     nav();
