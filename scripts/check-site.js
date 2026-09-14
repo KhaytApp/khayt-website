@@ -261,6 +261,31 @@ check('Focus and reduced-motion rules exist', () => {
   return 'present';
 });
 
+check('robots.txt still lets crawlers in', () => {
+  // The policy is deliberate and written down in the file itself; this only
+  // guards against it being reversed by accident — a stray Disallow: / on the
+  // wildcard agent, or the sitemap line going missing.
+  //
+  // It cannot see the bigger risk: Cloudflare's managed robots.txt replaces
+  // this file at the edge, so a green check here does not prove the served
+  // file says the same thing. That is why the file leads with where the
+  // setting lives.
+  const txt = fs.readFileSync('robots.txt', 'utf8');
+  const lines = txt.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+  const problems = [];
+
+  let agent = null, wildcardDisallowsAll = false;
+  for (const line of lines) {
+    const m = /^user-agent:\s*(.+)$/i.exec(line);
+    if (m) { agent = m[1].trim(); continue; }
+    if (agent === '*' && /^disallow:\s*\/\s*$/i.test(line)) wildcardDisallowsAll = true;
+  }
+  if (wildcardDisallowsAll) problems.push('User-agent: * is Disallow: / — that blocks the whole site');
+  if (!/^sitemap:\s*https:\/\/khaytapp\.com\/sitemap\.xml$/im.test(txt)) problems.push('the Sitemap line is missing or wrong');
+  if (problems.length) throw new Error(problems.join('; '));
+  return 'crawlable, sitemap declared';
+});
+
 check('Every page can be linked in Arabic', () => {
   // Arabic used to be a localStorage flag with no URL, so it could not be
   // shared or indexed. Each page needs its ?lang=ar alternate declared.

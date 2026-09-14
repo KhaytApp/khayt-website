@@ -1,4 +1,50 @@
+# Khayt — crawling policy
+#
+# THIS FILE IS ONLY SERVED IF CLOUDFLARE'S MANAGED robots.txt IS OFF.
+#
+# khaytapp.com sits behind Cloudflare, and Cloudflare's "block training in
+# robots.txt" setting replaces this file with a generated one — nine crawlers
+# under Disallow: / and a Content-Signal of ai-train=no. If you are reading a
+# different robots.txt at https://khaytapp.com/robots.txt than the one in this
+# repository, that setting is back on. It lives in:
+#
+#   Cloudflare dashboard -> Security -> Settings -> filter: Bot traffic
+#     -> "Set your preference to block training in robots.txt"
+#
+# There is a second, stronger setting beside it that returns 403 to AI
+# crawlers at the edge. robots.txt is a request; that one is enforcement, and
+# no file here can undo it.
+#
+# ---------------------------------------------------------------------------
+#
+# The policy, and why it is this one:
+#
+# Khayt is free, source-available, and found by word of mouth — a link in a
+# subreddit, a maker asking which software runs a print shop, someone
+# searching for ZATCA Phase 2 invoicing in Arabic. Every one of those routes
+# now runs partly through an assistant that has to be able to read this site
+# to answer. Being absent from that is a real cost.
+#
+# What it would have protected is public marketing copy. The product's value
+# is in the app, which is downloaded, not crawled; the source is already
+# public on GitHub under its own licence, which is where that question is
+# properly settled.
+#
+# So: everything is welcome, and the signals below say so explicitly rather
+# than staying silent and leaving it ambiguous.
+#
+# To narrow it later, the honest edit is a named User-agent block below —
+# not a change to the Cloudflare toggle, which would silently replace this
+# whole file and leave this reasoning unread.
+
 User-agent: *
 Allow: /
+
+# Content signals — the machine-readable version of the paragraphs above.
+#   search:   indexing and returning links and excerpts
+#   ai-input: reading the page to ground or answer a question right now
+#   ai-train: training or fine-tuning a model
+#   use:      how much of the content may be consumed
+Content-Signal: search=yes,ai-input=yes,ai-train=yes,use=full
 
 Sitemap: https://khaytapp.com/sitemap.xml
