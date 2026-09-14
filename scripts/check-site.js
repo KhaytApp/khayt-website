@@ -79,6 +79,40 @@ check('index.html is rendered from data.js', () => {
   return 'in sync';
 });
 
+check('Post pages match posts.js', () => {
+  // A post's title and summary live in posts.js and are stamped into its page.
+  // Edited in one place and not re-stamped, the tab, the share card and the
+  // heading disagree with the index that links to them — which had already
+  // happened: one post's page said "What the alpha already does" while the
+  // index and feed said "What it already does".
+  try {
+    execFileSync(process.execPath, ['scripts/stamp-posts.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error('stale. Run `node scripts/stamp-posts.js` and commit the result.');
+  }
+  return 'in sync';
+});
+
+check('No attribute is broken by an unescaped quote', () => {
+  // A description beginning with a quotation mark closed its own attribute,
+  // so what-the-cloud-sends.html shipped with an EMPTY meta description and
+  // the rest of the sentence parsed as stray attributes. The generator that
+  // wrote it interpolated values into attributes without escaping them.
+  const bad = [];
+  for (const p of pages()) {
+    const html = fs.readFileSync(p, 'utf8');
+    for (const m of html.matchAll(/<meta\b[^>]*>/g)) {
+      // Inside a tag, every " should be a delimiter: an even number per tag.
+      const quotes = (m[0].match(/"/g) || []).length;
+      if (quotes % 2 !== 0) bad.push(p + ': ' + m[0].slice(0, 90));
+    }
+    // content="" immediately followed by a non-delimiter is the specific shape.
+    for (const m of html.matchAll(/content=""[^>\s]/g)) bad.push(p + ': content="" then text — ' + m[0]);
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return 'attributes well-formed';
+});
+
 check('blog/feed.xml matches posts.js', () => {
   // A post added without regenerating the feed is a post published to nobody
   // who subscribed.
