@@ -53,6 +53,7 @@ function dictEn(key) {
 
 const BLOCKS = {
   featGrid: () => RENDER.features(DATA.features, 'en'),
+  flowSteps: () => RENDER.flow(DATA.flow, 'en'),
   betaGrid: () => RENDER.cloud(DATA.cloud, 'en', dictEn('beta.pill')),
   modesTable: () => RENDER.modesTable(DATA.modes, 'en', {
     simple: dictEn('modes.sim.pill'),

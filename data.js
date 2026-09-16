@@ -28,7 +28,7 @@
       i: '<rect x="3" y="4" width="5" height="16" rx="1.4"/><rect x="9.5" y="4" width="5" height="11" rx="1.4"/><rect x="16" y="4" width="5" height="8" rx="1.4"/>' },
     { t: { en: 'Smart Cost Calculator', ar: 'حاسبة تكلفة ذكية' }, d: { en: 'Drop in an STL, 3MF or g-code and it prices the geometry itself, then learns from what the printer reports when the job finishes. Live breakdown of material, machine time, electricity, labour, overhead, failure rate and margin — and every estimate says whether the rate behind it was measured or assumed. FDM, Resin and multi-material AMS/MMU costing.', ar: 'أسقِط ملف STL أو 3MF أو G-code ليسعّر الشكل نفسه، ثم يتعلّم مما تُبلغ به الطابعة عند انتهاء المهمة. تفصيل مباشر للمادة ووقت التشغيل والكهرباء والعمالة والمصاريف ونسبة الفشل والهامش — ويذكر كل تقدير إن كان معدّله مقيساً أم مفترضاً. تسعير FDM والراتنج والمواد المتعددة AMS/MMU.' },
       i: '<rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2"/>' },
-    { t: { en: 'E-Invoicing & Worldwide Tax', ar: 'الفوترة الإلكترونية والضرائب' }, d: { en: 'Cryptographically signed ZATCA e-invoices auto-submitted to FATOORA, with TLV QR codes, proforma invoices, milestone billing, BNPL links (Tabby, Tamara, Stripe) and VAT export. Outside the Gulf, tax is added to a price rather than folded into it, with thirty country presets — and documents print in the language you chose.', ar: 'فواتير إلكترونية موقّعة تُرسل تلقائياً إلى فاتورة، برموز QR، فواتير مبدئية، فوترة بالمراحل، روابط دفع آجل (تابي، تمارا، سترايب) وتصدير ضريبي. وخارج الخليج تُضاف الضريبة إلى السعر بدل أن تكون مضمّنة فيه، مع ثلاثين إعداداً جاهزاً للدول — وتُطبع المستندات باللغة التي اخترتها.' },
+    { t: { en: 'E-Invoicing & Worldwide Tax', ar: 'الفوترة الإلكترونية والضرائب' }, d: { en: 'Cryptographically signed e-invoices with TLV QR codes, submitted automatically where your country requires it, plus proforma invoices, milestone billing, BNPL links (Tabby, Tamara, Stripe) and VAT export. Tax is added to a price rather than folded into it, with thirty country presets — and documents print in the language you chose.', ar: 'فواتير إلكترونية موقّعة تُرسل تلقائياً إلى فاتورة، برموز QR، فواتير مبدئية، فوترة بالمراحل، روابط دفع آجل (تابي، تمارا، سترايب) وتصدير ضريبي. وخارج الخليج تُضاف الضريبة إلى السعر بدل أن تكون مضمّنة فيه، مع ثلاثين إعداداً جاهزاً للدول — وتُطبع المستندات باللغة التي اخترتها.' },
       i: '<path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2V3z"/><path d="M9 8h6M9 12h6"/>' },
     { t: { en: 'Live Printer API', ar: 'ربط مباشر بالطابعات' }, d: { en: 'Connect OctoPrint, Moonraker (Klipper), Bambu Lab, PrusaLink, Duet and Repetier. Real-time temperature and print progress inside the queue, plus error / offline / stall alerts over Telegram, webhook or email.', ar: 'اربط OctoPrint وMoonraker وBambu Lab وPrusaLink وDuet وRepetier. حرارة وتقدّم الطباعة لحظياً داخل القائمة، مع تنبيهات الأعطال والانقطاع والتوقف عبر تيليجرام أو ويب هوك أو البريد.' },
       i: '<rect x="4" y="4" width="16" height="11" rx="2"/><path d="M8 19h8M12 15v4"/><circle cx="12" cy="9.5" r="2.4"/>' },
@@ -66,7 +66,7 @@
     ] },
     { g: { en: 'Production business', ar: 'أعمال الإنتاج' }, rows: [
       { l: { en: 'Full analytics & forecasting', ar: 'تحليلات وتوقّعات كاملة' }, t: [0, 1] },
-      { l: { en: 'ZATCA Phase 2 e-invoicing', ar: 'فوترة هيئة الزكاة (المرحلة الثانية)' }, t: [0, 1] },
+      { l: { en: 'Signed e-invoicing', ar: 'فوترة هيئة الزكاة (المرحلة الثانية)' }, t: [0, 1] },
       { l: { en: 'Proforma, milestone & credit notes', ar: 'فواتير مبدئية ومراحل وإشعارات دائنة' }, t: [0, 1] },
       { l: { en: 'Purchase orders & payables', ar: 'أوامر الشراء والذمم الدائنة' }, t: [0, 1] },
       { l: { en: 'Multiple locations & print-farm view', ar: 'فروع متعددة وعرض مزرعة الطباعة' }, t: [0, 1] },
@@ -98,6 +98,109 @@
       i: '<path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15v6M15 18h6"/>' },
     { t: { en: 'Label & QR printing', ar: 'طباعة الملصقات و QR' }, d: { en: 'Print QR labels for orders (scan to the tracking page) and spools (scan to inventory), plus a one-way accounting webhook to push paid invoices to QuickBooks, Zoho or Xero.', ar: 'اطبع ملصقات QR للطلبات (مسح لصفحة التتبّع) والبكرات (مسح للمخزون)، مع ويب هوك محاسبي أحادي الاتجاه لدفع الفواتير المسددة إلى QuickBooks أو Zoho أو Xero.' },
       i: '<rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 4h7v7h-7zM14 15h3M20 15v5M14 20h6"/>' }  ];
+
+  /* ---------- The three cloud plans ----------------------------------------
+     Vendored from lib/cloud-plans.js in the app repo, which is the source of
+     truth: the app prices from it and this page only describes it. The fields
+     copied are the ones a price is made of — id, label, price, annual, soon,
+     tagline, features — and they are copied verbatim, Arabic included.
+
+     `betaFree` is that file's BETA_FREE. While it is true nothing is charged
+     and every non-zero price renders struck through next to "free during
+     beta". The prices are published anyway, so that nobody discovers one
+     later having built their shop on the assumption there wasn't one.
+
+     `featured` is the only field that is not in the app: it is presentation,
+     marking the tier this page recommends, and means nothing to the app.
+
+     SAR is pegged to USD at 3.75, so the two figures are the same price
+     expressed twice rather than a conversion that drifts. Every other locale
+     sees USD — a rate snapshot that goes stale is worse than a foreign
+     currency. If lib/cloud-plans.js changes, this changes with it.          */
+  DATA.betaFree = true;
+  DATA.currencies = ['USD', 'SAR'];
+  DATA.plans = [
+    {
+      id: 'free',
+      label: { en: 'Free', ar: 'مجاني' },
+      price: { USD: 0, SAR: 0 },
+      annual: { USD: 0, SAR: 0 },
+      tagline: { en: 'The whole app, forever, with no account.', ar: 'التطبيق كامل، للأبد، بدون حساب.' },
+      features: [
+        { en: 'Local app, LAN and BYO-key AI — everything', ar: 'التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء' },
+        { en: 'Off-site encrypted backup — 1 device', ar: 'نسخة احتياطية مشفّرة خارجية — جهاز واحد' },
+        { en: 'Customer portal — 30-day trial', ar: 'بوابة العملاء — تجربة 30 يوماً' },
+        { en: '7 days of snapshot history', ar: 'سجل نسخ لمدة 7 أيام' }
+      ],
+      cta: { en: 'Download Khayt', ar: 'حمّل خيط' },
+      href: 'index.html#download'
+    },
+    {
+      id: 'cloud',
+      label: { en: 'Cloud', ar: 'السحابة' },
+      price: { USD: 9, SAR: 35 },
+      annual: { USD: 90, SAR: 350 },
+      featured: true,
+      tagline: { en: 'Your shop on every device, and visible to your customers.', ar: 'متجرك على كل جهاز، وظاهر لعملائك.' },
+      features: [
+        { en: 'Encrypted sync across all your devices', ar: 'مزامنة مشفّرة عبر كل أجهزتك' },
+        { en: 'Customer portal and online storefront', ar: 'بوابة العملاء والمتجر الإلكتروني' },
+        { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
+        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' }
+      ],
+      cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
+      href: 'index.html#download'
+    },
+    {
+      id: 'branches',
+      label: { en: 'Branches', ar: 'الفروع' },
+      price: { USD: 29, SAR: 109 },
+      annual: { USD: 290, SAR: 1090 },
+      soon: true,
+      tagline: { en: 'One owner, several branches, one set of numbers.', ar: 'مالك واحد، عدة فروع، أرقام موحّدة.' },
+      features: [
+        { en: 'Everything in Cloud', ar: 'كل ما في السحابة' },
+        { en: 'Multiple branches with an HQ dashboard', ar: 'فروع متعددة مع لوحة تحكم رئيسية' },
+        { en: 'Team accounts — up to 10 people', ar: 'حسابات الفريق — حتى 10 أشخاص' },
+        { en: 'Shared inventory across branches', ar: 'مخزون مشترك بين الفروع' }
+      ],
+      cta: { en: 'Not built yet', ar: 'لم يُبنَ بعد' },
+      href: 'blog/'
+    }
+  ];
+
+  /* ---------- The thread: one job, end to end ----------------------------
+     Khayt means "thread", and this is the section that earns the name. The
+     five steps are the app's own order of operations — calculator, queue,
+     printer link, invoice, actuals — and step 05 is the one that closes the
+     loop back onto step 01.                                               */
+  DATA.flow = [
+    { n: '01',
+      t: { en: 'Quote', ar: 'تسعير' },
+      d: { en: 'Drop an STL, 3MF or g-code on the calculator. Khayt reads the geometry and prices it against your machine, material and margin.',
+           ar: 'أسقِط ملف STL أو 3MF أو G-code على الحاسبة. يقرأ خيط الشكل نفسه ويسعّره وفق آلتك وموادك وهامشك.' },
+      tag: { en: 'Calculator', ar: 'الحاسبة' } },
+    { n: '02',
+      t: { en: 'Schedule', ar: 'جدولة' },
+      d: { en: 'An approved quote becomes a job on the board, assigned to a machine with its colours and parts already attached.',
+           ar: 'يتحوّل العرض المعتمد إلى مهمة على اللوحة، مُسندة إلى طابعة بألوانها وقطعها مرفقة سلفاً.' },
+      tag: { en: 'Production queue', ar: 'قائمة الإنتاج' } },
+    { n: '03',
+      t: { en: 'Print', ar: 'طباعة' },
+      d: { en: 'Live temperature and progress from OctoPrint, Bambu, Klipper and friends — with stall and offline alerts.',
+           ar: 'حرارة وتقدّم مباشران من OctoPrint وBambu وKlipper وغيرها — مع تنبيهات التوقّف وانقطاع الاتصال.' },
+      tag: { en: 'Printer API', ar: 'واجهة الطابعات' } },
+    { n: '04',
+      t: { en: 'Invoice', ar: 'فوترة' },
+      d: { en: 'A signed e-invoice in the language your shop chose, with the tax added the way your country does it.',
+           ar: 'فاتورة إلكترونية موقّعة باللغة التي اختارتها مطبعتك، والضريبة مضافة بالطريقة التي يتبعها بلدك.' },
+      tag: { en: '30 country presets', ar: 'هيئة الزكاة · 30 إعداداً' } },
+    { n: '05',
+      t: { en: 'Correct', ar: 'تصحيح' },
+      d: { en: 'The finished job reports what it really used, and the estimator calibrates itself against your shop.',
+           ar: 'تُبلغ المهمة المنتهية بما استهلكته فعلاً، فيعاير المقدِّر نفسه على مطبعتك.' },
+      tag: { en: 'Measured, not assumed', ar: 'مقيس، لا مفترض' } }
+  ];
 
   root.KHAYT_DATA = DATA;
   // cloud-features.js used to export this on its own. Kept so nothing that

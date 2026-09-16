@@ -22,7 +22,7 @@
       ar: 'خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد'
     },
     'meta.desc': {
-      en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
+      en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, signed e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
       ar: 'تطبيق مجاني لأصحاب مطابع الطباعة ثلاثية الأبعاد. قائمة إنتاج كانبان، حاسبة تكلفة، فوترة إلكترونية للمرحلة الثانية من هيئة الزكاة، ربط مباشر بالطابعات، مخزون الخيوط وتحليلات — دون اتصال تماماً.'
     },
 
@@ -44,25 +44,28 @@
     },
 
     'hero.pill':  { en: 'Free to use · Source available', ar: 'مجاني · المصدر متاح' },
-    'hero.h1':    { en: 'Run your print shop like a <span class="hl">studio</span>', ar: 'أدِر مطبعتك <span class="hl">كأنها استوديو</span>' },
-    'hero.desc':  { en: 'The all-in-one production desk for 3D print shops — quoting, queue, ZATCA invoicing and inventory, entirely offline.', ar: 'مكتب الإنتاج المتكامل لمطابع الطباعة ثلاثية الأبعاد — التسعير والقائمة وفواتير هيئة الزكاة والمخزون، دون اتصال تماماً.' },
+    'hero.h1':    { en: 'One desk runs the <span class="hl">whole shop</span>.', ar: 'مكتب واحد يُدير <span class="hl">المطبعة كاملة</span>.' },
+    'hero.desc':  { en: 'Khayt is the production desk for 3D print shops — quoting, Kanban queue, e-invoicing and filament inventory in one app. Entirely offline. Free. No account, no telemetry.', ar: 'خيط هو مكتب الإنتاج لمطابع الطباعة ثلاثية الأبعاد — التسعير وقائمة كانبان والفوترة الإلكترونية ومخزون الخيوط في تطبيق واحد. دون اتصال تماماً. مجاناً. بلا حساب وبلا تتبّع.' },
     'hero.dl':    { en: 'Download Free', ar: 'حمّل مجاناً' },
     'hero.github':{ en: 'View on GitHub', ar: 'عرض على GitHub' },
     'hero.os':    { en: 'No account · No telemetry', ar: 'بدون حساب · بدون تتبّع' },
+    'hero.ios':   { en: 'iOS companion', ar: 'تطبيق iOS مرافق' },
+
+    'more.features': { en: 'Show all nine features', ar: 'اعرض المزايا التسع' },
+    'more.cloud':    { en: 'Show all nine services', ar: 'اعرض الخدمات التسع' },
+    'more.modes':    { en: 'Show the full comparison', ar: 'اعرض المقارنة كاملة' },
+    'more.less':     { en: 'Show less', ar: 'اعرض أقل' },
+
+    'flow.eyebrow': { en: 'One continuous thread', ar: 'خيط واحد متّصل' },
+    'flow.h2':      { en: 'From a file on the desk to money in the bank.', ar: 'من ملف على المكتب إلى مال في الحساب.' },
+    'flow.lede':    { en: 'Khayt — <span class="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.', ar: '<span class="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.' },
     'hero.live':  { en: '3 printers live', ar: '3 طابعات تعمل الآن' },
 
-    'pill.queue':     { en: 'Kanban queue', ar: 'قائمة كانبان' },
-    'pill.zatca':     { en: 'ZATCA e-invoicing', ar: 'فوترة هيئة الزكاة' },
-    'pill.catalog':   { en: 'Catalog', ar: 'كتالوج' },
-    'pill.gift':      { en: 'Gift cards', ar: 'بطاقات هدايا' },
-    'pill.portal':    { en: 'Customer portal', ar: 'بوابة العملاء' },
-    'pill.analytics': { en: 'Analytics', ar: 'تحليلات' },
 
     'trust.lab':  { en: 'Talks live to your printers', ar: 'يتصل مباشرة بطابعاتك' },
 
-    'gal.eyebrow':{ en: 'See it in action', ar: 'شاهده أثناء العمل' },
-    'gal.h2':     { en: 'Every screen, purpose-built', ar: 'كل شاشة مصمّمة لغرضها' },
-    'gal.lede':   { en: 'One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. Real screens, not mockups — preview them in any of Khayt’s designs.', ar: 'تطبيق واحد يدير المطبعة بالكامل — التسعير والإنتاج والفوترة والمخزون والأرقام خلفها جميعاً. شاشات حقيقية وليست تصاميم وهمية — استعرضها بأي من تصاميم خيط.' },
+    'gal.eyebrow':{ en: 'Every screen, purpose-built', ar: 'كل شاشة مصمّمة لغرضها' },
+    'gal.h2':     { en: 'Real screens. Not mockups.', ar: 'شاشات حقيقية. لا تصاميم وهمية.' },
     'tab.queue':      { en: 'Production Queue', ar: 'قائمة الإنتاج' },
     'tab.dashboard':  { en: 'Dashboard', ar: 'لوحة التحكم' },
     'tab.calculator': { en: 'Calculator', ar: 'الحاسبة' },
@@ -71,9 +74,6 @@
     'tab.orders':     { en: 'Orders Log', ar: 'سجل الطلبات' },
     'tab.inventory':  { en: 'Inventory', ar: 'المخزون' },
     'tab.catalog':    { en: 'Catalog', ar: 'الكتالوج' },
-    'tab.giftcards':  { en: 'Gift Cards', ar: 'بطاقات الهدايا' },
-    'tab.portfolio':  { en: 'Portfolio', ar: 'المعرض' },
-    'tab.waste':      { en: 'Waste Log', ar: 'سجل الهدر' },
     'tab.analytics':  { en: 'Analytics', ar: 'التحليلات' },
     'tab.clients':    { en: 'Clients', ar: 'العملاء' },
 
@@ -99,8 +99,8 @@
 
     'nav.beta':    { en: 'Cloud', ar: 'السحابة' },
     'beta.eyebrow':{ en: 'Opt-in', ar: 'اختياري' },
-    'beta.h2':     { en: 'An optional cloud', ar: 'سحابة اختيارية' },
-    'beta.lede':   { en: 'Khayt has an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
+    'beta.h2':     { en: 'An optional cloud. Never a requirement.', ar: 'سحابة اختيارية. وليست شرطاً أبداً.' },
+    'beta.lede':   { en: 'End-to-end encrypted — the server only ever sees ciphertext, and your sync passphrase never leaves your machine. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $9/mo for Cloud — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a>', ar: 'مشفّرة من طرف إلى طرف — لا يرى الخادم إلا نصاً مشفّراً، وعبارة مرور المزامنة لا تغادر جهازك. أطفئ السحابة ويعمل خيط تماماً كما كان. والخطط منشورة — 9 دولارات شهرياً للسحابة — وكلها مجانية ما دامت التجربة قائمة. <a href="services.html">اطّلع على الخطط وما ترسله كل خدمة ←</a>' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
@@ -125,7 +125,7 @@
     'bento.calib.act':   { en: 'Actual', ar: 'الفعلي' },
     'bento.tax.tag':     { en: 'Tax, worldwide', ar: 'ضرائب حول العالم' },
     'bento.tax.t':       { en: 'Prices that add up the way your country does', ar: 'أسعار تُحسب كما تُحسب في بلدك' },
-    'bento.tax.d':       { en: 'Tax added to a price rather than folded into it — so a shop quoting 100 invoices 108.25. Thirty country presets, alongside the ZATCA e-invoicing that was already there.', ar: 'ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه — فمطبعة تعرض 100 تُصدر فاتورة بـ108.25. ثلاثون إعداداً جاهزاً للدول، إلى جانب فوترة هيئة الزكاة والضريبة الموجودة أصلاً.' },
+    'bento.tax.d':       { en: 'Tax added to a price rather than folded into it — so a shop quoting 100 invoices 108.25. Thirty country presets, alongside the signed e-invoicing that was already there.', ar: 'ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه — فمطبعة تعرض 100 تُصدر فاتورة بـ108.25. ثلاثون إعداداً جاهزاً للدول، إلى جانب فوترة هيئة الزكاة والضريبة الموجودة أصلاً.' },
     'bento.tax.f1':      { en: 'Subtotal', ar: 'المجموع الفرعي' },
     'bento.tax.f2':      { en: 'Sales tax · 8.25%', ar: 'ضريبة المبيعات · 8.25٪' },
     'bento.tax.f3':      { en: 'Invoiced', ar: 'المفوتر' },
@@ -146,7 +146,7 @@
     'lang.h2':     { en: 'Built for global makers', ar: 'مصمّم لصُنّاع العالم' },
     'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) makes nine, and dates and numbers now follow the language you picked rather than defaulting to English.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) لتصبح تسع لغات، وصارت التواريخ والأرقام تتبع اللغة التي اخترتها بدل الإنجليزية.' },
     'lang.li1':{ en: 'Arabic RTL layout throughout the entire app', ar: 'تخطيط عربي من اليمين لليسار في كامل التطبيق' },
-    'lang.li2':{ en: 'ZATCA Phase 2 e-invoices — signed, bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
+    'lang.li2':{ en: 'Signed e-invoices — bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
@@ -160,7 +160,7 @@
     'oss.sponsor':{ en: 'Sponsor', ar: 'ادعم' },
     'stat.free': { en: 'Free to use', ar: 'مجاني للاستخدام' },
     'stat.langs':{ en: 'Languages', ar: 'لغات' },
-    'stat.subs': { en: 'Subscriptions', ar: 'اشتراكات' },
+    'stat.telemetry': { en: 'Telemetry', ar: 'تتبّع' },
     'stat.keep': { en: 'Yours to keep', ar: 'ملك لك للأبد' },
 
     'mn.badge':  { en: 'Alpha', ar: 'ألفا' },
@@ -217,6 +217,7 @@
   var DATA = (window.KHAYT_DATA || { features: [], modes: [], cloud: [] });
   var RENDER = window.KHAYT_RENDER;
   var FEATURES = DATA.features;
+  var FLOW = DATA.flow;
 
   var BETA_FEATURES = DATA.cloud;
 
@@ -227,7 +228,7 @@
     calculator: { name: { en: 'Calculator', ar: 'الحاسبة' }, cap: { en: 'Quote with confidence, not guesswork', ar: 'سعّر بثقة لا بالتخمين' }, text: { en: 'A multi-part cart costs material, machine time, electricity, labour, overhead, failure rate and margin in real time — for both FDM (grams) and Resin (mL), with G-code / 3MF auto-extraction.', ar: 'سلة متعددة القطع تحسب المادة ووقت التشغيل والكهرباء والعمالة والمصاريف ونسبة الفشل والهامش لحظياً — لكل من FDM بالغرام والراتنج بالمل، مع استخراج تلقائي من G-code و3MF.' } },
     printfiles: { name: { en: 'Print Files', ar: 'ملفات الطباعة' }, cap: { en: 'Your STL, 3MF and G-code library', ar: 'مكتبة ملفات STL و3MF وG-code' }, text: { en: 'A visual library of your print files with real preview thumbnails, extracted colours and swap counts, tested slicer notes, and one-click open in any installed slicer. Convert a 3MF to another printer and the result stays with the file.', ar: 'مكتبة مرئية لملفات الطباعة بمعاينات حقيقية، ألوان مستخرجة وعدد التبديلات، ملاحظات التقطيع المجرّبة، وفتح بنقرة في أي برنامج تقطيع مثبّت. حوّل ملف 3MF لطابعة أخرى ويبقى الناتج مع الملف.' } },
     colorstudio: { name: { en: 'Colour Studio', ar: 'استوديو الألوان' }, cap: { en: 'Match, blend and plan filament colours', ar: 'طابِق وامزج وخطّط ألوان الخيوط' }, text: { en: 'Pick a target colour and see the closest filament you already own, ranked by perceptual distance (ΔE). Blend two spools into a gradient for ombré or swap plans, and assign each colour of a multicolour print to a spool — with cost pushed straight to the calculator.', ar: 'اختر لوناً هدفاً وشاهد أقرب خيط تملكه مرتّباً حسب الفرق اللوني (ΔE). امزج بكرتين في تدرّج لخطط الأومبريه أو التبديل، وعيّن كل لون في طباعة متعددة الألوان لبكرة — مع دفع التكلفة مباشرة للحاسبة.' } },
-    orders:     { name: { en: 'Orders Log', ar: 'سجل الطلبات' }, cap: { en: 'From quote to paid, in one log', ar: 'من العرض إلى السداد في سجل واحد' }, text: { en: 'Every order tracked end-to-end with ZATCA Phase 2 e-invoices, TLV QR codes, proforma invoices, milestone billing, BNPL payment links, PDF export and WhatsApp or email delivery.', ar: 'كل طلب متتبّع من البداية للنهاية بفواتير المرحلة الثانية ورمز QR وفواتير مبدئية وفوترة بالمراحل وروابط دفع آجل وتصدير PDF وإرسال عبر واتساب أو البريد.' } },
+    orders:     { name: { en: 'Orders Log', ar: 'سجل الطلبات' }, cap: { en: 'From quote to paid, in one log', ar: 'من العرض إلى السداد في سجل واحد' }, text: { en: 'Every order tracked end-to-end with signed e-invoices, TLV QR codes, proforma invoices, milestone billing, BNPL payment links, PDF export and WhatsApp or email delivery.', ar: 'كل طلب متتبّع من البداية للنهاية بفواتير المرحلة الثانية ورمز QR وفواتير مبدئية وفوترة بالمراحل وروابط دفع آجل وتصدير PDF وإرسال عبر واتساب أو البريد.' } },
     inventory:  { name: { en: 'Inventory', ar: 'المخزون' }, cap: { en: 'Never start a print you can\u2019t finish', ar: 'لا تبدأ طباعة لا يمكنك إكمالها' }, text: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, FIFO cost, smart reorder alerts with draft purchase orders, drying logs and price history.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، تكلفة FIFO، تنبيهات إعادة طلب ذكية بأوامر شراء، سجلات التجفيف وسجل الأسعار.' } },
     analytics:  { name: { en: 'Analytics', ar: 'التحليلات' }, cap: { en: 'Know exactly where the money goes', ar: 'اعرف أين يذهب المال بالضبط' }, text: { en: 'Revenue trends, machine P&L, operator performance, filament usage, retention and a production heatmap — in Simple or Professional reporting modes, with end-of-day PDFs.', ar: 'اتجاهات الإيرادات، أرباح كل آلة، أداء المشغّلين، استهلاك الخيوط، الاحتفاظ وخريطة حرارية للإنتاج — بوضع بسيط أو احترافي، مع تقارير PDF لنهاية اليوم.' } },
     clients:    { name: { en: 'Clients', ar: 'العملاء' }, cap: { en: 'Turn buyers into regulars', ar: 'حوّل المشترين إلى عملاء دائمين' }, text: { en: 'Client profiles with credit limits, multi-currency, loyalty tiers with automatic discounts, a live customer portal with QR order tracking and an aged-receivables report.', ar: 'ملفات عملاء بحدود ائتمانية وتعدد عملات ومستويات ولاء بخصومات تلقائية، بوابة عملاء حيّة بتتبّع QR وتقرير الذمم المدينة.' } },
@@ -254,7 +255,7 @@
     { v: '3.0.0', date: '2026-07-04', beta: false, d: { en: 'Khayt 3.0 stable — optional E2E-encrypted cloud: sync, teams, storefront, portal & AI assistant', ar: 'خيط 3.0 مستقر — سحابة اختيارية مشفّرة: مزامنة، فِرق، متجر، بوابة ومساعد ذكي' } },
     { v: '2.3.3', date: '2026-06-11', beta: false, d: { en: 'LAN tunnel & customer-portal hardening', ar: 'تحسين نفق الشبكة وبوابة العملاء' } },
     { v: '2.3.0', date: '2026-06-04', beta: false, d: { en: 'Security & stability release — LAN order tracking tokens', ar: 'إصدار أمان واستقرار — رموز تتبّع الطلبات' } },
-    { v: '2.2.0', date: '2026-05-30', beta: false, d: { en: 'Gift cards, ZATCA Phase 2 FATOORA, LAN quote approval', ar: 'بطاقات هدايا، فاتورة المرحلة الثانية، اعتماد العروض' } },
+    { v: '2.2.0', date: '2026-05-30', beta: false, d: { en: 'Gift cards, Phase 2 e-invoicing, LAN quote approval', ar: 'بطاقات هدايا، فاتورة المرحلة الثانية، اعتماد العروض' } },
     { v: '2.1.0', date: '2026-05-30', beta: false, d: { en: 'Modular renderer, store validation, expanded tests', ar: 'بنية معيارية، التحقق من البيانات، اختبارات موسّعة' } }
   ];
 
@@ -385,6 +386,11 @@
     if (!el.__cmpWired) {
       el.addEventListener('scroll', paint, { passive: true });
       window.addEventListener('resize', paint, { passive: true });
+      // Measured again once the webfonts land. The first measurement runs with
+      // fallback faces, which are wider: the table overflowed, the hint said
+      // "swipe" — and then Archivo and Hanken loaded, the table fitted, and
+      // nothing re-measured. The hint was pointing at nothing on every phone.
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(paint);
       el.__cmpWired = true;
     }
     paint();
@@ -394,6 +400,12 @@
     var grid = document.getElementById('featGrid');
     if (!grid) return;
     grid.innerHTML = RENDER.features(FEATURES, lang);
+  }
+
+  function buildFlow() {
+    var list = document.getElementById('flowSteps');
+    if (!list) return;
+    list.innerHTML = RENDER.flow(FLOW, lang);
   }
 
   function buildBetaFeatures() {
@@ -445,10 +457,12 @@
       if (DICT[hk]) htmlNodes[j].innerHTML = DICT[hk][lang];
     }
     buildFeatures();
+    buildFlow();
     buildBetaFeatures();
     buildModesTable();
     buildChangelog();
     paintCaption();
+    capGrids();
     // swap gallery + hero screenshots to match language (EN / AR-RTL)
     var gi = document.getElementById('galImg');
     if (gi) {
@@ -507,7 +521,42 @@
     try { localStorage.setItem('khayt-lang', lang); } catch (e) {}
   }
 
-  /* ---------- Theme switcher (in-app theme demo) ---------- */
+  /* ---------- Phone disclosures ----------
+     The cap is applied from here, not from CSS: if this script never runs, the
+     grids must render whole rather than cropped with an inert button. */
+  function capGrids() {
+    var btns = document.querySelectorAll('.grid-more');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      var g = document.getElementById(btn.getAttribute('data-grid'));
+      if (!g) continue;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      g.classList.toggle('is-capped', !open);
+      if (open) btn.querySelector('span').textContent = t('more.less');
+    }
+  }
+
+  function wireGrids() {
+    document.addEventListener('click', function (ev) {
+      var btn = ev.target.closest && ev.target.closest('.grid-more');
+      if (!btn) return;
+      var g = document.getElementById(btn.getAttribute('data-grid'));
+      if (!g) return;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      g.classList.toggle('is-capped', open);
+      var label = btn.querySelector('span');
+      var key = label.getAttribute('data-i18n');
+      label.textContent = open ? t(key) : t('more.less');
+    });
+  }
+
+  /* ---------- Theme switcher (in-app theme demo) ----------
+     Dormant: the redesign took the chip row out of index.html, so there is no
+     #themeChips element and both functions below return immediately. They are
+     kept because the eight themes and their screenshots still exist — putting
+     `<div class="theme-chips" id="themeChips"></div>` back in the gallery is
+     the whole of restoring the demo. */
   function buildThemeChips() {
     var bar = document.getElementById('themeChips');
     if (!bar) return;
@@ -821,6 +870,7 @@
     langToggle();
     channelToggle();
     themeSwitch();
+    wireGrids();
     applyLang(saved);
     fetchReleases();
   });
