@@ -53,7 +53,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="deep">
 
 <a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
 
@@ -85,27 +85,14 @@
   <div class="wrap hero-in">
     <div class="hero-l">
       <span class="hero-tag">● <span class="v ver-tag">v3.7.0</span> · <span data-i18n="hero.pill">Free to use · Source available</span></span>
-      <h1 data-i18n-html="hero.h1">Run your print shop like a <span class="hl">studio</span></h1>
-      <p class="sub" data-i18n="hero.desc">The all-in-one production desk for 3D print shops — quoting, queue, ZATCA invoicing and inventory, entirely offline.</p>
-      <div class="hero-pills">
-        <span data-i18n="pill.queue">Kanban queue</span>
-        <span data-i18n="pill.zatca">ZATCA e-invoicing</span>
-        <span data-i18n="pill.catalog">Catalog</span>
-        <span data-i18n="pill.gift">Gift cards</span>
-        <span data-i18n="pill.portal">Customer portal</span>
-        <span data-i18n="pill.analytics">Analytics</span>
-      </div>
+      <h1 data-i18n-html="hero.h1">One desk runs the <span class="hl">whole shop</span>.</h1>
+      <p class="sub" data-i18n="hero.desc">Khayt is the production desk for 3D print shops — quoting, Kanban queue, e-invoicing and filament inventory in one app. Entirely offline. Free. No account, no telemetry.</p>
       <p class="hero-mac"><a href="#download"><span class="tag" data-i18n="mn.badge">Alpha</span><span data-i18n="hero.mac">Khayt for macOS is being rebuilt as a native Mac app — download it now →</span></a></p>
       <div class="hero-cta">
         <a href="#download" class="btn btn-primary btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span data-i18n="hero.dl">Download Free</span></a>
         <a href="https://github.com/khaytapp/Khayt" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="hero.github">View on GitHub</span></a>
       </div>
-      <div class="hero-stat">
-        <div class="s"><b>100%</b><span data-i18n="stat.free">Free to use</span></div>
-        <div class="s"><b data-stat="langs">9</b><span data-i18n="stat.langs">Languages</span></div>
-        <div class="s"><b>0</b><span data-i18n="stat.subs">Subscriptions</span></div>
-      </div>
-      <div class="os-line"><span>macOS</span><span class="sep"></span><span>Windows</span><span class="sep"></span><span>Linux</span><span class="sep"></span><span data-i18n="hero.os">No account · No telemetry</span></div>
+      <div class="os-line"><span>macOS</span><span class="sep"></span><span>Windows</span><span class="sep"></span><span>Linux</span><span class="sep"></span><span data-i18n="hero.ios">iOS companion</span></div>
     </div>
 
     <div class="hero-r">
@@ -142,19 +129,26 @@
   </div>
 </section>
 
+<!-- ============ THE THREAD ============ -->
+<section class="section flow-section" id="flow">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="flow.eyebrow">One continuous thread</span>
+    <h2 class="h2" style="margin-top:16px" data-i18n="flow.h2">From a file on the desk to money in the bank.</h2>
+    <p class="lede" data-i18n-html="flow.lede">Khayt — <span class="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.</p>
+    <ol class="flow" id="flowSteps"><!-- PRERENDER:flowSteps:START --><li class="step"><span class="step-n" aria-hidden="true">01</span><h3>Quote</h3><p>Drop an STL, 3MF or g-code on the calculator. Khayt reads the geometry and prices it against your machine, material and margin.</p><span class="step-tag">Calculator</span></li><li class="step"><span class="step-n" aria-hidden="true">02</span><h3>Schedule</h3><p>An approved quote becomes a job on the board, assigned to a machine with its colours and parts already attached.</p><span class="step-tag">Production queue</span></li><li class="step"><span class="step-n" aria-hidden="true">03</span><h3>Print</h3><p>Live temperature and progress from OctoPrint, Bambu, Klipper and friends — with stall and offline alerts.</p><span class="step-tag">Printer API</span></li><li class="step"><span class="step-n" aria-hidden="true">04</span><h3>Invoice</h3><p>A signed e-invoice in the language your shop chose, with the tax added the way your country does it.</p><span class="step-tag">ZATCA · 30 presets</span></li><li class="step"><span class="step-n" aria-hidden="true">05</span><h3>Correct</h3><p>The finished job reports what it really used, and the estimator calibrates itself against your shop.</p><span class="step-tag">Measured, not assumed</span></li><!-- PRERENDER:flowSteps:END --></ol>
+  </div>
+</section>
+
 <!-- ============ SCREEN GALLERY ============ -->
 <section class="section" id="screens">
   <div class="wrap">
     <div class="gallery-head">
       <div>
-        <span class="eyebrow" data-i18n="gal.eyebrow">See it in action</span>
-        <h2 class="h2" style="margin-top:16px" data-i18n="gal.h2">Every screen, purpose-built</h2>
+        <span class="eyebrow" data-i18n="gal.eyebrow">Every screen, purpose-built</span>
+        <h2 class="h2" style="margin-top:16px" data-i18n="gal.h2">Real screens. Not mockups.</h2>
       </div>
-      <p class="lede" data-i18n="gal.lede">One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. Real screens, not mockups — preview them in any of Khayt’s designs.</p>
+      <p class="theme-note" data-i18n="theme.note">8 designs · light &amp; dark · switch any time</p>
     </div>
-
-    <div class="theme-chips" id="themeChips" role="group" aria-label="Design"></div>
-    <p class="theme-note" data-i18n="theme.note">8 designs · light &amp; dark · switch any time</p>
 
     <div class="tabs" id="tabs" role="tablist">
       <button class="tab" role="tab" aria-selected="true" data-key="queue" data-i18n="tab.queue">Production Queue</button>
@@ -165,11 +159,8 @@
       <button class="tab" role="tab" aria-selected="false" data-key="orders" data-i18n="tab.orders">Orders Log</button>
       <button class="tab" role="tab" aria-selected="false" data-key="inventory" data-i18n="tab.inventory">Inventory</button>
       <button class="tab" role="tab" aria-selected="false" data-key="catalog" data-i18n="tab.catalog">Catalog</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="giftcards" data-i18n="tab.giftcards">Gift Cards</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="portfolio" data-i18n="tab.portfolio">Portfolio</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="waste" data-i18n="tab.waste">Waste Log</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="analytics" data-i18n="tab.analytics">Analytics</button>
       <button class="tab" role="tab" aria-selected="false" data-key="clients" data-i18n="tab.clients">Clients</button>
+      <button class="tab" role="tab" aria-selected="false" data-key="analytics" data-i18n="tab.analytics">Analytics</button>
     </div>
 
     <div class="gallery-shot">
@@ -370,8 +361,8 @@
 <section class="section beta-section" id="beta" style="background:var(--paper-2); border-block:1px solid var(--line);">
   <div class="wrap">
     <span class="eyebrow eyebrow-beta" data-i18n="beta.eyebrow">Opt-in</span>
-    <h2 class="h2" style="margin-top:16px" data-i18n="beta.h2">An optional cloud</h2>
-    <p class="lede" style="margin-top:16px" data-i18n="beta.lede">Khayt has an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required — turn the cloud off and Khayt works exactly as it always has.</p>
+    <h2 class="h2" style="margin-top:16px" data-i18n="beta.h2">An optional cloud. Never a requirement.</h2>
+    <p class="lede" style="margin-top:16px" data-i18n-html="beta.lede">End-to-end encrypted — the server only ever sees ciphertext, and your sync passphrase never leaves your machine. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $9/mo for Cloud — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a></p>
     <div class="feat-grid" id="betaGrid"><!-- PRERENDER:betaGrid:START --><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A3.5 3.5 0 0 1 18 18z"/><path d="M12 12v5M12 17l-2-2M12 17l2-2"/></svg></div><h3>Encrypted cloud sync</h3><p>Opt-in sync across your devices, end-to-end encrypted — the server only ever sees ciphertext. Your sync passphrase never leaves your machine. Turn it off and Khayt runs 100% offline as before.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.2a3 3 0 0 1 0 5.6M18.5 19a5.5 5.5 0 0 0-3-4.9"/></svg></div><h3>Team accounts</h3><p>Invite staff to your shop with roles (manager / operator / viewer). Everyone shares the same live cloud data; the desktop enforces what each role can do.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 12H5L4 8z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg></div><h3>Online storefront</h3><p>Publish a public shop page customers can browse — prices, a cart, deposits and promo codes. Orders land straight in your queue as draft quotes; checkout can take a deposit via your own payment link.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Customer order tracking</h3><p>Share a link and your customer follows a live progress timeline — received → printing → finishing → ready — in their own language, updating as you advance the order.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z"/></svg></div><h3>Reviews &amp; ratings</h3><p>Collect a star rating + comment after each order via a simple link; your average rating shows on the storefront and in the app.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l1.2-3.2A7 7 0 1 1 9 19.5z"/><path d="M9 10c.5 2 2.5 4 4.5 4.5"/></svg></div><h3>WhatsApp &amp; SMS</h3><p>Send automated order updates over WhatsApp or SMS (Twilio, WhatsApp Cloud API, Unifonic or your own webhook), and run marketing campaigns to a customer segment.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M8 21l2-4M16 21l-2-4M9 10h.01M15 10h.01"/></svg></div><h3>AI shop assistant</h3><p>Ask questions about your own shop — “what’s overdue?”, “revenue vs last month?” — in a chat that answers only from your data. Bring your own key; it stays on your machine.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15v6M15 18h6"/></svg></div><h3>Smart reorder &amp; POs</h3><p>Forecasts when each material runs out from real usage and the grams already committed to open orders, then drafts purchase orders ahead of time.</p></article><article class="feat feat-beta"><span class="beta-pill">BETA</span><div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 4h7v7h-7zM14 15h3M20 15v5M14 20h6"/></svg></div><h3>Label &amp; QR printing</h3><p>Print QR labels for orders (scan to the tracking page) and spools (scan to inventory), plus a one-way accounting webhook to push paid invoices to QuickBooks, Zoho or Xero.</p></article><!-- PRERENDER:betaGrid:END --></div>
   </div>
 </section>
@@ -459,7 +450,7 @@
       <div class="stats">
         <div class="stat-card"><div class="big">100%</div><div class="cap" data-i18n="stat.free">Free to use</div></div>
         <div class="stat-card"><div class="big" data-stat="langs">9</div><div class="cap" data-i18n="stat.langs">Languages</div></div>
-        <div class="stat-card"><div class="big">0</div><div class="cap" data-i18n="stat.subs">Subscriptions</div></div>
+        <div class="stat-card"><div class="big">0</div><div class="cap" data-i18n="stat.telemetry">Telemetry</div></div>
         <div class="stat-card"><div class="big">∞</div><div class="cap" data-i18n="stat.keep">Yours to keep</div></div>
       </div>
     </div>

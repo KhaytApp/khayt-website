@@ -38,6 +38,21 @@
     return html;
   };
 
+  /* ---------- "From a file on the desk to money in the bank" ---------- */
+  R.flow = function (flow, lang) {
+    var html = '';
+    for (var k = 0; k < flow.length; k++) {
+      var f = flow[k];
+      html += '<li class="step">' +
+        '<span class="step-n" aria-hidden="true">' + esc(f.n) + '</span>' +
+        '<h3>' + esc(f.t[lang]) + '</h3>' +
+        '<p>' + esc(f.d[lang]) + '</p>' +
+        '<span class="step-tag">' + esc(f.tag[lang]) + '</span>' +
+        '</li>';
+    }
+    return html;
+  };
+
   /* ---------- "An optional cloud" ---------- */
   R.cloud = function (cloud, lang, betaLabel) {
     var html = '';

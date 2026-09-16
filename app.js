@@ -44,25 +44,23 @@
     },
 
     'hero.pill':  { en: 'Free to use · Source available', ar: 'مجاني · المصدر متاح' },
-    'hero.h1':    { en: 'Run your print shop like a <span class="hl">studio</span>', ar: 'أدِر مطبعتك <span class="hl">كأنها استوديو</span>' },
-    'hero.desc':  { en: 'The all-in-one production desk for 3D print shops — quoting, queue, ZATCA invoicing and inventory, entirely offline.', ar: 'مكتب الإنتاج المتكامل لمطابع الطباعة ثلاثية الأبعاد — التسعير والقائمة وفواتير هيئة الزكاة والمخزون، دون اتصال تماماً.' },
+    'hero.h1':    { en: 'One desk runs the <span class="hl">whole shop</span>.', ar: 'مكتب واحد يُدير <span class="hl">المطبعة كاملة</span>.' },
+    'hero.desc':  { en: 'Khayt is the production desk for 3D print shops — quoting, Kanban queue, e-invoicing and filament inventory in one app. Entirely offline. Free. No account, no telemetry.', ar: 'خيط هو مكتب الإنتاج لمطابع الطباعة ثلاثية الأبعاد — التسعير وقائمة كانبان والفوترة الإلكترونية ومخزون الخيوط في تطبيق واحد. دون اتصال تماماً. مجاناً. بلا حساب وبلا تتبّع.' },
     'hero.dl':    { en: 'Download Free', ar: 'حمّل مجاناً' },
     'hero.github':{ en: 'View on GitHub', ar: 'عرض على GitHub' },
     'hero.os':    { en: 'No account · No telemetry', ar: 'بدون حساب · بدون تتبّع' },
+    'hero.ios':   { en: 'iOS companion', ar: 'تطبيق iOS مرافق' },
+
+    'flow.eyebrow': { en: 'One continuous thread', ar: 'خيط واحد متّصل' },
+    'flow.h2':      { en: 'From a file on the desk to money in the bank.', ar: 'من ملف على المكتب إلى مال في الحساب.' },
+    'flow.lede':    { en: 'Khayt — <span class="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.', ar: '<span class="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.' },
     'hero.live':  { en: '3 printers live', ar: '3 طابعات تعمل الآن' },
 
-    'pill.queue':     { en: 'Kanban queue', ar: 'قائمة كانبان' },
-    'pill.zatca':     { en: 'ZATCA e-invoicing', ar: 'فوترة هيئة الزكاة' },
-    'pill.catalog':   { en: 'Catalog', ar: 'كتالوج' },
-    'pill.gift':      { en: 'Gift cards', ar: 'بطاقات هدايا' },
-    'pill.portal':    { en: 'Customer portal', ar: 'بوابة العملاء' },
-    'pill.analytics': { en: 'Analytics', ar: 'تحليلات' },
 
     'trust.lab':  { en: 'Talks live to your printers', ar: 'يتصل مباشرة بطابعاتك' },
 
-    'gal.eyebrow':{ en: 'See it in action', ar: 'شاهده أثناء العمل' },
-    'gal.h2':     { en: 'Every screen, purpose-built', ar: 'كل شاشة مصمّمة لغرضها' },
-    'gal.lede':   { en: 'One app runs the whole shop — quoting, production, invoicing, inventory and the numbers behind it all. Real screens, not mockups — preview them in any of Khayt’s designs.', ar: 'تطبيق واحد يدير المطبعة بالكامل — التسعير والإنتاج والفوترة والمخزون والأرقام خلفها جميعاً. شاشات حقيقية وليست تصاميم وهمية — استعرضها بأي من تصاميم خيط.' },
+    'gal.eyebrow':{ en: 'Every screen, purpose-built', ar: 'كل شاشة مصمّمة لغرضها' },
+    'gal.h2':     { en: 'Real screens. Not mockups.', ar: 'شاشات حقيقية. لا تصاميم وهمية.' },
     'tab.queue':      { en: 'Production Queue', ar: 'قائمة الإنتاج' },
     'tab.dashboard':  { en: 'Dashboard', ar: 'لوحة التحكم' },
     'tab.calculator': { en: 'Calculator', ar: 'الحاسبة' },
@@ -71,9 +69,6 @@
     'tab.orders':     { en: 'Orders Log', ar: 'سجل الطلبات' },
     'tab.inventory':  { en: 'Inventory', ar: 'المخزون' },
     'tab.catalog':    { en: 'Catalog', ar: 'الكتالوج' },
-    'tab.giftcards':  { en: 'Gift Cards', ar: 'بطاقات الهدايا' },
-    'tab.portfolio':  { en: 'Portfolio', ar: 'المعرض' },
-    'tab.waste':      { en: 'Waste Log', ar: 'سجل الهدر' },
     'tab.analytics':  { en: 'Analytics', ar: 'التحليلات' },
     'tab.clients':    { en: 'Clients', ar: 'العملاء' },
 
@@ -99,8 +94,8 @@
 
     'nav.beta':    { en: 'Cloud', ar: 'السحابة' },
     'beta.eyebrow':{ en: 'Opt-in', ar: 'اختياري' },
-    'beta.h2':     { en: 'An optional cloud', ar: 'سحابة اختيارية' },
-    'beta.lede':   { en: 'Khayt has an opt-in, end-to-end-encrypted cloud on top of the offline core. None of it is required: turn the cloud off and Khayt works exactly as it always has.', ar: 'يضيف خيط 3.0 سحابة اختيارية مشفّرة طرفياً فوق النواة العاملة دون اتصال. ولا شيء منه إلزامي: أوقف السحابة ويعمل خيط تماماً كما اعتدت.' },
+    'beta.h2':     { en: 'An optional cloud. Never a requirement.', ar: 'سحابة اختيارية. وليست شرطاً أبداً.' },
+    'beta.lede':   { en: 'End-to-end encrypted — the server only ever sees ciphertext, and your sync passphrase never leaves your machine. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $9/mo for Cloud — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a>', ar: 'مشفّرة من طرف إلى طرف — لا يرى الخادم إلا نصاً مشفّراً، وعبارة مرور المزامنة لا تغادر جهازك. أطفئ السحابة ويعمل خيط تماماً كما كان. والخطط منشورة — 9 دولارات شهرياً للسحابة — وكلها مجانية ما دامت التجربة قائمة. <a href="services.html">اطّلع على الخطط وما ترسله كل خدمة ←</a>' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
 
     'wn.eyebrow': { en: 'Shipped recently', ar: 'وصل حديثاً' },
@@ -160,7 +155,7 @@
     'oss.sponsor':{ en: 'Sponsor', ar: 'ادعم' },
     'stat.free': { en: 'Free to use', ar: 'مجاني للاستخدام' },
     'stat.langs':{ en: 'Languages', ar: 'لغات' },
-    'stat.subs': { en: 'Subscriptions', ar: 'اشتراكات' },
+    'stat.telemetry': { en: 'Telemetry', ar: 'تتبّع' },
     'stat.keep': { en: 'Yours to keep', ar: 'ملك لك للأبد' },
 
     'mn.badge':  { en: 'Alpha', ar: 'ألفا' },
@@ -217,6 +212,7 @@
   var DATA = (window.KHAYT_DATA || { features: [], modes: [], cloud: [] });
   var RENDER = window.KHAYT_RENDER;
   var FEATURES = DATA.features;
+  var FLOW = DATA.flow;
 
   var BETA_FEATURES = DATA.cloud;
 
@@ -396,6 +392,12 @@
     grid.innerHTML = RENDER.features(FEATURES, lang);
   }
 
+  function buildFlow() {
+    var list = document.getElementById('flowSteps');
+    if (!list) return;
+    list.innerHTML = RENDER.flow(FLOW, lang);
+  }
+
   function buildBetaFeatures() {
     var grid = document.getElementById('betaGrid');
     if (!grid) return;
@@ -445,6 +447,7 @@
       if (DICT[hk]) htmlNodes[j].innerHTML = DICT[hk][lang];
     }
     buildFeatures();
+    buildFlow();
     buildBetaFeatures();
     buildModesTable();
     buildChangelog();
@@ -507,7 +510,12 @@
     try { localStorage.setItem('khayt-lang', lang); } catch (e) {}
   }
 
-  /* ---------- Theme switcher (in-app theme demo) ---------- */
+  /* ---------- Theme switcher (in-app theme demo) ----------
+     Dormant: the redesign took the chip row out of index.html, so there is no
+     #themeChips element and both functions below return immediately. They are
+     kept because the eight themes and their screenshots still exist — putting
+     `<div class="theme-chips" id="themeChips"></div>` back in the gallery is
+     the whole of restoring the demo. */
   function buildThemeChips() {
     var bar = document.getElementById('themeChips');
     if (!bar) return;

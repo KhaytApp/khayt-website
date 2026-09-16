@@ -169,6 +169,39 @@
     }
   ];
 
+  /* ---------- The thread: one job, end to end ----------------------------
+     Khayt means "thread", and this is the section that earns the name. The
+     five steps are the app's own order of operations — calculator, queue,
+     printer link, invoice, actuals — and step 05 is the one that closes the
+     loop back onto step 01.                                               */
+  DATA.flow = [
+    { n: '01',
+      t: { en: 'Quote', ar: 'تسعير' },
+      d: { en: 'Drop an STL, 3MF or g-code on the calculator. Khayt reads the geometry and prices it against your machine, material and margin.',
+           ar: 'أسقِط ملف STL أو 3MF أو G-code على الحاسبة. يقرأ خيط الشكل نفسه ويسعّره وفق آلتك وموادك وهامشك.' },
+      tag: { en: 'Calculator', ar: 'الحاسبة' } },
+    { n: '02',
+      t: { en: 'Schedule', ar: 'جدولة' },
+      d: { en: 'An approved quote becomes a job on the board, assigned to a machine with its colours and parts already attached.',
+           ar: 'يتحوّل العرض المعتمد إلى مهمة على اللوحة، مُسندة إلى طابعة بألوانها وقطعها مرفقة سلفاً.' },
+      tag: { en: 'Production queue', ar: 'قائمة الإنتاج' } },
+    { n: '03',
+      t: { en: 'Print', ar: 'طباعة' },
+      d: { en: 'Live temperature and progress from OctoPrint, Bambu, Klipper and friends — with stall and offline alerts.',
+           ar: 'حرارة وتقدّم مباشران من OctoPrint وBambu وKlipper وغيرها — مع تنبيهات التوقّف وانقطاع الاتصال.' },
+      tag: { en: 'Printer API', ar: 'واجهة الطابعات' } },
+    { n: '04',
+      t: { en: 'Invoice', ar: 'فوترة' },
+      d: { en: 'A signed e-invoice in the language your shop chose, with the tax added the way your country does it.',
+           ar: 'فاتورة إلكترونية موقّعة باللغة التي اختارتها مطبعتك، والضريبة مضافة بالطريقة التي يتبعها بلدك.' },
+      tag: { en: 'ZATCA · 30 presets', ar: 'هيئة الزكاة · 30 إعداداً' } },
+    { n: '05',
+      t: { en: 'Correct', ar: 'تصحيح' },
+      d: { en: 'The finished job reports what it really used, and the estimator calibrates itself against your shop.',
+           ar: 'تُبلغ المهمة المنتهية بما استهلكته فعلاً، فيعاير المقدِّر نفسه على مطبعتك.' },
+      tag: { en: 'Measured, not assumed', ar: 'مقيس، لا مفترض' } }
+  ];
+
   root.KHAYT_DATA = DATA;
   // cloud-features.js used to export this on its own. Kept so nothing that
   // reads the old name breaks while both spellings are in the tree.
