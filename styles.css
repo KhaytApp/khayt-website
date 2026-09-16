@@ -1269,3 +1269,9 @@ body.deep .cmp thead th.cmp-col-hl .cmp-chip { background: var(--brand); border-
     mask-image: linear-gradient(#000 82%, transparent);
   }
 }
+
+/* The screenshots are whole Mac windows now — traffic lights, title bar and
+   all — so the site no longer draws a fake window bar around them, and the
+   frame is just a rounded clip with a shadow. Its white fill would otherwise
+   show as a sliver wherever the picture does not reach the corner. */
+body.deep .frame { background: transparent; }
