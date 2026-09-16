@@ -1222,3 +1222,8 @@ body.deep .mode-pill { background: rgba(111,176,255,0.14); color: #9ccbff; }
    the deep surface's LINK blue (#6fb0ff), so white on it falls to 2.25:1 —
    the solid brand fill is the one that carries white (5.12:1). */
 body.deep .cmp thead th.cmp-col-hl .cmp-chip { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+
+/* The newest post carries a "Latest" chip, in the accent rather than the
+   neutral the topic tag beside it uses — two identical chips would read as
+   two topics. */
+.post-meta .tag.latest { color: var(--on-brand); background: var(--brand); border-color: var(--brand); }

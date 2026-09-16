@@ -29,7 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body class="deep">
 
 <a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
 
@@ -132,6 +132,7 @@
     'bl.note':    { en: 'Every dated post is dated by the release it describes, not by when it was written. The full machine-readable changelog lives with the releases on GitHub.',
                     ar: 'كل مقال مؤرَّخ بتاريخ الإصدار الذي يصفه، لا بتاريخ كتابته. وسجل التغييرات الكامل موجود مع الإصدارات على GitHub.' },
     'bl.more':    { en: 'Read the post →', ar: 'اقرأ المقال ←' },
+    'bl.latest': { en: 'Latest', ar: 'الأحدث' },
     'bl.feed':    { en: 'Subscribe by feed', ar: 'اشترك عبر التغذية' }
   };
 
@@ -159,7 +160,10 @@
       var p = posts[i];
       h += '<a class="post-card" href="' + esc(p.slug) + '.html">' +
         '<div class="post-meta"><span class="tag">' + esc(p.tag[lang]) + '</span>' +
-        '<time datetime="' + esc(p.date) + '">' + esc(fmt(p.date, lang)) + '</time></div>' +
+        '<time datetime="' + esc(p.date) + '">' + esc(fmt(p.date, lang)) + '</time>' +
+        // posts.js is newest-first, so the first card is the latest post.
+        (i === 0 ? '<span class="tag latest">' + esc(window.PAGE_STRINGS['bl.latest'][lang]) + '</span>' : '') +
+        '</div>' +
         '<h2>' + esc(p.t[lang]) + '</h2>' +
         '<p>' + esc(p.d[lang]) + '</p>' +
         '<span class="more">' + esc(more) + '</span>' +
