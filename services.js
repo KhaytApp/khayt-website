@@ -284,6 +284,11 @@
       window.addEventListener('resize', paint, { passive: true });
       el.setAttribute('tabindex', '0');
       el.setAttribute('role', 'region');
+      // Measured again once the webfonts land. The first measurement runs with
+      // fallback faces, which are wider: the table overflowed, the hint said
+      // "swipe" — and then Archivo and Hanken loaded, the table fitted, and
+      // nothing re-measured. The hint was pointing at nothing on every phone.
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(paint);
       el.__wired = true;
     }
     paint();

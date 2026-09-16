@@ -1227,3 +1227,45 @@ body.deep .cmp thead th.cmp-col-hl .cmp-chip { background: var(--brand); border-
    neutral the topic tag beside it uses — two identical chips would read as
    two topics. */
 .post-meta .tag.latest { color: var(--on-brand); background: var(--brand); border-color: var(--brand); }
+
+/* ============================================================================
+   PHONE DISCLOSURES — long grids and the comparison table
+   ----------------------------------------------------------------------------
+   Measured on a 390px viewport: the nine feature cards and the nine cloud
+   cards are 5,383px between them — 26% of the whole page — because a 3x3 grid
+   on a desktop is eighteen stacked cards on a phone. The comparison table adds
+   another twenty rows on top.
+
+   So on phones the three of them open to a few items with a button for the
+   rest. The content is NOT removed: it is prerendered into the HTML and stays
+   in the DOM, so crawlers and assistive tech read all of it either way — only
+   the height is capped until a reader asks. Above 640px none of this applies
+   and the desktop layout the design specifies is untouched.
+   ========================================================================== */
+.grid-more { display: none; }
+
+@media (max-width: 640px) {
+  .grid-more {
+    display: block; width: 100%; margin-top: 14px;
+    font-family: var(--font-body); font-size: 14.5px; font-weight: 600;
+    color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 11px; padding: 13px 18px; cursor: pointer;
+  }
+  .grid-more:hover { border-color: var(--tint-2); }
+
+  /* Three cards of the nine, and the rest behind the button. The fade tells
+     the reader the list continues rather than ending on a hard crop. */
+  .feat-grid.is-capped {
+    max-height: 940px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(#000 80%, transparent);
+    mask-image: linear-gradient(#000 80%, transparent);
+  }
+  /* Only the vertical axis is capped: .cmp-wrap is the table's horizontal
+     scroll container, and `overflow:hidden` would silently kill the swipe the
+     "Swipe the table" hint right below it promises. */
+  .cmp-wrap.is-capped {
+    max-height: 560px; overflow-x: auto; overflow-y: hidden;
+    -webkit-mask-image: linear-gradient(#000 82%, transparent);
+    mask-image: linear-gradient(#000 82%, transparent);
+  }
+}

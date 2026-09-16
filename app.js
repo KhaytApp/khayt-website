@@ -51,6 +51,11 @@
     'hero.os':    { en: 'No account · No telemetry', ar: 'بدون حساب · بدون تتبّع' },
     'hero.ios':   { en: 'iOS companion', ar: 'تطبيق iOS مرافق' },
 
+    'more.features': { en: 'Show all nine features', ar: 'اعرض المزايا التسع' },
+    'more.cloud':    { en: 'Show all nine services', ar: 'اعرض الخدمات التسع' },
+    'more.modes':    { en: 'Show the full comparison', ar: 'اعرض المقارنة كاملة' },
+    'more.less':     { en: 'Show less', ar: 'اعرض أقل' },
+
     'flow.eyebrow': { en: 'One continuous thread', ar: 'خيط واحد متّصل' },
     'flow.h2':      { en: 'From a file on the desk to money in the bank.', ar: 'من ملف على المكتب إلى مال في الحساب.' },
     'flow.lede':    { en: 'Khayt — <span class="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.', ar: '<span class="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.' },
@@ -381,6 +386,11 @@
     if (!el.__cmpWired) {
       el.addEventListener('scroll', paint, { passive: true });
       window.addEventListener('resize', paint, { passive: true });
+      // Measured again once the webfonts land. The first measurement runs with
+      // fallback faces, which are wider: the table overflowed, the hint said
+      // "swipe" — and then Archivo and Hanken loaded, the table fitted, and
+      // nothing re-measured. The hint was pointing at nothing on every phone.
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(paint);
       el.__cmpWired = true;
     }
     paint();
@@ -452,6 +462,7 @@
     buildModesTable();
     buildChangelog();
     paintCaption();
+    capGrids();
     // swap gallery + hero screenshots to match language (EN / AR-RTL)
     var gi = document.getElementById('galImg');
     if (gi) {
@@ -508,6 +519,36 @@
     var sw = document.getElementById('flipSwitch');
     if (card && sw) setFlip(card, sw, lang === 'ar');
     try { localStorage.setItem('khayt-lang', lang); } catch (e) {}
+  }
+
+  /* ---------- Phone disclosures ----------
+     The cap is applied from here, not from CSS: if this script never runs, the
+     grids must render whole rather than cropped with an inert button. */
+  function capGrids() {
+    var btns = document.querySelectorAll('.grid-more');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      var g = document.getElementById(btn.getAttribute('data-grid'));
+      if (!g) continue;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      g.classList.toggle('is-capped', !open);
+      if (open) btn.querySelector('span').textContent = t('more.less');
+    }
+  }
+
+  function wireGrids() {
+    document.addEventListener('click', function (ev) {
+      var btn = ev.target.closest && ev.target.closest('.grid-more');
+      if (!btn) return;
+      var g = document.getElementById(btn.getAttribute('data-grid'));
+      if (!g) return;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      g.classList.toggle('is-capped', open);
+      var label = btn.querySelector('span');
+      var key = label.getAttribute('data-i18n');
+      label.textContent = open ? t(key) : t('more.less');
+    });
   }
 
   /* ---------- Theme switcher (in-app theme demo) ----------
@@ -829,6 +870,7 @@
     langToggle();
     channelToggle();
     themeSwitch();
+    wireGrids();
     applyLang(saved);
     fetchReleases();
   });
