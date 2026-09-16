@@ -132,28 +132,45 @@ check('The feed is discoverable from every page', () => {
 
 /* ---------- 3. The dictionary ---------- */
 
+// Both dictionaries the site ships: app.js's DICT, and the per-page block
+// services.html loads on top of it. The second one was unchecked while it
+// held the whole services page — a missing `ar` there is the same bug, it
+// just shows up on one page instead of all of them.
+function dictionaries() {
+  const found = [];
+  for (const [file, marker] of [['app.js', 'var DICT = {'], ['services.js', 'window.PAGE_STRINGS = {']]) {
+    const src = fs.readFileSync(file, 'utf8');
+    const start = src.indexOf(marker);
+    if (start === -1) throw new Error(`could not find ${marker.trim()} in ${file}`);
+    const end = src.indexOf('\n  };', start);
+    if (end === -1) throw new Error(`could not find the end of the dictionary in ${file}`);
+    found.push({ file, body: src.slice(start, end) });
+  }
+  return found;
+}
+
 check('No duplicate dictionary keys', () => {
   // A duplicated key in DICT is legal JavaScript — the later one silently
   // wins. It happened once, with two different spellings of the native-Mac
   // line, and the page showed whichever came second.
-  const src = fs.readFileSync('app.js', 'utf8');
-  const start = src.indexOf('var DICT = {');
-  if (start === -1) throw new Error('could not find DICT in app.js');
-  const body = src.slice(start, src.indexOf('\n  };', start));
-  const keys = [...body.matchAll(/^ {4}'([a-zA-Z0-9._]+)':/gm)].map(m => m[1]);
-  if (keys.length < 100) throw new Error(`only found ${keys.length} keys — the extraction is wrong, not the dictionary`);
-  const dupes = [...new Set(keys.filter((k, i) => keys.indexOf(k) !== i))];
-  if (dupes.length) throw new Error('duplicate keys: ' + dupes.join(', '));
-  return keys.length + ' keys';
+  let total = 0;
+  for (const { file, body } of dictionaries()) {
+    const keys = [...body.matchAll(/^ {4}'([a-zA-Z0-9._]+)':/gm)].map(m => m[1]);
+    const floor = file === 'app.js' ? 100 : 20;
+    if (keys.length < floor) throw new Error(`only found ${keys.length} keys in ${file} — the extraction is wrong, not the dictionary`);
+    const dupes = [...new Set(keys.filter((k, i) => keys.indexOf(k) !== i))];
+    if (dupes.length) throw new Error(`duplicate keys in ${file}: ` + dupes.join(', '));
+    total += keys.length;
+  }
+  return total + ' keys';
 });
 
 check('Every dictionary entry has both languages', () => {
-  const src = fs.readFileSync('app.js', 'utf8');
-  const start = src.indexOf('var DICT = {');
-  const body = src.slice(start, src.indexOf('\n  };', start));
   const missing = [];
-  for (const m of body.matchAll(/^ {4}'([a-zA-Z0-9._]+)':\s*\{([\s\S]*?)\},?\s*$/gm)) {
-    if (!/\ben:/.test(m[2]) || !/\bar:/.test(m[2])) missing.push(m[1]);
+  for (const { file, body } of dictionaries()) {
+    for (const m of body.matchAll(/^ {4}'([a-zA-Z0-9._]+)':\s*\{([\s\S]*?)\},?\s*$/gm)) {
+      if (!/\ben:/.test(m[2]) || !/\bar:/.test(m[2])) missing.push(file + ' ' + m[1]);
+    }
   }
   if (missing.length) throw new Error('entries missing en or ar: ' + missing.join(', '));
   return 'all bilingual';

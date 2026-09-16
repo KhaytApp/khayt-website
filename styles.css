@@ -935,3 +935,192 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
   letter-spacing: -0.015em; color: var(--ink); }
 .nf-d { display: block; color: var(--muted); font-size: 14px; line-height: 1.5; margin-top: 6px; text-wrap: pretty; }
 @media (max-width: 620px) { .nf-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================================
+   THE DEEP TREATMENT — services.html only
+   ----------------------------------------------------------------------------
+   The services page argues about what leaves your machine, and it reads better
+   on the navy the icon is already built on than on the white the rest of the
+   site uses. It is scoped to `body.deep` rather than a media query or a
+   preference: this is one page's treatment, not a theme the visitor chose, and
+   index.html is untouched by everything below.
+
+   It works by moving the tokens, not by restyling components. Every card,
+   button, table and rule on this page already draws itself from --paper,
+   --ink, --line and friends, so redefining those eleven values converts the
+   whole page and keeps one definition of what a card is. What follows the
+   token block is only the handful of places that had a literal #fff baked in.
+
+   Contrast is measured against --paper (#06182f), not against white:
+     --ink       #eaf2fb  on #06182f   15.8:1
+     --ink-soft  #b3c8de  on #06182f    9.2:1
+     --muted     #8aa4c2  on #06182f    5.9:1   (12px mono lines clear AA)
+     --brand-2   #6fb0ff  on #06182f    7.1:1   (link text)
+   ========================================================================== */
+body.deep {
+  --paper:      #06182f;
+  --paper-2:    #081e38;
+  --paper-3:    #0d2444;
+  --card:       #0d2444;
+  --ink:        #eaf2fb;
+  --ink-soft:   #b3c8de;
+  --muted:      #8aa4c2;
+  --brand:      #216dca;
+  --brand-2:    #6fb0ff;
+  --tint:       rgba(111,176,255,0.10);
+  --tint-2:     rgba(111,176,255,0.26);
+  --wash:       #0a2a50;
+  --wash-2:     #123056;
+  --line:       rgba(255,255,255,0.11);
+  --line-soft:  rgba(255,255,255,0.07);
+  --live-ink:   #2fd07a;
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.30);
+  --shadow-md:  0 10px 28px rgba(0,0,0,0.34);
+  --shadow-lg:  0 40px 90px rgba(0,0,0,0.46);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* The places that held a literal white. */
+body.deep .nav { background: rgba(6,24,47,0.82); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); }
+body.deep .nav.scrolled { background: rgba(6,24,47,0.94); }
+body.deep .btn-ghost { background: rgba(255,255,255,0.06); color: var(--ink); border-color: var(--line); }
+body.deep .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.28); }
+body.deep .btn-primary { background: var(--amber); color: #fff; }
+body.deep .btn-primary:hover { background: #a8460b; }
+body.deep .nav-burger { background: rgba(255,255,255,0.06); border-color: var(--line); }
+body.deep .nav-burger span, body.deep .nav-burger span::before, body.deep .nav-burger span::after { background: var(--ink); }
+body.deep .nav-links a:hover { background: rgba(255,255,255,0.09); }
+body.deep .lang-toggle { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+body.deep .lang-toggle:hover { color: var(--ink); border-color: rgba(255,255,255,0.4); }
+
+/* One section stays on paper on purpose: the table of what each service sends
+   is the page's plainest claim, and it is set in the plain light the rest of
+   the site is written in rather than styled to match the argument around it. */
+body.deep .section.paper {
+  --paper:      #f4f6f8;
+  --paper-2:    #ffffff;
+  --paper-3:    #eef1f1;
+  --card:       #ffffff;
+  --ink:        #101417;
+  --ink-soft:   #3f464d;
+  --muted:      #697079;
+  --brand-2:    #11509c;
+  --line:       rgba(16,20,23,0.10);
+  --line-soft:  rgba(16,20,23,0.06);
+  --live-ink:   #0d7a3c;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* ---------- Plans ---------- */
+.plans-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.plans-head > div:first-child { flex: 1 1 520px; min-width: 0; }
+.plans-switches { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.seg { display: inline-flex; background: rgba(255,255,255,0.06); border: 1px solid var(--line); border-radius: 100px; padding: 3px; gap: 2px; }
+.section.paper .seg, body:not(.deep) .seg { background: var(--paper-3); }
+.seg-btn {
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+  padding: 6px 14px; border-radius: 100px; border: 0; cursor: pointer;
+  background: transparent; color: var(--muted); transition: background .15s, color .15s;
+}
+.seg-btn:hover { color: var(--ink); }
+.seg-btn.is-on { background: var(--brand); color: #fff; }
+body[dir="rtl"] .seg-btn { font-family: var(--font-ar); font-size: 12.5px; }
+
+.plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; align-items: start; }
+.plan {
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  padding: 26px 24px; display: flex; flex-direction: column; height: 100%;
+}
+.plan.is-featured { background: var(--wash-2); border-color: var(--tint-2); }
+.plan.is-soon { opacity: 0.82; }
+.plan-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.plan-top h3 { font-family: var(--font-display); font-size: 21px; font-weight: 800; letter-spacing: -0.02em; margin: 0; color: var(--ink); }
+.plan-badge {
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: #fff; background: var(--brand); padding: 3px 8px; border-radius: 999px;
+}
+.plan-badge.soon { color: #e9c46a; background: rgba(233,196,106,0.14); border: 1px solid rgba(233,196,106,0.32); }
+body[dir="rtl"] .plan-badge { font-family: var(--font-ar); letter-spacing: 0; text-transform: none; }
+.plan-tag { font-size: 14.5px; color: var(--ink-soft); margin: 8px 0 0; min-height: 44px; text-wrap: pretty; }
+.plan-price { display: flex; align-items: baseline; gap: 10px; margin: 18px 0 0; flex-wrap: wrap; }
+.plan-price .amt { font-family: var(--font-display); font-weight: 900; font-size: 40px; letter-spacing: -0.03em; line-height: 1; color: var(--ink); }
+/* Struck through, not hidden: the figure is the point. */
+.plan-price .amt.struck { text-decoration: line-through; text-decoration-thickness: 3px; text-decoration-color: #f2882f; }
+.plan-price .per { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+body[dir="rtl"] .plan-price .per { font-family: var(--font-ar); }
+.plan-now {
+  margin: 12px 0 0; align-self: flex-start; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+  color: #f2c28a; background: rgba(223,96,17,0.14); border: 1px solid rgba(223,96,17,0.32);
+  border-radius: 8px; padding: 7px 11px;
+}
+.plan-now.free { color: #a7e3c2; background: rgba(47,208,122,0.12); border-color: rgba(47,208,122,0.30); }
+body[dir="rtl"] .plan-now { font-family: var(--font-ar); font-size: 12.5px; }
+.plan-feats { list-style: none; margin: 18px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); }
+.plan-feats li { position: relative; padding: 6px 0 6px 18px; font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+body[dir="rtl"] .plan-feats li { padding: 6px 18px 6px 0; }
+.plan-feats li::before {
+  content: ""; position: absolute; inset-inline-start: 0; top: 14px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--brand-2);
+}
+.plan-cta { margin-top: auto; padding-top: 0; }
+.plan .plan-cta { margin-top: 20px; justify-content: center; }
+.plan-cta.is-dead { color: var(--muted); border: 1px solid var(--line); background: transparent; cursor: default; }
+
+/* ---------- The switchboard ---------- */
+.svc-bar { display: flex; align-items: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+.btn-sm { padding: 9px 16px; font-size: 13.5px; }
+.svc-count { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+body[dir="rtl"] .svc-count { font-family: var(--font-ar); font-size: 13px; }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; align-items: start; }
+.svc {
+  position: relative; background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 20px; transition: border-color .18s;
+}
+.svc.is-on { border-color: rgba(233,196,106,0.42); }
+.svc-head { display: flex; align-items: flex-start; gap: 14px; }
+.svc-ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--tint); color: var(--brand-2); flex: none; }
+.svc-ico svg { width: 19px; height: 19px; }
+.svc-text { flex: 1; min-width: 0; }
+.svc-text h3 { font-family: var(--font-display); font-size: 17.5px; font-weight: 700; letter-spacing: -0.015em; margin: 0; color: var(--ink); }
+.svc-text p { color: var(--ink-soft); font-size: 13.5px; margin: 8px 0 0; line-height: 1.55; text-wrap: pretty; }
+
+/* The switch is a preview of the app's own, so it is drawn like the app's own.
+   Knob offset is logical, not left/right — in Arabic the whole page mirrors. */
+.sw {
+  flex: none; width: 44px; height: 25px; border-radius: 100px; cursor: pointer; padding: 0;
+  position: relative; margin-top: 2px;
+  border: 1px solid var(--line); background: rgba(255,255,255,0.06);
+  transition: background .18s, border-color .18s;
+}
+.sw[aria-checked="true"] { border-color: #2fd07a; background: rgba(47,208,122,0.28); }
+.sw-knob {
+  position: absolute; top: 2px; inset-inline-start: 2px; width: 19px; height: 19px;
+  border-radius: 50%; background: var(--muted); display: block;
+  transition: inset-inline-start .18s, background .18s;
+}
+.sw[aria-checked="true"] .sw-knob { inset-inline-start: 21px; background: #2fd07a; }
+
+.svc-sends { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(233,196,106,0.32); }
+.svc-sends-k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #e9c46a; }
+body[dir="rtl"] .svc-sends-k { font-family: var(--font-ar); letter-spacing: 0; text-transform: none; font-size: 11px; }
+.svc-sends p { font-size: 13px; color: var(--ink-soft); margin: 6px 0 0; line-height: 1.5; }
+.svc-sends .svc-to { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 8px; }
+body[dir="rtl"] .svc-sends .svc-to { font-family: var(--font-ar); font-size: 12px; }
+
+/* ---------- Status ---------- */
+.status-row .dot.warn { background: #f2882f; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sw, .sw-knob, .svc, .seg-btn { transition: none; }
+}
+
+@media (max-width: 980px) {
+  .plan-grid, .svc-grid { grid-template-columns: repeat(2, 1fr); }
+  .plans-switches { align-items: flex-start; flex-direction: row; }
+}
+@media (max-width: 640px) {
+  .plan-grid, .svc-grid { grid-template-columns: 1fr; }
+  .plan-tag { min-height: 0; }
+}

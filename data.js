@@ -99,6 +99,76 @@
     { t: { en: 'Label & QR printing', ar: 'طباعة الملصقات و QR' }, d: { en: 'Print QR labels for orders (scan to the tracking page) and spools (scan to inventory), plus a one-way accounting webhook to push paid invoices to QuickBooks, Zoho or Xero.', ar: 'اطبع ملصقات QR للطلبات (مسح لصفحة التتبّع) والبكرات (مسح للمخزون)، مع ويب هوك محاسبي أحادي الاتجاه لدفع الفواتير المسددة إلى QuickBooks أو Zoho أو Xero.' },
       i: '<rect x="3" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="6" rx="1"/><path d="M14 4h7v7h-7zM14 15h3M20 15v5M14 20h6"/>' }  ];
 
+  /* ---------- The three cloud plans ----------------------------------------
+     Vendored from lib/cloud-plans.js in the app repo, which is the source of
+     truth: the app prices from it and this page only describes it. The fields
+     copied are the ones a price is made of — id, label, price, annual, soon,
+     tagline, features — and they are copied verbatim, Arabic included.
+
+     `betaFree` is that file's BETA_FREE. While it is true nothing is charged
+     and every non-zero price renders struck through next to "free during
+     beta". The prices are published anyway, so that nobody discovers one
+     later having built their shop on the assumption there wasn't one.
+
+     `featured` is the only field that is not in the app: it is presentation,
+     marking the tier this page recommends, and means nothing to the app.
+
+     SAR is pegged to USD at 3.75, so the two figures are the same price
+     expressed twice rather than a conversion that drifts. Every other locale
+     sees USD — a rate snapshot that goes stale is worse than a foreign
+     currency. If lib/cloud-plans.js changes, this changes with it.          */
+  DATA.betaFree = true;
+  DATA.currencies = ['USD', 'SAR'];
+  DATA.plans = [
+    {
+      id: 'free',
+      label: { en: 'Free', ar: 'مجاني' },
+      price: { USD: 0, SAR: 0 },
+      annual: { USD: 0, SAR: 0 },
+      tagline: { en: 'The whole app, forever, with no account.', ar: 'التطبيق كامل، للأبد، بدون حساب.' },
+      features: [
+        { en: 'Local app, LAN and BYO-key AI — everything', ar: 'التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء' },
+        { en: 'Off-site encrypted backup — 1 device', ar: 'نسخة احتياطية مشفّرة خارجية — جهاز واحد' },
+        { en: 'Customer portal — 30-day trial', ar: 'بوابة العملاء — تجربة 30 يوماً' },
+        { en: '7 days of snapshot history', ar: 'سجل نسخ لمدة 7 أيام' }
+      ],
+      cta: { en: 'Download Khayt', ar: 'حمّل خيط' },
+      href: 'index.html#download'
+    },
+    {
+      id: 'cloud',
+      label: { en: 'Cloud', ar: 'السحابة' },
+      price: { USD: 9, SAR: 35 },
+      annual: { USD: 90, SAR: 350 },
+      featured: true,
+      tagline: { en: 'Your shop on every device, and visible to your customers.', ar: 'متجرك على كل جهاز، وظاهر لعملائك.' },
+      features: [
+        { en: 'Encrypted sync across all your devices', ar: 'مزامنة مشفّرة عبر كل أجهزتك' },
+        { en: 'Customer portal and online storefront', ar: 'بوابة العملاء والمتجر الإلكتروني' },
+        { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
+        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' }
+      ],
+      cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
+      href: 'index.html#download'
+    },
+    {
+      id: 'branches',
+      label: { en: 'Branches', ar: 'الفروع' },
+      price: { USD: 29, SAR: 109 },
+      annual: { USD: 290, SAR: 1090 },
+      soon: true,
+      tagline: { en: 'One owner, several branches, one set of numbers.', ar: 'مالك واحد، عدة فروع، أرقام موحّدة.' },
+      features: [
+        { en: 'Everything in Cloud', ar: 'كل ما في السحابة' },
+        { en: 'Multiple branches with an HQ dashboard', ar: 'فروع متعددة مع لوحة تحكم رئيسية' },
+        { en: 'Team accounts — up to 10 people', ar: 'حسابات الفريق — حتى 10 أشخاص' },
+        { en: 'Shared inventory across branches', ar: 'مخزون مشترك بين الفروع' }
+      ],
+      cta: { en: 'Not built yet', ar: 'لم يُبنَ بعد' },
+      href: 'blog/'
+    }
+  ];
+
   root.KHAYT_DATA = DATA;
   // cloud-features.js used to export this on its own. Kept so nothing that
   // reads the old name breaks while both spellings are in the tree.

@@ -55,6 +55,31 @@
   ];
 
   window.PAGE_STRINGS = {
+    'sv.plans.eyebrow': { en: 'Plans', ar: 'الخطط' },
+    'sv.plans.h2': { en: 'The prices are real. Nobody is being charged yet.', ar: 'الأسعار حقيقية. ولا أحد يُحاسَب بعد.' },
+    'sv.plans.sub': { en: 'The desktop app is free forever and always will be — it is the hosted service, and only the hosted service, that Khayt charges for. Those prices are published now so nobody discovers one later, having built their shop on the assumption there wasn’t one.',
+                      ar: 'تطبيق سطح المكتب مجاني للأبد وسيبقى كذلك — فالخدمة المستضافة، وهي وحدها، ما يتقاضى خيط مقابلها. وهذه الأسعار تُنشر الآن كي لا يكتشفها أحد لاحقاً بعد أن يكون قد بنى مطبعته على افتراض أنها غير موجودة.' },
+    'sv.plans.monthly': { en: 'Monthly', ar: 'شهري' },
+    'sv.plans.annual': { en: 'Annual', ar: 'سنوي' },
+    'sv.plans.perMonth': { en: 'per shop / month', ar: 'لكل مطبعة / شهرياً' },
+    'sv.plans.perYear': { en: 'per shop / year', ar: 'لكل مطبعة / سنوياً' },
+    'sv.plans.forever': { en: 'forever', ar: 'للأبد' },
+    'sv.plans.freeNow': { en: 'Free forever — no account needed', ar: 'مجاني للأبد — بلا حساب' },
+    'sv.plans.betaNow': { en: 'Free during beta — nothing is being charged', ar: 'مجاني أثناء التجربة — لا يُحصَّل شيء' },
+    'sv.plans.featured': { en: 'Most shops', ar: 'أغلب المطابع' },
+    'sv.plans.soon': { en: 'Not built yet', ar: 'لم يُبنَ بعد' },
+    'sv.plans.peg': { en: 'SAR is pegged to USD at 3.75, so these are the same price expressed twice. Other locales see USD — a rate snapshot that goes stale is worse than a foreign currency.',
+                      ar: 'الريال مربوط بالدولار عند 3.75، فهذان السعران هما السعر نفسه مكتوباً مرتين. وبقية المناطق ترى الدولار — فسعر صرف مُلتقط يتقادم أسوأ من عملة أجنبية.' },
+
+    'sv.list.count': { en: '{n} of 9 on', ar: '{n} من 9 مُشغَّلة' },
+    'sv.list.allOn': { en: 'Switch everything on', ar: 'شغّل كل شيء' },
+    'sv.list.allOff': { en: 'Switch everything off', ar: 'أطفئ كل شيء' },
+    'sv.list.sends': { en: 'Switched on, this sends', ar: 'عند تشغيلها، تُرسل' },
+    'sv.list.switchLabel': { en: 'Preview what this service sends', ar: 'اعرض ما ترسله هذه الخدمة' },
+
+    'sv.status.r4': { en: 'Cloud billing — off, free during beta', ar: 'فوترة السحابة — متوقفة، مجانية أثناء التجربة' },
+    'sv.status.r5': { en: 'Branches tier — not built yet', ar: 'فئة الفروع — لم تُبنَ بعد' },
+
     'sv.eyebrow': { en: 'Opt-in · Beta', ar: 'اختياري · تجريبي' },
     'sv.h1':      { en: 'Online services', ar: 'الخدمات السحابية' },
     'sv.lede':    { en: 'Khayt is a desktop app that works with no account, no server and no internet. On top of that there is an optional, end-to-end-encrypted cloud. This page is what it is, what each part of it sends, and how to switch any of it off.',
@@ -66,8 +91,8 @@
 
     'sv.list.eyebrow': { en: 'What’s on offer', ar: 'ما المتاح' },
     'sv.list.h2':  { en: 'Nine services, each on its own switch', ar: 'تسع خدمات، لكل منها مفتاحها' },
-    'sv.list.sub': { en: 'These are the same nine described on the home page — one list, so the two pages cannot drift apart. All are in beta.',
-                     ar: 'هذه هي التسع نفسها الموصوفة في الصفحة الرئيسية — قائمة واحدة، لكي لا تتباعد الصفحتان. وجميعها تجريبية.' },
+    'sv.list.sub': { en: 'Flip one on to see what it would send. Nothing here changes your install — this is the same switchboard the app shows you, and these are the same nine described on the home page, from one list so the two pages cannot drift apart.',
+                     ar: 'شغّل إحداها لترى ما كانت سترسله. لا شيء هنا يغيّر ما هو مثبّت عندك — هذه هي لوحة المفاتيح نفسها التي يعرضها التطبيق، وهذه هي التسع نفسها الموصوفة في الصفحة الرئيسية، من قائمة واحدة لكي لا تتباعد الصفحتان.' },
 
     'sv.sends.eyebrow': { en: 'Plainly', ar: 'بوضوح' },
     'sv.sends.h2':  { en: 'What each one actually sends', ar: 'ما تُرسله كل خدمة فعلياً' },
@@ -98,12 +123,17 @@
     'sv.status.h2': { en: 'All of it is beta, and labelled that way in the app', ar: 'جميعها تجريبي، وموسومة كذلك داخل التطبيق' },
     'sv.status.r1': { en: 'Cloud services — beta', ar: 'الخدمات السحابية — تجريبية' },
     'sv.status.r2': { en: 'Offline core — stable', ar: 'النواة دون اتصال — مستقرة' },
-    'sv.status.r3': { en: 'Price — free, no subscription', ar: 'السعر — مجاني، بلا اشتراك' },
+    'sv.status.r3': { en: 'Desktop app — free forever', ar: 'تطبيق سطح المكتب — مجاني للأبد' },
     'sv.status.cta': { en: 'Download Khayt', ar: 'حمّل خيط' },
     'sv.status.blog': { en: 'Read the blog', ar: 'اقرأ المدوّنة' }
   };
 
   var BETA = { en: 'BETA', ar: 'تجريبي' };
+
+  // Presentation state for the plan cards. Neither is persisted: a price is
+  // not a preference, and a reload should show the page's own default.
+  var cycle = 'monthly';
+  var cur = 'USD';
 
   function lang() { return document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en'; }
 
@@ -111,18 +141,113 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  // Which service cards are showing their "this sends" panel. The switches are
+  // a preview of the app's own switchboard and nothing more: this page has no
+  // idea what your install has turned on, and says so above the grid.
+  var shown = {};
+
+  function str(key) {
+    var d = window.PAGE_STRINGS[key];
+    return d ? d[lang()] : key;
+  }
+
+  /* ---------- The three plans ----------
+     Rendered from KHAYT_DATA.plans, which is vendored from lib/cloud-plans.js
+     in the app repo. While betaFree is true every non-zero price is struck
+     through — the figure still shown, because the point of publishing it is
+     that nobody meets it as a surprise later. */
+  function renderPlans(L) {
+    var grid = document.getElementById('planGrid');
+    var D = window.KHAYT_DATA || {};
+    if (!grid || !D.plans) return;
+
+    var annual = cycle === 'annual';
+    var sym = cur === 'SAR' ? 'SAR ' : '$';
+    var html = '';
+
+    for (var i = 0; i < D.plans.length; i++) {
+      var p = D.plans[i];
+      var amount = annual ? p.annual[cur] : p.price[cur];
+      var isFree = amount === 0;
+      var strike = !isFree && D.betaFree;
+
+      var cls = 'plan';
+      if (p.featured) cls += ' is-featured';
+      if (p.soon) cls += ' is-soon';
+
+      var badge = '';
+      if (p.soon) badge = '<span class="plan-badge soon">' + esc(str('sv.plans.soon')) + '</span>';
+      else if (p.featured) badge = '<span class="plan-badge">' + esc(str('sv.plans.featured')) + '</span>';
+
+      var period = isFree ? str('sv.plans.forever')
+        : (annual ? str('sv.plans.perYear') : str('sv.plans.perMonth'));
+
+      var feats = '';
+      for (var f = 0; f < p.features.length; f++) {
+        feats += '<li>' + esc(p.features[f][L]) + '</li>';
+      }
+
+      html += '<article class="' + cls + '">' +
+        '<div class="plan-top"><h3>' + esc(p.label[L]) + '</h3>' + badge + '</div>' +
+        '<p class="plan-tag">' + esc(p.tagline[L]) + '</p>' +
+        '<p class="plan-price"><span class="' + (strike ? 'amt struck' : 'amt') + '">' + esc(sym + amount) + '</span>' +
+        '<span class="per">' + esc(period) + '</span></p>' +
+        '<p class="plan-now' + (isFree ? ' free' : '') + '">' +
+        esc(isFree ? str('sv.plans.freeNow') : str('sv.plans.betaNow')) + '</p>' +
+        '<ul class="plan-feats">' + feats + '</ul>' +
+        (p.soon
+          ? '<span class="btn btn-ghost plan-cta is-dead" aria-disabled="true">' + esc(p.cta[L]) + '</span>'
+          : '<a class="btn ' + (p.featured ? 'btn-accent' : 'btn-ghost') + ' plan-cta" href="' + esc(p.href) + '">' + esc(p.cta[L]) + '</a>') +
+        '</article>';
+    }
+    grid.innerHTML = html;
+  }
+
+  /* ---------- The nine services, as a switchboard ---------- */
+  function renderServices(L, list) {
+    var grid = document.getElementById('svcGrid');
+    if (!grid) return;
+
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      var f = list[i];
+      var on = !!shown[i];
+      var sends = SENDS[i] || { what: { en: '', ar: '' }, to: { en: '', ar: '' } };
+
+      html += '<article class="svc' + (on ? ' is-on' : '') + '" id="svc-' + i + '">' +
+        '<div class="svc-head">' +
+          '<div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + f.i + '</svg></div>' +
+          '<div class="svc-text"><h3>' + esc(f.t[L]) + '</h3><p>' + esc(f.d[L]) + '</p></div>' +
+          '<button type="button" class="sw" role="switch" aria-checked="' + (on ? 'true' : 'false') +
+            '" data-svc="' + i + '" aria-label="' + esc(str('sv.list.switchLabel') + ' — ' + f.t[L]) + '">' +
+            '<span class="sw-knob" aria-hidden="true"></span></button>' +
+        '</div>' +
+        '<div class="svc-sends"' + (on ? '' : ' hidden') + '>' +
+          '<span class="svc-sends-k">' + esc(str('sv.list.sends')) + '</span>' +
+          '<p>' + esc(sends.what[L]) + '</p>' +
+          '<p class="svc-to">&rarr; ' + esc(sends.to[L]) + '</p>' +
+        '</div>' +
+      '</article>';
+    }
+    grid.innerHTML = html;
+    paintCount(list.length);
+  }
+
+  function paintCount(total) {
+    var n = 0;
+    for (var k in shown) if (shown[k]) n++;
+    var el = document.getElementById('svcCount');
+    if (el) el.textContent = str('sv.list.count').replace('{n}', String(n));
+    var all = document.getElementById('svcToggleAll');
+    if (all) all.textContent = str(n === total ? 'sv.list.allOff' : 'sv.list.allOn');
+  }
+
   function render() {
     var L = lang();
     var list = (window.KHAYT_DATA && window.KHAYT_DATA.cloud) || [];
 
-    var grid = document.getElementById('svcGrid');
-    if (grid) {
-      // The same renderer the home page uses, so the nine cards are the same
-      // nine cards. Ids are added afterwards for the sends table to link to.
-      grid.innerHTML = window.KHAYT_RENDER.cloud(list, L, BETA[L]);
-      var cards = grid.children;
-      for (var i = 0; i < cards.length; i++) cards[i].id = 'svc-' + i;
-    }
+    renderPlans(L);
+    renderServices(L, list);
 
     var body = document.getElementById('sendsBody');
     if (body) {
@@ -163,6 +288,46 @@
     }
     paint();
   }
+
+  /* ---------- Wiring ----------
+     One delegated listener on the document: the grids are re-rendered on every
+     language change, so anything bound to a card would be bound to a node that
+     no longer exists. */
+  document.addEventListener('click', function (ev) {
+    var sw = ev.target.closest && ev.target.closest('.sw');
+    if (sw) {
+      var i = sw.getAttribute('data-svc');
+      if (shown[i]) delete shown[i]; else shown[i] = true;
+      render();
+      var again = document.querySelector('.sw[data-svc="' + i + '"]');
+      if (again) again.focus();
+      return;
+    }
+
+    var all = ev.target.closest && ev.target.closest('#svcToggleAll');
+    if (all) {
+      var list = (window.KHAYT_DATA && window.KHAYT_DATA.cloud) || [];
+      var n = 0;
+      for (var k in shown) if (shown[k]) n++;
+      shown = {};
+      if (n !== list.length) for (var j = 0; j < list.length; j++) shown[j] = true;
+      render();
+      return;
+    }
+
+    var seg = ev.target.closest && ev.target.closest('.seg-btn');
+    if (seg) {
+      if (seg.hasAttribute('data-cycle')) cycle = seg.getAttribute('data-cycle');
+      else if (seg.hasAttribute('data-cur')) cur = seg.getAttribute('data-cur');
+      var group = seg.parentNode.children;
+      for (var g = 0; g < group.length; g++) {
+        var on = group[g] === seg;
+        group[g].classList.toggle('is-on', on);
+        group[g].setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      renderPlans(lang());
+    }
+  });
 
   // site.js owns the language and announces every change, including the one it
   // applies on load. Rendering only on DOMContentLoaded would paint the grid in

@@ -29,7 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Almarai:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="deep">
 
 <a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
 
@@ -71,8 +71,33 @@
   </div>
 </section>
 
+<!-- ============ PLANS ============ -->
+<section class="section alt" id="plans">
+  <div class="wrap">
+    <div class="plans-head">
+      <div>
+        <span class="eyebrow" data-i18n="sv.plans.eyebrow">Plans</span>
+        <h2 data-i18n="sv.plans.h2">The prices are real. Nobody is being charged yet.</h2>
+        <p class="lede" data-i18n="sv.plans.sub">The desktop app is free forever and always will be — it is the hosted service, and only the hosted service, that Khayt charges for. Those prices are published now so nobody discovers one later, having built their shop on the assumption there wasn't one.</p>
+      </div>
+      <div class="plans-switches">
+        <div class="seg" role="group" aria-label="Billing period" id="cycleSeg">
+          <button type="button" class="seg-btn is-on" data-cycle="monthly" aria-pressed="true" data-i18n="sv.plans.monthly">Monthly</button>
+          <button type="button" class="seg-btn" data-cycle="annual" aria-pressed="false" data-i18n="sv.plans.annual">Annual</button>
+        </div>
+        <div class="seg" role="group" aria-label="Currency" id="curSeg">
+          <button type="button" class="seg-btn is-on" data-cur="USD" aria-pressed="true">USD</button>
+          <button type="button" class="seg-btn" data-cur="SAR" aria-pressed="false">SAR</button>
+        </div>
+      </div>
+    </div>
+    <div class="plan-grid" id="planGrid"></div>
+    <p class="fineprint" data-i18n="sv.plans.peg">SAR is pegged to USD at 3.75, so these are the same price expressed twice. Other locales see USD — a rate snapshot that goes stale is worse than a foreign currency.</p>
+  </div>
+</section>
+
 <!-- ============ THE PROMISE ============ -->
-<section class="section tight">
+<section class="section tight alt">
   <div class="wrap">
     <div class="promise">
       <div class="promise-mark" aria-hidden="true">
@@ -91,13 +116,17 @@
   <div class="wrap">
     <span class="eyebrow" data-i18n="sv.list.eyebrow">What's on offer</span>
     <h2 data-i18n="sv.list.h2">Nine services, each on its own switch</h2>
-    <p class="lede" data-i18n="sv.list.sub">These are the same nine described on the home page — one list, so the two pages cannot drift apart. All are in beta.</p>
-    <div class="feat-grid beta-section" id="svcGrid"></div>
+    <p class="lede" data-i18n="sv.list.sub">Flip one on to see what it would send. Nothing here changes your install — this is the same switchboard the app shows you, and these are the same nine described on the home page, from one list so the two pages cannot drift apart.</p>
+    <div class="svc-bar">
+      <button type="button" class="btn btn-ghost btn-sm" id="svcToggleAll" data-i18n="sv.list.allOn">Switch everything on</button>
+      <span class="svc-count" id="svcCount" aria-live="polite"></span>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
   </div>
 </section>
 
 <!-- ============ WHAT LEAVES THE MACHINE ============ -->
-<section class="section alt" id="sends">
+<section class="section paper" id="sends">
   <div class="wrap">
     <span class="eyebrow" data-i18n="sv.sends.eyebrow">Plainly</span>
     <h2 data-i18n="sv.sends.h2">What each one actually sends</h2>
@@ -154,25 +183,27 @@
 </section>
 
 <!-- ============ STATUS ============ -->
-<section class="section alt" id="status">
+<section class="section" id="status">
   <div class="wrap">
     <span class="eyebrow" data-i18n="sv.status.eyebrow">Where this stands</span>
     <h2 data-i18n="sv.status.h2">All of it is beta, and labelled that way in the app</h2>
     <div class="split">
       <div data-lang="en">
         <p>The cloud is marked BETA on the home page, in the app and here, and the word is meant literally rather than as a disclaimer: these services are newer than the offline core, they change between releases, and a shop that needs its book to be boring should run the offline core and leave them alone.</p>
-        <p>Nothing about them is paywalled. There is no subscription, no seat count and no upgrade tier — the comparison on the home page exists to describe what each <em>mode</em> shows you, not what you have paid for.</p>
+        <p>Nothing is being charged today: every plan is free while the cloud is in beta, and billing will not switch on before payment collection exists. The mode comparison on the home page is a different thing entirely — it describes what each <em>mode</em> shows you locally, not what you have paid for.</p>
         <p>If you are weighing one of these up, the honest order is: run Khayt offline first, decide whether the thing you want is worth an account at all, and switch on only that one.</p>
       </div>
       <div data-lang="ar" hidden>
         <p>السحابة موسومة بـ BETA في الصفحة الرئيسية وداخل التطبيق وهنا، والكلمة مقصودة حرفياً لا كإخلاء مسؤولية: هذه الخدمات أحدث من النواة العاملة دون اتصال، وتتغيّر بين الإصدارات، والمطبعة التي تحتاج دفترها أن يكون مملاً يجدر بها أن تشغّل النواة وتترك هذه الخدمات.</p>
-        <p>لا شيء منها خلف جدار دفع. لا اشتراك ولا عدّ مقاعد ولا فئة ترقية — والمقارنة في الصفحة الرئيسية موجودة لتصف ما يعرضه كل <em>وضع</em>، لا ما دفعت مقابله.</p>
+        <p>ولا يُحصَّل شيء اليوم: كل خطة مجانية ما دامت السحابة تجريبية، ولن تبدأ الفوترة قبل أن توجد وسيلة تحصيل أصلاً. أمّا مقارنة الأوضاع في الصفحة الرئيسية فشيء آخر تماماً — فهي تصف ما يعرضه كل <em>وضع</em> على جهازك، لا ما دفعت مقابله.</p>
         <p>وإن كنت توازن بين هذه الخدمات، فالترتيب الصادق هو: شغّل خيط دون اتصال أولاً، وقرّر إن كان ما تريده يستحق حساباً أصلاً، ثم شغّل ذلك وحده.</p>
       </div>
       <div class="status-card">
         <div class="status-row"><span class="dot" aria-hidden="true"></span><span data-i18n="sv.status.r1">Cloud services — beta</span></div>
         <div class="status-row"><span class="dot stable" aria-hidden="true"></span><span data-i18n="sv.status.r2">Offline core — stable</span></div>
-        <div class="status-row"><span class="dot stable" aria-hidden="true"></span><span data-i18n="sv.status.r3">Price — free, no subscription</span></div>
+        <div class="status-row"><span class="dot stable" aria-hidden="true"></span><span data-i18n="sv.status.r3">Desktop app — free forever</span></div>
+        <div class="status-row"><span class="dot warn" aria-hidden="true"></span><span data-i18n="sv.status.r4">Cloud billing — off, free during beta</span></div>
+        <div class="status-row"><span class="dot" aria-hidden="true"></span><span data-i18n="sv.status.r5">Branches tier — not built yet</span></div>
         <a class="btn btn-primary" href="index.html#download" data-i18n="sv.status.cta">Download Khayt</a>
         <a class="btn btn-ghost" href="blog/" data-i18n="sv.status.blog">Read the blog</a>
       </div>
