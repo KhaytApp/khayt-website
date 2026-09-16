@@ -22,7 +22,7 @@
       ar: 'خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد'
     },
     'meta.desc': {
-      en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, ZATCA Phase 2 e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
+      en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, signed e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
       ar: 'تطبيق مجاني لأصحاب مطابع الطباعة ثلاثية الأبعاد. قائمة إنتاج كانبان، حاسبة تكلفة، فوترة إلكترونية للمرحلة الثانية من هيئة الزكاة، ربط مباشر بالطابعات، مخزون الخيوط وتحليلات — دون اتصال تماماً.'
     },
 
@@ -125,7 +125,7 @@
     'bento.calib.act':   { en: 'Actual', ar: 'الفعلي' },
     'bento.tax.tag':     { en: 'Tax, worldwide', ar: 'ضرائب حول العالم' },
     'bento.tax.t':       { en: 'Prices that add up the way your country does', ar: 'أسعار تُحسب كما تُحسب في بلدك' },
-    'bento.tax.d':       { en: 'Tax added to a price rather than folded into it — so a shop quoting 100 invoices 108.25. Thirty country presets, alongside the ZATCA e-invoicing that was already there.', ar: 'ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه — فمطبعة تعرض 100 تُصدر فاتورة بـ108.25. ثلاثون إعداداً جاهزاً للدول، إلى جانب فوترة هيئة الزكاة والضريبة الموجودة أصلاً.' },
+    'bento.tax.d':       { en: 'Tax added to a price rather than folded into it — so a shop quoting 100 invoices 108.25. Thirty country presets, alongside the signed e-invoicing that was already there.', ar: 'ضريبة تُضاف إلى السعر بدل أن تكون مضمّنة فيه — فمطبعة تعرض 100 تُصدر فاتورة بـ108.25. ثلاثون إعداداً جاهزاً للدول، إلى جانب فوترة هيئة الزكاة والضريبة الموجودة أصلاً.' },
     'bento.tax.f1':      { en: 'Subtotal', ar: 'المجموع الفرعي' },
     'bento.tax.f2':      { en: 'Sales tax · 8.25%', ar: 'ضريبة المبيعات · 8.25٪' },
     'bento.tax.f3':      { en: 'Invoiced', ar: 'المفوتر' },
@@ -146,7 +146,7 @@
     'lang.h2':     { en: 'Built for global makers', ar: 'مصمّم لصُنّاع العالم' },
     'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) makes nine, and dates and numbers now follow the language you picked rather than defaulting to English.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) لتصبح تسع لغات، وصارت التواريخ والأرقام تتبع اللغة التي اخترتها بدل الإنجليزية.' },
     'lang.li1':{ en: 'Arabic RTL layout throughout the entire app', ar: 'تخطيط عربي من اليمين لليسار في كامل التطبيق' },
-    'lang.li2':{ en: 'ZATCA Phase 2 e-invoices — signed, bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
+    'lang.li2':{ en: 'Signed e-invoices — bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
@@ -228,7 +228,7 @@
     calculator: { name: { en: 'Calculator', ar: 'الحاسبة' }, cap: { en: 'Quote with confidence, not guesswork', ar: 'سعّر بثقة لا بالتخمين' }, text: { en: 'A multi-part cart costs material, machine time, electricity, labour, overhead, failure rate and margin in real time — for both FDM (grams) and Resin (mL), with G-code / 3MF auto-extraction.', ar: 'سلة متعددة القطع تحسب المادة ووقت التشغيل والكهرباء والعمالة والمصاريف ونسبة الفشل والهامش لحظياً — لكل من FDM بالغرام والراتنج بالمل، مع استخراج تلقائي من G-code و3MF.' } },
     printfiles: { name: { en: 'Print Files', ar: 'ملفات الطباعة' }, cap: { en: 'Your STL, 3MF and G-code library', ar: 'مكتبة ملفات STL و3MF وG-code' }, text: { en: 'A visual library of your print files with real preview thumbnails, extracted colours and swap counts, tested slicer notes, and one-click open in any installed slicer. Convert a 3MF to another printer and the result stays with the file.', ar: 'مكتبة مرئية لملفات الطباعة بمعاينات حقيقية، ألوان مستخرجة وعدد التبديلات، ملاحظات التقطيع المجرّبة، وفتح بنقرة في أي برنامج تقطيع مثبّت. حوّل ملف 3MF لطابعة أخرى ويبقى الناتج مع الملف.' } },
     colorstudio: { name: { en: 'Colour Studio', ar: 'استوديو الألوان' }, cap: { en: 'Match, blend and plan filament colours', ar: 'طابِق وامزج وخطّط ألوان الخيوط' }, text: { en: 'Pick a target colour and see the closest filament you already own, ranked by perceptual distance (ΔE). Blend two spools into a gradient for ombré or swap plans, and assign each colour of a multicolour print to a spool — with cost pushed straight to the calculator.', ar: 'اختر لوناً هدفاً وشاهد أقرب خيط تملكه مرتّباً حسب الفرق اللوني (ΔE). امزج بكرتين في تدرّج لخطط الأومبريه أو التبديل، وعيّن كل لون في طباعة متعددة الألوان لبكرة — مع دفع التكلفة مباشرة للحاسبة.' } },
-    orders:     { name: { en: 'Orders Log', ar: 'سجل الطلبات' }, cap: { en: 'From quote to paid, in one log', ar: 'من العرض إلى السداد في سجل واحد' }, text: { en: 'Every order tracked end-to-end with ZATCA Phase 2 e-invoices, TLV QR codes, proforma invoices, milestone billing, BNPL payment links, PDF export and WhatsApp or email delivery.', ar: 'كل طلب متتبّع من البداية للنهاية بفواتير المرحلة الثانية ورمز QR وفواتير مبدئية وفوترة بالمراحل وروابط دفع آجل وتصدير PDF وإرسال عبر واتساب أو البريد.' } },
+    orders:     { name: { en: 'Orders Log', ar: 'سجل الطلبات' }, cap: { en: 'From quote to paid, in one log', ar: 'من العرض إلى السداد في سجل واحد' }, text: { en: 'Every order tracked end-to-end with signed e-invoices, TLV QR codes, proforma invoices, milestone billing, BNPL payment links, PDF export and WhatsApp or email delivery.', ar: 'كل طلب متتبّع من البداية للنهاية بفواتير المرحلة الثانية ورمز QR وفواتير مبدئية وفوترة بالمراحل وروابط دفع آجل وتصدير PDF وإرسال عبر واتساب أو البريد.' } },
     inventory:  { name: { en: 'Inventory', ar: 'المخزون' }, cap: { en: 'Never start a print you can\u2019t finish', ar: 'لا تبدأ طباعة لا يمكنك إكمالها' }, text: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, FIFO cost, smart reorder alerts with draft purchase orders, drying logs and price history.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، تكلفة FIFO، تنبيهات إعادة طلب ذكية بأوامر شراء، سجلات التجفيف وسجل الأسعار.' } },
     analytics:  { name: { en: 'Analytics', ar: 'التحليلات' }, cap: { en: 'Know exactly where the money goes', ar: 'اعرف أين يذهب المال بالضبط' }, text: { en: 'Revenue trends, machine P&L, operator performance, filament usage, retention and a production heatmap — in Simple or Professional reporting modes, with end-of-day PDFs.', ar: 'اتجاهات الإيرادات، أرباح كل آلة، أداء المشغّلين، استهلاك الخيوط، الاحتفاظ وخريطة حرارية للإنتاج — بوضع بسيط أو احترافي، مع تقارير PDF لنهاية اليوم.' } },
     clients:    { name: { en: 'Clients', ar: 'العملاء' }, cap: { en: 'Turn buyers into regulars', ar: 'حوّل المشترين إلى عملاء دائمين' }, text: { en: 'Client profiles with credit limits, multi-currency, loyalty tiers with automatic discounts, a live customer portal with QR order tracking and an aged-receivables report.', ar: 'ملفات عملاء بحدود ائتمانية وتعدد عملات ومستويات ولاء بخصومات تلقائية، بوابة عملاء حيّة بتتبّع QR وتقرير الذمم المدينة.' } },
@@ -255,7 +255,7 @@
     { v: '3.0.0', date: '2026-07-04', beta: false, d: { en: 'Khayt 3.0 stable — optional E2E-encrypted cloud: sync, teams, storefront, portal & AI assistant', ar: 'خيط 3.0 مستقر — سحابة اختيارية مشفّرة: مزامنة، فِرق، متجر، بوابة ومساعد ذكي' } },
     { v: '2.3.3', date: '2026-06-11', beta: false, d: { en: 'LAN tunnel & customer-portal hardening', ar: 'تحسين نفق الشبكة وبوابة العملاء' } },
     { v: '2.3.0', date: '2026-06-04', beta: false, d: { en: 'Security & stability release — LAN order tracking tokens', ar: 'إصدار أمان واستقرار — رموز تتبّع الطلبات' } },
-    { v: '2.2.0', date: '2026-05-30', beta: false, d: { en: 'Gift cards, ZATCA Phase 2 FATOORA, LAN quote approval', ar: 'بطاقات هدايا، فاتورة المرحلة الثانية، اعتماد العروض' } },
+    { v: '2.2.0', date: '2026-05-30', beta: false, d: { en: 'Gift cards, Phase 2 e-invoicing, LAN quote approval', ar: 'بطاقات هدايا، فاتورة المرحلة الثانية، اعتماد العروض' } },
     { v: '2.1.0', date: '2026-05-30', beta: false, d: { en: 'Modular renderer, store validation, expanded tests', ar: 'بنية معيارية، التحقق من البيانات، اختبارات موسّعة' } }
   ];
 
