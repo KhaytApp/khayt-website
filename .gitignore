@@ -1,0 +1,8 @@
+# design-sync working state: staged converter scripts, regenerated bundle
+# output, machine-local caches. The durable inputs under .design-sync/
+# (config.json, NOTES.md, conventions.md, extract-tokens.mjs) ARE committed.
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
