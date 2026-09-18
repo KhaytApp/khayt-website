@@ -11,6 +11,19 @@
   'use strict';
   root.KHAYT_POSTS = [
   {
+    slug: 'mac-first',
+    date: '2026-09-18',
+    tag: { en: 'Direction', ar: 'الاتجاه' },
+    t: {
+      en: 'The Mac app leads now, and the cross-platform app follows',
+      ar: 'تطبيق ماك يتقدّم الآن، والنسخة العابرة للمنصّات تتبعه'
+    },
+    d: {
+      en: 'Khayt for macOS and the iPhone companion are where the work goes from here. The Windows and Linux app keeps being maintained and keeps getting the same features — weeks later, not never. What that means if you are running Khayt today.',
+      ar: 'خيط لماك وتطبيق الآيفون المرافق هما وجهة العمل من الآن. وتطبيق ويندوز ولينكس يبقى مدعوماً ويأخذ المزايا نفسها — بعد أسابيع، لا أبداً. وهذا ما يعنيه ذلك إن كنت تشغّل خيط اليوم.'
+    }
+  },
+  {
     slug: 'native-mac-alpha',
     date: '2026-09-14',
     tag: { en: 'Mac', ar: 'ماك' },
