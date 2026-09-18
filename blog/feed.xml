@@ -5,9 +5,29 @@
   <link href="https://khaytapp.com/blog/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://khaytapp.com/blog/" rel="alternate" type="text/html"/>
   <id>https://khaytapp.com/blog/</id>
-  <updated>2026-09-14T12:00:00Z</updated>
+  <updated>2026-09-18T12:00:00Z</updated>
   <author><name>Khayt</name><uri>https://khaytapp.com/</uri></author>
   <rights>FSL-1.1-Apache-2.0 · © 2026 Khayt</rights>
+
+  <entry xml:lang="en">
+    <title>The Mac app leads now, and the cross-platform app follows</title>
+    <link href="https://khaytapp.com/blog/mac-first.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-18:/blog/mac-first/en</id>
+    <published>2026-09-18T12:00:00Z</published>
+    <updated>2026-09-18T12:00:00Z</updated>
+    <category term="Direction"/>
+    <summary type="text">Khayt for macOS and the iPhone companion are where the work goes from here. The Windows and Linux app keeps being maintained and keeps getting the same features — weeks later, not never. What that means if you are running Khayt today.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>تطبيق ماك يتقدّم الآن، والنسخة العابرة للمنصّات تتبعه</title>
+    <link href="https://khaytapp.com/blog/mac-first.html?lang=ar" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-09-18:/blog/mac-first/ar</id>
+    <published>2026-09-18T12:00:00Z</published>
+    <updated>2026-09-18T12:00:00Z</updated>
+    <category term="الاتجاه"/>
+    <summary type="text">خيط لماك وتطبيق الآيفون المرافق هما وجهة العمل من الآن. وتطبيق ويندوز ولينكس يبقى مدعوماً ويأخذ المزايا نفسها — بعد أسابيع، لا أبداً. وهذا ما يعنيه ذلك إن كنت تشغّل خيط اليوم.</summary>
+  </entry>
 
   <entry xml:lang="en">
     <title>Khayt for macOS, rebuilt native — where the alpha stands</title>
