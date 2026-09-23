@@ -470,7 +470,7 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 .foot-brand p { color: var(--muted); font-size: 14px; margin-top: 14px; }
 .foot-brand .ar-sub { font-family: var(--font-ar); color: var(--ink-soft); margin-top: 4px; font-size: 14px; }
 .foot-links { display: flex; gap: 54px; flex-wrap: wrap; }
-.foot-col h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.foot-col h2 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
 .foot-col a { display: block; font-size: 14px; color: var(--ink-soft); padding: 5px 0; transition: color .15s; }
 .foot-col a:hover { color: var(--brand-2); }
 .foot-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }

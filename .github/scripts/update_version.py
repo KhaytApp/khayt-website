@@ -62,7 +62,21 @@ def replace_version_outside_mac_block(html, old_ver, new_ver):
     missing them is handled as it always was, with a warning rather than a
     failure, because an older index.html is still a valid one.
     """
-    sub = lambda t: re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, t)
+    # A release-download URL is NEVER rewritten here. Its filename comes from
+    # the asset map above, which only writes a URL for an asset the release
+    # actually has. This blanket pass used to rewrite them anyway, which
+    # defeated that guard completely: v3.8.0 shipped with no macOS artifacts,
+    # the asset map correctly skipped the .dmg — and then this line rewrote
+    # `v3.7.0/Khayt-3.7.0-arm64.dmg` into a v3.8.0 URL that was never built.
+    # khaytapp.com offered macOS users a download that 404ed for two days.
+    DL = re.compile(r'https://github\.com/[^"\s]*?/releases/download/[^"\s]*')
+    def sub(t):
+        bump = lambda x: re.sub(r'(?<!\d)' + re.escape(old_ver) + r'(?!\d)', new_ver, x)
+        out, last = '', 0
+        for m in DL.finditer(t):
+            out += bump(t[last:m.start()]) + m.group(0)
+            last = m.end()
+        return out + bump(t[last:])
 
     # Split the page into the parts that may be rewritten and the parts that
     # may not, then rewrite only the first kind. A page missing a marker is
@@ -190,6 +204,66 @@ if release:
 else:
     # Fallback: plain string replace (may break if filename format changed)
     html = replace_version_outside_mac_block(html, old_ver, new_ver)
+
+def sync_sizes(html, releases_by_tag):
+    """Make each download button state the size of the file it actually links to.
+
+    These were hand-written and every one of them was wrong: the page said
+    131 MB for a 147 MB installer, 156 for a 166 MB AppImage, 124 for 134.
+    They are beside a URL this script rewrites on every release, so they drift
+    a little further each time and nothing notices — the same shape of bug as
+    a hand-written release note next to an auto-synced version chip.
+
+    Keyed off the filename in each link's own href, not off a platform guess,
+    so the two Windows .exe builds cannot be told apart wrongly.
+    """
+    size_of = {}
+    for rel in releases_by_tag.values():
+        for a in rel.get('assets', []):
+            size_of[a['name']] = a['size']
+
+    LINK = re.compile(r'(<a class="dl-link"[^>]*href="[^"]*?/releases/download/[^/"]+/([^"/]+)"[^>]*>)(.*?)(</a>)', re.S)
+    changed = []
+    def fix(m):
+        head, filename, body, tail = m.groups()
+        size = size_of.get(filename)
+        if size is None:
+            return m.group(0)
+        mb = round(size / 1024 / 1024)
+        new_body, n = re.subn(r'\b\d+(?:\.\d+)?\s*MB\b', f'{mb} MB', body)
+        if n and new_body != body:
+            changed.append(f'{filename}: {mb} MB')
+        return head + new_body + tail
+    html = LINK.sub(fix, html)
+    for c in changed:
+        print('  size synced — ' + c)
+    return html
+
+
+# Every download URL on the page must name an asset this release really has.
+# Belt and braces to the freeze above: if some future edit reintroduces a way
+# for a URL to be invented, the sync fails here instead of committing a 404.
+if release is not None:
+    # Sizes come from whichever release each link actually points at — a link
+    # left on an older tag (because this release has no such asset) must state
+    # that older file's size, not this one's.
+    by_tag = {new_tag: release}
+    for t in set(re.findall(r'/releases/download/(v[0-9.]+)/', html)):
+        if t not in by_tag:
+            try:
+                by_tag[t] = next(r for r in releases if r['tag_name'] == t)
+            except Exception:
+                pass
+    html = sync_sizes(html, by_tag)
+
+    real = {a['browser_download_url'] for a in release.get('assets', [])}
+    bad = [u for u in re.findall(r'https://github\.com/[^"\s]*?/releases/download/[^"\s]*', html)
+           if new_tag in u and u not in real]
+    if bad:
+        print('ERROR: these URLs name assets %s does not have:' % new_tag)
+        for u in bad:
+            print('  ' + u)
+        sys.exit(1)
 
 with open('index.html', 'w') as f:
     f.write(html)

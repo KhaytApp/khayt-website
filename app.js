@@ -161,6 +161,7 @@
     'dl.dmg':    { en: 'Download .dmg', ar: 'حمّل .dmg' },
     'dl.exe':    { en: 'Installer (.exe)', ar: 'المثبّت (.exe)' },
     'dl.portable':{ en: 'Portable (.exe)', ar: 'نسخة محمولة (.exe)' },
+    'dl.portable_where': { en: 'x64 · on the releases page', ar: 'x64 · في صفحة الإصدارات' },
     'dl.deb':    { en: 'Debian / Ubuntu (.deb)', ar: 'دبيان / أوبنتو (.deb)' },
     'dl.latest': { en: 'latest', ar: 'الأحدث' },
     'dl.srcavail':{ en: 'Source available', ar: 'المصدر متاح' },
