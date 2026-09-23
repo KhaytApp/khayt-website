@@ -82,6 +82,31 @@ ln -sfn ../../../.design-sync/package .ds-sync/node_modules/@khayt/tokens
   `node_modules`. Harmless with zero components, and it would matter the moment
   there were any.
 
+## This repo has its own project — do not point it at "Khayt Design System"
+
+**Fixed 2026-09-18.** Both this repo and the Khayt app repo
+(`/Users/turkialballaa/Khayt/.design-sync/config.json`) had `projectId`
+`75ea0497-476b-4e0d-9e68-ace704423f5b` — one Claude Design project, two
+different design systems:
+
+| | this repo | the app repo |
+|---|---|---|
+| `pkg` | `@khayt/tokens` | `@khayt/design-system` |
+| content | tokens only, empty `_ds_bundle.js` | 11 React components |
+
+They overwrote each other. A sync from here builds a bundle with no
+`components/`, and the reconciliation pass deletes every remote path the local
+bundle lacks — so it would have **wiped all 11 components**. It had already
+happened once in the other direction: this repo synced on 16 Sep and the app
+repo's sync overwrote it on 17 Sep.
+
+This repo now syncs to **"Khayt Site Foundations"**
+(`987ea060-c3e9-4ed6-93db-0e28fb7bba29`). The app repo keeps
+`75ea0497-…`. Neither config should ever name the other's project.
+
+If a future sync from here lists remote `components/` that this repo did not
+build, **stop** — it means the pin has drifted back to the app's project.
+
 ## Re-sync risks
 
 - **The extractor is coupled to `styles.css`'s shape**, not just its values. A
@@ -92,6 +117,10 @@ ln -sfn ../../../.design-sync/package .ds-sync/node_modules/@khayt/tokens
   every re-sync. Adding a token to `styles.css` does NOT update the header.
 - **Nothing here is visually verified.** No previews exist to look at, so the
   gate was the CSS closure and the token diff, not a render.
+- **Two repos sync Khayt design systems.** Anything that resets
+  `.design-sync/config.json` from the app repo's copy re-creates the collision
+  above. The `projectId` is the one field that must differ between them.
+
 - **The moment Khayt grows a real React component library**, this config is the
   wrong shape: `pkg` should point at that package's built `dist/`, and
   `.design-sync/package/` here should be deleted rather than grown.
