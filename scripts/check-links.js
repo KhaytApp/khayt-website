@@ -75,18 +75,38 @@ async function check(url) {
   return 'ERR';
 }
 
+// A REFUSAL IS NOT AN ABSENCE.
+//
+// reddit.com answers this check with 403 from a GitHub runner and 200 from a
+// laptop: it is turning away a datacenter IP, not saying the subreddit is
+// gone. Failing on that would make a daily job that cries wolf, and a check
+// people learn to ignore is worse than no check — it was red on its very
+// first scheduled run for exactly this.
+//
+// So only an answer that proves the thing is NOT THERE fails: 404, 410, and
+// the 5xx range where the host is broken. 401/403/429 mean the server
+// responded and declined to serve US, which the download buttons — the whole
+// reason this exists — can never do: GitHub returns a plain 404 for an asset
+// that was never built.
+const BLOCKED = new Set([401, 403, 429]);
+
 (async () => {
-  const bad = [];
+  const bad = [], blocked = [];
   for (const url of urls) {
     let status = await check(url);
     // One retry: a single timeout is weather, not a broken link.
     if (typeof status !== 'number' || status >= 400) status = await check(url);
-    const ok = typeof status === 'number' && status < 400;
-    if (!ok) bad.push({ url, status, pages: [...found.get(url)] });
-    console.log(`  ${ok ? 'ok   ' : 'FAIL '} ${String(status).padEnd(5)} ${url}`);
+    const isBlocked = BLOCKED.has(status);
+    const ok = (typeof status === 'number' && status < 400) || isBlocked;
+    if (isBlocked) blocked.push({ url, status });
+    else if (!ok) bad.push({ url, status, pages: [...found.get(url)] });
+    const tag = isBlocked ? 'bot? ' : ok ? 'ok   ' : 'FAIL ';
+    console.log(`  ${tag} ${String(status).padEnd(5)} ${url}`);
   }
 
-  console.log(`\n${urls.length} link(s) checked, ${bad.length} broken`);
+  console.log(`\n${urls.length} link(s) checked, ${bad.length} broken` +
+              (blocked.length ? `, ${blocked.length} refused us (not counted)` : ''));
+  for (const b of blocked) console.log(`  note: ${b.status} from ${b.url} — reachable, declined to serve a bot`);
   if (bad.length) {
     console.error('\nBroken links:');
     for (const b of bad) console.error(`  ${b.status}  ${b.url}\n        on: ${b.pages.join(', ')}`);
