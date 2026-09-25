@@ -46,7 +46,8 @@ function pages() {
 
 check('JavaScript parses', () => {
   const files = ['app.js', 'site.js', 'services.js', 'data.js', 'render.js',
-    'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js'];
+    'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
+    'scripts/check-links.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });

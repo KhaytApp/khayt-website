@@ -1,0 +1,30 @@
+name: Links resolve
+
+# NOT on pull_request, and that is the point.
+#
+# check-site.js runs on every PR and is deliberately offline: a flaky network
+# must never fail somebody's commit. So nothing has ever asked whether the
+# download buttons point at files that exist — and in one week that cost this
+# site a macOS .dmg that 404ed for two releases, download sizes that were all
+# 10-16MB wrong, and a release sync that reported success while changing
+# nothing. None of it was visible in the HTML.
+#
+# Daily, so a broken link is found in hours rather than by a visitor; and on
+# demand, for after a release.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+
+      - name: Every link on the site resolves
+        run: node scripts/check-links.js
