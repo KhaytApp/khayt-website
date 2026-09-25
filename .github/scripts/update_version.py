@@ -135,7 +135,18 @@ with open('index.html') as f:
 # Unanchored, this would have read the Mac app's version as "the current
 # version", then rewritten the page around a number that has nothing to do with
 # the release being published.
-m = re.search(r'github\.com/khaytapp/Khayt/releases/download/v([\w.\-]+)/', html, re.I)
+# The HIGHEST version among them, not the first one encountered. A link may
+# legitimately be left behind on an older tag when this release has no asset
+# for it (the macOS .dmg was pinned to v3.7.0 across two releases that shipped
+# without one). Reading the first URL then reports the PINNED version as the
+# page's current version, the text replace finds nothing to change, and the
+# sync quietly does nothing at all.
+_vers = re.findall(r'github\.com/khaytapp/Khayt/releases/download/v([\w.\-]+)/', html, re.I)
+def _key(v):
+    parts = re.findall(r'\d+', v)
+    return [int(x) for x in parts[:3]] + [0] * (3 - len(parts[:3]))
+m = max(_vers, key=_key) if _vers else None
+m = type('M', (), {'group': staticmethod(lambda n, _v=m: _v)})() if m else None
 if not m:
     print('ERROR: could not detect current version in index.html')
     print('       (looked for a khaytapp/Khayt download URL — the Mac app\'s own')
@@ -180,11 +191,37 @@ if release:
 
     # Replace each old per-platform URL with the real new URL
     def replace_url(html, old_tag, old_ver, ext_pattern, new_url):
-        """Replace a single download URL matched by its extension pattern."""
+        """Point every download link of one kind at this release's asset.
+
+        ── WHY THIS NO LONGER MATCHES ON old_tag ─────────────────────────────
+
+        It used to look for `/releases/download/<old_tag>/…<ext>` — which
+        assumed every download on the page sits on the SAME tag. That stopped
+        being true the moment one link had to stay behind: v3.8.0 and v3.9.0
+        both shipped with no macOS build, so the .dmg was pinned to v3.7.0
+        while Windows and Linux moved on.
+
+        The version is then detected from whichever URL comes first — the
+        pinned one — and every other link, being on a different tag, matched
+        nothing. The sync rewrote NOTHING and reported success, which is the
+        failure this file's comments keep warning about: a run that looks
+        clean and leaves the site a release behind.
+
+        Matching on the extension alone fixes it. A link's tag is an output of
+        this script, never an input to finding it.
+        """
         old_url_pattern = re.compile(
             r'https://github\.com/' + re.escape(REPO) +
-            r'/releases/download/' + re.escape(old_tag) +
-            r'/[^\'"]+' + ext_pattern
+            r'/releases/download/v[\w.\-]+' +
+            r'/[^\'"]+' + ext_pattern,
+            # CASE-INSENSITIVE, and that is not a nicety. REPO is spelled
+            # "khaytapp/Khayt" here while every URL on the page says
+            # "KhaytApp/Khayt", so this pattern matched NOTHING — for as long
+            # as it has existed. Every download URL the site has ever updated
+            # was updated by the blanket version-string replace instead, and
+            # this asset-map path, including its "only write a URL for an
+            # asset that exists" guard, was dead code that looked alive.
+            re.I
         )
         return old_url_pattern.sub(new_url, html)
 
