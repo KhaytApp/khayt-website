@@ -53,4 +53,20 @@
     <lastmod>2026-09-18</lastmod>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://khaytapp.com/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/privacy/?lang=ar"/>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://khaytapp.com/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/terms/?lang=ar"/>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
 </urlset>

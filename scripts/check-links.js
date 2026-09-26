@@ -34,10 +34,7 @@ process.chdir(ROOT);
 
 const DOWNLOADS_ONLY = process.argv.includes('--downloads');
 
-function pages() {
-  const blog = fs.readdirSync('blog').filter(f => f.endsWith('.html')).map(f => 'blog/' + f);
-  return ['index.html', 'services.html', '404.html', ...blog];
-}
+const pages = require('./pages.js');
 
 // Anchored to real href/src attributes: a URL inside a comment or a code
 // sample is not a link this site offers anyone.

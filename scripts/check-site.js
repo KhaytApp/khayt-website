@@ -35,19 +35,15 @@ function blogPosts() {
   return fs.readdirSync('blog').filter(f => f.endsWith('.html') && f !== 'index.html');
 }
 
-// Every HTML page the site serves. 404.html is one of them — GitHub Pages
-// hands it to anyone who mistypes a URL, and it was not being checked.
-function pages() {
-  return ['index.html', 'services.html', '404.html', 'blog/index.html',
-    ...blogPosts().map(b => 'blog/' + b)];
-}
+// Every HTML page the site serves — shared with check-links.js.
+const pages = require('./pages.js');
 
 /* ---------- 1. Everything parses ---------- */
 
 check('JavaScript parses', () => {
   const files = ['app.js', 'site.js', 'services.js', 'data.js', 'render.js',
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
-    'scripts/check-links.js'];
+    'scripts/check-links.js', 'scripts/pages.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -217,7 +213,13 @@ check('Sitemap lists every page', () => {
   const xml = fs.readFileSync('sitemap.xml', 'utf8');
   if (!/<\/urlset>\s*$/.test(xml.trim())) throw new Error('sitemap.xml is malformed');
   const listed = new Set([...xml.matchAll(/<loc>https:\/\/khaytapp\.com\/([^<]*)<\/loc>/g)].map(m => m[1]));
-  const want = ['', 'services.html', 'blog/', ...blogPosts().map(b => 'blog/' + b)];
+  // Derived from pages() rather than hand-listed: this check passed happily
+  // while /privacy and /terms were missing from the sitemap, because the list
+  // it compared against was written by hand and nobody thought to extend it.
+  // 404.html is deliberately out — a sitemap advertises pages, not the error.
+  const want = pages()
+    .filter(p => p !== '404.html')
+    .map(p => p === 'index.html' ? '' : p.replace(/(^|\/)index\.html$/, '$1'));
   const missing = want.filter(w => !listed.has(w));
   if (missing.length) throw new Error('not listed: ' + missing.join(', '));
   return listed.size + ' URLs';
@@ -239,6 +241,42 @@ check('Every blog post is in the index', () => {
 
 /* ---------- 6. The things a review already found once ---------- */
 
+check('The privacy policy is reachable from every page', () => {
+  // Google's OAuth brand verification requires the app's homepage to link to a
+  // privacy policy on the same domain; the footer link is what satisfies it,
+  // and a page that loses it fails a review nobody here would see coming.
+  // 404.html has no footer on purpose — it is an error page, not a page.
+  const bad = [];
+  for (const p of pages()) {
+    if (p === '404.html') continue;
+    const html = fs.readFileSync(p, 'utf8');
+    for (const want of ['foot.privacy', 'foot.terms']) {
+      if (!html.includes('data-i18n="' + want + '"')) bad.push(p + ': no ' + want + ' link');
+    }
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return pages().length - 1 + ' pages';
+});
+
+// Where a nav link actually lands, as a repo-relative file, so the three
+// spellings the site uses for the same destination compare equal: bare
+// "#screens" on index.html, root-absolute "/#screens" on 404.html (which is
+// served at any URL, so it cannot use a relative one), and "index.html#screens"
+// or "../index.html#screens" everywhere else. The fragment is deliberately
+// dropped after resolution — it is part of the destination for humans, and
+// comparing it would make index.html's "#screens" differ from its own file.
+function navTarget(page, href) {
+  const raw = href.split('#')[0];
+  let t;
+  if (raw === '') t = page;                                   // same page
+  else if (raw.startsWith('/')) t = raw.slice(1) || 'index.html';
+  else t = path.posix.normalize(path.posix.join(path.dirname(page), raw));
+  t = t.replace(/^\.\//, '');
+  if (t === '' || t === '.') t = 'index.html';
+  if (t.endsWith('/')) t += 'index.html';
+  return t;
+}
+
 check('Every page carries the same nav', () => {
   // Two failures at once, both of which happened. index.html drifted to nine
   // links while every other page had seven, so the site had two navigations.
@@ -251,8 +289,14 @@ check('Every page carries the same nav', () => {
     const html = fs.readFileSync(p, 'utf8');
     const nav = html.split('id="navLinks"')[1];
     if (!nav) throw new Error(p + ' has no nav');
-    const labels = [...nav.split('</nav>')[0].matchAll(/data-i18n="(nav\.[a-z]+)"/g)].map(m => m[1]);
-    navs[p] = labels.join(' ');
+    // Labels alone are not enough: the privacy and terms pages were built from
+    // the blog page's chrome, and both arrived with the blog link pointing at
+    // `./` — their own directory — and marked aria-current. Every label was
+    // right, every link resolved, and the nav on two pages was wrong. So
+    // compare where each link GOES, resolved from the page that holds it.
+    const pairs = [...nav.split('</nav>')[0].matchAll(/<a href="([^"]*)"[^>]*data-i18n="(nav\.[a-z]+)"/g)]
+      .map(m => m[2] + '=' + navTarget(p, m[1]));
+    navs[p] = pairs.join(' ');
   }
   const shapes = [...new Set(Object.values(navs))];
   if (shapes.length > 1) {
@@ -260,6 +304,15 @@ check('Every page carries the same nav', () => {
       Object.entries(navs).map(([p, n]) => '  ' + p + ': ' + n).join('\n'));
   }
   const count = shapes[0].split(' ').length;
+  // Nothing outside the nav's own seven destinations may claim to be current:
+  // a page not in the nav marking one of them highlights the wrong thing.
+  const wrong = pages().filter(p => {
+    const nav = fs.readFileSync(p, 'utf8').split('id="navLinks"')[1].split('</nav>')[0];
+    const m = nav.match(/<a href="([^"]*)"[^>]*aria-current="page"/);
+    if (!m) return false;
+    return navTarget(p, m[1]) !== p;
+  });
+  if (wrong.length) throw new Error('marks a nav link aria-current that is not this page: ' + wrong.join(', '));
   // Seven is what was measured to fit down to 901px. Eight has not been.
   if (count > 7) throw new Error(count + ' nav links — only seven have been measured to fit; re-measure before adding another');
   return count + ' links, identical everywhere';
