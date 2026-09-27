@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Khayt</title>
-<meta name="description" content="How Khayt handles your data: local-first by default, what the optional cloud and Google Drive actually receive, and how to revoke access.">
+<meta name="description" content="How Khayt handles your data: local-first by default, what the optional cloud, Google Drive and the iPhone app actually receive, and how to revoke access.">
 <meta property="og:title" content="Privacy Policy — Khayt">
-<meta property="og:description" content="How Khayt handles your data: local-first by default, what the optional cloud and Google Drive actually receive, and how to revoke access.">
+<meta property="og:description" content="How Khayt handles your data: local-first by default, what the optional cloud, Google Drive and the iPhone app actually receive, and how to revoke access.">
 <meta property="og:image" content="https://khaytapp.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,8 +36,8 @@
 <span hidden
   data-page-title-en="Privacy Policy — Khayt"
   data-page-title-ar="سياسة الخصوصية — خيط"
-  data-page-desc-en="How Khayt handles your data: local-first by default, what the optional cloud and Google Drive actually receive, and how to revoke access."
-  data-page-desc-ar="كيف يتعامل خيط مع بياناتك: محليّ أولاً افتراضياً، وما تستقبله فعلاً السحابة الاختيارية وGoogle Drive، وكيف تسحب الإذن."></span>
+  data-page-desc-en="How Khayt handles your data: local-first by default, what the optional cloud, Google Drive and the iPhone app actually receive, and how to revoke access."
+  data-page-desc-ar="كيف يتعامل خيط مع بياناتك: محليّ أولاً افتراضياً، وما تستقبله فعلاً السحابة الاختيارية وGoogle Drive وتطبيق الآيفون، وكيف تسحب الإذن."></span>
 
 <header class="nav" id="nav">
   <div class="nav-in">
@@ -67,8 +67,8 @@
     <span class="eyebrow" data-lang="en">Khayt</span><span class="eyebrow" data-lang="ar" hidden>خيط</span>
     <h1 data-lang="en">Privacy Policy</h1>
     <h1 data-lang="ar" hidden>سياسة الخصوصية</h1>
-    <p class="lede" data-lang="en">Last updated: 26 September 2026</p>
-    <p class="lede" data-lang="ar" hidden>آخر تحديث: 26 سبتمبر 2026</p>
+    <p class="lede" data-lang="en">Last updated: 27 September 2026</p>
+    <p class="lede" data-lang="ar" hidden>آخر تحديث: 27 سبتمبر 2026</p>
    </div>
   </div>
 </section>
@@ -92,7 +92,7 @@
         <li>Your files — models, photos, PDFs — or anything you typed</li>
         <li>Your API keys, PINs, tokens or other secrets</li>
       </ul>
-      <p>Crash reports and anonymous usage counts are off by default and are only ever sent if you explicitly turn them on. Section 10 says exactly what those contain.</p>
+      <p>Crash reports and anonymous usage counts are off by default and are only ever sent if you explicitly turn them on. <a href="#crash-reports-en">Section 11</a> says exactly what those contain.</p>
 
       <h2>3. Where your data lives</h2>
       <p>Everything you enter is stored on your own device, in the application's data directory. Khayt does not sync your book to any cloud service operated by us unless you switch that on. Backup files you create are saved where you choose. If you enable iCloud Backup on macOS, your data is in your own iCloud account and Khayt has no access to it.</p>
@@ -120,7 +120,35 @@
       <p>When you do switch on sync, your book is encrypted on your own machine with a sync passphrase that never leaves it, and the server stores the result. <strong>The server holds ciphertext it cannot read.</strong> The consequence follows from the design and is worth knowing before you switch it on: a lost passphrase cannot be reset for you, because a recovery path that did not involve you would mean the server could read the data.</p>
       <p>Other online services — the storefront, order tracking, messaging, the AI assistant — each have their own switch, and each is described service by service, including exactly what it transmits and to whom, on the <a href="../services.html">online services page</a>.</p>
 
-      <h2>6. Optional third-party integrations</h2>
+      <h2>6. The iPhone app (Khayt Companion)</h2>
+      <p>Khayt Companion is an optional iPhone app that pairs with your own Mac. Everything below applies only if you install it.</p>
+
+      <p><strong>What it keeps on the phone.</strong> A working copy of your shop — open orders, the newest finished ones, clients, inventory, machines and the waiting list — stored in the app's own container. iOS encrypts it at rest, and it cannot be read until you have unlocked the phone at least once since it was last started. Your pairing credentials — the owner LAN PIN, the Khayt Cloud sign-in token and the shop's encryption key — are held in the iOS Keychain, marked <em>this device only</em>, so they are never copied into iCloud Keychain and never restored onto a different phone.</p>
+
+      <p><strong>Removing it.</strong> <em>Unpair this device</em> in Settings deletes all of it at once: the PIN, the cached shop data, the book and the rollback copy that holds the same records one write behind, and the cloud sign-in together with the shop's key.</p>
+
+      <p><strong>Where it goes.</strong> Two places, and nowhere else on its own:</p>
+      <ul>
+        <li>Your own Mac, over your local Wi-Fi. The app finds it with Bonjour and talks to it directly; nothing in that path leaves your building.</li>
+        <li>Khayt Cloud, only if you switched sync on. The data is sealed with your shop's key (AES-256-GCM) on the phone before it is sent, so the cloud stores ciphertext it cannot read.</li>
+      </ul>
+      <p>The app contains no analytics and no advertising SDKs.</p>
+
+      <p><strong>Notifications</strong> are optional — you can decline them when asked, or turn them off later in iOS Settings. If you allow them, the phone registers an Apple push token with Khayt Cloud; what is sent is that token, the app's bundle identifier and whether it is a test or release build. Nothing about your shop's contents goes with it.</p>
+      <p>What Apple delivers says only <em>"A print finished"</em>. The details — which job, which printer, which client — travel sealed under your shop's key, and the phone opens them itself, so neither Apple nor Khayt Cloud can read them. Where the sealed details are too large to fit in a push, the alert carries only a timestamp and the phone fetches the sealed copy from the cloud, which is the same ciphertext by another route. What is <em>not</em> concealed is that an alert happened: the push carries your shop's identifier and the time, so Apple and the cloud can see that a print ended at your shop without seeing anything about it.</p>
+      <p><em>New order request</em> alerts carry no customer details at all. The cloud raises those itself and holds no key to seal anything with.</p>
+
+      <p><strong>Camera</strong> (optional). Used to read printed spool labels and product barcodes. The text recognition runs on the phone, using Apple's own framework, and the pictures are not uploaded. The one exception is a receipt photo you choose to attach to an expense, which travels to your own shop with that expense. The app cannot reach your photo library at all — it has only the camera, at the moment you point it at something.</p>
+
+      <p><strong>Barcode lookup — one third party.</strong> When you scan a product barcode that is not already on your shelf, the app asks <a href="https://www.upcitemdb.com/" target="_blank" rel="noopener">UPCitemdb</a>, a public product database, what the product is, and reads the retail title it sends back. It sends the digits of the barcode and nothing else: no shop, no device, no account, no key. As with any request to any website, their server can see that it came from your internet connection. A barcode you have bought before is answered from your own inventory and nothing is sent anywhere.</p>
+
+      <p><strong>NFC</strong> (optional). Reads and writes filament spool tags. Nothing leaves the phone.</p>
+
+      <p><strong>Contacting a customer.</strong> The call, WhatsApp and email buttons hand that customer's number or address to the app you chose to open, exactly as tapping a number anywhere else on the phone would. Khayt does not transmit it anywhere itself.</p>
+
+      <p><strong>The sample shop</strong> is invented data for trying the app before you pair it. It exists only on the phone and is never sent anywhere.</p>
+
+      <h2>7. Optional third-party integrations</h2>
       <p>Khayt supports integrations you configure and control. When enabled, these may transmit data to the service concerned:</p>
       <ul>
         <li>Email notifications — using the SMTP or API credentials you provide</li>
@@ -132,13 +160,13 @@
       </ul>
       <p>None are enabled by default. Khayt does not share your credentials with any party other than the service you explicitly configured.</p>
 
-      <h2>7. Automatic updates</h2>
+      <h2>8. Automatic updates</h2>
       <p>Khayt checks for updates via GitHub Releases. That is a standard HTTPS request to GitHub's servers, to which <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a> applies. No personal data is transmitted in an update check, and updates install only when you choose.</p>
 
-      <h2>8. API keys and secrets</h2>
+      <h2>9. API keys and secrets</h2>
       <p>Keys, tokens and secrets you enter are encrypted at rest using your operating system's secure storage — macOS Keychain, Windows Credential Store, Linux Secret Service. They are never transmitted to Khayt's servers.</p>
 
-      <h2>9. Your customers' data</h2>
+      <h2>10. Your customers' data</h2>
       <p>Khayt stores the customer details you enter, or that customers submit through your intake form: names, phone, email, addresses, order history and communication notes.</p>
       <p>Under Saudi Arabia's Personal Data Protection Law (PDPL), and equivalents such as the GDPR, <strong>you</strong> are the data controller for that information. Khayt is a tool you run on your own machine; we never receive your customers' records. With cloud sync on, the data is end-to-end encrypted before it leaves your device, so we hold ciphertext, not customer records.</p>
       <p>To help you meet your obligations, Khayt provides:</p>
@@ -151,7 +179,7 @@
       </ul>
       <p>These are engineering tools, not legal advice. How long you keep records, and on what lawful basis, is your decision as controller — please take qualified advice.</p>
 
-      <h2>10. Crash reports and usage data</h2>
+      <h2 id="crash-reports-en">11. Crash reports and usage data</h2>
       <p><strong>Khayt sends nothing by default.</strong> You may turn on two separate, independently revocable options in Settings:</p>
       <ul>
         <li><strong>Crash reports</strong> — the error type, a scrubbed message and stack trace, your app version and OS family. File paths are reduced to a filename, and emails, phone numbers, IBANs and long digit sequences are removed before anything is stored.</li>
@@ -159,13 +187,13 @@
       </ul>
       <p>We never collect your orders, customers, prices, margins, inventory, files, or any secret. There is no account and no user id — only a random install identifier created when you opt in, and erased the moment you opt out. Turning an option off deletes anything queued locally straight away. You can inspect exactly what would be sent at any time via "View what's collected".</p>
 
-      <h2>11. Children's privacy</h2>
+      <h2>12. Children's privacy</h2>
       <p>Khayt is a business tool intended for adults. It is not directed at children under 13 and we do not knowingly collect information from children.</p>
 
-      <h2>12. Changes to this policy</h2>
+      <h2>13. Changes to this policy</h2>
       <p>We may update this policy from time to time. Updates are published at this URL, with the date at the top of the page. We encourage you to review it periodically.</p>
 
-      <h2>13. Contact</h2>
+      <h2>14. Contact</h2>
       <p>Questions about this policy: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
       <p>Khayt is source-available software licensed under the Functional Source License (FSL-1.1-Apache-2.0). The source is at <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">github.com/KhaytApp/Khayt</a>, which means every claim on this page can be checked against the code rather than taken on trust.</p>
 
@@ -186,7 +214,7 @@
         <li>ملفاتك — المجسّمات والصور وملفات PDF — ولا أي شيء كتبته</li>
         <li>مفاتيح الواجهات أو الأرقام السرية أو الرموز أو أي أسرار أخرى</li>
       </ul>
-      <p>تقارير الأعطال وعدّادات الاستخدام المجهولة معطّلة افتراضياً، ولا تُرسل إلا إن شغّلتها بنفسك صراحةً. والقسم 10 يبيّن ما تحتويه بالضبط.</p>
+      <p>تقارير الأعطال وعدّادات الاستخدام المجهولة معطّلة افتراضياً، ولا تُرسل إلا إن شغّلتها بنفسك صراحةً. و<a href="#crash-reports-ar">القسم 11</a> يبيّن ما تحتويه بالضبط.</p>
 
       <h2>3. أين تعيش بياناتك</h2>
       <p>كل ما تُدخله يُخزَّن على جهازك أنت، في مجلد بيانات التطبيق. ولا يزامن خيط دفترك إلى أي خدمة سحابية نشغّلها نحن ما لم تُشغّل ذلك. وملفات النسخ الاحتياطي التي تنشئها تُحفظ حيث تختار. وإن فعّلت النسخ الاحتياطي عبر iCloud على ماك، فبياناتك في حسابك أنت ولا وصول لخيط إليها.</p>
@@ -214,7 +242,35 @@
       <p>وحين تشغّل المزامنة، يُشفَّر دفترك على جهازك أنت بعبارة مرور لا تغادره، ويخزّن الخادم الناتج. <strong>فالخادم يحمل نصاً مشفّراً لا يستطيع قراءته.</strong> والنتيجة تترتب على هذا التصميم ويجدر معرفتها قبل التشغيل: عبارة المرور المفقودة لا يمكن إعادة تعيينها نيابةً عنك، لأن مسار استرداد لا يمرّ بك يعني أن الخادم قادر على قراءة البيانات.</p>
       <p>أمّا الخدمات السحابية الأخرى — المتجر وتتبّع الطلبات والرسائل والمساعد الذكي — فلكلٍّ منها مفتاحها، وكلٌّ موصوفة خدمةً خدمة، بما تُرسله ولمن، في <a href="../services.html">صفحة الخدمات السحابية</a>.</p>
 
-      <h2>6. تكاملات اختيارية مع أطراف ثالثة</h2>
+      <h2>6. تطبيق الآيفون (خيط المرافق)</h2>
+      <p>«خيط المرافق» تطبيق آيفون اختياري يقترن بجهاز ماك الخاص بك. وكل ما يلي لا ينطبق إلا إن ثبّتّه.</p>
+
+      <p><strong>ما يحفظه على الهاتف.</strong> نسخة عاملة من مطبعتك — الطلبات المفتوحة وأحدث المكتملة والعملاء والمخزون والآلات وقائمة الانتظار — مخزّنة في حاوية التطبيق نفسه. ويشفّرها iOS في حالة السكون، ولا يمكن قراءتها حتى تفتح قفل الهاتف مرة واحدة على الأقل منذ آخر تشغيل له. أمّا بيانات الاقتران — رمز الشبكة المحلية للمالك، ورمز الدخول إلى سحابة خيط، ومفتاح تشفير المطبعة — فمحفوظة في سلسلة مفاتيح iOS وموسومة بـ«هذا الجهاز فقط»، فلا تُنسخ أبداً إلى سلسلة مفاتيح iCloud ولا تُستعاد على هاتف آخر.</p>
+
+      <p><strong>إزالتها.</strong> خيار <em>إلغاء اقتران هذا الجهاز</em> في الإعدادات يحذفها جميعاً دفعةً واحدة: الرمز، وبيانات المطبعة المخبّأة، والدفتر ونسخة التراجع التي تحمل السجلات نفسها متأخرةً بكتابة واحدة، ومعها الدخول السحابي ومفتاح المطبعة.</p>
+
+      <p><strong>إلى أين تذهب.</strong> موضعان، ولا ثالث لهما من تلقاء نفسه:</p>
+      <ul>
+        <li>جهاز ماك الخاص بك، عبر شبكة الواي فاي المحلية. يجده التطبيق عبر Bonjour ويخاطبه مباشرةً؛ ولا شيء في هذا المسار يغادر مبناك.</li>
+        <li>سحابة خيط، إن شغّلت المزامنة فقط. وتُختم البيانات بمفتاح مطبعتك (AES-256-GCM) على الهاتف قبل إرسالها، فتخزّن السحابة نصاً مشفّراً لا تقدر على قراءته.</li>
+      </ul>
+      <p>ولا يحتوي التطبيق على أي أدوات تحليلات ولا أي أدوات إعلانات.</p>
+
+      <p><strong>الإشعارات</strong> اختيارية — لك أن ترفضها حين تُسأل، أو تعطّلها لاحقاً من إعدادات iOS. وإن سمحت بها، سجّل الهاتف رمز إشعارات Apple لدى سحابة خيط؛ والمُرسَل هو ذلك الرمز ومعرّف حزمة التطبيق وما إذا كان إصدار تجربة أم إصدار نهائي. ولا يذهب معه شيء من محتوى مطبعتك.</p>
+      <p>وما تسلّمه Apple نصّه فقط <em>«انتهت طباعة»</em>. أمّا التفاصيل — أي مهمّة وأي طابعة وأي عميل — فتسافر مختومة بمفتاح مطبعتك، والهاتف هو الذي يفتحها بنفسه، فلا تستطيع Apple ولا سحابة خيط قراءتها. وحين تكون التفاصيل المختومة أكبر من أن تتّسع في إشعار، يحمل الإشعار طابعاً زمنياً فقط ويجلب الهاتف النسخة المختومة من السحابة، وهي النص المشفّر نفسه بطريق آخر. والذي <em>لا</em> يُخفى هو وقوع الإشعار: فالإشعار يحمل معرّف مطبعتك والوقت، فتستطيع Apple والسحابة أن تعرفا أن طباعةً انتهت عندك دون أن تعرفا عنها شيئاً.</p>
+      <p>أمّا إشعارات <em>طلب جديد</em> فلا تحمل أي بيانات عميل البتّة. فالسحابة هي التي تطلقها، ولا تملك مفتاحاً تختم به شيئاً.</p>
+
+      <p><strong>الكاميرا</strong> (اختيارية). تُستخدم لقراءة ملصقات البكرات المطبوعة وباركود المنتجات. ويجري التعرّف على النص على الهاتف نفسه بإطار عمل Apple، ولا تُرفع الصور. والاستثناء الوحيد صورة إيصال تختار إرفاقها بمصروف، فتذهب إلى مطبعتك أنت مع ذلك المصروف. ولا يستطيع التطبيق الوصول إلى مكتبة صورك إطلاقاً — ليس لديه إلا الكاميرا، في اللحظة التي توجّهها فيها إلى شيء.</p>
+
+      <p><strong>البحث عن الباركود — طرف ثالث واحد.</strong> حين تمسح باركود منتج ليس على رفّك أصلاً، يسأل التطبيق <a href="https://www.upcitemdb.com/" target="_blank" rel="noopener">UPCitemdb</a>، وهي قاعدة بيانات منتجات عامّة، عن ماهيّة المنتج، ويقرأ الاسم التجاري الذي تردّه. ويرسل أرقام الباركود ولا شيء غيرها: لا مطبعة ولا جهاز ولا حساب ولا مفتاح. وكما في أي طلب إلى أي موقع، يستطيع خادمهم أن يرى أن الطلب جاء من اتصالك بالإنترنت. أمّا باركود سبق أن اشتريته فيُجاب من مخزونك أنت ولا يُرسل شيء إلى أي جهة.</p>
+
+      <p><strong>NFC</strong> (اختياري). يقرأ بطاقات بكرات الخيط ويكتب عليها. ولا شيء يغادر الهاتف.</p>
+
+      <p><strong>التواصل مع عميل.</strong> أزرار الاتصال وواتساب والبريد تسلّم رقم ذلك العميل أو عنوانه إلى التطبيق الذي اخترت فتحه، تماماً كما لو ضغطت رقماً في أي مكان آخر في الهاتف. ولا ينقله خيط إلى أي جهة بنفسه.</p>
+
+      <p><strong>المطبعة التجريبية</strong> بيانات مُختلَقة لتجربة التطبيق قبل اقترانه. وهي موجودة على الهاتف وحده ولا تُرسل إلى أي مكان.</p>
+
+      <h2>7. تكاملات اختيارية مع أطراف ثالثة</h2>
       <p>يدعم خيط تكاملات تضبطها أنت وتتحكم بها. وعند تفعيلها قد تنقل بيانات إلى الخدمة المعنية:</p>
       <ul>
         <li>إشعارات البريد — ببيانات SMTP أو الواجهة التي تقدّمها أنت</li>
@@ -226,13 +282,13 @@
       </ul>
       <p>لا شيء منها مفعّل افتراضياً. ولا يشارك خيط بياناتك مع أي جهة غير الخدمة التي ضبطتها أنت صراحةً.</p>
 
-      <h2>7. التحديثات التلقائية</h2>
+      <h2>8. التحديثات التلقائية</h2>
       <p>يتحقق خيط من التحديثات عبر إصدارات GitHub. وهذا طلب HTTPS قياسي إلى خوادم GitHub، وتنطبق عليه <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">سياسة خصوصية GitHub</a>. ولا تُنقل بيانات شخصية في التحقق من التحديث، ولا تُثبَّت التحديثات إلا باختيارك.</p>
 
-      <h2>8. المفاتيح والأسرار</h2>
+      <h2>9. المفاتيح والأسرار</h2>
       <p>المفاتيح والرموز والأسرار التي تُدخلها تُشفَّر في مكانها باستخدام التخزين الآمن في نظام تشغيلك — Keychain على ماك، وCredential Store على ويندوز، وSecret Service على لينكس. ولا تُنقل أبداً إلى خوادم خيط.</p>
 
-      <h2>9. بيانات عملائك</h2>
+      <h2>10. بيانات عملائك</h2>
       <p>يخزّن خيط تفاصيل العملاء التي تُدخلها أنت أو التي يرسلها العملاء عبر نموذج الاستقبال: الأسماء والهواتف والبريد والعناوين وسجل الطلبات وملاحظات التواصل.</p>
       <p>وبموجب نظام حماية البيانات الشخصية السعودي (PDPL)، وما يعادله كاللائحة الأوروبية GDPR، فإنّك <strong>أنت</strong> المتحكّم في تلك البيانات. فخيط أداة تشغّلها على جهازك، ونحن لا نستقبل سجلات عملائك أبداً. ومع تشغيل المزامنة السحابية تُشفَّر البيانات من طرف إلى طرف قبل أن تغادر جهازك، فنحمل نحن نصاً مشفّراً لا سجلات عملاء.</p>
       <p>ولمساعدتك على الوفاء بالتزاماتك، يوفّر خيط:</p>
@@ -245,7 +301,7 @@
       </ul>
       <p>وهذه أدوات هندسية لا استشارة قانونية. فمدة احتفاظك بالسجلات، وعلى أي أساس نظامي، قرارك أنت بصفتك المتحكّم — ويُرجى أخذ استشارة مختصة.</p>
 
-      <h2>10. تقارير الأعطال وبيانات الاستخدام</h2>
+      <h2 id="crash-reports-ar">11. تقارير الأعطال وبيانات الاستخدام</h2>
       <p><strong>لا يرسل خيط شيئاً افتراضياً.</strong> ويمكنك تشغيل خيارين منفصلين قابلين للإيقاف كلٌّ على حدة من الإعدادات:</p>
       <ul>
         <li><strong>تقارير الأعطال</strong> — نوع الخطأ، ورسالة وأثر مكدّس مُنظّفان، وإصدار التطبيق وعائلة النظام. وتُختصر مسارات الملفات إلى اسم الملف، وتُزال عناوين البريد وأرقام الهواتف والآيبان والسلاسل الرقمية الطويلة قبل تخزين أي شيء.</li>
@@ -253,13 +309,13 @@
       </ul>
       <p>نحن لا نجمع أبداً طلباتك أو عملاءك أو أسعارك أو هوامشك أو مخزونك أو ملفاتك أو أي سرّ. ولا يوجد حساب ولا معرّف مستخدم — بل معرّف تثبيت عشوائي يُنشأ عند موافقتك ويُمحى لحظة تراجعك. وإيقاف أي خيار يحذف ما هو مُنتظَر محلياً فوراً. ويمكنك معاينة ما سيُرسل بالضبط في أي وقت عبر «اعرض ما يُجمع».</p>
 
-      <h2>11. خصوصية الأطفال</h2>
+      <h2>12. خصوصية الأطفال</h2>
       <p>خيط أداة عمل موجّهة للبالغين. وهو غير موجّه للأطفال دون الثالثة عشرة، ولا نجمع عن قصد معلومات من الأطفال.</p>
 
-      <h2>12. تغييرات هذه السياسة</h2>
+      <h2>13. تغييرات هذه السياسة</h2>
       <p>قد نحدّث هذه السياسة من حين لآخر. وتُنشر التحديثات على هذا الرابط، مع التاريخ في أعلى الصفحة. وندعوك لمراجعتها دورياً.</p>
 
-      <h2>13. التواصل</h2>
+      <h2>14. التواصل</h2>
       <p>للأسئلة حول هذه السياسة: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
       <p>خيط برنامج متاح المصدر مرخّص بترخيص FSL-1.1-Apache-2.0. والمصدر على <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">github.com/KhaytApp/Khayt</a>، ما يعني أن كل ادّعاء في هذه الصفحة يمكن التحقق منه من الكود بدل أخذه على عِلّاته.</p>
 

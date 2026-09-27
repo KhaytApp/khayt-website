@@ -277,6 +277,49 @@ function navTarget(page, href) {
   return t;
 }
 
+check('Policy sections are numbered and cross-referenced correctly', () => {
+  // A policy page numbers its own clauses and refers to them by number, and
+  // both languages must agree. Inserting a section renumbers everything below
+  // it: adding Google Drive as section 4 turned "Section 9 says what those
+  // contain" into a pointer at the wrong clause, and nothing noticed. Adding
+  // the iPhone app as section 6 would have done it again.
+  let checked = 0, refs = 0;
+  for (const p of pages().filter(f => /^(privacy|terms)\//.test(f))) {
+    const html = fs.readFileSync(p, 'utf8');
+    const langs = {};
+    for (const m of html.matchAll(/<div class="post-body policy" data-lang="(en|ar)"[^>]*>([\s\S]*?)\n    <\/div>/g)) {
+      langs[m[1]] = [...m[2].matchAll(/<h2(?: [^>]*)?>(\d+)\./g)].map(h => Number(h[1]));
+    }
+    if (!langs.en || !langs.ar) throw new Error(p + ': could not find both language bodies');
+    const run = n => Array.from({ length: n }, (_, i) => i + 1).join(',');
+    if (langs.en.join(',') !== run(langs.en.length)) throw new Error(p + ' (en): sections are ' + langs.en.join(',') + ', not 1..n');
+    if (langs.ar.join(',') !== langs.en.join(',')) throw new Error(p + ': en has ' + langs.en.join(',') + ' but ar has ' + langs.ar.join(','));
+    // Every cross-reference is a LINK to the section it names, so the number
+    // in the text can be compared against the number in the heading it points
+    // at. A bare "Section 10" survives a renumber and quietly points at the
+    // wrong clause — the first version of this check passed on exactly that.
+    for (const m of html.matchAll(/<a href="#([a-z-]+)">(?:Section|القسم) (\d+)<\/a>/g)) {
+      const [, id, said] = m;
+      const target = html.match(new RegExp('<h2 id="' + id + '">(\\d+)\\.'));
+      if (!target) throw new Error(p + ': links to #' + id + ', which is not a numbered section heading');
+      if (target[1] !== said) {
+        throw new Error(p + ': text says section ' + said + ' but #' + id + ' is section ' + target[1]);
+      }
+      refs++;
+    }
+    // And a plain number, with no link to check it against, is not allowed.
+    for (const m of html.matchAll(/(?:Section|القسم) (\d+)/g)) {
+      const before = html.slice(Math.max(0, m.index - 40), m.index);
+      if (!/<a href="#[a-z-]+">$/.test(before)) {
+        throw new Error(p + ': "' + m[0] + '" is a bare cross-reference — link it to the section so a renumber cannot break it silently');
+      }
+    }
+    checked += langs.en.length;
+  }
+  if (!checked) throw new Error('found no policy pages to check — the selector is wrong, not the pages');
+  return checked + ' sections, ' + refs + ' checked cross-reference(s)';
+});
+
 check('Every page carries the same nav', () => {
   // Two failures at once, both of which happened. index.html drifted to nine
   // links while every other page had seven, so the site had two navigations.
