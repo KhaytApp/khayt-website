@@ -2,10 +2,10 @@
 /* ============================================================
    Start a blog post.
    ------------------------------------------------------------
-   A post touches four things, and three of them are bookkeeping that CI will
+   A post touches five things, and four of them are bookkeeping that CI will
    fail on if you forget: the post file, its entry in blog/posts.js, its URL
-   in sitemap.xml, and blog/feed.xml. This does all four, so the only thing
-   left is writing.
+   in sitemap.xml, blog/feed.xml, and its card prerendered into
+   blog/index.html. This does all five, so the only thing left is writing.
 
      node scripts/new-post.js <slug> <YYYY-MM-DD> "<Tag EN>" "<Tag AR>"
 
@@ -53,7 +53,7 @@ const longDate = new Intl.DateTimeFormat('en-GB',
   .format(new Date(date + 'T12:00:00Z'));
 
 const TODO_EN = '        <p>TODO — write the post in English. Headings are &lt;h2&gt;, and\n' +
-  '        links to elsewhere on the site are relative, like ../index.html#download.</p>';
+  '        links to elsewhere on the site are relative, like ../#download.</p>';
 const TODO_AR = '        <p>TODO — اكتب المقال بالعربية.</p>';
 
 const filled = fs.readFileSync(path.join('scripts', 'post-template.html'), 'utf8')
@@ -94,6 +94,10 @@ const entry =
     d: {
       en: 'TODO: one-sentence summary in English.',
       ar: 'TODO: ملخص بجملة واحدة بالعربية.'
+    },
+    m: {
+      en: 'TODO: the summary again, lead sentence first, 50-160 characters.',
+      ar: 'TODO: الملخص نفسه، بأوله، بين 50 و160 حرفاً.'
     }
   },
 `;
@@ -117,17 +121,21 @@ if (!xml.includes('</urlset>')) die('sitemap.xml has no </urlset>');
 xml = xml.replace('</urlset>', url + '</urlset>');
 fs.writeFileSync(SITEMAP, xml);
 
-/* ---------- 4. the feed ---------- */
+/* ---------- 4. the feed, the index's cards, the sitemap's date ---------- */
 
 execFileSync(process.execPath, [path.join('scripts', 'make-feed.js')], { stdio: 'pipe' });
+execFileSync(process.execPath, [path.join('scripts', 'prerender.js'), 'blog/index.html'], { stdio: 'pipe' });
+execFileSync(process.execPath, [path.join('scripts', 'stamp-sitemap.js')], { stdio: 'pipe' });
 
 console.log(`Created ${target}`);
 console.log('  · added to blog/posts.js (newest first)');
 console.log('  · added to sitemap.xml');
 console.log('  · blog/feed.xml regenerated');
+console.log('  · its card prerendered into blog/index.html');
 console.log('\nNow, two files and one command:');
-console.log('  1. blog/posts.js   — the title and the one-line summary, in both languages.');
+console.log('  1. blog/posts.js   — the title, the summary and its short meta version, in both languages.');
 console.log('                       This is the source for them; the page is stamped from it.');
 console.log(`  2. ${target}
                        — the prose only, in both <div class="post-body"> blocks.`);
-console.log('  3. node scripts/stamp-posts.js && node scripts/make-feed.js && node scripts/check-site.js');
+console.log('  3. node scripts/stamp-posts.js && node scripts/make-feed.js && node scripts/prerender.js \\');
+console.log('       && node scripts/stamp-sitemap.js && node scripts/check-site.js');

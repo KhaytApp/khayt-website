@@ -21,13 +21,12 @@
       ar: 'خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد'
     },
     'meta.desc': {
-      en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, signed e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
-      ar: 'تطبيق مجاني لأصحاب مطابع الطباعة ثلاثية الأبعاد. قائمة إنتاج كانبان، حاسبة تكلفة، فوترة إلكترونية موقّعة، ربط مباشر بالطابعات، مخزون الخيوط وتحليلات — دون اتصال تماماً.'
+      en: 'Free desktop app for 3D print shops: production queue, cost calculator, e-invoicing, live printers, inventory and analytics \u2014 offline, with an optional cloud.',
+      ar: 'تطبيق مجاني لمطابع الطباعة ثلاثية الأبعاد: قائمة الإنتاج وحاسبة التكلفة والفوترة الإلكترونية وربط الطابعات والمخزون والتحليلات — دون اتصال، مع سحابة اختيارية.'
     },
 
     'a11y.skip': { en: 'Skip to content', ar: 'تخطّ إلى المحتوى' },
-    'a11y.toAr': { en: 'Switch language to Arabic', ar: 'تغيير اللغة إلى العربية' },
-    'a11y.toEn': { en: 'Switch language to English', ar: 'تغيير اللغة إلى الإنجليزية' },
+    'a11y.lang': { en: 'Switch language to', ar: 'تغيير اللغة إلى' },
 
     'dl.nobeta': { en: 'No beta build published yet', ar: 'لا يوجد إصدار تجريبي منشور بعد' },
 
@@ -433,6 +432,13 @@
       var hk = htmlNodes[j].getAttribute('data-i18n-html');
       if (DICT[hk]) htmlNodes[j].innerHTML = DICT[hk][lang];
     }
+    // An accessible name with no visible text to hang it on — the download
+    // button is an icon alone below 1060px, so its label lives here.
+    var named = document.querySelectorAll('[data-i18n-aria]');
+    for (var a = 0; a < named.length; a++) {
+      var ak = named[a].getAttribute('data-i18n-aria');
+      if (DICT[ak]) named[a].setAttribute('aria-label', DICT[ak][lang]);
+    }
     buildFeatures();
     buildFlow();
     buildBetaFeatures();
@@ -458,11 +464,12 @@
     if (btn) {
       // The label is the language you are switching TO, written in that
       // language, so it carries its own lang or an English screen reader
-      // voices Arabic glyphs with an English voice.
+      // voices Arabic glyphs with an English voice. No aria-label: the name is
+      // the hidden phrase plus that visible word, so it contains what a
+      // voice-control user reads off the button (WCAG 2.5.3).
       var toAr = lang !== 'ar';
-      btn.innerHTML = '<span aria-hidden="true">🌐</span> ' +
+      btn.innerHTML = '<span aria-hidden="true">🌐</span> <span class="sr-only">' + t('a11y.lang') + ' </span>' +
         (toAr ? '<span lang="ar">العربية</span>' : '<span lang="en">English</span>');
-      btn.setAttribute('aria-label', t(toAr ? 'a11y.toAr' : 'a11y.toEn'));
     }
 
     // The page's own metadata was staying English while the page turned

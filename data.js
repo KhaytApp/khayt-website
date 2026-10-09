@@ -133,7 +133,7 @@
         { en: '7 days of snapshot history', ar: 'سجل نسخ لمدة 7 أيام' }
       ],
       cta: { en: 'Download Khayt', ar: 'حمّل خيط' },
-      href: 'index.html#download'
+      href: './#download'
     },
     {
       id: 'cloud',
@@ -149,7 +149,7 @@
         { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' }
       ],
       cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
-      href: 'index.html#download'
+      href: './#download'
     },
     {
       id: 'branches',

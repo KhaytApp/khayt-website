@@ -55,7 +55,9 @@ for (const p of POSTS) {
   let h = before;
 
   const titleEn = esc(p.t.en), titleAr = esc(p.t.ar);
-  const descEn = esc(p.d.en), descAr = esc(p.d.ar);
+  // The meta description is `m`, the summary cut to what a search result
+  // shows; the share card keeps the full `d`, which has room for it.
+  const meta = p.m || p.d;
 
   h = sub(h, p.slug + ' <title>', /<title>[\s\S]*?<\/title>/, `<title>${titleEn} — Khayt</title>`);
 
@@ -69,15 +71,15 @@ for (const p of POSTS) {
     new RegExp('^<meta ' + attr + ' content="[^\\n]*$', 'm'),
     `<meta ${attr} content="${val}">`
   ];
-  h = sub(h, p.slug + ' description', ...metaLine('name="description"', escAttr(p.d.en)));
+  h = sub(h, p.slug + ' description', ...metaLine('name="description"', escAttr(meta.en)));
   h = sub(h, p.slug + ' og:title', ...metaLine('property="og:title"', escAttr(p.t.en) + ' — Khayt'));
   h = sub(h, p.slug + ' og:description', ...metaLine('property="og:description"', escAttr(p.d.en)));
   h = sub(h, p.slug + ' published_time', ...metaLine('property="article:published_time"', p.date));
 
   h = sub(h, p.slug + ' page-title-en', /(data-page-title-en=")[^"]*(")/, `$1${escAttr(p.t.en)} — Khayt$2`);
   h = sub(h, p.slug + ' page-title-ar', /(data-page-title-ar=")[^"]*(")/, `$1${escAttr(p.t.ar)} — خيط$2`);
-  h = sub(h, p.slug + ' page-desc-en', /(data-page-desc-en=")[^"]*(")/, `$1${escAttr(p.d.en)}$2`);
-  h = sub(h, p.slug + ' page-desc-ar', /(data-page-desc-ar=")[^"]*(")/, `$1${escAttr(p.d.ar)}$2`);
+  h = sub(h, p.slug + ' page-desc-en', /(data-page-desc-en=")[^"]*(")/, `$1${escAttr(meta.en)}$2`);
+  h = sub(h, p.slug + ' page-desc-ar', /(data-page-desc-ar=")[^"]*(")/, `$1${escAttr(meta.ar)}$2`);
 
   h = sub(h, p.slug + ' h1 en', /<h1 data-lang="en">[\s\S]*?<\/h1>/, `<h1 data-lang="en">${titleEn}</h1>`);
   h = sub(h, p.slug + ' h1 ar', /<h1 data-lang="ar" hidden>[\s\S]*?<\/h1>/, `<h1 data-lang="ar" hidden>${titleAr}</h1>`);
@@ -91,17 +93,24 @@ for (const p of POSTS) {
   h = sub(h, p.slug + ' time', /<time datetime="[^"]*">[^<]*<\/time>/, `<time datetime="${p.date}">${longDate}</time>`);
 
   // The JSON-LD block is regenerated whole rather than patched field by field.
+  // dateModified comes from posts.js, not from git: a date read from the file's
+  // last commit would change the file it is written into, and a re-stamp of
+  // the chrome is not the post changing.
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: p.t.en,
     description: p.d.en,
     datePublished: p.date,
+    dateModified: p.updated || p.date,
     inLanguage: ['en', 'ar'],
     image: 'https://khaytapp.com/og-image.png',
     mainEntityOfPage: `https://khaytapp.com/blog/${p.slug}.html`,
     author: { '@type': 'Organization', name: 'Khayt', url: 'https://github.com/KhaytApp' },
-    publisher: { '@type': 'Organization', name: 'Khayt', url: 'https://khaytapp.com/' }
+    publisher: {
+      '@type': 'Organization', name: 'Khayt', url: 'https://khaytapp.com/',
+      logo: { '@type': 'ImageObject', url: 'https://khaytapp.com/khayt-icon.png', width: 256, height: 256 }
+    }
   };
   h = sub(h, p.slug + ' JSON-LD', /(<script type="application\/ld\+json">\n)[\s\S]*?(\n<\/script>)/,
     `$1${JSON.stringify(ld, null, 2)}$2`);
