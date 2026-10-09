@@ -182,15 +182,20 @@ if release:
         n = name.lower()
         if n.endswith('.dmg'):
             asset_map['macos'] = url
-        elif n.endswith('.exe'):
+        elif n.endswith('.exe') and 'setup' in n:
             asset_map['windows'] = url
+        elif n.endswith('.exe'):
+            # electron-builder's portable target is "Khayt-<version>.exe": no
+            # word marks it, so it is the .exe that is not the installer —
+            # the same rule app.js's findPortable() uses.
+            asset_map['portable'] = url
         elif n.endswith('.appimage'):
             asset_map['appimage'] = url
         elif n.endswith('.deb'):
             asset_map['deb'] = url
 
     # Replace each old per-platform URL with the real new URL
-    def replace_url(html, old_tag, old_ver, ext_pattern, new_url):
+    def replace_url(html, old_tag, old_ver, ext_pattern, new_url, keep=None):
         """Point every download link of one kind at this release's asset.
 
         ── WHY THIS NO LONGER MATCHES ON old_tag ─────────────────────────────
@@ -223,12 +228,20 @@ if release:
             # asset that exists" guard, was dead code that looked alive.
             re.I
         )
-        return old_url_pattern.sub(new_url, html)
+        # `keep` decides, per matched URL, whether it is this kind of link at
+        # all. Two Windows downloads share the .exe extension, and matching on
+        # the extension alone rewrote the portable link into the installer's.
+        return old_url_pattern.sub(
+            lambda m: new_url if keep is None or keep(m.group(0)) else m.group(0), html)
 
     if 'macos' in asset_map:
         html = replace_url(html, old_tag, old_ver, r'\.dmg', asset_map['macos'])
     if 'windows' in asset_map:
-        html = replace_url(html, old_tag, old_ver, r'\.exe', asset_map['windows'])
+        html = replace_url(html, old_tag, old_ver, r'\.exe', asset_map['windows'],
+                           keep=lambda u: 'setup' in u.lower())
+    if 'portable' in asset_map:
+        html = replace_url(html, old_tag, old_ver, r'\.exe', asset_map['portable'],
+                           keep=lambda u: 'setup' not in u.lower())
     if 'appimage' in asset_map:
         html = replace_url(html, old_tag, old_ver, r'\.AppImage', asset_map['appimage'])
     if 'deb' in asset_map:

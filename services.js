@@ -26,11 +26,11 @@
     },
     {
       what: { en: 'Only what you publish: the products, prices and promo codes you put on the page', ar: 'فقط ما تنشره: المنتجات والأسعار ورموز الخصم التي تضعها' },
-      to:   { en: 'Anyone with the shop page link — it is a public page', ar: 'أي شخص لديه رابط صفحة المتجر — فهي صفحة عامة' }
+      to:   { en: 'Khayt Cloud, which hosts it readably, and anyone with the shop page link — it is a public page', ar: 'خيط السحابي الذي يستضيفها بصيغة مقروءة، وأي شخص لديه رابط صفحة المتجر — فهي صفحة عامة' }
     },
     {
-      what: { en: 'One order’s stage — received, printing, finishing, ready', ar: 'مرحلة طلب واحد — مُستلم، قيد الطباعة، التشطيب، جاهز' },
-      to:   { en: 'The customer you sent that order’s link to', ar: 'العميل الذي أرسلت إليه رابط ذلك الطلب' }
+      what: { en: 'One order’s details and stage — received, printing, finishing, ready — with the customer’s email, the payment link and any messages', ar: 'تفاصيل طلب واحد ومرحلته — مُستلم، قيد الطباعة، التشطيب، جاهز — مع بريد العميل ورابط الدفع وأي رسائل' },
+      to:   { en: 'Khayt Cloud, which holds it readably until you unpublish it, and the customer you sent that order’s link to', ar: 'خيط السحابي الذي يحفظه بصيغة مقروءة حتى تلغي نشره، والعميل الذي أرسلت إليه رابط ذلك الطلب' }
     },
     {
       what: { en: 'A star rating and a comment, written by the customer', ar: 'تقييم بالنجوم وتعليق، يكتبهما العميل' },

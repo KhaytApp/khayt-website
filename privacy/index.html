@@ -67,8 +67,8 @@
     <span class="eyebrow" data-lang="en">Khayt</span><span class="eyebrow" data-lang="ar" hidden>خيط</span>
     <h1 data-lang="en">Privacy Policy</h1>
     <h1 data-lang="ar" hidden>سياسة الخصوصية</h1>
-    <p class="lede" data-lang="en">Last updated: 27 September 2026</p>
-    <p class="lede" data-lang="ar" hidden>آخر تحديث: 27 سبتمبر 2026</p>
+    <p class="lede" data-lang="en">Last updated: 9 October 2026</p>
+    <p class="lede" data-lang="ar" hidden>آخر تحديث: 9 أكتوبر 2026</p>
    </div>
   </div>
 </section>
@@ -78,7 +78,7 @@
    <div class="post-in">
     <div class="post-body policy" data-lang="en">
 
-      <p class="policy-tldr"><strong>Short version:</strong> Khayt keeps your book on your own machine. We do not collect, transmit or hold your business data. Where you switch on something that does leave the machine — the optional cloud, an offsite backup, a Google Drive — it is sealed with your key before it goes, and we hold ciphertext, not records.</p>
+      <p class="policy-tldr"><strong>Short version:</strong> Khayt keeps your book on your own machine. We do not collect, transmit or hold your business data. Sync, offsite backups and Google Drive are sealed with your key before they leave, so we hold ciphertext, not records. The customer-facing services are different: a storefront, an order-tracking link or an order form has to be readable by the customer it is for, so what you publish through one is stored by Khayt Cloud in a form it can read. <a href="#khayt-cloud-en">Section 5</a> lists exactly what that is.</p>
 
       <h2>1. Who we are</h2>
       <p>Khayt is a desktop application for 3D print shops: quoting, a production queue, invoicing, inventory and the numbers behind them. It is developed and maintained by Khayt. Contact: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
@@ -93,6 +93,7 @@
         <li>Your API keys, PINs, tokens or other secrets</li>
       </ul>
       <p>Crash reports and anonymous usage counts are off by default and are only ever sent if you explicitly turn them on. <a href="#crash-reports-en">Section 11</a> says exactly what those contain.</p>
+      <p><strong>What you choose to send us.</strong> If you report a problem with <em>Help ▸ Send Feedback</em> on the Mac, the app prepares an email to support@khaytapp.com in your own mail app, and nothing goes until you press Send. It attaches a diagnostics file (app and macOS versions, language, region, window size, and how many jobs, customers, machines, spools and library files your book holds — counts, not contents), a picture of the window you were in, which can show customer names and prices, and — only if you tick the box — a copy of your book with every password, key and token masked. The rest of the book, including your customers, is in that copy. We use what you send only to investigate the problem you reported.</p>
 
       <h2>3. Where your data lives</h2>
       <p>Everything you enter is stored on your own device, in the application's data directory. Khayt does not sync your book to any cloud service operated by us unless you switch that on. Backup files you create are saved where you choose. If you enable iCloud Backup on macOS, your data is in your own iCloud account and Khayt has no access to it.</p>
@@ -115,13 +116,21 @@
       <p>Revoking stops all further access immediately. Files Khayt already placed in your Drive stay in your Drive — they are yours — and you can delete them like any other file.</p>
       <p class="policy-note">Khayt's use and transfer of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
 
-      <h2>5. Khayt Cloud</h2>
+      <h2 id="khayt-cloud-en">5. Khayt Cloud</h2>
       <p>Khayt has an optional, opt-in cloud. It ships switched off, and a shop that never turns it on gets the whole app with no account to create and nothing leaving the building.</p>
       <p>When you do switch on sync, your book is encrypted on your own machine with a sync passphrase that never leaves it, and the server stores the result. <strong>The server holds ciphertext it cannot read.</strong> The consequence follows from the design and is worth knowing before you switch it on: a lost passphrase cannot be reset for you, because a recovery path that did not involve you would mean the server could read the data.</p>
       <p>Other online services — the storefront, order tracking, messaging, the AI assistant — each have their own switch, and each is described service by service, including exactly what it transmits and to whom, on the <a href="../services.html">online services page</a>.</p>
+      <p><strong>What the cloud can read.</strong> The services your customers use cannot be end-to-end encrypted, because the customer opening the page holds no key. So when you switch one on, what you publish through it is stored by Khayt Cloud in readable form:</p>
+      <ul>
+        <li><strong>Storefront</strong> — the products, prices, photos and promo codes you publish, and the ratings and comments customers leave.</li>
+        <li><strong>Order tracking and the customer portal</strong> — for each order you share: its details and stage, the customer's email address, the payment link, and the messages exchanged on it.</li>
+        <li><strong>Order requests</strong> — what a customer submits through your online order form or storefront checkout, held until you import or delete it.</li>
+        <li><strong>Instant quotes</strong> — the pricing inputs you publish so the storefront can quote (your rates and margin). Callers are shown a price, never those inputs. A model file a customer uploads for a quote is priced in memory and not kept.</li>
+      </ul>
+      <p>Your book itself is not among them: published records are copies you chose to share, and unpublishing one deletes it from the cloud. Server errors may be reported to an error-monitoring service (Sentry) so that we can fix them. None of this data is sold, used for advertising or used to train AI models.</p>
 
-      <h2>6. The iPhone app (Khayt Companion)</h2>
-      <p>Khayt Companion is an optional iPhone app that pairs with your own Mac. Everything below applies only if you install it.</p>
+      <h2>6. The iPhone app</h2>
+      <p>Khayt for iPhone is an optional app that pairs with your own Mac or PC. Everything below applies only if you install it.</p>
 
       <p><strong>What it keeps on the phone.</strong> A working copy of your shop — open orders, the newest finished ones, clients, inventory, machines and the waiting list — stored in the app's own container. iOS encrypts it at rest, and it cannot be read until you have unlocked the phone at least once since it was last started. Your pairing credentials — the owner LAN PIN, the Khayt Cloud sign-in token and the shop's encryption key — are held in the iOS Keychain, marked <em>this device only</em>, so they are never copied into iCloud Keychain and never restored onto a different phone.</p>
 
@@ -161,14 +170,14 @@
       <p>None are enabled by default. Khayt does not share your credentials with any party other than the service you explicitly configured.</p>
 
       <h2>8. Automatic updates</h2>
-      <p>Khayt checks for updates via GitHub Releases. That is a standard HTTPS request to GitHub's servers, to which <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a> applies. No personal data is transmitted in an update check, and updates install only when you choose.</p>
+      <p>Khayt checks for updates via GitHub Releases. That is a standard HTTPS request to GitHub's servers, to which <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a> applies. The native Mac app checks a feed on this site instead, <code>khaytapp.com/mac/appcast.xml</code>, using the Sparkle updater, and downloads the update itself from GitHub. No personal data is transmitted in an update check, and updates install only when you choose.</p>
 
       <h2>9. API keys and secrets</h2>
       <p>Keys, tokens and secrets you enter are encrypted at rest using your operating system's secure storage — macOS Keychain, Windows Credential Store, Linux Secret Service. They are never transmitted to Khayt's servers.</p>
 
       <h2>10. Your customers' data</h2>
       <p>Khayt stores the customer details you enter, or that customers submit through your intake form: names, phone, email, addresses, order history and communication notes.</p>
-      <p>Under Saudi Arabia's Personal Data Protection Law (PDPL), and equivalents such as the GDPR, <strong>you</strong> are the data controller for that information. Khayt is a tool you run on your own machine; we never receive your customers' records. With cloud sync on, the data is end-to-end encrypted before it leaves your device, so we hold ciphertext, not customer records.</p>
+      <p>Under Saudi Arabia's Personal Data Protection Law (PDPL), and equivalents such as the GDPR, <strong>you</strong> are the data controller for that information. Khayt is a tool you run on your own machine. With cloud sync on, your book is end-to-end encrypted before it leaves your device, so we hold ciphertext, not customer records. The exception is what you publish through a customer-facing service — an order's details, a customer's email address, their messages — which the cloud stores readably on your behalf, as <a href="#khayt-cloud-en">section 5</a> describes. For that data we act as your processor: we store it only to run the service you switched on, and unpublishing it deletes it.</p>
       <p>To help you meet your obligations, Khayt provides:</p>
       <ul>
         <li><strong>Consent at collection</strong> — your public intake form requires customers to agree to a plain-language notice before submitting, and records that consent with a timestamp and the exact wording shown.</li>
@@ -200,7 +209,7 @@
     </div>
     <div class="post-body policy" data-lang="ar" hidden>
 
-      <p class="policy-tldr"><strong>باختصار:</strong> يحتفظ خيط بدفترك على جهازك أنت. لا نجمع بياناتك التجارية ولا ننقلها ولا نحتفظ بها. وحين تُشغّل شيئاً يغادر الجهاز فعلاً — السحابة الاختيارية أو نسخة احتياطية خارجية أو Google Drive — فإنه يُختم بمفتاحك قبل أن يغادر، ولا نملك نحن إلا نصاً مشفّراً، لا سجلات.</p>
+      <p class="policy-tldr"><strong>باختصار:</strong> يحتفظ خيط بدفترك على جهازك أنت. لا نجمع بياناتك التجارية ولا ننقلها ولا نحتفظ بها. أمّا المزامنة والنسخ الاحتياطية الخارجية وGoogle Drive فتُختم بمفتاحك قبل أن تغادر، فلا نملك منها إلا نصاً مشفّراً، لا سجلات. والخدمات الموجّهة للعملاء مختلفة: فالمتجر ورابط تتبّع الطلب ونموذج الطلب يجب أن يقرأها العميل الموجّهة إليه، ولذلك يُخزّن خيط السحابي ما تنشره عبرها بصيغة يستطيع قراءتها. و<a href="#khayt-cloud-ar">القسم 5</a> يبيّن ذلك بالتحديد.</p>
 
       <h2>1. من نحن</h2>
       <p>خيط تطبيق سطح مكتب لمطابع الطباعة ثلاثية الأبعاد: التسعير وقائمة الإنتاج والفوترة والمخزون والأرقام خلفها. يطوّره ويصونه خيط. للتواصل: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
@@ -215,6 +224,7 @@
         <li>مفاتيح الواجهات أو الأرقام السرية أو الرموز أو أي أسرار أخرى</li>
       </ul>
       <p>تقارير الأعطال وعدّادات الاستخدام المجهولة معطّلة افتراضياً، ولا تُرسل إلا إن شغّلتها بنفسك صراحةً. و<a href="#crash-reports-ar">القسم 11</a> يبيّن ما تحتويه بالضبط.</p>
+      <p><strong>ما تختار إرساله إلينا.</strong> إن أبلغت عن مشكلة عبر <em>المساعدة ▸ إرسال ملاحظات</em> على ماك، يجهّز التطبيق رسالة إلى support@khaytapp.com في برنامج البريد لديك، ولا يُرسل شيء حتى تضغط «إرسال». ويُرفق بها ملف تشخيص (إصدار التطبيق وماك، واللغة والمنطقة، وحجم النافذة، وعدد المهام والعملاء والطابعات والبكرات وملفات المكتبة في دفترك — أعداداً لا محتوى)، وصورة للنافذة التي كنت فيها، وقد تُظهر أسماء عملاء وأسعاراً، و— فقط إن اخترت ذلك — نسخة من دفترك حُجبت فيها كل كلمة مرور ومفتاح ورمز. وبقية الدفتر، بما فيه عملاؤك، موجودة في تلك النسخة. ولا نستخدم ما ترسله إلا للتحقيق في المشكلة التي أبلغت عنها.</p>
 
       <h2>3. أين تعيش بياناتك</h2>
       <p>كل ما تُدخله يُخزَّن على جهازك أنت، في مجلد بيانات التطبيق. ولا يزامن خيط دفترك إلى أي خدمة سحابية نشغّلها نحن ما لم تُشغّل ذلك. وملفات النسخ الاحتياطي التي تنشئها تُحفظ حيث تختار. وإن فعّلت النسخ الاحتياطي عبر iCloud على ماك، فبياناتك في حسابك أنت ولا وصول لخيط إليها.</p>
@@ -237,13 +247,21 @@
       <p>سحب الإذن يوقف كل وصول لاحق فوراً. أمّا الملفات التي وضعها خيط في Drive فتبقى في Drive الخاص بك — فهي ملكك — ويمكنك حذفها كأي ملف آخر.</p>
       <p class="policy-note">إنّ استخدام خيط للمعلومات المستلمة من واجهات Google ونقلَها سيلتزم بـ<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">سياسة بيانات مستخدمي خدمات واجهات Google</a>، بما في ذلك متطلبات الاستخدام المحدود.</p>
 
-      <h2>5. سحابة خيط</h2>
+      <h2 id="khayt-cloud-ar">5. سحابة خيط</h2>
       <p>لخيط سحابة اختيارية تُشغَّل بطلبك. تأتي معطّلة، والمطبعة التي لا تشغّلها أبداً تحصل على التطبيق كاملاً بلا حساب يُنشأ وبلا شيء يغادر المكان.</p>
       <p>وحين تشغّل المزامنة، يُشفَّر دفترك على جهازك أنت بعبارة مرور لا تغادره، ويخزّن الخادم الناتج. <strong>فالخادم يحمل نصاً مشفّراً لا يستطيع قراءته.</strong> والنتيجة تترتب على هذا التصميم ويجدر معرفتها قبل التشغيل: عبارة المرور المفقودة لا يمكن إعادة تعيينها نيابةً عنك، لأن مسار استرداد لا يمرّ بك يعني أن الخادم قادر على قراءة البيانات.</p>
       <p>أمّا الخدمات السحابية الأخرى — المتجر وتتبّع الطلبات والرسائل والمساعد الذكي — فلكلٍّ منها مفتاحها، وكلٌّ موصوفة خدمةً خدمة، بما تُرسله ولمن، في <a href="../services.html">صفحة الخدمات السحابية</a>.</p>
+      <p><strong>ما تستطيع السحابة قراءته.</strong> الخدمات التي يستخدمها عملاؤك لا يمكن تشفيرها من طرف إلى طرف، لأن العميل الذي يفتح الصفحة لا يملك مفتاحاً. ولذلك حين تشغّل إحداها، يُخزّن خيط السحابي ما تنشره عبرها بصيغة مقروءة:</p>
+      <ul>
+        <li><strong>المتجر</strong> — المنتجات والأسعار والصور ورموز الخصم التي تنشرها، والتقييمات والتعليقات التي يتركها العملاء.</li>
+        <li><strong>تتبّع الطلبات وبوابة العملاء</strong> — لكل طلب تشاركه: تفاصيله ومرحلته، والبريد الإلكتروني للعميل، ورابط الدفع، والرسائل المتبادلة عليه.</li>
+        <li><strong>طلبات العملاء</strong> — ما يرسله العميل عبر نموذج الطلب الإلكتروني أو الدفع في المتجر، ويبقى حتى تستورده أو تحذفه.</li>
+        <li><strong>التسعير الفوري</strong> — مدخلات التسعير التي تنشرها ليستطيع المتجر التسعير (معدّلاتك وهامشك). ويرى السائل سعراً فقط، لا تلك المدخلات أبداً. أمّا ملف المجسّم الذي يرفعه العميل ليُسعَّر فيُسعَّر في الذاكرة ولا يُحتفظ به.</li>
+      </ul>
+      <p>ودفترك نفسه ليس منها: فالسجلات المنشورة نُسخ اخترت مشاركتها، وإلغاء نشر أيٍّ منها يحذفه من السحابة. وقد تُبلَّغ أخطاء الخادم إلى خدمة لمراقبة الأخطاء (Sentry) لكي نصلحها. ولا تُباع أيٌّ من هذه البيانات ولا تُستخدم للإعلانات ولا لتدريب نماذج الذكاء الاصطناعي.</p>
 
-      <h2>6. تطبيق الآيفون (خيط المرافق)</h2>
-      <p>«خيط المرافق» تطبيق آيفون اختياري يقترن بجهاز ماك الخاص بك. وكل ما يلي لا ينطبق إلا إن ثبّتّه.</p>
+      <h2>6. تطبيق الآيفون</h2>
+      <p>«خيط» للآيفون تطبيق اختياري يقترن بجهاز ماك أو الحاسوب الخاص بك. وكل ما يلي لا ينطبق إلا إن ثبّتّه.</p>
 
       <p><strong>ما يحفظه على الهاتف.</strong> نسخة عاملة من مطبعتك — الطلبات المفتوحة وأحدث المكتملة والعملاء والمخزون والآلات وقائمة الانتظار — مخزّنة في حاوية التطبيق نفسه. ويشفّرها iOS في حالة السكون، ولا يمكن قراءتها حتى تفتح قفل الهاتف مرة واحدة على الأقل منذ آخر تشغيل له. أمّا بيانات الاقتران — رمز الشبكة المحلية للمالك، ورمز الدخول إلى سحابة خيط، ومفتاح تشفير المطبعة — فمحفوظة في سلسلة مفاتيح iOS وموسومة بـ«هذا الجهاز فقط»، فلا تُنسخ أبداً إلى سلسلة مفاتيح iCloud ولا تُستعاد على هاتف آخر.</p>
 
@@ -283,14 +301,14 @@
       <p>لا شيء منها مفعّل افتراضياً. ولا يشارك خيط بياناتك مع أي جهة غير الخدمة التي ضبطتها أنت صراحةً.</p>
 
       <h2>8. التحديثات التلقائية</h2>
-      <p>يتحقق خيط من التحديثات عبر إصدارات GitHub. وهذا طلب HTTPS قياسي إلى خوادم GitHub، وتنطبق عليه <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">سياسة خصوصية GitHub</a>. ولا تُنقل بيانات شخصية في التحقق من التحديث، ولا تُثبَّت التحديثات إلا باختيارك.</p>
+      <p>يتحقق خيط من التحديثات عبر إصدارات GitHub. وهذا طلب HTTPS قياسي إلى خوادم GitHub، وتنطبق عليه <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">سياسة خصوصية GitHub</a>. أمّا تطبيق ماك الأصلي فيتحقق بدلاً من ذلك من ملف على هذا الموقع، <code>khaytapp.com/mac/appcast.xml</code>، باستخدام أداة التحديث Sparkle، ويُنزّل التحديث نفسه من GitHub. ولا تُنقل بيانات شخصية في التحقق من التحديث، ولا تُثبَّت التحديثات إلا باختيارك.</p>
 
       <h2>9. المفاتيح والأسرار</h2>
       <p>المفاتيح والرموز والأسرار التي تُدخلها تُشفَّر في مكانها باستخدام التخزين الآمن في نظام تشغيلك — Keychain على ماك، وCredential Store على ويندوز، وSecret Service على لينكس. ولا تُنقل أبداً إلى خوادم خيط.</p>
 
       <h2>10. بيانات عملائك</h2>
       <p>يخزّن خيط تفاصيل العملاء التي تُدخلها أنت أو التي يرسلها العملاء عبر نموذج الاستقبال: الأسماء والهواتف والبريد والعناوين وسجل الطلبات وملاحظات التواصل.</p>
-      <p>وبموجب نظام حماية البيانات الشخصية السعودي (PDPL)، وما يعادله كاللائحة الأوروبية GDPR، فإنّك <strong>أنت</strong> المتحكّم في تلك البيانات. فخيط أداة تشغّلها على جهازك، ونحن لا نستقبل سجلات عملائك أبداً. ومع تشغيل المزامنة السحابية تُشفَّر البيانات من طرف إلى طرف قبل أن تغادر جهازك، فنحمل نحن نصاً مشفّراً لا سجلات عملاء.</p>
+      <p>وبموجب نظام حماية البيانات الشخصية السعودي (PDPL)، وما يعادله كاللائحة الأوروبية GDPR، فإنّك <strong>أنت</strong> المتحكّم في تلك البيانات. فخيط أداة تشغّلها على جهازك. ومع تشغيل المزامنة السحابية يُشفَّر دفترك من طرف إلى طرف قبل أن يغادر جهازك، فنحمل نحن نصاً مشفّراً لا سجلات عملاء. والاستثناء هو ما تنشره عبر خدمة موجّهة للعملاء — تفاصيل طلب، والبريد الإلكتروني للعميل، ورسائله — إذ تخزّنه السحابة بصيغة مقروءة نيابةً عنك، كما يبيّن <a href="#khayt-cloud-ar">القسم 5</a>. وفي هذه البيانات نكون نحن المعالج لحسابك: نخزّنها فقط لتشغيل الخدمة التي فعّلتها، وإلغاء نشرها يحذفها.</p>
       <p>ولمساعدتك على الوفاء بالتزاماتك، يوفّر خيط:</p>
       <ul>
         <li><strong>الموافقة عند الجمع</strong> — نموذج الاستقبال العام يشترط موافقة العميل على إشعار بلغة واضحة قبل الإرسال، ويسجّل تلك الموافقة بختم زمني وبنص الإشعار المعروض حرفياً.</li>
