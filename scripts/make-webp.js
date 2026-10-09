@@ -18,6 +18,20 @@
      node scripts/make-webp.js           # only files with no WebP yet
      node scripts/make-webp.js --force   # re-encode everything
 
+   Narrower copies, for srcset. The hero and the gallery are 2160px captures,
+   and a phone drew them at ~350 CSS px: it downloaded six times the pixels
+   it could show, and the hero is the page's largest paint. So every
+   screenshot outside themes/ also gets a WebP at each of WIDTHS that is
+   narrower than itself, named screenshot-queue-640w.webp and so on, and the
+   pages and app.js offer them with srcset + sizes. themes/ is left alone:
+   the theme demo is dormant (see buildThemeChips in app.js) and its 182
+   captures are never shown.
+
+   The downscale is the canvas's own, at imageSmoothingQuality 'high'. The
+   widths are listed again in app.js (SHOT_WIDTHS), which builds the gallery's
+   srcset; check-site.js fails if the two lists differ, if a variant is
+   missing, stale, or not the width its name says.
+
    Chrome is the encoder: canvas.toDataURL('image/webp', q). macOS ships no
    cwebp and sips cannot write the format, and adding a native dependency to
    a repository that is otherwise plain files is a worse trade than driving
@@ -33,6 +47,25 @@ const { spawn } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const QUALITY = 0.92;
 const FORCE = process.argv.includes('--force');
+const WIDTHS = [640, 1080, 1600];
+
+// Width of a PNG, from its IHDR chunk, without decoding it.
+function pngWidth(rel) {
+  return fs.readFileSync(path.join(ROOT, rel)).readUInt32BE(16);
+}
+
+// Every file to write for one PNG: its full-size WebP, then the narrower
+// copies. A variant is never wider than its source — upscaling ships bytes
+// with no detail in them.
+function outputsFor(rel) {
+  const base = rel.replace(/\.png$/, '');
+  const out = [{ file: base + '.webp', width: 0 }];
+  if (rel.split(path.sep)[1] !== 'themes') {
+    const w = pngWidth(rel);
+    for (const v of WIDTHS) if (v < w) out.push({ file: base + '-' + v + 'w.webp', width: v });
+  }
+  return out;
+}
 
 /* ---------- what to convert ---------- */
 
@@ -46,14 +79,19 @@ function pngsUnder(dir) {
   return out;
 }
 
-const targets = pngsUnder('screenshots').filter(rel => {
-  if (FORCE) return true;
-  const webp = path.join(ROOT, rel.replace(/\.png$/, '.webp'));
-  if (!fs.existsSync(webp)) return true;
-  // Re-encode when the PNG is newer than its WebP, so a re-captured
-  // screenshot cannot leave a stale WebP being served in its place.
-  return fs.statSync(path.join(ROOT, rel)).mtimeMs > fs.statSync(webp).mtimeMs;
-});
+// Re-encode a WebP when its PNG is newer, so a re-captured screenshot cannot
+// leave a stale WebP being served in its place. Only the files that need it:
+// adding a width must not rewrite every full-size WebP already committed.
+function staleOutputs(rel) {
+  if (FORCE) return outputsFor(rel);
+  const png = fs.statSync(path.join(ROOT, rel)).mtimeMs;
+  return outputsFor(rel).filter(o => {
+    const webp = path.join(ROOT, o.file);
+    return !fs.existsSync(webp) || png > fs.statSync(webp).mtimeMs;
+  });
+}
+
+const targets = pngsUnder('screenshots').filter(rel => staleOutputs(rel).length);
 
 if (!targets.length) {
   console.log('Every screenshot already has an up-to-date WebP.');
@@ -135,10 +173,11 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html` });
   await sleep(1500);
 
-  let written = 0, pngBytes = 0, webpBytes = 0;
+  let written = 0, files = 0, pngBytes = 0, webpBytes = 0;
   const failures = [];
 
   for (const rel of targets) {
+    const outputs = staleOutputs(rel);
     const res = await send('Runtime.evaluate', {
       returnByValue: true,
       awaitPromise: true,
@@ -146,34 +185,45 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
         const img = new Image();
         img.src = ${JSON.stringify('/' + rel.split(path.sep).join('/'))};
         await img.decode();
-        const c = document.createElement('canvas');
-        c.width = img.naturalWidth; c.height = img.naturalHeight;
-        c.getContext('2d').drawImage(img, 0, 0);
-        const url = c.toDataURL('image/webp', ${QUALITY});
-        if (!url.startsWith('data:image/webp')) throw new Error('this Chrome did not encode WebP');
-        return url.slice(url.indexOf(',') + 1);
+        // 0 means the source's own width.
+        return ${JSON.stringify(outputs.map(o => o.width))}.map(w => {
+          const c = document.createElement('canvas');
+          c.width = w || img.naturalWidth;
+          c.height = Math.round(img.naturalHeight * c.width / img.naturalWidth);
+          const g = c.getContext('2d');
+          g.imageSmoothingEnabled = true;
+          g.imageSmoothingQuality = 'high';
+          g.drawImage(img, 0, 0, c.width, c.height);
+          const url = c.toDataURL('image/webp', ${QUALITY});
+          if (!url.startsWith('data:image/webp')) throw new Error('this Chrome did not encode WebP');
+          return url.slice(url.indexOf(',') + 1);
+        });
       })()`
     });
 
-    if (res.exceptionDetails || !res.result || !res.result.result || typeof res.result.result.value !== 'string') {
+    const value = res.result && res.result.result && res.result.result.value;
+    if (res.exceptionDetails || !Array.isArray(value) || value.length !== outputs.length) {
       const why = (res.exceptionDetails && res.exceptionDetails.exception && res.exceptionDetails.exception.description) || 'no data returned';
       failures.push(rel + ' — ' + String(why).split('\n')[0]);
       continue;
     }
 
-    const buf = Buffer.from(res.result.result.value, 'base64');
-    // A WebP file starts "RIFF....WEBP". Checked rather than assumed, because
-    // a silently truncated base64 string still writes a plausible-looking file.
-    if (buf.length < 64 || buf.slice(0, 4).toString() !== 'RIFF' || buf.slice(8, 12).toString() !== 'WEBP') {
-      failures.push(rel + ' — output is not a WebP file');
-      continue;
-    }
-
-    const out = path.join(ROOT, rel.replace(/\.png$/, '.webp'));
-    fs.writeFileSync(out, buf);
+    outputs.forEach((o, i) => {
+      const buf = Buffer.from(value[i], 'base64');
+      // A WebP file starts "RIFF....WEBP". Checked rather than assumed, because
+      // a silently truncated base64 string still writes a plausible-looking file.
+      if (buf.length < 64 || buf.slice(0, 4).toString() !== 'RIFF' || buf.slice(8, 12).toString() !== 'WEBP') {
+        failures.push(o.file + ' — output is not a WebP file');
+        return;
+      }
+      fs.writeFileSync(path.join(ROOT, o.file), buf);
+      files++;
+      if (!o.width) {
+        pngBytes += fs.statSync(path.join(ROOT, rel)).size;
+        webpBytes += buf.length;
+      }
+    });
     written++;
-    pngBytes += fs.statSync(path.join(ROOT, rel)).size;
-    webpBytes += buf.length;
     if (written % 25 === 0) process.stdout.write(`  ${written}/${targets.length}\n`);
   }
 
@@ -181,8 +231,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   cleanup();
 
   const mb = n => (n / 1048576).toFixed(1) + 'MB';
-  console.log(`${written} WebP written at q=${QUALITY} — ${mb(pngBytes)} of PNG became ${mb(webpBytes)} ` +
-    `(${Math.round(100 - webpBytes / pngBytes * 100)}% smaller)`);
+  console.log(`${written} screenshot(s), ${files} WebP file(s) written at q=${QUALITY}` + (pngBytes
+    ? ` — full size, ${mb(pngBytes)} of PNG became ${mb(webpBytes)} (${Math.round(100 - webpBytes / pngBytes * 100)}% smaller)`
+    : ''));
   if (failures.length) {
     console.error(`\n${failures.length} failed:`);
     failures.forEach(f => console.error('  ' + f));

@@ -267,7 +267,7 @@
     if (!img) return;
     var source = img.parentElement && img.parentElement.tagName === 'PICTURE'
       ? img.parentElement.querySelector('source[type="image/webp"]') : null;
-    var webp = src.replace(/\.png$/, '.webp');
+    var webp = shotSrcset(src);
 
     function set() {
       if (source) source.srcset = webp;
@@ -283,8 +283,7 @@
     // the frame in between was blank or stale. Fetch first, swap when it is
     // decoded, and the fade covers a picture that is already there.
     img.style.opacity = '0';
-    var pre = new Image();
-    pre.src = supportsWebp ? webp : src;
+    var pre = preload(src, source && source.getAttribute('sizes'));
     var done = false;
     function go() { if (!done) { done = true; set(); } }
     var decoded = pre.decode ? pre.decode() : Promise.reject();
@@ -310,8 +309,22 @@
   function warm(src) {
     if (!src || warmed[src]) return;
     warmed[src] = true;
+    var gs = document.getElementById('galSrc');
+    preload(src, gs && gs.getAttribute('sizes'));
+  }
+
+  // An off-DOM Image given the same srcset and sizes as the <source> it is
+  // fetching for picks the same width the <picture> will, so a warm or a
+  // swap downloads the file that is then shown — not the full 2160px one.
+  function preload(src, sizes) {
     var i = new Image();
-    i.src = supportsWebp ? src.replace(/\.png$/, '.webp') : src;
+    if (supportsWebp) {
+      if (sizes) i.sizes = sizes;
+      i.srcset = shotSrcset(src);
+    } else {
+      i.src = src;
+    }
+    return i;
   }
 
   // Screenshot path — themed, with Arabic RTL captures for every theme.
@@ -322,6 +335,32 @@
     return 'screenshots/themes/' + curTheme + '/screenshot-' + pre + key + '.png';
   }
   function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
+
+  // The WebP srcset for a screenshot PNG. scripts/make-webp.js writes a copy
+  // at each of SHOT_WIDTHS narrower than the capture, beside every screenshot
+  // outside themes/ — the theme demo is dormant and its captures get none.
+  // Most captures are 2160px wide; SHOT_NARROW lists the ones taken at 1440,
+  // so the full-size file is described by its real width. check-site.js
+  // holds both lists to the files on disk and SHOT_WIDTHS to make-webp.js.
+  var SHOT_WIDTHS = [640, 1080, 1600];
+  var SHOT_NARROW = { giftcards: 1440, portfolio: 1440, waste: 1440 };
+  function shotSrcset(png) {
+    var base = png.replace(/\.png$/, '');
+    if (base.indexOf('screenshots/themes/') === 0) return base + '.webp';
+    var full = SHOT_NARROW[base.replace(/^.*screenshot-(ar-)?/, '')] || 2160;
+    var out = [];
+    for (var i = 0; i < SHOT_WIDTHS.length; i++) {
+      if (SHOT_WIDTHS[i] < full) out.push(base + '-' + SHOT_WIDTHS[i] + 'w.webp ' + SHOT_WIDTHS[i] + 'w');
+    }
+    out.push(base + '.webp ' + full + 'w');
+    return out.join(', ');
+  }
+  // Assigning srcset, even to the value it already has, makes the browser
+  // re-run its selection; on load in English that is the hero, mid-paint.
+  function setSrcset(source, png) {
+    var v = shotSrcset(png);
+    if (source && source.getAttribute('srcset') !== v) source.srcset = v;
+  }
 
   var MODE_COMPARE = DATA.modes;
 
@@ -450,14 +489,12 @@
     var gi = document.getElementById('galImg');
     if (gi) {
       gi.src = shotPath(curKey);
-      var gsrc = document.getElementById('galSrc');
-      if (gsrc) gsrc.srcset = shotPath(curKey).replace(/\.png$/, '.webp');
+      setSrcset(document.getElementById('galSrc'), shotPath(curKey));
     }
     var hs = document.getElementById('heroShot');
     if (hs) {
       hs.src = heroPath();
-      var hsrc = document.getElementById('heroSrc');
-      if (hsrc) hsrc.srcset = heroPath().replace(/\.png$/, '.webp');
+      setSrcset(document.getElementById('heroSrc'), heroPath());
     }
     buildThemeChips();
     var btn = document.getElementById('navLang');
@@ -750,24 +787,62 @@
   }
 
   function shortNote(rel) {
-    var body = (rel.body || '').replace(/\r/g, '');
-    var line = body.split('\n').find(function (l) { return l.trim().length > 0 && !/^#/.test(l); });
+    // releases.json carries the note already made (scripts/make-releases.js);
+    // only the API fallback has a raw body to cut one from.
+    var line = rel.note || releaseNote(rel.body);
     if (!line) return { en: rel.name || rel.tag_name, ar: rel.name || rel.tag_name };
-    // Unwrap markdown links to their text. The body is rendered as plain text, so
-    // an un-stripped `[README](https://…)` printed its own brackets and URL on the
-    // page — which is exactly what the boilerplate body is made of.
-    line = line.replace(/^[-*\s]+/, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-               .replace(/\*\*/g, '').replace(/`/g, '').slice(0, 90);
     return { en: line, ar: line };
+  }
+
+  // The first sentence of the body's first PARAGRAPH, as one line. Release
+  // bodies are hard-wrapped, so the first line used to be the note and it
+  // stopped mid-sentence: "Money that adds up for shops that add tax on top,
+  // since 3.11.3. Individual". The paragraph goes on "Individual entries are
+  // kept below; this is what changed for you.", which means nothing repeated
+  // on every row here, so only its first sentence is kept. Unwrap markdown
+  // links to their text, too: the note is rendered as plain text, so an
+  // un-stripped `[README](https://…)` printed its own brackets and URL on the
+  // page. scripts/make-releases.js does the same — keep them in step.
+  function releaseNote(body) {
+    var paras = String(body || '').replace(/\r/g, '').split(/\n\s*\n/);
+    for (var i = 0; i < paras.length; i++) {
+      var lines = paras[i].split('\n').map(function (l) { return l.trim(); })
+        .filter(function (l) { return l && !/^#/.test(l); });
+      if (!lines.length) continue;
+      return lines.join(' ').replace(/^[-*\s]+/, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+        .replace(/\*\*/g, '').replace(/`/g, '').replace(/\s+/g, ' ').trim()
+        // . ! or ? then a space and a capital: the dots in "3.11.3" end nothing.
+        .replace(/^(.*?[.!?])\s+[A-Z][\s\S]*$/, '$1');
+    }
+    return '';
+  }
+
+  // releases.json rows, in the shape the API returns, so everything below
+  // reads one shape whichever source answered.
+  function fromSiteFile(r) {
+    return { tag_name: r.tag, name: r.name, prerelease: r.prerelease, draft: false,
+      published_at: r.date, note: r.note, html_url: r.html_url, assets: r.assets };
   }
 
   function fetchReleases() {
     if (!window.fetch) return;
-    // 30, not 12: a long beta run pushes the newest STABLE out of a 12-release
-    // window, and then there is no stable to point the download buttons at.
-    // 3.6.0 alone shipped 19 betas plus 4 rcs.
-    fetch('https://api.github.com/repos/khaytapp/Khayt/releases?per_page=30', { headers: { 'Accept': 'application/vnd.github+json' } })
-      .then(function (r) { return r.ok ? r.json() : null; })
+    function json(url, opts) {
+      return fetch(url, opts).then(function (r) { return r.ok ? r.json() : null; });
+    }
+    // releases.json first: same origin, ~13KB, written by the sync-release
+    // workflow (scripts/make-releases.js). The GitHub API is the fallback —
+    // 192KB, and 60 requests an hour per IP shared by everyone behind it.
+    json('releases.json')
+      .then(function (d) {
+        return d && d.releases && d.releases.length ? d.releases.map(fromSiteFile) : null;
+      }, function () { return null; })
+      .then(function (rels) {
+        // 30, not 12: a long beta run pushes the newest STABLE out of a 12-release
+        // window, and then there is no stable to point the download buttons at.
+        // 3.6.0 alone shipped 19 betas plus 4 rcs.
+        return rels || json('https://api.github.com/repos/khaytapp/Khayt/releases?per_page=30',
+          { headers: { 'Accept': 'application/vnd.github+json' } });
+      })
       .then(function (rels) {
         if (!rels || !rels.length) return;
         // The API does not guarantee version order — collect, then sort by semver.

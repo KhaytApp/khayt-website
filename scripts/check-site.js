@@ -44,7 +44,8 @@ check('JavaScript parses', () => {
   const files = ['app.js', 'site.js', 'services.js', 'data.js', 'render.js',
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
-    'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js'];
+    'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -478,6 +479,160 @@ check('Every screenshot has an up-to-date WebP', () => {
       (stale.length > 10 ? `\n...and ${stale.length - 10} more` : ''));
   }
   return pngs.length + ' pairs';
+});
+
+// Pixel width of a WebP, read from its header: the simple-lossy (VP8 ),
+// lossless (VP8L) and extended (VP8X) layouts keep it in different places.
+function webpWidth(file) {
+  const b = fs.readFileSync(file);
+  if (b.slice(0, 4).toString() !== 'RIFF' || b.slice(8, 12).toString() !== 'WEBP') throw new Error(file + ' is not a WebP file');
+  const kind = b.slice(12, 16).toString();
+  if (kind === 'VP8 ') return b.readUInt16LE(26) & 0x3fff;
+  if (kind === 'VP8L') return 1 + (b.readUInt16LE(21) & 0x3fff);
+  if (kind === 'VP8X') return 1 + b.readUIntLE(24, 3);
+  throw new Error(file + ': unknown WebP chunk ' + kind);
+}
+
+check('Every narrower screenshot copy exists, is current and is the width it says', () => {
+  // The hero and gallery offer 640/1080/1600px copies through srcset, and a
+  // phone picks one by the number in its name. A missing copy is a broken
+  // image on exactly the devices nobody tests on; a stale one is last month's
+  // screen; and a copy whose real width is not its descriptor makes the
+  // browser pick the wrong one and scale it. make-webp.js writes them, so its
+  // width list and app.js's (which builds the gallery's srcset) must agree.
+  const listOf = (file, re) => {
+    const m = fs.readFileSync(file, 'utf8').match(re);
+    if (!m) throw new Error('could not find the width list in ' + file);
+    return m[1].split(',').map(Number).join(',');
+  };
+  const made = listOf('scripts/make-webp.js', /const WIDTHS = \[([\d, ]+)\]/);
+  const offered = listOf('app.js', /var SHOT_WIDTHS = \[([\d, ]+)\]/);
+  if (made !== offered) throw new Error(`make-webp.js writes ${made} but app.js offers ${offered}`);
+  const widths = made.split(',').map(Number);
+
+  // app.js assumes 2160 except where SHOT_NARROW says otherwise, because it
+  // cannot measure a file before choosing it. Hold it to the PNGs.
+  const narrow = {};
+  const nm = fs.readFileSync('app.js', 'utf8').match(/var SHOT_NARROW = \{([^}]*)\}/);
+  if (!nm) throw new Error('could not find SHOT_NARROW in app.js');
+  for (const m of nm[1].matchAll(/(\w+): (\d+)/g)) narrow[m[1]] = Number(m[2]);
+
+  const bad = [];
+  let n = 0;
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const rel = path.join(dir, e.name);
+      if (e.isDirectory()) { if (e.name !== 'themes') walk(rel); continue; }
+      if (!e.name.endsWith('.png')) continue;
+      const png = fs.readFileSync(rel);
+      const w = png.readUInt32BE(16);
+      if (dir === 'screenshots') {
+        const key = e.name.replace(/^screenshot-(ar-)?/, '').replace(/\.png$/, '');
+        const said = narrow[key] || 2160;
+        if (said !== w) bad.push(`${rel} is ${w}px wide but app.js describes it as ${said}w (SHOT_NARROW)`);
+      }
+      for (const v of widths) {
+        if (v >= w) continue;
+        const out = rel.replace(/\.png$/, '-' + v + 'w.webp');
+        n++;
+        if (!fs.existsSync(out)) { bad.push(out + ' (missing)'); continue; }
+        if (fs.statSync(rel).mtimeMs > fs.statSync(out).mtimeMs + 1000) bad.push(out + ' (older than its PNG)');
+        const real = webpWidth(out);
+        if (real !== v) bad.push(`${out} is ${real}px wide, not ${v}`);
+      }
+    }
+  })('screenshots');
+  if (bad.length) throw new Error('run `node scripts/make-webp.js`:\n' + bad.join('\n'));
+  return n + ' copies at ' + made;
+});
+
+check('Every srcset candidate exists and is the width it claims', () => {
+  // The link check reads src= and href=, never srcset=, so a typo in one
+  // candidate was invisible to it — and only the devices that pick that
+  // candidate would see the hole.
+  const bad = [];
+  let n = 0;
+  for (const p of pages()) {
+    const dir = path.dirname(p);
+    for (const tag of fs.readFileSync(p, 'utf8').matchAll(/<(?:source|img)\b[^>]*\bsrcset="([^"]+)"[^>]*>/g)) {
+      const cands = tag[1].split(',').map(c => c.trim().split(/\s+/));
+      if (cands.some(c => /w$/.test(c[1] || '')) && !/\bsizes="/.test(tag[0])) {
+        bad.push(p + ': width descriptors with no sizes — the browser assumes 100vw: ' + tag[0].slice(0, 80));
+      }
+      for (const [url, desc] of cands) {
+        n++;
+        const file = url.startsWith('/') ? path.join(ROOT, url) : path.join(dir, url);
+        if (!fs.existsSync(file)) { bad.push(p + ': missing ' + url); continue; }
+        const m = /^(\d+)w$/.exec(desc || '');
+        if (m && file.endsWith('.webp') && webpWidth(file) !== Number(m[1])) {
+          bad.push(`${p}: ${url} is ${webpWidth(file)}px wide but is offered as ${desc}`);
+        }
+      }
+    }
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return n + ' candidates';
+});
+
+check('Every page loads the same self-hosted fonts', () => {
+  // The fonts were a Google Fonts stylesheet on every page, copied by hand
+  // into each new one — so the cheap way to regress is one page (a new blog
+  // post, the 404) quietly going back to it, or loading a second setup
+  // beside the first. Every page must load fonts/fonts.css and preload the
+  // heading face, and nothing from fonts.googleapis.com.
+  const want = 'preload=fonts/archivo-latin.woff2 css=fonts/fonts.css';
+  const bad = [];
+  for (const p of pages().concat(['scripts/post-template.html'])) {
+    const html = fs.readFileSync(p, 'utf8');
+    const head = html.split('</head>')[0];
+    if (/fonts\.(googleapis|gstatic)\.com/.test(head)) bad.push(p + ': still loads Google Fonts');
+    // post-template.html is written to blog/, so it resolves from there.
+    const at = p === 'scripts/post-template.html' ? 'blog/x.html' : p;
+    const preloads = [...head.matchAll(/<link rel="preload" href="([^"]+)" as="font" type="font\/woff2" crossorigin>/g)]
+      .map(m => navTarget(at, m[1]));
+    const sheets = [...head.matchAll(/<link rel="stylesheet" href="([^"]*fonts[^"]*)">/g)].map(m => navTarget(at, m[1]));
+    const got = preloads.map(x => 'preload=' + x).concat(sheets.map(x => 'css=' + x)).join(' ');
+    if (got !== want) bad.push(`${p}: has "${got}", want "${want}"`);
+    // The preload must come before any stylesheet, or it starts no earlier
+    // than the @font-face that would have found the file anyway.
+    if (head.indexOf('rel="preload"') > head.indexOf('rel="stylesheet"')) bad.push(p + ': the font preload comes after a stylesheet');
+  }
+
+  const css = fs.readFileSync('fonts/fonts.css', 'utf8');
+  for (const m of css.matchAll(/url\(([^)]+)\)/g)) {
+    if (!fs.existsSync(path.join('fonts', m[1]))) bad.push('fonts/fonts.css names ' + m[1] + ', which is not in fonts/');
+  }
+  if (!css.includes('url(archivo-latin.woff2)')) bad.push('pages preload archivo-latin.woff2, but fonts.css no longer uses it');
+  // Every family styles.css asks for first must be one fonts.css provides,
+  // with its licence beside it.
+  const families = new Set([...fs.readFileSync('styles.css', 'utf8').matchAll(/--font-[a-z]+:\s*"([^"]+)"/g)].map(m => m[1]));
+  for (const f of families) {
+    if (!css.includes("font-family: '" + f + "'")) bad.push('styles.css uses ' + f + ' but fonts/fonts.css does not define it');
+    const ofl = 'fonts/OFL-' + f.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.txt';
+    if (!fs.existsSync(ofl)) bad.push(ofl + ' is missing — the OFL has to ship with the font');
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return families.size + ' families, identical on ' + pages().length + ' pages and the post template';
+});
+
+check('releases.json is a usable release list', () => {
+  // The home page reads it before the GitHub API, and the sync-release
+  // workflow rewrites it. A file that parses but has lost its stable release
+  // or its download assets would leave the download card on the version
+  // index.html was last synced to, with every check green.
+  const { releases } = JSON.parse(fs.readFileSync('releases.json', 'utf8'));
+  if (!Array.isArray(releases) || !releases.length) throw new Error('no releases in releases.json');
+  const bad = [];
+  for (const r of releases) {
+    for (const k of ['tag', 'name', 'date', 'html_url']) if (!r[k]) bad.push((r.tag || '?') + ': no ' + k);
+    if (typeof r.prerelease !== 'boolean') bad.push(r.tag + ': prerelease is not a boolean');
+    if (/\n/.test(r.note || '')) bad.push(r.tag + ': note spans lines — it should be one unwrapped paragraph');
+  }
+  const stable = releases.find(r => !r.prerelease);
+  if (!stable) bad.push('no stable release');
+  else if (!stable.assets || !stable.assets.length) bad.push(stable.tag + ' (newest stable) has no assets to link');
+  if (bad.length) throw new Error(bad.join('\n') + '\nRegenerate: gh api \'repos/khaytapp/Khayt/releases?per_page=30\' | node scripts/make-releases.js');
+  return releases.length + ' releases, newest stable ' + stable.tag;
 });
 
 check('Focus and reduced-motion rules exist', () => {

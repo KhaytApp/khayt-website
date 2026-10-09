@@ -70,15 +70,35 @@ jobs:
           fi
           python3 .github/scripts/update_version.py "$TAG"
 
+      # The home page reads the release list from this file rather than from
+      # api.github.com on every visit (192KB, and 60 requests an hour per IP).
+      # Independent of the step above: a run that finds no new stable tag still
+      # refreshes the list, which carries the prereleases and the dates.
+      #
+      # make-releases.js refuses anything that is not a list of releases, so a
+      # rate-limited or failed fetch leaves the committed file as it was rather
+      # than emptying it. It writes no timestamp, so an unchanged list is an
+      # unchanged file and the commit step below finds nothing to do.
+      - name: Update releases.json
+        run: |
+          if curl -sf -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               "https://api.github.com/repos/khaytapp/Khayt/releases?per_page=30" \
+               -o "$RUNNER_TEMP/releases.json"; then
+            node scripts/make-releases.js < "$RUNNER_TEMP/releases.json" \
+              || echo "::warning::releases.json not updated — the API answer was not a release list"
+          else
+            echo "::warning::releases.json not updated — could not fetch the release list"
+          fi
+
       - name: Commit and push if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add index.html releases.json
           if git diff --staged --quiet; then
-            echo "index.html already up to date — nothing to commit"
+            echo "index.html and releases.json already up to date — nothing to commit"
           else
-            git commit -m "chore: auto-sync download links to ${{ steps.release.outputs.tag }}"
+            git commit -m "chore: auto-sync download links and release list to ${{ steps.release.outputs.tag }}"
             # The concurrency group above stops this workflow racing ITSELF; it
             # says nothing about a commit landing between the checkout and the
             # push. On rejection, REPLAY rather than merge.
@@ -88,24 +108,24 @@ jobs:
             # file every run touches, and `git pull --rebase` stops dead. Proven
             # locally before this was written.
             #
-            # index.html is DERIVED from the latest release tag, so there is
-            # nothing to merge — the newest generation simply wins. reset --soft
-            # keeps our generated file staged while moving onto origin/main; if it
-            # already matches what the other run wrote, there is nothing to commit
-            # and we are done.
+            # index.html is DERIVED from the latest release tag, and releases.json
+            # from the release list, so there is nothing to merge — the newest
+            # generation simply wins. reset --soft keeps our generated files staged
+            # while moving onto origin/main; if they already match what the other
+            # run wrote, there is nothing to commit and we are done.
             for attempt in 1 2 3; do
               if git push; then
                 echo "pushed on attempt $attempt"
                 exit 0
               fi
-              echo "push rejected — replaying our generated index.html onto origin/main"
+              echo "push rejected — replaying our generated files onto origin/main"
               git fetch origin main || exit 1
               git reset --soft origin/main
               if git diff --staged --quiet; then
                 echo "the other run already wrote the same links — nothing left to do"
                 exit 0
               fi
-              git commit -m "chore: auto-sync download links to ${{ steps.release.outputs.tag }}"
+              git commit -m "chore: auto-sync download links and release list to ${{ steps.release.outputs.tag }}"
               sleep $((attempt * 2))
             done
             echo "::error::could not push after 3 attempts"
