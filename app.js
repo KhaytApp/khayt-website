@@ -47,7 +47,7 @@
     'hero.dl':    { en: 'Download Free', ar: 'حمّل مجاناً' },
     'hero.github':{ en: 'View on GitHub', ar: 'عرض على GitHub' },
     'hero.os':    { en: 'No account · Nothing sent by default', ar: 'بدون حساب · لا يُرسل شيء افتراضياً' },
-    'hero.ios':   { en: 'iOS companion', ar: 'تطبيق iOS مرافق' },
+    'hero.ios':   { en: 'iPhone (testing)', ar: 'آيفون (قيد الاختبار)' },
 
     'more.features': { en: 'Show all nine features', ar: 'اعرض المزايا التسع' },
     'more.cloud':    { en: 'Show all nine services', ar: 'اعرض الخدمات التسع' },
@@ -148,6 +148,14 @@
     'mn.all':    { en: 'All Mac releases →', ar: 'كل إصدارات ماك ←' },
     'mn.road':   { en: 'Where this goes: the native Mac app becomes the main Khayt on macOS, a native Windows app follows it, and the app above keeps running everywhere — it is not going away.',
                    ar: 'إلى أين يتجه هذا: تطبيق ماك الأصلي سيصبح خيط الأساسي على ماك، ويتبعه تطبيق ويندوز أصلي، ويبقى التطبيق أعلاه يعمل في كل مكان — فهو لن يختفي.' },
+
+    'ip.badge':  { en: 'Testing', ar: 'قيد الاختبار' },
+    'ip.h':      { en: 'Khayt for iPhone', ar: 'خيط للآيفون' },
+    'ip.p':      { en: 'The shop in your pocket: orders, inventory, machines and customers, paired with your Mac or PC over the shop’s Wi-Fi, or through Khayt Cloud when you are away. Prints show as Live Activities on the Lock Screen and in the Dynamic Island. Record a payment at the counter, send the customer a WhatsApp update with a photo of the finished part, scan a spool or job label to open it, and watch a printer’s camera. Siri, Shortcuts and Control Center actions, a Focus filter for shop alerts, and side-by-side views on iPhone Duo.', ar: 'المطبعة في جيبك: الطلبات والمخزون والطابعات والعملاء، مقترنة بجهاز ماك أو الحاسوب عبر شبكة المطبعة، أو عبر سحابة خيط حين تكون بعيداً. تظهر الطباعة كأنشطة حيّة على شاشة القفل وفي الجزيرة الديناميكية. سجّل دفعة عند الكاونتر، وأرسل للعميل تحديثاً عبر واتساب مع صورة القطعة المنتهية، وامسح ملصق بكرة أو مهمة لفتحها، وشاهد كاميرا الطابعة. أوامر Siri والاختصارات ومركز التحكم، ومرشّح تركيز لتنبيهات المطبعة، وعرض جنباً إلى جنب على iPhone Duo.' },
+    'ip.warn':   { en: 'It is being tested with TestFlight and is not on the App Store yet.', ar: 'يُختبر حالياً عبر TestFlight، وليس على App Store بعد.' },
+    'ip.req':    { en: 'iOS 27 or later', ar: 'iOS 27 أو أحدث' },
+    'ip.pair':   { en: 'Pairs with your Mac or PC', ar: 'يقترن بماك أو الحاسوب' },
+    'ip.langs':  { en: 'English & Arabic', ar: 'العربية والإنجليزية' },
 
     'dl.eyebrow':{ en: 'Download Khayt', ar: 'حمّل خيط' },
     'dl.h2':     { en: 'Set up shop in two minutes', ar: 'جهّز مطبعتك في دقيقتين' },
