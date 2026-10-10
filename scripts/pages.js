@@ -13,7 +13,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 // Directory pages, each an index.html one level down. 404.html is one of the
 // flat ones on purpose — GitHub Pages hands it to anyone who mistypes a URL.
-const FLAT = ['index.html', 'services.html', '404.html'];
+const FLAT = ['index.html', 'services.html', '404.html', 'success.html', 'cancel.html', 'failure.html'];
 const DIRS = ['blog', 'privacy', 'terms'];
 
 module.exports = function pages() {
@@ -26,3 +26,11 @@ module.exports = function pages() {
   }
   return out;
 };
+
+// Pages that exist to be landed on, never to be found: the 404, and the three
+// a BNPL checkout (Tabby, Tamara) returns a shop's customer to — the desktop
+// app's payment links name https://khaytapp.com/success, /cancel and /failure
+// (lib/main/payment-links.js in the app repo), and for as long as they existed
+// a customer who had just paid landed on "page not found". All four are
+// noindex, carry no canonical, and stay out of the sitemap.
+module.exports.NOINDEX = new Set(['404.html', 'success.html', 'cancel.html', 'failure.html']);

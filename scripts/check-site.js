@@ -260,7 +260,7 @@ check('Sitemap lists every page', () => {
   // it compared against was written by hand and nobody thought to extend it.
   // 404.html is deliberately out — a sitemap advertises pages, not the error.
   const want = pages()
-    .filter(p => p !== '404.html')
+    .filter(p => !pages.NOINDEX.has(p))
     .map(p => p === 'index.html' ? '' : p.replace(/(^|\/)index\.html$/, '$1'));
   const missing = want.filter(w => !listed.has(w));
   if (missing.length) throw new Error('not listed: ' + missing.join(', '));
@@ -302,14 +302,14 @@ check('The privacy policy is reachable from every page', () => {
   // 404.html has no footer on purpose — it is an error page, not a page.
   const bad = [];
   for (const p of pages()) {
-    if (p === '404.html') continue;
+    if (pages.NOINDEX.has(p)) continue;
     const html = fs.readFileSync(p, 'utf8');
     for (const want of ['foot.privacy', 'foot.terms']) {
       if (!html.includes('data-i18n="' + want + '"')) bad.push(p + ': no ' + want + ' link');
     }
   }
   if (bad.length) throw new Error(bad.join('\n'));
-  return pages().length - 1 + ' pages';
+  return pages().length - pages.NOINDEX.size + ' pages';
 });
 
 // Where a nav link actually lands, as a repo-relative file, so the three
@@ -676,7 +676,7 @@ check('Every page can be linked in Arabic', () => {
   // shared or indexed. Each page needs its ?lang=ar alternate declared.
   const bad = [];
   // 404.html is excluded: it is noindex, so it has no canonical to alternate.
-  for (const p of pages().filter(f => f !== '404.html')) {
+  for (const p of pages().filter(f => !pages.NOINDEX.has(f))) {
     const html = fs.readFileSync(p, 'utf8');
     if (!/hreflang="ar"[^>]*lang=ar/.test(html)) bad.push(p);
   }
@@ -707,7 +707,7 @@ check('Every page has one canonical, and it is its own URL', () => {
   for (const p of pages()) {
     const html = fs.readFileSync(p, 'utf8');
     const canon = [...html.matchAll(/<link rel="canonical" href="([^"]*)"/g)].map(m => m[1]);
-    if (p === '404.html') {
+    if (pages.NOINDEX.has(p)) {
       if (canon.length) bad.push(p + ': has a canonical (' + canon[0] + ') — it is served at every missing URL');
       if (!/<meta name="robots" content="[^"]*noindex/.test(html)) bad.push(p + ': not noindex');
       continue;
@@ -719,7 +719,7 @@ check('Every page has one canonical, and it is its own URL', () => {
     if (og && og[1] !== want) bad.push(`${p}: og:url ${og[1]}, should be ${want}`);
   }
   if (bad.length) throw new Error(bad.join('\n'));
-  return pages().length - 1 + ' pages self-canonical';
+  return pages().length - pages.NOINDEX.size + ' pages self-canonical';
 });
 
 check('Titles and descriptions fit a search result, and are unique', () => {
