@@ -11,7 +11,7 @@
     'nav.modes':     { en: 'Modes', ar: 'الأوضاع' },
     'nav.features':  { en: 'Features', ar: 'المزايا' },
     'nav.languages': { en: 'Languages', ar: 'اللغات' },
-    'nav.oss':       { en: 'Open Source', ar: 'مفتوح المصدر' },
+    'nav.oss':       { en: 'Source available', ar: 'المصدر متاح' },
     'nav.download':  { en: 'Download', ar: 'تحميل' },
     'nav.services':  { en: 'Services', ar: 'الخدمات' },
     'nav.blog':      { en: 'Blog', ar: 'المدوّنة' },
@@ -22,7 +22,7 @@
     },
     'meta.desc': {
       en: 'Free desktop app for 3D print shop owners. Kanban production queue, cost calculator, signed e-invoicing, live printer API, filament inventory and analytics \u2014 fully offline.',
-      ar: 'تطبيق مجاني لأصحاب مطابع الطباعة ثلاثية الأبعاد. قائمة إنتاج كانبان، حاسبة تكلفة، فوترة إلكترونية للمرحلة الثانية من هيئة الزكاة، ربط مباشر بالطابعات، مخزون الخيوط وتحليلات — دون اتصال تماماً.'
+      ar: 'تطبيق مجاني لأصحاب مطابع الطباعة ثلاثية الأبعاد. قائمة إنتاج كانبان، حاسبة تكلفة، فوترة إلكترونية موقّعة، ربط مباشر بالطابعات، مخزون الخيوط وتحليلات — دون اتصال تماماً.'
     },
 
     'a11y.skip': { en: 'Skip to content', ar: 'تخطّ إلى المحتوى' },
@@ -44,10 +44,10 @@
 
     'hero.pill':  { en: 'Free to use · Source available', ar: 'مجاني · المصدر متاح' },
     'hero.h1':    { en: 'One desk runs the <span class="hl">whole shop</span>.', ar: 'مكتب واحد يُدير <span class="hl">المطبعة كاملة</span>.' },
-    'hero.desc':  { en: 'Khayt is the production desk for 3D print shops — quoting, Kanban queue, e-invoicing and filament inventory in one app. Entirely offline. Free. No account, no telemetry.', ar: 'خيط هو مكتب الإنتاج لمطابع الطباعة ثلاثية الأبعاد — التسعير وقائمة كانبان والفوترة الإلكترونية ومخزون الخيوط في تطبيق واحد. دون اتصال تماماً. مجاناً. بلا حساب وبلا تتبّع.' },
+    'hero.desc':  { en: 'Khayt is the production desk for 3D print shops — quoting, Kanban queue, e-invoicing and filament inventory in one app. Entirely offline. Free. No account, and nothing sent unless you opt in.', ar: 'خيط هو مكتب الإنتاج لمطابع الطباعة ثلاثية الأبعاد — التسعير وقائمة كانبان والفوترة الإلكترونية ومخزون الخيوط في تطبيق واحد. دون اتصال تماماً. مجاناً. بلا حساب، ولا يُرسل شيء ما لم تختر ذلك.' },
     'hero.dl':    { en: 'Download Free', ar: 'حمّل مجاناً' },
     'hero.github':{ en: 'View on GitHub', ar: 'عرض على GitHub' },
-    'hero.os':    { en: 'No account · No telemetry', ar: 'بدون حساب · بدون تتبّع' },
+    'hero.os':    { en: 'No account · Nothing sent by default', ar: 'بدون حساب · لا يُرسل شيء افتراضياً' },
     'hero.ios':   { en: 'iOS companion', ar: 'تطبيق iOS مرافق' },
 
     'more.features': { en: 'Show all nine features', ar: 'اعرض المزايا التسع' },
@@ -81,7 +81,7 @@
     'modes.hobby.cta':{ en: 'Take a look at Bed Ready', ar: '\u0627\u0637\u0651\u0644\u0639 \u0639\u0644\u0649 Bed Ready' },
     'modes.eyebrow':{ en: 'One app, two ways to run it', ar: 'تطبيق واحد بطريقتين للاستخدام' },
     'modes.h2':     { en: 'From side-business to production floor', ar: 'من عمل جانبي إلى أرضية إنتاج' },
-    'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a personal print log to a full production business, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من سجل طباعة شخصي إلى منشأة إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
+    'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a small side-business to a full production floor, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من عمل جانبي صغير إلى أرضية إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
     'modes.sim.pill':{ en: 'Simple', ar: 'بسيط' },
     'modes.sim.t': { en: 'A small shop, made easy', ar: 'متجر صغير بسهولة' },
     'modes.sim.d': { en: 'Everything a side-business needs — orders, clients, invoicing and revenue, plus focused sales reports. The advanced production and accounting depth stays out of the way until you want it.', ar: 'كل ما يحتاجه مشروع جانبي — طلبات، عملاء، فوترة وإيرادات، مع تقارير مبيعات مركّزة. يبقى العمق الإنتاجي والمحاسبي المتقدّم بعيداً حتى تطلبه.' },
@@ -99,7 +99,7 @@
     'nav.beta':    { en: 'Cloud', ar: 'السحابة' },
     'beta.eyebrow':{ en: 'Opt-in', ar: 'اختياري' },
     'beta.h2':     { en: 'An optional cloud. Never a requirement.', ar: 'سحابة اختيارية. وليست شرطاً أبداً.' },
-    'beta.lede':   { en: 'End-to-end encrypted — the server only ever sees ciphertext, and your sync passphrase never leaves your machine. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $9/mo for Cloud — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a>', ar: 'مشفّرة من طرف إلى طرف — لا يرى الخادم إلا نصاً مشفّراً، وعبارة مرور المزامنة لا تغادر جهازك. أطفئ السحابة ويعمل خيط تماماً كما كان. والخطط منشورة — 9 دولارات شهرياً للسحابة — وكلها مجانية ما دامت التجربة قائمة. <a href="services.html">اطّلع على الخطط وما ترسله كل خدمة ←</a>' },
+    'beta.lede':   { en: 'Sync is end-to-end encrypted — the server only ever sees your book as ciphertext, and your sync passphrase never leaves your machine. The customer-facing services hold only what you publish to them. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $9/mo for Cloud — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a>', ar: 'المزامنة مشفّرة من طرف إلى طرف — لا يرى الخادم دفترك إلا نصاً مشفّراً، وعبارة مرور المزامنة لا تغادر جهازك. أمّا الخدمات الموجّهة للعملاء فلا تحمل إلا ما تنشره فيها. أطفئ السحابة ويعمل خيط تماماً كما كان. والخطط منشورة — 9 دولارات شهرياً للسحابة — وكلها مجانية ما دامت التجربة قائمة. <a href="services.html">اطّلع على الخطط وما ترسله كل خدمة ←</a>' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
 
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
@@ -118,9 +118,9 @@
 
     'lang.eyebrow':{ en: '9 languages', ar: '9 لغات' },
     'lang.h2':     { en: 'Built for global makers', ar: 'مصمّم لصُنّاع العالم' },
-    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) makes nine, and dates and numbers now follow the language you picked rather than defaulting to English.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) لتصبح تسع لغات، وصارت التواريخ والأرقام تتبع اللغة التي اخترتها بدل الإنجليزية.' },
+    'lang.lede':   { en: 'Full Arabic RTL layout is a core design decision — not an afterthought. Khayt also ships in German, Spanish, French, Turkish, Chinese and Japanese, with instant switching from anywhere in the app. Portuguese (Brazil) makes nine, and dates and numbers now follow the language you picked rather than defaulting to English. The native Mac and iPhone apps are in English and Arabic so far, and print documents in all nine.', ar: 'دعم العربية من اليمين إلى اليسار قرار تصميمي أساسي، وليس إضافة لاحقة. يأتي خيط أيضاً بالألمانية والإسبانية والفرنسية والتركية والصينية واليابانية، مع تبديل فوري من أي مكان في التطبيق. وتنضم البرتغالية (البرازيل) لتصبح تسع لغات، وصارت التواريخ والأرقام تتبع اللغة التي اخترتها بدل الإنجليزية. أمّا تطبيقا ماك والآيفون الأصليان فبالعربية والإنجليزية حتى الآن، ويطبعان المستندات باللغات التسع.' },
     'lang.li1':{ en: 'Arabic RTL layout throughout the entire app', ar: 'تخطيط عربي من اليمين لليسار في كامل التطبيق' },
-    'lang.li2':{ en: 'Signed e-invoices — bilingual AR & EN', ar: 'فواتير المرحلة الثانية — موقّعة، ثنائية اللغة عربي وإنجليزي' },
+    'lang.li2':{ en: 'Signed e-invoices — bilingual AR & EN', ar: 'فواتير إلكترونية موقّعة — ثنائية اللغة عربي وإنجليزي' },
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
@@ -134,7 +134,7 @@
     'oss.sponsor':{ en: 'Sponsor', ar: 'ادعم' },
     'stat.free': { en: 'Free to use', ar: 'مجاني للاستخدام' },
     'stat.langs':{ en: 'Languages', ar: 'لغات' },
-    'stat.telemetry': { en: 'Telemetry', ar: 'تتبّع' },
+    'stat.telemetry': { en: 'Accounts needed', ar: 'حسابات مطلوبة' },
     'stat.keep': { en: 'Yours to keep', ar: 'ملك لك للأبد' },
 
     'mn.badge':  { en: 'Alpha', ar: 'ألفا' },
@@ -152,7 +152,7 @@
 
     'dl.eyebrow':{ en: 'Download Khayt', ar: 'حمّل خيط' },
     'dl.h2':     { en: 'Set up shop in two minutes', ar: 'جهّز مطبعتك في دقيقتين' },
-    'dl.lede':   { en: 'Free for everyone. No account. No telemetry. Your data stays on your device.', ar: 'مجاني للجميع. بدون حساب. بدون تتبّع. بياناتك تبقى على جهازك.' },
+    'dl.lede':   { en: 'Free for everyone. No account. Nothing sent unless you opt in. Your data stays on your device.', ar: 'مجاني للجميع. بدون حساب. لا يُرسل شيء ما لم تختر ذلك. بياناتك تبقى على جهازك.' },
     'dl.stable': { en: 'Stable', ar: 'مستقر' },
     'dl.beta':   { en: 'Beta', ar: 'تجريبي' },
     'dl.mac':    { en: 'Signed & Notarized — opens cleanly', ar: 'موقّع وموثّق — يفتح بسلاسة' },
@@ -165,7 +165,7 @@
     'dl.deb':    { en: 'Debian / Ubuntu (.deb)', ar: 'دبيان / أوبنتو (.deb)' },
     'dl.latest': { en: 'latest', ar: 'الأحدث' },
     'dl.srcavail':{ en: 'Source available', ar: 'المصدر متاح' },
-    'dl.notel':  { en: 'No telemetry', ar: 'بدون تتبّع' },
+    'dl.notel':  { en: 'Nothing sent by default', ar: 'لا يُرسل شيء افتراضياً' },
     'dl.allrel': { en: 'All releases on GitHub →', ar: 'كل الإصدارات على GitHub ←' },
 
     'cl.title':  { en: 'Release history', ar: 'سجل الإصدارات' },
@@ -831,6 +831,26 @@
       .catch(function () {});
   }
 
+  // The native Mac app's download comes from its own Sparkle feed, which the
+  // Mac release pushes to this site. Every khayt-mac release is a prerelease, so
+  // GitHub's /releases/latest has nothing to point at and quietly landed on the
+  // release list instead of a file. The feed's enclosure is the file Sparkle
+  // itself installs, so the button and the updater cannot disagree. The static
+  // href (the release list) is what a reader without JS gets.
+  function macFeed() {
+    var a = document.querySelector('.mn-dl');
+    if (!a || !window.fetch || !window.DOMParser) return;
+    fetch('mac/appcast.xml', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (xml) {
+        if (!xml) return;
+        var enc = new DOMParser().parseFromString(xml, 'application/xml').querySelector('item enclosure');
+        var url = enc && enc.getAttribute('url');
+        if (url && /^https:\/\/github\.com\/KhaytApp\/khayt-mac\/releases\/download\//.test(url)) a.href = url;
+      })
+      .catch(function () {});
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     // An explicit ?lang= in the link beats whatever this browser last chose:
     // someone following an Arabic link wants the Arabic page, even if they
@@ -850,5 +870,6 @@
     wireGrids();
     applyLang(saved);
     fetchReleases();
+    macFeed();
   });
 })();
