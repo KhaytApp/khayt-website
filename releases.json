@@ -331,6 +331,38 @@
    "prerelease": true,
    "note": "See README for full release notes.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.16"
+  },
+  {
+   "tag": "v3.7.0-beta.15",
+   "name": "Khayt v3.7.0-beta.15",
+   "date": "2026-08-30",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.15"
+  },
+  {
+   "tag": "v3.7.0-beta.14",
+   "name": "Khayt v3.7.0-beta.14",
+   "date": "2026-08-30",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.14"
+  },
+  {
+   "tag": "v3.7.0-beta.13",
+   "name": "Khayt v3.7.0-beta.13",
+   "date": "2026-08-29",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.13"
+  },
+  {
+   "tag": "v3.7.0-beta.12",
+   "name": "Khayt v3.7.0-beta.12",
+   "date": "2026-08-29",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.12"
   }
  ]
 }
