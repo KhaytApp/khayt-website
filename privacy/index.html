@@ -67,8 +67,8 @@
     <span class="eyebrow" data-lang="en">Khayt</span><span class="eyebrow" data-lang="ar" hidden>خيط</span>
     <h1 data-lang="en">Privacy Policy</h1>
     <h1 data-lang="ar" hidden>سياسة الخصوصية</h1>
-    <p class="lede" data-lang="en">Last updated: 9 October 2026</p>
-    <p class="lede" data-lang="ar" hidden>آخر تحديث: 9 أكتوبر 2026</p>
+    <p class="lede" data-lang="en">Last updated: 10 October 2026</p>
+    <p class="lede" data-lang="ar" hidden>آخر تحديث: 10 أكتوبر 2026</p>
    </div>
   </div>
 </section>
@@ -78,7 +78,7 @@
    <div class="post-in">
     <div class="post-body policy" data-lang="en">
 
-      <p class="policy-tldr"><strong>Short version:</strong> Khayt keeps your book on your own machine. We do not collect, transmit or hold your business data. Sync, offsite backups and Google Drive are sealed with your key before they leave, so we hold ciphertext, not records. The customer-facing services are different: a storefront, an order-tracking link or an order form has to be readable by the customer it is for, so what you publish through one is stored by Khayt Cloud in a form it can read. <a href="#khayt-cloud-en">Section 5</a> lists exactly what that is.</p>
+      <p class="policy-tldr"><strong>Short version:</strong> Khayt keeps your book on your own machine. We do not collect, transmit or hold your business data. Sync, offsite backups and Google Drive are sealed with your key before they leave, so we hold ciphertext, not records. The customer-facing services are different: a storefront, an order-tracking link or an order form has to be readable by the customer it is for, so what you publish through one is stored by Khayt Cloud in a form it can read. So are an iPhone's Live Activities, which iOS draws without a key. <a href="#khayt-cloud-en">Section 5</a> lists exactly what that is.</p>
 
       <h2>1. Who we are</h2>
       <p>Khayt is a desktop application for 3D print shops: quoting, a production queue, invoicing, inventory and the numbers behind them. It is developed and maintained by Khayt. Contact: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
@@ -123,13 +123,14 @@
       <p><strong>What the cloud can read.</strong> The services your customers use cannot be end-to-end encrypted, because the customer opening the page holds no key. So when you switch one on, what you publish through it is stored by Khayt Cloud in readable form:</p>
       <ul>
         <li><strong>Storefront</strong> — the products, prices, photos and promo codes you publish, and the ratings and comments customers leave.</li>
-        <li><strong>Order tracking and the customer portal</strong> — for each order you share: its details and stage, the customer's email address, the payment link, and the messages exchanged on it.</li>
+        <li><strong>Order tracking and the customer portal</strong> — for each order you share: its details and stage, the customer's email address, the payment link, the messages exchanged on it, and any photos of the order you add (see <a href="#iphone-en">section 6</a>).</li>
+        <li><strong>Live Activities</strong> — a printer's name, its job, the print's phase and progress, and its start and estimated end times, relayed to Apple for a phone showing that print on its Lock Screen (see <a href="#iphone-en">section 6</a>).</li>
         <li><strong>Order requests</strong> — what a customer submits through your online order form or storefront checkout, held until you import or delete it.</li>
         <li><strong>Instant quotes</strong> — the pricing inputs you publish so the storefront can quote (your rates and margin). Callers are shown a price, never those inputs. A model file a customer uploads for a quote is priced in memory and not kept.</li>
       </ul>
       <p>Your book itself is not among them: published records are copies you chose to share, and unpublishing one deletes it from the cloud. Server errors may be reported to an error-monitoring service (Sentry) so that we can fix them. None of this data is sold, used for advertising or used to train AI models.</p>
 
-      <h2>6. The iPhone app</h2>
+      <h2 id="iphone-en">6. The iPhone app</h2>
       <p>Khayt for iPhone is an optional app that pairs with your own Mac or PC. Everything below applies only if you install it.</p>
 
       <p><strong>What it keeps on the phone.</strong> A working copy of your shop — open orders, the newest finished ones, clients, inventory, machines and the waiting list — stored in the app's own container. iOS encrypts it at rest, and it cannot be read until you have unlocked the phone at least once since it was last started. Your pairing credentials — the owner LAN PIN, the Khayt Cloud sign-in token and the shop's encryption key — are held in the iOS Keychain, marked <em>this device only</em>, so they are never copied into iCloud Keychain and never restored onto a different phone.</p>
@@ -138,18 +139,23 @@
 
       <p><strong>Where it goes.</strong> Two places, and nowhere else on its own:</p>
       <ul>
-        <li>Your own Mac, over your local Wi-Fi. The app finds it with Bonjour and talks to it directly; nothing in that path leaves your building.</li>
+        <li>Your own Mac or PC, over your local Wi-Fi. The app finds it with Bonjour and talks to it directly; nothing in that path leaves your building.</li>
         <li>Khayt Cloud, only if you switched sync on. The data is sealed with your shop's key (AES-256-GCM) on the phone before it is sent, so the cloud stores ciphertext it cannot read.</li>
       </ul>
+      <p>Two things you can switch on go to Khayt Cloud readable instead, because the person or device receiving them holds no key: photos you add to an order's tracking page, and Live Activities. Both are described below.</p>
       <p>The app contains no analytics and no advertising SDKs.</p>
 
       <p><strong>Notifications</strong> are optional — you can decline them when asked, or turn them off later in iOS Settings. If you allow them, the phone registers an Apple push token with Khayt Cloud; what is sent is that token, the app's bundle identifier and whether it is a test or release build. Nothing about your shop's contents goes with it.</p>
       <p>What Apple delivers says only <em>"A print finished"</em>. The details — which job, which printer, which client — travel sealed under your shop's key, and the phone opens them itself, so neither Apple nor Khayt Cloud can read them. Where the sealed details are too large to fit in a push, the alert carries only a timestamp and the phone fetches the sealed copy from the cloud, which is the same ciphertext by another route. What is <em>not</em> concealed is that an alert happened: the push carries your shop's identifier and the time, so Apple and the cloud can see that a print ended at your shop without seeing anything about it.</p>
       <p><em>New order request</em> alerts carry no customer details at all. The cloud raises those itself and holds no key to seal anything with.</p>
 
-      <p><strong>Camera</strong> (optional). Used to read printed spool labels and product barcodes. The text recognition runs on the phone, using Apple's own framework, and the pictures are not uploaded. The one exception is a receipt photo you choose to attach to an expense, which travels to your own shop with that expense. The app has no access to your photo library. When you choose a picture to send a customer, iOS's own photo picker hands the app that one picture and nothing else.</p>
+      <p><strong>Live Activities</strong> (optional) are the deliberate exception to the sealing above. To keep a print current on your Lock Screen and in the Dynamic Island while the app is closed, your Mac sends the printer's name, the job's name, the print's phase (printing, paused, finished, failed or cancelled), its progress, and its start and estimated end times through Khayt Cloud to Apple. These are <strong>not encrypted</strong>: iOS draws them itself, with no Khayt code running to open a sealed copy, so Khayt Cloud and Apple can read them. They are sent only for a phone that has registered for that printer's Live Activity — one showing it, or one that lets Live Activities start remotely. The cloud keeps a Live Activity's push token for at most 12 hours (a token for starting one, until the phone replaces it), does not store the print details it relays, and remembers only each printer's last phase and when it last sent, in memory, so it can space out updates. You can turn Live Activities off for Khayt in iOS Settings.</p>
+
+      <p><strong>Camera</strong> (optional). Used to read printed spool labels and product barcodes. The text recognition runs on the phone, using Apple's own framework, and the pictures are not uploaded. There are two exceptions: a receipt photo you choose to attach to an expense, which travels to your own shop with that expense, and photos you add to an order's tracking page, below. The app has no access to your photo library. When you choose a picture to send a customer, iOS's own photo picker hands the app that one picture and nothing else.</p>
 
       <p><strong>Photos for a customer</strong> (optional). When you send a customer a WhatsApp update with a picture of the finished part — taken with the camera or chosen from your photos — the picture goes only into the iOS share sheet, and from there to whichever app you send it with. Khayt does not upload it or keep it.</p>
+
+      <p><strong>Photos on an order's tracking page</strong> (optional). You can also add photos of an order — the finished part, say — to that order's tracking page. These are uploaded to Khayt Cloud <strong>unencrypted</strong>, because your customer has to see them, and <strong>anyone with the order's tracking link</strong> can view them. Location and other metadata are removed on upload: EXIF (including GPS), XMP, IPTC and comments; the colour profile is kept. An order can have at most six photos, each at most 2 MB. They are deleted when you delete them, when you unpublish the order, or when the shop is deleted.</p>
 
       <p><strong>Printer camera</strong> (optional). While a printer's camera page is open, the phone fetches a still frame directly from that printer over the shop's Wi-Fi, every three seconds. The frames are not stored and are not sent anywhere.</p>
 
@@ -213,7 +219,7 @@
     </div>
     <div class="post-body policy" data-lang="ar" hidden>
 
-      <p class="policy-tldr"><strong>باختصار:</strong> يحتفظ خيط بدفترك على جهازك أنت. لا نجمع بياناتك التجارية ولا ننقلها ولا نحتفظ بها. أمّا المزامنة والنسخ الاحتياطية الخارجية وGoogle Drive فتُختم بمفتاحك قبل أن تغادر، فلا نملك منها إلا نصاً مشفّراً، لا سجلات. والخدمات الموجّهة للعملاء مختلفة: فالمتجر ورابط تتبّع الطلب ونموذج الطلب يجب أن يقرأها العميل الموجّهة إليه، ولذلك يُخزّن خيط السحابي ما تنشره عبرها بصيغة يستطيع قراءتها. و<a href="#khayt-cloud-ar">القسم 5</a> يبيّن ذلك بالتحديد.</p>
+      <p class="policy-tldr"><strong>باختصار:</strong> يحتفظ خيط بدفترك على جهازك أنت. لا نجمع بياناتك التجارية ولا ننقلها ولا نحتفظ بها. أمّا المزامنة والنسخ الاحتياطية الخارجية وGoogle Drive فتُختم بمفتاحك قبل أن تغادر، فلا نملك منها إلا نصاً مشفّراً، لا سجلات. والخدمات الموجّهة للعملاء مختلفة: فالمتجر ورابط تتبّع الطلب ونموذج الطلب يجب أن يقرأها العميل الموجّهة إليه، ولذلك يُخزّن خيط السحابي ما تنشره عبرها بصيغة يستطيع قراءتها. وكذلك الأنشطة الحيّة على الآيفون، التي يرسمها iOS دون مفتاح. و<a href="#khayt-cloud-ar">القسم 5</a> يبيّن ذلك بالتحديد.</p>
 
       <h2>1. من نحن</h2>
       <p>خيط تطبيق سطح مكتب لمطابع الطباعة ثلاثية الأبعاد: التسعير وقائمة الإنتاج والفوترة والمخزون والأرقام خلفها. يطوّره ويصونه خيط. للتواصل: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
@@ -258,13 +264,14 @@
       <p><strong>ما تستطيع السحابة قراءته.</strong> الخدمات التي يستخدمها عملاؤك لا يمكن تشفيرها من طرف إلى طرف، لأن العميل الذي يفتح الصفحة لا يملك مفتاحاً. ولذلك حين تشغّل إحداها، يُخزّن خيط السحابي ما تنشره عبرها بصيغة مقروءة:</p>
       <ul>
         <li><strong>المتجر</strong> — المنتجات والأسعار والصور ورموز الخصم التي تنشرها، والتقييمات والتعليقات التي يتركها العملاء.</li>
-        <li><strong>تتبّع الطلبات وبوابة العملاء</strong> — لكل طلب تشاركه: تفاصيله ومرحلته، والبريد الإلكتروني للعميل، ورابط الدفع، والرسائل المتبادلة عليه.</li>
+        <li><strong>تتبّع الطلبات وبوابة العملاء</strong> — لكل طلب تشاركه: تفاصيله ومرحلته، والبريد الإلكتروني للعميل، ورابط الدفع، والرسائل المتبادلة عليه، وأي صور للطلب تضيفها (انظر <a href="#iphone-ar">القسم 6</a>).</li>
+        <li><strong>الأنشطة الحيّة</strong> — اسم الطابعة ومهمّتها ومرحلة الطباعة وتقدّمها ووقت بدئها ووقت انتهائها المتوقّع، تُمرَّر إلى Apple لهاتفٍ يعرض تلك الطباعة على شاشة القفل (انظر <a href="#iphone-ar">القسم 6</a>).</li>
         <li><strong>طلبات العملاء</strong> — ما يرسله العميل عبر نموذج الطلب الإلكتروني أو الدفع في المتجر، ويبقى حتى تستورده أو تحذفه.</li>
         <li><strong>التسعير الفوري</strong> — مدخلات التسعير التي تنشرها ليستطيع المتجر التسعير (معدّلاتك وهامشك). ويرى السائل سعراً فقط، لا تلك المدخلات أبداً. أمّا ملف المجسّم الذي يرفعه العميل ليُسعَّر فيُسعَّر في الذاكرة ولا يُحتفظ به.</li>
       </ul>
       <p>ودفترك نفسه ليس منها: فالسجلات المنشورة نُسخ اخترت مشاركتها، وإلغاء نشر أيٍّ منها يحذفه من السحابة. وقد تُبلَّغ أخطاء الخادم إلى خدمة لمراقبة الأخطاء (Sentry) لكي نصلحها. ولا تُباع أيٌّ من هذه البيانات ولا تُستخدم للإعلانات ولا لتدريب نماذج الذكاء الاصطناعي.</p>
 
-      <h2>6. تطبيق الآيفون</h2>
+      <h2 id="iphone-ar">6. تطبيق الآيفون</h2>
       <p>«خيط» للآيفون تطبيق اختياري يقترن بجهاز ماك أو الحاسوب الخاص بك. وكل ما يلي لا ينطبق إلا إن ثبّتّه.</p>
 
       <p><strong>ما يحفظه على الهاتف.</strong> نسخة عاملة من مطبعتك — الطلبات المفتوحة وأحدث المكتملة والعملاء والمخزون والآلات وقائمة الانتظار — مخزّنة في حاوية التطبيق نفسه. ويشفّرها iOS في حالة السكون، ولا يمكن قراءتها حتى تفتح قفل الهاتف مرة واحدة على الأقل منذ آخر تشغيل له. أمّا بيانات الاقتران — رمز الشبكة المحلية للمالك، ورمز الدخول إلى سحابة خيط، ومفتاح تشفير المطبعة — فمحفوظة في سلسلة مفاتيح iOS وموسومة بـ«هذا الجهاز فقط»، فلا تُنسخ أبداً إلى سلسلة مفاتيح iCloud ولا تُستعاد على هاتف آخر.</p>
@@ -273,18 +280,23 @@
 
       <p><strong>إلى أين تذهب.</strong> موضعان، ولا ثالث لهما من تلقاء نفسه:</p>
       <ul>
-        <li>جهاز ماك الخاص بك، عبر شبكة الواي فاي المحلية. يجده التطبيق عبر Bonjour ويخاطبه مباشرةً؛ ولا شيء في هذا المسار يغادر مبناك.</li>
+        <li>جهاز ماك أو الحاسوب الخاص بك، عبر شبكة الواي فاي المحلية. يجده التطبيق عبر Bonjour ويخاطبه مباشرةً؛ ولا شيء في هذا المسار يغادر مبناك.</li>
         <li>سحابة خيط، إن شغّلت المزامنة فقط. وتُختم البيانات بمفتاح مطبعتك (AES-256-GCM) على الهاتف قبل إرسالها، فتخزّن السحابة نصاً مشفّراً لا تقدر على قراءته.</li>
       </ul>
+      <p>وشيئان يمكنك تشغيلهما يذهبان إلى سحابة خيط بصيغة مقروءة بدلاً من ذلك، لأن الشخص أو الجهاز الذي يستلمهما لا يملك مفتاحاً: الصور التي تضيفها إلى صفحة تتبّع الطلب، والأنشطة الحيّة. وكلاهما موصوف أدناه.</p>
       <p>ولا يحتوي التطبيق على أي أدوات تحليلات ولا أي أدوات إعلانات.</p>
 
       <p><strong>الإشعارات</strong> اختيارية — لك أن ترفضها حين تُسأل، أو تعطّلها لاحقاً من إعدادات iOS. وإن سمحت بها، سجّل الهاتف رمز إشعارات Apple لدى سحابة خيط؛ والمُرسَل هو ذلك الرمز ومعرّف حزمة التطبيق وما إذا كان إصدار تجربة أم إصدار نهائي. ولا يذهب معه شيء من محتوى مطبعتك.</p>
       <p>وما تسلّمه Apple نصّه فقط <em>«انتهت طباعة»</em>. أمّا التفاصيل — أي مهمّة وأي طابعة وأي عميل — فتسافر مختومة بمفتاح مطبعتك، والهاتف هو الذي يفتحها بنفسه، فلا تستطيع Apple ولا سحابة خيط قراءتها. وحين تكون التفاصيل المختومة أكبر من أن تتّسع في إشعار، يحمل الإشعار طابعاً زمنياً فقط ويجلب الهاتف النسخة المختومة من السحابة، وهي النص المشفّر نفسه بطريق آخر. والذي <em>لا</em> يُخفى هو وقوع الإشعار: فالإشعار يحمل معرّف مطبعتك والوقت، فتستطيع Apple والسحابة أن تعرفا أن طباعةً انتهت عندك دون أن تعرفا عنها شيئاً.</p>
       <p>أمّا إشعارات <em>طلب جديد</em> فلا تحمل أي بيانات عميل البتّة. فالسحابة هي التي تطلقها، ولا تملك مفتاحاً تختم به شيئاً.</p>
 
-      <p><strong>الكاميرا</strong> (اختيارية). تُستخدم لقراءة ملصقات البكرات المطبوعة وباركود المنتجات. ويجري التعرّف على النص على الهاتف نفسه بإطار عمل Apple، ولا تُرفع الصور. والاستثناء الوحيد صورة إيصال تختار إرفاقها بمصروف، فتذهب إلى مطبعتك أنت مع ذلك المصروف. ولا يملك التطبيق أي وصول إلى مكتبة صورك. وحين تختار صورة لترسلها إلى عميل، يسلّم منتقي الصور الخاص بنظام iOS التطبيقَ تلك الصورة وحدها لا غير.</p>
+      <p><strong>الأنشطة الحيّة</strong> (اختيارية) هي الاستثناء المقصود من الختم أعلاه. فلإبقاء الطباعة محدّثة على شاشة القفل وفي الجزيرة الديناميكية والتطبيق مغلق، يرسل جهاز ماك اسم الطابعة واسم المهمّة ومرحلة الطباعة (قيد الطباعة، أو متوقفة مؤقتاً، أو منتهية، أو فاشلة، أو ملغاة) وتقدّمها ووقت بدئها ووقت انتهائها المتوقّع عبر سحابة خيط إلى Apple. وهذه <strong>غير مشفّرة</strong>: فنظام iOS يرسمها بنفسه دون أن تعمل أي شيفرة من خيط لفتح نسخة مختومة، فتستطيع سحابة خيط وApple قراءتها. ولا تُرسل إلا لهاتفٍ سجّل لنشاط تلك الطابعة الحيّ — هاتفٍ يعرضه، أو هاتفٍ يسمح ببدء الأنشطة الحيّة عن بُعد. وتحتفظ السحابة برمز الإشعار الخاص بنشاط حيّ مدةً أقصاها 12 ساعة (ورمز بدء النشاط حتى يستبدله الهاتف)، ولا تخزّن تفاصيل الطباعة التي تمرّرها، ولا تتذكّر إلا آخر مرحلة لكل طابعة ووقت آخر إرسال، في الذاكرة، لتباعد بين التحديثات. ويمكنك إيقاف الأنشطة الحيّة لخيط من إعدادات iOS.</p>
+
+      <p><strong>الكاميرا</strong> (اختيارية). تُستخدم لقراءة ملصقات البكرات المطبوعة وباركود المنتجات. ويجري التعرّف على النص على الهاتف نفسه بإطار عمل Apple، ولا تُرفع الصور. وهناك استثناءان: صورة إيصال تختار إرفاقها بمصروف، فتذهب إلى مطبعتك أنت مع ذلك المصروف، والصور التي تضيفها إلى صفحة تتبّع الطلب، أدناه. ولا يملك التطبيق أي وصول إلى مكتبة صورك. وحين تختار صورة لترسلها إلى عميل، يسلّم منتقي الصور الخاص بنظام iOS التطبيقَ تلك الصورة وحدها لا غير.</p>
 
       <p><strong>صور للعميل</strong> (اختيارية). حين ترسل إلى عميل تحديثاً عبر واتساب مع صورة القطعة المنتهية — ملتقطة بالكاميرا أو مختارة من صورك — تذهب الصورة إلى ورقة المشاركة في iOS وحدها، ومنها إلى التطبيق الذي ترسلها به. ولا يرفعها خيط ولا يحتفظ بها.</p>
+
+      <p><strong>صور في صفحة تتبّع الطلب</strong> (اختيارية). يمكنك أيضاً إضافة صور لطلب — القطعة المنتهية مثلاً — إلى صفحة تتبّع ذلك الطلب. وهذه تُرفع إلى سحابة خيط <strong>غير مشفّرة</strong>، لأن عميلك يجب أن يراها، ويستطيع <strong>أي شخص لديه رابط تتبّع الطلب</strong> مشاهدتها. ويُزال الموقع والبيانات الوصفية الأخرى عند الرفع: EXIF (بما فيه GPS) وXMP وIPTC والتعليقات؛ ويُبقى على ملف تعريف الألوان. وللطلب ست صور كحدّ أقصى، لا تتجاوز كلٌّ منها 2 ميغابايت. وتُحذف حين تحذفها، أو حين تلغي نشر الطلب، أو حين تُحذف المطبعة.</p>
 
       <p><strong>كاميرا الطابعة</strong> (اختيارية). ما دامت صفحة كاميرا الطابعة مفتوحة، يجلب الهاتف لقطة ثابتة من تلك الطابعة مباشرةً عبر شبكة المطبعة، كل ثلاث ثوانٍ. ولا تُخزَّن اللقطات ولا تُرسل إلى أي مكان.</p>
 
