@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- A Tabby or Tamara checkout returns the shop's customer here: the desktop
+     app's payment links name https://khaytapp.com/success (lib/main/payment-links.js
+     in the app repo). Before this page existed that customer, having just
+     dealt with money, landed on "page not found". See scripts/pages.js. -->
+<html lang="en" data-lang-auto>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment complete — Khayt</title>
+<meta name="description" content="Your payment went through. The shop that sent you the payment link will see it confirmed by the payment provider.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a2a50">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="/blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="/khayt-apple-icon.png">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="deep">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+<span hidden
+  data-page-title-en="Payment complete — Khayt"
+  data-page-title-ar="اكتمل الدفع — خيط"
+  data-page-desc-en="Your payment went through. The shop that sent you the payment link will see it confirmed by the payment provider."
+  data-page-desc-ar="تمّ الدفع. وسترى المطبعة التي أرسلت إليك رابط الدفع تأكيده من مزوّد الدفع."></span>
+
+<!-- Absolute paths, like 404.html: the payment provider may append its own
+     path or query, and a relative href would follow it. -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="/" class="brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/#screens" data-i18n="nav.screens">Screens</a>
+      <a href="/#modes" data-i18n="nav.modes">Modes</a>
+      <a href="/#features" data-i18n="nav.features">Features</a>
+      <a href="/#languages" data-i18n="nav.languages">Languages</a>
+      <a href="/services.html" data-i18n="nav.services">Services</a>
+      <a href="/blog/" data-i18n="nav.blog">Blog</a>
+      <a href="/#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="/#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="page-head nf">
+  <div class="wrap">
+    <span class="nf-ico" aria-hidden="true" style="margin-bottom:18px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+    <span class="eyebrow" data-i18n="pay.eyebrow">Payment complete</span>
+    <h1 data-i18n="pay.h1">Your payment went through</h1>
+    <p class="lede" data-i18n="pay.lede">Thank you. The shop that sent you the payment link will see it confirmed by the payment provider, and will be in touch about your order.</p>
+    <p class="lede" data-i18n="pay.close">You can close this page.</p>
+    <p class="fineprint" data-i18n="pay.about">This page belongs to Khayt, the software the shop uses to run its orders. Khayt does not take, hold or see payments — the payment itself is between you, the shop and the payment provider.</p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-bottom" style="border-top:0;margin-top:0">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.PAGE_STRINGS = {
+  'pay.about': { en: 'This page belongs to Khayt, the software the shop uses to run its orders. Khayt does not take, hold or see payments — the payment itself is between you, the shop and the payment provider.',
+               ar: 'هذه الصفحة تابعة لخيط، البرنامج الذي تدير به المطبعة طلباتها. وخيط لا يتسلّم المدفوعات ولا يحتفظ بها ولا يطّلع عليها — فالدفع نفسه بينك وبين المطبعة ومزوّد الدفع.' },
+  'pay.close': { en: 'You can close this page.',
+               ar: 'يمكنك إغلاق هذه الصفحة.' },
+  'pay.eyebrow': { en: 'Payment complete',
+                 ar: 'اكتمل الدفع' },
+  'pay.h1': { en: 'Your payment went through',
+            ar: 'تمّ الدفع بنجاح' },
+  'pay.lede': { en: 'Thank you. The shop that sent you the payment link will see it confirmed by the payment provider, and will be in touch about your order.',
+              ar: 'شكراً لك. سترى المطبعة التي أرسلت إليك رابط الدفع تأكيده من مزوّد الدفع، وستتواصل معك بشأن طلبك.' }
+};
+</script>
+<script src="/site.js"></script>
+</body>
+</html>

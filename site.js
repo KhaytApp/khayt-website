@@ -154,7 +154,13 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var saved = 'en';
-    try { saved = localStorage.getItem(KEY) || 'en'; } catch (e) {}
+    // A page marked data-lang-auto (the payment-return pages) is reached by a
+    // shop's customer straight from a checkout, with no choice saved here yet,
+    // so it starts in the browser's language rather than in English.
+    if (document.documentElement.hasAttribute('data-lang-auto')) {
+      try { if (/^ar\b/i.test(navigator.language || '')) saved = 'ar'; } catch (e) {}
+    }
+    try { saved = localStorage.getItem(KEY) || saved; } catch (e) {}
     // An explicit ?lang= in the link beats the saved preference, so an Arabic
     // link opens in Arabic for someone who reads the site in English.
     try {
