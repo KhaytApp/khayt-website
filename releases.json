@@ -1,0 +1,336 @@
+{
+ "releases": [
+  {
+   "tag": "v3.11.8",
+   "name": "Khayt v3.11.8",
+   "date": "2026-10-08",
+   "prerelease": false,
+   "note": "Exact quotes from a plain STL, since 3.11.7.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.8",
+   "assets": [
+    {
+     "name": "Khayt-3.11.8-arm64-mac.zip",
+     "size": 176998595,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-3.11.8-arm64-mac.zip"
+    },
+    {
+     "name": "Khayt-3.11.8-arm64-mac.zip.blockmap",
+     "size": 183671,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-3.11.8-arm64-mac.zip.blockmap"
+    },
+    {
+     "name": "Khayt-3.11.8-arm64.dmg",
+     "size": 178235975,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-3.11.8-arm64.dmg"
+    },
+    {
+     "name": "Khayt-3.11.8-arm64.dmg.blockmap",
+     "size": 187350,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-3.11.8-arm64.dmg.blockmap"
+    },
+    {
+     "name": "Khayt-3.11.8.AppImage",
+     "size": 175197389,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-3.11.8.AppImage"
+    },
+    {
+     "name": "Khayt-3.11.8.exe",
+     "size": 154419421,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-3.11.8.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.8.exe",
+     "size": 154676726,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-Setup-3.11.8.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.8.exe.blockmap",
+     "size": 162649,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/Khayt-Setup-3.11.8.exe.blockmap"
+    },
+    {
+     "name": "khayt_3.11.8_amd64.deb",
+     "size": 141208624,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/khayt_3.11.8_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 518,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 503,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 342,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.8/latest.yml"
+    }
+   ]
+  },
+  {
+   "tag": "v3.11.7",
+   "name": "Khayt v3.11.7",
+   "date": "2026-10-08",
+   "prerelease": false,
+   "note": "Slicing for an exact quote, and logged labour in the P&L, since 3.11.6.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.7"
+  },
+  {
+   "tag": "v3.11.6",
+   "name": "Khayt v3.11.6",
+   "date": "2026-10-06",
+   "prerelease": false,
+   "note": "The converter, a safer upgrade and a review's fixes, since 3.11.5.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.6"
+  },
+  {
+   "tag": "v3.11.5",
+   "name": "Khayt v3.11.5",
+   "date": "2026-10-04",
+   "prerelease": false,
+   "note": "The calculator, a tester's report and a money fix, since 3.11.4.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.5"
+  },
+  {
+   "tag": "v3.11.4",
+   "name": "Khayt v3.11.4",
+   "date": "2026-10-03",
+   "prerelease": false,
+   "note": "Money that adds up for shops that add tax on top, since 3.11.3.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.4"
+  },
+  {
+   "tag": "v3.11.3",
+   "name": "Khayt v3.11.3",
+   "date": "2026-10-02",
+   "prerelease": false,
+   "note": "Security fixes and stock that adds up, since 3.11.2.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.3"
+  },
+  {
+   "tag": "v3.11.2",
+   "name": "Khayt v3.11.2",
+   "date": "2026-10-02",
+   "prerelease": false,
+   "note": "A data-loss fix and the shop's own electricity price, since 3.11.1.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.2"
+  },
+  {
+   "tag": "v3.11.1",
+   "name": "Khayt v3.11.1",
+   "date": "2026-10-01",
+   "prerelease": false,
+   "note": "Security fixes since 3.11.0.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.1"
+  },
+  {
+   "tag": "v3.11.0",
+   "name": "Khayt v3.11.0",
+   "date": "2026-09-30",
+   "prerelease": false,
+   "note": "Profit figures, machine wear and backups, since 3.10.1.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.0"
+  },
+  {
+   "tag": "v3.10.1",
+   "name": "Khayt v3.10.1",
+   "date": "2026-09-26",
+   "prerelease": false,
+   "note": "Fixes since 3.10.0.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.10.1"
+  },
+  {
+   "tag": "v3.10.0",
+   "name": "Khayt v3.10.0",
+   "date": "2026-09-26",
+   "prerelease": false,
+   "note": "The work since 3.9.2.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.10.0"
+  },
+  {
+   "tag": "v3.9.2",
+   "name": "Khayt v3.9.2",
+   "date": "2026-09-25",
+   "prerelease": false,
+   "note": "Khayt for Mac is back on the current version.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.9.2"
+  },
+  {
+   "tag": "v3.9.1",
+   "name": "Khayt v3.9.1",
+   "date": "2026-09-24",
+   "prerelease": false,
+   "note": "The fixes since 3.9.0.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.9.1"
+  },
+  {
+   "tag": "v3.9.0",
+   "name": "Khayt v3.9.0",
+   "date": "2026-09-23",
+   "prerelease": false,
+   "note": "The work since 3.8.0.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.9.0"
+  },
+  {
+   "tag": "v3.8.0",
+   "name": "Khayt v3.8.0",
+   "date": "2026-09-21",
+   "prerelease": false,
+   "note": "The work since 3.7.0, released as stable.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.8.0"
+  },
+  {
+   "tag": "v3.7.0",
+   "name": "Khayt v3.7.0",
+   "date": "2026-09-11",
+   "prerelease": false,
+   "note": "The 3.7.0 beta line, released as stable.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0"
+  },
+  {
+   "tag": "v3.7.0-beta.25",
+   "name": "Khayt v3.7.0-beta.25",
+   "date": "2026-09-03",
+   "prerelease": true,
+   "note": "The box on a print file that said \"Folder\" now says \"Group\", and it means something on your catalogue too.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.25",
+   "assets": [
+    {
+     "name": "Khayt-3.7.0-beta.25-arm64-mac.zip",
+     "size": 161069117,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-3.7.0-beta.25-arm64-mac.zip"
+    },
+    {
+     "name": "Khayt-3.7.0-beta.25-arm64-mac.zip.blockmap",
+     "size": 168313,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-3.7.0-beta.25-arm64-mac.zip.blockmap"
+    },
+    {
+     "name": "Khayt-3.7.0-beta.25-arm64.dmg",
+     "size": 161836771,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-3.7.0-beta.25-arm64.dmg"
+    },
+    {
+     "name": "Khayt-3.7.0-beta.25-arm64.dmg.blockmap",
+     "size": 171468,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-3.7.0-beta.25-arm64.dmg.blockmap"
+    },
+    {
+     "name": "Khayt-3.7.0-beta.25.AppImage",
+     "size": 169318899,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-3.7.0-beta.25.AppImage"
+    },
+    {
+     "name": "Khayt-3.7.0-beta.25.exe",
+     "size": 134929057,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-3.7.0-beta.25.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.7.0-beta.25.exe",
+     "size": 135179353,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-Setup-3.7.0-beta.25.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.7.0-beta.25.exe.blockmap",
+     "size": 142900,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/Khayt-Setup-3.7.0-beta.25.exe.blockmap"
+    },
+    {
+     "name": "khayt_3.7.0-beta.25_amd64.deb",
+     "size": 134203716,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/khayt_3.7.0-beta.25_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 546,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 531,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 363,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.7.0-beta.25/latest.yml"
+    }
+   ]
+  },
+  {
+   "tag": "v3.7.0-beta.24",
+   "name": "Khayt v3.7.0-beta.24",
+   "date": "2026-09-02",
+   "prerelease": true,
+   "note": "Khayt will move your model previews out of its data file and into the folders beside the models themselves.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.24"
+  },
+  {
+   "tag": "v3.7.0-beta.23",
+   "name": "Khayt v3.7.0-beta.23",
+   "date": "2026-09-02",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.23"
+  },
+  {
+   "tag": "v3.7.0-beta.22",
+   "name": "Khayt v3.7.0-beta.22",
+   "date": "2026-09-01",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.22"
+  },
+  {
+   "tag": "v3.7.0-beta.21",
+   "name": "Khayt v3.7.0-beta.21",
+   "date": "2026-09-01",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.21"
+  },
+  {
+   "tag": "v3.7.0-beta.20",
+   "name": "Khayt v3.7.0-beta.20",
+   "date": "2026-09-01",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.20"
+  },
+  {
+   "tag": "v3.7.0-beta.19",
+   "name": "Khayt v3.7.0-beta.19",
+   "date": "2026-09-01",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.19"
+  },
+  {
+   "tag": "v3.7.0-beta.18",
+   "name": "Khayt v3.7.0-beta.18",
+   "date": "2026-08-31",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.18"
+  },
+  {
+   "tag": "v3.7.0-beta.17",
+   "name": "Khayt v3.7.0-beta.17",
+   "date": "2026-08-31",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.17"
+  },
+  {
+   "tag": "v3.7.0-beta.16",
+   "name": "Khayt v3.7.0-beta.16",
+   "date": "2026-08-31",
+   "prerelease": true,
+   "note": "See README for full release notes.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.16"
+  }
+ ]
+}
