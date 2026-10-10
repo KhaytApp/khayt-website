@@ -21,6 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The whole history, not the default single commit: the sitemap
+          # check dates each page by its last commit, and in a shallow clone
+          # every file's last commit is the only one there is.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:

@@ -43,7 +43,8 @@ const pages = require('./pages.js');
 check('JavaScript parses', () => {
   const files = ['app.js', 'site.js', 'services.js', 'data.js', 'render.js',
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
-    'scripts/check-links.js', 'scripts/pages.js'];
+    'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
+    'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -60,7 +61,7 @@ check('JSON-LD parses', () => {
   return n + ' blocks';
 });
 
-/* ---------- 2. The generated half of index.html is current ---------- */
+/* ---------- 2. The generated halves of index.html and blog/index.html are current ---------- */
 
 check('index.html is rendered from data.js', () => {
   // The feature cards, the cloud cards and the comparison table are static
@@ -69,11 +70,34 @@ check('index.html is rendered from data.js', () => {
   // and the copy the browser writes over it on load disagree: the page
   // visibly reflows, and search engines index copy that is no longer there.
   try {
-    execFileSync(process.execPath, ['scripts/prerender.js', '--check'], { stdio: 'pipe' });
+    execFileSync(process.execPath, ['scripts/prerender.js', '--check', 'index.html'], { stdio: 'pipe' });
   } catch (e) {
     throw new Error('stale. Run `node scripts/prerender.js` and commit the result.');
   }
   return 'in sync';
+});
+
+check('blog/index.html is rendered from posts.js, and links every post', () => {
+  // The post cards used to exist only after JS ran: the page's HTML linked to
+  // no post at all, so a crawler that does not render found an empty blog,
+  // and the footer jumped down the length of the list on every load (CLS
+  // 0.27). They are prerendered now; stale, the static cards and the ones the
+  // browser writes over them disagree, and the page reflows again.
+  try {
+    execFileSync(process.execPath, ['scripts/prerender.js', '--check', 'blog/index.html'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error('stale. Run `node scripts/prerender.js` and commit the result.');
+  }
+  // And in sync is not the same as present: an empty marker pair renders
+  // nothing and still matches an empty list. Every post needs a real link.
+  const html = fs.readFileSync('blog/index.html', 'utf8');
+  const block = html.split('<!-- PRERENDER:postList:START -->')[1]?.split('<!-- PRERENDER:postList:END -->')[0];
+  if (block === undefined) throw new Error('the PRERENDER:postList markers are missing');
+  require(path.join(ROOT, 'blog', 'posts.js'));
+  const slugs = (globalThis.KHAYT_POSTS || []).map(p => p.slug);
+  const unlinked = slugs.filter(s => !block.includes('<a class="post-card" href="' + s + '.html">'));
+  if (unlinked.length) throw new Error('no prerendered link to: ' + unlinked.join(', '));
+  return slugs.length + ' post links in the HTML';
 });
 
 check('Post pages match posts.js', () => {
@@ -205,6 +229,23 @@ check('Every internal link resolves', () => {
   return n + ' references';
 });
 
+check('No link spells out index.html', () => {
+  // https://khaytapp.com/index.html#download is the same page as the
+  // canonical https://khaytapp.com/, at a second URL — and every page on the
+  // site linked to it that way, nav, footer and download buttons. Links go to
+  // the directory instead: ./#download, ../#download, or /#download on the
+  // 404 page, which is served at any URL and so cannot be relative.
+  const bad = [];
+  for (const p of pages()) {
+    for (const m of fs.readFileSync(p, 'utf8').matchAll(/href="((?:\.\.?\/|\/)*index\.html[^"]*)"/g)) bad.push(p + ': ' + m[1]);
+  }
+  for (const f of ['data.js', 'services.js', 'app.js', 'site.js']) {
+    for (const m of fs.readFileSync(f, 'utf8').matchAll(/['"]((?:\.\.?\/|\/)*index\.html#[^'"]*)['"]/g)) bad.push(f + ': ' + m[1]);
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return 'directory URLs only';
+});
+
 /* ---------- 5. Nothing is unreachable ---------- */
 
 check('Sitemap lists every page', () => {
@@ -223,6 +264,18 @@ check('Sitemap lists every page', () => {
   const missing = want.filter(w => !listed.has(w));
   if (missing.length) throw new Error('not listed: ' + missing.join(', '));
   return listed.size + ' URLs';
+});
+
+check('Sitemap lastmod dates are not older than the pages', () => {
+  // The home page said 2026-09-14 for weeks while it was edited again and
+  // again. stamp-sitemap.js takes the date from git, so this is its --check;
+  // it ignores the release bots, which only swap a version in a URL.
+  try {
+    execFileSync(process.execPath, ['scripts/stamp-sitemap.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error(String(e.stderr || e.message).trim());
+  }
+  return 'current';
 });
 
 check('Every blog post is in the index', () => {
@@ -261,8 +314,8 @@ check('The privacy policy is reachable from every page', () => {
 // Where a nav link actually lands, as a repo-relative file, so the three
 // spellings the site uses for the same destination compare equal: bare
 // "#screens" on index.html, root-absolute "/#screens" on 404.html (which is
-// served at any URL, so it cannot use a relative one), and "index.html#screens"
-// or "../index.html#screens" everywhere else. The fragment is deliberately
+// served at any URL, so it cannot use a relative one), and "./#screens"
+// or "../#screens" everywhere else. The fragment is deliberately
 // dropped after resolution — it is part of the destination for humans, and
 // comparing it would make index.html's "#screens" differ from its own file.
 function navTarget(page, href) {
@@ -474,6 +527,120 @@ check('Every page can be linked in Arabic', () => {
   }
   if (bad.length) throw new Error('no Arabic alternate declared: ' + bad.join(', '));
   return 'all declared';
+});
+
+/* ---------- 7. What search engines and share cards read ---------- */
+
+// A page's public URL, the same mapping the sitemap check uses.
+function publicUrl(p) {
+  return 'https://khaytapp.com/' + (p === 'index.html' ? '' : p.replace(/(^|\/)index\.html$/, '$1'));
+}
+
+function decode(s) {
+  return s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+}
+
+check('Every page has one canonical, and it is its own URL', () => {
+  // A canonical copied from the page a new one was built from tells Google
+  // the new page is a duplicate of the old one, and it quietly drops out of
+  // the index. og:url is held to the same URL, for the same copy-paste.
+  //
+  // 404.html is the exception the other way: it is noindex and served at
+  // every mistyped URL, so a canonical on it would claim all of them are
+  // /404.html. It must have none.
+  const bad = [];
+  for (const p of pages()) {
+    const html = fs.readFileSync(p, 'utf8');
+    const canon = [...html.matchAll(/<link rel="canonical" href="([^"]*)"/g)].map(m => m[1]);
+    if (p === '404.html') {
+      if (canon.length) bad.push(p + ': has a canonical (' + canon[0] + ') — it is served at every missing URL');
+      if (!/<meta name="robots" content="[^"]*noindex/.test(html)) bad.push(p + ': not noindex');
+      continue;
+    }
+    const want = publicUrl(p);
+    if (canon.length !== 1) bad.push(`${p}: ${canon.length} canonical links`);
+    else if (canon[0] !== want) bad.push(`${p}: canonical ${canon[0]}, should be ${want}`);
+    const og = html.match(/<meta property="og:url" content="([^"]*)"/);
+    if (og && og[1] !== want) bad.push(`${p}: og:url ${og[1]}, should be ${want}`);
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return pages().length - 1 + ' pages self-canonical';
+});
+
+check('Titles and descriptions fit a search result, and are unique', () => {
+  // Google cuts a title at about 65 characters and a description at about
+  // 160, and rewrites one it finds too short to say anything. The home page's
+  // description was 364 characters and the blog's title was "Blog — Khayt".
+  //
+  // The language switch rewrites both from data-page-*-en/ar on every page
+  // but the home page (app.js does that one from its own dictionary), so the
+  // Arabic pair is held to the same limits, and the English pair must be
+  // exactly what the head says — otherwise the page's description changes the
+  // moment the script runs, in English.
+  const LIMIT = { title: [15, 65], desc: [50, 160] };
+  const bad = [];
+  const seen = { title: new Map(), desc: new Map() };
+  const len = s => [...s].length;
+  function take(p, kind, lang, value) {
+    const [lo, hi] = LIMIT[kind];
+    const n = len(value);
+    if (n < lo || n > hi) bad.push(`${p}: ${lang} ${kind} is ${n} characters (want ${lo}-${hi}): ${value}`);
+    const key = lang + ' ' + kind + ' ' + value;
+    if (seen[kind].has(key)) bad.push(`${p}: same ${lang} ${kind} as ${seen[kind].get(key)}`);
+    else seen[kind].set(key, p);
+  }
+  for (const p of pages()) {
+    const html = fs.readFileSync(p, 'utf8');
+    const title = html.match(/<title>([^<]*)<\/title>/);
+    const desc = html.match(/<meta name="description" content="([^"]*)"/);
+    if (!title || !desc) { bad.push(p + ': no <title> or no meta description'); continue; }
+    take(p, 'title', 'en', decode(title[1]));
+    take(p, 'desc', 'en', decode(desc[1]));
+    const attr = name => { const m = html.match(new RegExp('data-page-' + name + '="([^"]*)"')); return m && decode(m[1]); };
+    if (attr('title-en') !== null || attr('desc-en') !== null) {
+      if (attr('title-en') !== decode(title[1])) bad.push(`${p}: data-page-title-en differs from <title>`);
+      if (attr('desc-en') !== decode(desc[1])) bad.push(`${p}: data-page-desc-en differs from the meta description`);
+      if (attr('title-ar') === null || attr('desc-ar') === null) bad.push(p + ': no Arabic title or description');
+      else { take(p, 'title', 'ar', attr('title-ar')); take(p, 'desc', 'ar', attr('desc-ar')); }
+    }
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return pages().length + ' pages, both languages';
+});
+
+check('Every share image has alt text', () => {
+  // og:image without og:image:alt is a picture a screen reader announces as
+  // nothing at all wherever the link is shared.
+  const bad = pages().filter(p => {
+    const html = fs.readFileSync(p, 'utf8');
+    return /property="og:image"/.test(html) && !/<meta property="og:image:alt" content="[^"]{10,}"/.test(html);
+  });
+  if (bad.length) throw new Error('og:image with no og:image:alt: ' + bad.join(', '));
+  return 'described';
+});
+
+check('Controls that hide their text still have a name', () => {
+  // Below 1060px the nav's download button hides its word and keeps the
+  // icon, which left a link with no accessible name at all. And the language
+  // toggle had an aria-label, "Switch language to Arabic", that replaced its
+  // visible "العربية" — so a voice-control user saying the word on the button
+  // matched nothing (WCAG 2.5.3). Its name is its content now, with the
+  // phrase in a screen-reader-only span, so it must NOT carry an aria-label.
+  const bad = [];
+  for (const p of pages()) {
+    const html = fs.readFileSync(p, 'utf8');
+    for (const m of html.matchAll(/<(a|button)\b([^>]*)>((?:(?!<\/\1>)[\s\S])*?class="hide-sm"[\s\S]*?)<\/\1>/g)) {
+      if (!/\baria-label="[^"]+"/.test(m[2])) bad.push(p + ': <' + m[1] + '> hides its text with no aria-label');
+      else if (!/\bdata-i18n-aria="/.test(m[2])) bad.push(p + ': <' + m[1] + '> aria-label has no data-i18n-aria, so it stays English in Arabic');
+    }
+    const toggle = html.match(/<button[^>]*id="navLang"[^>]*>/);
+    if (toggle && /aria-label=/.test(toggle[0])) bad.push(p + ': the language toggle has an aria-label, which hides its visible word');
+  }
+  for (const f of ['app.js', 'site.js']) {
+    if (/navLang[\s\S]{0,800}setAttribute\('aria-label'/.test(fs.readFileSync(f, 'utf8'))) bad.push(f + ': sets an aria-label on the language toggle');
+  }
+  if (bad.length) throw new Error(bad.join('\n'));
+  return 'named';
 });
 
 console.log(failed ? `\n${failed} check(s) failed` : '\nAll checks passed');

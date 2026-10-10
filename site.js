@@ -33,8 +33,7 @@
     'nav.home':      { en: 'Home', ar: 'الرئيسية' },
 
     'a11y.skip': { en: 'Skip to content', ar: 'تخطّ إلى المحتوى' },
-    'a11y.toAr': { en: 'Switch language to Arabic', ar: 'تغيير اللغة إلى العربية' },
-    'a11y.toEn': { en: 'Switch language to English', ar: 'تغيير اللغة إلى الإنجليزية' },
+    'a11y.lang': { en: 'Switch language to', ar: 'تغيير اللغة إلى' },
 
     'foot.desc':     { en: 'The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.', ar: 'مكتب الإنتاج المتكامل لمطابع الطباعة ثلاثية الأبعاد — التسعير والقائمة والفوترة والمخزون، دون اتصال تماماً.' },
     'foot.product':  { en: 'Product', ar: 'المنتج' },
@@ -71,6 +70,14 @@
       var v = t(k);
       if (v !== k) nodes[i].textContent = v;
     }
+    // An accessible name with no visible text to hang it on — the download
+    // button is an icon alone below 1060px, so its label lives here.
+    var named = document.querySelectorAll('[data-i18n-aria]');
+    for (var a = 0; a < named.length; a++) {
+      var ak = named[a].getAttribute('data-i18n-aria');
+      var av = t(ak);
+      if (av !== ak) named[a].setAttribute('aria-label', av);
+    }
 
     // A post's date follows the language, the same rule the app itself uses for
     // dates: an Arabic page should not be showing "11 September 2026".
@@ -106,10 +113,12 @@
 
     var btn = document.getElementById('navLang');
     if (btn) {
+      // No aria-label: the name is the hidden phrase plus the visible word, so
+      // it contains what a voice-control user reads off the button (WCAG
+      // 2.5.3), and the word keeps its own lang for a screen reader's voice.
       var toAr = lang !== 'ar';
-      btn.innerHTML = '<span aria-hidden="true">🌐</span> ' +
+      btn.innerHTML = '<span aria-hidden="true">🌐</span> <span class="sr-only">' + t('a11y.lang') + ' </span>' +
         (toAr ? '<span lang="ar">العربية</span>' : '<span lang="en">English</span>');
-      btn.setAttribute('aria-label', t(toAr ? 'a11y.toAr' : 'a11y.toEn'));
     }
 
     try {

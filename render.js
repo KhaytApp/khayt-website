@@ -1,10 +1,11 @@
 /* ============================================================
-   KHAYT — the markup for the three JS-built grids, in one place
+   KHAYT — the markup for the JS-built blocks, in one place
    ------------------------------------------------------------
-   app.js calls these in the browser and scripts/prerender.js calls them in
-   Node. That is the whole point: the prerendered HTML in index.html and the
-   HTML the browser writes over it on load have to be byte-identical, or the
-   page visibly reflows on every load and the prerender is worse than nothing.
+   app.js and the blog index call these in the browser, and
+   scripts/prerender.js calls them in Node. That is the whole point: the
+   prerendered HTML in index.html and blog/index.html and the HTML the browser
+   writes over it on load have to be byte-identical, or the page visibly
+   reflows on every load and the prerender is worse than nothing.
 
    One implementation is the only way to guarantee that. A duplicated template
    string in the build script would agree on the day it was written.
@@ -31,7 +32,10 @@
       var f = features[k];
       var n = (k + 1 < 10 ? '0' : '') + (k + 1);
       html += '<article class="feat">' +
-        '<span class="num">' + n + '</span>' +
+        // The big faint number is decoration (1.4:1 on the card on purpose);
+        // the cards are already a list, so a screen reader gains nothing from
+        // hearing "zero one" before each heading.
+        '<span class="num" aria-hidden="true">' + n + '</span>' +
         '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></div>' +
         '<h3>' + esc(f.t[lang]) + '</h3><p>' + esc(f.d[lang]) + '</p></article>';
     }
@@ -98,6 +102,38 @@
       }
     }
     return h + '</tbody></table>';
+  };
+
+  /* ---------- The blog index's post cards ----------
+     `strings` carries the two labels from the page's own dictionary: the
+     "Read the post" line and the "Latest" tag. The date is formatted here too,
+     so the visible date is part of what has to match. Only the English copy
+     is ever prerendered, and en-GB formats the same in Node as in a browser;
+     Arabic is written by the browser alone, so its digits are the browser's. */
+  R.postDate = function (iso, lang) {
+    try {
+      return new Intl.DateTimeFormat(lang === 'ar' ? 'ar' : 'en-GB',
+        { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
+        .format(new Date(iso + 'T00:00:00Z'));
+    } catch (e) { return iso; }
+  };
+
+  R.postCards = function (posts, lang, strings) {
+    var html = '';
+    for (var i = 0; i < posts.length; i++) {
+      var p = posts[i];
+      html += '<a class="post-card" href="' + esc(p.slug) + '.html">' +
+        '<div class="post-meta"><span class="tag">' + esc(p.tag[lang]) + '</span>' +
+        '<time datetime="' + esc(p.date) + '">' + esc(R.postDate(p.date, lang)) + '</time>' +
+        // posts.js is newest-first, so the first card is the latest post.
+        (i === 0 ? '<span class="tag latest">' + esc(strings.latest) + '</span>' : '') +
+        '</div>' +
+        '<h2>' + esc(p.t[lang]) + '</h2>' +
+        '<p>' + esc(p.d[lang]) + '</p>' +
+        '<span class="more">' + esc(strings.more) + '</span>' +
+        '</a>';
+    }
+    return html;
   };
 
   root.KHAYT_RENDER = R;

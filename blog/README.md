@@ -6,13 +6,15 @@ node scripts/new-post.js <slug> <YYYY-MM-DD> "<Tag EN>" "<Tag AR>"
 node scripts/new-post.js khayt-3-8 2026-10-02 Release إصدار
 ```
 
-That creates `blog/<slug>.html` and registers it in the three places CI checks:
-`blog/posts.js`, `sitemap.xml`, and `blog/feed.xml`.
+That creates `blog/<slug>.html` and registers it in the four places CI checks:
+`blog/posts.js`, `sitemap.xml`, `blog/feed.xml`, and the prerendered cards in
+`blog/index.html`.
 
 Then edit two files:
 
-1. **`blog/posts.js`** — the title and the one-line summary, in both languages.
-   This is where they live. The post page is stamped from it, so do not edit
+1. **`blog/posts.js`** — the title, the summary (`d`, for the index card and
+   the feed) and its short version (`m`, the meta description: lead sentence
+   first, 50–160 characters), in both languages. This is where they live. The post page is stamped from it, so do not edit
    them in the HTML; they will be overwritten.
 2. **`blog/<slug>.html`** — the prose, in both `<div class="post-body">` blocks.
    English in `data-lang="en"`, Arabic in `data-lang="ar" hidden`.
@@ -20,7 +22,8 @@ Then edit two files:
 Then:
 
 ```bash
-node scripts/stamp-posts.js && node scripts/make-feed.js && node scripts/check-site.js
+node scripts/stamp-posts.js && node scripts/make-feed.js && node scripts/prerender.js \
+  && node scripts/stamp-sitemap.js && node scripts/check-site.js
 ```
 
 Commit, and merging to `main` publishes it.
