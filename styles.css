@@ -842,6 +842,15 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
 
 /* The sends table reuses .cmp wholesale — it only needs its own column widths
    and left-aligned body cells, since .cmp centres its tick columns. */
+/* Why Khayt: four pillars, then the dated comparison, which borrows the
+   services page's text table (.cmp.sends) with a fourth column. */
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; }
+@media (max-width: 1000px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
+.why-cmp-h { font-family: var(--font-display); font-weight: 800; font-size: 22px; margin: 48px 0 16px; }
+.cmp.sends.vs col.v-c0 { width: 19%; } .cmp.sends.vs col.v-c { width: 27%; }
+.cmp.sends.vs thead th a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--line); }
+.cmp.sends.vs thead th a:hover { color: var(--brand-2); }
 .cmp.sends { min-width: 760px; }
 .cmp.sends col.s-c1 { width: 24%; } .cmp.sends col.s-c2 { width: 42%; } .cmp.sends col.s-c3 { width: 34%; }
 .cmp.sends thead th { text-align: start; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em;
