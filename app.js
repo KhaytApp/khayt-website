@@ -158,6 +158,9 @@
     'ip.pair':   { en: 'Pairs with your Mac or PC', ar: 'يقترن بماك أو الحاسوب' },
     'ip.langs':  { en: 'English & Arabic', ar: 'العربية والإنجليزية' },
 
+    'ip.shot.home': { en: 'Shop Pulse on iPhone: the queue, money owed, the pipeline and what needs attention', ar: 'نبض الورشة على الآيفون: قائمة الانتظار والمستحقات وسير العمل وما يحتاج إلى انتباه' },
+    'ip.shot.order': { en: 'An order on iPhone, with its print progress and the stage to move it to', ar: 'طلب على الآيفون، مع تقدّم طباعته والمرحلة التالية' },
+    'ip.shot.inventory': { en: 'Inventory on iPhone: spools with the grams left on each', ar: 'المخزون على الآيفون: البكرات والغرامات المتبقية في كلٍّ منها' },
     'dl.eyebrow':{ en: 'Download Khayt', ar: 'حمّل خيط' },
     'dl.h2':     { en: 'Set up shop in two minutes', ar: 'جهّز مطبعتك في دقيقتين' },
     'dl.lede':   { en: 'Free for everyone. No account. Nothing sent unless you opt in. Your data stays on your device.', ar: 'مجاني للجميع. بدون حساب. لا يُرسل شيء ما لم تختر ذلك. بياناتك تبقى على جهازك.' },
@@ -504,6 +507,16 @@
     if (hs) {
       hs.src = heroPath();
       setSrcset(document.getElementById('heroSrc'), heroPath());
+    }
+    // The iPhone shots are portrait 1206px captures, so they carry their own
+    // srcset rather than going through shotSrcset's 2160px landscape set.
+    var phones = document.querySelectorAll('img[data-phone]');
+    for (var ph = 0; ph < phones.length; ph++) {
+      var pb = phones[ph].getAttribute('data-phone') + '-' + lang;
+      var psrc = phones[ph].parentElement.querySelector('source');
+      if (psrc) psrc.srcset = pb + '-640w.webp 640w, ' + pb + '-1080w.webp 1080w, ' + pb + '.webp 1206w';
+      phones[ph].src = pb + '.png';
+      phones[ph].alt = t(phones[ph].getAttribute('data-alt'));
     }
     buildThemeChips();
     var btn = document.getElementById('navLang');

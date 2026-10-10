@@ -702,6 +702,18 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
 .mn-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
 .mn-dl { background: var(--card); min-width: 280px; }
 .mn-notes { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+/* Phone screenshots: a row on desktop, a swipeable strip on a phone, where
+   three side by side would be a hundred pixels each. */
+.ip-shots {
+  display: flex; gap: 16px; margin-top: 20px; padding-bottom: 6px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+}
+.ip-shots picture { flex: 0 0 auto; scroll-snap-align: start; }
+.ip-shots img {
+  display: block; width: 220px; height: auto;
+  border-radius: 24px; border: 1px solid var(--line);
+}
+@media (max-width: 640px) { .ip-shots img { width: 62vw; } }
 .mn-road { margin: 16px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 70ch; }
 @media (max-width: 640px) {
   .mac-native { padding: 20px 18px; }
