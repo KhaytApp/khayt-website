@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -170,6 +170,41 @@ function dictionaries() {
   }
   return found;
 }
+
+check('index.html says in its HTML what app.js says on load', () => {
+  // app.js rewrites every data-i18n element from DICT once the page runs, so
+  // a stale sentence in the HTML is invisible in a browser — and is exactly
+  // what a crawler, a link preview and a reader without JS get. A conflict
+  // resolution once took one PR's whole index.html and dropped another's
+  // corrections from it ("no telemetry", "cleared by FATOORA", a download
+  // link) while every page still looked right with JS on.
+  const vm = require('vm');
+  const { body } = dictionaries().find(d => d.file === 'app.js');
+  const dict = vm.runInNewContext('(' + body.slice(body.indexOf('{')) + '\n})');
+  const html = fs.readFileSync('index.html', 'utf8');
+  const decode = t => t.replace(/&nbsp;/g, '\u00a0').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+  const norm = t => decode(t).replace(/\s+/g, ' ').trim();
+  const bad = [];
+  let n = 0;
+  // Leaf elements only: text with no markup inside, so what JS would assign
+  // as textContent is exactly what sits between the tags.
+  for (const m of html.matchAll(/data-i18n="([^"]+)"[^>]*>([^<]*)</g)) {
+    const e = dict[m[1]];
+    if (!e || typeof e.en !== 'string') continue;
+    n++;
+    if (norm(m[2]) !== norm(e.en)) bad.push(`${m[1]}: HTML "${norm(m[2]).slice(0, 60)}" but app.js "${e.en.slice(0, 60)}"`);
+  }
+  for (const m of html.matchAll(/<(\w+)[^>]*\sdata-i18n-html="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/g)) {
+    const e = dict[m[2]];
+    if (!e || typeof e.en !== 'string') continue;
+    n++;
+    if (norm(m[3]) !== norm(e.en)) bad.push(`${m[2]}: HTML differs from app.js`);
+  }
+  if (n < 50) throw new Error(`only compared ${n} elements — the extraction is wrong, not the page`);
+  if (bad.length) throw new Error(bad.join('\n') + '\n\nRun `node scripts/sync-static-text.js` to copy app.js\'s English into the HTML.');
+  return n + ' elements match';
+});
 
 check('No duplicate dictionary keys', () => {
   // A duplicated key in DICT is legal JavaScript — the later one silently
