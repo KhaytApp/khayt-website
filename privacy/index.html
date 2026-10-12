@@ -177,8 +177,17 @@
         <li>BNPL payment links — using the Tabby, Tamara or Stripe credentials you provide</li>
         <li>Salla / Zid webhooks — receiving inbound orders from platforms you configure</li>
         <li>LAN server — exposing a local HTTP server on your own network for the customer portal and intake form</li>
+        <li>AI features — using the API key you provide for Anthropic, OpenAI, Google or a compatible service you name</li>
       </ul>
       <p>None are enabled by default. Khayt does not share your credentials with any party other than the service you explicitly configured.</p>
+
+      <p id="ai-features-en"><strong>AI features with your own key</strong> (optional). The Mac and desktop apps can use an AI provider you choose — Anthropic, OpenAI, Google, or a compatible service at an address you give — with an API key from your own account with that provider. The request goes from the app straight to that provider; Khayt's servers are not involved and never see it, and the provider's own terms and privacy policy apply to it. Nothing is sent until you add a key, turn AI on, and turn on the feature itself — each has its own switch, and the app lists beside it exactly what it sends:</p>
+      <ul>
+        <li><strong>Quote from a description</strong> — the description you type, your material names, and a reference photo if you attach one.</li>
+        <li><strong>Price suggestion</strong> — project names, prices and margins from up to 6 past jobs, plus the new job's material, weight, hours and cost.</li>
+        <li><strong>Customer message drafting</strong> — the customer's name, the order reference, project, status and due date, the amount and outstanding balance, and any note you type for it. This is the one feature that sends a customer's personal data, so it stays off until you turn it on yourself, even if you had AI on before it existed.</li>
+        <li><strong>Shop assistant</strong> — your question, with the conversation so far, your shop's name, and a summary of the shop: order and client counts (not names), revenue, outstanding and overdue totals, overdue project names, top materials and low stock.</li>
+      </ul>
 
       <p><strong>AI assistants on your Mac (khayt-mcp)</strong> (optional). The Mac app includes a small local server that an AI assistant you set up yourself — Claude Desktop, Cursor and others — can ask questions. It runs on your own Mac, reads your book there and never writes to it, and Khayt itself sends nothing anywhere for it. It can answer questions about your model library, and read-only questions about your books: open orders with their status, due date and amount; who owes what, and how late; stock running low; profit and loss for a month or a quarter; and the price of a quote. Whatever it answers goes to the assistant you connected — if that assistant is a cloud service, the answers leave your Mac and that service's own privacy terms apply.</p>
       <p>Customers are not named unless you choose: the assistant sees "Customer 1", "Customer 2" and so on — the same label for the same customer in every answer — and a customer's full name is also replaced wherever it appears in project, stock and model titles, folders and tags. Titles are text you typed, though, so a first name on its own in one (say, "Nouf's lamp") can still reach the assistant. The switch <em>Share customer names with AI assistants</em>, at the bottom of Settings ▸ Assistant, is off unless you turn it on; it is kept with your shop's data, so it applies on every Mac that opens the same book, from the next question on. Phone numbers, email addresses and postal addresses are never shared, whatever that switch says, and neither are PIN hashes, passwords, sealed keys or cloud sign-in tokens.</p>
@@ -323,8 +332,17 @@
         <li>روابط الدفع الآجل — ببيانات تابي أو تمارا أو Stripe التي تقدّمها</li>
         <li>ويب هوك سلة / زد — لاستقبال الطلبات الواردة من المنصّات التي تضبطها</li>
         <li>خادم الشبكة المحلية — لعرض خادم محلي على شبكتك أنت لبوابة العملاء ونموذج الاستقبال</li>
+        <li>مزايا الذكاء الاصطناعي — بمفتاح API الذي تقدّمه لدى Anthropic أو OpenAI أو Google أو خدمة متوافقة تحدّدها</li>
       </ul>
       <p>لا شيء منها مفعّل افتراضياً. ولا يشارك خيط بياناتك مع أي جهة غير الخدمة التي ضبطتها أنت صراحةً.</p>
+
+      <p id="ai-features-ar"><strong>مزايا الذكاء الاصطناعي بمفتاحك أنت</strong> (اختيارية). يستطيع تطبيقا ماك وسطح المكتب استخدام مزوّد ذكاء اصطناعي تختاره — Anthropic أو OpenAI أو Google أو خدمة متوافقة على عنوان تحدّده — بمفتاح API من حسابك أنت لدى ذلك المزوّد. ويذهب الطلب من التطبيق مباشرةً إلى ذلك المزوّد؛ ولا تشارك فيه خوادم خيط ولا تراه أبداً، وتنطبق عليه شروط المزوّد وسياسة خصوصيته. ولا يُرسل شيء حتى تضيف مفتاحاً، وتشغّل الذكاء الاصطناعي، وتشغّل الميزة نفسها — لكلٍّ منها مفتاحه، ويعرض التطبيق بجانبه ما يرسله بالضبط:</p>
+      <ul>
+        <li><strong>تسعير من وصف</strong> — الوصف الذي تكتبه، وأسماء موادك، وصورة مرجعية إن أرفقتها.</li>
+        <li><strong>اقتراح السعر</strong> — أسماء المشاريع وأسعارها وهوامشها من 6 مهام سابقة كحدّ أقصى، ومادة المهمة الجديدة ووزنها وساعاتها وتكلفتها.</li>
+        <li><strong>صياغة رسائل العملاء</strong> — اسم العميل، ورقم الطلب، والمشروع، والحالة، وتاريخ الاستحقاق، والمبلغ والرصيد المتبقي، وأي ملاحظة تكتبها لها. وهي الميزة الوحيدة التي ترسل بيانات شخصية لعميل، لذا تبقى معطّلة حتى تشغّلها بنفسك، حتى لو كان الذكاء الاصطناعي مفعّلاً لديك قبل وجودها.</li>
+        <li><strong>مساعد الورشة</strong> — سؤالك مع المحادثة حتى الآن، واسم ورشتك، وملخّص للورشة: أعداد الطلبات والعملاء (لا أسماؤهم)، وإجماليات الإيرادات والمستحقات والمتأخرات، وأسماء المشاريع المتأخرة، وأكثر المواد استخداماً، والمخزون المنخفض.</li>
+      </ul>
 
       <p><strong>مساعدات الذكاء الاصطناعي على ماك (khayt-mcp)</strong> (اختيارية). يتضمّن تطبيق ماك خادماً محلياً صغيراً يستطيع مساعد ذكاء اصطناعي تضبطه أنت بنفسك — Claude Desktop وCursor وغيرهما — أن يطرح عليه أسئلة. يعمل على جهاز ماك الخاص بك، ويقرأ دفترك هناك ولا يكتب فيه أبداً، ولا يرسل خيط نفسه أي شيء إلى أي مكان من أجله. ويستطيع الإجابة عن أسئلة حول مكتبة المجسّمات، وعن أسئلة للقراءة فقط حول حساباتك: الطلبات المفتوحة بحالتها وموعد تسليمها ومبلغها؛ ومن يدين بماذا ومنذ متى تأخّر؛ والمخزون الذي يوشك على النفاد؛ والأرباح والخسائر لشهر أو ربع سنة؛ وسعر عرض. وما يجيب به يذهب إلى المساعد الذي ربطته — فإن كان ذلك المساعد خدمة سحابية، غادرت الإجابات جهازك وانطبقت عليها شروط الخصوصية الخاصة بتلك الخدمة.</p>
       <p>لا تُذكر أسماء العملاء ما لم تختر ذلك: يرى المساعد «Customer 1» و«Customer 2» وهكذا — التسمية نفسها للعميل نفسه في كل إجابة — ويُستبدل الاسم الكامل للعميل أيضاً أينما ورد في عناوين المشاريع والمخزون والمجسّمات والمجلدات والوسوم. غير أن العناوين نصّ كتبته أنت، فقد يصل اسمٌ أول وحده ورد في أحدها (مثل «مصباح نوف») إلى المساعد. والمفتاح <em>مشاركة أسماء العملاء مع مساعدي الذكاء الاصطناعي (khayt-mcp)</em>، في أسفل الإعدادات ▸ المساعد، معطّل ما لم تفعّله؛ ويُحفظ مع بيانات مطبعتك، فينطبق على كل ماك يفتح الدفتر نفسه، ابتداءً من السؤال التالي. أمّا أرقام الهواتف وعناوين البريد الإلكتروني والعناوين البريدية فلا تُشارَك أبداً مهما كان ذلك المفتاح، ولا تجزئات الأرقام السرية ولا كلمات المرور ولا المفاتيح المختومة ولا رموز تسجيل الدخول إلى السحابة.</p>
