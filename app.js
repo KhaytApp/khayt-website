@@ -290,6 +290,14 @@
   ];
 
   var lang = 'en', curKey = 'queue', channel = 'stable', curTheme = 'workbench';
+  // The Arabic home page is its own file at /ar/ (scripts/make-ar.js), so a
+  // crawler reads Arabic as HTML. Here the language follows the URL: /ar/ is
+  // Arabic, / is English, and switching moves between them.
+  var AR_PAGE = /^\/ar(\/|$)/.test(window.location.pathname);
+  function goLang(next) {
+    try { localStorage.setItem('khayt-lang', next); } catch (e) {}
+    window.location.href = (next === 'ar' ? '/ar/' : '/') + window.location.hash;
+  }
   var CHANNELS = { stable: null, beta: null }; // filled from GitHub
 
   // In-app design demo — every design a user can pick, in the order the app
@@ -586,11 +594,10 @@
     var ogl = document.querySelector('meta[property="og:locale"]');
     if (ogl) ogl.setAttribute('content', lang);
 
-    // Arabic becomes a URL rather than a private localStorage flag: linkable,
-    // shareable, and the thing the hreflang tags in <head> actually point at.
+    // The language is the URL (/ or /ar/), so an old ?lang= is dropped.
     try {
       var u = new URL(window.location.href);
-      if (lang === 'ar') u.searchParams.set('lang', 'ar'); else u.searchParams.delete('lang');
+      u.searchParams.delete('lang');
       history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
     } catch (e) {}
 
@@ -745,7 +752,7 @@
   function langToggle() {
     var btn = document.getElementById('navLang');
     if (!btn) return;
-    btn.addEventListener('click', function () { applyLang(lang === 'ar' ? 'en' : 'ar'); });
+    btn.addEventListener('click', function () { goLang(lang === 'ar' ? 'en' : 'ar'); });
   }
 
   /* ---------- Download channel (stable / beta) ---------- */
@@ -1001,12 +1008,16 @@
     // An explicit ?lang= in the link beats whatever this browser last chose:
     // someone following an Arabic link wants the Arabic page, even if they
     // read the site in English yesterday.
+    // On / a reader who chose Arabic (or followed an old ?lang=ar link) is
+    // sent to /ar/; /ar/ itself is always Arabic.
     var saved = 'en';
     try { saved = localStorage.getItem('khayt-lang') || 'en'; } catch (e) {}
     try {
       var q = new URL(window.location.href).searchParams.get('lang');
       if (q === 'ar' || q === 'en') saved = q;
     } catch (e) {}
+    if (AR_PAGE) saved = 'ar';
+    else if (saved === 'ar') { goLang('ar'); return; }
     tabs();
     flip();
     nav();
