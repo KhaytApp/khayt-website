@@ -28,3 +28,9 @@ jobs:
 
       - name: Every link on the site resolves
         run: node scripts/check-links.js
+
+      # The dated FoxTrack/PrintMate comparison on the home page. Red here after
+      # 35 days means: re-read their pages and move the date (see the script).
+      - name: The competitor comparison is recent
+        if: always()
+        run: node scripts/check-freshness.js
