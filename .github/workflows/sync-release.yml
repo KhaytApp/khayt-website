@@ -90,11 +90,16 @@ jobs:
             echo "::warning::releases.json not updated — could not fetch the release list"
           fi
 
+      # ar/index.html is generated from index.html (scripts/make-ar.js), so the
+      # versions just written there are carried into the Arabic page too.
+      - name: Regenerate the Arabic page
+        run: node scripts/make-ar.js
+
       - name: Commit and push if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html releases.json
+          git add index.html releases.json ar/index.html
           if git diff --staged --quiet; then
             echo "index.html and releases.json already up to date — nothing to commit"
           else

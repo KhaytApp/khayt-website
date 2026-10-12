@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -74,6 +74,18 @@ check('index.html is rendered from data.js', () => {
     execFileSync(process.execPath, ['scripts/prerender.js', '--check', 'index.html'], { stdio: 'pipe' });
   } catch (e) {
     throw new Error('stale. Run `node scripts/prerender.js` and commit the result.');
+  }
+  return 'in sync';
+});
+
+check('ar/index.html is generated from index.html and app.js', () => {
+  // The Arabic home page is a file so crawlers read it as Arabic; it must say
+  // exactly what index.html says, in DICT's Arabic. Release-bot version and
+  // size changes are masked by --check (see make-ar.js).
+  try {
+    execFileSync(process.execPath, ['scripts/make-ar.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error('stale. Run `node scripts/make-ar.js` and commit the result.');
   }
   return 'in sync';
 });
@@ -363,6 +375,9 @@ function navTarget(page, href) {
   t = t.replace(/^\.\//, '');
   if (t === '' || t === '.') t = 'index.html';
   if (t.endsWith('/')) t += 'index.html';
+  // ar/index.html is the home page in Arabic: its "/ar/#screens" is the same
+  // destination as the English page's "#screens".
+  if (t === 'ar/index.html') t = 'index.html';
   return t;
 }
 
@@ -442,7 +457,7 @@ check('Every page carries the same nav', () => {
     const nav = fs.readFileSync(p, 'utf8').split('id="navLinks"')[1].split('</nav>')[0];
     const m = nav.match(/<a href="([^"]*)"[^>]*aria-current="page"/);
     if (!m) return false;
-    return navTarget(p, m[1]) !== p;
+    return navTarget(p, m[1]) !== navTarget(p, '');
   });
   if (wrong.length) throw new Error('marks a nav link aria-current that is not this page: ' + wrong.join(', '));
   // Seven is what was measured to fit down to 901px. Eight has not been.
@@ -708,12 +723,15 @@ check('robots.txt still lets crawlers in', () => {
 
 check('Every page can be linked in Arabic', () => {
   // Arabic used to be a localStorage flag with no URL, so it could not be
-  // shared or indexed. Each page needs its ?lang=ar alternate declared.
+  // shared or indexed. Each page needs its ?lang=ar alternate declared — or,
+  // for the home page and its Arabic file, the /ar/ page itself.
   const bad = [];
   // 404.html is excluded: it is noindex, so it has no canonical to alternate.
   for (const p of pages().filter(f => !pages.NOINDEX.has(f))) {
     const html = fs.readFileSync(p, 'utf8');
-    if (!/hreflang="ar"[^>]*lang=ar/.test(html)) bad.push(p);
+    const want = (p === 'index.html' || p === 'ar/index.html')
+      ? /hreflang="ar" href="https:\/\/khaytapp\.com\/ar\/"/ : /hreflang="ar"[^>]*lang=ar/;
+    if (!want.test(html)) bad.push(p);
   }
   if (bad.length) throw new Error('no Arabic alternate declared: ' + bad.join(', '));
   return 'all declared';
