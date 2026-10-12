@@ -51,21 +51,44 @@ const HREF = /(?:href|src)="(https?:\/\/[^"]+)"/g;
 // What counts as a download: the page says so with class="dl-link", or the
 // URL is one of GitHub's two release-file shapes. A plain /releases page link
 // in a footer is a page on purpose and is only checked for existing.
+//
+// A dl-link can be a page on purpose too, and says so with data-page:
+//   · the Mac button, whose static href is the khayt-mac releases LIST (every
+//     release there is a prerelease, so there is no /latest) and which app.js
+//     points at the file from mac/appcast.xml on load. That file is what a
+//     visitor gets, so it is checked below as the download instead.
+//   · the iPhone TestFlight join link, which is Apple's web page by design.
 const DOWNLOAD_URL = /\/releases\/(download|latest)(\/|$)/;
-const DL_TAG = /<a\b[^>]*\bclass="[^"]*\bdl-link\b[^"]*"[^>]*\bhref="(https?:\/\/[^"]+)"|<a\b[^>]*\bhref="(https?:\/\/[^"]+)"[^>]*\bclass="[^"]*\bdl-link\b/g;
+const DL_A = /<a\b[^>]*\bclass="[^"]*\bdl-link\b[^"]*"[^>]*>/g;
 
 const found = new Map(); // url -> Set(pages)
 const downloads = new Set();
+function addFound(url, p) {
+  if (!found.has(url)) found.set(url, new Set());
+  found.get(url).add(p);
+}
 for (const p of pages()) {
   const html = fs.readFileSync(p, 'utf8');
-  for (const m of html.matchAll(DL_TAG)) downloads.add((m[1] || m[2]).replace(/&amp;/g, '&'));
+  for (const m of html.matchAll(DL_A)) {
+    const href = m[0].match(/\bhref="(https?:\/\/[^"]+)"/);
+    if (href && !/\bdata-page\b/.test(m[0])) downloads.add(href[1].replace(/&amp;/g, '&'));
+  }
   for (const m of html.matchAll(HREF)) {
     const url = m[1].replace(/&amp;/g, '&');
     if (DOWNLOAD_URL.test(url)) downloads.add(url);
     if (DOWNLOADS_ONLY && !downloads.has(url)) continue;
-    if (!found.has(url)) found.set(url, new Set());
-    found.get(url).add(p);
+    addFound(url, p);
   }
+}
+
+// The Mac button's real target: the newest enclosure in the Sparkle feed.
+{
+  const feed = fs.readFileSync('mac/appcast.xml', 'utf8');
+  const enc = feed.match(/<enclosure\b[^>]*\burl="(https?:\/\/[^"]+)"/);
+  if (!enc) { console.error('mac/appcast.xml has no enclosure — the Mac download button has nothing to point at'); process.exit(1); }
+  const url = enc[1].replace(/&amp;/g, '&');
+  downloads.add(url);
+  addFound(url, 'mac/appcast.xml (the Mac download button)');
 }
 
 // Fonts and the like are third-party infrastructure; if Google Fonts is down
