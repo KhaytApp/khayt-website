@@ -516,6 +516,20 @@
           <a class="meta-chip" href="https://github.com/KhaytApp/khayt-mac/releases" target="_blank" rel="noopener" style="color:var(--brand-2)" data-i18n="mn.all">All Mac releases →</a>
         </div>
       </div>
+      <!-- The beta list: khayt-cloud's POST /v1/beta/signup (#115), double
+           opt-in. "website" is a honeypot people never see. Any answer the page
+           cannot read falls back to an email to support. /privacy §2 says what
+           is kept, and must change with this form. -->
+      <form class="beta-form" id="betaForm" data-platform="mac" novalidate>
+        <label for="betaEmail" data-i18n="bf.label">Email me when the Mac beta is out</label>
+        <div class="beta-row">
+          <input type="email" id="betaEmail" name="email" required autocomplete="email" inputmode="email" placeholder="you@example.com" dir="ltr">
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn btn-ghost" data-i18n="bf.btn">Notify me</button>
+        </div>
+        <p class="beta-msg" id="betaMsg" role="status" aria-live="polite"></p>
+        <p class="beta-fine"><span data-i18n="bf.fine">One email to confirm, then only beta news. Leave any time.</span> <a href="privacy/#beta-list-en" data-i18n="bf.priv">Privacy</a></p>
+      </form>
       <p class="mn-road" data-i18n="mn.road">Where this goes: the native Mac app becomes the main Khayt on macOS, a native Windows app follows it, and the app above keeps running everywhere — it is not going away.</p>
     </div>
     <!-- MAC-NATIVE:END -->
