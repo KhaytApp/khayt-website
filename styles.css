@@ -162,6 +162,14 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .frame-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 3px rgba(27,181,92,.18); animation: pulse 2s infinite; }
 .frame-img-wrap { position: relative; background: #0c1320; }
 .frame img.shot { width: 100%; height: auto; display: block; transition: opacity .25s ease; }
+/* The hero video lies over its own first frame and shows only once playing. */
+.hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease; }
+.hero-vid.on { opacity: 1; }
+.vid-btn { position: absolute; bottom: 12px; inset-inline-end: 12px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(12,19,32,.72); color: #fff; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.vid-btn[hidden] { display: none; }
+.vid-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.vid-ico { width: 10px; height: 12px; border-inline: 3px solid currentColor; box-sizing: border-box; }
+.vid-btn.paused .vid-ico { width: 0; height: 0; border-inline: 0; border-block: 6px solid transparent; border-left: 10px solid currentColor; margin-left: 3px; }
 @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.4 } }
 
 /* ===================== HERO (Console) ===================== */

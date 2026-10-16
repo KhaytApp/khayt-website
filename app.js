@@ -41,6 +41,9 @@
       ar: 'يُعاد بناء خيط لماك كتطبيق ماك أصلي — جرّب نسخة ألفا ←'
     },
 
+    'hero.vid':   { en: 'The Khayt Mac app’s sample shop: the production board, a job with its money and operator, the model library and customers', ar: 'المطبعة التجريبية في تطبيق خيط لماك: لوحة الإنتاج، ومهمة بمبالغها ومشغّلها، ومكتبة المجسّمات، والعملاء' },
+    'hero.vid.pause': { en: 'Pause the video', ar: 'أوقف الفيديو مؤقتاً' },
+    'hero.vid.play':  { en: 'Play the video', ar: 'شغّل الفيديو' },
     'hero.pill':  { en: 'Free to use · Source available', ar: 'مجاني · المصدر متاح' },
     'hero.h1':    { en: 'One desk runs the <span class="hl">whole shop</span>.', ar: 'مكتب واحد يُدير <span class="hl">المطبعة كاملة</span>.' },
     'hero.desc':  { en: 'Khayt runs a 3D print shop from your own Mac and iPhone: quotes costed from what your printers actually used, a production queue, filament stock, and tax invoices with VAT, a QR code and credit notes. Your shop’s data stays on your machine. Free, no account, and nothing sent unless you opt in.', ar: 'يدير خيط مطبعة الطباعة ثلاثية الأبعاد من ماك وآيفون الخاصّين بك: عروض أسعار محسوبة مما استهلكته طابعاتك فعلاً، وقائمة إنتاج، ومخزون الخيوط، وفواتير ضريبية بالقيمة المضافة ورمز QR الخاص بهيئة الزكاة وإشعارات دائنة. بيانات مطبعتك تبقى على جهازك. مجاناً، بلا حساب، ولا يُرسل شيء ما لم تختر ذلك.' },
@@ -404,7 +407,13 @@
     if (curTheme === 'workbench') return 'screenshots/screenshot-' + pre + key + '.png';
     return 'screenshots/themes/' + curTheme + '/screenshot-' + pre + key + '.png';
   }
-  function heroPath() { return 'screenshots/screenshot-' + (lang === 'ar' ? 'ar-' : '') + 'queue.png'; }
+  // The hero is the Mac demo's first frame (screenshots/mac/, 1920px), with
+  // the video over it — see heroVideo().
+  function heroPath() { return 'screenshots/mac/demo-' + lang + '.png'; }
+  function heroSrcset() {
+    var b = 'screenshots/mac/demo-' + lang;
+    return b + '-640w.webp 640w, ' + b + '-1080w.webp 1080w, ' + b + '-1600w.webp 1600w, ' + b + '.webp 1920w';
+  }
 
   // The WebP srcset for a screenshot PNG. scripts/make-webp.js writes a copy
   // at each of SHOT_WIDTHS narrower than the capture, beside every screenshot
@@ -564,7 +573,18 @@
     var hs = document.getElementById('heroShot');
     if (hs) {
       hs.src = heroPath();
-      setSrcset(document.getElementById('heroSrc'), heroPath());
+      hs.alt = t('hero.vid');
+      var hsrc = document.getElementById('heroSrc');
+      if (hsrc && hsrc.getAttribute('srcset') !== heroSrcset()) hsrc.srcset = heroSrcset();
+    }
+    var hv = document.getElementById('heroVid');
+    if (hv) {
+      var vsrc = '/video/mac-demo-' + lang + '.mp4';
+      if (hv.getAttribute('data-src') !== vsrc) {
+        hv.setAttribute('data-src', vsrc);
+        if (hv.getAttribute('src')) { hv.classList.remove('on'); hv.src = vsrc; if (!hv.hasAttribute('data-paused')) hv.play().catch(function () {}); }
+      }
+      vidLabel();
     }
     // The iPhone shots are portrait 1206px captures, so they carry their own
     // srcset rather than going through shotSrcset's 2160px landscape set.
@@ -1002,6 +1022,31 @@
      200 is the answer for every accepted address, new or not, so the form
      cannot tell anyone who is already on the list. Anything the page cannot
      read — 503, a network error, no JSON — becomes an email to support. */
+  /* ---------- The hero video ----------
+     The picture under it is the video's first frame, so nothing moves until
+     the video is really playing, and a visitor who asked for less motion, or
+     whose browser will not autoplay, keeps the picture. The button pauses it
+     (WCAG 2.2.2: anything moving for over 5 seconds needs a way to stop). */
+  function vidLabel() {
+    var v = document.getElementById('heroVid'), b = document.getElementById('heroVidBtn');
+    if (!v || !b) return;
+    var paused = v.hasAttribute('data-paused');
+    b.classList.toggle('paused', paused);
+    b.querySelector('.sr-only').textContent = t(paused ? 'hero.vid.play' : 'hero.vid.pause');
+  }
+  function heroVideo() {
+    var v = document.getElementById('heroVid'), b = document.getElementById('heroVidBtn');
+    if (!v || !b || calmed() || !v.play) return;
+    v.addEventListener('playing', function () { v.classList.add('on'); });
+    b.addEventListener('click', function () {
+      if (v.hasAttribute('data-paused')) { v.removeAttribute('data-paused'); v.play().catch(function () {}); }
+      else { v.setAttribute('data-paused', ''); v.pause(); }
+      vidLabel();
+    });
+    v.src = v.getAttribute('data-src');
+    v.play().then(function () { b.hidden = false; vidLabel(); }).catch(function () { v.removeAttribute('src'); v.load(); });
+  }
+
   function betaForm() {
     var form = document.getElementById('betaForm');
     if (!form) return;
@@ -1070,6 +1115,7 @@
     wireGrids();
     applyLang(saved);
     betaForm();
+    heroVideo();
     fetchReleases();
     macFeed();
   });

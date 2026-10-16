@@ -128,9 +128,16 @@
         <div class="frame">
           <div class="frame-img-wrap">
             <picture>
-              <source id="heroSrc" type="image/webp" srcset="screenshots/screenshot-queue-640w.webp 640w, screenshots/screenshot-queue-1080w.webp 1080w, screenshots/screenshot-queue-1600w.webp 1600w, screenshots/screenshot-queue.webp 2160w" sizes="(max-width: 1000px) 92vw, 611px">
-              <img class="shot" id="heroShot" src="screenshots/screenshot-queue.png" width="2160" height="1243" alt="Khayt production queue — Kanban board with live printer status" loading="eager" fetchpriority="high">
+              <source id="heroSrc" type="image/webp" srcset="screenshots/mac/demo-en-640w.webp 640w, screenshots/mac/demo-en-1080w.webp 1080w, screenshots/mac/demo-en-1600w.webp 1600w, screenshots/mac/demo-en.webp 1920w" sizes="(max-width: 1000px) 92vw, 611px">
+              <img class="shot" id="heroShot" src="screenshots/mac/demo-en.png" width="1920" height="1104" alt="The Khayt Mac app’s sample shop: the production board, a job with its money and operator, the model library and customers" loading="eager" fetchpriority="high">
             </picture>
+            <!-- 22 seconds of the Mac app on its sample shop, no sound, the
+                 same first frame as the picture under it. heroVideo() in
+                 app.js starts it, unless the visitor asked for less motion,
+                 and the button pauses it (WCAG 2.2.2). /ar/ plays the
+                 Arabic take. -->
+            <video class="hero-vid" id="heroVid" muted loop playsinline preload="none" width="1920" height="1104" aria-hidden="true" data-src="/video/mac-demo-en.mp4"></video>
+            <button type="button" class="vid-btn" id="heroVidBtn" hidden><span aria-hidden="true" class="vid-ico"></span><span class="sr-only" data-i18n="hero.vid.pause">Pause the video</span></button>
           </div>
         </div>
       </div>

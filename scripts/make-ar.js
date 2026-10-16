@@ -101,7 +101,13 @@ function build() {
   });
   html = html.replace(/(<source\b[^>]*\bsrcset=")screenshots\/iphone\/([a-z]+)-([a-z]+)-en-/g, '$1screenshots/iphone/$2-$3-ar-')
     .replace(/screenshots\/iphone\/([a-z]+)-([a-z]+)-en(-\d+w)?\.(webp|png)/g, 'screenshots/iphone/$1-$2-ar$3.$4');
-  for (const id of ['heroSrc', 'heroShot', 'galSrc', 'galImg']) {
+  // The hero: the Arabic take of the Mac demo, its first frame and its alt.
+  for (const id of ['heroSrc', 'heroShot', 'heroVid']) {
+    html = one(html, new RegExp(`<(?:source|img|video)\\b[^>]*\\bid="${id}"[^>]*>`, 'g'),
+      tag => tag.replace(/(screenshots\/mac\/demo|video\/mac-demo)-en/g, '$1-ar')
+        .replace(/\balt="[^"]*"/, () => `alt="${attr(ar('hero.vid'))}"`), '#' + id);
+  }
+  for (const id of ['galSrc', 'galImg']) {
     html = one(html, new RegExp(`<(?:source|img)\\b[^>]*\\bid="${id}"[^>]*>`, 'g'),
       tag => tag.replace(/screenshots\/screenshot-queue/g, 'screenshots/screenshot-ar-queue'), '#' + id);
   }
