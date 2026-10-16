@@ -130,9 +130,16 @@
         <div class="frame">
           <div class="frame-img-wrap">
             <picture>
-              <source id="heroSrc" type="image/webp" srcset="/screenshots/screenshot-ar-queue-640w.webp 640w, /screenshots/screenshot-ar-queue-1080w.webp 1080w, /screenshots/screenshot-ar-queue-1600w.webp 1600w, /screenshots/screenshot-ar-queue.webp 2160w" sizes="(max-width: 1000px) 92vw, 611px">
-              <img class="shot" id="heroShot" src="/screenshots/screenshot-ar-queue.png" width="2160" height="1243" alt="Khayt production queue — Kanban board with live printer status" loading="eager" fetchpriority="high">
+              <source id="heroSrc" type="image/webp" srcset="/screenshots/mac/demo-ar-640w.webp 640w, /screenshots/mac/demo-ar-1080w.webp 1080w, /screenshots/mac/demo-ar-1600w.webp 1600w, /screenshots/mac/demo-ar.webp 1920w" sizes="(max-width: 1000px) 92vw, 611px">
+              <img class="shot" id="heroShot" src="/screenshots/mac/demo-ar.png" width="1920" height="1104" alt="المطبعة التجريبية في تطبيق خيط لماك: لوحة الإنتاج، ومهمة بمبالغها ومشغّلها، ومكتبة المجسّمات، والعملاء" loading="eager" fetchpriority="high">
             </picture>
+            <!-- 22 seconds of the Mac app on its sample shop, no sound, the
+                 same first frame as the picture under it. heroVideo() in
+                 app.js starts it, unless the visitor asked for less motion,
+                 and the button pauses it (WCAG 2.2.2). /ar/ plays the
+                 Arabic take. -->
+            <video class="hero-vid" id="heroVid" muted loop playsinline preload="none" width="1920" height="1104" aria-hidden="true" data-src="/video/mac-demo-ar.mp4"></video>
+            <button type="button" class="vid-btn" id="heroVidBtn" hidden><span aria-hidden="true" class="vid-ico"></span><span class="sr-only" data-i18n="hero.vid.pause">أوقف الفيديو مؤقتاً</span></button>
           </div>
         </div>
       </div>
