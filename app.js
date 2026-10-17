@@ -174,6 +174,7 @@
     'ip.shot.home': { en: 'Shop Pulse on iPhone: the queue, money owed, the pipeline and what needs attention', ar: 'نبض الورشة على الآيفون: قائمة الانتظار والمستحقات وسير العمل وما يحتاج إلى انتباه' },
     'ip.shot.order': { en: 'An order on iPhone, with its print progress and the stage to move it to', ar: 'طلب على الآيفون، مع تقدّم طباعته والمرحلة التالية' },
     'ip.shot.inventory': { en: 'Inventory on iPhone: spools with the grams left on each', ar: 'المخزون على الآيفون: البكرات والغرامات المتبقية في كلٍّ منها' },
+    'ip.shot.lock': { en: 'A print on the iPhone Lock Screen: the printer, the file, the time left, when it ends and how far along it is', ar: 'طباعة على شاشة قفل الآيفون: الطابعة والملف والوقت المتبقي وموعد الانتهاء ومقدار ما أُنجز' },
     'why.eyebrow': { en: 'Why Khayt', ar: 'لماذا خيط' },
     'why.h2': { en: 'Four things, together in one app', ar: 'أربعة أشياء، معاً في تطبيق واحد' },
     'why.lede': { en: 'Other tools now do one or two of these. Khayt is built around all four.', ar: 'صارت أدوات أخرى تقدّم واحداً أو اثنين منها. أمّا خيط فمبنيّ حولها جميعاً.' },
