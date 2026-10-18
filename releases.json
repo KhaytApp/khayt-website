@@ -1,74 +1,82 @@
 {
  "releases": [
   {
+   "tag": "v3.11.14",
+   "name": "Khayt v3.11.14",
+   "date": "2026-10-18",
+   "prerelease": false,
+   "note": "Find every job printed from a filament lot, since 3.11.13.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.14",
+   "assets": [
+    {
+     "name": "Khayt-3.11.14-arm64-mac.zip",
+     "size": 177168495,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-3.11.14-arm64-mac.zip"
+    },
+    {
+     "name": "Khayt-3.11.14-arm64-mac.zip.blockmap",
+     "size": 185253,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-3.11.14-arm64-mac.zip.blockmap"
+    },
+    {
+     "name": "Khayt-3.11.14-arm64.dmg",
+     "size": 178419967,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-3.11.14-arm64.dmg"
+    },
+    {
+     "name": "Khayt-3.11.14-arm64.dmg.blockmap",
+     "size": 186956,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-3.11.14-arm64.dmg.blockmap"
+    },
+    {
+     "name": "Khayt-3.11.14.AppImage",
+     "size": 175348990,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-3.11.14.AppImage"
+    },
+    {
+     "name": "Khayt-3.11.14.exe",
+     "size": 154624864,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-3.11.14.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.14.exe",
+     "size": 154882161,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-Setup-3.11.14.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.14.exe.blockmap",
+     "size": 163201,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/Khayt-Setup-3.11.14.exe.blockmap"
+    },
+    {
+     "name": "khayt_3.11.14_amd64.deb",
+     "size": 141335308,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/khayt_3.11.14_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 522,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 507,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 345,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.14/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v3.11.13",
    "name": "Khayt v3.11.13",
    "date": "2026-10-16",
    "prerelease": false,
    "note": "Quotes with a marketplace fee now come out slightly higher.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.13",
-   "assets": [
-    {
-     "name": "Khayt-3.11.13-arm64-mac.zip",
-     "size": 177158971,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-3.11.13-arm64-mac.zip"
-    },
-    {
-     "name": "Khayt-3.11.13-arm64-mac.zip.blockmap",
-     "size": 184611,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-3.11.13-arm64-mac.zip.blockmap"
-    },
-    {
-     "name": "Khayt-3.11.13-arm64.dmg",
-     "size": 178411174,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-3.11.13-arm64.dmg"
-    },
-    {
-     "name": "Khayt-3.11.13-arm64.dmg.blockmap",
-     "size": 186299,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-3.11.13-arm64.dmg.blockmap"
-    },
-    {
-     "name": "Khayt-3.11.13.AppImage",
-     "size": 175341209,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-3.11.13.AppImage"
-    },
-    {
-     "name": "Khayt-3.11.13.exe",
-     "size": 154614883,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-3.11.13.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.13.exe",
-     "size": 154872191,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-Setup-3.11.13.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.13.exe.blockmap",
-     "size": 162536,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/Khayt-Setup-3.11.13.exe.blockmap"
-    },
-    {
-     "name": "khayt_3.11.13_amd64.deb",
-     "size": 141326948,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/khayt_3.11.13_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 522,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 507,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 345,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.13/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.13"
   },
   {
    "tag": "v3.11.12",
@@ -355,14 +363,6 @@
    "prerelease": true,
    "note": "See README for full release notes.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.18"
-  },
-  {
-   "tag": "v3.7.0-beta.17",
-   "name": "Khayt v3.7.0-beta.17",
-   "date": "2026-08-31",
-   "prerelease": true,
-   "note": "See README for full release notes.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.7.0-beta.17"
   }
  ]
 }
