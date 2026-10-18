@@ -141,8 +141,8 @@
 
     'mn.badge':  { en: 'Alpha', ar: 'ألفا' },
     'mn.h':      { en: 'Khayt for macOS, rebuilt native', ar: 'خيط لماك، مُعاد بناؤه أصليًا' },
-    'mn.p':      { en: 'Not Electron in a Mac costume — a real Mac app: native windows, the menu bar, Quick Look, Shortcuts. It runs the same tax, pricing and estimator rules as the app above, unchanged and proved against them test for test, so it reads the same book and gets the same answers.',
-                   ar: 'ليس إلكترون بثوب ماك — تطبيق ماك حقيقي: نوافذ أصلية، وشريط القوائم، والعرض السريع، والاختصارات. يشغّل قواعد الضريبة والتسعير والتقدير نفسها الموجودة في التطبيق أعلاه، دون تغيير ومُثبتة مقابلها اختبارًا باختبار، فيقرأ الدفتر نفسه ويعطي الإجابات نفسها.' },
+    'mn.p':      { en: 'Not Electron in a Mac costume — a real Mac app: native windows, the menu bar, Quick Look, Shortcuts, desktop widgets for what is printing and what is next, and ⌘K to jump to any job, customer or model. It runs the same tax, pricing and estimator rules as the app above, unchanged and proved against them test for test, so it reads the same book and gets the same answers.',
+                   ar: 'ليس إلكترون بثوب ماك — تطبيق ماك حقيقي: نوافذ أصلية، وشريط القوائم، والعرض السريع، والاختصارات، وأدوات سطح المكتب لما يُطبع الآن وما يليه، و⌘K للانتقال إلى أي مهمة أو عميل أو نموذج. يشغّل قواعد الضريبة والتسعير والتقدير نفسها الموجودة في التطبيق أعلاه، دون تغيير ومُثبتة مقابلها اختبارًا باختبار، فيقرأ الدفتر نفسه ويعطي الإجابات نفسها.' },
     'mn.warn':   { en: 'It is an alpha. Keep the stable app installed alongside it — they read the same file, so nothing is lost either way, but an alpha is not what a shop should be billing from yet.',
                    ar: 'إنه إصدار ألفا. أبقِ التطبيق المستقر مثبّتًا إلى جانبه — كلاهما يقرأ الملف نفسه فلا يضيع شيء، لكن الألفا ليس ما ينبغي أن تصدر منه فواتيرك بعد.' },
     'mn.dl':     { en: 'Download for Apple silicon', ar: 'حمّل لمعالجات آبل' },
