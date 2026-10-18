@@ -67,8 +67,8 @@
     <span class="eyebrow" data-lang="en">Khayt</span><span class="eyebrow" data-lang="ar" hidden>خيط</span>
     <h1 data-lang="en">Privacy Policy</h1>
     <h1 data-lang="ar" hidden>سياسة الخصوصية</h1>
-    <p class="lede" data-lang="en">Last updated: 13 October 2026</p>
-    <p class="lede" data-lang="ar" hidden>آخر تحديث: 13 أكتوبر 2026</p>
+    <p class="lede" data-lang="en">Last updated: 18 October 2026</p>
+    <p class="lede" data-lang="ar" hidden>آخر تحديث: 18 أكتوبر 2026</p>
    </div>
   </div>
 </section>
@@ -78,7 +78,7 @@
    <div class="post-in">
     <div class="post-body policy" data-lang="en">
 
-      <p class="policy-tldr"><strong>Short version:</strong> Khayt keeps your book on your own machine. We do not collect, transmit or hold your business data. Sync, offsite backups and Google Drive are sealed with your key before they leave, so we hold ciphertext, not records. The customer-facing services are different: a storefront, an order-tracking link or an order form has to be readable by the customer it is for, so what you publish through one is stored by Khayt Cloud in a form it can read. So are an iPhone's Live Activities, which iOS draws without a key. <a href="#khayt-cloud-en">Section 5</a> lists exactly what that is.</p>
+      <p class="policy-tldr"><strong>Short version:</strong> Khayt keeps your book on your own machine. We do not collect, transmit or hold your business data. Sync, offsite backups and Google Drive are sealed with your key before they leave, so we hold ciphertext, not records. The customer-facing services are different: a storefront, an order-tracking link or an order form has to be readable by the customer it is for, so what you publish through one is stored by Khayt Cloud in a form it can read. So are an iPhone's Live Activities, which iOS draws without a key, and — only if you turn it on — a copy of your customers and their orders for your own web store. <a href="#khayt-cloud-en">Section 5</a> lists exactly what that is.</p>
 
       <h2>1. Who we are</h2>
       <p>Khayt is a desktop application for 3D print shops: quoting, a production queue, invoicing, inventory and the numbers behind them. It is developed and maintained by Khayt. Contact: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
@@ -128,6 +128,8 @@
         <li><strong>Live Activities</strong> — a printer's name, its job, the print's phase and progress, and its start and estimated end times, relayed to Apple for a phone showing that print on its Lock Screen (see <a href="#iphone-en">section 6</a>).</li>
         <li><strong>Order requests</strong> — what a customer submits through your online order form or storefront checkout, held until you import or delete it.</li>
         <li><strong>Instant quotes</strong> — the pricing inputs you publish so the storefront can quote (your rates and margin). Callers are shown a price, never those inputs. A model file a customer uploads for a quote is priced in memory and not kept.</li>
+        <li id="customer-records-en"><strong>Customer records for your web store</strong> (Mac; off unless you turn it on) — so that your own web store can show a signed-in customer their past orders and let them order again. This is a readable copy, outside your encrypted book. While it is on, the Mac uploads, for each customer who has an email address: the email, name and phone number, and up to their 100 most recent orders (order number, the web store's reference, date, title, stage, the total they paid and its currency, and what was ordered, with quantities). It never includes your costs, margins, notes or files. The cloud can also hold up to ten delivery addresses per customer, though the Mac sends none today. The copy cannot be listed: your web store, using your shop's own access key, looks up one customer at a time by email address, and it must show a record only to someone who has proved they own that address. Each upload replaces the whole copy, so a customer you delete is gone from it at the next one. Turning the switch off deletes the copy at once; a copy the Mac has not refreshed for 30 days is deleted automatically, and deleting the shop deletes it too.</li>
+        <li id="whatsapp-reports-en"><strong>WhatsApp delivery reports</strong> (Mac; off unless you set it up) — when you send customers WhatsApp messages through your own WhatsApp Business account, the Mac sends them straight to Meta; Khayt Cloud sends nothing and never sees what a message says. Meta reports what happened to a message only to a public internet address, which your Mac is not, so the cloud receives those reports for your account and keeps, for each message: Meta's message ID, its status (sent, delivered, read or failed), the time, the customer's phone number, your business number's ID, and any error code and description. Customer replies that reach the same address are counted and dropped, never stored. To check that a report really came from Meta, the cloud keeps your Meta app's secret and a verification token (see <a href="#secrets-en">section 9</a>). Reports are kept for 30 days after a message's last change. Removing the connection deletes it and every report, and deleting the shop deletes everything.</li>
       </ul>
       <p>Your book itself is not among them: published records are copies you chose to share, and unpublishing one deletes it from the cloud. Server errors may be reported to an error-monitoring service (Sentry) so that we can fix them. None of this data is sold, used for advertising or used to train AI models.</p>
 
@@ -175,6 +177,7 @@
         <li>Telegram notifications — using the bot token and chat ID you provide</li>
         <li>E-invoicing — submitting invoices to your country's authority where the law requires it</li>
         <li>BNPL payment links — using the Tabby, Tamara or Stripe credentials you provide</li>
+        <li>WhatsApp and SMS messages — using the WhatsApp Business (Meta), Twilio or Unifonic account you provide. A WhatsApp message goes from your app to Meta, which processes it for you under its <a href="https://www.whatsapp.com/legal/business-data-processing-terms" rel="noopener">WhatsApp Business data processing terms</a> and <a href="https://www.whatsapp.com/legal/privacy-policy" rel="noopener">privacy policy</a>; delivery reports come back through Khayt Cloud, as <a href="#khayt-cloud-en">section 5</a> describes</li>
         <li>Salla / Zid webhooks — receiving inbound orders from platforms you configure</li>
         <li>LAN server — exposing a local HTTP server on your own network for the customer portal and intake form</li>
         <li>AI features — using the API key you provide for Anthropic, OpenAI, Google or a compatible service you name</li>
@@ -198,12 +201,12 @@
       <h2>8. Automatic updates</h2>
       <p>Khayt checks for updates via GitHub Releases. That is a standard HTTPS request to GitHub's servers, to which <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a> applies. The native Mac app checks a feed on this site instead, <code>khaytapp.com/mac/appcast.xml</code>, using the Sparkle updater, and downloads the update itself from GitHub. No personal data is transmitted in an update check, and updates install only when you choose.</p>
 
-      <h2>9. API keys and secrets</h2>
-      <p>Keys, tokens and secrets you enter are encrypted at rest using your operating system's secure storage — macOS Keychain, Windows Credential Store, Linux Secret Service. They are never transmitted to Khayt's servers.</p>
+      <h2 id="secrets-en">9. API keys and secrets</h2>
+      <p>Keys, tokens and secrets you enter are encrypted at rest using your operating system's secure storage — macOS Keychain, Windows Credential Store, Linux Secret Service. They are never transmitted to Khayt's servers, with one exception you choose: if you set up WhatsApp delivery reports, the Mac sends your Meta app's secret to Khayt Cloud, which uses it only to check that each report is signed by Meta. The cloud stores that secret as you entered it, not encrypted, and never shows it back. Your WhatsApp access token, which sends the messages, stays on your Mac.</p>
 
       <h2>10. Your customers' data</h2>
       <p>Khayt stores the customer details you enter, or that customers submit through your intake form: names, phone, email, addresses, order history and communication notes.</p>
-      <p>Under Saudi Arabia's Personal Data Protection Law (PDPL), and equivalents such as the GDPR, <strong>you</strong> are the data controller for that information. Khayt is a tool you run on your own machine. With cloud sync on, your book is end-to-end encrypted before it leaves your device, so we hold ciphertext, not customer records. The exception is what you publish through a customer-facing service — an order's details, a customer's email address, their messages — which the cloud stores readably on your behalf, as <a href="#khayt-cloud-en">section 5</a> describes. For that data we act as your processor: we store it only to run the service you switched on, and unpublishing it deletes it.</p>
+      <p>Under Saudi Arabia's Personal Data Protection Law (PDPL), and equivalents such as the GDPR, <strong>you</strong> are the data controller for that information. Khayt is a tool you run on your own machine. With cloud sync on, your book is end-to-end encrypted before it leaves your device, so we hold ciphertext, not customer records. The exception is what you publish through a customer-facing service — an order's details, a customer's email address, their messages, and, if you turn on customer records, a copy of your customers and their orders — which the cloud stores readably on your behalf, as <a href="#khayt-cloud-en">section 5</a> describes. For that data we act as your processor: we store it only to run the service you switched on, and unpublishing it deletes it.</p>
       <p>To help you meet your obligations, Khayt provides:</p>
       <ul>
         <li><strong>Consent at collection</strong> — your public intake form requires customers to agree to a plain-language notice before submitting, and records that consent with a timestamp and the exact wording shown.</li>
@@ -236,7 +239,7 @@
     </div>
     <div class="post-body policy" data-lang="ar" hidden>
 
-      <p class="policy-tldr"><strong>باختصار:</strong> يحتفظ خيط بدفترك على جهازك أنت. لا نجمع بياناتك التجارية ولا ننقلها ولا نحتفظ بها. أمّا المزامنة والنسخ الاحتياطية الخارجية وGoogle Drive فتُختم بمفتاحك قبل أن تغادر، فلا نملك منها إلا نصاً مشفّراً، لا سجلات. والخدمات الموجّهة للعملاء مختلفة: فالمتجر ورابط تتبّع الطلب ونموذج الطلب يجب أن يقرأها العميل الموجّهة إليه، ولذلك يُخزّن خيط السحابي ما تنشره عبرها بصيغة يستطيع قراءتها. وكذلك الأنشطة الحيّة على الآيفون، التي يرسمها iOS دون مفتاح. و<a href="#khayt-cloud-ar">القسم 5</a> يبيّن ذلك بالتحديد.</p>
+      <p class="policy-tldr"><strong>باختصار:</strong> يحتفظ خيط بدفترك على جهازك أنت. لا نجمع بياناتك التجارية ولا ننقلها ولا نحتفظ بها. أمّا المزامنة والنسخ الاحتياطية الخارجية وGoogle Drive فتُختم بمفتاحك قبل أن تغادر، فلا نملك منها إلا نصاً مشفّراً، لا سجلات. والخدمات الموجّهة للعملاء مختلفة: فالمتجر ورابط تتبّع الطلب ونموذج الطلب يجب أن يقرأها العميل الموجّهة إليه، ولذلك يُخزّن خيط السحابي ما تنشره عبرها بصيغة يستطيع قراءتها. وكذلك الأنشطة الحيّة على الآيفون، التي يرسمها iOS دون مفتاح، و— إن شغّلتها أنت فقط — نسخة من عملائك وطلباتهم لمتجرك الإلكتروني. و<a href="#khayt-cloud-ar">القسم 5</a> يبيّن ذلك بالتحديد.</p>
 
       <h2>1. من نحن</h2>
       <p>خيط تطبيق سطح مكتب لمطابع الطباعة ثلاثية الأبعاد: التسعير وقائمة الإنتاج والفوترة والمخزون والأرقام خلفها. يطوّره ويصونه خيط. للتواصل: <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>.</p>
@@ -286,6 +289,8 @@
         <li><strong>الأنشطة الحيّة</strong> — اسم الطابعة ومهمّتها ومرحلة الطباعة وتقدّمها ووقت بدئها ووقت انتهائها المتوقّع، تُمرَّر إلى Apple لهاتفٍ يعرض تلك الطباعة على شاشة القفل (انظر <a href="#iphone-ar">القسم 6</a>).</li>
         <li><strong>طلبات العملاء</strong> — ما يرسله العميل عبر نموذج الطلب الإلكتروني أو الدفع في المتجر، ويبقى حتى تستورده أو تحذفه.</li>
         <li><strong>التسعير الفوري</strong> — مدخلات التسعير التي تنشرها ليستطيع المتجر التسعير (معدّلاتك وهامشك). ويرى السائل سعراً فقط، لا تلك المدخلات أبداً. أمّا ملف المجسّم الذي يرفعه العميل ليُسعَّر فيُسعَّر في الذاكرة ولا يُحتفظ به.</li>
+        <li id="customer-records-ar"><strong>سجلات العملاء لمتجرك الإلكتروني</strong> (ماك؛ معطّلة ما لم تشغّلها) — ليستطيع متجرك الإلكتروني أن يُري العميل المسجّل دخوله طلباته السابقة ويتيح له إعادة الطلب. وهي نسخة مقروءة خارج دفترك المشفّر. وما دامت مشغّلة، يرفع تطبيق ماك لكل عميل له بريد إلكتروني: البريد والاسم ورقم الهاتف، وما يصل إلى أحدث 100 طلب له (رقم الطلب، ومرجع المتجر الإلكتروني، والتاريخ، والعنوان، والمرحلة، والمبلغ الذي دفعه وعملته، وما طُلب بكمّياته). ولا تتضمّن أبداً تكاليفك أو هوامشك أو ملاحظاتك أو ملفاتك. وتستطيع السحابة كذلك أن تحفظ حتى عشرة عناوين توصيل لكل عميل، لكن تطبيق ماك لا يرسل أيّاً منها حالياً. ولا يمكن سرد النسخة: فمتجرك الإلكتروني، بمفتاح الوصول الخاص بمطبعتك، يبحث عن عميل واحد في كل مرة ببريده الإلكتروني، ويجب ألّا يعرض سجلاً إلا لمن أثبت أنه يملك ذلك البريد. وكل رفع يستبدل النسخة كاملة، فالعميل الذي تحذفه يختفي منها في الرفع التالي. وإيقاف المفتاح يحذف النسخة فوراً؛ والنسخة التي لم يحدّثها تطبيق ماك منذ 30 يوماً تُحذف تلقائياً، وحذف المطبعة يحذفها كذلك.</li>
+        <li id="whatsapp-reports-ar"><strong>تقارير تسليم واتساب</strong> (ماك؛ معطّلة ما لم تضبطها) — حين ترسل لعملائك رسائل واتساب عبر حسابك أنت في واتساب للأعمال، يرسلها تطبيق ماك مباشرةً إلى Meta؛ ولا ترسل سحابة خيط شيئاً ولا ترى نصّ أي رسالة. ولا تُبلغ Meta بمصير الرسالة إلا إلى عنوان عام على الإنترنت، وجهازك ليس كذلك، فتستقبل السحابة تلك التقارير لحسابك وتحفظ لكل رسالة: معرّف الرسالة لدى Meta، وحالتها (أُرسلت أو سُلّمت أو قُرئت أو فشلت)، والوقت، ورقم هاتف العميل، ومعرّف رقم نشاطك التجاري، وأي رمز خطأ ووصفه. أمّا ردود العملاء التي تصل إلى العنوان نفسه فتُعدّ وتُهمل، ولا تُخزَّن أبداً. وللتحقّق من أن التقرير صادر فعلاً عن Meta، تحفظ السحابة السرّ الخاص بتطبيقك في Meta ورمز تحقّق (انظر <a href="#secrets-ar">القسم 9</a>). وتُحفظ التقارير 30 يوماً بعد آخر تغيّر في الرسالة. وإزالة الربط تحذفه مع كل التقارير، وحذف المطبعة يحذف كل شيء.</li>
       </ul>
       <p>ودفترك نفسه ليس منها: فالسجلات المنشورة نُسخ اخترت مشاركتها، وإلغاء نشر أيٍّ منها يحذفه من السحابة. وقد تُبلَّغ أخطاء الخادم إلى خدمة لمراقبة الأخطاء (Sentry) لكي نصلحها. ولا تُباع أيٌّ من هذه البيانات ولا تُستخدم للإعلانات ولا لتدريب نماذج الذكاء الاصطناعي.</p>
 
@@ -333,6 +338,7 @@
         <li>إشعارات Telegram — برمز البوت ومعرّف المحادثة اللذين تقدّمهما</li>
         <li>الفوترة الإلكترونية — بإرسال الفواتير إلى هيئة بلدك حيث يوجب القانون ذلك</li>
         <li>روابط الدفع الآجل — ببيانات تابي أو تمارا أو Stripe التي تقدّمها</li>
+        <li>رسائل واتساب والرسائل النصية — بحساب واتساب للأعمال (Meta) أو Twilio أو Unifonic الذي تقدّمه. وتنتقل رسالة واتساب من تطبيقك إلى Meta، التي تعالجها لحسابك وفق <a href="https://www.whatsapp.com/legal/business-data-processing-terms" rel="noopener">شروط معالجة البيانات في واتساب للأعمال</a> و<a href="https://www.whatsapp.com/legal/privacy-policy" rel="noopener">سياسة الخصوصية</a> الخاصة بها؛ وتعود تقارير التسليم عبر سحابة خيط، كما يبيّن <a href="#khayt-cloud-ar">القسم 5</a></li>
         <li>ويب هوك سلة / زد — لاستقبال الطلبات الواردة من المنصّات التي تضبطها</li>
         <li>خادم الشبكة المحلية — لعرض خادم محلي على شبكتك أنت لبوابة العملاء ونموذج الاستقبال</li>
         <li>مزايا الذكاء الاصطناعي — بمفتاح API الذي تقدّمه لدى Anthropic أو OpenAI أو Google أو خدمة متوافقة تحدّدها</li>
@@ -356,12 +362,12 @@
       <h2>8. التحديثات التلقائية</h2>
       <p>يتحقق خيط من التحديثات عبر إصدارات GitHub. وهذا طلب HTTPS قياسي إلى خوادم GitHub، وتنطبق عليه <a href="https://docs.github.com/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">سياسة خصوصية GitHub</a>. أمّا تطبيق ماك الأصلي فيتحقق بدلاً من ذلك من ملف على هذا الموقع، <code>khaytapp.com/mac/appcast.xml</code>، باستخدام أداة التحديث Sparkle، ويُنزّل التحديث نفسه من GitHub. ولا تُنقل بيانات شخصية في التحقق من التحديث، ولا تُثبَّت التحديثات إلا باختيارك.</p>
 
-      <h2>9. المفاتيح والأسرار</h2>
-      <p>المفاتيح والرموز والأسرار التي تُدخلها تُشفَّر في مكانها باستخدام التخزين الآمن في نظام تشغيلك — Keychain على ماك، وCredential Store على ويندوز، وSecret Service على لينكس. ولا تُنقل أبداً إلى خوادم خيط.</p>
+      <h2 id="secrets-ar">9. المفاتيح والأسرار</h2>
+      <p>المفاتيح والرموز والأسرار التي تُدخلها تُشفَّر في مكانها باستخدام التخزين الآمن في نظام تشغيلك — Keychain على ماك، وCredential Store على ويندوز، وSecret Service على لينكس. ولا تُنقل أبداً إلى خوادم خيط، باستثناء واحد تختاره أنت: إن ضبطت تقارير تسليم واتساب، يرسل تطبيق ماك السرّ الخاص بتطبيقك في Meta إلى سحابة خيط، التي تستخدمه فقط للتحقّق من أن كل تقرير موقّع من Meta. وتخزّن السحابة ذلك السرّ كما أدخلته، دون تشفير، ولا تعرضه مجدداً أبداً. أمّا رمز الوصول إلى واتساب، الذي تُرسل به الرسائل، فيبقى على جهازك.</p>
 
       <h2>10. بيانات عملائك</h2>
       <p>يخزّن خيط تفاصيل العملاء التي تُدخلها أنت أو التي يرسلها العملاء عبر نموذج الاستقبال: الأسماء والهواتف والبريد والعناوين وسجل الطلبات وملاحظات التواصل.</p>
-      <p>وبموجب نظام حماية البيانات الشخصية السعودي (PDPL)، وما يعادله كاللائحة الأوروبية GDPR، فإنّك <strong>أنت</strong> المتحكّم في تلك البيانات. فخيط أداة تشغّلها على جهازك. ومع تشغيل المزامنة السحابية يُشفَّر دفترك من طرف إلى طرف قبل أن يغادر جهازك، فنحمل نحن نصاً مشفّراً لا سجلات عملاء. والاستثناء هو ما تنشره عبر خدمة موجّهة للعملاء — تفاصيل طلب، والبريد الإلكتروني للعميل، ورسائله — إذ تخزّنه السحابة بصيغة مقروءة نيابةً عنك، كما يبيّن <a href="#khayt-cloud-ar">القسم 5</a>. وفي هذه البيانات نكون نحن المعالج لحسابك: نخزّنها فقط لتشغيل الخدمة التي فعّلتها، وإلغاء نشرها يحذفها.</p>
+      <p>وبموجب نظام حماية البيانات الشخصية السعودي (PDPL)، وما يعادله كاللائحة الأوروبية GDPR، فإنّك <strong>أنت</strong> المتحكّم في تلك البيانات. فخيط أداة تشغّلها على جهازك. ومع تشغيل المزامنة السحابية يُشفَّر دفترك من طرف إلى طرف قبل أن يغادر جهازك، فنحمل نحن نصاً مشفّراً لا سجلات عملاء. والاستثناء هو ما تنشره عبر خدمة موجّهة للعملاء — تفاصيل طلب، والبريد الإلكتروني للعميل، ورسائله، وإن شغّلت سجلات العملاء، نسخة من عملائك وطلباتهم — إذ تخزّنه السحابة بصيغة مقروءة نيابةً عنك، كما يبيّن <a href="#khayt-cloud-ar">القسم 5</a>. وفي هذه البيانات نكون نحن المعالج لحسابك: نخزّنها فقط لتشغيل الخدمة التي فعّلتها، وإلغاء نشرها يحذفها.</p>
       <p>ولمساعدتك على الوفاء بالتزاماتك، يوفّر خيط:</p>
       <ul>
         <li><strong>الموافقة عند الجمع</strong> — نموذج الاستقبال العام يشترط موافقة العميل على إشعار بلغة واضحة قبل الإرسال، ويسجّل تلك الموافقة بختم زمني وبنص الإشعار المعروض حرفياً.</li>
