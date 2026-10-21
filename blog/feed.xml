@@ -5,9 +5,29 @@
   <link href="https://khaytapp.com/blog/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://khaytapp.com/blog/" rel="alternate" type="text/html"/>
   <id>https://khaytapp.com/blog/</id>
-  <updated>2026-09-18T12:00:00Z</updated>
+  <updated>2026-10-21T12:00:00Z</updated>
   <author><name>Khayt</name><uri>https://khaytapp.com/</uri></author>
   <rights>FSL-1.1-Apache-2.0 · © 2026 Khayt</rights>
+
+  <entry xml:lang="en">
+    <title>Khayt for macOS is in beta</title>
+    <link href="https://khaytapp.com/blog/mac-beta.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-10-21:/blog/mac-beta/en</id>
+    <published>2026-10-21T12:00:00Z</published>
+    <updated>2026-10-21T12:00:00Z</updated>
+    <category term="Mac"/>
+    <summary type="text">Eighty-six alphas later, the native Mac app is a beta, and it is now Khayt on the Mac. What “beta” means here, what happens to the cross-platform app on macOS, and the two small things the app sends.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>خيط لماك صار إصداراً تجريبياً</title>
+    <link href="https://khaytapp.com/blog/mac-beta.html?lang=ar" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-10-21:/blog/mac-beta/ar</id>
+    <published>2026-10-21T12:00:00Z</published>
+    <updated>2026-10-21T12:00:00Z</updated>
+    <category term="ماك"/>
+    <summary type="text">بعد ستة وثمانين إصدار ألفا، صار تطبيق ماك الأصلي إصداراً تجريبياً، وهو الآن خيط على ماك. ماذا تعني «تجريبي» هنا، وما مصير التطبيق العابر للمنصّات على ماك، والشيئان الصغيران اللذان يرسلهما التطبيق.</summary>
+  </entry>
 
   <entry xml:lang="en">
     <title>The Mac app leads now, and the cross-platform app follows</title>

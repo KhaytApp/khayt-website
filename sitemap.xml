@@ -29,7 +29,7 @@
     <loc>https://khaytapp.com/blog/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/?lang=ar"/>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -76,5 +76,12 @@
     <lastmod>2026-10-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://khaytapp.com/blog/mac-beta.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/mac-beta.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/mac-beta.html?lang=ar"/>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
