@@ -138,7 +138,7 @@
 
       <p><strong>What it keeps on the phone.</strong> A working copy of your shop — open orders, the newest finished ones, clients, inventory, machines and the waiting list — and a copy of your print library's list of models, so the phone can price one away from the shop, with the pictures of models you have looked at on the shop's Wi-Fi (at most 80 MB, oldest dropped first). All of it is stored in the app's own container. iOS encrypts it at rest, and it cannot be read until you have unlocked the phone at least once since it was last started. Your pairing credentials — the owner LAN PIN, the Khayt Cloud sign-in token and the shop's encryption key — are held in the iOS Keychain, marked <em>this device only</em>, so they are never copied into iCloud Keychain and never restored onto a different phone.</p>
 
-      <p><strong>Removing it.</strong> <em>Unpair this device</em> in Settings deletes all of it at once: the PIN, the cached shop data, the book and the rollback copy that holds the same records one write behind, the library copy and its pictures, and the cloud sign-in together with the shop's key.</p>
+      <p><strong>Removing it.</strong> <em>Unpair this device</em> in Settings deletes all of it at once: the PIN, the cached shop data, the book and the rollback copy that holds the same records one write behind, the library copy and its pictures, and the cloud sign-in together with the shop's key. If your Mac or PC signs the phone out instead, the phone deletes its pairing key and PIN at once but keeps the shop data until you unpair it, so that a forged sign-out on the network cannot delete edits it has not sent yet.</p>
 
       <p><strong>Where it goes.</strong> Your shop's data goes to two places, and nowhere else on its own:</p>
       <ul>
@@ -300,7 +300,7 @@
 
       <p><strong>ما يحفظه على الهاتف.</strong> نسخة عاملة من مطبعتك — الطلبات المفتوحة وأحدث المكتملة والعملاء والمخزون والآلات وقائمة الانتظار — ونسخة من قائمة نماذج مكتبة الطباعة لديك، ليستطيع الهاتف تسعير نموذج بعيداً عن المطبعة، مع صور النماذج التي اطّلعت عليها على شبكة المطبعة (80 ميغابايت على الأكثر، ويُحذف الأقدم أولاً). وكل ذلك مخزّن في حاوية التطبيق نفسه. ويشفّرها iOS في حالة السكون، ولا يمكن قراءتها حتى تفتح قفل الهاتف مرة واحدة على الأقل منذ آخر تشغيل له. أمّا بيانات الاقتران — رمز الشبكة المحلية للمالك، ورمز الدخول إلى سحابة خيط، ومفتاح تشفير المطبعة — فمحفوظة في سلسلة مفاتيح iOS وموسومة بـ«هذا الجهاز فقط»، فلا تُنسخ أبداً إلى سلسلة مفاتيح iCloud ولا تُستعاد على هاتف آخر.</p>
 
-      <p><strong>إزالتها.</strong> خيار <em>إلغاء اقتران هذا الجهاز</em> في الإعدادات يحذفها جميعاً دفعةً واحدة: الرمز، وبيانات المطبعة المخبّأة، والدفتر ونسخة التراجع التي تحمل السجلات نفسها متأخرةً بكتابة واحدة، ونسخة المكتبة وصورها، ومعها الدخول السحابي ومفتاح المطبعة.</p>
+      <p><strong>إزالتها.</strong> خيار <em>إلغاء اقتران هذا الجهاز</em> في الإعدادات يحذفها جميعاً دفعةً واحدة: الرمز، وبيانات المطبعة المخبّأة، والدفتر ونسخة التراجع التي تحمل السجلات نفسها متأخرةً بكتابة واحدة، ونسخة المكتبة وصورها، ومعها الدخول السحابي ومفتاح المطبعة. وإن سجّل جهاز ماك أو الحاسوب خروج الهاتف بدلاً من ذلك، يحذف الهاتف مفتاح الاقتران والرمز فوراً لكنه يُبقي بيانات المطبعة حتى تلغي اقترانه، كي لا يستطيع تسجيل خروج مزوّر على الشبكة أن يحذف تعديلات لم يرسلها بعد.</p>
 
       <p><strong>إلى أين تذهب.</strong> تذهب بيانات مطبعتك إلى موضعين، ولا ثالث لهما من تلقاء نفسه:</p>
       <ul>
