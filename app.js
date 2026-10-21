@@ -37,8 +37,8 @@
     'modes.cmp.hint': { en: 'Swipe the table to see both columns', ar: 'اسحب الجدول لرؤية العمودين' },
 
     'hero.mac': {
-      en: 'Khayt for macOS is being rebuilt as a native Mac app \u2014 try the alpha \u2192',
-      ar: 'يُعاد بناء خيط لماك كتطبيق ماك أصلي — جرّب نسخة ألفا ←'
+      en: 'Khayt for macOS is now a native Mac app \u2014 try the beta \u2192',
+      ar: 'خيط لماك صار تطبيق ماك أصليًا — جرّب النسخة التجريبية ←'
     },
 
     'hero.vid':   { en: 'The Khayt Mac app’s sample shop: the production board, a job with its money and operator, the model library and customers', ar: 'المطبعة التجريبية في تطبيق خيط لماك: لوحة الإنتاج، ومهمة بمبالغها ومشغّلها، ومكتبة المجسّمات، والعملاء' },
@@ -139,17 +139,17 @@
     'stat.telemetry': { en: 'Accounts needed', ar: 'حسابات مطلوبة' },
     'stat.keep': { en: 'Yours to keep', ar: 'ملك لك للأبد' },
 
-    'mn.badge':  { en: 'Alpha', ar: 'ألفا' },
+    'mn.badge':  { en: 'Beta', ar: 'تجريبي' },
     'mn.h':      { en: 'Khayt for macOS, rebuilt native', ar: 'خيط لماك، مُعاد بناؤه أصليًا' },
     'mn.p':      { en: 'Not Electron in a Mac costume — a real Mac app: native windows, the menu bar, Quick Look, Shortcuts, desktop widgets for what is printing and what is next, and ⌘K to jump to any job, customer or model. It runs the same tax, pricing and estimator rules as the app above, unchanged and proved against them test for test, so it reads the same book and gets the same answers.',
                    ar: 'ليس إلكترون بثوب ماك — تطبيق ماك حقيقي: نوافذ أصلية، وشريط القوائم، والعرض السريع، والاختصارات، وأدوات سطح المكتب لما يُطبع الآن وما يليه، و⌘K للانتقال إلى أي مهمة أو عميل أو نموذج. يشغّل قواعد الضريبة والتسعير والتقدير نفسها الموجودة في التطبيق أعلاه، دون تغيير ومُثبتة مقابلها اختبارًا باختبار، فيقرأ الدفتر نفسه ويعطي الإجابات نفسها.' },
-    'mn.warn':   { en: 'It is an alpha. Keep the stable app installed alongside it — they read the same file, so nothing is lost either way, but an alpha is not what a shop should be billing from yet.',
-                   ar: 'إنه إصدار ألفا. أبقِ التطبيق المستقر مثبّتًا إلى جانبه — كلاهما يقرأ الملف نفسه فلا يضيع شيء، لكن الألفا ليس ما ينبغي أن تصدر منه فواتيرك بعد.' },
+    'mn.warn':   { en: 'It is a beta, and it is now Khayt on the Mac. It opens the same book on disk as the desktop app, so there is nothing to move or export. The desktop app’s last macOS build keeps working but gets no further updates on macOS.',
+                   ar: 'إنه إصدار تجريبي، وهو الآن خيط على ماك. يفتح الدفتر نفسه على القرص الذي يفتحه تطبيق سطح المكتب، فلا شيء تنقله أو تصدّره. آخر نسخة من تطبيق سطح المكتب لماك تبقى تعمل، لكنها لن تتلقى تحديثات أخرى على ماك.' },
     'mn.dl':     { en: 'Download for Apple silicon', ar: 'حمّل لمعالجات آبل' },
     'mn.updates':{ en: 'Updates itself', ar: 'يحدّث نفسه' },
     'mn.signed': { en: 'Signed & notarized', ar: 'موقّع وموثّق' },
     'mn.all':    { en: 'All Mac releases →', ar: 'كل إصدارات ماك ←' },
-    'bf.label':  { en: 'Email me when the Mac beta is out', ar: 'راسلني عند صدور النسخة التجريبية لماك' },
+    'bf.label':  { en: 'Email me news about the Mac beta', ar: 'راسلني بأخبار النسخة التجريبية لماك' },
     'bf.btn':    { en: 'Notify me', ar: 'أبلغني' },
     'bf.fine':   { en: 'One email to confirm, then only beta news. Leave any time.', ar: 'رسالة واحدة للتأكيد، ثم أخبار النسخة التجريبية فقط. يمكنك المغادرة متى شئت.' },
     'bf.priv':   { en: 'Privacy', ar: 'الخصوصية' },
@@ -157,8 +157,8 @@
     'bf.bad':    { en: 'That email address does not look right.', ar: 'يبدو أن عنوان البريد غير صحيح.' },
     'bf.slow':   { en: 'Too many tries — please wait a little and try again.', ar: 'محاولات كثيرة — انتظر قليلاً ثم أعد المحاولة.' },
     'bf.mail':   { en: 'Sign-up is unavailable right now, so your email app will open instead.', ar: 'التسجيل غير متاح الآن، لذا سيُفتح تطبيق البريد لديك بدلاً من ذلك.' },
-    'mn.road':   { en: 'Where this goes: the native Mac app becomes the main Khayt on macOS, a native Windows app follows it, and the app above keeps running everywhere — it is not going away.',
-                   ar: 'إلى أين يتجه هذا: تطبيق ماك الأصلي سيصبح خيط الأساسي على ماك، ويتبعه تطبيق ويندوز أصلي، ويبقى التطبيق أعلاه يعمل في كل مكان — فهو لن يختفي.' },
+    'mn.road':   { en: 'Where this goes: a native Windows app follows the Mac one, and the desktop app above keeps running on Windows and Linux — it is not going away.',
+                   ar: 'إلى أين يتجه هذا: يتبع تطبيقَ ماك تطبيقُ ويندوز أصلي، ويبقى تطبيق سطح المكتب أعلاه يعمل على ويندوز ولينكس — فهو لن يختفي.' },
 
     'ip.badge': { en: 'Beta', ar: 'تجريبي' },
     'ip.h':      { en: 'Khayt for iPhone', ar: 'خيط للآيفون' },
@@ -179,7 +179,7 @@
     'why.h2': { en: 'Four things, together in one app', ar: 'أربعة أشياء، معاً في تطبيق واحد' },
     'why.lede': { en: 'Other tools now do one or two of these. Khayt is built around all four.', ar: 'صارت أدوات أخرى تقدّم واحداً أو اثنين منها. أمّا خيط فمبنيّ حولها جميعاً.' },
     'why.p1.t': { en: 'Native on Mac and iPhone', ar: 'أصلي على ماك وآيفون' },
-    'why.p1.d': { en: 'A real Mac app and an iPhone app, not a web page in a window. The Mac app is in alpha and the iPhone app in beta; Windows and Linux run the desktop app.', ar: 'تطبيق ماك حقيقي وتطبيق آيفون، لا صفحة ويب داخل نافذة. تطبيق ماك في مرحلة ألفا وتطبيق الآيفون تجريبي؛ ويعمل تطبيق سطح المكتب على ويندوز ولينكس.' },
+    'why.p1.d': { en: 'A real Mac app and an iPhone app, not a web page in a window. Both are in beta; Windows and Linux run the desktop app.', ar: 'تطبيق ماك حقيقي وتطبيق آيفون، لا صفحة ويب داخل نافذة. كلاهما في مرحلة تجريبية؛ ويعمل تطبيق سطح المكتب على ويندوز ولينكس.' },
     'why.p2.t': { en: 'Your data stays on your machine', ar: 'بياناتك تبقى على جهازك' },
     'why.p2.d': { en: 'The shop’s book is a file on your own computer. No account and no server you depend on; sync is optional and end-to-end encrypted.', ar: 'دفتر المطبعة ملف على حاسوبك أنت. بلا حساب ولا خادم تعتمد عليه؛ والمزامنة اختيارية ومشفّرة من طرف إلى طرف.' },
     'why.p3.t': { en: 'Cost from what was really printed', ar: 'التكلفة مما طُبع فعلاً' },
@@ -194,7 +194,7 @@
     'why.r1.f': { en: 'Free for 1 printer and 10 orders a month; Pro $12 a month; Farm $39 a month.', ar: 'مجاني لطابعة واحدة و10 طلبات شهرياً؛ Pro بـ12 دولاراً شهرياً؛ Farm بـ39 دولاراً شهرياً.' },
     'why.r1.p': { en: 'Free with limits; Premium from $0.99 a week, or one-time purchases up to $39.99.', ar: 'مجاني بحدود؛ والنسخة المميزة من 0.99 دولار أسبوعياً، أو بشراء لمرة واحدة حتى 39.99 دولاراً.' },
     'why.r2': { en: 'Runs as', ar: 'طريقة التشغيل' },
-    'why.r2.k': { en: 'Native Mac app (alpha) and iPhone app (beta); desktop app for macOS, Windows and Linux.', ar: 'تطبيق ماك أصلي (ألفا) وتطبيق آيفون (تجريبي)؛ وتطبيق سطح مكتب لماك وويندوز ولينكس.' },
+    'why.r2.k': { en: 'Native Mac app and iPhone app (both beta); desktop app for Windows and Linux.', ar: 'تطبيق ماك أصلي وتطبيق آيفون (كلاهما تجريبي)؛ وتطبيق سطح مكتب لويندوز ولينكس.' },
     'why.r2.f': { en: 'A web app in the browser, hosted only.', ar: 'تطبيق ويب في المتصفح، مستضاف فقط.' },
     'why.r2.p': { en: 'Native on iPhone, iPad, Mac and Vision Pro.', ar: 'أصلي على آيفون وآيباد وماك وVision Pro.' },
     'why.r3': { en: 'Where your data lives', ar: 'أين تعيش بياناتك' },
@@ -223,7 +223,11 @@
     'dl.mac':    { en: 'Signed & Notarized — opens cleanly', ar: 'موقّع وموثّق — يفتح بسلاسة' },
     'dl.win':    { en: 'Built-in auto-updater', ar: 'محدّث تلقائي مدمج' },
     'dl.linux':  { en: 'Runs anywhere, no install', ar: 'يعمل في أي مكان دون تثبيت' },
-    'dl.dmg':    { en: 'Download .dmg', ar: 'حمّل .dmg' },
+    'dl.dmg':    { en: 'Last desktop build (.dmg)', ar: 'آخر نسخة سطح مكتب (.dmg)' },
+    'dl.macnote':{ en: 'Apple silicon · macOS 26+', ar: 'معالجات آبل · macOS 26+' },
+    'dl.macapp': { en: 'Khayt for Mac (beta)', ar: 'خيط لماك (تجريبي)' },
+    'dl.macapp.b':{ en: 'native · updates itself', ar: 'أصلي · يحدّث نفسه' },
+    'dl.maclast':{ en: 'For a Mac older than macOS 26: the desktop app’s last macOS build. It keeps working, with no further updates.', ar: 'لجهاز ماك أقدم من macOS 26: آخر نسخة من تطبيق سطح المكتب لماك. تبقى تعمل، دون تحديثات أخرى.' },
     'dl.exe':    { en: 'Installer (.exe)', ar: 'المثبّت (.exe)' },
     'dl.portable':{ en: 'Portable (.exe)', ar: 'نسخة محمولة (.exe)' },
     'dl.portable_where': { en: 'x64 · on the releases page', ar: 'x64 · في صفحة الإصدارات' },
@@ -1080,15 +1084,25 @@
   }
 
   function macFeed() {
-    var a = document.querySelector('.mn-dl');
-    if (!a || !window.fetch || !window.DOMParser) return;
+    var links = document.querySelectorAll('[data-mac-feed]');
+    if (!links.length || !window.fetch || !window.DOMParser) return;
     fetch('mac/appcast.xml', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.text() : null; })
       .then(function (xml) {
         if (!xml) return;
-        var enc = new DOMParser().parseFromString(xml, 'application/xml').querySelector('item enclosure');
+        var item = new DOMParser().parseFromString(xml, 'application/xml').querySelector('item');
+        var enc = item && item.querySelector('enclosure');
         var url = enc && enc.getAttribute('url');
-        if (url && /^https:\/\/github\.com\/KhaytApp\/khayt-mac\/releases\/download\//.test(url)) a.href = url;
+        if (url && /^https:\/\/github\.com\/KhaytApp\/khayt-mac\/releases\/download\//.test(url))
+          for (var i = 0; i < links.length; i++) links[i].href = url;
+        // The version text follows the feed too. The release edits it in
+        // index.html, but ar/index.html is only regenerated by the next site
+        // PR, so /ar/ showed alpha.86 while / showed beta.1.
+        var title = item && item.querySelector('title');
+        var ver = title && title.textContent.trim();
+        var span = document.querySelector('[data-mac-version]');
+        if (span && ver && /^\d+\.\d+\.\d+(-[a-z]+\.\d+)?$/.test(ver))
+          span.textContent = span.textContent.replace(/^\S+/, ver);
       })
       .catch(function () {});
   }
