@@ -62,6 +62,21 @@ check('JSON-LD parses', () => {
   return n + ' blocks';
 });
 
+// A merge that stops on a conflict leaves its markers in the file, and every
+// other check here still passed on a privacy page holding two copies of a
+// paragraph between them (Oct 2026, a draft branch). Tracked text files only.
+check('No merge conflict markers', () => {
+  const files = execFileSync('git', ['ls-files', '*.html', '*.js', '*.css', '*.xml', '*.json', '*.md'], { encoding: 'utf8' })
+    .split('\n').filter(Boolean);
+  const bad = [];
+  for (const f of files) {
+    const lines = fs.readFileSync(f, 'utf8').split('\n');
+    lines.forEach((l, i) => { if (/^(<{7}|>{7})( |$)|^={7}$/.test(l)) bad.push(f + ':' + (i + 1)); });
+  }
+  if (bad.length) throw new Error('conflict markers at ' + bad.join(', '));
+  return files.length + ' files';
+});
+
 /* ---------- 2. The generated halves of index.html and blog/index.html are current ---------- */
 
 check('index.html is rendered from data.js', () => {
