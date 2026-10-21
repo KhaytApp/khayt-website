@@ -20,6 +20,23 @@
   'use strict';
   root.KHAYT_POSTS = [
   {
+    slug: 'mac-beta',
+    date: '2026-10-21',
+    tag: { en: 'Mac', ar: 'ماك' },
+    t: {
+      en: 'Khayt for macOS is in beta',
+      ar: 'خيط لماك صار إصداراً تجريبياً'
+    },
+    d: {
+      en: 'Eighty-six alphas later, the native Mac app is a beta, and it is now Khayt on the Mac. What “beta” means here, what happens to the cross-platform app on macOS, and the two small things the app sends.',
+      ar: 'بعد ستة وثمانين إصدار ألفا، صار تطبيق ماك الأصلي إصداراً تجريبياً، وهو الآن خيط على ماك. ماذا تعني «تجريبي» هنا، وما مصير التطبيق العابر للمنصّات على ماك، والشيئان الصغيران اللذان يرسلهما التطبيق.'
+    },
+    m: {
+      en: 'Eighty-six alphas later, the native Mac app is a beta, and now Khayt on the Mac. What that means, and what happens to the cross-platform app.',
+      ar: 'بعد ستة وثمانين إصدار ألفا، صار تطبيق ماك الأصلي إصداراً تجريبياً، وهو الآن خيط على ماك. ماذا يعني ذلك، وما مصير التطبيق العابر للمنصّات.'
+    }
+  },
+  {
     slug: 'mac-first',
     date: '2026-09-18',
     tag: { en: 'Direction', ar: 'الاتجاه' },
