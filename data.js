@@ -68,6 +68,7 @@
       { l: { en: 'Full analytics & forecasting', ar: 'تحليلات وتوقّعات كاملة' }, t: [0, 1] },
       { l: { en: 'Signed e-invoicing', ar: 'فوترة إلكترونية موقّعة' }, t: [0, 1] },
       { l: { en: 'Proforma, milestone & credit notes', ar: 'فواتير مبدئية ومراحل وإشعارات دائنة' }, t: [0, 1] },
+      { l: { en: 'VAT returns, marked as filed', ar: 'إقرارات ضريبية تُعلَّم بأنها قُدِّمت' }, t: [0, 1] },
       { l: { en: 'Purchase orders & payables', ar: 'أوامر الشراء والذمم الدائنة' }, t: [0, 1] },
       { l: { en: 'Multiple locations & print-farm view', ar: 'فروع متعددة وعرض مزرعة الطباعة' }, t: [0, 1] },
       { l: { en: 'Team accounts & roles', ar: 'حسابات الفريق والأدوار' }, t: [0, 1] },
