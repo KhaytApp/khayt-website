@@ -140,7 +140,6 @@
       label: { en: 'Maker', ar: 'الصانع' },
       price: { USD: 7, SAR: 25 },
       annual: { USD: 70, SAR: 250 },
-      featured: true,
       tagline: { en: 'Your shop visible to your customers, and room for your files.', ar: 'متجرك ظاهر لعملائك، ومساحة لملفاتك.' },
       features: [
         { en: 'Everything in Free', ar: 'كل ما في المجانية' },
