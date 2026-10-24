@@ -128,9 +128,7 @@
       tagline: { en: 'The whole app, forever, with no account.', ar: 'التطبيق كامل، للأبد، بدون حساب.' },
       features: [
         { en: 'Local app, LAN and BYO-key AI — everything', ar: 'التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء' },
-        { en: 'Off-site encrypted backup — 1 device', ar: 'نسخة احتياطية مشفّرة خارجية — جهاز واحد' },
-        { en: 'Customer portal — 30-day trial', ar: 'بوابة العملاء — تجربة 30 يوماً' },
-        { en: '7 days of snapshot history', ar: 'سجل نسخ لمدة 7 أيام' },
+        { en: 'Off-site encrypted backup', ar: 'نسخة احتياطية مشفّرة خارجية' },
         { en: 'Khayt Vault — 2 GB, no share links', ar: 'خزنة خيط — 2 غيغابايت، بلا روابط مشاركة' }
       ],
       cta: { en: 'Download Khayt', ar: 'حمّل خيط' },
@@ -147,7 +145,6 @@
         { en: 'Encrypted sync across all your devices', ar: 'مزامنة مشفّرة عبر كل أجهزتك' },
         { en: 'Customer portal and online storefront', ar: 'بوابة العملاء والمتجر الإلكتروني' },
         { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
-        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' },
         { en: 'Khayt Vault — 150 GB, 50 share links', ar: 'خزنة خيط — 150 غيغابايت، 50 رابط مشاركة' }
       ],
       cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
@@ -177,7 +174,6 @@
       features: [
         { en: 'Everything in Creator', ar: 'كل ما في المبدع' },
         { en: 'Team accounts — up to 5 people', ar: 'حسابات الفريق — حتى 5 أشخاص' },
-        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' },
         { en: 'Khayt Vault — 1 TB, 1,000 share links', ar: 'خزنة خيط — 1 تيرابايت، 1,000 رابط مشاركة' }
       ],
       cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
