@@ -68,8 +68,8 @@
     'sv.plans.betaNow': { en: 'Free during beta — nothing is being charged', ar: 'مجاني أثناء التجربة — لا يُحصَّل شيء' },
     'sv.plans.featured': { en: 'Most shops', ar: 'أغلب المطابع' },
     'sv.plans.soon': { en: 'Not built yet', ar: 'لم يُبنَ بعد' },
-    'sv.plans.peg': { en: 'Prices include VAT. SAR is pegged to USD at 3.75, and each dollar price is the riyal price divided by 3.75 and rounded up. Other locales see USD — a rate snapshot that goes stale is worse than a foreign currency.',
-                      ar: 'الأسعار شاملة ضريبة القيمة المضافة. والريال مربوط بالدولار عند 3.75، وسعر الدولار هو سعر الريال مقسوماً على 3.75 ومقرّباً إلى الأعلى. وبقية المناطق ترى الدولار — فسعر صرف مُلتقط يتقادم أسوأ من عملة أجنبية.' },
+    'sv.plans.peg': { en: 'Prices include VAT. Dollar prices are the riyal price ÷ 3.75, rounded up.',
+                      ar: 'الأسعار شاملة ضريبة القيمة المضافة. وسعر الدولار هو سعر الريال ÷ 3.75، مقرّباً إلى الأعلى.' },
 
     'sv.list.count': { en: '{n} of 9 on', ar: '{n} من 9 مُشغَّلة' },
     'sv.list.allOn': { en: 'Switch everything on', ar: 'شغّل كل شيء' },
