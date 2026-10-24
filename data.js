@@ -139,7 +139,7 @@
       id: 'maker',
       label: { en: 'Maker', ar: 'الصانع' },
       price: { USD: 7, SAR: 25 },
-      annual: { USD: 67, SAR: 250 },
+      annual: { USD: 70, SAR: 250 },
       featured: true,
       tagline: { en: 'Your shop visible to your customers, and room for your files.', ar: 'متجرك ظاهر لعملائك، ومساحة لملفاتك.' },
       features: [
@@ -155,7 +155,7 @@
       id: 'creator',
       label: { en: 'Creator', ar: 'المبدع' },
       price: { USD: 18, SAR: 65 },
-      annual: { USD: 174, SAR: 650 },
+      annual: { USD: 180, SAR: 650 },
       tagline: { en: 'Everything in Maker, and sell your files.', ar: 'كل ما في الصانع، وبِع ملفاتك.' },
       features: [
         { en: 'Everything in Maker', ar: 'كل ما في الصانع' },
