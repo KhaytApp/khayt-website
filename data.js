@@ -130,42 +130,58 @@
         { en: 'Local app, LAN and BYO-key AI — everything', ar: 'التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء' },
         { en: 'Off-site encrypted backup — 1 device', ar: 'نسخة احتياطية مشفّرة خارجية — جهاز واحد' },
         { en: 'Customer portal — 30-day trial', ar: 'بوابة العملاء — تجربة 30 يوماً' },
-        { en: '7 days of snapshot history', ar: 'سجل نسخ لمدة 7 أيام' }
+        { en: '7 days of snapshot history', ar: 'سجل نسخ لمدة 7 أيام' },
+        { en: 'Khayt Vault — 2 GB, no share links', ar: 'خزنة خيط — 2 غيغابايت، بلا روابط مشاركة' }
       ],
       cta: { en: 'Download Khayt', ar: 'حمّل خيط' },
       href: './#download'
     },
     {
-      id: 'cloud',
-      label: { en: 'Cloud', ar: 'السحابة' },
-      price: { USD: 9, SAR: 35 },
-      annual: { USD: 90, SAR: 350 },
+      id: 'maker',
+      label: { en: 'Maker', ar: 'الصانع' },
+      price: { USD: 7, SAR: 25 },
+      annual: { USD: 67, SAR: 250 },
       featured: true,
       tagline: { en: 'Your shop on every device, and visible to your customers.', ar: 'متجرك على كل جهاز، وظاهر لعملائك.' },
       features: [
         { en: 'Encrypted sync across all your devices', ar: 'مزامنة مشفّرة عبر كل أجهزتك' },
         { en: 'Customer portal and online storefront', ar: 'بوابة العملاء والمتجر الإلكتروني' },
         { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
-        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' }
+        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' },
+        { en: 'Khayt Vault — 150 GB, 50 share links', ar: 'خزنة خيط — 150 غيغابايت، 50 رابط مشاركة' }
       ],
       cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
       href: './#download'
     },
     {
-      id: 'branches',
-      label: { en: 'Branches', ar: 'الفروع' },
-      price: { USD: 29, SAR: 109 },
-      annual: { USD: 290, SAR: 1090 },
-      soon: true,
-      tagline: { en: 'One owner, several branches, one set of numbers.', ar: 'مالك واحد، عدة فروع، أرقام موحّدة.' },
+      id: 'creator',
+      label: { en: 'Creator', ar: 'المبدع' },
+      price: { USD: 18, SAR: 65 },
+      annual: { USD: 174, SAR: 650 },
+      tagline: { en: 'Everything in Maker, and sell your files.', ar: 'كل ما في الصانع، وبِع ملفاتك.' },
       features: [
-        { en: 'Everything in Cloud', ar: 'كل ما في السحابة' },
-        { en: 'Multiple branches with an HQ dashboard', ar: 'فروع متعددة مع لوحة تحكم رئيسية' },
-        { en: 'Team accounts — up to 10 people', ar: 'حسابات الفريق — حتى 10 أشخاص' },
-        { en: 'Shared inventory across branches', ar: 'مخزون مشترك بين الفروع' }
+        { en: 'Everything in Maker', ar: 'كل ما في الصانع' },
+        { en: 'Sell files through makerrun.com, paid at your own checkout', ar: 'بيع الملفات عبر makerrun.com، والدفع عبر صفحة الدفع الخاصة بك' },
+        { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
+        { en: 'Khayt Vault — 400 GB, 200 share links', ar: 'خزنة خيط — 400 غيغابايت، 200 رابط مشاركة' }
       ],
-      cta: { en: 'Not built yet', ar: 'لم يُبنَ بعد' },
-      href: 'blog/'
+      cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
+      href: './#download'
+    },
+    {
+      id: 'studio',
+      label: { en: 'Studio', ar: 'الاستوديو' },
+      price: { USD: 48, SAR: 180 },
+      annual: { USD: 480, SAR: 1800 },
+      tagline: { en: 'For a bigger team and a bigger library.', ar: 'لفريق أكبر ومكتبة أكبر.' },
+      features: [
+        { en: 'Everything in Creator', ar: 'كل ما في المبدع' },
+        { en: 'Team accounts — up to 5 people', ar: 'حسابات الفريق — حتى 5 أشخاص' },
+        { en: '90 days of snapshot history', ar: 'سجل نسخ لمدة 90 يوماً' },
+        { en: 'Khayt Vault — 1 TB, 1,000 share links', ar: 'خزنة خيط — 1 تيرابايت، 1,000 رابط مشاركة' }
+      ],
+      cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
+      href: './#download'
     }
   ];
 

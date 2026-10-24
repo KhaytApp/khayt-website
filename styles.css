@@ -1075,7 +1075,7 @@ body.deep .section.paper {
 .seg-btn.is-on { background: var(--brand); color: #fff; }
 body[dir="rtl"] .seg-btn { font-family: var(--font-ar); font-size: 12.5px; }
 
-.plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; align-items: start; }
+.plan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; align-items: start; }
 .plan {
   background: var(--card); border: 1px solid var(--line); border-radius: 18px;
   padding: 26px 24px; display: flex; flex-direction: column; height: 100%;
