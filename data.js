@@ -128,7 +128,8 @@
       tagline: { en: 'The whole app, forever, with no account.', ar: 'التطبيق كامل، للأبد، بدون حساب.' },
       features: [
         { en: 'Local app, LAN and BYO-key AI — everything', ar: 'التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء' },
-        { en: 'Off-site encrypted backup', ar: 'نسخة احتياطية مشفّرة خارجية' },
+        { en: 'With a free account: encrypted sync and off-site backup', ar: 'بحساب مجاني: مزامنة مشفّرة ونسخة احتياطية خارجية' },
+        { en: 'Customer portal — 30-day trial once the beta ends', ar: 'بوابة العملاء — تجربة 30 يوماً بعد انتهاء التجربة العامة' },
         { en: 'Khayt Vault — 2 GB, no share links', ar: 'خزنة خيط — 2 غيغابايت، بلا روابط مشاركة' }
       ],
       cta: { en: 'Download Khayt', ar: 'حمّل خيط' },
@@ -140,10 +141,10 @@
       price: { USD: 7, SAR: 25 },
       annual: { USD: 67, SAR: 250 },
       featured: true,
-      tagline: { en: 'Your shop on every device, and visible to your customers.', ar: 'متجرك على كل جهاز، وظاهر لعملائك.' },
+      tagline: { en: 'Your shop visible to your customers, and room for your files.', ar: 'متجرك ظاهر لعملائك، ومساحة لملفاتك.' },
       features: [
-        { en: 'Encrypted sync across all your devices', ar: 'مزامنة مشفّرة عبر كل أجهزتك' },
-        { en: 'Customer portal and online storefront', ar: 'بوابة العملاء والمتجر الإلكتروني' },
+        { en: 'Everything in Free', ar: 'كل ما في المجانية' },
+        { en: 'Customer portal and online storefront, with no time limit', ar: 'بوابة العملاء والمتجر الإلكتروني، بلا حدّ زمني' },
         { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
         { en: 'Khayt Vault — 150 GB, 50 share links', ar: 'خزنة خيط — 150 غيغابايت، 50 رابط مشاركة' }
       ],
@@ -159,7 +160,6 @@
       features: [
         { en: 'Everything in Maker', ar: 'كل ما في الصانع' },
         { en: 'Sell files through makerrun.com, paid at your own checkout', ar: 'بيع الملفات عبر makerrun.com، والدفع عبر صفحة الدفع الخاصة بك' },
-        { en: 'Team accounts — up to 3 people', ar: 'حسابات الفريق — حتى 3 أشخاص' },
         { en: 'Khayt Vault — 400 GB, 200 share links', ar: 'خزنة خيط — 400 غيغابايت، 200 رابط مشاركة' }
       ],
       cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
