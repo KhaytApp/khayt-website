@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v3.11.30",
+   "name": "Khayt v3.11.30",
+   "date": "2026-10-26",
+   "prerelease": false,
+   "note": "Desktop: models archived on the Mac leave the desktop library too.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.30",
+   "assets": [
+    {
+     "name": "Khayt-3.11.30.AppImage",
+     "size": 175513390,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/Khayt-3.11.30.AppImage"
+    },
+    {
+     "name": "Khayt-3.11.30.exe",
+     "size": 154757176,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/Khayt-3.11.30.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.30.exe",
+     "size": 155014453,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/Khayt-Setup-3.11.30.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.30.exe.blockmap",
+     "size": 163208,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/Khayt-Setup-3.11.30.exe.blockmap"
+    },
+    {
+     "name": "khayt_3.11.30_amd64.deb",
+     "size": 141476208,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/khayt_3.11.30_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 522,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 345,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.30/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v3.11.29",
    "name": "Khayt v3.11.29",
    "date": "2026-10-25",
    "prerelease": false,
    "note": "Desktop: the Khayt Cloud plan picker says what happens to vault files over a smaller plan's limit. - It used to say \"Nothing is deleted\".",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.29",
-   "assets": [
-    {
-     "name": "Khayt-3.11.29.AppImage",
-     "size": 175508189,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/Khayt-3.11.29.AppImage"
-    },
-    {
-     "name": "Khayt-3.11.29.exe",
-     "size": 154754196,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/Khayt-3.11.29.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.29.exe",
-     "size": 155011483,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/Khayt-Setup-3.11.29.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.29.exe.blockmap",
-     "size": 162603,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/Khayt-Setup-3.11.29.exe.blockmap"
-    },
-    {
-     "name": "khayt_3.11.29_amd64.deb",
-     "size": 141474176,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/khayt_3.11.29_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 522,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 345,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.29/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.29"
   },
   {
    "tag": "v3.11.28",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Security fixes since 3.11.0.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.1"
-  },
-  {
-   "tag": "v3.11.0",
-   "name": "Khayt v3.11.0",
-   "date": "2026-09-30",
-   "prerelease": false,
-   "note": "Profit figures, machine wear and backups, since 3.10.1.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.0"
   }
  ]
 }
