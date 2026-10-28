@@ -167,10 +167,24 @@
       var q = new URL(window.location.href).searchParams.get('lang');
       if (q === 'ar' || q === 'en') saved = q;
     } catch (e) {}
+    // A link to a section that exists in one language only (the policy pages'
+    // #quote-form-ar, #customers-en …) names its language in the anchor. The
+    // other language's block is hidden, so the browser found nothing to scroll
+    // to at load: show that language, then scroll once it is visible. The
+    // cloud's quote form links to /privacy/#quote-form-ar with no ?lang.
+    var target = null;
+    try {
+      var id = decodeURIComponent(window.location.hash.slice(1));
+      var m = /-(ar|en)$/.exec(id);
+      target = m && document.getElementById(id);
+      if (target && target.closest('[data-lang="' + m[1] + '"]')) saved = m[1];
+      else target = null;
+    } catch (e) {}
 
     nav();
     var toggle = document.getElementById('navLang');
     if (toggle) toggle.addEventListener('click', function () { applyLang(lang === 'ar' ? 'en' : 'ar'); });
     applyLang(saved);
+    if (target) target.scrollIntoView();
   });
 })();
