@@ -182,60 +182,67 @@
 
     <h3 class="why-cmp-h" data-i18n="why.cmp.h">كيف يقارَن</h3>
     <div class="cmp-frame">
-      <div class="cmp-wrap">
+      <div class="cmp-wrap" tabindex="0" role="region" aria-labelledby="whyCmpCap">
         <table class="cmp sends vs">
-          <caption class="sr-only" data-i18n="why.cmp.caption">مقارنة خيط مع FoxTrack وPrintMate</caption>
-          <colgroup><col class="v-c0"><col class="v-c"><col class="v-c"><col class="v-c"></colgroup>
+          <caption class="sr-only" id="whyCmpCap" data-i18n="why.cmp.caption">مقارنة خيط مع FoxTrack وPrintMate وWatchtower</caption>
+          <colgroup><col class="v-c0"><col class="v-c"><col class="v-c"><col class="v-c"><col class="v-c"></colgroup>
           <thead>
             <tr>
-              <th scope="col" data-i18n="why.cmp.col0">حتى 10 أكتوبر 2026</th>
+              <th scope="col" data-i18n="why.cmp.col0">حتى 29 أكتوبر 2026</th>
               <th scope="col" class="cmp-col-hl">Khayt</th>
               <th scope="col"><a href="https://foxtrack.studio/pricing" target="_blank" rel="noopener">FoxTrack</a></th>
               <th scope="col"><a href="https://apps.apple.com/us/app/3d-print-cost-sales-printmate/id6743996044" target="_blank" rel="noopener">PrintMate</a></th>
+              <th scope="col"><a href="https://watchtower3d.com/pricing" target="_blank" rel="noopener">Watchtower</a></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row" data-i18n="why.r1">السعر</th>
-              <td class="cmp-col-hl" data-i18n="why.r1.k">مجاني. والسحابة الاختيارية بـ9 دولارات شهرياً، ومجانية أثناء التجربة.</td>
+              <td class="cmp-col-hl" data-i18n="why.r1.k">مجاني. وخطط السحابة الاختيارية من 7 إلى 48 دولاراً شهرياً، ومجانية أثناء التجربة.</td>
               <td data-i18n="why.r1.f">مجاني لطابعة واحدة و10 طلبات شهرياً؛ Pro بـ12 دولاراً شهرياً؛ Farm بـ39 دولاراً شهرياً.</td>
               <td data-i18n="why.r1.p">مجاني بحدود؛ والنسخة المميزة من 0.99 دولار أسبوعياً، أو بشراء لمرة واحدة حتى 39.99 دولاراً.</td>
+              <td data-i18n="why.r1.w">ترخيص لمرة واحدة يُسعَّر بعدد الطابعات: من 99 دولاراً لما يصل إلى 5 طابعات، حتى 1,349 دولاراً لـ100 طابعة. ويدفع داعمو Kickstarter أقل.</td>
             </tr>
             <tr>
               <th scope="row" data-i18n="why.r2">طريقة التشغيل</th>
               <td class="cmp-col-hl" data-i18n="why.r2.k">تطبيق ماك أصلي وتطبيق آيفون (كلاهما تجريبي)؛ وتطبيق سطح مكتب لويندوز ولينكس.</td>
               <td data-i18n="why.r2.f">تطبيق ويب في المتصفح، مستضاف فقط.</td>
               <td data-i18n="why.r2.p">أصلي على آيفون وآيباد وماك وVision Pro.</td>
+              <td data-i18n="why.r2.w">برنامج تشغّله على حاسوبك أنت بنظام ماك أو ويندوز أو لينكس، أو على Raspberry Pi، وتفتحه في المتصفح. وهو تجريبي، وتُسلَّم التراخيص بعد نحو 30 يوماً من انتهاء حملته على Kickstarter.</td>
             </tr>
             <tr>
               <th scope="row" data-i18n="why.r3">أين تعيش بياناتك</th>
               <td class="cmp-col-hl" data-i18n="why.r3.k">ملف على حاسوبك أنت؛ والمزامنة السحابية اختيارية ومشفّرة من طرف إلى طرف.</td>
               <td data-i18n="why.r3.f">على خدمة FoxTrack المستضافة؛ ولا توجد نسخة للاستضافة الذاتية.</td>
               <td data-i18n="why.r3.p">على أجهزة Apple الخاصة بك، بمزامنة عبر iCloud.</td>
+              <td data-i18n="why.r3.w">على أجهزتك وشبكتك أنت؛ ولا يرسل شيئاً إلى خوادم Watchtower سوى التحقق من الترخيص.</td>
             </tr>
             <tr>
               <th scope="row" data-i18n="why.r4">التكلفة من الطابعة</th>
               <td class="cmp-col-hl" data-i18n="why.r4.k">يقرأ ما تُبلغ به الطابعة عند انتهاء المهمة، ويتعلّم منه التقدير التالي.</td>
               <td data-i18n="why.r4.f">يراقب الطابعات لحظياً عبر FoxTrack Bridge؛ وتمسح البكرة بعد الطباعة لتسجيل الغرامات.</td>
               <td data-i18n="why.r4.p">يملأ المهام الجديدة مسبقاً من سجل طابعة Bambu Lab.</td>
+              <td data-i18n="why.r4.w">تُخصم البكرة المربوطة بخانة في الطابعة مع تشغيل المهام؛ وتقدّر تحليلاته متوسط تكلفة الطباعة الواحدة وتكلفة الطاقة.</td>
             </tr>
             <tr>
               <th scope="row" data-i18n="why.r5">الضريبة في الفواتير</th>
               <td class="cmp-col-hl" data-i18n="why.r5.k">ضريبة مضافة أو مضمّنة، ورموز QR (ومنها رمز هيئة الزكاة)، وإشعارات دائنة، وثلاثون إعداداً جاهزاً للدول.</td>
               <td data-i18n="why.r5.f">تُطبع تسمية ضريبتك ورقمها على الفواتير (GST أو VAT أو ضريبة المبيعات).</td>
               <td data-i18n="why.r5.p">خيار لتفعيل الضريبة أو إيقافها؛ وعروض أسعار وفواتير بصيغة PDF.</td>
+              <td data-i18n="why.r5.w">غير مذكورة. يستورد طلبات Etsy وShopify لطباعتها، لكن صفحاته لا تذكر أي فواتير.</td>
             </tr>
             <tr>
               <th scope="row" data-i18n="why.r6">العربية</th>
               <td class="cmp-col-hl" data-i18n="why.r6.k">نعم، من اليمين إلى اليسار في كل مكان.</td>
               <td data-i18n="why.r6.f">غير مذكورة.</td>
               <td data-i18n="why.r6.p">نعم، ضمن 25 لغة.</td>
+              <td data-i18n="why.r6.w">غير مذكورة.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <p class="fineprint" data-i18n="why.cmp.note">قُرئت من صفحات كل منتج نفسه في 10 أكتوبر 2026: صفحة أسعار FoxTrack وصفحة PrintMate على App Store. والأسعار بالدولار الأمريكي وقد تكون تغيّرت منذ ذلك الحين. وحيث تقول خانة «غير مذكورة»، فصفحات المنتج لم تذكر ذلك.</p>
+    <p class="fineprint" data-i18n="why.cmp.note">قُرئت من صفحات كل منتج نفسه في 29 أكتوبر 2026: الصفحة الرئيسية وصفحة الأسعار لـFoxTrack، وصفحة PrintMate على App Store، والصفحة الرئيسية وصفحتا الأسعار والأسئلة الشائعة لـWatchtower. والأسعار بالدولار الأمريكي وقد تكون تغيّرت منذ ذلك الحين. وحيث تقول خانة «غير مذكورة»، فصفحات المنتج لم تذكر ذلك.</p>
   </div>
 </section>
 

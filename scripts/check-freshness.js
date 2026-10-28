@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-/* The comparison table in #why names FoxTrack and PrintMate and is dated.
+/* The comparison table in #why names FoxTrack, PrintMate and Watchtower and is dated.
    Every cell was read from their own pages on that day, and those pages
    change: a price or a feature we state about another product goes stale
    silently. This fails the daily scheduled run (links.yml) once the date is
-   older than MAX_DAYS, which is the prompt to re-read both pages, correct the
+   older than MAX_DAYS, which is the prompt to re-read their pages, correct the
    cells, and move the date in app.js (why.cmp.col0 and why.cmp.note, EN + AR).
    It is not in check-site.js on purpose: a PR should go red because its
    author broke something, not because a month passed. */
@@ -24,8 +24,8 @@ if (!m || MONTHS.indexOf(m[2]) === -1) {
 const asOf = Date.UTC(+m[3], MONTHS.indexOf(m[2]), +m[1]);
 const age = Math.floor((Date.now() - asOf) / 86400000);
 if (age > MAX_DAYS) {
-  console.error(`The FoxTrack/PrintMate comparison is ${age} days old (as of ${m[1]} ${m[2]} ${m[3]}; limit ${MAX_DAYS}).`);
-  console.error('Re-read https://foxtrack.studio/pricing and the PrintMate App Store listing, fix the cells in app.js (why.*), and move the date.');
+  console.error(`The FoxTrack/PrintMate/Watchtower comparison is ${age} days old (as of ${m[1]} ${m[2]} ${m[3]}; limit ${MAX_DAYS}).`);
+  console.error('Re-read https://foxtrack.studio/pricing, the PrintMate App Store listing and https://watchtower3d.com/pricing (+ /faq; it needs JavaScript, so read it with headless Chrome), fix the cells in app.js (why.*), and move the date.');
   process.exit(1);
 }
 console.log(`comparison is ${age} day(s) old (limit ${MAX_DAYS})`);
