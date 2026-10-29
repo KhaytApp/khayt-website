@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v3.11.33",
+   "name": "Khayt v3.11.33",
+   "date": "2026-10-29",
+   "prerelease": false,
+   "note": "Desktop: a quote-form G-code is imported, not left queued.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.33",
+   "assets": [
+    {
+     "name": "Khayt-3.11.33.AppImage",
+     "size": 175521770,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/Khayt-3.11.33.AppImage"
+    },
+    {
+     "name": "Khayt-3.11.33.exe",
+     "size": 154759851,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/Khayt-3.11.33.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.33.exe",
+     "size": 155017132,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/Khayt-Setup-3.11.33.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.33.exe.blockmap",
+     "size": 162559,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/Khayt-Setup-3.11.33.exe.blockmap"
+    },
+    {
+     "name": "khayt_3.11.33_amd64.deb",
+     "size": 141142520,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/khayt_3.11.33_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 522,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 345,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.33/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v3.11.32",
    "name": "Khayt v3.11.32",
    "date": "2026-10-29",
    "prerelease": false,
    "note": "Desktop: a quote-form request's model file is saved with the quote before the request is deleted.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.32",
-   "assets": [
-    {
-     "name": "Khayt-3.11.32.AppImage",
-     "size": 175521574,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-3.11.32.AppImage"
-    },
-    {
-     "name": "Khayt-3.11.32.exe",
-     "size": 154759798,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-3.11.32.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.32.exe",
-     "size": 155017066,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-Setup-3.11.32.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.32.exe.blockmap",
-     "size": 162127,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-Setup-3.11.32.exe.blockmap"
-    },
-    {
-     "name": "khayt_3.11.32_amd64.deb",
-     "size": 141143852,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/khayt_3.11.32_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 522,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 345,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.32"
   },
   {
    "tag": "v3.11.31",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Money that adds up for shops that add tax on top, since 3.11.3.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.4"
-  },
-  {
-   "tag": "v3.11.3",
-   "name": "Khayt v3.11.3",
-   "date": "2026-10-02",
-   "prerelease": false,
-   "note": "Security fixes and stock that adds up, since 3.11.2.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.3"
   }
  ]
 }
