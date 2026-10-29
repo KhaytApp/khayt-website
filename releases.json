@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v3.11.32",
+   "name": "Khayt v3.11.32",
+   "date": "2026-10-29",
+   "prerelease": false,
+   "note": "Desktop: a quote-form request's model file is saved with the quote before the request is deleted.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.32",
+   "assets": [
+    {
+     "name": "Khayt-3.11.32.AppImage",
+     "size": 175521574,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-3.11.32.AppImage"
+    },
+    {
+     "name": "Khayt-3.11.32.exe",
+     "size": 154759798,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-3.11.32.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.32.exe",
+     "size": 155017066,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-Setup-3.11.32.exe"
+    },
+    {
+     "name": "Khayt-Setup-3.11.32.exe.blockmap",
+     "size": 162127,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/Khayt-Setup-3.11.32.exe.blockmap"
+    },
+    {
+     "name": "khayt_3.11.32_amd64.deb",
+     "size": 141143852,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/khayt_3.11.32_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 522,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 345,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.32/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v3.11.31",
    "name": "Khayt v3.11.31",
    "date": "2026-10-29",
    "prerelease": false,
    "note": "Desktop: the colour planner costs a print's time in hours, not minutes. \"Add to calculator\" in the multicolour planner passed the slicer's time in minutes where the calculator expects hours.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.31",
-   "assets": [
-    {
-     "name": "Khayt-3.11.31.AppImage",
-     "size": 175513433,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/Khayt-3.11.31.AppImage"
-    },
-    {
-     "name": "Khayt-3.11.31.exe",
-     "size": 154757320,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/Khayt-3.11.31.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.31.exe",
-     "size": 155014586,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/Khayt-Setup-3.11.31.exe"
-    },
-    {
-     "name": "Khayt-Setup-3.11.31.exe.blockmap",
-     "size": 162481,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/Khayt-Setup-3.11.31.exe.blockmap"
-    },
-    {
-     "name": "khayt_3.11.31_amd64.deb",
-     "size": 141140204,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/khayt_3.11.31_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 522,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 345,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v3.11.31/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.31"
   },
   {
    "tag": "v3.11.30",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Security fixes and stock that adds up, since 3.11.2.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.3"
-  },
-  {
-   "tag": "v3.11.2",
-   "name": "Khayt v3.11.2",
-   "date": "2026-10-02",
-   "prerelease": false,
-   "note": "A data-loss fix and the shop's own electricity price, since 3.11.1.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.2"
   }
  ]
 }
