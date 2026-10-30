@@ -171,6 +171,21 @@
     'ip.pair':   { en: 'Pairs with your Mac or PC', ar: 'يقترن بماك أو الحاسوب' },
     'ip.langs':  { en: 'English & Arabic', ar: 'العربية والإنجليزية' },
 
+    'ext.badge': { en: 'New', ar: 'جديد' },
+    'ext.h':     { en: 'Save to Khayt, for your browser', ar: '«احفظ في خيط» لمتصفحك' },
+    'ext.p':     { en: 'On a model page on Printables, MakerWorld, Thingiverse, Thangs, Cults3D and other sites, press the button. The page’s title, creator, licence, tags and picture go into the Khayt library on your Mac. A model file you download from that page within 10 minutes can be added to the same record.',
+                   ar: 'في صفحة نموذج على Printables أو MakerWorld أو Thingiverse أو Thangs أو Cults3D وغيرها، اضغط الزر. فيذهب عنوان الصفحة والمصمّم والترخيص والوسوم والصورة إلى مكتبة خيط على جهاز ماك. وإن نزّلت ملف النموذج من تلك الصفحة خلال 10 دقائق، أمكن إضافته إلى السجل نفسه.' },
+    'ext.warn':  { en: 'It works with the Khayt Mac app (4.0 beta), not with the Windows desktop app or the iPhone. In Chrome, Edge, Brave, Vivaldi and Firefox there is one setup step: in Khayt › Settings › Preferences › Browser extension, press Install for that browser.',
+                   ar: 'تعمل مع تطبيق خيط لماك (4.0 التجريبي)، لا مع تطبيق سطح المكتب على ويندوز ولا مع الآيفون. وفي Chrome وEdge وBrave وVivaldi وFirefox خطوة إعداد واحدة: في خيط ‹ الإعدادات ‹ التفضيلات ‹ إضافة المتصفح، اضغط «تثبيت» لذلك المتصفح.' },
+    'ext.chrome':   { en: 'Chrome Web Store', ar: 'Chrome Web Store' },
+    'ext.chrome.b': { en: 'For Chrome, Brave and Vivaldi', ar: 'لـ Chrome وBrave وVivaldi' },
+    'ext.edge':     { en: 'Microsoft Edge Add-ons', ar: 'إضافات Microsoft Edge' },
+    'ext.edge.b':   { en: 'For Microsoft Edge', ar: 'لـ Microsoft Edge' },
+    'ext.firefox':  { en: 'Firefox Add-ons', ar: 'إضافات Firefox' },
+    'ext.firefox.b':{ en: 'Firefox 128 or later', ar: 'Firefox 128 أو أحدث' },
+    'ext.safari':   { en: 'Safari: it comes with the Khayt Mac app. Switch it on in Safari › Settings › Extensions.', ar: 'Safari: تأتي مع تطبيق خيط لماك. فعّلها من Safari ‹ الإعدادات ‹ الإضافات.' },
+    'ext.priv':     { en: 'What the extension reads', ar: 'ما تقرؤه الإضافة' },
+
     'ip.shot.home': { en: 'Shop Pulse on iPhone: the queue, money owed, the pipeline and what needs attention', ar: 'نبض الورشة على الآيفون: قائمة الانتظار والمستحقات وسير العمل وما يحتاج إلى انتباه' },
     'ip.shot.order': { en: 'An order on iPhone, with its print progress and the stage to move it to', ar: 'طلب على الآيفون، مع تقدّم طباعته والمرحلة التالية' },
     'ip.shot.inventory': { en: 'Inventory on iPhone: spools with the grams left on each', ar: 'المخزون على الآيفون: البكرات والغرامات المتبقية في كلٍّ منها' },
@@ -567,6 +582,12 @@
     for (var a = 0; a < named.length; a++) {
       var ak = named[a].getAttribute('data-i18n-aria');
       if (DICT[ak]) named[a].setAttribute('aria-label', DICT[ak][lang]);
+    }
+    // A policy link names its section's language (#beta-list-en): an -en
+    // anchor opens /privacy in English, so follow the page's language.
+    var pol = document.querySelectorAll('a[href*="privacy/#"], a[href*="terms/#"]');
+    for (var q = 0; q < pol.length; q++) {
+      pol[q].setAttribute('href', pol[q].getAttribute('href').replace(/-(en|ar)$/, '-' + lang));
     }
     buildFeatures();
     buildFlow();
