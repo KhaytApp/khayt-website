@@ -101,6 +101,8 @@ function build() {
   });
   html = html.replace(/(<source\b[^>]*\bsrcset=")screenshots\/iphone\/([a-z]+)-([a-z]+)-en-/g, '$1screenshots/iphone/$2-$3-ar-')
     .replace(/screenshots\/iphone\/([a-z]+)-([a-z]+)-en(-\d+w)?\.(webp|png)/g, 'screenshots/iphone/$1-$2-ar$3.$4');
+  // Policy links: the Arabic section. An -en anchor opens /privacy in English.
+  html = html.replace(/(href="[^"]*(?:privacy|terms)\/#[a-z-]+)-en"/g, '$1-ar"');
   // The hero: the Arabic take of the Mac demo, its first frame and its alt.
   for (const id of ['heroSrc', 'heroShot', 'heroVid']) {
     html = one(html, new RegExp(`<(?:source|img|video)\\b[^>]*\\bid="${id}"[^>]*>`, 'g'),
