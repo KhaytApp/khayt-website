@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.1.0",
+   "name": "Khayt v4.1.0",
+   "date": "2026-10-31",
+   "prerelease": false,
+   "note": "Bed Ready HueForge: reliefs bigger than the bed print as tiles.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.1.0",
+   "assets": [
+    {
+     "name": "Khayt-4.1.0.AppImage",
+     "size": 175553759,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-4.1.0.AppImage"
+    },
+    {
+     "name": "Khayt-4.1.0.exe",
+     "size": 154782966,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-4.1.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.1.0.exe",
+     "size": 155040198,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-Setup-4.1.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.1.0.exe.blockmap",
+     "size": 163075,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-Setup-4.1.0.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.1.0_amd64.deb",
+     "size": 141170848,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/khayt_4.1.0_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 514,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 339,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.0.0",
    "name": "Khayt v4.0.0",
    "date": "2026-10-31",
    "prerelease": false,
    "note": "Desktop: version 4, to match Khayt for macOS.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.0.0",
-   "assets": [
-    {
-     "name": "Khayt-4.0.0.AppImage",
-     "size": 175533342,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/Khayt-4.0.0.AppImage"
-    },
-    {
-     "name": "Khayt-4.0.0.exe",
-     "size": 154768237,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/Khayt-4.0.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.0.0.exe",
-     "size": 155025551,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/Khayt-Setup-4.0.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.0.0.exe.blockmap",
-     "size": 162618,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/Khayt-Setup-4.0.0.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.0.0_amd64.deb",
-     "size": 141150588,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/khayt_4.0.0_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 514,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 339,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.0.0/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.0.0"
   },
   {
    "tag": "v3.11.35",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Exact quotes from a plain STL, since 3.11.7.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.8"
-  },
-  {
-   "tag": "v3.11.7",
-   "name": "Khayt v3.11.7",
-   "date": "2026-10-08",
-   "prerelease": false,
-   "note": "Slicing for an exact quote, and logged labour in the P&L, since 3.11.6.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.7"
   }
  ]
 }
