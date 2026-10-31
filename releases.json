@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.1.1",
+   "name": "Khayt v4.1.1",
+   "date": "2026-10-31",
+   "prerelease": false,
+   "note": "Desktop: a proforma is no longer a tax invoice with a new title. \"Generate Proforma\" used to draw the full invoice and then retitle it, so the paper still carried the ZATCA QR, quoted the invoice number in its payment QR, stamped a ZATCA id on the job, and could warn that the QR was not compliant.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.1.1",
+   "assets": [
+    {
+     "name": "Khayt-4.1.1.AppImage",
+     "size": 175553597,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/Khayt-4.1.1.AppImage"
+    },
+    {
+     "name": "Khayt-4.1.1.exe",
+     "size": 154783012,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/Khayt-4.1.1.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.1.1.exe",
+     "size": 155040319,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/Khayt-Setup-4.1.1.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.1.1.exe.blockmap",
+     "size": 163190,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/Khayt-Setup-4.1.1.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.1.1_amd64.deb",
+     "size": 141170208,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/khayt_4.1.1_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 514,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 339,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.1/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.1.0",
    "name": "Khayt v4.1.0",
    "date": "2026-10-31",
    "prerelease": false,
    "note": "> No change to Khayt itself.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.1.0",
-   "assets": [
-    {
-     "name": "Khayt-4.1.0.AppImage",
-     "size": 175553759,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-4.1.0.AppImage"
-    },
-    {
-     "name": "Khayt-4.1.0.exe",
-     "size": 154782966,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-4.1.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.1.0.exe",
-     "size": 155040198,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-Setup-4.1.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.1.0.exe.blockmap",
-     "size": 163075,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/Khayt-Setup-4.1.0.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.1.0_amd64.deb",
-     "size": 141170848,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/khayt_4.1.0_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 514,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 339,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.1.0/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.1.0"
   },
   {
    "tag": "v4.0.0",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Receipts and accounting, since 3.11.8.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.9"
-  },
-  {
-   "tag": "v3.11.8",
-   "name": "Khayt v3.11.8",
-   "date": "2026-10-08",
-   "prerelease": false,
-   "note": "Exact quotes from a plain STL, since 3.11.7.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.8"
   }
  ]
 }
