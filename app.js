@@ -254,6 +254,8 @@
     'dl.maclast':{ en: 'For a Mac older than macOS 26: the desktop app’s last macOS build. It keeps working, with no further updates.', ar: 'لجهاز ماك أقدم من macOS 26: آخر نسخة من تطبيق سطح المكتب لماك. تبقى تعمل، دون تحديثات أخرى.' },
     'dl.exe':    { en: 'Installer (.exe)', ar: 'المثبّت (.exe)' },
     'dl.portable':{ en: 'Portable (.exe)', ar: 'نسخة محمولة (.exe)' },
+    'dl.store':  { en: 'Microsoft Store', ar: 'متجر Microsoft' },
+    'dl.store.b':{ en: 'Updates through the Store', ar: 'يتحدّث عبر المتجر' },
     'dl.portable_where': { en: 'x64 · on the releases page', ar: 'x64 · في صفحة الإصدارات' },
     'dl.deb':    { en: 'Debian / Ubuntu (.deb)', ar: 'دبيان / أوبنتو (.deb)' },
     'dl.latest': { en: 'latest', ar: 'الأحدث' },
