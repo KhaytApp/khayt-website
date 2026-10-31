@@ -25,19 +25,39 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  /* ---------- Where a feature works ----------
+     `p` on a feature or cloud card: 'mac' (the native Mac app) and/or 'desk'
+     (the desktop app, which is Windows and Linux together, never one alone).
+     No `p`, no row: a card is left unmarked rather than guessed. Each mark is
+     confirmed by the lane that owns that app, against what it has RELEASED. */
+  var PLAT = {
+    on: { en: 'Works on:', ar: 'يعمل على:' },
+    mac: [{ en: 'Mac', ar: 'ماك' }],
+    desk: [{ en: 'Windows', ar: 'ويندوز' }, { en: 'Linux', ar: 'لينكس' }]
+  };
+  function plats(p, lang) {
+    if (!p || !p.length) return '';
+    var h = '<p class="plat"><span class="sr-only">' + esc(PLAT.on[lang]) + ' </span>';
+    for (var k = 0; k < p.length; k++) {
+      var names = PLAT[p[k]] || [];
+      for (var j = 0; j < names.length; j++) h += '<span class="plat-i">' + esc(names[j][lang]) + '</span>';
+    }
+    return h + '</p>';
+  }
+
   /* ---------- "Built for print shop owners" ---------- */
   R.features = function (features, lang) {
     var html = '';
     for (var k = 0; k < features.length; k++) {
       var f = features[k];
       var n = (k + 1 < 10 ? '0' : '') + (k + 1);
-      html += '<article class="feat">' +
+      html += '<article class="feat' + (f.wide ? ' feat-wide' : '') + '">' +
         // The big faint number is decoration (1.4:1 on the card on purpose);
         // the cards are already a list, so a screen reader gains nothing from
         // hearing "zero one" before each heading.
         '<span class="num" aria-hidden="true">' + n + '</span>' +
         '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></div>' +
-        '<h3>' + esc(f.t[lang]) + '</h3><p>' + esc(f.d[lang]) + '</p></article>';
+        '<h3>' + esc(f.t[lang]) + '</h3><p>' + esc(f.d[lang]) + '</p>' + plats(f.p, lang) + '</article>';
     }
     return html;
   };
@@ -65,7 +85,7 @@
       html += '<article class="feat feat-beta">' +
         '<span class="beta-pill">' + esc(betaLabel) + '</span>' +
         '<div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + f.i + '</svg></div>' +
-        '<h3>' + esc(f.t[lang]) + '</h3><p>' + esc(f.d[lang]) + '</p></article>';
+        '<h3>' + esc(f.t[lang]) + '</h3><p>' + esc(f.d[lang]) + '</p>' + plats(f.p, lang) + '</article>';
     }
     return html;
   };
