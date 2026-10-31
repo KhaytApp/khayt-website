@@ -160,8 +160,8 @@
     'bf.bad':    { en: 'That email address does not look right.', ar: 'يبدو أن عنوان البريد غير صحيح.' },
     'bf.slow':   { en: 'Too many tries — please wait a little and try again.', ar: 'محاولات كثيرة — انتظر قليلاً ثم أعد المحاولة.' },
     'bf.mail':   { en: 'Sign-up is unavailable right now, so your email app will open instead.', ar: 'التسجيل غير متاح الآن، لذا سيُفتح تطبيق البريد لديك بدلاً من ذلك.' },
-    'mn.road':   { en: 'Where this goes: a native Windows app follows the Mac one, and the desktop app below keeps running on Windows and Linux — it is not going away.',
-                   ar: 'إلى أين يتجه هذا: يتبع تطبيقَ ماك تطبيقُ ويندوز أصلي، ويبقى تطبيق سطح المكتب أدناه يعمل على ويندوز ولينكس — فهو لن يختفي.' },
+    'mn.road':   { en: 'The desktop app below keeps running on Windows and Linux — it is not going away.',
+                   ar: 'ويبقى تطبيق سطح المكتب أدناه يعمل على ويندوز ولينكس — فهو لن يختفي.' },
 
     'ip.badge': { en: 'Beta', ar: 'تجريبي' },
     'ip.h':      { en: 'Khayt for iPhone', ar: 'خيط للآيفون' },
