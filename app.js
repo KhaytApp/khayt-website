@@ -55,7 +55,7 @@
     'hero.os':    { en: 'No account · Nothing sent by default', ar: 'بدون حساب · لا يُرسل شيء افتراضياً' },
     'hero.ios':   { en: 'iPhone beta (TestFlight)', ar: 'آيفون تجريبي (TestFlight)' },
 
-    'more.features': { en: 'Show all ten features', ar: 'اعرض المزايا العشر' },
+    'more.features': { en: 'Show all eleven features', ar: 'اعرض المزايا الإحدى عشرة' },
     'more.cloud':    { en: 'Show all nine services', ar: 'اعرض الخدمات التسع' },
     'more.modes':    { en: 'Show the full comparison', ar: 'اعرض المقارنة كاملة' },
     'more.less':     { en: 'Show less', ar: 'اعرض أقل' },
