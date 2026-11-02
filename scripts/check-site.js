@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/check-freshness.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/check-freshness.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -103,6 +103,32 @@ check('ar/index.html is generated from index.html and app.js', () => {
     throw new Error('stale. Run `node scripts/make-ar.js` and commit the result.');
   }
   return 'in sync';
+});
+
+check('services.html is rendered from data.js and services.js', () => {
+  // The plan cards, the service cards and the "what each one sends" table
+  // were empty elements until services.js ran, so a crawler saw a pricing
+  // page with no prices. They are prerendered from the same functions the
+  // browser calls; stale, the two disagree and the page reflows on load.
+  try {
+    execFileSync(process.execPath, ['scripts/prerender.js', '--check', 'services.html'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error('stale. Run `node scripts/prerender.js` and commit the result.');
+  }
+  return 'in sync';
+});
+
+check('The Arabic sub-pages under ar/ are generated from the English ones', () => {
+  // ar/services.html, ar/privacy/, ar/terms/, ar/blog/ and every post are
+  // copies of the English files in Arabic, so search engines index the
+  // Arabic as its own page. They must say exactly what the English pages
+  // say, and each English page must name its copy as hreflang="ar".
+  try {
+    execFileSync(process.execPath, ['scripts/make-ar-pages.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error(String(e.stderr || e.message).trim());
+  }
+  return pages.AR_SOURCES().length + ' copies in sync';
 });
 
 check('blog/index.html is rendered from posts.js, and links every post', () => {
@@ -390,9 +416,9 @@ function navTarget(page, href) {
   t = t.replace(/^\.\//, '');
   if (t === '' || t === '.') t = 'index.html';
   if (t.endsWith('/')) t += 'index.html';
-  // ar/index.html is the home page in Arabic: its "/ar/#screens" is the same
-  // destination as the English page's "#screens".
-  if (t === 'ar/index.html') t = 'index.html';
+  // ar/ is the site in Arabic: "/ar/#screens" is the same destination as
+  // the English page's "#screens", and "/ar/blog/" as "../blog/".
+  if (t.startsWith('ar/')) t = t.slice(3);
   return t;
 }
 
@@ -738,18 +764,24 @@ check('robots.txt still lets crawlers in', () => {
 
 check('Every page can be linked in Arabic', () => {
   // Arabic used to be a localStorage flag with no URL, so it could not be
-  // shared or indexed. Each page needs its ?lang=ar alternate declared — or,
-  // for the home page and its Arabic file, the /ar/ page itself.
+  // shared or indexed. Then it was ?lang=ar — the same file, whose canonical
+  // is the English URL, so search engines folded it into the English page.
+  // Every page has a real Arabic copy at /ar/<same path> now, and both halves
+  // of each pair name both: en, ar, and x-default = en.
   const bad = [];
   // 404.html is excluded: it is noindex, so it has no canonical to alternate.
   for (const p of pages().filter(f => !pages.NOINDEX.has(f))) {
     const html = fs.readFileSync(p, 'utf8');
-    const want = (p === 'index.html' || p === 'ar/index.html')
-      ? /hreflang="ar" href="https:\/\/khaytapp\.com\/ar\/"/ : /hreflang="ar"[^>]*lang=ar/;
-    if (!want.test(html)) bad.push(p);
+    const en = p.startsWith('ar/') ? p.slice(3) : p;
+    if (!fs.existsSync('ar/' + en)) { bad.push(p + ': no Arabic copy at ar/' + en); continue; }
+    const want = { en: publicUrl(en), ar: publicUrl('ar/' + en), 'x-default': publicUrl(en) };
+    for (const [l, url] of Object.entries(want)) {
+      const got = [...html.matchAll(new RegExp('<link rel="alternate" hreflang="' + l + '" href="([^"]*)">', 'g'))].map(m => m[1]);
+      if (got.length !== 1 || got[0] !== url) bad.push(`${p}: hreflang="${l}" is ${got.join(', ') || 'missing'}, should be ${url}`);
+    }
   }
-  if (bad.length) throw new Error('no Arabic alternate declared: ' + bad.join(', '));
-  return 'all declared';
+  if (bad.length) throw new Error(bad.join('\n'));
+  return 'every pair declared both ways';
 });
 
 /* ---------- 7. What search engines and share cards read ---------- */
@@ -817,9 +849,16 @@ check('Titles and descriptions fit a search result, and are unique', () => {
     const title = html.match(/<title>([^<]*)<\/title>/);
     const desc = html.match(/<meta name="description" content="([^"]*)"/);
     if (!title || !desc) { bad.push(p + ': no <title> or no meta description'); continue; }
+    const attr = name => { const m = html.match(new RegExp('data-page-' + name + '="([^"]*)"')); return m && decode(m[1]); };
+    // An Arabic copy's head is its English page's Arabic pair, which that
+    // page already held to the limits and to uniqueness above.
+    if (p.startsWith('ar/') && attr('title-ar') !== null) {
+      if (attr('title-ar') !== decode(title[1])) bad.push(`${p}: <title> is not data-page-title-ar`);
+      if (attr('desc-ar') !== decode(desc[1])) bad.push(`${p}: the meta description is not data-page-desc-ar`);
+      continue;
+    }
     take(p, 'title', 'en', decode(title[1]));
     take(p, 'desc', 'en', decode(desc[1]));
-    const attr = name => { const m = html.match(new RegExp('data-page-' + name + '="([^"]*)"')); return m && decode(m[1]); };
     if (attr('title-en') !== null || attr('desc-en') !== null) {
       if (attr('title-en') !== decode(title[1])) bad.push(`${p}: data-page-title-en differs from <title>`);
       if (attr('desc-en') !== decode(desc[1])) bad.push(`${p}: data-page-desc-en differs from the meta description`);

@@ -62,7 +62,8 @@ let xml = `<?xml version="1.0" encoding="utf-8"?>
 
 for (const p of POSTS) {
   for (const lang of ['en', 'ar']) {
-    const url = `${SITE}/blog/${p.slug}.html` + (lang === 'ar' ? '?lang=ar' : '');
+    // The Arabic entry links the post's Arabic copy (scripts/make-ar-pages.js).
+    const url = `${SITE}${lang === 'ar' ? '/ar' : ''}/blog/${p.slug}.html`;
     xml += `
   <entry xml:lang="${lang}">
     <title>${esc(p.t[lang])}</title>

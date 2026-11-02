@@ -9,7 +9,7 @@
    claimed on this page — if a row cannot be traced back to the service's own
    description in cloud-features.js, it does not belong here.
    ============================================================ */
-(function () {
+(function (window) {
   'use strict';
 
   // Keyed by position in window.KHAYT_CLOUD so the two lists stay aligned.
@@ -129,37 +129,30 @@
 
   var BETA = { en: 'BETA', ar: 'تجريبي' };
 
-  // Presentation state for the plan cards. Neither is persisted: a price is
-  // not a preference, and a reload should show the page's own default.
-  var cycle = 'monthly';
-  var cur = 'USD';
-
-  function lang() { return document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en'; }
-
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
-  // Which service cards are showing their "this sends" panel. The switches are
-  // a preview of the app's own switchboard and nothing more: this page has no
-  // idea what your install has turned on, and says so above the grid.
-  var shown = {};
-
-  function str(key) {
+  function str(key, L) {
     var d = window.PAGE_STRINGS[key];
-    return d ? d[lang()] : key;
+    return d ? d[L] : key;
   }
 
-  /* ---------- The three plans ----------
-     Rendered from KHAYT_DATA.plans, which is vendored from lib/cloud-plans.js
-     in the app repo. While betaFree is true every non-zero price is struck
-     through — the figure still shown, because the point of publishing it is
-     that nobody meets it as a surprise later. */
-  function renderPlans(L) {
-    var grid = document.getElementById('planGrid');
-    var D = window.KHAYT_DATA || {};
-    if (!grid || !D.plans) return;
+  /* ---------- The markup, as pure functions ----------
+     The three grids are built here and nowhere else. The page calls these on
+     load and on every switch; scripts/prerender.js calls the same functions in
+     Node to write the English grids into services.html, and
+     scripts/make-ar-pages.js the Arabic ones into ar/services.html. One
+     implementation is what keeps the static HTML and the live render
+     byte-identical, so the page does not reflow when this script runs. No
+     DOM, no state: everything they show comes in as an argument. */
+  var V = {};
 
+  /* The three plans. Rendered from KHAYT_DATA.plans, which is vendored from
+     lib/cloud-plans.js in the app repo. While betaFree is true every non-zero
+     price is struck through — the figure still shown, because the point of
+     publishing it is that nobody meets it as a surprise later. */
+  V.plans = function (D, L, cycle, cur) {
     var annual = cycle === 'annual';
     var sym = cur === 'SAR' ? 'SAR ' : '$';
     var html = '';
@@ -175,11 +168,11 @@
       if (p.soon) cls += ' is-soon';
 
       var badge = '';
-      if (p.soon) badge = '<span class="plan-badge soon">' + esc(str('sv.plans.soon')) + '</span>';
-      else if (p.featured) badge = '<span class="plan-badge">' + esc(str('sv.plans.featured')) + '</span>';
+      if (p.soon) badge = '<span class="plan-badge soon">' + esc(str('sv.plans.soon', L)) + '</span>';
+      else if (p.featured) badge = '<span class="plan-badge">' + esc(str('sv.plans.featured', L)) + '</span>';
 
-      var period = isFree ? str('sv.plans.forever')
-        : (annual ? str('sv.plans.perYear') : str('sv.plans.perMonth'));
+      var period = isFree ? str('sv.plans.forever', L)
+        : (annual ? str('sv.plans.perYear', L) : str('sv.plans.perMonth', L));
 
       var feats = '';
       for (var f = 0; f < p.features.length; f++) {
@@ -192,21 +185,19 @@
         '<p class="plan-price"><span class="' + (strike ? 'amt struck' : 'amt') + '">' + esc(sym + amount) + '</span>' +
         '<span class="per">' + esc(period) + '</span></p>' +
         '<p class="plan-now' + (isFree ? ' free' : '') + '">' +
-        esc(isFree ? str('sv.plans.freeNow') : str('sv.plans.betaNow')) + '</p>' +
+        esc(isFree ? str('sv.plans.freeNow', L) : str('sv.plans.betaNow', L)) + '</p>' +
         '<ul class="plan-feats">' + feats + '</ul>' +
         (p.soon
           ? '<span class="btn btn-ghost plan-cta is-dead" aria-disabled="true">' + esc(p.cta[L]) + '</span>'
           : '<a class="btn ' + (p.featured ? 'btn-accent' : 'btn-ghost') + ' plan-cta" href="' + esc(p.href) + '">' + esc(p.cta[L]) + '</a>') +
         '</article>';
     }
-    grid.innerHTML = html;
-  }
+    return html;
+  };
 
-  /* ---------- The nine services, as a switchboard ---------- */
-  function renderServices(L, list) {
-    var grid = document.getElementById('svcGrid');
-    if (!grid) return;
-
+  /* The nine services, as a switchboard. `shown` is which cards have their
+     "this sends" panel open, keyed by position. */
+  V.services = function (list, L, shown) {
     var html = '';
     for (var i = 0; i < list.length; i++) {
       var f = list[i];
@@ -218,17 +209,64 @@
           '<div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + f.i + '</svg></div>' +
           '<div class="svc-text"><h3>' + esc(f.t[L]) + '</h3><p>' + esc(f.d[L]) + '</p></div>' +
           '<button type="button" class="sw" role="switch" aria-checked="' + (on ? 'true' : 'false') +
-            '" data-svc="' + i + '" aria-label="' + esc(str('sv.list.switchLabel') + ' — ' + f.t[L]) + '">' +
+            '" data-svc="' + i + '" aria-label="' + esc(str('sv.list.switchLabel', L) + ' — ' + f.t[L]) + '">' +
             '<span class="sw-knob" aria-hidden="true"></span></button>' +
         '</div>' +
         '<div class="svc-sends"' + (on ? '' : ' hidden') + '>' +
-          '<span class="svc-sends-k">' + esc(str('sv.list.sends')) + '</span>' +
+          '<span class="svc-sends-k">' + esc(str('sv.list.sends', L)) + '</span>' +
           '<p>' + esc(sends.what[L]) + '</p>' +
           '<p class="svc-to">&rarr; ' + esc(sends.to[L]) + '</p>' +
         '</div>' +
       '</article>';
     }
-    grid.innerHTML = html;
+    return html;
+  };
+
+  /* The "what each one sends" table body. */
+  V.sends = function (list, L) {
+    var rows = '';
+    for (var j = 0; j < list.length && j < SENDS.length; j++) {
+      rows += '<tr>' +
+        '<th scope="row"><a href="#svc-' + j + '">' + esc(list[j].t[L]) + '</a></th>' +
+        '<td>' + esc(SENDS[j].what[L]) + '</td>' +
+        '<td>' + esc(SENDS[j].to[L]) + '</td>' +
+        '</tr>';
+    }
+    return rows;
+  };
+
+  // What the page shows before anyone touches a control. prerender.js renders
+  // this state, so it must be the one the browser starts in.
+  V.INITIAL = { cycle: 'monthly', cur: 'USD' };
+
+  window.KHAYT_SERVICES = V;
+
+  // In Node (prerender.js, make-ar-pages.js) the markup is all that is wanted.
+  if (typeof document === 'undefined') return;
+
+  // Presentation state for the plan cards. Neither is persisted: a price is
+  // not a preference, and a reload should show the page's own default.
+  var cycle = V.INITIAL.cycle;
+  var cur = V.INITIAL.cur;
+
+  function lang() { return document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en'; }
+
+  // Which service cards are showing their "this sends" panel. The switches are
+  // a preview of the app's own switchboard and nothing more: this page has no
+  // idea what your install has turned on, and says so above the grid.
+  var shown = {};
+
+  function renderPlans(L) {
+    var grid = document.getElementById('planGrid');
+    var D = window.KHAYT_DATA || {};
+    if (!grid || !D.plans) return;
+    grid.innerHTML = V.plans(D, L, cycle, cur);
+  }
+
+  function renderServices(L, list) {
+    var grid = document.getElementById('svcGrid');
+    if (!grid) return;
+    grid.innerHTML = V.services(list, L, shown);
     paintCount(list.length);
   }
 
@@ -236,9 +274,9 @@
     var n = 0;
     for (var k in shown) if (shown[k]) n++;
     var el = document.getElementById('svcCount');
-    if (el) el.textContent = str('sv.list.count').replace('{n}', String(n));
+    if (el) el.textContent = str('sv.list.count', lang()).replace('{n}', String(n));
     var all = document.getElementById('svcToggleAll');
-    if (all) all.textContent = str(n === total ? 'sv.list.allOff' : 'sv.list.allOn');
+    if (all) all.textContent = str(n === total ? 'sv.list.allOff' : 'sv.list.allOn', lang());
   }
 
   function render() {
@@ -249,17 +287,7 @@
     renderServices(L, list);
 
     var body = document.getElementById('sendsBody');
-    if (body) {
-      var rows = '';
-      for (var j = 0; j < list.length && j < SENDS.length; j++) {
-        rows += '<tr>' +
-          '<th scope="row"><a href="#svc-' + j + '">' + esc(list[j].t[L]) + '</a></th>' +
-          '<td>' + esc(SENDS[j].what[L]) + '</td>' +
-          '<td>' + esc(SENDS[j].to[L]) + '</td>' +
-          '</tr>';
-      }
-      body.innerHTML = rows;
-    }
+    if (body) body.innerHTML = V.sends(list, L);
 
     syncScroll();
   }
@@ -338,4 +366,4 @@
   // applies on load. Rendering only on DOMContentLoaded would paint the grid in
   // English before site.js had read ?lang=ar.
   document.addEventListener('khayt:lang', render);
-})();
+})(typeof window !== 'undefined' ? window : globalThis);

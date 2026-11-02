@@ -23,8 +23,12 @@ Then:
 
 ```bash
 node scripts/stamp-posts.js && node scripts/make-feed.js && node scripts/prerender.js \
-  && node scripts/stamp-sitemap.js && node scripts/check-site.js
+  && node scripts/make-ar-pages.js && node scripts/stamp-sitemap.js && node scripts/check-site.js
 ```
+
+`make-ar-pages.js` writes the post's Arabic copy, `ar/blog/<slug>.html`, from
+the English file — the page search engines index in Arabic. Never edit it by
+hand; `check-site.js` fails if it is stale.
 
 Commit, and merging to `main` publishes it.
 

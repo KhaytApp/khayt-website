@@ -53,6 +53,29 @@
 
   var lang = 'en';
 
+  // /ar/… is a page's Arabic copy (scripts/make-ar-pages.js): a real file, in
+  // Arabic in its HTML, that search engines index on its own. The English URL
+  // with ?lang=ar is the same file switched in place, and still works.
+  function onArabicPath() { return /^\/ar\//.test(window.location.pathname); }
+
+  // The page's declared alternate for a language, as a path on THIS origin —
+  // the hrefs are https://khaytapp.com/…, and a local preview should stay local.
+  function alternatePath(l) {
+    var link = document.querySelector('link[rel="alternate"][hreflang="' + l + '"]');
+    if (!link) return null;
+    try { return new URL(link.getAttribute('href'), window.location.href).pathname; } catch (e) { return null; }
+  }
+
+  // Carrying an anchor across: a policy section's id names its language
+  // (#account-ar), and the other language's page shows the other block — so
+  // the anchor follows to its twin when this page has one.
+  function carryHash(to) {
+    var h = window.location.hash;
+    var m = /^#(.+)-(ar|en)$/.exec(h);
+    if (m && m[2] !== to && document.getElementById(m[1] + '-' + to)) return '#' + m[1] + '-' + to;
+    return h;
+  }
+
   function t(key) {
     var e = CHROME[key];
     return e ? e[lang] : (window.PAGE_STRINGS && window.PAGE_STRINGS[key] ? window.PAGE_STRINGS[key][lang] : key);
@@ -126,7 +149,8 @@
 
     try {
       var u = new URL(window.location.href);
-      if (lang === 'ar') u.searchParams.set('lang', 'ar'); else u.searchParams.delete('lang');
+      // On /ar/ the path already says Arabic; ?lang= is for the English URL.
+      if (lang === 'ar' && !onArabicPath()) u.searchParams.set('lang', 'ar'); else u.searchParams.delete('lang');
       history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
     } catch (e) {}
 
@@ -170,6 +194,8 @@
       var q = new URL(window.location.href).searchParams.get('lang');
       if (q === 'ar' || q === 'en') saved = q;
     } catch (e) {}
+    // And an Arabic copy is Arabic, whatever was saved or asked for.
+    if (onArabicPath()) saved = 'ar';
     // A link to a section that exists in one language only (the policy pages'
     // #quote-form-ar, #customers-en …) names its language in the anchor. The
     // other language's block is hidden, so the browser found nothing to scroll
@@ -186,7 +212,19 @@
 
     nav();
     var toggle = document.getElementById('navLang');
-    if (toggle) toggle.addEventListener('click', function () { applyLang(lang === 'ar' ? 'en' : 'ar'); });
+    if (toggle) toggle.addEventListener('click', function () {
+      var next = lang === 'ar' ? 'en' : 'ar';
+      // A page whose other language lives at another URL goes there, so the
+      // address bar names the language on screen; one that has none (or is
+      // already that URL, switched in place) switches in place as it always has.
+      var to = alternatePath(next);
+      if (to && to !== window.location.pathname) {
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        window.location.href = to + carryHash(next);
+        return;
+      }
+      applyLang(next);
+    });
     applyLang(saved);
     if (target) target.scrollIntoView();
   });
