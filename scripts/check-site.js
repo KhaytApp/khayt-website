@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/check-freshness.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/check-freshness.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -129,6 +129,17 @@ check('The Arabic sub-pages under ar/ are generated from the English ones', () =
     throw new Error(String(e.stderr || e.message).trim());
   }
   return pages.AR_SOURCES().length + ' copies in sync';
+});
+
+check('Every page carries a current Content-Security-Policy', () => {
+  // scripts/csp.js writes it, with a SHA-256 for each inline <script>. Edit an
+  // inline script without re-running it and the browser refuses that script.
+  try {
+    execFileSync(process.execPath, ['scripts/csp.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error(String(e.stderr || e.message).trim());
+  }
+  return pages().length + ' pages';
 });
 
 check('blog/index.html is rendered from posts.js, and links every post', () => {
