@@ -78,7 +78,6 @@
     'sv.list.switchLabel': { en: 'Preview what this service sends', ar: 'اعرض ما ترسله هذه الخدمة' },
 
     'sv.status.r4': { en: 'Cloud billing — off, free during beta', ar: 'فوترة السحابة — متوقفة، مجانية أثناء التجربة' },
-    'sv.status.r5': { en: 'Branches tier — not built yet', ar: 'فئة الفروع — لم تُبنَ بعد' },
 
     'sv.eyebrow': { en: 'Opt-in · Beta', ar: 'اختياري · تجريبي' },
     'sv.h1':      { en: 'Online services', ar: 'الخدمات السحابية' },
