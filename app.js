@@ -43,6 +43,8 @@
     },
 
     'hero.vid':   { en: 'The Khayt Mac app’s sample shop: the production board, a job with its money and operator, the model library and customers', ar: 'المطبعة التجريبية في تطبيق خيط لماك: لوحة الإنتاج، ومهمة بمبالغها ومشغّلها، ومكتبة المجسّمات، والعملاء' },
+    'tabs.aria': { en: 'App screens', ar: 'شاشات التطبيق' },
+    'dl.channel': { en: 'Release channel', ar: 'قناة الإصدار' },
     'hero.vid.pause': { en: 'Pause the video', ar: 'أوقف الفيديو مؤقتاً' },
     'hero.vid.play':  { en: 'Play the video', ar: 'شغّل الفيديو' },
     'hero.pill':  { en: 'Free to use · Source available', ar: 'مجاني · المصدر متاح' },
@@ -606,6 +608,7 @@
     if (gi) {
       gi.src = shotPath(curKey);
       setSrcset(document.getElementById('galSrc'), shotPath(curKey));
+      gi.alt = shotAlt(curKey);
     }
     var hs = document.getElementById('heroShot');
     if (hs) {
@@ -753,6 +756,10 @@
   }
 
   /* ---------- Screen gallery ---------- */
+  function shotAlt(key) {
+    var s = SCREENS[key] || SCREENS.queue;
+    return lang === 'ar' ? 'لقطة شاشة خيط: ' + s.name.ar : 'Khayt ' + s.name.en + ' screenshot';
+  }
   function tabs() {
     var bar = document.getElementById('tabs');
     if (!bar) return;
@@ -764,10 +771,34 @@
       if (!SCREENS[key]) return;
       curKey = key;
       var all = bar.querySelectorAll('.tab');
-      for (var i = 0; i < all.length; i++) all[i].setAttribute('aria-selected', 'false');
+      for (var i = 0; i < all.length; i++) {
+        all[i].setAttribute('aria-selected', 'false');
+        all[i].setAttribute('tabindex', '-1');
+      }
       btn.setAttribute('aria-selected', 'true');
-      swapShot(img, shotPath(key), 'Khayt ' + SCREENS[key].name.en + ' screenshot');
+      btn.removeAttribute('tabindex');
+      var panel = document.getElementById('galPanel');
+      if (panel) panel.setAttribute('aria-labelledby', btn.id);
+      swapShot(img, shotPath(key), shotAlt(key));
       paintCaption();
+    });
+
+    // Tabs pattern: one tab stop, arrows move between tabs (mirrored in RTL),
+    // Home/End jump to the ends; moving selects, as the click does.
+    bar.addEventListener('keydown', function (e) {
+      var all = Array.prototype.slice.call(bar.querySelectorAll('.tab'));
+      var i = all.indexOf(document.activeElement);
+      if (i < 0) return;
+      var rtl = getComputedStyle(bar).direction === 'rtl';
+      var next = null;
+      if (e.key === 'ArrowRight') next = all[(i + (rtl ? -1 : 1) + all.length) % all.length];
+      else if (e.key === 'ArrowLeft') next = all[(i + (rtl ? 1 : -1) + all.length) % all.length];
+      else if (e.key === 'Home') next = all[0];
+      else if (e.key === 'End') next = all[all.length - 1];
+      if (!next) return;
+      e.preventDefault();
+      next.focus();
+      next.click();
     });
 
     // Pointer travel and keyboard focus both give a head start on the fetch.
@@ -836,7 +867,7 @@
       for (var i = 0; i < btns.length; i++) {
         var on = btns[i] === btn;
         btns[i].classList.toggle('on', on);
-        btns[i].setAttribute('aria-selected', on ? 'true' : 'false');
+        btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
       }
       applyChannel();
     });

@@ -269,20 +269,20 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       <p class="theme-note" data-i18n="theme.note">8 تصاميم · فاتح وداكن · بدّل في أي وقت</p>
     </div>
 
-    <div class="tabs" id="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" data-key="queue" data-i18n="tab.queue">قائمة الإنتاج</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="dashboard" data-i18n="tab.dashboard">لوحة التحكم</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="calculator" data-i18n="tab.calculator">الحاسبة</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="printfiles" data-i18n="tab.printfiles">ملفات الطباعة</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="colorstudio" data-i18n="tab.colorstudio">استوديو الألوان</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="orders" data-i18n="tab.orders">سجل الطلبات</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="inventory" data-i18n="tab.inventory">المخزون</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="catalog" data-i18n="tab.catalog">الكتالوج</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="clients" data-i18n="tab.clients">العملاء</button>
-      <button class="tab" role="tab" aria-selected="false" data-key="analytics" data-i18n="tab.analytics">التحليلات</button>
+    <div class="tabs" id="tabs" role="tablist" aria-label="شاشات التطبيق" data-i18n-aria="tabs.aria">
+      <button class="tab" role="tab" id="tab-queue" aria-controls="galPanel" aria-selected="true" data-key="queue" data-i18n="tab.queue">قائمة الإنتاج</button>
+      <button class="tab" role="tab" id="tab-dashboard" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="dashboard" data-i18n="tab.dashboard">لوحة التحكم</button>
+      <button class="tab" role="tab" id="tab-calculator" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="calculator" data-i18n="tab.calculator">الحاسبة</button>
+      <button class="tab" role="tab" id="tab-printfiles" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="printfiles" data-i18n="tab.printfiles">ملفات الطباعة</button>
+      <button class="tab" role="tab" id="tab-colorstudio" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="colorstudio" data-i18n="tab.colorstudio">استوديو الألوان</button>
+      <button class="tab" role="tab" id="tab-orders" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="orders" data-i18n="tab.orders">سجل الطلبات</button>
+      <button class="tab" role="tab" id="tab-inventory" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="inventory" data-i18n="tab.inventory">المخزون</button>
+      <button class="tab" role="tab" id="tab-catalog" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="catalog" data-i18n="tab.catalog">الكتالوج</button>
+      <button class="tab" role="tab" id="tab-clients" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="clients" data-i18n="tab.clients">العملاء</button>
+      <button class="tab" role="tab" id="tab-analytics" aria-controls="galPanel" aria-selected="false" tabindex="-1" data-key="analytics" data-i18n="tab.analytics">التحليلات</button>
     </div>
 
-    <div class="gallery-shot">
+    <div class="gallery-shot" id="galPanel" role="tabpanel" aria-labelledby="tab-queue">
       <div class="frame">
           <div class="frame-img-wrap">
           <picture>
@@ -516,9 +516,9 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
     <!-- The desktop app: Windows and Linux. Its macOS card stays, last, for a
          Mac older than macOS 26; the native Mac app above leads (Oct 31). -->
     <h3 class="dl-sub" id="desktop" data-i18n="dl.desk.h">تطبيق سطح المكتب لويندوز ولينكس</h3>
-    <div class="dl-channel" id="dlChannel" role="tablist" aria-label="Release channel">
-      <button class="on" data-channel="stable" role="tab" aria-selected="true"><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.stable">مستقر</span> <span class="ver-tag" style="opacity:.7">v4.2.0</span></button>
-      <button class="beta-btn" data-channel="beta" role="tab" aria-selected="false" disabled><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.beta">تجريبي</span> <span class="ver-beta" style="opacity:.7">—</span></button>
+    <div class="dl-channel" id="dlChannel" role="group" aria-label="قناة الإصدار" data-i18n-aria="dl.channel">
+      <button type="button" class="on" data-channel="stable" aria-pressed="true"><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.stable">مستقر</span> <span class="ver-tag" style="opacity:.7">v4.2.0</span></button>
+      <button type="button" class="beta-btn" data-channel="beta" aria-pressed="false" disabled><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.beta">تجريبي</span> <span class="ver-beta" style="opacity:.7">—</span></button>
     </div>
 
     <div class="dl-grid" style="text-align:start">
