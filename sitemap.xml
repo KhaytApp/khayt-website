@@ -5,7 +5,7 @@
     <loc>https://khaytapp.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/"/>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,7 +13,7 @@
     <loc>https://khaytapp.com/ar/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/"/>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -21,7 +21,7 @@
     <loc>https://khaytapp.com/services.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/services.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/services.html?lang=ar"/>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -29,7 +29,7 @@
     <loc>https://khaytapp.com/blog/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/?lang=ar"/>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -37,35 +37,35 @@
     <loc>https://khaytapp.com/blog/native-mac-alpha.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/native-mac-alpha.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/native-mac-alpha.html?lang=ar"/>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://khaytapp.com/blog/what-the-cloud-sends.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/what-the-cloud-sends.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/what-the-cloud-sends.html?lang=ar"/>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://khaytapp.com/blog/khayt-3-7.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/khayt-3-7.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/khayt-3-7.html?lang=ar"/>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://khaytapp.com/blog/mac-first.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/mac-first.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/mac-first.html?lang=ar"/>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://khaytapp.com/privacy/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/privacy/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/privacy/?lang=ar"/>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -73,7 +73,7 @@
     <loc>https://khaytapp.com/terms/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/terms/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/terms/?lang=ar"/>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -81,7 +81,7 @@
     <loc>https://khaytapp.com/blog/mac-beta.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/mac-beta.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/mac-beta.html?lang=ar"/>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>

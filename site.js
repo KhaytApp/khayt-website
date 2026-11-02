@@ -31,6 +31,7 @@
     'nav.blog':      { en: 'Blog', ar: 'المدوّنة' },
     'nav.download':  { en: 'Download', ar: 'تحميل' },
     'nav.home':      { en: 'Home', ar: 'الرئيسية' },
+    'nav.beta':      { en: 'Cloud', ar: 'السحابة' },
 
     'a11y.skip': { en: 'Skip to content', ar: 'تخطّ إلى المحتوى' },
     'a11y.lang': { en: 'Switch language to', ar: 'تغيير اللغة إلى' },
@@ -42,6 +43,8 @@
     'foot.community':{ en: 'Community', ar: 'المجتمع' },
     'foot.license':  { en: 'License', ar: 'الرخصة' },
     'foot.sponsor':  { en: 'Sponsor', ar: 'ادعم المشروع' },
+    'foot.privacy':  { en: 'Privacy', ar: 'الخصوصية' },
+    'foot.terms':    { en: 'Terms', ar: 'الشروط' },
     'foot.made':     { en: 'Made with ♥ for the 3D printing community · Built with the help of AI', ar: 'صُنع بحب لمجتمع الطباعة ثلاثية الأبعاد · بُني بمساعدة الذكاء الاصطناعي' },
 
     'back.blog':  { en: '← All posts', ar: 'كل المقالات →' },

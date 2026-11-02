@@ -87,7 +87,7 @@
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#top" class="brand"><img src="khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+    <a href="#top" class="brand"><img src="khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
     <nav class="nav-links" id="navLinks">
       <a href="#screens" data-i18n="nav.screens">Screens</a>
       <a href="#modes" data-i18n="nav.modes">Modes</a>
@@ -248,7 +248,7 @@
   <div class="wrap">
     <span class="eyebrow" data-i18n="flow.eyebrow">One continuous thread</span>
     <h2 class="h2" style="margin-top:16px" data-i18n="flow.h2">From a file on the desk to money in the bank.</h2>
-    <p class="lede" data-i18n-html="flow.lede">Khayt — <span class="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.</p>
+    <p class="lede" data-i18n-html="flow.lede">Khayt — <span class="ar" lang="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.</p>
     <ol class="flow" id="flowSteps"><!-- PRERENDER:flowSteps:START --><li class="step"><span class="step-n" aria-hidden="true">01</span><h3>Quote</h3><p>Drop an STL, 3MF or g-code on the calculator. Khayt reads the geometry and prices it against your machine, material and margin.</p><span class="step-tag">Calculator</span></li><li class="step"><span class="step-n" aria-hidden="true">02</span><h3>Schedule</h3><p>An approved quote becomes a job on the board, assigned to a machine with its colours and parts already attached.</p><span class="step-tag">Production queue</span></li><li class="step"><span class="step-n" aria-hidden="true">03</span><h3>Print</h3><p>Live temperature and progress from OctoPrint, Bambu, Klipper and friends — with stall and offline alerts.</p><span class="step-tag">Printer API</span></li><li class="step"><span class="step-n" aria-hidden="true">04</span><h3>Invoice</h3><p>A signed e-invoice in the language your shop chose, with the tax added the way your country does it.</p><span class="step-tag">30 country presets</span></li><li class="step"><span class="step-n" aria-hidden="true">05</span><h3>Correct</h3><p>The finished job reports what it really used, and the estimator calibrates itself against your shop.</p><span class="step-tag">Measured, not assumed</span></li><!-- PRERENDER:flowSteps:END --></ol>
   </div>
 </section>
@@ -390,7 +390,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li3">Instant language switch, no restart needed</span></li>
           </ul>
           <div class="lang-chips">
-            <span class="lang-chip on">العربية</span>
+            <span class="lang-chip on" lang="ar">العربية</span>
             <span class="lang-chip on">English</span>
             <span class="lang-chip">Deutsch</span>
             <span class="lang-chip">Español</span>
@@ -406,8 +406,8 @@
           <div class="flip-head">
             <span class="lab" data-i18n="flip.lab">Live invoice preview</span>
             <div class="flip-switch" id="flipSwitch">
-              <button class="on" data-side="front">EN</button>
-              <button data-side="back">ع</button>
+              <button type="button" class="on" data-side="front" aria-pressed="true" aria-label="English" lang="en">EN</button>
+              <button type="button" data-side="back" aria-pressed="false" aria-label="العربية" lang="ar">ع</button>
             </div>
           </div>
           <div class="flip-card" id="flipCard">
@@ -423,9 +423,9 @@
               <div class="r-total"><span class="k">Total cost</span><span class="v">SAR 38.50</span></div>
               <div class="r-qr"><span class="qr"></span><span class="qt">Signed e-invoice<br>QR verified</span></div>
             </div>
-            <div class="flip-face back" dir="rtl">
+            <div class="flip-face back" dir="rtl" lang="ar">
               <div class="receipt-top">
-                <div class="r-brand"><img src="khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true"><span class="ar">خيط</span></div>
+                <div class="r-brand"><img src="khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true"><span class="ar" lang="ar">خيط</span></div>
                 <span class="r-tag">فاتورة ضريبية · 1042#</span>
               </div>
               <div class="r-row"><span class="k">المادة</span><span class="v"><span class="sw"></span>PLA أسود</span></div>
@@ -639,9 +639,9 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#top" class="brand"><img src="khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+        <a href="#top" class="brand"><img src="khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
         <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
-        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+        <p class="ar-sub" lang="ar">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
       </div>
       <div class="foot-links">
         <div class="foot-col">

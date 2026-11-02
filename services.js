@@ -283,6 +283,7 @@
       window.addEventListener('resize', paint, { passive: true });
       el.setAttribute('tabindex', '0');
       el.setAttribute('role', 'region');
+      if (document.getElementById('sendsCaption')) el.setAttribute('aria-labelledby', 'sendsCaption');
       // Measured again once the webfonts land. The first measurement runs with
       // fallback faces, which are wider: the table overflowed, the hint said
       // "swipe" — and then Archivo and Hanken loaded, the table fitted, and

@@ -48,7 +48,7 @@ function releaseNote(body) {
     const lines = p.split('\n').map(l => l.trim()).filter(l => l && !/^#/.test(l));
     if (!lines.length) continue;
     return lines.join(' ')
-      .replace(/^[-*\s]+/, '')
+      .replace(/^[-*>\s]+/, '')
       .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
       .replace(/\*\*/g, '').replace(/`/g, '')
       .replace(/\s+/g, ' ').trim()

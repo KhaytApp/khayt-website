@@ -89,7 +89,7 @@
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="/ar/#top" class="brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+    <a href="/ar/#top" class="brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
     <nav class="nav-links" id="navLinks">
       <a href="/ar/#screens" data-i18n="nav.screens">الشاشات</a>
       <a href="/ar/#modes" data-i18n="nav.modes">الأوضاع</a>
@@ -250,7 +250,7 @@
   <div class="wrap">
     <span class="eyebrow" data-i18n="flow.eyebrow">خيط واحد متّصل</span>
     <h2 class="h2" style="margin-top:16px" data-i18n="flow.h2">من ملف على المكتب إلى مال في الحساب.</h2>
-    <p class="lede" data-i18n-html="flow.lede"><span class="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.</p>
+    <p class="lede" data-i18n-html="flow.lede"><span class="ar" lang="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.</p>
     <ol class="flow" id="flowSteps"><!-- PRERENDER:flowSteps:START --><li class="step"><span class="step-n" aria-hidden="true">01</span><h3>تسعير</h3><p>أسقِط ملف STL أو 3MF أو G-code على الحاسبة. يقرأ خيط الشكل نفسه ويسعّره وفق آلتك وموادك وهامشك.</p><span class="step-tag">الحاسبة</span></li><li class="step"><span class="step-n" aria-hidden="true">02</span><h3>جدولة</h3><p>يتحوّل العرض المعتمد إلى مهمة على اللوحة، مُسندة إلى طابعة بألوانها وقطعها مرفقة سلفاً.</p><span class="step-tag">قائمة الإنتاج</span></li><li class="step"><span class="step-n" aria-hidden="true">03</span><h3>طباعة</h3><p>حرارة وتقدّم مباشران من OctoPrint وBambu وKlipper وغيرها — مع تنبيهات التوقّف وانقطاع الاتصال.</p><span class="step-tag">واجهة الطابعات</span></li><li class="step"><span class="step-n" aria-hidden="true">04</span><h3>فوترة</h3><p>فاتورة إلكترونية موقّعة باللغة التي اختارتها مطبعتك، والضريبة مضافة بالطريقة التي يتبعها بلدك.</p><span class="step-tag">هيئة الزكاة · 30 إعداداً</span></li><li class="step"><span class="step-n" aria-hidden="true">05</span><h3>تصحيح</h3><p>تُبلغ المهمة المنتهية بما استهلكته فعلاً، فيعاير المقدِّر نفسه على مطبعتك.</p><span class="step-tag">مقيس، لا مفترض</span></li><!-- PRERENDER:flowSteps:END --></ol>
   </div>
 </section>
@@ -392,7 +392,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="lang.li3">تبديل فوري للّغة دون إعادة تشغيل</span></li>
           </ul>
           <div class="lang-chips">
-            <span class="lang-chip on">العربية</span>
+            <span class="lang-chip on" lang="ar">العربية</span>
             <span class="lang-chip on">English</span>
             <span class="lang-chip">Deutsch</span>
             <span class="lang-chip">Español</span>
@@ -408,8 +408,8 @@
           <div class="flip-head">
             <span class="lab" data-i18n="flip.lab">معاينة فاتورة حيّة</span>
             <div class="flip-switch" id="flipSwitch">
-              <button class="on" data-side="front">EN</button>
-              <button data-side="back">ع</button>
+              <button type="button" class="on" data-side="front" aria-pressed="true" aria-label="English" lang="en">EN</button>
+              <button type="button" data-side="back" aria-pressed="false" aria-label="العربية" lang="ar">ع</button>
             </div>
           </div>
           <div class="flip-card" id="flipCard">
@@ -425,9 +425,9 @@
               <div class="r-total"><span class="k">Total cost</span><span class="v">SAR 38.50</span></div>
               <div class="r-qr"><span class="qr"></span><span class="qt">Signed e-invoice<br>QR verified</span></div>
             </div>
-            <div class="flip-face back" dir="rtl">
+            <div class="flip-face back" dir="rtl" lang="ar">
               <div class="receipt-top">
-                <div class="r-brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true"><span class="ar">خيط</span></div>
+                <div class="r-brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true"><span class="ar" lang="ar">خيط</span></div>
                 <span class="r-tag">فاتورة ضريبية · 1042#</span>
               </div>
               <div class="r-row"><span class="k">المادة</span><span class="v"><span class="sw"></span>PLA أسود</span></div>
@@ -641,9 +641,9 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="/ar/#top" class="brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar">خيط</span></a>
+        <a href="/ar/#top" class="brand"><img src="/khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
         <p data-i18n="foot.desc">مكتب الإنتاج المتكامل لمطابع الطباعة ثلاثية الأبعاد — التسعير والقائمة والفوترة والمخزون، دون اتصال تماماً.</p>
-        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+        <p class="ar-sub" lang="ar">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
       </div>
       <div class="foot-links">
         <div class="foot-col">
