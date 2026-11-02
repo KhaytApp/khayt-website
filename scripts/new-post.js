@@ -108,15 +108,17 @@ fs.writeFileSync(POSTS, posts);
 
 const SITEMAP = 'sitemap.xml';
 let xml = fs.readFileSync(SITEMAP, 'utf8');
-const url =
+// The post and its Arabic copy (scripts/make-ar-pages.js), each naming both.
+const sitemapEntry = loc =>
 `  <url>
-    <loc>https://khaytapp.com/blog/${slug}.html</loc>
+    <loc>${loc}</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/${slug}.html"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/blog/${slug}.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/blog/${slug}.html"/>
     <lastmod>${date}</lastmod>
     <priority>0.6</priority>
   </url>
 `;
+const url = sitemapEntry(`https://khaytapp.com/blog/${slug}.html`) + sitemapEntry(`https://khaytapp.com/ar/blog/${slug}.html`);
 if (!xml.includes('</urlset>')) die('sitemap.xml has no </urlset>');
 xml = xml.replace('</urlset>', url + '</urlset>');
 fs.writeFileSync(SITEMAP, xml);
@@ -125,6 +127,7 @@ fs.writeFileSync(SITEMAP, xml);
 
 execFileSync(process.execPath, [path.join('scripts', 'make-feed.js')], { stdio: 'pipe' });
 execFileSync(process.execPath, [path.join('scripts', 'prerender.js'), 'blog/index.html'], { stdio: 'pipe' });
+execFileSync(process.execPath, [path.join('scripts', 'make-ar-pages.js')], { stdio: 'pipe' });
 execFileSync(process.execPath, [path.join('scripts', 'stamp-sitemap.js')], { stdio: 'pipe' });
 
 console.log(`Created ${target}`);
@@ -132,6 +135,7 @@ console.log('  · added to blog/posts.js (newest first)');
 console.log('  · added to sitemap.xml');
 console.log('  · blog/feed.xml regenerated');
 console.log('  · its card prerendered into blog/index.html');
+console.log('  · its Arabic copy written to ar/blog/ (and the blog index\'s)');
 console.log('\nNow, two files and one command:');
 console.log('  1. blog/posts.js   — the title, the summary and its short meta version, in both languages.');
 console.log('                       This is the source for them; the page is stamped from it.');

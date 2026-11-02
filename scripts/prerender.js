@@ -22,8 +22,12 @@
    all and the footer jumped down the length of the list (CLS 0.27). It is
    rendered the same way now, from the same render.js the page calls.
 
-     node scripts/prerender.js                          # write both pages
-     node scripts/prerender.js --check                  # exit 1 if either is stale
+   services.html had it too: its plan cards, service cards and the "what each
+   one sends" table were empty until services.js ran. Its markup lives in
+   services.js as pure functions (KHAYT_SERVICES), called here the same way.
+
+     node scripts/prerender.js                          # write every page
+     node scripts/prerender.js --check                  # exit 1 if any is stale
      node scripts/prerender.js --check blog/index.html  # just the one
 
    --check is what CI runs, so a change to data.js or posts.js that nobody
@@ -42,10 +46,12 @@ const ROOT = path.resolve(__dirname, '..');
 require(path.join(ROOT, 'data.js'));
 require(path.join(ROOT, 'render.js'));
 require(path.join(ROOT, 'blog', 'posts.js'));
+require(path.join(ROOT, 'services.js'));
 
 const DATA = globalThis.KHAYT_DATA;
 const RENDER = globalThis.KHAYT_RENDER;
 const POSTS = globalThis.KHAYT_POSTS;
+const SERVICES = globalThis.KHAYT_SERVICES;
 
 // The English strings the table needs. app.js holds the bilingual dictionary;
 // these are read out of it rather than retyped, so a change to the wording in
@@ -84,6 +90,16 @@ PAGES['blog/index.html'] = {
   })
 };
 
+// services.html: the plan cards, the nine service cards and the "what each
+// one sends" table, which were empty elements until services.js ran — so a
+// crawler saw a pricing page with no prices. services.js owns the markup and
+// exposes it as pure functions; this renders the state the page loads in.
+PAGES['services.html'] = {
+  planGrid: () => SERVICES.plans(DATA, 'en', SERVICES.INITIAL.cycle, SERVICES.INITIAL.cur),
+  svcGrid: () => SERVICES.services(DATA.cloud, 'en', {}),
+  sendsBody: () => SERVICES.sends(DATA.cloud, 'en')
+};
+
 function inject(page, html) {
   for (const [id, build] of Object.entries(PAGES[page])) {
     const start = `<!-- PRERENDER:${id}:START -->`;
@@ -106,7 +122,7 @@ for (const p of only) {
   if (!PAGES[p]) { console.error(`prerender: ${p} is not a prerendered page (${Object.keys(PAGES).join(', ')})`); process.exit(2); }
 }
 
-const SOURCE_OF = { 'index.html': 'data.js', 'blog/index.html': 'blog/posts.js' };
+const SOURCE_OF = { 'index.html': 'data.js', 'blog/index.html': 'blog/posts.js', 'services.html': 'data.js and services.js' };
 let stale = 0;
 for (const page of only.length ? only : Object.keys(PAGES)) {
   const file = path.join(ROOT, page);
@@ -126,7 +142,9 @@ for (const page of only.length ? only : Object.keys(PAGES)) {
     `${DATA.features.length} features`,
     `${DATA.cloud.length} cloud services`,
     `${DATA.modes.reduce((a, g) => a + g.rows.length, 0)} comparison rows`
-  ].join(', ') : `${POSTS.length} post cards`);
+  ].join(', ') : page === 'services.html'
+    ? `${DATA.plans.length} plans, ${DATA.cloud.length} services, ${DATA.cloud.length} table rows`
+    : `${POSTS.length} post cards`);
 }
 
 if (stale) {
