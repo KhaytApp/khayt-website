@@ -62,7 +62,7 @@
 
     'flow.eyebrow': { en: 'One continuous thread', ar: 'خيط واحد متّصل' },
     'flow.h2':      { en: 'From a file on the desk to money in the bank.', ar: 'من ملف على المكتب إلى مال في الحساب.' },
-    'flow.lede':    { en: 'Khayt — <span class="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.', ar: '<span class="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.' },
+    'flow.lede':    { en: 'Khayt — <span class="ar" lang="ar">خيط</span> — means thread. Every job is one unbroken run: nothing is re-keyed, nothing is guessed twice, and the numbers at the end correct the estimate at the start.', ar: '<span class="ar" lang="ar">خيط</span> — هو الخيط نفسه. كل مهمة مسار واحد غير منقطع: لا شيء يُعاد إدخاله، ولا شيء يُخمَّن مرتين، والأرقام في النهاية تصحّح التقدير في البداية.' },
     'hero.live':  { en: '3 printers live', ar: '3 طابعات تعمل الآن' },
 
 
@@ -794,7 +794,11 @@
     card.classList.toggle('flipped', back);
     var btns = sw.querySelectorAll('button');
     for (var i = 0; i < btns.length; i++)
-      btns[i].classList.toggle('on', (btns[i].getAttribute('data-side') === 'back') === back);
+    {
+      var on = (btns[i].getAttribute('data-side') === 'back') === back;
+      btns[i].classList.toggle('on', on);
+      btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
   }
 
   /* ---------- Nav: scroll state + mobile menu ---------- */
@@ -925,9 +929,12 @@
   function shortNote(rel) {
     // releases.json carries the note already made (scripts/make-releases.js);
     // only the API fallback has a raw body to cut one from.
-    var line = rel.note || releaseNote(rel.body);
-    if (!line) return { en: rel.name || rel.tag_name, ar: rel.name || rel.tag_name };
-    return { en: line, ar: line };
+    // Notes come from GitHub as plain English text: escape them (the row is
+    // built as HTML) and, on /ar/, mark them English so they read LTR with an
+    // English voice rather than as broken Arabic.
+    var line = (rel.note || releaseNote(rel.body) || rel.name || rel.tag_name || '').replace(/^[>\s]+/, '');
+    var safe = line.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+    return { en: safe, ar: '<span lang="en" dir="ltr">' + safe + '</span>' };
   }
 
   // The first sentence of the body's first PARAGRAPH, as one line. Release
@@ -945,7 +952,7 @@
       var lines = paras[i].split('\n').map(function (l) { return l.trim(); })
         .filter(function (l) { return l && !/^#/.test(l); });
       if (!lines.length) continue;
-      return lines.join(' ').replace(/^[-*\s]+/, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      return lines.join(' ').replace(/^[-*>\s]+/, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/\*\*/g, '').replace(/`/g, '').replace(/\s+/g, ' ').trim()
         // . ! or ? then a space and a capital: the dots in "3.11.3" end nothing.
         .replace(/^(.*?[.!?])\s+[A-Z][\s\S]*$/, '$1');
@@ -1074,7 +1081,20 @@
   function heroVideo() {
     var v = document.getElementById('heroVid'), b = document.getElementById('heroVidBtn');
     if (!v || !b || calmed() || !v.play) return;
+    // The first frame is already on screen as a picture, so a phone, or a
+    // visitor who asked to save data, keeps the picture and skips the 1.9 MB.
+    var conn = navigator.connection;
+    if ((conn && conn.saveData) || !window.matchMedia('(min-width: 700px)').matches) return;
     v.addEventListener('playing', function () { v.classList.add('on'); });
+    // Stop decoding while it is scrolled away; resume only if the visitor
+    // did not pause it themselves.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        var e = es[es.length - 1];
+        if (!v.getAttribute('src') || v.hasAttribute('data-paused')) return;
+        if (e.isIntersecting) v.play().catch(function () {}); else v.pause();
+      }).observe(v);
+    }
     b.addEventListener('click', function () {
       if (v.hasAttribute('data-paused')) { v.removeAttribute('data-paused'); v.play().catch(function () {}); }
       else { v.setAttribute('data-paused', ''); v.pause(); }

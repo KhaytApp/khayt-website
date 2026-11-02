@@ -562,7 +562,11 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
   .b-quote, .b-calib, .b-tax, .b-docs, .b-library, .b-safety { grid-column: 1 / -1; }
 }
 @media (max-width: 460px) {
-  .lang-toggle { display: none; }
+  /* Phones keep the switch: globe only, the language name stays for screen readers. */
+  .lang-toggle { padding-inline: 8px; }
+  .nav-in { gap: 10px; }
+  .nav-right { gap: 6px; }
+  .lang-toggle > span[lang] { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; white-space: nowrap; }
   .frame-title { display: none; }
   .hero-stat { gap: 18px; }
 }
@@ -737,11 +741,13 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
 .beta-form { margin-top: 18px; max-width: 520px; }
 .beta-form label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; }
 .beta-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.beta-row input[type="email"] { flex: 1 1 220px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper-2); color: inherit; font: inherit; }
+.beta-row input[type="email"] { flex: 1 1 220px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 50%, transparent); background: var(--paper-2); color: inherit; font: inherit; }
 .beta-row input[type="email"]:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
-.beta-form .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+/* Honeypot: clipped in place, not pushed off-screen. left:-10000px made the
+   RTL page 10,360px wide (leftward overflow scrolls in RTL). */
+.beta-form .hp { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; white-space: nowrap; }
 .beta-msg { margin: 8px 0 0; font-size: 13.5px; min-height: 1em; }
-.beta-msg.err { color: #e5484d; }
+.beta-msg.err { color: color-mix(in srgb, #e5484d 65%, currentColor); }
 .beta-fine { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); }
 .beta-fine a { color: var(--brand-2); }
 .mn-road { margin: 16px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 70ch; }
