@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* A reader who chose Arabic goes to /ar/ before anything else loads, not after the
+   whole English page has painted (app.js keeps the same rule as a fallback). */
+try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(location.search).get('lang'),l=q||localStorage.getItem('khayt-lang');if(l==='ar'){localStorage.setItem('khayt-lang','ar');location.replace('/ar/'+location.hash)}}}catch(e){}</script>
 <title>خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد</title>
 <meta name="description" content="تطبيق مجاني لمطابع الطباعة ثلاثية الأبعاد: قائمة الإنتاج وحاسبة التكلفة والفوترة الإلكترونية وربط الطابعات والمخزون والتحليلات — دون اتصال، مع سحابة اختيارية.">
 <meta property="og:title" content="خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد">

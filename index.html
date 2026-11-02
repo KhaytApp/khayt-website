@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* A reader who chose Arabic goes to /ar/ before anything else loads, not after the
+   whole English page has painted (app.js keeps the same rule as a fallback). */
+try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(location.search).get('lang'),l=q||localStorage.getItem('khayt-lang');if(l==='ar'){localStorage.setItem('khayt-lang','ar');location.replace('/ar/'+location.hash)}}}catch(e){}</script>
 <title>Khayt — Free 3D Print Shop Management Software</title>
 <meta name="description" content="Free desktop app for 3D print shops: production queue, cost calculator, e-invoicing, live printers, inventory and analytics — offline, with an optional cloud.">
 <meta property="og:title" content="Khayt — Free 3D Print Shop Management Software">
