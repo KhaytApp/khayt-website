@@ -1407,7 +1407,7 @@ body:has(.hero) .nav-burger span, body:has(.hero) .nav-burger span::before, body
 
 /* ---- hero ---- */
 .hero { background: var(--hero-grad); margin-top: calc(-1 * var(--nav-h, 64px)); padding-top: var(--nav-h, 64px); }
-.hero-tag { background: transparent; border: 0; padding: 0; color: var(--thread); font-family: var(--font-mono); letter-spacing: .14em; text-transform: uppercase; font-size: 12.5px; }
+.hero-tag { display: block; line-height: 1.7; text-wrap: balance; background: transparent; border: 0; padding: 0; color: var(--thread); font-family: var(--font-mono); letter-spacing: .14em; text-transform: uppercase; font-size: 12.5px; }
 .hero-tag .v { color: var(--thread); }
 .hero h1 { color: var(--on-dark); font-weight: 800; }
 .hero h1 .hl { color: #9cc2f2; }
@@ -1518,3 +1518,12 @@ body[dir="rtl"] .flow::before { transform: scaleX(-1); }
 @media (max-width: 860px) {
   body:has(.hero) .nav.open .nav-links { background: var(--navy-deep); border-color: rgba(255,255,255,0.1); }
 }
+
+/* Arabic is joined script: a monospace face with no Arabic glyphs and tracked
+   letter-spacing pull its letters apart. The small mono labels set in Arabic
+   take the Arabic face, untracked. */
+body[dir="rtl"] .eyebrow,
+body[dir="rtl"] .hero-tag,
+body[dir="rtl"] .trust-lab,
+body[dir="rtl"] .os-line { font-family: var(--font-ar); letter-spacing: 0; text-transform: none; }
+body[dir="rtl"] .hero-tag, body[dir="rtl"] .trust-lab { font-size: 13.5px; font-weight: 700; }
