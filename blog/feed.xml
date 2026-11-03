@@ -5,9 +5,29 @@
   <link href="https://khaytapp.com/blog/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://khaytapp.com/blog/" rel="alternate" type="text/html"/>
   <id>https://khaytapp.com/blog/</id>
-  <updated>2026-10-21T12:00:00Z</updated>
+  <updated>2026-11-03T12:00:00Z</updated>
   <author><name>Khayt</name><uri>https://khaytapp.com/</uri></author>
   <rights>FSL-1.1-Apache-2.0 · © 2026 Khayt</rights>
+
+  <entry xml:lang="en">
+    <title>Khayt 4: nine languages, HueForge and a store quote form</title>
+    <link href="https://khaytapp.com/blog/version-4.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-11-03:/blog/version-4/en</id>
+    <published>2026-11-03T12:00:00Z</published>
+    <updated>2026-11-03T12:00:00Z</updated>
+    <category term="Update"/>
+    <summary type="text">Two weeks after the Mac beta: the Windows and Linux app is version 4 too, the Mac speaks nine languages and gained the vault, a new library and a quote form, and paid plans now have their terms.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>خيط 4: تسع لغات وHueForge ونموذج عرض سعر للمتجر</title>
+    <link href="https://khaytapp.com/ar/blog/version-4.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-11-03:/blog/version-4/ar</id>
+    <published>2026-11-03T12:00:00Z</published>
+    <updated>2026-11-03T12:00:00Z</updated>
+    <category term="تحديث"/>
+    <summary type="text">بعد أسبوعين من النسخة التجريبية للماك: تطبيق ويندوز ولينكس صار الإصدار 4 أيضاً، والماك يتحدث تسع لغات واكتسب الخزنة ومكتبة جديدة ونموذج عرض سعر، وللخطط المدفوعة الآن شروطها.</summary>
+  </entry>
 
   <entry xml:lang="en">
     <title>Khayt for macOS is in beta</title>

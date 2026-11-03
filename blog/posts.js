@@ -20,6 +20,23 @@
   'use strict';
   root.KHAYT_POSTS = [
   {
+    slug: 'version-4',
+    date: '2026-11-03',
+    tag: { en: 'Update', ar: 'تحديث' },
+    t: {
+      en: 'Khayt 4: nine languages, HueForge and a store quote form',
+      ar: 'خيط 4: تسع لغات وHueForge ونموذج عرض سعر للمتجر'
+    },
+    d: {
+      en: 'Two weeks after the Mac beta: the Windows and Linux app is version 4 too, the Mac speaks nine languages and gained the vault, a new library and a quote form, and paid plans now have their terms.',
+      ar: 'بعد أسبوعين من النسخة التجريبية للماك: تطبيق ويندوز ولينكس صار الإصدار 4 أيضاً، والماك يتحدث تسع لغات واكتسب الخزنة ومكتبة جديدة ونموذج عرض سعر، وللخطط المدفوعة الآن شروطها.'
+    },
+    m: {
+      en: 'Khayt 4: the Mac beta in nine languages, HueForge on Windows and Linux, the vault, a store quote form and terms for paid plans.',
+      ar: 'خيط 4: النسخة التجريبية للماك بتسع لغات، وHueForge على ويندوز ولينكس، والخزنة، ونموذج عرض سعر للمتجر، وشروط الخطط المدفوعة.'
+    }
+  },
+  {
     slug: 'mac-beta',
     date: '2026-10-21',
     tag: { en: 'Mac', ar: 'ماك' },
