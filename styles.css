@@ -1385,25 +1385,26 @@ body.deep .frame { background: transparent; }
 .eyebrow::before { background: var(--thread); width: 24px; }
 
 /* ---- the dark sections share one set of colours ---- */
-.hero, .trust, .flow-section, .beta-section, .dl, .footer { color: var(--on-dark); }
+.hero, .trust, .flow-section, .beta-section, .dl, .footer, .page-head { color: var(--on-dark); }
 .flow-section .h2, .beta-section .h2, .dl .h2, .dl h2 { color: var(--on-dark); }
 .flow-section .lede, .beta-section .lede, .dl .lede { color: var(--on-dark-soft); }
 .flow-section .eyebrow, .beta-section .eyebrow, .dl .eyebrow, .hero .eyebrow { color: var(--thread); }
 .beta-section .lede a, .dl .lede a, .dl-note a, .footer a { color: #9cc2f2; }
 
 /* ---- nav: sits on the navy hero ---- */
-body:has(.hero) .nav { background: transparent; border-color: transparent; }
-body:has(.hero) .nav.scrolled { background: rgba(6,26,51,0.86); border-color: rgba(255,255,255,0.08); }
-body:has(.hero) .nav .brand { color: var(--on-dark); }
-body:has(.hero) .nav .brand .ar { color: var(--thread); }
-body:has(.hero) .nav-links a { color: var(--on-dark-soft); }
-body:has(.hero) .nav-links a:hover { background: rgba(255,255,255,0.08); color: var(--on-dark); }
-body:has(.hero) .nav .lang-toggle { color: var(--on-dark-soft); border-color: rgba(255,255,255,0.18); background: transparent; }
-body:has(.hero) .nav .lang-toggle:hover { color: var(--on-dark); border-color: rgba(255,255,255,0.4); }
-body:has(.hero) .nav .btn-accent { background: var(--on-dark); color: var(--ink-panel); box-shadow: none; border-radius: 999px; }
-body:has(.hero) .nav .btn-accent:hover { background: #e7eef8; }
-body:has(.hero) .nav-burger { background: transparent; border-color: rgba(255,255,255,0.2); }
-body:has(.hero) .nav-burger span, body:has(.hero) .nav-burger span::before, body:has(.hero) .nav-burger span::after { background: var(--on-dark); }
+body:is(:has(.hero), :has(.page-head)) .nav { background: transparent; border-color: transparent; }
+body.page:not(:has(.page-head)) .nav { background: rgba(6,26,51,0.94); border-color: rgba(255,255,255,0.08); }
+body:is(.home, .page) .nav.scrolled { background: rgba(6,26,51,0.86); border-color: rgba(255,255,255,0.08); }
+body:is(.home, .page) .nav .brand { color: var(--on-dark); }
+body:is(.home, .page) .nav .brand .ar { color: var(--thread); }
+body:is(.home, .page) .nav-links a { color: var(--on-dark-soft); }
+body:is(.home, .page) .nav-links a:hover { background: rgba(255,255,255,0.08); color: var(--on-dark); }
+body:is(.home, .page) .nav .lang-toggle { color: var(--on-dark-soft); border-color: rgba(255,255,255,0.18); background: transparent; }
+body:is(.home, .page) .nav .lang-toggle:hover { color: var(--on-dark); border-color: rgba(255,255,255,0.4); }
+body:is(.home, .page) .nav .btn-accent { background: var(--on-dark); color: var(--ink-panel); box-shadow: none; border-radius: 999px; }
+body:is(.home, .page) .nav .btn-accent:hover { background: #e7eef8; }
+body:is(.home, .page) .nav-burger { background: transparent; border-color: rgba(255,255,255,0.2); }
+body:is(.home, .page) .nav-burger span, body:is(.home, .page) .nav-burger span::before, body:is(.home, .page) .nav-burger span::after { background: var(--on-dark); }
 
 /* ---- hero ---- */
 .hero { background: var(--hero-grad); margin-top: calc(-1 * var(--nav-h, 64px)); padding-top: var(--nav-h, 64px); }
@@ -1509,14 +1510,14 @@ body[dir="rtl"] .flow::before { transform: scaleX(-1); }
 /* The dark home-page bands move the tokens the way body.deep does on the
    services page, so anything inside them that draws from --paper/--ink/--line
    (inputs, tables, chips) turns with them. */
-.flow-section, .beta-section, .dl, .footer {
+.flow-section, .beta-section, .dl, .footer, .page-head {
   --paper: #06182f; --paper-2: #081e38; --paper-3: #0d2444; --card: #0b2240;
   --ink: #eaf2fb; --ink-soft: #b3c8de; --muted: #8aa4c2;
   --brand-2: #6fb0ff; --line: rgba(234,242,251,0.13); --line-soft: rgba(234,242,251,0.07);
   --tint: rgba(111,176,255,0.12); --tint-2: rgba(111,176,255,0.2);
 }
 @media (max-width: 860px) {
-  body:has(.hero) .nav.open .nav-links { background: var(--navy-deep); border-color: rgba(255,255,255,0.1); }
+  body:is(.home, .page) .nav.open .nav-links { background: var(--navy-deep); border-color: rgba(255,255,255,0.1); }
 }
 
 /* Arabic is joined script: a monospace face with no Arabic glyphs and tracked
@@ -1527,3 +1528,23 @@ body[dir="rtl"] .hero-tag,
 body[dir="rtl"] .trust-lab,
 body[dir="rtl"] .os-line { font-family: var(--font-ar); letter-spacing: 0; text-transform: none; }
 body[dir="rtl"] .hero-tag, body[dir="rtl"] .trust-lab { font-size: 13.5px; font-weight: 700; }
+
+/* ---- inner pages (services, blog, privacy, terms, 404, payment results) ----
+   The same two-tone page as the home: a navy head under the nav, with the
+   reading on paper below it. */
+body.page .page-head { background: var(--hero-grad); margin-top: calc(-1 * var(--nav-h, 64px)); padding-top: calc(var(--nav-h, 64px) + clamp(56px, 7vw, 96px)); padding-bottom: clamp(48px, 6vw, 80px); border-bottom: 0; }
+body.page .page-head h1 { color: var(--on-dark); }
+body.page .page-head .lede, body.page .page-head p { color: var(--on-dark-soft); }
+body.page .page-head .eyebrow { color: var(--thread); }
+body.page .page-head a:not(.btn) { color: #9cc2f2; }
+body.page .post { padding-top: clamp(56px, 7vw, 88px); }
+body.page .post-back { color: var(--brand); }
+body:is(.home, .page) .nav-links a.here { color: var(--on-dark); background: rgba(255,255,255,0.12); }
+/* Plan notes were drawn for the old dark page; on paper they take the inks. */
+body.page .plan-now { color: #9a4a0c; background: rgba(223,96,17,0.08); border-color: rgba(223,96,17,0.28); }
+body.page .plan-now.free { color: var(--live-ink); background: rgba(27,181,92,0.08); border-color: rgba(27,181,92,0.28); }
+body.page .plan-badge.soon { color: #8a6100; background: rgba(233,196,106,0.18); border-color: rgba(233,196,106,0.5); }
+body.page .seg-btn { color: var(--ink-soft); }
+body.page .seg-btn.is-on { color: #fff; }
+body.page .svc-sends-k { color: #8a6100; }
+body.page .sw { background: var(--paper-3); }
