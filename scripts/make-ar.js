@@ -130,7 +130,7 @@ function build() {
 
   // Head and document.
   html = one(html, /<html lang="en">/g, () => '<html lang="ar" dir="rtl">', '<html>');
-  html = one(html, /<body class="deep">/g, () => '<body class="deep" dir="rtl">', '<body>');
+  html = one(html, /<body class="home">/g, () => '<body class="home" dir="rtl">', '<body>');
   html = one(html, /<title>[^<]*<\/title>/g, () => `<title>${esc(ar('meta.title'))}</title>`, '<title>');
   html = one(html, /<meta name="description" content="[^"]*">/g, () => `<meta name="description" content="${attr(ar('meta.desc'))}">`, 'description');
   html = one(html, /<meta property="og:title" content="[^"]*">/g, () => `<meta property="og:title" content="${attr(ar('meta.title'))}">`, 'og:title');
