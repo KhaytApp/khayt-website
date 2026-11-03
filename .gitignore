@@ -6,3 +6,6 @@ ds-bundle/
 .design-sync/.cache/
 .design-sync/learnings/
 .design-sync/node_modules
+
+# A headless-Chrome test profile written when $S was unset (committed once by mistake, broke the Pages build)
+undefined/
