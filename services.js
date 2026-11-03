@@ -68,8 +68,8 @@
     'sv.plans.betaNow': { en: 'Free during beta — nothing is being charged', ar: 'مجاني أثناء التجربة — لا يُحصَّل شيء' },
     'sv.plans.featured': { en: 'Most shops', ar: 'أغلب المطابع' },
     'sv.plans.soon': { en: 'Not built yet', ar: 'لم يُبنَ بعد' },
-    'sv.plans.peg': { en: 'Prices include VAT. Dollar prices are the riyal price ÷ 3.75, rounded up.',
-                      ar: 'الأسعار شاملة ضريبة القيمة المضافة. وسعر الدولار هو سعر الريال ÷ 3.75، مقرّباً إلى الأعلى.' },
+    'sv.plans.peg': { en: 'No VAT is charged: Khayt is not registered for it. Dollar prices are the riyal price ÷ 3.75, rounded up.',
+                      ar: 'لا تُحصَّل ضريبة القيمة المضافة، لأن خيط غير مسجّل فيها. وسعر الدولار هو سعر الريال ÷ 3.75، مقرّباً إلى الأعلى.' },
 
     'sv.list.count': { en: '{n} of 9 on', ar: '{n} من 9 مُشغَّلة' },
     'sv.list.allOn': { en: 'Switch everything on', ar: 'شغّل كل شيء' },
