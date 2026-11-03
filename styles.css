@@ -1359,3 +1359,162 @@ body.deep .frame { background: transparent; }
    top margin .post-body gives an h2 is what separates one clause from the next. */
 .policy h2 { font-size: clamp(19px, 2vw, 22px); }
 .policy ul { margin-top: 14px; }
+
+/* ============================================================
+   REDESIGN 2026 — "the thread"
+   ------------------------------------------------------------
+   Approved in Figma (khaytapp.com — Redesign, Nov 2026). A layer over the
+   rules above rather than a rewrite: every id, data-i18n hook and prerender
+   marker stays where app.js, prerender.js and make-ar.js expect it.
+   Dark sections: the hero (with the nav over it), the printer strip, the
+   flow, the cloud, download and the footer. An amber "thread" runs through
+   the hero and the flow, because خيط means thread.
+   ============================================================ */
+:root {
+  --thread: #f2a541;
+  --navy-deep: #061a33;
+  --navy-line: #1a3d68;
+  --on-dark: #ffffff;
+  --on-dark-soft: #b9c7d8;
+  --radius: 22px;
+  --hero-grad: linear-gradient(180deg, #061a33 0%, #0a2a50 100%);
+}
+
+/* ---- type scale ---- */
+.h2 { font-size: clamp(34px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
+.eyebrow::before { background: var(--thread); width: 24px; }
+
+/* ---- the dark sections share one set of colours ---- */
+.hero, .trust, .flow-section, .beta-section, .dl, .footer { color: var(--on-dark); }
+.flow-section .h2, .beta-section .h2, .dl .h2, .dl h2 { color: var(--on-dark); }
+.flow-section .lede, .beta-section .lede, .dl .lede { color: var(--on-dark-soft); }
+.flow-section .eyebrow, .beta-section .eyebrow, .dl .eyebrow, .hero .eyebrow { color: var(--thread); }
+.beta-section .lede a, .dl .lede a, .dl-note a, .footer a { color: #9cc2f2; }
+
+/* ---- nav: sits on the navy hero ---- */
+body:has(.hero) .nav { background: transparent; border-color: transparent; }
+body:has(.hero) .nav.scrolled { background: rgba(6,26,51,0.86); border-color: rgba(255,255,255,0.08); }
+body:has(.hero) .nav .brand { color: var(--on-dark); }
+body:has(.hero) .nav .brand .ar { color: var(--thread); }
+body:has(.hero) .nav-links a { color: var(--on-dark-soft); }
+body:has(.hero) .nav-links a:hover { background: rgba(255,255,255,0.08); color: var(--on-dark); }
+body:has(.hero) .nav .lang-toggle { color: var(--on-dark-soft); border-color: rgba(255,255,255,0.18); background: transparent; }
+body:has(.hero) .nav .lang-toggle:hover { color: var(--on-dark); border-color: rgba(255,255,255,0.4); }
+body:has(.hero) .nav .btn-accent { background: var(--on-dark); color: var(--ink-panel); box-shadow: none; border-radius: 999px; }
+body:has(.hero) .nav .btn-accent:hover { background: #e7eef8; }
+body:has(.hero) .nav-burger { background: transparent; border-color: rgba(255,255,255,0.2); }
+body:has(.hero) .nav-burger span, body:has(.hero) .nav-burger span::before, body:has(.hero) .nav-burger span::after { background: var(--on-dark); }
+
+/* ---- hero ---- */
+.hero { background: var(--hero-grad); margin-top: calc(-1 * var(--nav-h, 64px)); padding-top: var(--nav-h, 64px); }
+.hero-tag { background: transparent; border: 0; padding: 0; color: var(--thread); font-family: var(--font-mono); letter-spacing: .14em; text-transform: uppercase; font-size: 12.5px; }
+.hero-tag .v { color: var(--thread); }
+.hero h1 { color: var(--on-dark); font-weight: 800; }
+.hero h1 .hl { color: #9cc2f2; }
+.hero .sub { color: var(--on-dark-soft); }
+.hero-mac a { color: var(--on-dark); border-bottom-color: rgba(255,255,255,0.25); }
+.hero-mac a:hover { color: var(--on-dark); border-bottom-color: var(--thread); }
+.hero-mac .tag { background: var(--thread); color: var(--navy-deep); }
+.hero .btn { border-radius: 999px; }
+.hero .btn-primary { background: var(--brand); color: var(--on-brand); box-shadow: 0 10px 30px rgba(33,109,202,0.45); }
+.hero .btn-primary:hover { background: #2b7ad8; }
+.hero .btn-ghost { background: transparent; color: var(--on-dark); border-color: rgba(255,255,255,0.28); }
+.hero .btn-ghost:hover { border-color: var(--on-dark); box-shadow: none; }
+.os-line { display: flex; flex-wrap: wrap; gap: 8px; letter-spacing: .02em; text-transform: none; font-size: 12.5px; }
+.os-line > span:not(.sep), .os-line > a { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; color: var(--on-dark); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); text-decoration: none; }
+.os-line > span:not(.sep)::before, .os-line > a::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
+.os-line > a:hover { color: var(--on-dark); border-color: rgba(255,255,255,0.4); }
+.os-line .sep { display: none; }
+.hero-rbg { display: none; }
+.hero-shot .frame { border-color: rgba(255,255,255,0.12); box-shadow: 0 50px 110px rgba(0,0,0,0.5), 0 14px 36px rgba(0,0,0,0.3); }
+.hero-thread { position: absolute; inset-inline-start: -60px; top: 0; width: calc(100% + 120px); height: 100%; overflow: visible; pointer-events: none; }
+.hero-thread path { fill: none; stroke: var(--thread); stroke-width: 4; stroke-linecap: round; }
+body[dir="rtl"] .hero-thread { transform: scaleX(-1); }
+.hero-phone { position: absolute; z-index: 2; width: clamp(130px, 13vw, 190px); inset-inline-end: calc(-1 * var(--pad) + 8px); bottom: -24px; border-radius: 30px; padding: 7px; background: #0d0f14; box-shadow: 0 34px 70px rgba(0,0,0,0.55); }
+.hero-phone img { display: block; width: 100%; height: auto; border-radius: 24px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-thread path { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: thread-draw 2.2s cubic-bezier(.65,0,.35,1) .3s forwards; }
+  @keyframes thread-draw { to { stroke-dashoffset: 0; } }
+}
+@media (prefers-reduced-motion: reduce) { .hero-thread path { stroke-dasharray: none; } }
+
+/* ---- printer strip: the hero's last band ---- */
+.trust { background: #0a2a50; border-block: 1px solid rgba(255,255,255,0.08); }
+.trust-lab { color: var(--thread); }
+.trust-item { color: rgba(255,255,255,0.72); }
+
+/* ---- flow: the thread made literal ---- */
+.flow-section { background: var(--ink-panel); position: relative; overflow: hidden; }
+.flow { position: relative; padding-top: 34px; }
+.flow::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 40px; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1220 40' preserveAspectRatio='none'%3E%3Cpath d='M6 20 C 150 0, 250 40, 400 20 S 650 0, 800 20 S 1050 40, 1214 20' fill='none' stroke='%23F2A541' stroke-width='3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+body[dir="rtl"] .flow::before { transform: scaleX(-1); }
+.step::after { content: none; }
+.step::before { content: ""; display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--thread); box-shadow: 0 0 0 4px var(--ink-panel); margin: -26px 0 18px; position: relative; }
+.step-n { color: var(--thread); background: transparent; border: 0; }
+.step h3 { color: var(--on-dark); }
+.step p { color: var(--on-dark-soft); }
+.step-tag { color: var(--on-dark-soft); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+@media (max-width: 1000px) {
+  .flow::before { content: none; }
+  .step::before { margin: 0 0 12px; }
+}
+
+/* ---- screens ---- */
+#screens { background: #eef4fc; }
+.tabs { background: var(--paper); padding: 6px; border-radius: 999px; display: inline-flex; box-shadow: 0 4px 14px rgba(10,42,80,0.08); gap: 4px; }
+.tab { border: 0; border-radius: 999px; background: transparent; }
+.tab[aria-selected="true"] { background: var(--ink-panel); color: var(--on-dark); }
+.gallery-shot .frame { border-radius: 18px; box-shadow: 0 40px 90px rgba(10,42,80,0.22); }
+
+/* ---- cards ---- */
+.feat, .mode-card, .stat-card, .dl-card { border-radius: var(--radius); }
+.feat-ico { border-radius: 12px; }
+
+/* ---- the cloud ---- */
+.beta-section { background: var(--navy-deep) !important; border-color: transparent !important; }
+.beta-section .feat { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); color: var(--on-dark); }
+.beta-section .feat:hover { border-color: rgba(255,255,255,0.3); box-shadow: none; }
+.beta-section .feat h3 { color: var(--on-dark); }
+.beta-section .feat p { color: var(--on-dark-soft); }
+.beta-section .feat-ico { background: rgba(242,165,65,0.14); color: var(--thread); }
+.beta-section .eyebrow-beta { color: var(--thread); }
+.beta-section .eyebrow-beta::before { background: var(--thread); }
+.beta-section .beta-pill { background: rgba(242,165,65,0.16); color: var(--thread); border-color: rgba(242,165,65,0.4); }
+.beta-section .grid-more { color: var(--on-dark); border-color: rgba(255,255,255,0.25); background: transparent; }
+
+/* ---- download ---- */
+.dl { background: var(--ink-panel); border-top: 0; }
+.dl-sub { color: var(--on-dark); }
+.dl-card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: var(--on-dark); }
+.dl-card:hover { box-shadow: none; border-color: rgba(255,255,255,0.3); }
+.dl-os h3 { color: var(--on-dark); }
+.dl-os .note, .dl-link .b, .dl-note, .dl-meta { color: var(--on-dark-soft); }
+.dl-os .ico { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: var(--on-dark); }
+.dl-link { border-color: rgba(255,255,255,0.16); color: var(--on-dark); background: transparent; }
+.dl-link:hover { border-color: var(--thread); background: rgba(255,255,255,0.04); }
+.dl-link .arr, .dl-link:hover .arr { color: var(--thread); }
+.dl-channel { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+.dl-channel button { color: var(--on-dark-soft); }
+.dl-channel button[aria-pressed="true"] { background: var(--on-dark); color: var(--ink-panel); }
+
+/* ---- footer ---- */
+.footer { background: var(--navy-deep); border-top: 0; }
+.footer .brand { color: var(--on-dark); }
+.foot-brand p, .foot-brand .ar-sub, .foot-bottom, .foot-bottom * { color: var(--on-dark-soft); }
+.foot-col h2 { color: var(--thread); }
+.foot-col a { color: var(--on-dark-soft); }
+.foot-col a:hover { color: var(--on-dark); }
+
+/* The dark home-page bands move the tokens the way body.deep does on the
+   services page, so anything inside them that draws from --paper/--ink/--line
+   (inputs, tables, chips) turns with them. */
+.flow-section, .beta-section, .dl, .footer {
+  --paper: #06182f; --paper-2: #081e38; --paper-3: #0d2444; --card: #0b2240;
+  --ink: #eaf2fb; --ink-soft: #b3c8de; --muted: #8aa4c2;
+  --brand-2: #6fb0ff; --line: rgba(234,242,251,0.13); --line-soft: rgba(234,242,251,0.07);
+  --tint: rgba(111,176,255,0.12); --tint-2: rgba(111,176,255,0.2);
+}
+@media (max-width: 860px) {
+  body:has(.hero) .nav.open .nav-links { background: var(--navy-deep); border-color: rgba(255,255,255,0.1); }
+}
