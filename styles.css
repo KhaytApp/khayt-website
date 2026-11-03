@@ -1548,3 +1548,10 @@ body.page .seg-btn { color: var(--ink-soft); }
 body.page .seg-btn.is-on { color: #fff; }
 body.page .svc-sends-k { color: #8a6100; }
 body.page .sw { background: var(--paper-3); }
+
+/* In Arabic pages the mono face keeps Latin digits and codes, and any Arabic
+   inside a mono label falls through to the Arabic face instead of a system
+   monospace that draws each letter on its own. Tracking is dropped: it pulls
+   joined letters apart. */
+body[dir="rtl"] { --font-mono: "JetBrains Mono", "IBM Plex Sans Arabic", ui-monospace, monospace; }
+body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-date, .foot-col h2, .enc-list .k, .cmp.sends thead th, .theme-note, .stat-card .cap, .dl-os .note, .dl-link .b, .cl-head .clt, .lang-chip, .feat .num, .hero-pills span, .bt .tag) { letter-spacing: 0; text-transform: none; }
