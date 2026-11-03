@@ -87,7 +87,7 @@ const CHROME = literalAfter(fs.readFileSync('site.js', 'utf8'), 'var CHROME = {'
 // for services.html — the one in services.js, which it loads.
 function pageStrings(file, html) {
   return literalAfter(html, 'window.PAGE_STRINGS = {', file) ||
-    (/<script src="services\.js">/.test(html) ? literalAfter(fs.readFileSync('services.js', 'utf8'), 'window.PAGE_STRINGS = {', 'services.js') : {});
+    (/<script src="services\.js(?:\?v=[0-9a-f]+)?">/.test(html) ? literalAfter(fs.readFileSync('services.js', 'utf8'), 'window.PAGE_STRINGS = {', 'services.js') : {});
 }
 
 function one(html, re, fn, what, file) {
