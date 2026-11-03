@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.2.1",
+   "name": "Khayt v4.2.1",
+   "date": "2026-11-03",
+   "prerelease": false,
+   "note": "Desktop: the calculator says what a job for a client in another currency will be saved as.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.2.1",
+   "assets": [
+    {
+     "name": "Khayt-4.2.1.AppImage",
+     "size": 175562471,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/Khayt-4.2.1.AppImage"
+    },
+    {
+     "name": "Khayt-4.2.1.exe",
+     "size": 154787456,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/Khayt-4.2.1.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.2.1.exe",
+     "size": 155044766,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/Khayt-Setup-4.2.1.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.2.1.exe.blockmap",
+     "size": 163323,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/Khayt-Setup-4.2.1.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.2.1_amd64.deb",
+     "size": 141175932,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/khayt_4.2.1_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 514,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 339,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.1/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.2.0",
    "name": "Khayt v4.2.0",
    "date": "2026-11-01",
    "prerelease": false,
    "note": "Desktop: HueForge is in Khayt, not only Bed Ready.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.2.0",
-   "assets": [
-    {
-     "name": "Khayt-4.2.0.AppImage",
-     "size": 175558358,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/Khayt-4.2.0.AppImage"
-    },
-    {
-     "name": "Khayt-4.2.0.exe",
-     "size": 154785356,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/Khayt-4.2.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.2.0.exe",
-     "size": 155042577,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/Khayt-Setup-4.2.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.2.0.exe.blockmap",
-     "size": 163395,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/Khayt-Setup-4.2.0.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.2.0_amd64.deb",
-     "size": 141172728,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/khayt_4.2.0_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 514,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 339,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.0/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.2.0"
   },
   {
    "tag": "v4.1.2",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Invoice numbers agree everywhere, and a machine bought is counted once, since 3.11.11.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.12"
-  },
-  {
-   "tag": "v3.11.11",
-   "name": "Khayt v3.11.11",
-   "date": "2026-10-13",
-   "prerelease": false,
-   "note": "Deleting keeps the online copy, and Tamara and Tabby, since 3.11.10.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.11"
   }
  ]
 }
