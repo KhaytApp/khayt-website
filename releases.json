@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.3.0",
+   "name": "Khayt v4.3.0",
+   "date": "2026-11-04",
+   "prerelease": false,
+   "note": "Khayt looks different, and the sidebar is arranged by what you are doing.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.3.0",
+   "assets": [
+    {
+     "name": "Khayt-4.3.0.AppImage",
+     "size": 173786517,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/Khayt-4.3.0.AppImage"
+    },
+    {
+     "name": "Khayt-4.3.0.exe",
+     "size": 152733214,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/Khayt-4.3.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.3.0.exe",
+     "size": 152997408,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/Khayt-Setup-4.3.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.3.0.exe.blockmap",
+     "size": 161281,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/Khayt-Setup-4.3.0.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.3.0_amd64.deb",
+     "size": 139369412,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/khayt_4.3.0_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 514,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 339,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.3.0/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.2.2",
    "name": "Khayt v4.2.2",
    "date": "2026-11-03",
    "prerelease": false,
    "note": "Desktop: a milestone invoice is a proforma for that part of the job.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.2.2",
-   "assets": [
-    {
-     "name": "Khayt-4.2.2.AppImage",
-     "size": 175562815,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/Khayt-4.2.2.AppImage"
-    },
-    {
-     "name": "Khayt-4.2.2.exe",
-     "size": 154790246,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/Khayt-4.2.2.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.2.2.exe",
-     "size": 155047469,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/Khayt-Setup-4.2.2.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.2.2.exe.blockmap",
-     "size": 163475,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/Khayt-Setup-4.2.2.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.2.2_amd64.deb",
-     "size": 141179156,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/khayt_4.2.2_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 514,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 339,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.2.2/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.2.2"
   },
   {
    "tag": "v4.2.1",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Find every job printed from a filament lot, since 3.11.13.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.14"
-  },
-  {
-   "tag": "v3.11.13",
-   "name": "Khayt v3.11.13",
-   "date": "2026-10-16",
-   "prerelease": false,
-   "note": "Quotes with a marketplace fee now come out slightly higher.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.13"
   }
  ]
 }
