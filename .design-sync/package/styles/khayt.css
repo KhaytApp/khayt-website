@@ -44,8 +44,10 @@
   --wash-2:     #d6e4f5;
   /* The filament, kept sparing — and darkened, because it is drawn as TEXT
      on .cl-ver.beta and #df6011 is 3.61:1 on white, under what AA asks of
-     body copy. 4.77:1 at the same hue.                                    */
-  --amber:      #be520e;   /* warm secondary, sparing  4.77:1 on white     */
+     body copy. #be520e was not enough either: on the chip's own 10% tint it
+     is 4.17:1 (khayt-cloud #177 found the same on its tint). #ad4a0b is
+     4.84:1 on the tint and 5.58:1 on white.                               */
+  --amber:      #ad4a0b;   /* warm secondary, sparing  5.58:1 on white     */
   --live:       #1bb55c;   /* the DOT fill — decorative, any ratio is fine */
   /* --live is 2.69:1 on white, which is under what AA asks of the 12px
      assurance lines on the download cards. Same problem --amber already had
