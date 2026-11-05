@@ -2,9 +2,9 @@
 /* ============================================================
    Write a WebP beside every screenshot PNG.
    ------------------------------------------------------------
-   The site ships 208 screenshots — 8 designs x 13 screens x 2 languages —
-   plus the two mode shots, all PNG, averaging ~180KB. Every gallery tab and
-   every theme chip is a fresh network fetch of one of them.
+   The site ships one set of screenshots per app (screenshots/mac/,
+   desktop/ and iphone/, see PLATS in app.js), each in English and Arabic,
+   all PNG. Every gallery tab is a fresh network fetch of one of them.
 
    Quality is 0.92, chosen by looking rather than by reputation: the four
    qualities were rendered side by side at 2x over the densest text in the
@@ -21,11 +21,9 @@
    Narrower copies, for srcset. The hero and the gallery are 2160px captures,
    and a phone drew them at ~350 CSS px: it downloaded six times the pixels
    it could show, and the hero is the page's largest paint. So every
-   screenshot outside themes/ also gets a WebP at each of WIDTHS that is
-   narrower than itself, named screenshot-queue-640w.webp and so on, and the
-   pages and app.js offer them with srcset + sizes. themes/ is left alone:
-   the theme demo is dormant (see buildThemeChips in app.js) and its 182
-   captures are never shown.
+   screenshot also gets a WebP at each of WIDTHS that is
+   narrower than itself, named queue-en-640w.webp and so on, and the
+   pages and app.js offer them with srcset + sizes.
 
    The downscale is the canvas's own, at imageSmoothingQuality 'high'. The
    widths are listed again in app.js (SHOT_WIDTHS), which builds the gallery's

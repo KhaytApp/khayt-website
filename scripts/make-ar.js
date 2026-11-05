@@ -104,6 +104,12 @@ function build() {
   });
   html = html.replace(/(<source\b[^>]*\bsrcset=")screenshots\/iphone\/([a-z]+)-([a-z]+)-en-/g, '$1screenshots/iphone/$2-$3-ar-')
     .replace(/screenshots\/iphone\/([a-z]+)-([a-z]+)-en(-\d+w)?\.(webp|png)/g, 'screenshots/iphone/$1-$2-ar$3.$4');
+  html = html.replace(/<img\b[^>]*\bdata-shot="([^"]+)"[^>]*>/g, (tag, base) => {
+    const key = (tag.match(/\bdata-alt="([^"]+)"/) || [])[1];
+    return tag.replace(/\bsrc="[^"]*"/, `src="${base}-ar.png"`)
+      .replace(/\balt="[^"]*"/, key ? `alt="${attr(ar(key))}"` : '$&');
+  });
+  html = html.replace(/(screenshots\/desktop\/analytics-(?:simple|professional))-en(-\d+w)?\.webp/g, '$1-ar$2.webp');
   // Policy links: the Arabic section. An -en anchor opens /privacy in English.
   html = html.replace(/(href="[^"]*(?:privacy|terms)\/#[a-z-]+)-en"/g, '$1-ar"');
   // The hero: the Arabic take of the Mac demo, its first frame and its alt.
@@ -114,14 +120,15 @@ function build() {
   }
   for (const id of ['galSrc', 'galImg']) {
     html = one(html, new RegExp(`<(?:source|img)\\b[^>]*\\bid="${id}"[^>]*>`, 'g'),
-      tag => tag.replace(/screenshots\/screenshot-queue/g, 'screenshots/screenshot-ar-queue'), '#' + id);
+      tag => tag.replace(/screenshots\/mac\/queue-en/g, 'screenshots/mac/queue-ar')
+        .replace(/\balt="[^"]*"/, () => 'alt="لقطة شاشة خيط على ماك: لوحة المهام"'), '#' + id);
   }
 
   // The gallery caption, which paintCaption() fills from SCREENS, not DICT.
   const sAt = src.indexOf('var SCREENS = {');
   const screens = vm.runInNewContext('(' + src.slice(src.indexOf('{', sAt), src.indexOf('\n  };', sAt)) + '\n})');
   html = one(html, /(<h3 id="capTitle">)[^<]*(<\/h3>)/g, (m, a, b) => a + esc(screens.queue.cap.ar) + b, '#capTitle');
-  html = one(html, /(<p id="capText">)[^<]*(<\/p>)/g, (m, a, b) => a + esc(screens.queue.text.ar) + b, '#capText');
+  html = one(html, /(<p id="capText">)[^<]*(<\/p>)/g, (m, a, b) => a + esc(((screens.queue.mac && screens.queue.mac.text) || screens.queue.text).ar) + b, '#capText');
 
   // The language button names the language you switch TO.
   html = one(html, /(<button class="lang-toggle" id="navLang">)[\s\S]*?(<\/button>)/g,

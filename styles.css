@@ -1469,6 +1469,25 @@ body[dir="rtl"] .flow::before { transform: scaleX(-1); }
 .tab { border: 0; border-radius: 999px; background: transparent; }
 .tab[aria-selected="true"] { background: var(--ink-panel); color: var(--on-dark); }
 .gallery-shot .frame { border-radius: 18px; box-shadow: 0 40px 90px rgba(10,42,80,0.22); }
+/* Which app the gallery shows (platSwitch in app.js). Bigger and plainer
+   than the tab row under it, so it reads as the choice the tabs depend on. */
+.plat-switch { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.plat {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--ink-soft);
+  min-height: 44px; padding: 8px 20px; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--paper); transition: background .15s, color .15s, border-color .15s;
+}
+.plat:hover { color: var(--ink); border-color: var(--muted); }
+.plat[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+.plat:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+/* The iPhone set is portrait: a phone-width picture with the phone's corners,
+   no window bar. */
+.gallery-shot.tall .frame { max-width: 340px; margin-inline: auto; border-radius: 34px; }
+.gallery-shot.tall .frame-bar { display: none; }
+.gallery-shot.tall .frame-img-wrap { background: transparent; }
+@media (max-width: 640px) { .gallery-shot.tall .frame { max-width: 70vw; } }
+@media (prefers-reduced-motion: reduce) { .plat { transition: none; } }
+@media (max-width: 480px) { .plat-switch { gap: 6px; } .plat { font-size: 14px; padding: 8px 12px; } }
 
 /* ---- cards ---- */
 .feat, .mode-card, .stat-card, .dl-card { border-radius: var(--radius); }
