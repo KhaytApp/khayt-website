@@ -58,10 +58,8 @@ function pngWidth(rel) {
 function outputsFor(rel) {
   const base = rel.replace(/\.png$/, '');
   const out = [{ file: base + '.webp', width: 0 }];
-  if (rel.split(path.sep)[1] !== 'themes') {
-    const w = pngWidth(rel);
-    for (const v of WIDTHS) if (v < w) out.push({ file: base + '-' + v + 'w.webp', width: v });
-  }
+  const w = pngWidth(rel);
+  for (const v of WIDTHS) if (v < w) out.push({ file: base + '-' + v + 'w.webp', width: v });
   return out;
 }
 
