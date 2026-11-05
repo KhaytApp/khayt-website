@@ -178,6 +178,7 @@
       features: [
         { en: 'Everything in Creator', ar: 'كل ما في المبدع' },
         { en: 'Team accounts — up to 5 people', ar: 'حسابات الفريق — حتى 5 أشخاص' },
+        { en: 'Quote form without the “Quotes by Khayt” line', ar: 'نموذج التسعير بلا سطر «عروض الأسعار من خيط»' },
         { en: 'Khayt Vault — 1 TB, 1,000 share links', ar: 'خزنة خيط — 1 تيرابايت، 1,000 رابط مشاركة' }
       ],
       cta: { en: 'Turn it on in the app', ar: 'شغّلها داخل التطبيق' },
