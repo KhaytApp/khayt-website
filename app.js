@@ -42,7 +42,7 @@
       ar: 'خيط لماك صار تطبيق ماك أصليًا — جرّب النسخة التجريبية ←'
     },
 
-    'hero.vid':   { en: 'The Khayt Mac app’s sample shop: the production board, a job with its money and operator, the model library and customers', ar: 'المطبعة التجريبية في تطبيق خيط لماك: لوحة الإنتاج، ومهمة بمبالغها ومشغّلها، ومكتبة المجسّمات، والعملاء' },
+    'hero.vid':   { en: 'The Khayt Mac app’s sample shop: Today, the production board, a job, the model library and the reports', ar: 'المطبعة التجريبية في تطبيق خيط لماك: شاشة اليوم، ولوحة الإنتاج، ومهمة، ومكتبة المجسّمات، والتقارير' },
     'tabs.aria': { en: 'App screens', ar: 'شاشات التطبيق' },
     'dl.channel': { en: 'Release channel', ar: 'قناة الإصدار' },
     'hero.vid.pause': { en: 'Pause the video', ar: 'أوقف الفيديو مؤقتاً' },
@@ -74,6 +74,14 @@
     'gal.h2':     { en: 'Real screens. Not mockups.', ar: 'شاشات حقيقية. لا تصاميم وهمية.' },
     'tab.queue':      { en: 'Production Queue', ar: 'قائمة الإنتاج' },
     'tab.dashboard':  { en: 'Dashboard', ar: 'لوحة التحكم' },
+    'tab.today':      { en: 'Today', ar: 'اليوم' },
+    'tab.board':      { en: 'Board', ar: 'لوحة المهام' },
+    'tab.jobs':       { en: 'Jobs', ar: 'الأعمال' },
+    'tab.library':    { en: 'Library', ar: 'المكتبة' },
+    'tab.catalogue':  { en: 'Catalogue', ar: 'الكتالوج' },
+    'tab.customers':  { en: 'Customers', ar: 'العملاء' },
+    'tab.reports':    { en: 'Reports', ar: 'التقارير' },
+    'tab.colour':     { en: 'Colour', ar: 'الألوان' },
     'tab.calculator': { en: 'Calculator', ar: 'الحاسبة' },
     'tab.printfiles': { en: 'Print Files', ar: 'ملفات الطباعة' },
     'tab.colorstudio':{ en: 'Colour Studio', ar: 'استوديو الألوان' },
@@ -86,7 +94,9 @@
     'modes.hobby.t':{ en: 'Printing for yourself, not for customers?', ar: 'تطبع لنفسك لا لعملاء؟' },
     'modes.hobby.d':{ en: 'Khayt is built around orders, clients and invoicing. If you just want to prep files, plan colours and keep track of filament, that\u2019s Bed Ready \u2014 a separate free app from the same workshop.', ar: '\u062e\u064a\u0637 \u0645\u0628\u0646\u064a\u0651 \u062d\u0648\u0644 \u0627\u0644\u0637\u0644\u0628\u0627\u062a \u0648\u0627\u0644\u0639\u0645\u0644\u0627\u0621 \u0648\u0627\u0644\u0641\u0648\u062a\u0631\u0629. \u0625\u0646 \u0643\u0646\u062a \u062a\u0631\u064a\u062f \u0641\u0642\u0637 \u062a\u062c\u0647\u064a\u0632 \u0627\u0644\u0645\u0644\u0641\u0627\u062a \u0648\u062a\u062e\u0637\u064a\u0637 \u0627\u0644\u0623\u0644\u0648\u0627\u0646 \u0648\u0645\u062a\u0627\u0628\u0639\u0629 \u0627\u0644\u062e\u064a\u0648\u0637\u060c \u0641\u0647\u0630\u0627 \u0647\u0648 Bed Ready \u2014 \u062a\u0637\u0628\u064a\u0642 \u0645\u062c\u0627\u0646\u064a \u0645\u0646\u0641\u0635\u0644 \u0645\u0646 \u0627\u0644\u0648\u0631\u0634\u0629 \u0646\u0641\u0633\u0647\u0627.' },
     'modes.hobby.cta':{ en: 'Take a look at Bed Ready', ar: '\u0627\u0637\u0651\u0644\u0639 \u0639\u0644\u0649 Bed Ready' },
-    'modes.eyebrow':{ en: 'One app, two ways to run it', ar: 'تطبيق واحد بطريقتين للاستخدام' },
+    'modes.eyebrow':{ en: 'On Windows and Linux: two ways to run it', ar: 'على ويندوز ولينكس: طريقتان للاستخدام' },
+    'modes.sim.alt': { en: 'Analytics in Simple mode on Windows: three report tiles and a CSV download', ar: 'التحليلات في الوضع البسيط على ويندوز: ثلاث بطاقات تقارير وتنزيل CSV' },
+    'modes.pro.alt': { en: 'Analytics in Professional mode on Windows: the full reports', ar: 'التحليلات في الوضع الاحترافي على ويندوز: التقارير كاملة' },
     'modes.h2':     { en: 'From side-business to production floor', ar: 'من عمل جانبي إلى أرضية إنتاج' },
     'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a small side-business to a full production floor, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من عمل جانبي صغير إلى أرضية إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
     'modes.sim.pill':{ en: 'Simple', ar: 'بسيط' },
@@ -131,8 +141,13 @@
     'lang.li3':{ en: 'Instant language switch, no restart needed', ar: 'تبديل فوري للّغة دون إعادة تشغيل' },
     'flip.lab':{ en: 'Live invoice preview', ar: 'معاينة فاتورة حيّة' },
     'theme.lab':{ en: 'Make it yours', ar: 'بلمستك الخاصة' },
-    'theme.note':{ en: '8 designs · light & dark · switch any time', ar: '8 تصاميم · فاتح وداكن · بدّل في أي وقت' },
-    'chip.beta': { en: 'beta', ar: 'تجريبي' },
+    'gal.note.mac':     { en: 'One design · light & dark · follows your Mac', ar: 'تصميم واحد · فاتح وداكن · يتبع جهاز ماك' },
+    'gal.note.desktop': { en: '9 designs, or install your own · light & dark · switch any time', ar: '9 تصاميم، أو ثبّت تصميمك · فاتح وداكن · بدّل في أي وقت' },
+    'gal.note.iphone':  { en: 'Light & dark · follows your iPhone', ar: 'فاتح وداكن · يتبع جهاز الآيفون' },
+    'plat.aria':        { en: 'Which app', ar: 'أي تطبيق' },
+    'plat.mac':         { en: 'Mac', ar: 'ماك' },
+    'plat.desktop':     { en: 'Windows & Linux', ar: 'ويندوز ولينكس' },
+    'plat.iphone':      { en: 'iPhone', ar: 'آيفون' },
 
     'oss.eyebrow':{ en: 'Source available', ar: 'المصدر متاح' },
     'oss.h2':    { en: 'Free to use.<br>Yours to inspect.', ar: 'مجاني للاستخدام.<br>وملكك لتفحّصه.' },
@@ -149,7 +164,7 @@
     'faq.q3':   { en: 'Khayt is free. How is it paid for?', ar: 'خيط مجاني، فكيف يُموَّل؟' },
     'faq.a3':   { en: 'The app is free to use and will stay free. Khayt Cloud is an optional paid service — sync between devices, team members, customer pages and an encrypted cloud library — and it is free while it is in beta. The cloud plans and sponsors pay for Khayt’s development. You never need the cloud to run your shop.', ar: 'التطبيق مجاني وسيبقى مجانياً. أما سحابة خيط فخدمة مدفوعة اختيارية — مزامنة بين الأجهزة، وأعضاء فريق، وصفحات للعملاء، ومكتبة سحابية مشفّرة — وهي مجانية ما دامت تجريبية. ومن خطط السحابة والداعمين يُموَّل تطوير خيط. ولن تحتاج إلى السحابة لتدير مطبعتك أبداً.' },
     'faq.q4':   { en: 'Do the Mac and Windows apps do the same things?', ar: 'هل يفعل تطبيق الماك وتطبيق ويندوز الأشياء نفسها؟' },
-    'faq.a4':   { en: 'Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: signed invoices, buy-now-pay-later links and HueForge pictures for the Snapmaker U1.', ar: 'في معظمها. كلاهما يقرأ دفتر المطبعة نفسه بالقواعد نفسها، وبطاقات المزايا أعلاه تذكر ما يوجد في تطبيق ولم يصل إلى الآخر بعد. على ماك وحده حالياً: نموذج التسعير لموقعك، وخزنة خيط، وإرسال الملفات من برنامج التقطيع. وعلى ويندوز ولينكس وحدهما حالياً: الفواتير الموقّعة، وروابط الدفع الآجل، وصور HueForge لطابعة Snapmaker U1.' },
+    'faq.a4':   { en: 'Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: buy-now-pay-later links and HueForge pictures for the Snapmaker U1.', ar: 'في معظمها. كلاهما يقرأ دفتر المطبعة نفسه بالقواعد نفسها، وبطاقات المزايا أعلاه تذكر ما يوجد في تطبيق ولم يصل إلى الآخر بعد. على ماك وحده حالياً: نموذج التسعير لموقعك، وخزنة خيط، وإرسال الملفات من برنامج التقطيع. وعلى ويندوز ولينكس وحدهما حالياً: روابط الدفع الآجل، وصور HueForge لطابعة Snapmaker U1.' },
     'faq.q5':   { en: 'Which printers does it talk to?', ar: 'مع أي طابعات يتواصل؟' },
     'faq.a5':   { en: 'OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use.', ar: 'OctoPrint وKlipper (عبر Moonraker) وBambu Lab وPrusaLink وDuet وRepetier وElegoo. تظهر حرارتها وتقدّمها في قائمة الإنتاج، وحين تنتهي الطباعة يقرأ خيط ما أبلغت عنه الطابعة، فتُحسب تكلفة العرض التالي من الاستخدام الفعلي.' },
     'faq.q6':   { en: 'Is there an iPhone app?', ar: 'هل يوجد تطبيق للآيفون؟' },
@@ -312,19 +327,43 @@
 
   /* ---------- Screen gallery data ---------- */
   var SCREENS = {
-    queue:      { name: { en: 'Production Queue', ar: 'قائمة الإنتاج' }, cap: { en: 'Kanban production queue', ar: 'قائمة إنتاج كانبان' }, text: { en: 'Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print-failure photo capture, on-hold with reason, and part-level colour assignment.', ar: 'اسحب الطلبات عبر المراحل من قيد الانتظار إلى مكتمل. عروض لكل طابعة، قوائم بدء الوردية، التقاط صور الأعطال، الإيقاف المؤقت بسبب، وتعيين ألوان القطع.' } },
-    dashboard:  { name: { en: 'Dashboard', ar: 'لوحة التحكم' }, cap: { en: 'Your shop at a glance', ar: 'مطبعتك في لمحة' }, text: { en: 'Active orders, today\u2019s revenue, outstanding balances, pipeline value and days-to-clear-queue — with a monthly revenue goal forecast and live machine-load breakdown.', ar: 'الطلبات النشطة، إيرادات اليوم، الأرصدة المستحقة، قيمة المسار وأيام تفريغ القائمة — مع توقّع هدف الإيرادات الشهري وتوزيع حِمل الآلات لحظياً.' } },
-    calculator: { name: { en: 'Calculator', ar: 'الحاسبة' }, cap: { en: 'Quote with confidence, not guesswork', ar: 'سعّر بثقة لا بالتخمين' }, text: { en: 'A multi-part cart costs material, machine time, electricity, labour, overhead, failure rate and margin in real time — for both FDM (grams) and Resin (mL), with G-code / 3MF auto-extraction.', ar: 'سلة متعددة القطع تحسب المادة ووقت التشغيل والكهرباء والعمالة والمصاريف ونسبة الفشل والهامش لحظياً — لكل من FDM بالغرام والراتنج بالمل، مع استخراج تلقائي من G-code و3MF.' } },
-    printfiles: { name: { en: 'Print Files', ar: 'ملفات الطباعة' }, cap: { en: 'Your STL, 3MF and G-code library', ar: 'مكتبة ملفات STL و3MF وG-code' }, text: { en: 'A visual library of your print files with real preview thumbnails, extracted colours and swap counts, tested slicer notes, and one-click open in any installed slicer. Convert a 3MF to another printer and the result stays with the file.', ar: 'مكتبة مرئية لملفات الطباعة بمعاينات حقيقية، ألوان مستخرجة وعدد التبديلات، ملاحظات التقطيع المجرّبة، وفتح بنقرة في أي برنامج تقطيع مثبّت. حوّل ملف 3MF لطابعة أخرى ويبقى الناتج مع الملف.' } },
-    colorstudio: { name: { en: 'Colour Studio', ar: 'استوديو الألوان' }, cap: { en: 'Match, blend and plan filament colours', ar: 'طابِق وامزج وخطّط ألوان الخيوط' }, text: { en: 'Pick a target colour and see the closest filament you already own, ranked by perceptual distance (ΔE). Blend two spools into a gradient for ombré or swap plans, and assign each colour of a multicolour print to a spool — with cost pushed straight to the calculator.', ar: 'اختر لوناً هدفاً وشاهد أقرب خيط تملكه مرتّباً حسب الفرق اللوني (ΔE). امزج بكرتين في تدرّج لخطط الأومبريه أو التبديل، وعيّن كل لون في طباعة متعددة الألوان لبكرة — مع دفع التكلفة مباشرة للحاسبة.' } },
-    orders:     { name: { en: 'Orders Log', ar: 'سجل الطلبات' }, cap: { en: 'From quote to paid, in one log', ar: 'من العرض إلى السداد في سجل واحد' }, text: { en: 'Every order tracked end-to-end with signed e-invoices, TLV QR codes, proforma invoices, milestone billing, BNPL payment links, PDF export and WhatsApp or email delivery.', ar: 'كل طلب متتبّع من البداية للنهاية بفواتير موقّعة برمز QR وفواتير مبدئية وفوترة بالمراحل وروابط دفع آجل وتصدير PDF وإرسال عبر واتساب أو البريد.' } },
-    inventory:  { name: { en: 'Inventory', ar: 'المخزون' }, cap: { en: 'Never start a print you can\u2019t finish', ar: 'لا تبدأ طباعة لا يمكنك إكمالها' }, text: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, FIFO cost, smart reorder alerts with draft purchase orders, drying logs and price history.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، تكلفة FIFO، تنبيهات إعادة طلب ذكية بأوامر شراء، سجلات التجفيف وسجل الأسعار.' } },
-    analytics:  { name: { en: 'Analytics', ar: 'التحليلات' }, cap: { en: 'Know exactly where the money goes', ar: 'اعرف أين يذهب المال بالضبط' }, text: { en: 'Revenue trends, machine P&L, operator performance, filament usage, retention and a production heatmap — in Simple or Professional reporting modes, with end-of-day PDFs.', ar: 'اتجاهات الإيرادات، أرباح كل آلة، أداء المشغّلين، استهلاك الخيوط، الاحتفاظ وخريطة حرارية للإنتاج — بوضع بسيط أو احترافي، مع تقارير PDF لنهاية اليوم.' } },
-    clients:    { name: { en: 'Clients', ar: 'العملاء' }, cap: { en: 'Turn buyers into regulars', ar: 'حوّل المشترين إلى عملاء دائمين' }, text: { en: 'Client profiles with credit limits, multi-currency, loyalty tiers with automatic discounts, a live customer portal with QR order tracking and an aged-receivables report.', ar: 'ملفات عملاء بحدود ائتمانية وتعدد عملات ومستويات ولاء بخصومات تلقائية، بوابة عملاء حيّة بتتبّع QR وتقرير الذمم المدينة.' } },
-    catalog:    { name: { en: 'Catalog', ar: 'الكتالوج' }, cap: { en: 'Reusable products, one-tap quotes', ar: 'منتجات جاهزة وتسعير بلمسة' }, text: { en: 'Save any part as a reusable product SKU with its slicer settings and price, then quote it in one tap. Track per-product revenue and print history, import in bulk via CSV.', ar: 'احفظ أي قطعة كمنتج جاهز بإعداداته وسعره، ثم سعّره بلمسة. تتبّع إيراد كل منتج وسجل طباعته، واستورد دفعة عبر CSV.' } },
+    queue:      { mac: { name: { en: 'Board', ar: 'لوحة المهام' }, text: { en: 'Every job on one board, from Pending through Printing, Post-processing and QC to Done, with jobs on hold carrying a reason and each part on its own spool.', ar: 'كل المهام على لوحة واحدة، من الانتظار إلى الطباعة والمعالجة اللاحقة وفحص الجودة حتى الإنجاز، مع سبب لكل مهمة معلّقة، وكل قطعة على بكرتها.' } },
+                  name: { en: 'Production Queue', ar: 'قائمة الإنتاج' }, cap: { en: 'Kanban production queue', ar: 'قائمة إنتاج كانبان' }, text: { en: 'Drag orders across Pending → Printing → Post-Processing → QC → Done. Per-machine queue views, shift-start checklists, print-failure photo capture, on-hold with reason, and part-level colour assignment.', ar: 'اسحب الطلبات عبر المراحل من قيد الانتظار إلى مكتمل. عروض لكل طابعة، قوائم بدء الوردية، التقاط صور الأعطال، الإيقاف المؤقت بسبب، وتعيين ألوان القطع.' } },
+    dashboard:  { mac: { name: { en: 'Today', ar: 'اليوم' }, cap: { en: 'Your day, at a glance', ar: 'يومك في لمحة' }, text: { en: 'Today: open, printing and due jobs, what you are owed, revenue and margin for the period, progress toward the monthly goal, and every machine\u2019s live print.', ar: 'اليوم: المهام المفتوحة وقيد الطباعة والمستحقة، وما لك من مستحقات، والإيراد والهامش للفترة، والتقدّم نحو هدف الشهر، والطباعة الجارية على كل آلة.' } },
+                  desktop: { text: { en: 'Your shop at a glance: active jobs, live fleet status, and what needs attention (overdue jobs, unpaid invoices, low stock).', ar: 'مطبعتك في لمحة: المهام النشطة، وحالة الطابعات مباشرة، وما يحتاج إلى انتباه (مهام متأخرة، فواتير غير مدفوعة، مخزون منخفض).' } },
+                  name: { en: 'Dashboard', ar: 'لوحة التحكم' }, cap: { en: 'Your shop at a glance', ar: 'مطبعتك في لمحة' }, text: { en: 'Active orders, today\u2019s revenue, outstanding balances, pipeline value and days-to-clear-queue — with a monthly revenue goal forecast and live machine-load breakdown.', ar: 'الطلبات النشطة، إيرادات اليوم، الأرصدة المستحقة، قيمة المسار وأيام تفريغ القائمة — مع توقّع هدف الإيرادات الشهري وتوزيع حِمل الآلات لحظياً.' } },
+    calculator: { iphone: { cap: { en: 'Quote at the counter', ar: 'سعّر عند الاستلام' }, text: { en: 'What to charge for a part from its weight and print time, with the cost broken down, using your shop\u2019s own rates.', ar: 'ما تتقاضاه عن قطعة من وزنها وزمن طباعتها، مع تفصيل التكلفة، بأسعار ورشتك نفسها.' } },
+                  mac: { text: { en: 'Price a part from material, machine time, electricity, labour, overhead and failure rate with a live margin, or fill the figures from a sliced model in your library.', ar: 'سعّر قطعة من المادة ووقت الآلة والكهرباء والعمالة والمصاريف ونسبة الفشل مع هامش مباشر، أو املأ الأرقام من مجسّم مقطَّع في مكتبتك.' } },
+                  name: { en: 'Calculator', ar: 'الحاسبة' }, cap: { en: 'Quote with confidence, not guesswork', ar: 'سعّر بثقة لا بالتخمين' }, text: { en: 'A multi-part cart costs material, machine time, electricity, labour, overhead, failure rate and margin in real time — for both FDM (grams) and Resin (mL), with G-code / 3MF auto-extraction.', ar: 'سلة متعددة القطع تحسب المادة ووقت التشغيل والكهرباء والعمالة والمصاريف ونسبة الفشل والهامش لحظياً — لكل من FDM بالغرام والراتنج بالمل، مع استخراج تلقائي من G-code و3MF.' } },
+    printfiles: { mac: { name: { en: 'Library', ar: 'المكتبة' }, text: { en: 'Your print files with thumbnails, colours and swap counts, tested notes, open-in-slicer, and 3MF conversion for another printer that lands back in the library.', ar: 'ملفات طباعتك بصور مصغّرة وألوانها وعدد تبديلاتها، وملاحظات مجرّبة، وفتح في برنامج التقطيع، وتحويل 3MF لطابعة أخرى يعود إلى المكتبة.' } },
+                  name: { en: 'Print Files', ar: 'ملفات الطباعة' }, cap: { en: 'Your STL, 3MF and G-code library', ar: 'مكتبة ملفات STL و3MF وG-code' }, text: { en: 'A visual library of your print files with real preview thumbnails, extracted colours and swap counts, tested slicer notes, and one-click open in any installed slicer. Convert a 3MF to another printer and the result stays with the file.', ar: 'مكتبة مرئية لملفات الطباعة بمعاينات حقيقية، ألوان مستخرجة وعدد التبديلات، ملاحظات التقطيع المجرّبة، وفتح بنقرة في أي برنامج تقطيع مثبّت. حوّل ملف 3MF لطابعة أخرى ويبقى الناتج مع الملف.' } },
+    colorstudio: { mac: { name: { en: 'Colour', ar: 'الألوان' }, text: { en: 'Find the closest filament you own to any colour by \u0394E, and preview a gradient blended between two spools.', ar: 'اعثر على أقرب خيط تملكه إلى أي لون بمقياس \u0394E، وعاين تدرّجاً ممزوجاً بين بكرتين.' } },
+                  name: { en: 'Colour Studio', ar: 'استوديو الألوان' }, cap: { en: 'Match, blend and plan filament colours', ar: 'طابِق وامزج وخطّط ألوان الخيوط' }, text: { en: 'Pick a target colour and see the closest filament you already own, ranked by perceptual distance (ΔE). Blend two spools into a gradient for ombré or swap plans, and assign each colour of a multicolour print to a spool — with cost pushed straight to the calculator.', ar: 'اختر لوناً هدفاً وشاهد أقرب خيط تملكه مرتّباً حسب الفرق اللوني (ΔE). امزج بكرتين في تدرّج لخطط الأومبريه أو التبديل، وعيّن كل لون في طباعة متعددة الألوان لبكرة — مع دفع التكلفة مباشرة للحاسبة.' } },
+    orders:     { iphone: { name: { en: 'Orders', ar: 'الطلبات' }, cap: { en: 'Every job, in your pocket', ar: 'كل المهام في جيبك' }, text: { en: 'The job list from the same book as your Mac or PC, by stage, with each job\u2019s progress, customer and due date.', ar: 'قائمة المهام من الدفتر نفسه الذي على جهاز ماك أو الحاسوب، حسب المرحلة، مع تقدّم كل مهمة وعميلها وموعد تسليمها.' } },
+                  mac: { name: { en: 'Jobs', ar: 'الأعمال' }, text: { en: 'Invoices with the ZATCA QR, proformas (including one per milestone), Tabby and Tamara pay-later links, PDF export, and WhatsApp or email updates as jobs move.', ar: 'فواتير برمز QR الخاص بهيئة الزكاة، وفواتير مبدئية (منها واحدة لكل مرحلة)، وروابط الدفع الآجل من تابي وتمارا، وتصدير PDF، وتحديثات عبر واتساب أو البريد مع تقدّم المهام.' } },
+                  desktop: { text: { en: 'E-invoices with the ZATCA QR, proforma invoices, milestone billing, BNPL payment links, PDF export, WhatsApp sharing and email notifications.', ar: 'فواتير إلكترونية برمز QR الخاص بهيئة الزكاة، وفواتير مبدئية، وفوترة على مراحل، وروابط الدفع الآجل، وتصدير PDF، ومشاركة عبر واتساب، وإشعارات بالبريد.' } },
+                  name: { en: 'Orders Log', ar: 'سجل الطلبات' }, cap: { en: 'From quote to paid, in one log', ar: 'من العرض إلى السداد في سجل واحد' }, text: { en: 'Every order tracked end-to-end with e-invoices, TLV QR codes, proforma invoices, milestone billing, BNPL payment links, PDF export and WhatsApp or email delivery.', ar: 'كل طلب متتبّع من البداية للنهاية بفواتير برمز QR وفواتير مبدئية وفوترة بالمراحل وروابط دفع آجل وتصدير PDF وإرسال عبر واتساب أو البريد.' } },
+    inventory:  { mac: { text: { en: 'Spools and resin bottles that deduct themselves as jobs finish, with low-stock alerts, draft purchase orders, re-dry reminders and what you\u2019ve paid over time.', ar: 'بكرات وزجاجات راتنج تُخصم تلقائياً مع إنجاز المهام، مع تنبيهات انخفاض المخزون ومسودات أوامر الشراء وتذكيرات إعادة التجفيف وما دفعته عبر الوقت.' } },
+                  desktop: { text: { en: 'FDM spools and resin bottles with auto-deduction on completion, per-spool cost and lot tracking, reorder alerts with draft purchase orders, drying logs and price history.', ar: 'بكرات FDM وزجاجات الراتنج مع الخصم التلقائي عند الإنجاز، وتكلفة كل بكرة وتتبّع الدفعات، وتنبيهات إعادة الطلب مع مسودات أوامر الشراء، وسجلات التجفيف، وتاريخ الأسعار.' } },
+                  iphone: { cap: { en: 'Every spool, at a glance', ar: 'كل بكرة في لمحة' }, text: { en: 'Spools with the grams left on each, from the same book as your Mac or PC.', ar: 'البكرات والغرامات المتبقية في كلٍّ منها، من الدفتر نفسه الذي على جهاز ماك أو الحاسوب.' } },
+                  name: { en: 'Inventory', ar: 'المخزون' }, cap: { en: 'Never start a print you can\u2019t finish', ar: 'لا تبدأ طباعة لا يمكنك إكمالها' }, text: { en: 'Track FDM spools and Resin bottles with auto-deduction on completion, FIFO cost, smart reorder alerts with draft purchase orders, drying logs and price history.', ar: 'تتبّع خيوط FDM وزجاجات الراتنج مع الخصم التلقائي عند الإكمال، تكلفة FIFO، تنبيهات إعادة طلب ذكية بأوامر شراء، سجلات التجفيف وسجل الأسعار.' } },
+    analytics:  { mac: { name: { en: 'Reports', ar: 'التقارير' }, text: { en: 'Profit and loss, revenue and cash-flow trends, profit per machine, operator performance, customer retention, when work gets finished, and an end-of-day PDF.', ar: 'الأرباح والخسائر، واتجاهات الإيراد والتدفق النقدي، وربح كل آلة، وأداء المشغّلين، والاحتفاظ بالعملاء، ومتى يُنجز العمل، وتقرير نهاية اليوم بصيغة PDF.' } },
+                  name: { en: 'Analytics', ar: 'التحليلات' }, cap: { en: 'Know exactly where the money goes', ar: 'اعرف أين يذهب المال بالضبط' }, text: { en: 'Revenue trends, machine P&L, operator performance, filament usage, retention and a production heatmap — in Simple or Professional reporting modes, with end-of-day PDFs.', ar: 'اتجاهات الإيرادات، أرباح كل آلة، أداء المشغّلين، استهلاك الخيوط، الاحتفاظ وخريطة حرارية للإنتاج — بوضع بسيط أو احترافي، مع تقارير PDF لنهاية اليوم.' } },
+    clients:    { mac: { name: { en: 'Customers', ar: 'العملاء' }, text: { en: 'Customers with credit limits, their own invoicing currency, loyalty points and tiers, an order-tracking link, and aged receivables.', ar: 'عملاء بحدود ائتمان وعملة فوترة خاصة بكلٍّ منهم، ونقاط ومستويات ولاء، ورابط لتتبّع الطلب، وأعمار الذمم المدينة.' } },
+                  desktop: { text: { en: 'Credit limits, multi-currency clients, loyalty tiers with one-click discounts, a per-order customer portal with QR tracking, and balances at a glance.', ar: 'حدود ائتمان، وعملاء بعملات متعددة، ومستويات ولاء بخصم بنقرة واحدة، وبوابة عملاء لكل طلب مع تتبّع QR، والأرصدة في لمحة.' } },
+                  name: { en: 'Clients', ar: 'العملاء' }, cap: { en: 'Turn buyers into regulars', ar: 'حوّل المشترين إلى عملاء دائمين' }, text: { en: 'Client profiles with credit limits, multi-currency, loyalty tiers with automatic discounts, a live customer portal with QR order tracking and an aged-receivables report.', ar: 'ملفات عملاء بحدود ائتمانية وتعدد عملات ومستويات ولاء بخصومات تلقائية، بوابة عملاء حيّة بتتبّع QR وتقرير الذمم المدينة.' } },
+    catalog:    { mac: { name: { en: 'Catalogue', ar: 'الكتالوج' }, text: { en: 'Reusable products built from your library models, priced from their parts with markup and wholesale tiers, and turned into a job in one step.', ar: 'منتجات جاهزة مبنية من مجسّمات مكتبتك، مسعّرة من قطعها مع هامش وشرائح جملة، وتتحوّل إلى مهمة بخطوة واحدة.' } },
+                  desktop: { text: { en: 'Reusable product SKUs linked to tested print files and priced, one-tap quotes, per-product revenue and print count, and CSV bulk import.', ar: 'منتجات جاهزة مرتبطة بملفات طباعة مجرّبة ومسعّرة، وتسعير بلمسة، وإيراد كل منتج وعدد مرات طباعته، واستيراد جماعي عبر CSV.' } },
+                  name: { en: 'Catalog', ar: 'الكتالوج' }, cap: { en: 'Reusable products, one-tap quotes', ar: 'منتجات جاهزة وتسعير بلمسة' }, text: { en: 'Save any part as a reusable product SKU with its slicer settings and price, then quote it in one tap. Track per-product revenue and print history, import in bulk via CSV.', ar: 'احفظ أي قطعة كمنتج جاهز بإعداداته وسعره، ثم سعّره بلمسة. تتبّع إيراد كل منتج وسجل طباعته، واستورد دفعة عبر CSV.' } },
     giftcards:  { name: { en: 'Gift Cards', ar: 'بطاقات الهدايا' }, cap: { en: 'Sell credit, redeem at checkout', ar: 'بِع رصيداً واستخدمه عند الدفع' }, text: { en: 'Issue gift cards and store credit with balance and optional expiry tracking. Redeem directly in the payment modal, with full status history (Active / Used).', ar: 'أصدر بطاقات هدايا ورصيداً بتتبّع الرصيد وتاريخ انتهاء اختياري. استخدمها مباشرة في نافذة الدفع مع سجل حالة كامل (نشطة / مستخدمة).' } },
     portfolio:  { name: { en: 'Portfolio', ar: 'المعرض' }, cap: { en: 'Show off your finished work', ar: 'اعرض أعمالك المنتهية' }, text: { en: 'A gallery built automatically from your finished-order photos — browse by project or order number, and reveal the source photos folder in one click.', ar: 'معرض يُبنى تلقائياً من صور الطلبات المنتهية — تصفّح بحسب المشروع أو رقم الطلب، واكشف مجلد الصور بنقرة.' } },
-    waste:      { name: { en: 'Waste Log', ar: 'سجل الهدر' }, cap: { en: 'Every failed print, counted', ar: 'كل طباعة فاشلة، محسوبة' }, text: { en: 'Log failed prints with a failure category, scrapped weight and the real material cost lost — so waste shows up in analytics instead of quietly eating your margin.', ar: 'سجّل الطبعات الفاشلة بفئة العطل والوزن المهدور والتكلفة الفعلية المفقودة — ليظهر الهدر في التحليلات بدل أن يلتهم هامشك بصمت.' } }
+    waste:      { name: { en: 'Waste Log', ar: 'سجل الهدر' }, cap: { en: 'Every failed print, counted', ar: 'كل طباعة فاشلة، محسوبة' }, text: { en: 'Log failed prints with a failure category, scrapped weight and the real material cost lost — so waste shows up in analytics instead of quietly eating your margin.', ar: 'سجّل الطبعات الفاشلة بفئة العطل والوزن المهدور والتكلفة الفعلية المفقودة — ليظهر الهدر في التحليلات بدل أن يلتهم هامشك بصمت.' } },
+    home:       { name: { en: 'Shop Pulse', ar: 'نبض الورشة' }, cap: { en: 'Your shop, in your pocket', ar: 'ورشتك في جيبك' }, text: { en: 'The queue, money owed, the pipeline and what needs attention, paired with your Mac or PC over the shop\u2019s Wi-Fi, or through Khayt Cloud when you are away.', ar: 'قائمة الانتظار والمستحقات وسير العمل وما يحتاج إلى انتباه، مقترناً بجهاز ماك أو الحاسوب عبر شبكة الورشة، أو عبر سحابة خيط حين تكون بعيداً.' } },
+    order:      { name: { en: 'Order', ar: 'الطلب' }, cap: { en: 'Move a job on from anywhere', ar: 'حرّك المهمة من أي مكان' }, text: { en: 'An order with its print progress and the stage to move it to, and a payment recorded at the counter.', ar: 'طلب مع تقدّم طباعته والمرحلة التالية، وتسجيل دفعة عند الاستلام.' } },
+    machines:   { name: { en: 'Machines', ar: 'الآلات' }, cap: { en: 'Every printer, live', ar: 'كل طابعة، مباشرة' }, text: { en: 'Each printer\u2019s state, the job on it and the time left, with pause, resume and stop for printers your Mac is connected to.', ar: 'حالة كل طابعة والمهمة عليها والوقت المتبقي، مع الإيقاف المؤقت والاستئناف والإيقاف للطابعات المتصلة بجهاز ماك لديك.' } },
+    lockscreen: { name: { en: 'Lock Screen', ar: 'شاشة القفل' }, cap: { en: 'A print, without opening the app', ar: 'الطباعة دون فتح التطبيق' }, text: { en: 'The printer, the file, the time left, when it ends and how far along it is, on the Lock Screen and in the Dynamic Island, updating with the app closed when the Mac\u2019s \u201cSend print progress to my iPhone (Live Activities)\u201d option is on.', ar: 'الطابعة والملف والوقت المتبقي وموعد الانتهاء ومقدار ما أُنجز، على شاشة القفل وفي الجزيرة التفاعلية، ويتحدّث والتطبيق مغلق حين يكون خيار «إرسال تقدّم الطباعة إلى الآيفون (الأنشطة المباشرة)» في تطبيق ماك مفعّلاً.' } },
+    hueforge:   { name: { en: 'HueForge', ar: 'HueForge' }, cap: { en: 'Pictures as printed reliefs, for the Snapmaker U1', ar: 'صور تُطبع نقوشاً بارزة، لطابعة Snapmaker U1' }, text: { en: 'Turn any picture into a layered filament painting for the Snapmaker U1\u2019s four heads: Khayt picks the filaments, shows how it will print and where each swap falls. Calibrate with a printed card, fix one area\u2019s colour, add a hanger hole or keychain loop, and tile reliefs bigger than the bed.', ar: 'حوّل أي صورة إلى لوحة من طبقات الخيوط لرؤوس Snapmaker U1 الأربعة: يختار «خيط» الخيوط، ويريك كيف ستُطبع وأين يقع كل تبديل. عايِر ببطاقة مطبوعة، وصحّح لون منطقة واحدة، وأضف ثقب تعليق أو حلقة ميدالية، وقسّم النقوش الأكبر من سطح الطباعة إلى بلاطات.' } },
+    invoice:    { name: { en: 'Invoice', ar: 'الفاتورة' }, cap: { en: 'A tax invoice in two languages', ar: 'فاتورة ضريبية بلغتين' }, text: { en: 'Bilingual Arabic and English tax invoices with the ZATCA QR, ready to print, save as a PDF or send on WhatsApp.', ar: 'فواتير ضريبية بالعربية والإنجليزية مع رمز QR الخاص بهيئة الزكاة، جاهزة للطباعة أو الحفظ بصيغة PDF أو الإرسال عبر واتساب.' } }
   };
 
   /* ---------- Release history (descriptions; dates refreshed from GitHub) ----------
@@ -348,7 +387,7 @@
     { v: '2.1.0', date: '2026-05-30', beta: false, d: { en: 'Modular renderer, store validation, expanded tests', ar: 'بنية معيارية، التحقق من البيانات، اختبارات موسّعة' } }
   ];
 
-  var lang = 'en', curKey = 'queue', channel = 'stable', curTheme = 'workbench';
+  var lang = 'en', curKey = 'queue', channel = 'stable', curPlat = 'mac';
   // The Arabic home page is its own file at /ar/ (scripts/make-ar.js), so a
   // crawler reads Arabic as HTML. Here the language follows the URL: /ar/ is
   // Arabic, / is English, and switching moves between them.
@@ -358,19 +397,6 @@
     window.location.href = (next === 'ar' ? '/ar/' : '/') + window.location.hash;
   }
   var CHANNELS = { stable: null, beta: null }; // filled from GitHub
-
-  // In-app design demo — every design a user can pick, in the order the app
-  // presents them. Nocturne is captured dark because that is what it is for.
-  var THEMES = [
-    { id: 'workbench', label: { en: 'Workbench', ar: 'وركبنش' }, tone: 'light' },
-    { id: 'command',   label: { en: 'Command',   ar: 'كوماند' }, tone: 'light' },
-    { id: 'vivid',     label: { en: 'Vivid',     ar: 'فيفِد' }, tone: 'light' },
-    { id: 'blueprint', label: { en: 'Blueprint', ar: 'بلوبرنت' }, tone: 'light', beta: true },
-    { id: 'nocturne',  label: { en: 'Nocturne',  ar: 'نوكتيرن' }, tone: 'dark',  beta: true },
-    { id: 'meridian',  label: { en: 'Meridian',  ar: 'ميريديان' }, tone: 'light', beta: true },
-    { id: 'foreman',   label: { en: 'Foreman',   ar: 'فورمان' }, tone: 'light', beta: true },
-    { id: 'flow',      label: { en: 'Flow',      ar: 'فلو' }, tone: 'light', beta: true }
-  ];
 
   function t(key) { return DICT[key] ? DICT[key][lang] : key; }
 
@@ -448,12 +474,22 @@
     return i;
   }
 
-  // Screenshot path — themed, with Arabic RTL captures for every theme.
-  // Workbench (default) uses the flat set; the others live under themes/<id>/.
-  function shotPath(key) {
-    var pre = lang === 'ar' ? 'ar-' : '';
-    if (curTheme === 'workbench') return 'screenshots/screenshot-' + pre + key + '.png';
-    return 'screenshots/themes/' + curTheme + '/screenshot-' + pre + key + '.png';
+  // The gallery has one set of screens per app, because the apps are not the
+  // same: the Mac is native, Windows and Linux are the Electron app, and the
+  // iPhone is a companion. Each set is captured from that app's own sample
+  // shop, in English and Arabic, as <dir><key>-<lang>.png. `w`/`h` are the
+  // capture size (check-site.js holds them to the PNGs); `keys` are the tabs,
+  // in order; `note` is the DICT line under the heading.
+  var PLATS = {
+    mac:     { dir: 'screenshots/mac/', w: 2160, h: 1319, note: 'gal.note.mac',
+               keys: ['queue', 'dashboard', 'calculator', 'printfiles', 'colorstudio', 'orders', 'inventory', 'catalog', 'clients', 'analytics'] },
+    desktop: { dir: 'screenshots/desktop/', w: 2160, h: 1244, note: 'gal.note.desktop',
+               keys: ['queue', 'dashboard', 'calculator', 'printfiles', 'colorstudio', 'orders', 'invoice', 'inventory', 'catalog', 'clients', 'analytics', 'hueforge'] },
+    iphone:  { dir: 'screenshots/iphone/iphone-', w: 1206, h: 2622, note: 'gal.note.iphone', tall: true,
+               keys: ['home', 'orders', 'order', 'machines', 'inventory', 'calculator', 'lockscreen'] }
+  };
+  function shotPath(key, plat) {
+    return PLATS[plat || curPlat].dir + key + '-' + lang + '.png';
   }
   // The hero is the Mac demo's first frame (screenshots/mac/, 1920px), with
   // the video over it — see heroVideo().
@@ -464,17 +500,14 @@
   }
 
   // The WebP srcset for a screenshot PNG. scripts/make-webp.js writes a copy
-  // at each of SHOT_WIDTHS narrower than the capture, beside every screenshot
-  // outside themes/ — the theme demo is dormant and its captures get none.
-  // Most captures are 2160px wide; SHOT_NARROW lists the ones taken at 1440,
-  // so the full-size file is described by its real width. check-site.js
-  // holds both lists to the files on disk and SHOT_WIDTHS to make-webp.js.
+  // at each of SHOT_WIDTHS narrower than the capture, beside every
+  // screenshot; the full-size file is described by its platform's `w`.
+  // check-site.js holds SHOT_WIDTHS to make-webp.js.
   var SHOT_WIDTHS = [640, 1080, 1600];
-  var SHOT_NARROW = { giftcards: 1440, portfolio: 1440, waste: 1440 };
   function shotSrcset(png) {
     var base = png.replace(/\.png$/, '');
-    if (base.indexOf('screenshots/themes/') === 0) return base + '.webp';
-    var full = SHOT_NARROW[base.replace(/^.*screenshot-(ar-)?/, '')] || 2160;
+    var full = 2160;
+    for (var p in PLATS) if (png.indexOf(PLATS[p].dir) === 0) full = PLATS[p].w;
     var out = [];
     for (var i = 0; i < SHOT_WIDTHS.length; i++) {
       if (SHOT_WIDTHS[i] < full) out.push(base + '-' + SHOT_WIDTHS[i] + 'w.webp ' + SHOT_WIDTHS[i] + 'w');
@@ -577,9 +610,9 @@
     var title = document.getElementById('galTitle');
     var capT = document.getElementById('capTitle');
     var capP = document.getElementById('capText');
-    if (title) title.innerHTML = buildTitle(s.name[lang]);
-    if (capT) capT.textContent = s.cap[lang];
-    if (capP) capP.textContent = s.text[lang];
+    if (title) title.innerHTML = buildTitle(screenText(curKey, 'name'));
+    if (capT) capT.textContent = screenText(curKey, 'cap');
+    if (capP) capP.textContent = screenText(curKey, 'text');
   }
 
   function applyLang(next) {
@@ -616,15 +649,10 @@
     buildBetaFeatures();
     buildModesTable();
     buildChangelog();
-    paintCaption();
     capGrids();
-    // swap gallery + hero screenshots to match language (EN / AR-RTL)
-    var gi = document.getElementById('galImg');
-    if (gi) {
-      gi.src = shotPath(curKey);
-      setSrcset(document.getElementById('galSrc'), shotPath(curKey));
-      gi.alt = shotAlt(curKey);
-    }
+    // The gallery in this language: tab names, picture, caption.
+    buildTabs();
+    showShot(false);
     var hs = document.getElementById('heroShot');
     if (hs) {
       hs.src = heroPath();
@@ -641,6 +669,15 @@
       }
       vidLabel();
     }
+    // Other screenshots that follow the language (the two modes): the
+    // capture's base path is in data-shot, its alt key in data-alt.
+    var shots = document.querySelectorAll('img[data-shot]');
+    for (var sh = 0; sh < shots.length; sh++) {
+      var sp = shots[sh].getAttribute('data-shot') + '-' + lang + '.png';
+      setSrcset(shots[sh].parentElement.querySelector('source'), sp);
+      shots[sh].src = sp;
+      shots[sh].alt = t(shots[sh].getAttribute('data-alt'));
+    }
     // The iPhone shots are portrait 1206px captures, so they carry their own
     // srcset rather than going through shotSrcset's 2160px landscape set.
     var phones = document.querySelectorAll('img[data-phone]');
@@ -651,7 +688,6 @@
       phones[ph].src = pb + '.png';
       phones[ph].alt = t(phones[ph].getAttribute('data-alt'));
     }
-    buildThemeChips();
     var btn = document.getElementById('navLang');
     if (btn) {
       // The label is the language you are switching TO, written in that
@@ -726,59 +762,86 @@
     });
   }
 
-  /* ---------- Theme switcher (in-app theme demo) ----------
-     Dormant: the redesign took the chip row out of index.html, so there is no
-     #themeChips element and both functions below return immediately. They are
-     kept because the eight themes and their screenshots still exist — putting
-     `<div class="theme-chips" id="themeChips"></div>` back in the gallery is
-     the whole of restoring the demo. */
-  function buildThemeChips() {
-    var bar = document.getElementById('themeChips');
+  /* ---------- Screen gallery ---------- */
+  var PLAT_NAME = { mac: { en: 'Mac', ar: 'ماك' }, desktop: { en: 'Windows and Linux', ar: 'ويندوز ولينكس' }, iphone: { en: 'iPhone', ar: 'آيفون' } };
+  function shotAlt(key) {
+    var on = PLAT_NAME[curPlat][lang], nm = screenText(key, 'name');
+    return lang === 'ar' ? 'لقطة شاشة خيط على ' + on + ': ' + nm : 'Khayt on ' + on + ': ' + nm + ' screenshot';
+  }
+  // A screen's caption can differ by app: SCREENS[key][plat] overrides
+  // cap/text where that app does it differently.
+  function screenText(key, field) {
+    var s = SCREENS[key] || SCREENS.queue;
+    var o = s[curPlat];
+    return ((o && o[field]) || s[field])[lang];
+  }
+
+  // The tab row for the chosen app. The click and arrow-key handlers are on
+  // the row itself (tabs()), so rebuilding the buttons keeps them working.
+  function buildTabs() {
+    var bar = document.getElementById('tabs');
     if (!bar) return;
+    var keys = PLATS[curPlat].keys;
+    if (keys.indexOf(curKey) < 0) curKey = keys[0];
     var html = '';
-    for (var i = 0; i < THEMES.length; i++) {
-      var th = THEMES[i];
-      html += '<button class="theme-chip tone-' + th.tone + (th.id === curTheme ? ' on' : '') + '" data-theme="' + th.id + '">' +
-        '<span class="sw"></span>' + th.label[lang] +
-        (th.beta ? '<span class="chip-beta">' + t('chip.beta') + '</span>' : '') + '</button>';
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i], on = k === curKey;
+      html += '<button class="tab" type="button" role="tab" id="tab-' + k + '" aria-controls="galPanel" aria-selected="' + on + '"' +
+        (on ? '' : ' tabindex="-1"') + ' data-key="' + k + '">' + screenText(k, 'name') + '</button>';
     }
     bar.innerHTML = html;
+    var panel = document.getElementById('galPanel');
+    if (panel) panel.setAttribute('aria-labelledby', 'tab-' + curKey);
   }
-  function themeSwitch() {
-    var bar = document.getElementById('themeChips');
+
+  // Show the current screen of the current app: picture, size, alt, caption.
+  function showShot(fade) {
+    var img = document.getElementById('galImg');
+    if (!img) return;
+    var P = PLATS[curPlat];
+    var shot = document.getElementById('galPanel');
+    if (shot) shot.classList.toggle('tall', !!P.tall);
+    var src = document.getElementById('galSrc');
+    if (src) src.setAttribute('sizes', P.tall ? '(max-width: 640px) 70vw, 340px' : '(max-width: 1220px) 92vw, 1078px');
+    if (fade) swapShot(img, shotPath(curKey), shotAlt(curKey));
+    else {
+      img.src = shotPath(curKey);
+      setSrcset(src, shotPath(curKey));
+      img.alt = shotAlt(curKey);
+    }
+    img.width = P.w; img.height = P.h;
+    var note = document.getElementById('galNote');
+    if (note) note.textContent = t(P.note);
+    paintCaption();
+  }
+
+  // Which app the gallery shows. A group of toggle buttons rather than more
+  // tabs: it changes which tabs there are, so it sits above the tab row.
+  function platSwitch() {
+    var bar = document.getElementById('platSwitch');
     if (!bar) return;
     bar.addEventListener('click', function (e) {
-      var btn = e.target.closest('.theme-chip');
-      if (!btn) return;
-      curTheme = btn.getAttribute('data-theme');
-      var all = bar.querySelectorAll('.theme-chip');
-      for (var i = 0; i < all.length; i++) all[i].classList.toggle('on', all[i] === btn);
-      for (var j = 0; j < all.length; j++) all[j].setAttribute('aria-pressed', all[j] === btn ? 'true' : 'false');
-      swapShot(document.getElementById('galImg'), shotPath(curKey));
+      var btn = e.target.closest('[data-plat]');
+      if (!btn || btn.getAttribute('aria-pressed') === 'true') return;
+      curPlat = btn.getAttribute('data-plat');
+      var all = bar.querySelectorAll('[data-plat]');
+      for (var i = 0; i < all.length; i++) all[i].setAttribute('aria-pressed', all[i] === btn ? 'true' : 'false');
+      buildTabs();
+      showShot(true);
     });
-
     function hint(e) {
-      var chip = e.target.closest && e.target.closest('.theme-chip');
-      if (!chip) return;
-      var id = chip.getAttribute('data-theme');
-      var pre = lang === 'ar' ? 'ar-' : '';
-      warm(id === 'workbench'
-        ? 'screenshots/screenshot-' + pre + curKey + '.png'
-        : 'screenshots/themes/' + id + '/screenshot-' + pre + curKey + '.png');
+      var btn = e.target.closest && e.target.closest('[data-plat]');
+      if (!btn) return;
+      var p = btn.getAttribute('data-plat');
+      var k = PLATS[p].keys.indexOf(curKey) < 0 ? PLATS[p].keys[0] : curKey;
+      warm(shotPath(k, p));
     }
     bar.addEventListener('pointerover', hint);
     bar.addEventListener('focusin', hint);
   }
-
-  /* ---------- Screen gallery ---------- */
-  function shotAlt(key) {
-    var s = SCREENS[key] || SCREENS.queue;
-    return lang === 'ar' ? 'لقطة شاشة خيط: ' + s.name.ar : 'Khayt ' + s.name.en + ' screenshot';
-  }
   function tabs() {
     var bar = document.getElementById('tabs');
     if (!bar) return;
-    var img = document.getElementById('galImg');
     bar.addEventListener('click', function (e) {
       var btn = e.target.closest('.tab');
       if (!btn) return;
@@ -794,8 +857,7 @@
       btn.removeAttribute('tabindex');
       var panel = document.getElementById('galPanel');
       if (panel) panel.setAttribute('aria-labelledby', btn.id);
-      swapShot(img, shotPath(key), shotAlt(key));
-      paintCaption();
+      showShot(true);
     });
 
     // Tabs pattern: one tab stop, arrows move between tabs (mirrored in RTL),
@@ -1224,7 +1286,7 @@
     nav();
     langToggle();
     channelToggle();
-    themeSwitch();
+    platSwitch();
     wireGrids();
     applyLang(saved);
     betaForm();

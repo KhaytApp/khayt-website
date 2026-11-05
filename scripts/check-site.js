@@ -625,26 +625,25 @@ check('Every narrower screenshot copy exists, is current and is the width it say
   if (made !== offered) throw new Error(`make-webp.js writes ${made} but app.js offers ${offered}`);
   const widths = made.split(',').map(Number);
 
-  // app.js assumes 2160 except where SHOT_NARROW says otherwise, because it
-  // cannot measure a file before choosing it. Hold it to the PNGs.
-  const narrow = {};
-  const nm = fs.readFileSync('app.js', 'utf8').match(/var SHOT_NARROW = \{([^}]*)\}/);
-  if (!nm) throw new Error('could not find SHOT_NARROW in app.js');
-  for (const m of nm[1].matchAll(/(\w+): (\d+)/g)) narrow[m[1]] = Number(m[2]);
+  // app.js describes each app's captures by PLATS[p].w/h, because it cannot
+  // measure a file before choosing it. Hold every gallery PNG to them.
+  const plats = [...fs.readFileSync('app.js', 'utf8').matchAll(/(\w+):\s*\{ dir: '([^']+)', w: (\d+), h: (\d+)/g)]
+    .map(m => ({ name: m[1], dir: m[2], w: Number(m[3]), h: Number(m[4]) }));
+  if (plats.length < 3) throw new Error('could not read PLATS from app.js');
 
   const bad = [];
   let n = 0;
   (function walk(dir) {
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const rel = path.join(dir, e.name);
-      if (e.isDirectory()) { if (e.name !== 'themes') walk(rel); continue; }
+      if (e.isDirectory()) { walk(rel); continue; }
       if (!e.name.endsWith('.png')) continue;
       const png = fs.readFileSync(rel);
       const w = png.readUInt32BE(16);
-      if (dir === 'screenshots') {
-        const key = e.name.replace(/^screenshot-(ar-)?/, '').replace(/\.png$/, '');
-        const said = narrow[key] || 2160;
-        if (said !== w) bad.push(`${rel} is ${w}px wide but app.js describes it as ${said}w (SHOT_NARROW)`);
+      for (const p of plats) {
+        if (!rel.startsWith(p.dir) || !/-(en|ar)\.png$/.test(e.name) || /^demo-/.test(e.name)) continue;
+        const h = png.readUInt32BE(20);
+        if (w !== p.w || h !== p.h) bad.push(`${rel} is ${w}x${h} but app.js PLATS.${p.name} says ${p.w}x${p.h}`);
       }
       for (const v of widths) {
         if (v >= w) continue;
