@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.5.0",
+   "name": "Khayt v4.5.0",
+   "date": "2026-11-06",
+   "prerelease": false,
+   "note": "Undo for queue moves (Windows/Linux).",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.5.0",
+   "assets": [
+    {
+     "name": "Khayt-4.5.0.AppImage",
+     "size": 173959663,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/Khayt-4.5.0.AppImage"
+    },
+    {
+     "name": "Khayt-4.5.0.exe",
+     "size": 152865698,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/Khayt-4.5.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.5.0.exe",
+     "size": 153129897,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/Khayt-Setup-4.5.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.5.0.exe.blockmap",
+     "size": 160207,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/Khayt-Setup-4.5.0.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.5.0_amd64.deb",
+     "size": 139516148,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/khayt_4.5.0_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 514,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 339,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.5.0/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.4.2",
    "name": "Khayt v4.4.2",
    "date": "2026-11-05",
    "prerelease": false,
    "note": "Fixed: a pay-later link asked for the whole price again (both apps).",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.4.2",
-   "assets": [
-    {
-     "name": "Khayt-4.4.2.AppImage",
-     "size": 173828613,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/Khayt-4.4.2.AppImage"
-    },
-    {
-     "name": "Khayt-4.4.2.exe",
-     "size": 152766208,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/Khayt-4.4.2.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.4.2.exe",
-     "size": 153030405,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/Khayt-Setup-4.4.2.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.4.2.exe.blockmap",
-     "size": 160973,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/Khayt-Setup-4.4.2.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.4.2_amd64.deb",
-     "size": 139406888,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/khayt_4.4.2_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 514,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 339,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.4.2/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.4.2"
   },
   {
    "tag": "v4.4.1",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "A paired iPhone can price a model from the library, since 3.11.17.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.18"
-  },
-  {
-   "tag": "v3.11.17",
-   "name": "Khayt v3.11.17",
-   "date": "2026-10-19",
-   "prerelease": false,
-   "note": "A paired iPhone sends the LAN PIN once, then signs its requests, since 3.11.16.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.17"
   }
  ]
 }
