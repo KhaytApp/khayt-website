@@ -301,7 +301,11 @@
     'dl.notel':  { en: 'Nothing sent by default', ar: 'لا يُرسل شيء افتراضياً' },
     'dl.allrel': { en: 'All releases on GitHub →', ar: 'كل الإصدارات على GitHub ←' },
 
-    'cl.title':  { en: 'Release history', ar: 'سجل الإصدارات' },
+    'cl.title':  { en: 'Release history', ar: 'سجل الإصدارات (بالإنجليزية)' },
+    // Head-only strings: make-ar.js puts these in /ar/'s share card and its
+    // schema.org description. The English stays inline in index.html.
+    'meta.ogalt': { en: 'Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.', ar: 'خيط، «مكتب واحد يُدير المطبعة كاملة»: نافذة قائمة الإنتاج بجانب الشعار — مجاني، والمصدر متاح، لماك وويندوز ولينكس.' },
+    'meta.ld':    { en: 'Free app that runs a 3D print shop from your own Mac, PC and iPhone: quotes costed from what your printers actually used, a production queue, filament stock, live printer control and tax invoices with VAT and a QR code. Your data stays on your machine; no account needed.', ar: 'تطبيق مجاني يدير مطبعة الطباعة ثلاثية الأبعاد من جهاز ماك أو الحاسوب أو الآيفون: عروض أسعار محسوبة مما استهلكته طابعاتك فعلاً، وقائمة إنتاج، ومخزون الخيوط، وتحكّم مباشر بالطابعات، وفواتير ضريبية بضريبة القيمة المضافة ورمز QR. تبقى بياناتك على جهازك، ولا حاجة إلى حساب.' },
     'cl.all':    { en: 'View all →', ar: 'عرض الكل ←' },
     'cl.beta':   { en: 'beta', ar: 'تجريبي' },
 

@@ -1617,3 +1617,13 @@ body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-
   .seg-btn, .flip-switch button { min-height: 44px; }
   .flip-switch button { min-width: 44px; }
 }
+
+/* ---- Release history: folded by default ----
+   It is English release notes and the longest list on a phone; open on demand. */
+.changelog > summary { cursor: pointer; list-style: none; min-height: 44px; }
+.changelog > summary::-webkit-details-marker { display: none; }
+.changelog > summary::after { content: "+"; font-family: var(--font-mono); font-size: 16px; color: var(--muted); }
+.changelog[open] > summary::after { content: "−"; }
+.changelog:not([open]) > summary { border-bottom: 0; }
+.cl-foot { margin: 0; padding: 12px 20px 16px; text-align: end; }
+.cl-foot a { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--brand-2); }

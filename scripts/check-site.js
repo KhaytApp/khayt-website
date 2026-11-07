@@ -695,6 +695,7 @@ check('Every page loads the same self-hosted fonts', () => {
   // beside the first. Every page must load fonts/fonts.css and preload the
   // heading face, and nothing from fonts.googleapis.com.
   const want = 'preload=fonts/archivo-latin.woff2 css=fonts/fonts.css';
+  const WANT_AR = 'preload=fonts/ibm-plex-sans-arabic-arabic-400.woff2 preload=fonts/ibm-plex-sans-arabic-arabic-700.woff2 css=fonts/fonts.css';
   const bad = [];
   for (const p of pages().concat(['scripts/post-template.html'])) {
     const html = fs.readFileSync(p, 'utf8');
@@ -706,7 +707,10 @@ check('Every page loads the same self-hosted fonts', () => {
       .map(m => navTarget(at, m[1]));
     const sheets = [...head.matchAll(/<link rel="stylesheet" href="([^"]*fonts[^"]*)">/g)].map(m => navTarget(at, m[1].replace(/\?v=[0-9a-f]+$/, "")));
     const got = preloads.map(x => 'preload=' + x).concat(sheets.map(x => 'css=' + x)).join(' ');
-    if (got !== want) bad.push(`${p}: has "${got}", want "${want}"`);
+    // An Arabic page's first paint is Arabic, so it preloads the Arabic body
+    // and heading faces instead (make-ar.js, make-ar-pages.js).
+    const w = p.startsWith('ar/') ? WANT_AR : want;
+    if (got !== w) bad.push(`${p}: has "${got}", want "${w}"`);
     // The preload must come before any stylesheet, or it starts no earlier
     // than the @font-face that would have found the file anyway.
     if (head.indexOf('rel="preload"') > head.indexOf('rel="stylesheet"')) bad.push(p + ': the font preload comes after a stylesheet');
