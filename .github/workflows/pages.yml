@@ -1,0 +1,85 @@
+name: Deploy to Pages
+
+# Replaces the "legacy" Pages build (deploy from main, through Jekyll), which
+# shipped the whole checkout and timed out in "Deploy to GitHub Pages" on 4 of
+# 40 runs, each needing a manual re-run.
+#
+# The site's build output is committed (scripts/*.js run locally before each
+# commit), so there is nothing to build here: assemble-site.js copies the files
+# the site serves into _site from an explicit list, check-site-refs.js proves
+# every local link in them resolves inside _site, and the deploy is retried
+# once if it fails. Last, the live site is fetched: the home page and the
+# Sparkle feed the Mac app polls (mac/appcast.xml) must both answer 200.
+#
+# Needs Settings -> Pages -> Source set to "GitHub Actions".
+#
+# sync-release.yml pushes with GITHUB_TOKEN, which starts no `push` workflow,
+# so it dispatches this one explicitly after a push.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+  contents: read
+
+# One deploy at a time, and never cancel one that has started: the newest
+# queued run deploys the newest main anyway.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy-retry.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Assemble _site from the served files
+        run: node .github/scripts/assemble-site.js _site
+
+      - name: Every local reference resolves inside _site
+        run: node .github/scripts/check-site-refs.js _site
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+          # .nojekyll is a dotfile, which v4+ leaves out by default.
+          include-hidden-files: true
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+
+      - name: Wait before retrying the deploy
+        if: steps.deploy.outcome == 'failure'
+        run: |
+          echo "::warning::The first deploy failed — retrying once in 60 s"
+          sleep 60
+
+      - name: Deploy to GitHub Pages (retry)
+        id: deploy-retry
+        if: steps.deploy.outcome == 'failure'
+        uses: actions/deploy-pages@v5
+
+      - name: The live site answers
+        run: |
+          fail=0
+          for url in https://khaytapp.com/ https://khaytapp.com/mac/appcast.xml; do
+            code=$(curl -fsS -o /dev/null -w '%{http_code}' -L --retry 5 --retry-delay 10 --retry-all-errors "$url" || true)
+            echo "$url -> $code"
+            if [ "$code" != "200" ]; then
+              echo "::error::$url answered $code, not 200"
+              fail=1
+            fi
+          done
+          exit $fail

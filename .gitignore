@@ -9,3 +9,6 @@ ds-bundle/
 
 # A headless-Chrome test profile written when $S was unset (committed once by mistake, broke the Pages build)
 undefined/
+
+# The deploy folder .github/scripts/assemble-site.js writes (pages.yml).
+_site/
