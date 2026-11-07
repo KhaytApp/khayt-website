@@ -30,6 +30,9 @@
     'nav.services':  { en: 'Services', ar: 'الخدمات' },
     'nav.blog':      { en: 'Blog', ar: 'المدوّنة' },
     'nav.download':  { en: 'Download', ar: 'تحميل' },
+    'nav.menu':      { en: 'Menu', ar: 'القائمة' },
+    'sv.seg.cycle':  { en: 'Billing period', ar: 'فترة الفوترة' },
+    'sv.seg.cur':    { en: 'Currency', ar: 'العملة' },
     'nav.home':      { en: 'Home', ar: 'الرئيسية' },
     'nav.beta':      { en: 'Cloud', ar: 'السحابة' },
 
