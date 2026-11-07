@@ -695,7 +695,7 @@ check('Every page loads the same self-hosted fonts', () => {
   // beside the first. Every page must load fonts/fonts.css and preload the
   // heading face, and nothing from fonts.googleapis.com.
   const want = 'preload=fonts/archivo-latin.woff2 css=fonts/fonts.css';
-  const WANT_AR = 'preload=fonts/ibm-plex-sans-arabic-arabic-400.woff2 preload=fonts/ibm-plex-sans-arabic-arabic-700.woff2 css=fonts/fonts.css';
+  const WANT_AR = 'preload=fonts/ibm-plex-sans-arabic-arabic-400.woff2 css=fonts/fonts.css';
   const bad = [];
   for (const p of pages().concat(['scripts/post-template.html'])) {
     const html = fs.readFileSync(p, 'utf8');

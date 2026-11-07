@@ -194,9 +194,9 @@ function build(file, en) {
   });
   if (/\ssrcset="/.test(html)) throw new Error(`make-ar-pages: ${file}: has a srcset, which this does not rewrite yet`);
 
-  // Fonts: preload the Arabic body and heading faces, not the Latin one.
+  // Fonts: preload the Arabic body face, not the Latin one.
   html = html.replace(/<link rel="preload" href="([^"]*?)fonts\/archivo-latin\.woff2" as="font" type="font\/woff2" crossorigin>/,
-    (m, pre) => `<link rel="preload" href="${pre}fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>\n<link rel="preload" href="${pre}fonts/ibm-plex-sans-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>`);
+    (m, pre) => `<link rel="preload" href="${pre}fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>`);
 
   // The prerendered blocks, in Arabic — after the URL pass, so the static
   // markup is exactly what the page's own script writes over it.

@@ -148,9 +148,9 @@ function build() {
   // schema.org: the Arabic page describes the app in Arabic, as JSON (\u escapes).
   html = one(html, /  "description": "[^"]*",\n  "license"/g, () => '  "description": ' + JSON.stringify(ar('meta.ld')).replace(/[\u0080-\uffff]/g, c => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0')) + ',\n  "license"', 'ld description');
   // Fonts: the Arabic page's first paint is Arabic text, so preload that face
-  // (body and headings) instead of the Latin one.
+  // (the body weight: the largest first paint is the hero paragraph) instead of the Latin one.
   html = one(html, /<link rel="preload" href="\/?fonts\/archivo-latin.woff2" as="font" type="font\/woff2" crossorigin>/g,
-    () => '<link rel="preload" href="/fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>\n<link rel="preload" href="/fonts/ibm-plex-sans-arabic-arabic-700.woff2" as="font" type="font/woff2" crossorigin>', 'font preload');
+    () => '<link rel="preload" href="/fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>', 'font preload');
   html = one(html, /<meta property="og:locale" content="en">\n<meta property="og:locale:alternate" content="ar">/g,
     () => '<meta property="og:locale" content="ar">\n<meta property="og:locale:alternate" content="en">', 'og:locale');
   html = one(html, /<link rel="canonical" href="[^"]*">/g, () => `<link rel="canonical" href="${SITE}/ar/">`, 'canonical');
