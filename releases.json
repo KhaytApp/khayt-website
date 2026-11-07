@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.7.0",
+   "name": "Khayt v4.7.0",
+   "date": "2026-11-07",
+   "prerelease": false,
+   "note": "Desktop: care plans per printer model, \"Not needed\", and Parts to buy.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.7.0",
+   "assets": [
+    {
+     "name": "Khayt-4.7.0.AppImage",
+     "size": 174021510,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/Khayt-4.7.0.AppImage"
+    },
+    {
+     "name": "Khayt-4.7.0.exe",
+     "size": 152917315,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/Khayt-4.7.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.7.0.exe",
+     "size": 153181518,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/Khayt-Setup-4.7.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.7.0.exe.blockmap",
+     "size": 160395,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/Khayt-Setup-4.7.0.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.7.0_amd64.deb",
+     "size": 139566428,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/khayt_4.7.0_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 514,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 339,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.7.0/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.6.0",
    "name": "Khayt v4.6.0",
    "date": "2026-11-06",
    "prerelease": false,
    "note": "Webhook delivery log, with Resend (Windows/Linux).",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.6.0",
-   "assets": [
-    {
-     "name": "Khayt-4.6.0.AppImage",
-     "size": 173983758,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/Khayt-4.6.0.AppImage"
-    },
-    {
-     "name": "Khayt-4.6.0.exe",
-     "size": 152888230,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/Khayt-4.6.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.6.0.exe",
-     "size": 153152425,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/Khayt-Setup-4.6.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.6.0.exe.blockmap",
-     "size": 160751,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/Khayt-Setup-4.6.0.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.6.0_amd64.deb",
-     "size": 139536988,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/khayt_4.6.0_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 514,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 339,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.6.0/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.6.0"
   },
   {
    "tag": "v4.5.0",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "Dates follow your language on Windows and Linux, since 3.11.19.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.20"
-  },
-  {
-   "tag": "v3.11.19",
-   "name": "Khayt v3.11.19",
-   "date": "2026-10-20",
-   "prerelease": false,
-   "note": "A paired phone can be signed out on its own, since 3.11.18.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.19"
   }
  ]
 }
