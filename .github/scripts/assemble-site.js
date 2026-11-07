@@ -42,7 +42,7 @@ const FILES = [
   // today, but it has been served at that URL and may be shared elsewhere.
   'favicon.ico', 'khayt-apple-icon.png', 'khayt-favicon-16.png',
   'khayt-favicon-32.png', 'khayt-icon-128.png', 'khayt-icon.png',
-  'og-image.png', 'og-image-mark.png',
+  'og-image.png', 'og-image-ar.png', 'og-image-mark.png',
   // Machine-read files
   'robots.txt', 'sitemap.xml', 'blog/feed.xml',
   'releases.json',      // fetched by app.js for the release list

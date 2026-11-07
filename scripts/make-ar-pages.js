@@ -194,6 +194,9 @@ function build(file, en) {
   });
   if (/\ssrcset="/.test(html)) throw new Error(`make-ar-pages: ${file}: has a srcset, which this does not rewrite yet`);
 
+  // The Arabic share card (node scripts/make-og.js --ar).
+  html = html.replace(/https:\/\/khaytapp\.com\/og-image\.png/g, 'https://khaytapp.com/og-image-ar.png');
+
   // Fonts: preload the Arabic body face, not the Latin one.
   html = html.replace(/<link rel="preload" href="([^"]*?)fonts\/archivo-latin\.woff2" as="font" type="font\/woff2" crossorigin>/,
     (m, pre) => `<link rel="preload" href="${pre}fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>`);
