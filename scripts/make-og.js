@@ -47,7 +47,9 @@ if (!chrome) {
 const PORT = 9411 + (process.pid % 300);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'khayt-og-'));
 const out2x = path.join(os.tmpdir(), 'khayt-og-card@2x-' + process.pid + '.png');
-const target = path.join(ROOT, 'og-image.png');
+// --ar renders the Arabic card (og-card.html#ar) for /ar/'s share links.
+const AR = process.argv.includes('--ar');
+const target = path.join(ROOT, AR ? 'og-image-ar.png' : 'og-image.png');
 
 const proc = spawn(chrome, [
   '--headless=new', '--disable-gpu', '--hide-scrollbars',
@@ -96,7 +98,7 @@ function cleanup() {
 
   await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', { width: W, height: H, deviceScaleFactor: SCALE, mobile: false });
-  await send('Page.navigate', { url: 'file://' + path.join(__dirname, 'og-card.html') });
+  await send('Page.navigate', { url: 'file://' + path.join(__dirname, 'og-card.html') + (AR ? '#ar' : '') });
   // The card loads webfonts from Google; without them the type falls back to
   // system sans and the card ships looking like a different product.
   await sleep(3500);
@@ -128,10 +130,10 @@ function cleanup() {
   const w = +(/pixelWidth: (\d+)/.exec(dims) || [])[1];
   const h = +(/pixelHeight: (\d+)/.exec(dims) || [])[1];
   if (w !== W || h !== H) throw new Error(`wrote ${w}x${h}, expected ${W}x${H}`);
-  if (before && before.equals(after)) throw new Error('og-image.png is unchanged — sips did not write it');
+  if (before && before.equals(after)) throw new Error(path.basename(target) + ' is unchanged — sips did not write it');
 
   cleanup();
-  console.log(`og-image.png written — ${w}x${h}, ${Math.round(after.length / 1024)}KB`);
+  console.log(`${path.basename(target)} written — ${w}x${h}, ${Math.round(after.length / 1024)}KB`);
 })().catch(e => {
   console.error('make-og failed:', e.message);
   cleanup();
