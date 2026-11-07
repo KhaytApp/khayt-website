@@ -156,5 +156,19 @@
     return html;
   };
 
+  // The FAQ as schema.org FAQPage data, from the same strings the page shows.
+  // "<" is escaped so no answer can close the script element.
+  R.faqLd = function (pairs, lang) {
+    var data = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      inLanguage: lang,
+      mainEntity: pairs.map(function (p) {
+        return { '@type': 'Question', name: p[0], acceptedAnswer: { '@type': 'Answer', text: p[1] } };
+      })
+    };
+    return '<script type="application/ld+json">' + JSON.stringify(data).replace(/</g, '\\u003c') + '</script>';
+  };
+
   root.KHAYT_RENDER = R;
 })(typeof window !== 'undefined' ? window : globalThis);

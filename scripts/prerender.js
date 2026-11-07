@@ -70,6 +70,7 @@ function dictEn(key, file = 'app.js') {
 const PAGES = {};
 
 PAGES['index.html'] = {
+  faqLd: () => RENDER.faqLd([1, 2, 3, 4, 5, 6].map(n => [dictEn('faq.q' + n), dictEn('faq.a' + n)]), 'en'),
   featGrid: () => RENDER.features(DATA.features, 'en'),
   flowSteps: () => RENDER.flow(DATA.flow, 'en'),
   betaGrid: () => RENDER.cloud(DATA.cloud, 'en', dictEn('beta.pill')),
