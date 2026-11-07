@@ -50,7 +50,7 @@
     },
     {
       what: { en: 'Paid invoices, on the accounting webhook — the labels themselves print locally', ar: 'الفواتير المدفوعة عبر ويب هوك المحاسبة — أمّا الملصقات فتُطبع محلياً' },
-      to:   { en: 'QuickBooks, Zoho or Xero — one way, and only if you connected one', ar: 'QuickBooks أو Zoho أو Xero — باتجاه واحد، وفقط إن ربطت أحدها' }
+      to:   { en: 'An https address you set — for example a bridge to QuickBooks, Zoho or Xero — one way, and only if you set one', ar: 'عنوان https تحدّده أنت — مثلاً جسر إلى QuickBooks أو Zoho أو Xero — باتجاه واحد، وفقط إن حدّدته' }
     }
   ];
 
@@ -104,8 +104,8 @@
     'sv.sends.col2': { en: 'What leaves your machine', ar: 'ما يغادر جهازك' },
     'sv.sends.col3': { en: 'Who receives it', ar: 'من يستلمه' },
     'sv.sends.hint': { en: 'Swipe the table to read every column', ar: 'اسحب الجدول لقراءة كل الأعمدة' },
-    'sv.sends.note': { en: 'Every row above restates what the app itself does; none of it is a promise made only on this page. Where a row names a third party — Twilio, the WhatsApp Cloud API, Unifonic, QuickBooks, Zoho, Xero, an AI provider — that is an account you open and control, and Khayt sends nothing to it until you have entered your own credentials.',
-                       ar: 'كل صف أعلاه يعيد صياغة ما يفعله التطبيق نفسه؛ وليس فيه وعد يُقطع في هذه الصفحة وحدها. وحيثما يذكر صفّ طرفاً ثالثاً — Twilio أو WhatsApp Cloud API أو Unifonic أو QuickBooks أو Zoho أو Xero أو مزوّد ذكاء اصطناعي — فهو حساب تفتحه أنت وتتحكم فيه، ولا يرسل خيط إليه شيئاً حتى تدخل بياناتك فيه.' },
+    'sv.sends.note': { en: 'Every row above restates what the app itself does; none of it is a promise made only on this page. Where a row names a third party — Twilio, the WhatsApp Cloud API, Unifonic, an accounting bridge, an AI provider — that is an account you open and control, and Khayt sends nothing to it until you have entered your own credentials.',
+                       ar: 'كل صف أعلاه يعيد صياغة ما يفعله التطبيق نفسه؛ وليس فيه وعد يُقطع في هذه الصفحة وحدها. وحيثما يذكر صفّ طرفاً ثالثاً — Twilio أو WhatsApp Cloud API أو Unifonic أو جسر محاسبة أو مزوّد ذكاء اصطناعي — فهو حساب تفتحه أنت وتتحكم فيه، ولا يرسل خيط إليه شيئاً حتى تدخل بياناتك فيه.' },
 
     'sv.enc.eyebrow': { en: 'The sync model', ar: 'نموذج المزامنة' },
     'sv.enc.h2': { en: 'The server holds ciphertext it cannot read', ar: 'الخادم يحمل نصاً مشفّراً لا يستطيع قراءته' },
