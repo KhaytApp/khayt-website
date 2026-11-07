@@ -240,6 +240,8 @@
   // What the page shows before anyone touches a control. prerender.js renders
   // this state, so it must be the one the browser starts in.
   V.INITIAL = { cycle: 'monthly', cur: 'USD' };
+  // The Arabic copy (make-ar-pages.js) starts in riyals; see curTouched below.
+  V.INITIAL_AR = { cycle: 'monthly', cur: 'SAR' };
 
   window.KHAYT_SERVICES = V;
 
@@ -250,6 +252,9 @@
   // not a preference, and a reload should show the page's own default.
   var cycle = V.INITIAL.cycle;
   var cur = V.INITIAL.cur;
+  // Until someone picks a currency, the Arabic page shows riyals: its readers
+  // are mostly Saudi shops, and the plans are priced in SAR at checkout.
+  var curTouched = false;
 
   function lang() { return document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en'; }
 
@@ -283,6 +288,15 @@
 
   function render() {
     var L = lang();
+    if (!curTouched) {
+      cur = (L === 'ar' ? V.INITIAL_AR : V.INITIAL).cur;
+      var cb = document.querySelectorAll('#curSeg [data-cur]');
+      for (var c = 0; c < cb.length; c++) {
+        var on = cb[c].getAttribute('data-cur') === cur;
+        cb[c].classList.toggle('is-on', on);
+        cb[c].setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+    }
     var list = (window.KHAYT_DATA && window.KHAYT_DATA.cloud) || [];
 
     renderPlans(L);
@@ -353,7 +367,7 @@
     var seg = ev.target.closest && ev.target.closest('.seg-btn');
     if (seg) {
       if (seg.hasAttribute('data-cycle')) cycle = seg.getAttribute('data-cycle');
-      else if (seg.hasAttribute('data-cur')) cur = seg.getAttribute('data-cur');
+      else if (seg.hasAttribute('data-cur')) { cur = seg.getAttribute('data-cur'); curTouched = true; }
       var group = seg.parentNode.children;
       for (var g = 0; g < group.length; g++) {
         var on = group[g] === seg;

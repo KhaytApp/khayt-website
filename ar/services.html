@@ -31,7 +31,7 @@
 <link rel="apple-touch-icon" href="/khayt-apple-icon.png">
 <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="/styles.css?v=437ff5433c">
+<link rel="stylesheet" href="/styles.css?v=c450cb68a1">
 </head>
 <body class="page" dir="rtl">
 
@@ -59,7 +59,7 @@
     <div class="nav-right">
       <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">تغيير اللغة إلى </span><span lang="en">English</span></button>
       <a href="/ar/#download" class="btn btn-accent" aria-label="تحميل" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">تحميل</span></a>
-      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+      <button class="nav-burger" id="burger" aria-label="القائمة" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
     </div>
   </div>
 </header>
@@ -85,17 +85,17 @@
         <p class="lede" data-i18n="sv.plans.sub">تطبيق سطح المكتب مجاني للأبد وسيبقى كذلك — فالخدمة المستضافة، وهي وحدها، ما يتقاضى خيط مقابلها. وهذه الأسعار تُنشر الآن كي لا يكتشفها أحد لاحقاً بعد أن يكون قد بنى مطبعته على افتراض أنها غير موجودة.</p>
       </div>
       <div class="plans-switches">
-        <div class="seg" role="group" aria-label="Billing period" id="cycleSeg">
+        <div class="seg" role="group" aria-label="فترة الفوترة" data-i18n-aria="sv.seg.cycle" id="cycleSeg">
           <button type="button" class="seg-btn is-on" data-cycle="monthly" aria-pressed="true" data-i18n="sv.plans.monthly">شهري</button>
           <button type="button" class="seg-btn" data-cycle="annual" aria-pressed="false" data-i18n="sv.plans.annual">سنوي</button>
         </div>
-        <div class="seg" role="group" aria-label="Currency" id="curSeg">
-          <button type="button" class="seg-btn is-on" data-cur="USD" aria-pressed="true">USD</button>
-          <button type="button" class="seg-btn" data-cur="SAR" aria-pressed="false">SAR</button>
+        <div class="seg" role="group" aria-label="العملة" data-i18n-aria="sv.seg.cur" id="curSeg">
+          <button type="button" class="seg-btn" data-cur="USD" aria-pressed="false">USD</button>
+          <button type="button" class="seg-btn is-on" data-cur="SAR" aria-pressed="true">SAR</button>
         </div>
       </div>
     </div>
-    <div class="plan-grid" id="planGrid"><!-- PRERENDER:planGrid:START --><article class="plan"><div class="plan-top"><h3>مجاني</h3></div><p class="plan-tag">التطبيق كامل، للأبد، بدون حساب.</p><p class="plan-price"><span class="amt">$0</span><span class="per">للأبد</span></p><p class="plan-now free">مجاني للأبد — بلا حساب</p><ul class="plan-feats"><li>التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء</li><li>بحساب مجاني: مزامنة مشفّرة ونسخة احتياطية خارجية</li><li>بوابة العملاء — تجربة 30 يوماً بعد انتهاء التجربة العامة</li><li>خزنة خيط — 2 غيغابايت، بلا روابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">حمّل خيط</a></article><article class="plan"><div class="plan-top"><h3>الصانع</h3></div><p class="plan-tag">متجرك ظاهر لعملائك، ومساحة لملفاتك.</p><p class="plan-price"><span class="amt struck">$7</span><span class="per">لكل مطبعة / شهرياً</span></p><p class="plan-now">مجاني أثناء التجربة — لا يُحصَّل شيء</p><ul class="plan-feats"><li>كل ما في المجانية</li><li>بوابة العملاء والمتجر الإلكتروني، بلا حدّ زمني</li><li>حسابات الفريق — حتى 3 أشخاص</li><li>خزنة خيط — 150 غيغابايت، 50 رابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">شغّلها داخل التطبيق</a></article><article class="plan"><div class="plan-top"><h3>المبدع</h3></div><p class="plan-tag">كل ما في الصانع، وبِع ملفاتك.</p><p class="plan-price"><span class="amt struck">$18</span><span class="per">لكل مطبعة / شهرياً</span></p><p class="plan-now">مجاني أثناء التجربة — لا يُحصَّل شيء</p><ul class="plan-feats"><li>كل ما في الصانع</li><li>بيع الملفات عبر makerrun.com، والدفع عبر صفحة الدفع الخاصة بك</li><li>خزنة خيط — 400 غيغابايت، 200 رابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">شغّلها داخل التطبيق</a></article><article class="plan"><div class="plan-top"><h3>الاستوديو</h3></div><p class="plan-tag">لفريق أكبر ومكتبة أكبر.</p><p class="plan-price"><span class="amt struck">$48</span><span class="per">لكل مطبعة / شهرياً</span></p><p class="plan-now">مجاني أثناء التجربة — لا يُحصَّل شيء</p><ul class="plan-feats"><li>كل ما في المبدع</li><li>حسابات الفريق — حتى 5 أشخاص</li><li>نموذج التسعير بلا سطر «عروض الأسعار من خيط»</li><li>خزنة خيط — 1 تيرابايت، 1,000 رابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">شغّلها داخل التطبيق</a></article><!-- PRERENDER:planGrid:END --></div>
+    <div class="plan-grid" id="planGrid"><!-- PRERENDER:planGrid:START --><article class="plan"><div class="plan-top"><h3>مجاني</h3></div><p class="plan-tag">التطبيق كامل، للأبد، بدون حساب.</p><p class="plan-price"><span class="amt">SAR 0</span><span class="per">للأبد</span></p><p class="plan-now free">مجاني للأبد — بلا حساب</p><ul class="plan-feats"><li>التطبيق المحلي والشبكة والذكاء الاصطناعي بمفتاحك — كل شيء</li><li>بحساب مجاني: مزامنة مشفّرة ونسخة احتياطية خارجية</li><li>بوابة العملاء — تجربة 30 يوماً بعد انتهاء التجربة العامة</li><li>خزنة خيط — 2 غيغابايت، بلا روابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">حمّل خيط</a></article><article class="plan"><div class="plan-top"><h3>الصانع</h3></div><p class="plan-tag">متجرك ظاهر لعملائك، ومساحة لملفاتك.</p><p class="plan-price"><span class="amt struck">SAR 25</span><span class="per">لكل مطبعة / شهرياً</span></p><p class="plan-now">مجاني أثناء التجربة — لا يُحصَّل شيء</p><ul class="plan-feats"><li>كل ما في المجانية</li><li>بوابة العملاء والمتجر الإلكتروني، بلا حدّ زمني</li><li>حسابات الفريق — حتى 3 أشخاص</li><li>خزنة خيط — 150 غيغابايت، 50 رابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">شغّلها داخل التطبيق</a></article><article class="plan"><div class="plan-top"><h3>المبدع</h3></div><p class="plan-tag">كل ما في الصانع، وبِع ملفاتك.</p><p class="plan-price"><span class="amt struck">SAR 65</span><span class="per">لكل مطبعة / شهرياً</span></p><p class="plan-now">مجاني أثناء التجربة — لا يُحصَّل شيء</p><ul class="plan-feats"><li>كل ما في الصانع</li><li>بيع الملفات عبر makerrun.com، والدفع عبر صفحة الدفع الخاصة بك</li><li>خزنة خيط — 400 غيغابايت، 200 رابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">شغّلها داخل التطبيق</a></article><article class="plan"><div class="plan-top"><h3>الاستوديو</h3></div><p class="plan-tag">لفريق أكبر ومكتبة أكبر.</p><p class="plan-price"><span class="amt struck">SAR 180</span><span class="per">لكل مطبعة / شهرياً</span></p><p class="plan-now">مجاني أثناء التجربة — لا يُحصَّل شيء</p><ul class="plan-feats"><li>كل ما في المبدع</li><li>حسابات الفريق — حتى 5 أشخاص</li><li>نموذج التسعير بلا سطر «عروض الأسعار من خيط»</li><li>خزنة خيط — 1 تيرابايت، 1,000 رابط مشاركة</li></ul><a class="btn btn-ghost plan-cta" href="./#download">شغّلها داخل التطبيق</a></article><!-- PRERENDER:planGrid:END --></div>
     <p class="fineprint" id="sales-fee" data-i18n="sv.plans.fees">بيع الملفات (المبدع والاستوديو): لا يأخذ خيط أي عمولة (0%). يدفع المشتري في صفحة الدفع الخاصة بك لدى Stripe أو Lemon Squeezy أو Gumroad ويصلك المال؛ ولا تنطبق إلا رسوم ذلك المزوّد نفسه. وللمقارنة، كما يذكر كل موقع، بتاريخ 6 نوفمبر 2026: يدفع Cults3D للمصمّمين 80% من السعر قبل الضريبة، ويأخذ متجر Printables رسماً قدره 20%، ويأخذ MakerWorld ‏10% من اشتراكات الترخيص التجاري إضافةً إلى رسوم PayPal، ولا يبيع نماذج مدفوعة منفردة. ويمكنهم تغيير ذلك في أي وقت.</p>
     <p class="fineprint" data-i18n="sv.plans.peg">الأسعار قبل ضريبة القيمة المضافة. وتُضاف الضريبة عند الدفع فقط حيث يلزم خيطاً تحصيلها، بحسب دولة الفوترة لديك؛ وخيط غير مسجّل فيها في أي دولة اليوم، فلا يُضاف شيء. وسعر الدولار هو سعر الريال ÷ 3.75، مقرّباً إلى الأعلى.</p>
   </div>
@@ -257,7 +257,7 @@
 
 <script src="/data.js?v=d8e83f7d09"></script>
 <script src="/render.js?v=be7bbb1ad9"></script>
-<script src="/services.js?v=ea0e56979d"></script>
-<script src="/site.js?v=44fc007b4f"></script>
+<script src="/services.js?v=759b87a264"></script>
+<script src="/site.js?v=caf5b6281c"></script>
 </body>
 </html>

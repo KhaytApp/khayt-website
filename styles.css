@@ -1599,3 +1599,21 @@ body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-
 .faq-item p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; line-height: 1.65; max-width: 72ch; }
 .faq-item p a { color: var(--brand); }
 @media (prefers-reduced-motion: reduce) { .faq-item summary::after { transition: none; } }
+
+/* ---- hero: the beta-news link, and where it lands ----
+   The beta form sits deep in the download section; the hero points at it so a
+   visitor who is not ready to install can still leave an address. */
+.hero-news { margin-top: 10px; font-size: 14px; }
+.hero-news a { display: inline-block; padding-block: 12px; color: var(--on-dark-soft); text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
+.hero-news a:hover { color: var(--on-dark); text-decoration-color: var(--thread); }
+#betaForm { scroll-margin-top: calc(var(--nav-h, 64px) + 24px); }
+
+/* ---- Touch targets ----
+   On a touch screen the small controls grow to 44px, Apple's minimum; with a
+   mouse they keep their compact desktop size. */
+@media (pointer: coarse) {
+  .nav-burger, .lang-toggle, .nav-right .btn { min-height: 44px; min-width: 44px; }
+  .os-line a { display: inline-block; padding-block: 12px; }
+  .seg-btn, .flip-switch button { min-height: 44px; }
+  .flip-switch button { min-width: 44px; }
+}

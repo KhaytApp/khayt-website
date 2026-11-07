@@ -51,6 +51,12 @@
     'hero.h1':    { en: 'One desk runs the <span class="hl">whole shop</span>.', ar: 'مكتب واحد يُدير <span class="hl">المطبعة كاملة</span>.' },
     'hero.desc':  { en: 'Khayt runs a 3D print shop from your own Mac and iPhone: quotes costed from what your printers actually used, a production queue, filament stock, and tax invoices with VAT, a QR code and credit notes. Your shop’s data stays on your machine. Free, no account, and nothing sent unless you opt in.', ar: 'يدير خيط مطبعة الطباعة ثلاثية الأبعاد من ماك وآيفون الخاصّين بك: عروض أسعار محسوبة مما استهلكته طابعاتك فعلاً، وقائمة إنتاج، ومخزون الخيوط، وفواتير ضريبية بالقيمة المضافة ورمز QR الخاص بهيئة الزكاة وإشعارات دائنة. بيانات مطبعتك تبقى على جهازك. مجاناً، بلا حساب، ولا يُرسل شيء ما لم تختر ذلك.' },
     'hero.dl':    { en: 'Download for Mac', ar: 'حمّل لماك' },
+    'hero.dl.win':  { en: 'Download for Windows', ar: 'حمّل لويندوز' },
+    'hero.dl.linux':{ en: 'Download for Linux', ar: 'حمّل للينكس' },
+    'hero.dl.ios':  { en: 'Join the iPhone beta', ar: 'انضم إلى تجربة الآيفون' },
+    'hero.dl.other':{ en: 'Get Khayt for your computer', ar: 'احصل على خيط لحاسوبك' },
+    'hero.news':  { en: 'Or get Mac beta news by email →', ar: 'أو استلم أخبار نسخة ماك التجريبية بالبريد ←' },
+    'nav.menu':   { en: 'Menu', ar: 'القائمة' },
     'hero.pill.mac': { en: 'Native Mac app', ar: 'تطبيق ماك أصلي' },
     'dl.desk.h': { en: 'The desktop app for Windows and Linux', ar: 'تطبيق سطح المكتب لويندوز ولينكس' },
     'hero.github':{ en: 'View on GitHub', ar: 'عرض على GitHub' },
@@ -621,6 +627,7 @@
     html.setAttribute('lang', lang);
     html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
     document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    flipToLang();
     var nodes = document.querySelectorAll('[data-i18n]');
     for (var i = 0; i < nodes.length; i++) {
       var key = nodes[i].getAttribute('data-i18n');
@@ -888,6 +895,9 @@
   }
 
   /* ---------- Bilingual flip card ---------- */
+  // Until someone flips it by hand, the card shows the page's own language:
+  // an Arabic reader should meet the Arabic tax invoice first.
+  var flipTouched = false;
   function flip() {
     var sw = document.getElementById('flipSwitch');
     var card = document.getElementById('flipCard');
@@ -895,8 +905,41 @@
     sw.addEventListener('click', function (e) {
       var btn = e.target.closest('button');
       if (!btn) return;
+      flipTouched = true;
       setFlip(card, sw, btn.getAttribute('data-side') === 'back');
     });
+  }
+  function flipToLang() {
+    if (flipTouched) return;
+    var sw = document.getElementById('flipSwitch');
+    var card = document.getElementById('flipCard');
+    if (sw && card) setFlip(card, sw, lang === 'ar');
+  }
+
+  /* ---------- Hero: the download that fits this device ----------
+     The HTML says "Download for Mac", which is right with no script and on a
+     Mac. Windows and Linux go to the desktop app; an iPhone or iPad to the
+     TestFlight beta; anything else (Android, ChromeOS) to the whole download
+     section, since there is nothing to install on it. */
+  function visitorOS() {
+    var ua = navigator.userAgent || '';
+    var p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+    if (/iPhone|iPod|iPad/.test(ua) || (/Mac/.test(p) && navigator.maxTouchPoints > 1)) return 'ios';
+    if (/Android|CrOS/.test(ua) || /Android|Chrome OS/.test(p)) return 'other';
+    if (/Win/.test(p) || /Windows/.test(ua)) return 'win';
+    if (/Linux/.test(p) || /Linux|X11/.test(ua)) return 'linux';
+    return 'mac';
+  }
+  function heroForOS() {
+    var a = document.getElementById('heroDl');
+    var s = document.getElementById('heroDlText');
+    if (!a || !s) return;
+    var os = visitorOS();
+    var map = { win: ['hero.dl.win', '#desktop'], linux: ['hero.dl.linux', '#desktop'], ios: ['hero.dl.ios', '#iphone'], other: ['hero.dl.other', '#download'] };
+    if (!map[os]) return;
+    s.setAttribute('data-i18n', map[os][0]);
+    // On /ar/ links are "/ar/#x" (make-ar.js); keep that prefix.
+    a.setAttribute('href', a.getAttribute('href').replace(/#.*$/, map[os][1]));
   }
   function setFlip(card, sw, back) {
     card.classList.toggle('flipped', back);
@@ -1288,6 +1331,7 @@
     channelToggle();
     platSwitch();
     wireGrids();
+    heroForOS();
     applyLang(saved);
     betaForm();
     heroVideo();
