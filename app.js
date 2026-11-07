@@ -55,7 +55,6 @@
     'hero.dl.linux':{ en: 'Download for Linux', ar: 'حمّل للينكس' },
     'hero.dl.ios':  { en: 'Join the iPhone beta', ar: 'انضم إلى تجربة الآيفون' },
     'hero.dl.other':{ en: 'Get Khayt for your computer', ar: 'احصل على خيط لحاسوبك' },
-    'hero.news':  { en: 'Or get Mac beta news by email →', ar: 'أو استلم أخبار نسخة ماك التجريبية بالبريد ←' },
     'nav.menu':   { en: 'Menu', ar: 'القائمة' },
     'hero.pill.mac': { en: 'Native Mac app', ar: 'تطبيق ماك أصلي' },
     'dl.desk.h': { en: 'The desktop app for Windows and Linux', ar: 'تطبيق سطح المكتب لويندوز ولينكس' },
@@ -190,14 +189,6 @@
     'mn.updates':{ en: 'Updates itself', ar: 'يحدّث نفسه' },
     'mn.signed': { en: 'Signed & notarized', ar: 'موقّع وموثّق' },
     'mn.all':    { en: 'All Mac releases →', ar: 'كل إصدارات ماك ←' },
-    'bf.label':  { en: 'Email me news about the Mac beta', ar: 'راسلني بأخبار النسخة التجريبية لماك' },
-    'bf.btn':    { en: 'Notify me', ar: 'أبلغني' },
-    'bf.fine':   { en: 'One email to confirm, then only beta news. Leave any time.', ar: 'رسالة واحدة للتأكيد، ثم أخبار النسخة التجريبية فقط. يمكنك المغادرة متى شئت.' },
-    'bf.priv':   { en: 'Privacy', ar: 'الخصوصية' },
-    'bf.ok':     { en: 'Check your inbox to confirm.', ar: 'تفقّد بريدك لتأكيد الاشتراك.' },
-    'bf.bad':    { en: 'That email address does not look right.', ar: 'يبدو أن عنوان البريد غير صحيح.' },
-    'bf.slow':   { en: 'Too many tries — please wait a little and try again.', ar: 'محاولات كثيرة — انتظر قليلاً ثم أعد المحاولة.' },
-    'bf.mail':   { en: 'Sign-up is unavailable right now, so your email app will open instead.', ar: 'التسجيل غير متاح الآن، لذا سيُفتح تطبيق البريد لديك بدلاً من ذلك.' },
     'mn.road':   { en: 'The desktop app below keeps running on Windows and Linux — it is not going away.',
                    ar: 'ويبقى تطبيق سطح المكتب أدناه يعمل على ويندوز ولينكس — فهو لن يختفي.' },
 
@@ -1217,10 +1208,6 @@
   // release list instead of a file. The feed's enclosure is the file Sparkle
   // itself installs, so the button and the updater cannot disagree. The static
   // href (the release list) is what a reader without JS gets.
-  /* ---------- The beta list (khayt-cloud #115) ----------
-     200 is the answer for every accepted address, new or not, so the form
-     cannot tell anyone who is already on the list. Anything the page cannot
-     read — 503, a network error, no JSON — becomes an email to support. */
   /* ---------- The hero video ----------
      The picture under it is the video's first frame, so nothing moves until
      the video is really playing, and a visitor who asked for less motion, or
@@ -1257,37 +1244,6 @@
     });
     v.src = v.getAttribute('data-src');
     v.play().then(function () { b.hidden = false; vidLabel(); }).catch(function () { v.removeAttribute('src'); v.load(); });
-  }
-
-  function betaForm() {
-    var form = document.getElementById('betaForm');
-    if (!form) return;
-    var msg = document.getElementById('betaMsg');
-    function say(key, err) { msg.textContent = t(key); msg.classList.toggle('err', !!err); }
-    function mailto(email) {
-      say('bf.mail');
-      window.location.href = 'mailto:support@khaytapp.com?subject=' + encodeURIComponent('Khayt Mac beta') +
-        '&body=' + encodeURIComponent('Please add ' + email + ' to the Mac beta list.');
-    }
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = form.elements.email.value.trim();
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('bf.bad', true); return; }
-      var btn = form.querySelector('button');
-      btn.disabled = true;
-      fetch('https://cloud.khaytapp.com/v1/beta/signup', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email: email, platform: form.getAttribute('data-platform'), lang: lang, website: form.elements.website.value })
-      }).then(function (r) {
-        return r.json().then(function (j) { return { status: r.status, j: j }; });
-      }).then(function (res) {
-        if (res.status === 200 && res.j && res.j.ok) { say('bf.ok'); form.elements.email.value = ''; }
-        else if (res.status === 400 && res.j && res.j.reason === 'email') say('bf.bad', true);
-        else if (res.status === 429) say('bf.slow', true);
-        else mailto(email);
-      }).catch(function () { mailto(email); }).then(function () { btn.disabled = false; });
-    });
   }
 
   function macFeed() {
@@ -1337,7 +1293,6 @@
     wireGrids();
     heroForOS();
     applyLang(saved);
-    betaForm();
     heroVideo();
     fetchReleases();
     macFeed();

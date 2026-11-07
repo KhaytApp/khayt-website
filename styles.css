@@ -740,16 +740,6 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
   border-radius: 24px; border: 1px solid var(--line);
 }
 @media (max-width: 640px) { .ip-shots img { width: 62vw; } }
-.beta-form { margin-top: 18px; max-width: 520px; }
-.beta-form label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; }
-.beta-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.beta-row input[type="email"] { flex: 1 1 220px; min-width: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 50%, transparent); background: var(--paper-2); color: inherit; font: inherit; }
-.beta-row input[type="email"]:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
-/* Honeypot: clipped in place, not pushed off-screen. left:-10000px made the
-   RTL page 10,360px wide (leftward overflow scrolls in RTL). */
-.beta-form .hp { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; white-space: nowrap; }
-.beta-msg { margin: 8px 0 0; font-size: 13.5px; min-height: 1em; }
-.beta-msg.err { color: color-mix(in srgb, #e5484d 65%, currentColor); }
 .beta-fine { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); }
 .beta-fine a { color: var(--brand-2); }
 .mn-road { margin: 16px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 70ch; }
@@ -1599,14 +1589,6 @@ body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-
 .faq-item p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; line-height: 1.65; max-width: 72ch; }
 .faq-item p a { color: var(--brand); }
 @media (prefers-reduced-motion: reduce) { .faq-item summary::after { transition: none; } }
-
-/* ---- hero: the beta-news link, and where it lands ----
-   The beta form sits deep in the download section; the hero points at it so a
-   visitor who is not ready to install can still leave an address. */
-.hero-news { margin-top: 10px; font-size: 14px; }
-.hero-news a { display: inline-block; padding-block: 12px; color: var(--on-dark-soft); text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
-.hero-news a:hover { color: var(--on-dark); text-decoration-color: var(--thread); }
-#betaForm { scroll-margin-top: calc(var(--nav-h, 64px) + 24px); }
 
 /* ---- Touch targets ----
    On a touch screen the small controls grow to 44px, Apple's minimum; with a
