@@ -82,7 +82,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 <link rel="apple-touch-icon" href="khayt-apple-icon.png">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="styles.css?v=1420eee389">
+<link rel="stylesheet" href="styles.css?v=ce8ed2f44d">
 <!-- PRERENDER:faqLd:START --><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Where is my shop’s data kept?","acceptedAnswer":{"@type":"Answer","text":"In a file on your own computer. Khayt needs no account and works offline. If you turn on Khayt Cloud, your shop’s data is encrypted on your computer before it is synced, so the server holds only ciphertext. What you publish for customers, such as an order page or the quote form, is kept in a form they can read."}},{"@type":"Question","name":"Can my accountant use what Khayt keeps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Invoices and expenses export as CSV, laid out for QuickBooks, Xero, Zoho Books, Wafeq or Daftra, or as plain CSV. Khayt also works out a VAT return for each month or quarter, with revenue reported net of tax."}},{"@type":"Question","name":"Khayt is free. How is it paid for?","acceptedAnswer":{"@type":"Answer","text":"The app is free to use and will stay free. Khayt Cloud is an optional paid service — sync between devices, team members, customer pages and an encrypted cloud library — and it is free while it is in beta. The cloud plans and sponsors pay for Khayt’s development. You never need the cloud to run your shop."}},{"@type":"Question","name":"Do the Mac and Windows apps do the same things?","acceptedAnswer":{"@type":"Answer","text":"Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: buy-now-pay-later links and HueForge pictures for the Snapmaker U1."}},{"@type":"Question","name":"Which printers does it talk to?","acceptedAnswer":{"@type":"Answer","text":"OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use."}},{"@type":"Question","name":"Is there an iPhone app?","acceptedAnswer":{"@type":"Answer","text":"Yes, in beta on TestFlight. It shows your queue and your printers, and with the Mac app it can pause, resume or stop a print."}}]}</script><!-- PRERENDER:faqLd:END -->
 </head>
 <body class="home">
@@ -125,7 +125,6 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
         <a href="https://github.com/khaytapp/Khayt" target="_blank" rel="noopener" class="btn btn-ghost btn-lg"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.86c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span data-i18n="hero.github">View on GitHub</span></a>
       </div>
       <div class="os-line"><span>macOS</span><span class="sep"></span><a href="#desktop">Windows</a><span class="sep"></span><a href="#desktop">Linux</a><span class="sep"></span><span data-i18n="hero.ios">iPhone beta (TestFlight)</span></div>
-      <p class="hero-news"><a href="#betaForm" data-i18n="hero.news">Or get Mac beta news by email →</a></p>
     </div>
 
     <div class="hero-r">
@@ -541,20 +540,6 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
           <a class="meta-chip" href="https://github.com/KhaytApp/khayt-mac/releases" target="_blank" rel="noopener" style="color:var(--brand-2)" data-i18n="mn.all">All Mac releases →</a>
         </div>
       </div>
-      <!-- The beta list: khayt-cloud's POST /v1/beta/signup (#115), double
-           opt-in. "website" is a honeypot people never see. Any answer the page
-           cannot read falls back to an email to support. /privacy §2 says what
-           is kept, and must change with this form. -->
-      <form class="beta-form" id="betaForm" data-platform="mac" novalidate>
-        <label for="betaEmail" data-i18n="bf.label">Email me news about the Mac beta</label>
-        <div class="beta-row">
-          <input type="email" id="betaEmail" name="email" required autocomplete="email" inputmode="email" placeholder="you@example.com" dir="ltr">
-          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" class="btn btn-ghost" data-i18n="bf.btn">Notify me</button>
-        </div>
-        <p class="beta-msg" id="betaMsg" role="status" aria-live="polite"></p>
-        <p class="beta-fine"><span data-i18n="bf.fine">One email to confirm, then only beta news. Leave any time.</span> <a href="privacy/#beta-list-en" data-i18n="bf.priv">Privacy</a></p>
-      </form>
       <p class="mn-road" data-i18n="mn.road">The desktop app below keeps running on Windows and Linux — it is not going away.</p>
     </div>
     <!-- MAC-NATIVE:END -->
@@ -725,6 +710,6 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 
 <script src="data.js?v=d8e83f7d09"></script>
 <script src="render.js?v=ac1ec3bc99"></script>
-<script src="app.js?v=570dd74b02"></script>
+<script src="app.js?v=2544f0f313"></script>
 </body>
 </html>
