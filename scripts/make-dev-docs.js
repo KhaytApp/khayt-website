@@ -242,9 +242,184 @@ function page(rel, title, desc, main) {
   return fixPaths(h) + '<main id="top">\n' + main + fixPaths(foot);
 }
 
+// ---- /developers/events/ — what a connector is sent --------------------------
+// The bodies are payloadFor() of the example manifest over a sample order, so
+// they are the bytes the app builds; the signature headers are the app's own
+// signatureHeaders() over those bytes. The delivery rules (retries, timeouts,
+// X-Khayt-Delivery) live in the platforms' transports, not in lib/, so they
+// are prose here — confirmed by the Mac lane, which the desktop matches.
+const P = require(path.join(ROOT, 'developers', 'vendor', 'plugin-payload.js'));
+const B = require(path.join(ROOT, 'developers', 'vendor', 'webhook-bus.js'));
+const WS = require(path.join(ROOT, 'developers', 'vendor', 'webhook-send.js'));
+const SAMPLE_SECRET = 'example-signing-key';
+const SAMPLE_MS = Date.parse('2026-11-08T09:00:00Z');
+const sampleCtx = {
+  order: { id: 'ORD-1042', invoiceNumber: 'INV-2026-0107', project: 'Bracket set', status: 'completed',
+    trackingNumber: '290012345678', plugins: { [example.id]: { service: 'express' } } },
+  customer: { name: 'Sara A.', company: 'Najd Robotics', phone: '+966500000000', address: 'King Fahd Rd, Riyadh' },
+};
+function request(trigger, label) {
+  const r = P.payloadFor(example, trigger, sampleCtx);
+  if (!r.ok) { console.error(`make-dev-docs: payloadFor(${JSON.stringify(trigger)}) failed: ${r.error}`); process.exit(1); }
+  const name = trigger.event || trigger.action;
+  const lines = [`POST ${r.url}`, 'Content-Type: application/json', `X-Khayt-Event: ${name}`, 'X-Khayt-Delivery: <one id per press or event, the same on every retry>'];
+  if (r.auth) lines.push(`${r.auth.header}: ${r.auth.scheme ? r.auth.scheme + ' ' : ''}<the shop’s ${r.auth.secret}>`);
+  if (r.signWith) for (const [k, v] of Object.entries(WS.signatureHeaders(SAMPLE_SECRET, r.body, SAMPLE_MS))) lines.push(`${k}: ${v}`);
+  return `<p>${label}</p>
+      <pre class="ref-code"><code>${esc(lines.join('\n') + '\n\n' + r.body)}</code></pre>`;
+}
+const verifyNode = `const crypto = require('crypto');
+
+// body: the raw request body, exactly as received (before any JSON parsing).
+function verify(body, headers, signingKey) {
+  const ts = headers['x-khayt-timestamp'];
+  const v2 = headers['x-khayt-signature-v2'];
+  if (!ts || !v2) return false;
+  if (Math.abs(Date.now() / 1000 - Number(ts)) > 300) return false; // refuse replays
+  const want = crypto.createHmac('sha256', signingKey).update(ts + '.' + body).digest('hex');
+  return v2.length === want.length &&
+    crypto.timingSafeEqual(Buffer.from(v2), Buffer.from(want));
+}`;
+// The recipe above must accept the example it is printed beside.
+{
+  const body = '{"khayt":"plugin-payload-v1"}';
+  const h = WS.signatureHeaders(SAMPLE_SECRET, body, Date.now());
+  const verify = new Function('require', verifyNode + '\nreturn verify;')(require);
+  if (!verify(body, { 'x-khayt-timestamp': h['X-Khayt-Timestamp'], 'x-khayt-signature-v2': h['X-Khayt-Signature-V2'] }, SAMPLE_SECRET)) {
+    console.error('make-dev-docs: the printed verification recipe rejects a real signature'); process.exit(1);
+  }
+}
+
+const EVENTS_MAIN = `
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Requests your connector receives</h1>
+    <p class="lede">What Khayt sends when a shop presses one of your buttons or an event happens, how to check it came from that shop, and what Khayt does with your reply.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at ${VENDOR_SHA.slice(0, 9)}) from the <a href="../manifest/#example">example manifest</a>.</p>
+
+      <h2 id="body">The body</h2>
+      <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>${esc(P.PAYLOAD_VERSION)}</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
+      ${request({ event: 'order_shipped' }, 'An <code>order_shipped</code> event, with <code>signWith</code>:')}
+      ${request({ action: 'book' }, 'The <code>book</code> button, with an <code>auth</code> header and no signature:')}
+
+      <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>${SAMPLE_SECRET}</code>.</p>
+
+      <h2 id="headers">Headers</h2>
+      ${table('Headers on every request', ['Header', 'When', 'Value'], [
+        [code('Content-Type'), 'Always', code('application/json')],
+        [code('X-Khayt-Event'), 'Always', 'The event name, or the button’s <code>id</code>.'],
+        [code('X-Khayt-Delivery'), 'Always', 'One id per button press or event. A retry sends the same id, so you can ignore one you have already handled.'],
+        ['Your <code>auth.header</code>', 'If the trigger has <code>auth</code>', 'Its <code>scheme</code>, a space, and the secret the shop typed in.'],
+        [code('X-Khayt-Timestamp'), 'If the trigger has <code>signWith</code>', 'Unix time in seconds.'],
+        [code('X-Khayt-Signature'), 'If the trigger has <code>signWith</code>', 'HMAC-SHA256 of the body under the signing key, lowercase hex, no prefix.'],
+        [code('X-Khayt-Signature-V2'), 'If the trigger has <code>signWith</code>', 'HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>, lowercase hex. Check this one: it also lets you refuse a replay.'],
+      ])}
+
+      <h2 id="verify">Checking a signature</h2>
+      <p>Compute the HMAC over the raw bytes you received, not over JSON you parsed and wrote out again. This recipe is run against a real signature from the app every time this page is built.</p>
+      <pre class="ref-code"><code>${esc(verifyNode)}</code></pre>
+
+      <h2 id="delivery">Delivery</h2>
+      <ul>
+        <li><strong>Events</strong> are tried up to ${B.MAX_ATTEMPTS} times — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until you answer with any 2xx. <code>410 Gone</code> stops the retries and switches that event off for the shop.</li>
+        <li><strong>Buttons</strong> are never retried: a person pressed it and sees the result. Any 2xx is success. Anything else, a timeout (15 seconds) or a redirect (never followed) shows the shop “<em>your connector’s name</em> answered <em>status</em>” or “could not be reached”, and nothing is written.</li>
+        <li>Requests go only over https, only to a host in your <code>domains</code>, and never to a private or local address.</li>
+      </ul>
+
+      <h2 id="response">Your reply</h2>
+      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a value of the wrong type is dropped, not converted. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+
+    </div>
+   </div>
+  </div>
+</section>
+`;
+
+// ---- /developers/webhooks/ — the shop's own webhooks -----------------------
+const BUS_DOC = {
+  order_created: 'An order was created.',
+  status_changed: 'An order moved to another status.',
+  order_shipped: 'An order was marked shipped.',
+  order_delivered: 'An order was handed over. Delivered is a date on a completed job, not a status, so there is none in the payload.',
+  payment_received: 'A payment was recorded.',
+  quote_created: 'A quote was created.',
+  quote_approved: 'A customer approved a quote.',
+  low_stock: 'A material fell below its reorder level.',
+  printer_alert: 'A printer reported an error or stopped.',
+  intake_submitted: 'A customer sent a request through the intake form.',
+  qc_failed: 'A job failed inspection.',
+  rma_opened: 'A customer reported a problem with a delivered job (desktop only).',
+};
+same('webhook event', B.EVENTS, BUS_DOC);
+if (problems.length) { console.error('make-dev-docs:\n  ' + problems.join('\n  ')); process.exit(1); }
+const CAT = B.eventCatalogue();
+const busRows = CAT.events.map(e => [code(e.event), BUS_DOC[e.event],
+  e.sent ? e.fields.map(f => `${code(f.key)} <span class="ref-cat">${esc(f.type)}</span>`).join('<br>') : '<em>Listed, not sent yet</em>']);
+const firstSent = CAT.events.find(e => e.sent);
+const busWire = JSON.stringify(B.buildWireBody(firstSent.event, firstSent.example, SAMPLE_MS));
+const envWire = CAT.orderEnvelope[0].example ? JSON.stringify(B.buildWireBody(CAT.orderEnvelope[0].event, CAT.orderEnvelope[0].example, SAMPLE_MS)) : null;
+const wireBlock = (event, wire) => {
+  const h = WS.signatureHeaders(SAMPLE_SECRET, wire, SAMPLE_MS);
+  return `<pre class="ref-code"><code>${esc(['Content-Type: application/json', `X-Khayt-Event: ${event}`, ...Object.entries(h).map(([k, v]) => `${k}: ${v}`)].join('\n') + '\n\n' + wire)}</code></pre>`;
+};
+
+const WEBHOOKS_MAIN = `
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Shop webhooks</h1>
+    <p class="lede">A shop can send its own events to any https address it sets in Settings — a Zapier or Make hook, or your own server. This is what arrives.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Not a connector.</strong> These are addresses a shop types in itself, with no manifest and no review. A connector is sent <a href="../events/">a different body</a>. Everything below is generated from <code>lib/webhook-bus.js</code> at ${VENDOR_SHA.slice(0, 9)}.</p>
+
+      <h2 id="events">Events</h2>
+      ${table('Webhook events', ['Event', 'When', 'Payload'], busRows)}
+
+      <h2 id="body">The body</h2>
+      <p>The request body is an outer object — <code>event</code>, <code>payload</code> and <code>timestamp</code> in milliseconds — with the delivery inside <code>payload</code>. The delivery’s <code>id</code> stays the same on every retry and on a resend from the delivery log, so you can ignore one you have already handled.</p>
+      ${wireBlock(firstSent.event, busWire)}
+      ${envWire ? `<p>The older single-address <em>event webhook</em> (Settings: one URL with a switch for created, status and paid) sends the same moments in its own envelope, which its existing receivers expect byte for byte:</p>
+      ${wireBlock(CAT.orderEnvelope[0].event, envWire)}` : ''}
+
+      <h2 id="verify">Checking a signature</h2>
+      <p>When the shop has set a signing secret, three headers are added: <code>X-Khayt-Signature</code> (HMAC-SHA256 of the body, lowercase hex, no prefix), <code>X-Khayt-Timestamp</code> (Unix seconds) and <code>X-Khayt-Signature-V2</code> (HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>). With no secret, none of them is sent. Check V2 with the <a href="../events/#verify">same recipe</a> connectors use.</p>
+
+      <h2 id="delivery">Delivery</h2>
+      <p>Up to ${B.MAX_ATTEMPTS} attempts — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until a 2xx. <code>410 Gone</code> stops the retries and switches the subscription off. Retries wait on the shop’s computer and survive a restart, so they are only sent while it is on.</p>
+
+    </div>
+   </div>
+  </div>
+</section>
+`;
+
 const OUT = {
   'developers/manifest/index.html': page('developers/manifest/index.html', 'Connector manifest — Khayt developers',
     'Every key a Khayt connector manifest can hold, generated from the app’s own rules.', MAIN),
+  'developers/events/index.html': page('developers/events/index.html', 'Connector requests — Khayt developers',
+    'What a Khayt connector is sent, how to verify it, and what Khayt does with the reply.', EVENTS_MAIN),
+  'developers/webhooks/index.html': page('developers/webhooks/index.html', 'Shop webhooks — Khayt developers',
+    'The events a Khayt shop can send to its own https address, and how to verify them.', WEBHOOKS_MAIN),
 };
 
 let stale = 0;

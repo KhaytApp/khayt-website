@@ -26,19 +26,23 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const APP = path.resolve(process.argv[2] || path.join(ROOT, '..'));
 const REF = process.argv[3] || 'origin/main';
-const SRC = 'lib/plugin-manifest.js';
+// plugin-manifest.js: the rules. plugin-payload.js: the exact bytes a
+// connector is sent, so the docs show requests the app really builds.
+// webhook-bus.js, webhooks.js, webhook-send.js (+ host-ranges.js, which it
+// requires): the shop's own webhooks, for /developers/webhooks/.
+const SRCS = ['lib/plugin-manifest.js', 'lib/plugin-payload.js',
+  'lib/webhook-bus.js', 'lib/webhooks.js', 'lib/webhook-send.js', 'lib/host-ranges.js'];
 
 const git = (...a) => execFileSync('git', ['-C', APP, ...a], { encoding: 'utf8' });
 const sha = git('rev-parse', REF).trim();
-const body = git('show', `${sha}:${SRC}`);
-
-const header = `// COPIED from KhaytApp/Khayt ${SRC} at ${sha}.\n` +
-  `// Do not edit here: run scripts/sync-plugin-manifest.js. The docs under\n` +
-  `// developers/ are generated from this file by scripts/make-dev-docs.js.\n`;
-
+fs.mkdirSync(path.join(ROOT, 'developers', 'vendor'), { recursive: true });
+for (const SRC of SRCS) {
+  const header = `// COPIED from KhaytApp/Khayt ${SRC} at ${sha}.\n` +
+    `// Do not edit here: run scripts/sync-plugin-manifest.js. The docs under\n` +
+    `// developers/ are generated from this file by scripts/make-dev-docs.js.\n`;
+  fs.writeFileSync(path.join(ROOT, 'developers', 'vendor', path.basename(SRC)), header + git('show', `${sha}:${SRC}`));
+}
 const vendor = path.join(ROOT, 'developers', 'vendor', 'plugin-manifest.js');
-fs.mkdirSync(path.dirname(vendor), { recursive: true });
-fs.writeFileSync(vendor, header + body);
 
 delete require.cache[vendor];
 const M = require(vendor);
@@ -49,4 +53,4 @@ const out = path.join(ROOT, 'schemas', 'plugin-manifest-v1.json');
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, JSON.stringify(schema, null, 2) + '\n');
 
-console.log(`plugin-manifest.js @ ${sha.slice(0, 9)} -> developers/vendor/, schemas/plugin-manifest-v1.json`);
+console.log(`${SRCS.map(f => path.basename(f)).join(', ')} @ ${sha.slice(0, 9)} -> developers/vendor/, schemas/plugin-manifest-v1.json`);
