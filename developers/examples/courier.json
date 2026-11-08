@@ -1,0 +1,50 @@
+{
+  "khayt": { "manifest": 1 },
+  "id": "com.example.courier",
+  "name": { "en": "Example Courier", "ar": "شركة الشحن المثال" },
+  "description": { "en": "Book a pickup for an order and keep its tracking number on the job." },
+  "publisher": "Example Courier Ltd",
+  "version": "1.0.0",
+  "homepage": "https://courier.example.com/khayt",
+  "domains": ["api.courier.example.com", "track.courier.example.com"],
+  "secrets": [
+    { "name": "apiKey", "label": { "en": "API key" }, "kind": "apiKey" },
+    { "name": "hookKey", "label": { "en": "Webhook signing key" }, "kind": "signingKey" }
+  ],
+  "fields": [
+    { "key": "tracking", "label": { "en": "Courier tracking" }, "type": "text", "attach": "order" },
+    { "key": "service", "label": { "en": "Service" }, "type": "enum", "attach": "order",
+      "options": [
+        { "value": "standard", "label": { "en": "Standard" } },
+        { "value": "express", "label": { "en": "Express" } }
+      ] }
+  ],
+  "actions": [
+    {
+      "id": "book",
+      "label": { "en": "Book pickup", "ar": "احجز الاستلام" },
+      "placement": "order",
+      "kind": "post",
+      "url": "https://api.courier.example.com/v1/shipments",
+      "send": ["order.number", "order.title", "customer.name", "customer.phone", "customer.address", "field.service"],
+      "auth": { "header": "Authorization", "scheme": "Bearer", "secret": "apiKey" },
+      "response": { "fields": { "tracking": "data.trackingNumber" } }
+    },
+    {
+      "id": "track",
+      "label": { "en": "Track parcel" },
+      "placement": "order",
+      "kind": "open",
+      "url": "https://track.courier.example.com/{field.tracking}"
+    }
+  ],
+  "events": [
+    {
+      "event": "order_shipped",
+      "url": "https://api.courier.example.com/v1/khayt/shipped",
+      "send": ["order.number", "order.trackingNumber"],
+      "signWith": "hookKey"
+    }
+  ],
+  "scopes": ["fields.write"]
+}
