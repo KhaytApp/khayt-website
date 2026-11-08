@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/e848f063fa3bc67519983060a03b44a594d9db37/lib/plugin-manifest.js">e848f063f</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/50ce56a160d8ea5eb518612acd47d5442b1a507c/lib/plugin-manifest.js">50ce56a16</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
 
       <h2 id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
@@ -87,10 +87,11 @@
             <tr><th scope="row"><code>homepage</code></th><td data-label="Required">Optional</td><td data-label="What it is">An https page about the connector, including your privacy policy.</td></tr>
             <tr><th scope="row"><code>domains</code></th><td data-label="Required">Optional</td><td data-label="What it is">Every host the connector sends to or opens, lower case, no scheme. Each must be used by an action or event, and each is shown to the shop before it agrees.</td></tr>
             <tr><th scope="row"><code>secrets</code></th><td data-label="Required">Optional</td><td data-label="What it is">Values the shop types in once and the device keeps in its own protected storage: API keys, tokens, signing keys. Never synced, never sent to Khayt Cloud.</td></tr>
+            <tr><th scope="row"><code>settings</code></th><td data-label="Required">Optional</td><td data-label="What it is">Values the shop fills in when it sets the connector up — a sender’s name, an account number — which the connector can send as <code>config.&lt;key&gt;</code>.</td></tr>
             <tr><th scope="row"><code>fields</code></th><td data-label="Required">Optional</td><td data-label="What it is">Fields the connector adds to a record, which the shop can fill in and the connector can send or fill from a reply.</td></tr>
             <tr><th scope="row"><code>actions</code></th><td data-label="Required">Optional</td><td data-label="What it is">Buttons the connector adds beside an order or a customer.</td></tr>
             <tr><th scope="row"><code>events</code></th><td data-label="Required">Optional</td><td data-label="What it is">Things that happen in the shop that the connector is told about, as they happen.</td></tr>
-            <tr><th scope="row"><code>scopes</code></th><td data-label="Required">Optional</td><td data-label="What it is">What the connector may do to the shop, beyond sending the fields it lists.</td></tr>
+            <tr><th scope="row"><code>scopes</code></th><td data-label="Required">Optional</td><td data-label="What it is">What the connector may change in the shop. In this version that is only its own fields.</td></tr>
             <tr><th scope="row"><code>signature</code></th><td data-label="Required">Optional</td><td data-label="What it is">Added by Khayt when a connector passes review: an ed25519 signature over the canonical JSON of everything else. Leave it out while you develop.</td></tr>
           </tbody>
         </table>
@@ -121,6 +122,7 @@
             <tr><th scope="row"><code>customer.email</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Email Address</td></tr>
             <tr><th scope="row"><code>customer.address</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Physical Address</td></tr>
             <tr><th scope="row"><code>field.&lt;key&gt;</code></th><td data-label="Read from">One of your own <code>fields</code></td><td data-label="Type">its type</td><td data-label="Privacy category">User Content › Other User Content</td></tr>
+            <tr><th scope="row"><code>config.&lt;key&gt;</code></th><td data-label="Read from">One of your <code>settings</code></td><td data-label="Type">its type</td><td data-label="Privacy category">Set by its <code>kind</code> (<a href="#settings">below</a>)</td></tr>
           </tbody>
         </table>
       </div>
@@ -204,10 +206,38 @@
         </table>
       </div>
 
-      <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
+      <h2 id="settings">Settings (<code>settings</code>)</h2>
+      <p>Each entry is <code>{"key", "label", "type"}</code>, with <code>options</code> for an enum, <code>required</code> if the connector cannot work without it, and, for a text setting, a <code>kind</code> saying what the value is. The kind decides the privacy category — a sender’s phone is a phone number, whoever’s it is — so you never name a category. A button or event that uses a required setting the shop has not filled in is not sent, and the error names the missing setting. A value of the wrong type, or text over the limit, is sent as <code>null</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
         <table class="ref-table">
-          <caption id="ref-t9">Kinds of secret</caption>
+          <caption id="ref-t9">Setting types</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text, up to the setting value limit.</td></tr>
+            <tr><th scope="row"><code>number</code></th><td data-label="Meaning">A number.</td></tr>
+            <tr><th scope="row"><code>bool</code></th><td data-label="Meaning">Yes or no.</td></tr>
+            <tr><th scope="row"><code>enum</code></th><td data-label="Meaning">One of 1–30 <code>options</code>, each <code>{"value", "label"}</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
+        <table class="ref-table">
+          <caption id="ref-t10">Kinds of text setting</caption>
+          <thead><tr><th scope="col">Kind</th><th scope="col">Meaning</th><th scope="col">Privacy category</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>name</code></th><td data-label="Meaning">A person’s or business’s name.</td><td data-label="Privacy category">Contact Info › Name</td></tr>
+            <tr><th scope="row"><code>phone</code></th><td data-label="Meaning">A phone number.</td><td data-label="Privacy category">Contact Info › Phone Number</td></tr>
+            <tr><th scope="row"><code>email</code></th><td data-label="Meaning">An email address.</td><td data-label="Privacy category">Contact Info › Email Address</td></tr>
+            <tr><th scope="row"><code>address</code></th><td data-label="Meaning">A postal address.</td><td data-label="Privacy category">Contact Info › Physical Address</td></tr>
+            <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Anything else. The default when <code>kind</code> is left out.</td><td data-label="Privacy category">User Content › Other User Content</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
+        <table class="ref-table">
+          <caption id="ref-t11">Kinds of secret</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>apiKey</code></th><td data-label="Meaning">An API key.</td></tr>
@@ -221,23 +251,32 @@
       <p>A secret can be used in a <code>post</code> URL, an <code>auth</code> header or <code>signWith</code>. It can never be sent as a field, put in a body template, or appear in an <code>open</code> link, which a browser would keep in its history.</p>
 
       <h2 id="scopes">Scopes (<code>scopes</code>)</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
         <table class="ref-table">
-          <caption id="ref-t10">Scopes</caption>
+          <caption id="ref-t12">Scopes</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><code>orders.read</code></th><td data-label="Meaning">Read orders.</td></tr>
-            <tr><th scope="row"><code>customers.read</code></th><td data-label="Meaning">Read customers.</td></tr>
-            <tr><th scope="row"><code>fields.write</code></th><td data-label="Meaning">Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply.</td></tr>
-            <tr><th scope="row"><code>jobs.status</code></th><td data-label="Meaning">Move a job to another status.</td></tr>
+            <tr><th scope="row"><code>fields.write</code></th><td data-label="Meaning">Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply. Required by any button with a <code>response</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A connector is told only the fields it sends; that needs no scope. These names are kept for when connectors can reach the shop through Khayt Cloud, and a manifest that asks for one is refused until then:</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
+        <table class="ref-table">
+          <caption id="ref-t13">Reserved scopes</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>orders.read</code></th><td data-label="Meaning">Reading the shop’s orders.</td></tr>
+            <tr><th scope="row"><code>customers.read</code></th><td data-label="Meaning">Reading the shop’s customers.</td></tr>
+            <tr><th scope="row"><code>jobs.status</code></th><td data-label="Meaning">Moving a job to another status.</td></tr>
           </tbody>
         </table>
       </div>
 
       <h2 id="limits">Limits</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
         <table class="ref-table">
-          <caption id="ref-t11">Limits</caption>
+          <caption id="ref-t14">Limits</caption>
           <thead><tr><th scope="col">At most</th><th scope="col">Of</th></tr></thead>
           <tbody>
             <tr><th scope="row">10</th><td data-label="Of">hosts in <code>domains</code></td></tr>
@@ -249,15 +288,17 @@
             <tr><th scope="row">80</th><td data-label="Of">characters in any label, and in <code>publisher</code></td></tr>
             <tr><th scope="row">300</th><td data-label="Of">characters in <code>description</code></td></tr>
             <tr><th scope="row">500</th><td data-label="Of">characters in a URL</td></tr>
+            <tr><th scope="row">10</th><td data-label="Of">entries in <code>settings</code></td></tr>
+            <tr><th scope="row">500</th><td data-label="Of">characters in a text setting’s value</td></tr>
           </tbody>
         </table>
       </div>
 
       <h2 id="signing">Review and signing</h2>
       <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t15">
         <table class="ref-table">
-          <caption id="ref-t12">Signing keys</caption>
+          <caption id="ref-t15">Signing keys</caption>
           <thead><tr><th scope="col">Key id</th><th scope="col">Public key (raw ed25519, base64)</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>khayt-2026-11</code></th><td data-label="Public key (raw ed25519, base64)"><code>LGzEHSMW6OGkgSXgYvP9egtqAVSUn+xIyoSxiPDO8sE=</code></td></tr>
@@ -267,9 +308,9 @@
 
       <h2 id="consent">What the shop agrees to</h2>
       <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
         <table class="ref-table">
-          <caption id="ref-t13">Consent screen for the example</caption>
+          <caption id="ref-t16">Consent screen for the example</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields sent there</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>api.courier.example.com</code></th><td data-label="Fields sent there"><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.service</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>

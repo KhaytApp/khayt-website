@@ -48,17 +48,26 @@ const DOC = {
     homepage: 'An https page about the connector, including your privacy policy.',
     domains: 'Every host the connector sends to or opens, lower case, no scheme. Each must be used by an action or event, and each is shown to the shop before it agrees.',
     secrets: 'Values the shop types in once and the device keeps in its own protected storage: API keys, tokens, signing keys. Never synced, never sent to Khayt Cloud.',
+    settings: 'Values the shop fills in when it sets the connector up — a sender’s name, an account number — which the connector can send as <code>config.&lt;key&gt;</code>.',
     fields: 'Fields the connector adds to a record, which the shop can fill in and the connector can send or fill from a reply.',
     actions: 'Buttons the connector adds beside an order or a customer.',
     events: 'Things that happen in the shop that the connector is told about, as they happen.',
-    scopes: 'What the connector may do to the shop, beyond sending the fields it lists.',
+    scopes: 'What the connector may change in the shop. In this version that is only its own fields.',
     signature: 'Added by Khayt when a connector passes review: an ed25519 signature over the canonical JSON of everything else. Leave it out while you develop.',
   },
   scopes: {
-    'orders.read': 'Read orders.',
-    'customers.read': 'Read customers.',
-    'fields.write': 'Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply.',
-    'jobs.status': 'Move a job to another status.',
+    'fields.write': 'Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply. Required by any button with a <code>response</code>.',
+  },
+  // Names kept for the Cloud relay: the validator refuses them until it ships.
+  reservedScopes: {
+    'orders.read': 'Reading the shop’s orders.',
+    'customers.read': 'Reading the shop’s customers.',
+    'jobs.status': 'Moving a job to another status.',
+  },
+  settingTypes: { text: 'Free text, up to the setting value limit.', number: 'A number.', bool: 'Yes or no.', enum: 'One of 1–30 <code>options</code>, each <code>{"value", "label"}</code>.' },
+  settingKinds: {
+    name: 'A person’s or business’s name.', phone: 'A phone number.', email: 'An email address.',
+    address: 'A postal address.', text: 'Anything else. The default when <code>kind</code> is left out.',
   },
   events: {
     order_created: 'An order was created.',
@@ -93,6 +102,7 @@ const DOC = {
     domains: 'hosts in <code>domains</code>', secrets: 'entries in <code>secrets</code>', fields: 'entries in <code>fields</code>',
     actions: 'entries in <code>actions</code>', events: 'entries in <code>events</code>', send: 'fields one action or event sends',
     label: 'characters in any label, and in <code>publisher</code>', description: 'characters in <code>description</code>', url: 'characters in a URL',
+    settings: 'entries in <code>settings</code>', settingValue: 'characters in a text setting’s value',
   },
 };
 
@@ -105,6 +115,9 @@ function same(what, have, documented) {
 }
 same('top-level key', M.TOP_KEYS, DOC.top);
 same('scope', M.SCOPES, DOC.scopes);
+same('reserved scope', M.RESERVED_SCOPES, DOC.reservedScopes);
+same('setting type', M.SETTING_TYPES, DOC.settingTypes);
+same('setting kind', Object.keys(M.SETTING_KINDS), DOC.settingKinds);
 same('event', M.EVENTS, DOC.events);
 same('field type', M.FIELD_TYPES, DOC.fieldTypes);
 same('attach', M.FIELD_ATTACH, DOC.attach);
@@ -113,7 +126,12 @@ same('secret kind', M.SECRET_KINDS, DOC.secretKinds);
 same('body format', M.BODY_FORMATS, DOC.bodyFormats);
 same('limit', Object.keys(M.LIMITS), DOC.limits);
 same('privacy category',
-  [...new Set(Object.values(M.SENDABLE_FIELDS).map(f => f.category).concat(M.OWN_FIELD_CATEGORY))], DOC.categories);
+  [...new Set(Object.values(M.SENDABLE_FIELDS).map(f => f.category).concat(M.OWN_FIELD_CATEGORY, Object.values(M.SETTING_KINDS)))], DOC.categories);
+// A reserved scope must be refused, with the reason, not merely absent.
+for (const sc of M.RESERVED_SCOPES) {
+  const v = M.validateManifest(Object.assign({}, JSON.parse(fs.readFileSync(path.join(ROOT, 'developers/examples/courier.json'), 'utf8')), { scopes: ['fields.write', sc] }));
+  if (v.ok || !v.errors.some(e => e.includes('Cloud relay'))) problems.push(`reserved scope "${sc}" is not refused as reserved`);
+}
 
 const EXAMPLE_FILE = 'developers/examples/courier.json';
 const example = JSON.parse(fs.readFileSync(path.join(ROOT, EXAMPLE_FILE), 'utf8'));
@@ -149,6 +167,7 @@ const topRows = M.TOP_KEYS.map(k => [code(k), required.has(k) ? 'Required' : 'Op
 const sendRows = Object.entries(M.SENDABLE_FIELDS).map(([k, f]) =>
   [code(k), f.from === 'order' ? 'The order' : 'The order’s customer', f.type, DOC.categories[f.category]]);
 sendRows.push([code('field.<key>'), 'One of your own <code>fields</code>', 'its type', DOC.categories[M.OWN_FIELD_CATEGORY]]);
+sendRows.push([code('config.<key>'), 'One of your <code>settings</code>', 'its type', 'Set by its <code>kind</code> (<a href="#settings">below</a>)']);
 const placeRows = Object.entries(M.PLACEMENT_SOURCES).map(([p, src]) =>
   [code(p), src.map(s => code(s + '.*')).join(', ')]);
 const limitRows = Object.entries(M.LIMITS).map(([k, n]) => [String(n), DOC.limits[k]]);
@@ -196,12 +215,19 @@ const MAIN = `
       ${enumTable('Field types', DOC.fieldTypes)}
       ${enumTable('Records a field can be added to', DOC.attach)}
 
+      <h2 id="settings">Settings (<code>settings</code>)</h2>
+      <p>Each entry is <code>{"key", "label", "type"}</code>, with <code>options</code> for an enum, <code>required</code> if the connector cannot work without it, and, for a text setting, a <code>kind</code> saying what the value is. The kind decides the privacy category — a sender’s phone is a phone number, whoever’s it is — so you never name a category. A button or event that uses a required setting the shop has not filled in is not sent, and the error names the missing setting. A value of the wrong type, or text over the limit, is sent as <code>null</code>.</p>
+      ${enumTable('Setting types', DOC.settingTypes)}
+      ${table('Kinds of text setting', ['Kind', 'Meaning', 'Privacy category'], Object.entries(DOC.settingKinds).map(([k, v]) => [code(k), v, DOC.categories[M.SETTING_KINDS[k]]]))}
+
       <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
       ${enumTable('Kinds of secret', DOC.secretKinds)}
       <p>A secret can be used in a <code>post</code> URL, an <code>auth</code> header or <code>signWith</code>. It can never be sent as a field, put in a body template, or appear in an <code>open</code> link, which a browser would keep in its history.</p>
 
       <h2 id="scopes">Scopes (<code>scopes</code>)</h2>
       ${enumTable('Scopes', DOC.scopes)}
+      <p>A connector is told only the fields it sends; that needs no scope. These names are kept for when connectors can reach the shop through Khayt Cloud, and a manifest that asks for one is refused until then:</p>
+      ${enumTable('Reserved scopes', DOC.reservedScopes)}
 
       <h2 id="limits">Limits</h2>
       ${table('Limits', ['At most', 'Of'], limitRows)}
@@ -475,8 +501,16 @@ const samples = fs.readdirSync(SAMPLE_DIR).filter(f => f.endsWith('.json')).sort
   return { f, m, key };
 });
 if (!samples.length) { console.error('make-dev-docs: no samples in developers/samples/'); process.exit(1); }
+// What a shop might type into a setting, by kind and type, for the sample request.
+function sampleSetting(st) {
+  if (st.type === 'number') return 1;
+  if (st.type === 'bool') return true;
+  if (st.type === 'enum') return st.options[0].value;
+  return { name: 'Athar Studio', phone: '+966511111111', email: 'shop@example.com', address: 'Olaya St, Riyadh' }[st.kind] || 'Riyadh';
+}
 function sampleSection({ f, m, key }) {
-  const ctx = Object.assign({}, sampleCtx, { secrets: Object.fromEntries((m.secrets || []).map(x => [x.name, 'YOUR-' + x.name.toUpperCase()])) });
+  const ctx = Object.assign({}, sampleCtx, { secrets: Object.fromEntries((m.secrets || []).map(x => [x.name, 'YOUR-' + x.name.toUpperCase()])),
+    config: Object.fromEntries((m.settings || []).map(st => [st.key, sampleSetting(st)])) });
   const first = (m.events || [])[0] ? { event: m.events[0].event } : { action: m.actions[0].id };
   const r = P.payloadFor(m, first, ctx);
   if (!r.ok) { console.error(`make-dev-docs: ${f}: payloadFor failed: ${r.error}`); process.exit(1); }

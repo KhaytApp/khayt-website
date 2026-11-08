@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at e848f063f) from the <a href="../manifest/#example">example manifest</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at 50ce56a16) from the <a href="../manifest/#example">example manifest</a>.</p>
 
       <h2 id="body">The body</h2>
       <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>plugin-payload-v1</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
@@ -95,9 +95,9 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;
       <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>example-signing-key</code>.</p>
 
       <h2 id="headers">Headers</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
         <table class="ref-table">
-          <caption id="ref-t14">Headers on every request</caption>
+          <caption id="ref-t17">Headers on every request</caption>
           <thead><tr><th scope="col">Header</th><th scope="col">When</th><th scope="col">Value</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>Content-Type</code></th><td data-label="When">Always</td><td data-label="Value"><code>application/json</code></td></tr>
