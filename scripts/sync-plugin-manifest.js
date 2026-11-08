@@ -28,7 +28,10 @@ const APP = path.resolve(process.argv[2] || path.join(ROOT, '..'));
 const REF = process.argv[3] || 'origin/main';
 // plugin-manifest.js: the rules. plugin-payload.js: the exact bytes a
 // connector is sent, so the docs show requests the app really builds.
-const SRCS = ['lib/plugin-manifest.js', 'lib/plugin-payload.js'];
+// webhook-bus.js, webhooks.js, webhook-send.js (+ host-ranges.js, which it
+// requires): the shop's own webhooks, for /developers/webhooks/.
+const SRCS = ['lib/plugin-manifest.js', 'lib/plugin-payload.js',
+  'lib/webhook-bus.js', 'lib/webhooks.js', 'lib/webhook-send.js', 'lib/host-ranges.js'];
 
 const git = (...a) => execFileSync('git', ['-C', APP, ...a], { encoding: 'utf8' });
 const sha = git('rev-parse', REF).trim();
