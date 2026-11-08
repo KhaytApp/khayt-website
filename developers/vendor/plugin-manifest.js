@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/plugin-manifest.js at bf54eadd45f1c3833b74422bbc9b0bf84923d869.
+// COPIED from KhaytApp/Khayt lib/plugin-manifest.js at 9303b0220e4a06dda43f0b7bc75b0997c1446510.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
