@@ -77,7 +77,7 @@
       <pre class="ref-code"><code>POST https://api.courier.example.com/v1/khayt/shipped
 Content-Type: application/json
 X-Khayt-Event: order_shipped
-X-Khayt-Delivery: &lt;one id per press or event, the same on every retry&gt;
+X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
 X-Khayt-Signature: 43f88f47435419c10557f522d05e8960b400a68b4b7264eff8f492d1b6b63b4f
 X-Khayt-Timestamp: 1794128400
 X-Khayt-Signature-V2: 0d7a7b96523aa1d31d875b4c3957b252e77b18c1317fe2a8ae4084d9612fafbb
@@ -87,7 +87,7 @@ X-Khayt-Signature-V2: 0d7a7b96523aa1d31d875b4c3957b252e77b18c1317fe2a8ae4084d961
       <pre class="ref-code"><code>POST https://api.courier.example.com/v1/shipments
 Content-Type: application/json
 X-Khayt-Event: book
-X-Khayt-Delivery: &lt;one id per press or event, the same on every retry&gt;
+X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
 Authorization: Bearer &lt;the shop’s apiKey&gt;
 
 {&quot;data&quot;:{&quot;customer.address&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;customer.phone&quot;:&quot;+966500000000&quot;,&quot;field.service&quot;:&quot;express&quot;,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;com.example.courier&quot;,&quot;trigger&quot;:{&quot;action&quot;:&quot;book&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
@@ -102,8 +102,8 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;
           <tbody>
             <tr><th scope="row"><code>Content-Type</code></th><td data-label="When">Always</td><td data-label="Value"><code>application/json</code></td></tr>
             <tr><th scope="row"><code>X-Khayt-Event</code></th><td data-label="When">Always</td><td data-label="Value">The event name, or the button’s <code>id</code>.</td></tr>
-            <tr><th scope="row"><code>X-Khayt-Delivery</code></th><td data-label="When">Always</td><td data-label="Value">One id per button press or event. A retry sends the same id, so you can ignore one you have already handled.</td></tr>
-            <tr><th scope="row">Your <code>auth.header</code></th><td data-label="When">If the trigger has <code>auth</code></td><td data-label="Value">Its <code>scheme</code>, a space, and the secret the shop typed in.</td></tr>
+            <tr><th scope="row"><code>X-Khayt-Delivery</code></th><td data-label="When">Always</td><td data-label="Value"><code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled.</td></tr>
+            <tr><th scope="row">Your <code>auth.header</code></th><td data-label="When">If the trigger has <code>auth</code></td><td data-label="Value">Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Timestamp</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">Unix time in seconds.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Signature</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">HMAC-SHA256 of the body under the signing key, lowercase hex, no prefix.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Signature-V2</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>, lowercase hex. Check this one: it also lets you refuse a replay.</td></tr>
@@ -134,7 +134,7 @@ function verify(body, headers, signingKey) {
       </ul>
 
       <h2 id="response">Your reply</h2>
-      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a value of the wrong type is dropped, not converted. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
 
     </div>
    </div>

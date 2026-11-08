@@ -262,7 +262,7 @@ function request(trigger, label) {
   const r = P.payloadFor(example, trigger, sampleCtx);
   if (!r.ok) { console.error(`make-dev-docs: payloadFor(${JSON.stringify(trigger)}) failed: ${r.error}`); process.exit(1); }
   const name = trigger.event || trigger.action;
-  const lines = [`POST ${r.url}`, 'Content-Type: application/json', `X-Khayt-Event: ${name}`, 'X-Khayt-Delivery: <one id per press or event, the same on every retry>'];
+  const lines = [`POST ${r.url}`, 'Content-Type: application/json', `X-Khayt-Event: ${name}`, 'X-Khayt-Delivery: dlv_<a lower-case UUID, the same on every retry>'];
   if (r.auth) lines.push(`${r.auth.header}: ${r.auth.scheme ? r.auth.scheme + ' ' : ''}<the shop’s ${r.auth.secret}>`);
   if (r.signWith) for (const [k, v] of Object.entries(WS.signatureHeaders(SAMPLE_SECRET, r.body, SAMPLE_MS))) lines.push(`${k}: ${v}`);
   return `<p>${label}</p>
@@ -287,6 +287,28 @@ function verify(body, headers, signingKey) {
   const verify = new Function('require', verifyNode + '\nreturn verify;')(require);
   if (!verify(body, { 'x-khayt-timestamp': h['X-Khayt-Timestamp'], 'x-khayt-signature-v2': h['X-Khayt-Signature-V2'] }, SAMPLE_SECRET)) {
     console.error('make-dev-docs: the printed verification recipe rejects a real signature'); process.exit(1);
+  }
+}
+
+// The reply rules printed under "Your reply", checked against applyResponse.
+{
+  const m = { khayt: { manifest: 1 }, id: 'com.example.check', name: { en: 'Check' }, publisher: 'x', version: '1.0.0',
+    domains: ['api.check.example.com'],
+    fields: [
+      { key: 'n', label: { en: 'n' }, type: 'number', attach: 'order' },
+      { key: 'd', label: { en: 'd' }, type: 'date', attach: 'order' },
+      { key: 't', label: { en: 't' }, type: 'text', attach: 'order' },
+      { key: 'b', label: { en: 'b' }, type: 'bool', attach: 'order' },
+      { key: 'e', label: { en: 'e' }, type: 'enum', attach: 'order', options: [{ value: 'a', label: { en: 'a' } }] },
+    ],
+    actions: [{ id: 'go', label: { en: 'Go' }, placement: 'order', kind: 'post', url: 'https://api.check.example.com/x',
+      response: { fields: { n: 'n', d: 'd', t: 't', b: 'b', e: 'e' } } }],
+    scopes: ['fields.write'] };
+  const ok = M.validateManifest(m);
+  const got = P.applyResponse(m, 'go', { n: '2.5', d: '2026-11-08T09:00:00Z', t: 'x'.repeat(600), b: 'true', e: 'z' });
+  const want = { n: 2.5, d: '2026-11-08', t: 'x'.repeat(500) };
+  if (!ok.ok || JSON.stringify(got) !== JSON.stringify(want)) {
+    console.error('make-dev-docs: "Your reply" no longer matches applyResponse: ' + JSON.stringify(ok.errors || got)); process.exit(1);
   }
 }
 
@@ -319,8 +341,8 @@ const EVENTS_MAIN = `
       ${table('Headers on every request', ['Header', 'When', 'Value'], [
         [code('Content-Type'), 'Always', code('application/json')],
         [code('X-Khayt-Event'), 'Always', 'The event name, or the button’s <code>id</code>.'],
-        [code('X-Khayt-Delivery'), 'Always', 'One id per button press or event. A retry sends the same id, so you can ignore one you have already handled.'],
-        ['Your <code>auth.header</code>', 'If the trigger has <code>auth</code>', 'Its <code>scheme</code>, a space, and the secret the shop typed in.'],
+        [code('X-Khayt-Delivery'), 'Always', '<code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled.'],
+        ['Your <code>auth.header</code>', 'If the trigger has <code>auth</code>', 'Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>.'],
         [code('X-Khayt-Timestamp'), 'If the trigger has <code>signWith</code>', 'Unix time in seconds.'],
         [code('X-Khayt-Signature'), 'If the trigger has <code>signWith</code>', 'HMAC-SHA256 of the body under the signing key, lowercase hex, no prefix.'],
         [code('X-Khayt-Signature-V2'), 'If the trigger has <code>signWith</code>', 'HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>, lowercase hex. Check this one: it also lets you refuse a replay.'],
@@ -338,7 +360,7 @@ const EVENTS_MAIN = `
       </ul>
 
       <h2 id="response">Your reply</h2>
-      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a value of the wrong type is dropped, not converted. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
 
     </div>
    </div>
