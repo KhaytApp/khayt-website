@@ -72,7 +72,7 @@
       <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
 
       <h2 id="discord">Discord alerts</h2>
-      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/e848f063fa3bc67519983060a03b44a594d9db37/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
         <table class="ref-table">
           <caption id="ref-t16">What Discord alerts sends</caption>
@@ -89,7 +89,7 @@ Content-Type: application/json
 {&quot;content&quot;:&quot;New job INV-2026-0107: Bracket set&quot;}</code></pre>
 
       <h2 id="sheets">Google Sheets order log</h2>
-      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/e848f063fa3bc67519983060a03b44a594d9db37/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
         <table class="ref-table">
           <caption id="ref-t17">What Google Sheets order log sends</caption>
@@ -106,7 +106,7 @@ Content-Type: application/json
 {&quot;data&quot;:{&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;order.currency&quot;:&quot;SAR&quot;,&quot;order.date&quot;:null,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;,&quot;order.total&quot;:180},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;app.khayt.samples.sheets&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_created&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
 
       <h2 id="slack">Slack alerts</h2>
-      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/e848f063fa3bc67519983060a03b44a594d9db37/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
         <table class="ref-table">
           <caption id="ref-t18">What Slack alerts sends</caption>

@@ -48,8 +48,9 @@ const vendor = path.join(ROOT, 'developers', 'vendor', 'plugin-manifest.js');
 // /developers/samples/. Copied as they are: their signatures cover these bytes'
 // canonical form, and make-dev-docs.js verifies each one.
 const SAMPLES = path.join(ROOT, 'developers', 'samples');
-fs.rmSync(SAMPLES, { recursive: true, force: true });
+// Only the .json files: index.html here is the generated page.
 fs.mkdirSync(SAMPLES, { recursive: true });
+for (const f of fs.readdirSync(SAMPLES)) if (f.endsWith('.json')) fs.rmSync(path.join(SAMPLES, f));
 for (const f of git('ls-tree', '--name-only', `${sha}:plugins/samples/`).split('\n').filter(n => n.endsWith('.json'))) {
   fs.writeFileSync(path.join(SAMPLES, f), git('show', `${sha}:plugins/samples/${f}`));
 }

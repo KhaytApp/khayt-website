@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/plugin-payload.js at 216f6ce707bb162dd726fefc002822d3b726e91e.
+// COPIED from KhaytApp/Khayt lib/plugin-payload.js at e848f063fa3bc67519983060a03b44a594d9db37.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
@@ -61,8 +61,22 @@
     if (!s) return null;
     const rec = c[s.from];
     let v = isObj(rec) ? rec[s.path] : undefined;
+    const blank = (x) => x === undefined || x === null || String(x).trim() === '';
+    // WHERE THE BOOK REALLY KEEPS THEM. The customer editors in all three
+    // apps save `nameEn`/`nameAr` and an address book `addresses[]` of
+    // {label, address}; a plain `name` and `address` exist only on CSV
+    // imports and older records. Reading `path` alone sent null for nearly
+    // every customer (found by the desktop lane, Nov 8 2026). The same
+    // order of preference as lib/customer-records.js nameOf.
+    if (ref === 'customer.name' && isObj(rec)) {
+      for (const k of ['nameEn', 'nameAr', 'name']) if (!blank(rec[k])) { v = rec[k]; break; }
+    }
+    if (ref === 'customer.address' && blank(v) && isObj(rec) && Array.isArray(rec.addresses)) {
+      const first = rec.addresses.find(a => isObj(a) && !blank(a.address));
+      if (first) v = first.address;
+    }
     // A job typed in without a customer record still has a name on it.
-    if (ref === 'customer.name' && (v === undefined || v === null || v === '') && isObj(c.order)) v = c.order.client;
+    if (ref === 'customer.name' && blank(v) && isObj(c.order)) v = c.order.client;
     if (v === undefined || v === '') return null;
     if (s.type === 'number') return Number.isFinite(Number(v)) ? Number(v) : null;
     if (typeof v === 'object') return null;
