@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample connectors — Khayt developers</title>
+<meta name="description" content="Signed sample Khayt connectors to start your own from.">
+<meta property="og:title" content="Sample connectors — Khayt developers">
+<meta property="og:description" content="Signed sample Khayt connectors to start your own from.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/developers/samples/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="../../blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
+<link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../../#features" data-i18n="nav.features">Features</a>
+      <a href="../../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../../services.html" data-i18n="nav.services">Services</a>
+      <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+      <a href="../../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Sample connectors</h1>
+    <p class="lede">Connectors Khayt has written, reviewed and signed. Copy one as the start of your own.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
+
+      <h2 id="discord">Discord alerts</h2>
+      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
+        <table class="ref-table">
+          <caption id="ref-t16">What Discord alerts sends</caption>
+          <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>discord.com</code></th><td data-label="Fields"><code>order.carrier</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The request for the <code>order_created</code> event, for a sample order:</p>
+      <pre class="ref-code"><code>POST https://discord.com/api/webhooks/YOUR-WEBHOOKPATH
+Content-Type: application/json
+
+{&quot;content&quot;:&quot;New job INV-2026-0107: Bracket set&quot;}</code></pre>
+
+      <h2 id="sheets">Google Sheets order log</h2>
+      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
+        <table class="ref-table">
+          <caption id="ref-t17">What Google Sheets order log sends</caption>
+          <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>script.google.com</code></th><td data-label="Fields"><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>order.currency</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.date</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.total</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The request for the <code>order_created</code> event, for a sample order:</p>
+      <pre class="ref-code"><code>POST https://script.google.com/macros/s/YOUR-DEPLOYMENTID/exec
+Content-Type: application/json
+
+{&quot;data&quot;:{&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;order.currency&quot;:&quot;SAR&quot;,&quot;order.date&quot;:null,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;,&quot;order.total&quot;:180},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;app.khayt.samples.sheets&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_created&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+
+      <h2 id="slack">Slack alerts</h2>
+      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
+        <table class="ref-table">
+          <caption id="ref-t18">What Slack alerts sends</caption>
+          <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>hooks.slack.com</code></th><td data-label="Fields"><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>order.currency</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.total</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The request for the <code>order_created</code> event, for a sample order:</p>
+      <pre class="ref-code"><code>POST https://hooks.slack.com/services/YOUR-WEBHOOKPATH
+Content-Type: application/json
+
+{&quot;text&quot;:&quot;New job INV-2026-0107: Bracket set for Sara A. (180 SAR)&quot;}</code></pre>
+
+      <p>A copy you change is no longer signed: load it in developer mode on the Mac while you work on it, then send it for review.</p>
+
+    </div>
+   </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../../#features" data-i18n="nav.features">Features</a>
+          <a href="../../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../../services.html" data-i18n="nav.services">Services</a>
+          <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+          <a href="../../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../../#open-source" data-i18n="foot.license">License</a>
+          <a href="../../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../site.js?v=caf5b6281c"></script>
+</body>
+</html>

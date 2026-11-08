@@ -206,6 +206,10 @@ const MAIN = `
       <h2 id="limits">Limits</h2>
       ${table('Limits', ['At most', 'Of'], limitRows)}
 
+      <h2 id="signing">Review and signing</h2>
+      <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
+      ${table('Signing keys', ['Key id', 'Public key (raw ed25519, base64)'], M.SIGNING_KEYS.map(k => [code(k.id), code(k.key)]))}
+
       <h2 id="consent">What the shop agrees to</h2>
       <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
       ${table('Consent screen for the example', ['Host', 'Fields sent there'], consent)}
@@ -254,7 +258,7 @@ const WS = require(path.join(ROOT, 'developers', 'vendor', 'webhook-send.js'));
 const SAMPLE_SECRET = 'example-signing-key';
 const SAMPLE_MS = Date.parse('2026-11-08T09:00:00Z');
 const sampleCtx = {
-  order: { id: 'ORD-1042', invoiceNumber: 'INV-2026-0107', project: 'Bracket set', status: 'completed',
+  order: { id: 'ORD-1042', invoiceNumber: 'INV-2026-0107', project: 'Bracket set', status: 'completed', price: 180, currency: 'SAR',
     trackingNumber: '290012345678', plugins: { [example.id]: { service: 'express' } } },
   customer: { name: 'Sara A.', company: 'Najd Robotics', phone: '+966500000000', address: 'King Fahd Rd, Riyadh' },
 };
@@ -305,7 +309,12 @@ function verify(body, headers, signingKey) {
       response: { fields: { n: 'n', d: 'd', t: 't', b: 'b', e: 'e' } } }],
     scopes: ['fields.write'] };
   const ok = M.validateManifest(m);
-  const got = P.applyResponse(m, 'go', { n: '2.5', d: '2026-11-08T09:00:00Z', t: 'x'.repeat(600), b: 'true', e: 'z' });
+  const entry = { id: m.id, version: m.version, enabled: true, manifest: m, granted: M.grantFor(m) };
+  const reply = { n: '2.5', d: '2026-11-08T09:00:00Z', t: 'x'.repeat(600), b: 'true', e: 'z' };
+  const got = P.applyResponse(m, 'go', reply, entry);
+  // …and nothing at all without fields.write granted, as the page says.
+  const ungranted = P.applyResponse(m, 'go', reply, Object.assign({}, entry, { granted: Object.assign({}, entry.granted, { scopes: [] }) }));
+  if (Object.keys(ungranted).length) { console.error('make-dev-docs: a reply filled fields without fields.write'); process.exit(1); }
   const want = { n: 2.5, d: '2026-11-08', t: 'x'.repeat(500) };
   if (!ok.ok || JSON.stringify(got) !== JSON.stringify(want)) {
     console.error('make-dev-docs: "Your reply" no longer matches applyResponse: ' + JSON.stringify(ok.errors || got)); process.exit(1);
@@ -435,11 +444,78 @@ const WEBHOOKS_MAIN = `
 </section>
 `;
 
+// ---- /developers/samples/ — the signed sample connectors -------------------
+// Each sample must pass validateManifest AND verify against a published
+// SIGNING_KEYS entry, the same check the apps make, or the build fails.
+const crypto = require('crypto');
+const SPKI_PREFIX = Buffer.from('302a300506032b6570032100', 'hex');
+function signedBy(m) {
+  if (typeof m.signature !== 'string') return null;
+  const msg = Buffer.from(M.canonicalJSON(m), 'utf8');
+  const sig = Buffer.from(m.signature, 'base64');
+  const hit = M.SIGNING_KEYS.find(k => crypto.verify(null, msg,
+    crypto.createPublicKey({ key: Buffer.concat([SPKI_PREFIX, Buffer.from(k.key, 'base64')]), format: 'der', type: 'spki' }), sig));
+  return hit ? hit.id : null;
+}
+const SAMPLE_DIR = path.join(ROOT, 'developers', 'samples');
+const samples = fs.readdirSync(SAMPLE_DIR).filter(f => f.endsWith('.json')).sort().map(f => {
+  const m = JSON.parse(fs.readFileSync(path.join(SAMPLE_DIR, f), 'utf8'));
+  const v = M.validateManifest(m);
+  if (!v.ok) { console.error(`make-dev-docs: developers/samples/${f} is refused: ${v.errors.join('; ')}`); process.exit(1); }
+  const key = signedBy(m);
+  if (!key) { console.error(`make-dev-docs: developers/samples/${f} is not signed by a published key`); process.exit(1); }
+  return { f, m, key };
+});
+if (!samples.length) { console.error('make-dev-docs: no samples in developers/samples/'); process.exit(1); }
+function sampleSection({ f, m, key }) {
+  const ctx = Object.assign({}, sampleCtx, { secrets: Object.fromEntries((m.secrets || []).map(x => [x.name, 'YOUR-' + x.name.toUpperCase()])) });
+  const first = (m.events || [])[0] ? { event: m.events[0].event } : { action: m.actions[0].id };
+  const r = P.payloadFor(m, first, ctx);
+  if (!r.ok) { console.error(`make-dev-docs: ${f}: payloadFor failed: ${r.error}`); process.exit(1); }
+  const consentRows = M.consentRows(m).map(row => [code(row.host),
+    row.fields.length ? row.fields.map(x => `${code(x.key)} <span class="ref-cat">${esc(DOC.categories[x.category] || x.category)}</span>`).join('<br>') : 'Nothing from the book']);
+  const triggers = [...(m.events || []).map(e => `the ${code(e.event)} event`), ...(m.actions || []).map(a => `a ${code(a.id)} button`)];
+  return `
+      <h2 id="${esc(m.id.split('.').pop())}">${esc(m.name.en)}</h2>
+      <p>${esc((m.description && m.description.en) || '')} It reacts to ${triggers.join(' and ')}. File: <a href="https://github.com/KhaytApp/Khayt/blob/${VENDOR_SHA}/plugins/samples/${esc(f)}">plugins/samples/${esc(f)}</a>, signed with <code>${esc(key)}</code>.</p>
+      ${table(`What ${esc(m.name.en)} sends`, ['Host', 'Fields'], consentRows)}
+      <p>The request for ${triggers[0]}, for a sample order:</p>
+      <pre class="ref-code"><code>${esc(`POST ${r.url}\nContent-Type: application/json\n\n${r.body}`)}</code></pre>`;
+}
+const SAMPLES_MAIN = `
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Sample connectors</h1>
+    <p class="lede">Connectors Khayt has written, reviewed and signed. Copy one as the start of your own.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
+${samples.map(sampleSection).join('\n')}
+
+      <p>A copy you change is no longer signed: load it in developer mode on the Mac while you work on it, then send it for review.</p>
+
+    </div>
+   </div>
+  </div>
+</section>
+`;
+
 const OUT = {
   'developers/manifest/index.html': page('developers/manifest/index.html', 'Connector manifest — Khayt developers',
     'Every key a Khayt connector manifest can hold, generated from the app’s own rules.', MAIN),
   'developers/events/index.html': page('developers/events/index.html', 'Connector requests — Khayt developers',
     'What a Khayt connector is sent, how to verify it, and what Khayt does with the reply.', EVENTS_MAIN),
+  'developers/samples/index.html': page('developers/samples/index.html', 'Sample connectors — Khayt developers',
+    'Signed sample Khayt connectors to start your own from.', SAMPLES_MAIN),
   'developers/webhooks/index.html': page('developers/webhooks/index.html', 'Shop webhooks — Khayt developers',
     'The events a Khayt shop can send to its own https address, and how to verify them.', WEBHOOKS_MAIN),
 };

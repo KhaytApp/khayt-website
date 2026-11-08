@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/plugin-payload.js at 9303b0220e4a06dda43f0b7bc75b0997c1446510.
+// COPIED from KhaytApp/Khayt lib/plugin-payload.js at 216f6ce707bb162dd726fefc002822d3b726e91e.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
@@ -209,12 +209,16 @@
   /**
    * A reply, mapped into the plugin's own fields: { key: value }. Only the
    * fields the action's `response` names, each checked against its type; a
-   * value of the wrong shape is dropped, not guessed at.
+   * value of the wrong shape is dropped, not guessed at. `entry` is the
+   * stored `settings.plugins[]` row: nothing is written unless it grants
+   * fields.write and is not paused.
    */
-  function applyResponse(manifest, actionId, reply) {
+  function applyResponse(manifest, actionId, reply, entry) {
     const a = (manifest.actions || []).find(x => x.id === actionId);
     const out = {};
     if (!a || !isObj(a.response) || !isObj(a.response.fields) || !isObj(reply)) return out;
+    // The shop granted fields.write, and the grant still covers this manifest.
+    if (!M.mayWriteFields(entry)) return out;
     for (const [key, path] of Object.entries(a.response.fields)) {
       const f = (manifest.fields || []).find(x => x.key === key && x.attach === a.placement);
       if (!f) continue;
