@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/9303b0220e4a06dda43f0b7bc75b0997c1446510/lib/plugin-manifest.js">9303b0220</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/216f6ce707bb162dd726fefc002822d3b726e91e/lib/plugin-manifest.js">216f6ce70</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
 
       <h2 id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
@@ -253,11 +253,23 @@
         </table>
       </div>
 
-      <h2 id="consent">What the shop agrees to</h2>
-      <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
+      <h2 id="signing">Review and signing</h2>
+      <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
         <table class="ref-table">
-          <caption id="ref-t12">Consent screen for the example</caption>
+          <caption id="ref-t12">Signing keys</caption>
+          <thead><tr><th scope="col">Key id</th><th scope="col">Public key (raw ed25519, base64)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>khayt-2026-11</code></th><td data-label="Public key (raw ed25519, base64)"><code>LGzEHSMW6OGkgSXgYvP9egtqAVSUn+xIyoSxiPDO8sE=</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="consent">What the shop agrees to</h2>
+      <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
+        <table class="ref-table">
+          <caption id="ref-t13">Consent screen for the example</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields sent there</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>api.courier.example.com</code></th><td data-label="Fields sent there"><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.service</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>

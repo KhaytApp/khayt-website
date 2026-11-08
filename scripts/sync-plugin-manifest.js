@@ -44,6 +44,16 @@ for (const SRC of SRCS) {
 }
 const vendor = path.join(ROOT, 'developers', 'vendor', 'plugin-manifest.js');
 
+// The signed sample connectors (plugins/samples/ in the app repo), for
+// /developers/samples/. Copied as they are: their signatures cover these bytes'
+// canonical form, and make-dev-docs.js verifies each one.
+const SAMPLES = path.join(ROOT, 'developers', 'samples');
+fs.rmSync(SAMPLES, { recursive: true, force: true });
+fs.mkdirSync(SAMPLES, { recursive: true });
+for (const f of git('ls-tree', '--name-only', `${sha}:plugins/samples/`).split('\n').filter(n => n.endsWith('.json'))) {
+  fs.writeFileSync(path.join(SAMPLES, f), git('show', `${sha}:plugins/samples/${f}`));
+}
+
 delete require.cache[vendor];
 const M = require(vendor);
 const schema = M.manifestJsonSchema();
