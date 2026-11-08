@@ -398,10 +398,18 @@ const CAT = B.eventCatalogue();
 const busRows = CAT.events.map(e => [code(e.event), BUS_DOC[e.event],
   e.sent ? e.fields.map(f => `${code(f.key)} <span class="ref-cat">${esc(f.type)}</span>`).join('<br>') : '<em>Listed, not sent yet</em>']);
 const firstSent = CAT.events.find(e => e.sent);
-const busWire = JSON.stringify(B.buildWireBody(firstSent.event, firstSent.example, SAMPLE_MS));
-const envWire = CAT.orderEnvelope[0].example ? JSON.stringify(B.buildWireBody(CAT.orderEnvelope[0].event, CAT.orderEnvelope[0].example, SAMPLE_MS)) : null;
-const wireBlock = (event, wire) => {
-  const h = WS.signatureHeaders(SAMPLE_SECRET, wire, SAMPLE_MS);
+// The catalogue's own `wire` example: the exact object the sender signs and
+// posts, so the page cannot show a body the app does not build.
+for (const e of [firstSent, CAT.orderEnvelope[0]]) {
+  if (!e.wire || e.wire.event !== e.event || typeof e.wire.timestamp !== 'number') {
+    console.error(`make-dev-docs: eventCatalogue() has no usable wire example for ${e.event}`); process.exit(1);
+  }
+}
+const busWire = JSON.stringify(firstSent.wire);
+const envWire = JSON.stringify(CAT.orderEnvelope[0].wire);
+const busAt = firstSent.wire.timestamp, envAt = CAT.orderEnvelope[0].wire.timestamp;
+const wireBlock = (event, wire, at) => {
+  const h = WS.signatureHeaders(SAMPLE_SECRET, wire, at);
   return `<pre class="ref-code"><code>${esc(['Content-Type: application/json', `X-Khayt-Event: ${event}`, ...Object.entries(h).map(([k, v]) => `${k}: ${v}`)].join('\n') + '\n\n' + wire)}</code></pre>`;
 };
 
@@ -428,9 +436,9 @@ const WEBHOOKS_MAIN = `
 
       <h2 id="body">The body</h2>
       <p>The request body is an outer object — <code>event</code>, <code>payload</code> and <code>timestamp</code> in milliseconds — with the delivery inside <code>payload</code>. The delivery’s <code>id</code> stays the same on every retry and on a resend from the delivery log, so you can ignore one you have already handled.</p>
-      ${wireBlock(firstSent.event, busWire)}
-      ${envWire ? `<p>The older single-address <em>event webhook</em> (Settings: one URL with a switch for created, status and paid) sends the same moments in its own envelope, which its existing receivers expect byte for byte:</p>
-      ${wireBlock(CAT.orderEnvelope[0].event, envWire)}` : ''}
+      ${wireBlock(firstSent.event, busWire, busAt)}
+      ${CAT.orderEnvelope[0].example ? `<p>The older single-address <em>event webhook</em> (Settings: one URL with a switch for created, status and paid) sends the same moments in its own envelope, which its existing receivers expect byte for byte:</p>
+      ${wireBlock(CAT.orderEnvelope[0].event, envWire, envAt)}` : ''}
 
       <h2 id="verify">Checking a signature</h2>
       <p>When the shop has set a signing secret, three headers are added: <code>X-Khayt-Signature</code> (HMAC-SHA256 of the body, lowercase hex, no prefix), <code>X-Khayt-Timestamp</code> (Unix seconds) and <code>X-Khayt-Signature-V2</code> (HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>). With no secret, none of them is sent. Check V2 with the <a href="../events/#verify">same recipe</a> connectors use.</p>
