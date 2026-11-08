@@ -81,6 +81,90 @@
         "pattern": "^(?=.{1,253}$)([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$"
       }
     },
+    "settings": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "label",
+          "type"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          },
+          "label": {
+            "type": "object",
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "propertyNames": {
+              "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+            }
+          },
+          "type": {
+            "enum": [
+              "text",
+              "number",
+              "bool",
+              "enum"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "name",
+              "phone",
+              "email",
+              "address",
+              "text"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "value",
+                "label"
+              ],
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "label": {
+                  "type": "object",
+                  "required": [
+                    "en"
+                  ],
+                  "additionalProperties": {
+                    "type": "string",
+                    "maxLength": 80
+                  },
+                  "propertyNames": {
+                    "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "secrets": {
       "type": "array",
       "maxItems": 5,
@@ -280,7 +364,7 @@
                   ]
                 },
                 {
-                  "pattern": "^field\\.[a-z][a-zA-Z0-9_]{0,31}$"
+                  "pattern": "^(field|config)\\.[a-z][a-zA-Z0-9_]{0,31}$"
                 }
               ]
             }
@@ -400,7 +484,7 @@
                   ]
                 },
                 {
-                  "pattern": "^field\\.[a-z][a-zA-Z0-9_]{0,31}$"
+                  "pattern": "^(field|config)\\.[a-z][a-zA-Z0-9_]{0,31}$"
                 }
               ]
             }
@@ -455,10 +539,7 @@
       "uniqueItems": true,
       "items": {
         "enum": [
-          "orders.read",
-          "customers.read",
-          "fields.write",
-          "jobs.status"
+          "fields.write"
         ]
       }
     }
