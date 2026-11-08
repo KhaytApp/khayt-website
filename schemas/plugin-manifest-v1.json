@@ -1,0 +1,466 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://khaytapp.com/schemas/plugin-manifest-v1.json",
+  "title": "Khayt connector manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "khayt",
+    "id",
+    "name",
+    "publisher",
+    "version"
+  ],
+  "properties": {
+    "khayt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest"
+      ],
+      "properties": {
+        "manifest": {
+          "const": 1
+        }
+      }
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 100,
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9][a-z0-9-]*)+$"
+    },
+    "name": {
+      "type": "object",
+      "required": [
+        "en"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "propertyNames": {
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      }
+    },
+    "description": {
+      "type": "object",
+      "required": [
+        "en"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "propertyNames": {
+        "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+      }
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d{0,4})\\.(0|[1-9]\\d{0,4})\\.(0|[1-9]\\d{0,5})$"
+    },
+    "homepage": {
+      "type": "string",
+      "pattern": "^https://"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9+/]{86}==$"
+    },
+    "domains": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?=.{1,253}$)([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$"
+      }
+    },
+    "secrets": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "label",
+          "kind"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          },
+          "label": {
+            "type": "object",
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "propertyNames": {
+              "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+            }
+          },
+          "kind": {
+            "enum": [
+              "apiKey",
+              "token",
+              "password",
+              "signingKey",
+              "url"
+            ]
+          }
+        }
+      }
+    },
+    "fields": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "label",
+          "type",
+          "attach"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          },
+          "label": {
+            "type": "object",
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "propertyNames": {
+              "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+            }
+          },
+          "type": {
+            "enum": [
+              "text",
+              "number",
+              "bool",
+              "enum",
+              "date"
+            ]
+          },
+          "attach": {
+            "enum": [
+              "order",
+              "customer",
+              "machine",
+              "spool"
+            ]
+          },
+          "options": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "value",
+                "label"
+              ],
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "label": {
+                  "type": "object",
+                  "required": [
+                    "en"
+                  ],
+                  "additionalProperties": {
+                    "type": "string",
+                    "maxLength": 80
+                  },
+                  "propertyNames": {
+                    "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "placement",
+          "kind",
+          "url"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          },
+          "label": {
+            "type": "object",
+            "required": [
+              "en"
+            ],
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "propertyNames": {
+              "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+            }
+          },
+          "placement": {
+            "enum": [
+              "order",
+              "customer"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "post",
+              "open"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 500,
+            "pattern": "^https://[a-z0-9.-]+(/|\\?|#|$)"
+          },
+          "send": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "anyOf": [
+                {
+                  "enum": [
+                    "order.id",
+                    "order.number",
+                    "order.title",
+                    "order.status",
+                    "order.total",
+                    "order.currency",
+                    "order.qty",
+                    "order.material",
+                    "order.dueDate",
+                    "order.date",
+                    "order.carrier",
+                    "order.trackingNumber",
+                    "customer.name",
+                    "customer.company",
+                    "customer.phone",
+                    "customer.email",
+                    "customer.address"
+                  ]
+                },
+                {
+                  "pattern": "^field\\.[a-z][a-zA-Z0-9_]{0,31}$"
+                }
+              ]
+            }
+          },
+          "body": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "format"
+            ],
+            "properties": {
+              "format": {
+                "enum": [
+                  "khayt-v1",
+                  "json-template"
+                ]
+              },
+              "template": {
+                "type": "object"
+              }
+            }
+          },
+          "auth": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "header",
+              "secret"
+            ],
+            "properties": {
+              "header": {
+                "type": "string"
+              },
+              "scheme": {
+                "type": "string"
+              },
+              "secret": {
+                "type": "string",
+                "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+              }
+            }
+          },
+          "signWith": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          },
+          "response": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fields"
+            ],
+            "properties": {
+              "fields": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "event",
+          "url"
+        ],
+        "properties": {
+          "event": {
+            "enum": [
+              "order_created",
+              "status_changed",
+              "order_shipped",
+              "order_delivered",
+              "payment_received",
+              "quote_created",
+              "quote_approved"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 500,
+            "pattern": "^https://[a-z0-9.-]+(/|\\?|#|$)"
+          },
+          "send": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "string",
+              "anyOf": [
+                {
+                  "enum": [
+                    "order.id",
+                    "order.number",
+                    "order.title",
+                    "order.status",
+                    "order.total",
+                    "order.currency",
+                    "order.qty",
+                    "order.material",
+                    "order.dueDate",
+                    "order.date",
+                    "order.carrier",
+                    "order.trackingNumber",
+                    "customer.name",
+                    "customer.company",
+                    "customer.phone",
+                    "customer.email",
+                    "customer.address"
+                  ]
+                },
+                {
+                  "pattern": "^field\\.[a-z][a-zA-Z0-9_]{0,31}$"
+                }
+              ]
+            }
+          },
+          "body": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "format"
+            ],
+            "properties": {
+              "format": {
+                "enum": [
+                  "khayt-v1",
+                  "json-template"
+                ]
+              },
+              "template": {
+                "type": "object"
+              }
+            }
+          },
+          "auth": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "header",
+              "secret"
+            ],
+            "properties": {
+              "header": {
+                "type": "string"
+              },
+              "scheme": {
+                "type": "string"
+              },
+              "secret": {
+                "type": "string",
+                "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+              }
+            }
+          },
+          "signWith": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          }
+        }
+      }
+    },
+    "scopes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "orders.read",
+          "customers.read",
+          "fields.write",
+          "jobs.status"
+        ]
+      }
+    }
+  }
+}

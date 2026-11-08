@@ -69,6 +69,11 @@ const NOT_SERVED = [
   '.github/',          // workflows and their helpers
   '.gitignore',
   'blog/README.md',    // how to write a post — for authors, not visitors
+  // Connector developer docs and the manifest schema: built and checked, but
+  // NOT served until connectors v1 ships (developers/README.md says how to
+  // switch them on). Until then they must not reach khaytapp.com at all.
+  'developers/',
+  'schemas/',
 ];
 
 // ----------------------------------------------------------------------------
