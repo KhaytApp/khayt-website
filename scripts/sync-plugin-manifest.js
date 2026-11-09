@@ -31,7 +31,8 @@ const REF = process.argv[3] || 'origin/main';
 // webhook-bus.js, webhooks.js, webhook-send.js (+ host-ranges.js, which it
 // requires): the shop's own webhooks, for /developers/webhooks/.
 const SRCS = ['lib/plugin-manifest.js', 'lib/plugin-payload.js',
-  'lib/webhook-bus.js', 'lib/webhooks.js', 'lib/webhook-send.js', 'lib/host-ranges.js'];
+  'lib/webhook-bus.js', 'lib/webhooks.js', 'lib/webhook-send.js', 'lib/host-ranges.js',
+  'lib/plugin-host.js'];  // plugin-host.js: which jobs a refresh asks about
 
 const git = (...a) => execFileSync('git', ['-C', APP, ...a], { encoding: 'utf8' });
 const sha = git('rev-parse', REF).trim();

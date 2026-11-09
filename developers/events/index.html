@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at 50ce56a16) from the <a href="../manifest/#example">example manifest</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at faebf81db) from the <a href="../manifest/#example">example manifest</a>.</p>
 
       <h2 id="body">The body</h2>
       <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>plugin-payload-v1</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
@@ -91,17 +91,22 @@ X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
 Authorization: Bearer &lt;the shop’s apiKey&gt;
 
 {&quot;data&quot;:{&quot;customer.address&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;customer.phone&quot;:&quot;+966500000000&quot;,&quot;field.service&quot;:&quot;express&quot;,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;com.example.courier&quot;,&quot;trigger&quot;:{&quot;action&quot;:&quot;book&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+      <p>The refresh, for one job, as a <code>GET</code> with no body:</p>
+      <pre class="ref-code"><code>GET https://api.courier.example.com/v1/shipments/CX-88412
+X-Khayt-Event: refresh
+X-Khayt-Delivery: dlv_&lt;a lower-case UUID&gt;
+Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
 
       <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>example-signing-key</code>.</p>
 
       <h2 id="headers">Headers</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
         <table class="ref-table">
-          <caption id="ref-t17">Headers on every request</caption>
+          <caption id="ref-t18">Headers</caption>
           <thead><tr><th scope="col">Header</th><th scope="col">When</th><th scope="col">Value</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><code>Content-Type</code></th><td data-label="When">Always</td><td data-label="Value"><code>application/json</code></td></tr>
-            <tr><th scope="row"><code>X-Khayt-Event</code></th><td data-label="When">Always</td><td data-label="Value">The event name, or the button’s <code>id</code>.</td></tr>
+            <tr><th scope="row"><code>Content-Type</code></th><td data-label="When">On a POST</td><td data-label="Value"><code>application/json</code></td></tr>
+            <tr><th scope="row"><code>X-Khayt-Event</code></th><td data-label="When">Always</td><td data-label="Value">The event name, the button’s <code>id</code>, or <code>refresh</code>.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Delivery</code></th><td data-label="When">Always</td><td data-label="Value"><code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled.</td></tr>
             <tr><th scope="row">Your <code>auth.header</code></th><td data-label="When">If the trigger has <code>auth</code></td><td data-label="Value">Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Timestamp</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">Unix time in seconds.</td></tr>
@@ -130,11 +135,12 @@ function verify(body, headers, signingKey) {
       <ul>
         <li><strong>Events</strong> are tried up to 5 times — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until you answer with any 2xx. <code>410 Gone</code> stops the retries and switches that event off for the shop.</li>
         <li><strong>Buttons</strong> are never retried: a person pressed it and sees the result. Any 2xx is success. Anything else, a timeout (15 seconds) or a redirect (never followed) shows the shop “<em>your connector’s name</em> answered <em>status</em>” or “could not be reached”, and nothing is written.</li>
+        <li><strong>A refresh</strong> is never retried: the job is asked about again on a later run.</li>
         <li>Requests go only over https, only to a host in your <code>domains</code>, and never to a private or local address.</li>
       </ul>
 
       <h2 id="response">Your reply</h2>
-      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+      <p>If a button, an event or the refresh declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
 
     </div>
    </div>

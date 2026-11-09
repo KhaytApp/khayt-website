@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/50ce56a160d8ea5eb518612acd47d5442b1a507c/lib/plugin-manifest.js">50ce56a16</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/faebf81dbbc602c469ad24c1672c88e260d1bce9/lib/plugin-manifest.js">faebf81db</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
 
       <h2 id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
@@ -91,6 +91,7 @@
             <tr><th scope="row"><code>fields</code></th><td data-label="Required">Optional</td><td data-label="What it is">Fields the connector adds to a record, which the shop can fill in and the connector can send or fill from a reply.</td></tr>
             <tr><th scope="row"><code>actions</code></th><td data-label="Required">Optional</td><td data-label="What it is">Buttons the connector adds beside an order or a customer.</td></tr>
             <tr><th scope="row"><code>events</code></th><td data-label="Required">Optional</td><td data-label="What it is">Things that happen in the shop that the connector is told about, as they happen.</td></tr>
+            <tr><th scope="row"><code>refresh</code></th><td data-label="Required">Optional</td><td data-label="What it is">At most one: a regular check with your service for news on open jobs your connector already handles, such as delivery status.</td></tr>
             <tr><th scope="row"><code>scopes</code></th><td data-label="Required">Optional</td><td data-label="What it is">What the connector may change in the shop. In this version that is only its own fields.</td></tr>
             <tr><th scope="row"><code>signature</code></th><td data-label="Required">Optional</td><td data-label="What it is">Added by Khayt when a connector passes review: an ed25519 signature over the canonical JSON of everything else. Leave it out while you develop.</td></tr>
           </tbody>
@@ -162,7 +163,7 @@
       </div>
 
       <h2 id="events">Events (<code>events</code>)</h2>
-      <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code> and <code>signWith</code> as a button. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
+      <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code> and <code>response</code> as a button; a reply can fill your own fields on that order. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t6">
         <table class="ref-table">
           <caption id="ref-t6">Events</caption>
@@ -179,10 +180,28 @@
         </table>
       </div>
 
-      <h2 id="fields">Your own fields (<code>fields</code>)</h2>
+      <h2 id="refresh">Refresh (<code>refresh</code>)</h2>
+      <p>A refresh asks your service, on a schedule, about jobs your connector already handles — say, a parcel’s delivery status — and fills your own fields from the reply. It runs only on the computer that has the shop’s book open, never on a phone, and only while the connector is switched on. It needs the <code>fields.write</code> scope.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t7">
         <table class="ref-table">
-          <caption id="ref-t7">Field types</caption>
+          <caption id="ref-t7">Refresh keys</caption>
+          <thead><tr><th scope="col">Key</th><th scope="col">What it is</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>every</code></th><td data-label="What it is">Minutes between runs, a whole number from 15 to 1440.</td></tr>
+            <tr><th scope="row"><code>when</code></th><td data-label="What it is">One of your own fields on an order. Only jobs where it is filled in are asked about — for example a tracking number your <code>book</code> button stored.</td></tr>
+            <tr><th scope="row"><code>method</code></th><td data-label="What it is"><code>GET</code> or <code>POST</code>; <code>POST</code> if left out. A <code>GET</code> has no body.</td></tr>
+            <tr><th scope="row"><code>url</code></th><td data-label="What it is">As for a button: https, a host in your <code>domains</code>, placeholders only in the path or query.</td></tr>
+            <tr><th scope="row"><code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code></th><td data-label="What it is">As for a button. Everything a refresh sends is on the consent screen.</td></tr>
+            <tr><th scope="row"><code>response</code></th><td data-label="What it is">Required: the reason a refresh exists. Which of your own order fields to fill, and from which path in your reply.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Each run asks about open jobs — not cancelled, not archived, not voided and not yet delivered — one request per job, at most 50 a run, the ones asked about least recently first. A refresh is not retried; the job comes round again on a later run. Adding a refresh, or shortening its <code>every</code>, pauses the connector until the shop agrees again.</p>
+
+      <h2 id="fields">Your own fields (<code>fields</code>)</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t8">
+        <table class="ref-table">
+          <caption id="ref-t8">Field types</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text.</td></tr>
@@ -193,9 +212,9 @@
           </tbody>
         </table>
       </div>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t8">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
         <table class="ref-table">
-          <caption id="ref-t8">Records a field can be added to</caption>
+          <caption id="ref-t9">Records a field can be added to</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>order</code></th><td data-label="Meaning">An order (job).</td></tr>
@@ -208,9 +227,9 @@
 
       <h2 id="settings">Settings (<code>settings</code>)</h2>
       <p>Each entry is <code>{"key", "label", "type"}</code>, with <code>options</code> for an enum, <code>required</code> if the connector cannot work without it, and, for a text setting, a <code>kind</code> saying what the value is. The kind decides the privacy category — a sender’s phone is a phone number, whoever’s it is — so you never name a category. A button or event that uses a required setting the shop has not filled in is not sent, and the error names the missing setting. A value of the wrong type, or text over the limit, is sent as <code>null</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
         <table class="ref-table">
-          <caption id="ref-t9">Setting types</caption>
+          <caption id="ref-t10">Setting types</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text, up to the setting value limit.</td></tr>
@@ -220,9 +239,9 @@
           </tbody>
         </table>
       </div>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
         <table class="ref-table">
-          <caption id="ref-t10">Kinds of text setting</caption>
+          <caption id="ref-t11">Kinds of text setting</caption>
           <thead><tr><th scope="col">Kind</th><th scope="col">Meaning</th><th scope="col">Privacy category</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>name</code></th><td data-label="Meaning">A person’s or business’s name.</td><td data-label="Privacy category">Contact Info › Name</td></tr>
@@ -235,9 +254,9 @@
       </div>
 
       <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
         <table class="ref-table">
-          <caption id="ref-t11">Kinds of secret</caption>
+          <caption id="ref-t12">Kinds of secret</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>apiKey</code></th><td data-label="Meaning">An API key.</td></tr>
@@ -251,9 +270,9 @@
       <p>A secret can be used in a <code>post</code> URL, an <code>auth</code> header or <code>signWith</code>. It can never be sent as a field, put in a body template, or appear in an <code>open</code> link, which a browser would keep in its history.</p>
 
       <h2 id="scopes">Scopes (<code>scopes</code>)</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
         <table class="ref-table">
-          <caption id="ref-t12">Scopes</caption>
+          <caption id="ref-t13">Scopes</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>fields.write</code></th><td data-label="Meaning">Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply. Required by any button with a <code>response</code>.</td></tr>
@@ -261,9 +280,9 @@
         </table>
       </div>
       <p>A connector is told only the fields it sends; that needs no scope. These names are kept for when connectors can reach the shop through Khayt Cloud, and a manifest that asks for one is refused until then:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
         <table class="ref-table">
-          <caption id="ref-t13">Reserved scopes</caption>
+          <caption id="ref-t14">Reserved scopes</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>orders.read</code></th><td data-label="Meaning">Reading the shop’s orders.</td></tr>
@@ -274,9 +293,9 @@
       </div>
 
       <h2 id="limits">Limits</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t15">
         <table class="ref-table">
-          <caption id="ref-t14">Limits</caption>
+          <caption id="ref-t15">Limits</caption>
           <thead><tr><th scope="col">At most</th><th scope="col">Of</th></tr></thead>
           <tbody>
             <tr><th scope="row">10</th><td data-label="Of">hosts in <code>domains</code></td></tr>
@@ -296,9 +315,9 @@
 
       <h2 id="signing">Review and signing</h2>
       <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t15">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
         <table class="ref-table">
-          <caption id="ref-t15">Signing keys</caption>
+          <caption id="ref-t16">Signing keys</caption>
           <thead><tr><th scope="col">Key id</th><th scope="col">Public key (raw ed25519, base64)</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>khayt-2026-11</code></th><td data-label="Public key (raw ed25519, base64)"><code>LGzEHSMW6OGkgSXgYvP9egtqAVSUn+xIyoSxiPDO8sE=</code></td></tr>
@@ -308,16 +327,17 @@
 
       <h2 id="consent">What the shop agrees to</h2>
       <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
         <table class="ref-table">
-          <caption id="ref-t16">Consent screen for the example</caption>
+          <caption id="ref-t17">Consent screen for the example</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields sent there</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><code>api.courier.example.com</code></th><td data-label="Fields sent there"><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.service</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
+            <tr><th scope="row"><code>api.courier.example.com</code></th><td data-label="Fields sent there"><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.service</code> <span class="ref-cat">User Content › Other User Content</span><br><code>field.tracking</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
             <tr><th scope="row"><code>track.courier.example.com</code></th><td data-label="Fields sent there"><code>field.tracking</code> <span class="ref-cat">User Content › Other User Content</span></td></tr>
           </tbody>
         </table>
       </div>
+      <p>A connector with a refresh adds one line below the hosts. For the example: “Every 60 min, while this computer has your book open, it checks api.courier.example.com for updates on open jobs that have “Courier tracking”, and fills in its own fields from the reply.”</p>
 
       <h2 id="example">Example</h2>
       <p>A courier connector: a button that books a pickup and keeps the tracking number from the reply, a link to the tracking page, and an event when an order ships. It passes the app’s validator as written.</p>
@@ -386,6 +406,14 @@
           }
         }
       ]
+    },
+    {
+      &quot;key&quot;: &quot;delivery&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Courier status&quot;
+      },
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;attach&quot;: &quot;order&quot;
     }
   ],
   &quot;actions&quot;: [
@@ -438,6 +466,22 @@
       &quot;signWith&quot;: &quot;hookKey&quot;
     }
   ],
+  &quot;refresh&quot;: {
+    &quot;every&quot;: 60,
+    &quot;when&quot;: &quot;tracking&quot;,
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;url&quot;: &quot;https://api.courier.example.com/v1/shipments/{field.tracking}&quot;,
+    &quot;auth&quot;: {
+      &quot;header&quot;: &quot;Authorization&quot;,
+      &quot;scheme&quot;: &quot;Bearer&quot;,
+      &quot;secret&quot;: &quot;apiKey&quot;
+    },
+    &quot;response&quot;: {
+      &quot;fields&quot;: {
+        &quot;delivery&quot;: &quot;data.status&quot;
+      }
+    }
+  },
   &quot;scopes&quot;: [
     &quot;fields.write&quot;
   ]
