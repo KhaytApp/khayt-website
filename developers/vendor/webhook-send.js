@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/webhook-send.js at faebf81dbbc602c469ad24c1672c88e260d1bce9.
+// COPIED from KhaytApp/Khayt lib/webhook-send.js at c8044ca2674e5c6ca9cb7269d49689ae245e957a.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
@@ -73,7 +73,9 @@ const defaultLookupAll = (host) => dns.promises.lookup(host, { all: true });
 // `maxBytes`: how much of a reply is read (4 KB for a webhook's, which only
 // a log shows; a connector's JSON reply may be up to 64 KB). A longer reply
 // comes back cut, with `truncated: true`, and is never parsed as JSON whole.
-async function postPinned(url, { headers = {}, body = '', timeoutMs = 10000, maxBytes = 4096 } = {}, deps = {}) {
+// `method` 'GET' (a connector's refresh) sends no body and no Content-Length.
+async function postPinned(url, { headers = {}, body = '', timeoutMs = 10000, maxBytes = 4096, method = 'POST' } = {}, deps = {}) {
+  const isGet = method === 'GET';
   const lookupAll = deps.lookupAll || defaultLookupAll;
 
   let u;
@@ -97,7 +99,7 @@ async function postPinned(url, { headers = {}, body = '', timeoutMs = 10000, max
     target = { address: addrs[0].address, family: addrs[0].family || net.isIP(addrs[0].address) };
   }
 
-  const payload = Buffer.from(String(body), 'utf8');
+  const payload = Buffer.from(isGet ? '' : String(body), 'utf8');
   return new Promise((resolve) => {
     let settled = false;
     const done = (r) => { if (!settled) { settled = true; resolve(r); } };
@@ -108,8 +110,8 @@ async function postPinned(url, { headers = {}, body = '', timeoutMs = 10000, max
         hostname: host,
         port: u.port || 443,
         path: (u.pathname || '/') + (u.search || ''),
-        method: 'POST',
-        headers: { ...headers, 'Content-Length': payload.length },
+        method: isGet ? 'GET' : 'POST',
+        headers: isGet ? { ...headers } : { ...headers, 'Content-Length': payload.length },
         // The pin: whatever name Node asks to resolve, it gets the checked address.
         lookup: (_name, options, cb) => {
           if (options && options.all) cb(null, [{ address: target.address, family: target.family }]);
@@ -138,7 +140,7 @@ async function postPinned(url, { headers = {}, body = '', timeoutMs = 10000, max
     } catch (e) { return done({ ok: false, error: String((e && e.message) || e) }); }
     req.on('timeout', () => { req.destroy(new Error('Webhook timed out')); });
     req.on('error', (e) => done({ ok: false, error: String((e && e.message) || e) }));
-    req.end(payload);
+    if (isGet) req.end(); else req.end(payload);
   });
 }
 
