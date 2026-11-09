@@ -88,7 +88,10 @@ const DOC = {
   secretKinds: { apiKey: 'An API key.', token: 'An access token.', password: 'A password.', signingKey: 'A key the device signs requests with (<code>signWith</code>).', url: 'A private URL, for example one with a key in it.' },
   bodyFormats: {
     'khayt-v1': 'The default: a JSON object with the fields you listed in <code>send</code>.',
-    'json-template': 'Your own JSON shape, up to 4 levels deep, with <code>{placeholders}</code> naming sendable fields.',
+    'json-template': 'Your own JSON shape, up to 4 levels deep, with <code>{placeholders}</code> naming sendable fields or <a href="#time">the time</a>.',
+  },
+  authEncodings: {
+    basic: 'HTTP Basic: the secret, as <code>user:password</code>, in base64 of its UTF-8 bytes, after the scheme <code>Basic</code> unless you name another. A secret with no colon is taken as the user name with an empty password, so a colon is added — the form a payment provider’s secret key usually takes.',
   },
   categories: {
     'purchase.history': 'Purchases › Purchase History',
@@ -127,6 +130,7 @@ same('attach', M.FIELD_ATTACH, DOC.attach);
 same('action kind', M.ACTION_KINDS, DOC.actionKinds);
 same('secret kind', M.SECRET_KINDS, DOC.secretKinds);
 same('body format', M.BODY_FORMATS, DOC.bodyFormats);
+same('auth encoding', M.AUTH_ENCODINGS, DOC.authEncodings);
 same('limit', Object.keys(M.LIMITS), DOC.limits);
 same('privacy category',
   [...new Set(Object.values(M.SENDABLE_FIELDS).map(f => f.category).concat(M.OWN_FIELD_CATEGORY, Object.values(M.SETTING_KINDS)))], DOC.categories);
@@ -140,6 +144,34 @@ const EXAMPLE_FILE = 'developers/examples/courier.json';
 const example = JSON.parse(fs.readFileSync(path.join(ROOT, EXAMPLE_FILE), 'utf8'));
 const verdict = M.validateManifest(example);
 if (!verdict.ok) problems.push(`${EXAMPLE_FILE} is refused by validateManifest: ${verdict.errors.join('; ')}`);
+
+{ // The Time, Amount due and auth "encode" sections, checked against payloadFor.
+  const PAY = require(path.join(ROOT, 'developers', 'vendor', 'plugin-payload.js'));
+  const m = JSON.parse(JSON.stringify(example));
+  const book = m.actions.find(a => a.kind === 'post');
+  book.send = ['order.amountDue', 'order.amountDueMinor', 'now.epochMs', `now.plusDays.${M.NOW_MAX_DAYS}.epochMs`];
+  book.auth = { header: 'Authorization', secret: book.auth.secret, encode: 'basic' };
+  delete book.response;
+  const v = M.validateManifest(m);
+  if (!v.ok) problems.push(`the Time/Amount due sections: a manifest using them is refused: ${v.errors.join('; ')}`);
+  if (M.validateManifest(Object.assign({}, m, { actions: [Object.assign({}, book, { send: [`now.plusDays.${M.NOW_MAX_DAYS + 1}.epochMs`] })] })).ok) problems.push(`the Time section says ${M.NOW_MAX_DAYS} days at most; validateManifest takes more`);
+  if (M.permissionsOf && JSON.stringify(M.permissionsOf(m)).includes('now.')) problems.push('the Time section says the time is not shop data; permissionsOf lists it');
+  const t0 = Date.parse('2026-11-08T09:00:00Z');
+  const ctx = { order: { id: 'o', price: 1.5, currency: 'KWD', plugins: {} }, customer: {}, settings: {}, nowMs: t0 };
+  const r = PAY.payloadFor(m, { action: book.id }, ctx);
+  const d = r.ok && JSON.parse(r.body).data;
+  if (!d || d['order.amountDue'] !== 1.5 || d['order.amountDueMinor'] !== 1500) problems.push('the Amount due section says 1.5 KWD is 1500 minor units; payloadFor disagrees');
+  if (!d || d['now.epochMs'] !== t0 || d[`now.plusDays.${M.NOW_MAX_DAYS}.epochMs`] !== t0 + M.NOW_MAX_DAYS * 86400000) problems.push('the Time section’s arithmetic no longer matches payloadFor');
+  const later = PAY.payloadFor(m, { action: book.id }, Object.assign({}, ctx, { nowMs: t0 + 1000 }));
+  if (!later.ok || later.body === r.body) problems.push('the Time section says a retry’s body differs; payloadFor builds the same bytes');
+  if (PAY.payloadFor(m, { action: book.id }, Object.assign({}, ctx, { nowMs: undefined })).ok) problems.push('the Time section says nothing is sent without a clock');
+  if (PAY.payloadFor(m, { action: book.id }, Object.assign({}, ctx, { settings: undefined })).ok) problems.push('the Amount due section says nothing is sent without the shop settings');
+  const jpy = PAY.payloadFor(m, { action: book.id }, Object.assign({}, ctx, { order: { id: 'o', price: 1200, currency: 'JPY', plugins: {} } }));
+  if (!jpy.ok || JSON.parse(jpy.body).data['order.amountDueMinor'] !== 1200) problems.push('the Amount due section says JPY has no minor unit; payloadFor disagrees');
+  const b64 = x => Buffer.from(x, 'utf8').toString('base64');
+  if (!r.ok || r.auth.scheme !== 'Basic' || PAY.authHeaderValue(r.auth, 'sk_test_1') !== 'Basic ' + b64('sk_test_1:')
+      || PAY.authHeaderValue(r.auth, 'user:pässword') !== 'Basic ' + b64('user:pässword')) problems.push('the auth "encode" description no longer matches authHeaderValue');
+}
 
 // "Open job", as the Refresh section words it, checked against the app's own test.
 const H = require(path.join(ROOT, 'developers', 'vendor', 'plugin-host.js'));
@@ -219,12 +251,17 @@ const MAIN = `
       <h2 id="sendable">Fields a connector can send</h2>
       <p>A connector names what it sends from this list; it cannot ask for anything else. Each field is declared under a fixed privacy category, which the shop sees on the consent screen and which Apple’s App Privacy label for the iPhone app covers. You cannot choose the category.</p>
       ${table('Sendable fields', ['Name', 'Read from', 'Type', 'Privacy category'], sendRows)}
+      <p id="amount-due"><code>order.amountDue</code> and <code>order.amountDueMinor</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW.</p>
       <p>Which of them a button can reach depends on where it sits: a customer has no single order, so a button on a customer cannot send <code>order.*</code>.</p>
       ${table('Where a button can sit', ['Placement', 'Can send'], placeRows)}
 
+      <h2 id="time">The time</h2>
+      <p>For a link that expires — a payment link, say — a URL, a body template or <code>send</code> can use <code>{now.epochMs}</code>, the time in milliseconds since 1970 (UTC), or <code>{now.plusDays.N.epochMs}</code>, N whole days later, N from 1 to ${M.NOW_MAX_DAYS}. The time is not shop data, so the shop does not grant it and it is not on the consent screen. It is read when each attempt is sent: a retry carries a later time, so its body is not the same bytes as the first attempt’s. Recognise a repeat by its <code>X-Khayt-Delivery</code> id, which every retry keeps, never by comparing bodies. An expiry N days ahead counts from the attempt that reached you, so it always gets its full N days.</p>
+
       <h2 id="actions">Buttons (<code>actions</code>)</h2>
       ${enumTable('Kinds of button', DOC.actionKinds)}
-      <p>A URL must start <code>https://</code> followed by one of your <code>domains</code>, written literally: a placeholder can appear in the path or query, never in the host, so a value from the book can never choose where data goes. A <code>post</code> button can authenticate with <code>auth</code> (a header filled from one of your <code>secrets</code>) and sign the request with <code>signWith</code>. Its <code>response</code> can copy values from your reply into your own fields — <code>{"fields": {"tracking": "data.trackingNumber"}}</code> — and only into fields on the same kind of record as the button.</p>
+      <p>A URL must start <code>https://</code> followed by one of your <code>domains</code>, written literally: a placeholder can appear in the path or query, never in the host, so a value from the book can never choose where data goes. A <code>post</code> button can authenticate with <code>auth</code> (a header filled from one of your <code>secrets</code>) and sign the request with <code>signWith</code>. <code>auth</code> is <code>{"header", "scheme", "secret"}</code>, plus <code>"encode": "basic"</code> when your API takes HTTP Basic (table below). Its <code>response</code> can copy values from your reply into your own fields — <code>{"fields": {"tracking": "data.trackingNumber"}}</code> — and only into fields on the same kind of record as the button.</p>
+      ${enumTable('Auth encodings (<code>auth.encode</code>)', DOC.authEncodings)}
       ${enumTable('Body formats', DOC.bodyFormats)}
 
       <h2 id="events">Events (<code>events</code>)</h2>
@@ -328,7 +365,7 @@ function request(trigger, label) {
   const get = r.method === 'GET';
   const lines = [`${get ? 'GET' : 'POST'} ${r.url}`, ...(get ? [] : ['Content-Type: application/json']), `X-Khayt-Event: ${name}`,
     `X-Khayt-Delivery: dlv_<a lower-case UUID${trigger.refresh ? '' : ', the same on every retry'}>`];
-  if (r.auth) lines.push(`${r.auth.header}: ${r.auth.scheme ? r.auth.scheme + ' ' : ''}<the shop’s ${r.auth.secret}>`);
+  if (r.auth) lines.push(`${r.auth.header}: ${r.auth.scheme ? r.auth.scheme + ' ' : ''}<the shop’s ${r.auth.secret}${r.auth.encode === 'basic' ? ', in base64' : ''}>`);
   if (r.signWith) for (const [k, v] of Object.entries(WS.signatureHeaders(SAMPLE_SECRET, r.body, SAMPLE_MS))) lines.push(`${k}: ${v}`);
   return `<p>${label}</p>
       <pre class="ref-code"><code>${esc(lines.join('\n') + (r.body ? '\n\n' + r.body : ''))}</code></pre>`;
@@ -412,8 +449,8 @@ const EVENTS_MAIN = `
       ${table('Headers', ['Header', 'When', 'Value'], [
         [code('Content-Type'), 'On a POST', code('application/json')],
         [code('X-Khayt-Event'), 'Always', 'The event name, the button’s <code>id</code>, or <code>refresh</code>.'],
-        [code('X-Khayt-Delivery'), 'Always', '<code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled.'],
-        ['Your <code>auth.header</code>', 'If the trigger has <code>auth</code>', 'Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>.'],
+        [code('X-Khayt-Delivery'), 'Always', '<code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled. Compare ids, not bodies: a body that carries <a href="../manifest/#time">the time</a> changes on each attempt.'],
+        ['Your <code>auth.header</code>', 'If the trigger has <code>auth</code>', 'Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>. With <code>"encode": "basic"</code>, <code>Basic</code> and the secret in base64 (<a href="../manifest/#actions">see the manifest</a>).'],
         [code('X-Khayt-Timestamp'), 'If the trigger has <code>signWith</code>', 'Unix time in seconds.'],
         [code('X-Khayt-Signature'), 'If the trigger has <code>signWith</code>', 'HMAC-SHA256 of the body under the signing key, lowercase hex, no prefix.'],
         [code('X-Khayt-Signature-V2'), 'If the trigger has <code>signWith</code>', 'HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>, lowercase hex. Check this one: it also lets you refuse a replay.'],

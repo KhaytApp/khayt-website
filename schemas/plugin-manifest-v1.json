@@ -356,6 +356,8 @@
                     "order.date",
                     "order.carrier",
                     "order.trackingNumber",
+                    "order.amountDue",
+                    "order.amountDueMinor",
                     "customer.name",
                     "customer.company",
                     "customer.phone",
@@ -365,6 +367,9 @@
                 },
                 {
                   "pattern": "^(field|config)\\.[a-z][a-zA-Z0-9_]{0,31}$"
+                },
+                {
+                  "pattern": "^now\\.(?:plusDays\\.([1-9][0-9]?)\\.)?epochMs$"
                 }
               ]
             }
@@ -404,6 +409,11 @@
               "secret": {
                 "type": "string",
                 "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+              },
+              "encode": {
+                "enum": [
+                  "basic"
+                ]
               }
             }
           },
@@ -477,6 +487,8 @@
                     "order.date",
                     "order.carrier",
                     "order.trackingNumber",
+                    "order.amountDue",
+                    "order.amountDueMinor",
                     "customer.name",
                     "customer.company",
                     "customer.phone",
@@ -486,6 +498,9 @@
                 },
                 {
                   "pattern": "^(field|config)\\.[a-z][a-zA-Z0-9_]{0,31}$"
+                },
+                {
+                  "pattern": "^now\\.(?:plusDays\\.([1-9][0-9]?)\\.)?epochMs$"
                 }
               ]
             }
@@ -525,6 +540,11 @@
               "secret": {
                 "type": "string",
                 "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+              },
+              "encode": {
+                "enum": [
+                  "basic"
+                ]
               }
             }
           },
@@ -601,6 +621,8 @@
                   "order.date",
                   "order.carrier",
                   "order.trackingNumber",
+                  "order.amountDue",
+                  "order.amountDueMinor",
                   "customer.name",
                   "customer.company",
                   "customer.phone",
@@ -610,6 +632,9 @@
               },
               {
                 "pattern": "^(field|config)\\.[a-z][a-zA-Z0-9_]{0,31}$"
+              },
+              {
+                "pattern": "^now\\.(?:plusDays\\.([1-9][0-9]?)\\.)?epochMs$"
               }
             ]
           }
@@ -649,6 +674,11 @@
             "secret": {
               "type": "string",
               "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+            },
+            "encode": {
+              "enum": [
+                "basic"
+              ]
             }
           }
         },

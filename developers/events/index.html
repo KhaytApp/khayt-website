@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at faebf81db) from the <a href="../manifest/#example">example manifest</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at c8044ca26) from the <a href="../manifest/#example">example manifest</a>.</p>
 
       <h2 id="body">The body</h2>
       <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>plugin-payload-v1</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
@@ -100,15 +100,15 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
       <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>example-signing-key</code>.</p>
 
       <h2 id="headers">Headers</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t19">
         <table class="ref-table">
-          <caption id="ref-t18">Headers</caption>
+          <caption id="ref-t19">Headers</caption>
           <thead><tr><th scope="col">Header</th><th scope="col">When</th><th scope="col">Value</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>Content-Type</code></th><td data-label="When">On a POST</td><td data-label="Value"><code>application/json</code></td></tr>
             <tr><th scope="row"><code>X-Khayt-Event</code></th><td data-label="When">Always</td><td data-label="Value">The event name, the button’s <code>id</code>, or <code>refresh</code>.</td></tr>
-            <tr><th scope="row"><code>X-Khayt-Delivery</code></th><td data-label="When">Always</td><td data-label="Value"><code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled.</td></tr>
-            <tr><th scope="row">Your <code>auth.header</code></th><td data-label="When">If the trigger has <code>auth</code></td><td data-label="Value">Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>.</td></tr>
+            <tr><th scope="row"><code>X-Khayt-Delivery</code></th><td data-label="When">Always</td><td data-label="Value"><code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled. Compare ids, not bodies: a body that carries <a href="../manifest/#time">the time</a> changes on each attempt.</td></tr>
+            <tr><th scope="row">Your <code>auth.header</code></th><td data-label="When">If the trigger has <code>auth</code></td><td data-label="Value">Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>. With <code>"encode": "basic"</code>, <code>Basic</code> and the secret in base64 (<a href="../manifest/#actions">see the manifest</a>).</td></tr>
             <tr><th scope="row"><code>X-Khayt-Timestamp</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">Unix time in seconds.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Signature</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">HMAC-SHA256 of the body under the signing key, lowercase hex, no prefix.</td></tr>
             <tr><th scope="row"><code>X-Khayt-Signature-V2</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>, lowercase hex. Check this one: it also lets you refuse a replay.</td></tr>

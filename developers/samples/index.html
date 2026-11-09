@@ -72,10 +72,10 @@
       <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
 
       <h2 id="discord">Discord alerts</h2>
-      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/faebf81dbbc602c469ad24c1672c88e260d1bce9/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t20">
+      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t21">
         <table class="ref-table">
-          <caption id="ref-t20">What Discord alerts sends</caption>
+          <caption id="ref-t21">What Discord alerts sends</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>discord.com</code></th><td data-label="Fields"><code>order.carrier</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
@@ -89,10 +89,10 @@ Content-Type: application/json
 {&quot;content&quot;:&quot;New job INV-2026-0107: Bracket set&quot;}</code></pre>
 
       <h2 id="lamha">Lamha shipping</h2>
-      <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/faebf81dbbc602c469ad24c1672c88e260d1bce9/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t21">
+      <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t22">
         <table class="ref-table">
-          <caption id="ref-t21">What Lamha shipping sends</caption>
+          <caption id="ref-t22">What Lamha shipping sends</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>app.lamha.sa</code></th><td data-label="Fields"><code>config.carrierId</code> <span class="ref-cat">User Content › Other User Content</span><br><code>config.senderAddress</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>config.senderCity</code> <span class="ref-cat">User Content › Other User Content</span><br><code>config.senderName</code> <span class="ref-cat">Contact Info › Name</span><br><code>config.senderPhone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.email</code> <span class="ref-cat">Contact Info › Email Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.city</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.currency</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.date</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.id</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.qty</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.total</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
@@ -106,10 +106,10 @@ Content-Type: application/json
 {&quot;ShipmentCurrency&quot;:&quot;SAR&quot;,&quot;carrier_id&quot;:&quot;Riyadh&quot;,&quot;create_shippment&quot;:false,&quot;customer&quot;:{&quot;AddressLine1&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;City&quot;:null,&quot;Country&quot;:&quot;SA&quot;,&quot;email&quot;:null,&quot;name&quot;:&quot;Sara A.&quot;,&quot;phone&quot;:&quot;+966500000000&quot;,&quot;phone1&quot;:&quot;+966500000000&quot;},&quot;date&quot;:null,&quot;items&quot;:[{&quot;amount&quot;:180,&quot;name&quot;:&quot;Bracket set&quot;,&quot;quantity&quot;:null,&quot;weight&quot;:&quot;1&quot;}],&quot;order_id&quot;:&quot;INV-2026-0107&quot;,&quot;parcels&quot;:&quot;1&quot;,&quot;payment_method&quot;:&quot;prepaid&quot;,&quot;reference_id&quot;:&quot;ORD-1042&quot;,&quot;shipper&quot;:{&quot;AddressLine1&quot;:&quot;Olaya St, Riyadh&quot;,&quot;City&quot;:&quot;Riyadh&quot;,&quot;Country&quot;:&quot;SA&quot;,&quot;name&quot;:&quot;Athar Studio&quot;,&quot;phone&quot;:&quot;+966511111111&quot;},&quot;total&quot;:180}</code></pre>
 
       <h2 id="sheets">Google Sheets order log</h2>
-      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/faebf81dbbc602c469ad24c1672c88e260d1bce9/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t22">
+      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t23">
         <table class="ref-table">
-          <caption id="ref-t22">What Google Sheets order log sends</caption>
+          <caption id="ref-t23">What Google Sheets order log sends</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>script.google.com</code></th><td data-label="Fields"><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>order.currency</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.date</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.total</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
@@ -123,10 +123,10 @@ Content-Type: application/json
 {&quot;data&quot;:{&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;order.currency&quot;:&quot;SAR&quot;,&quot;order.date&quot;:null,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;,&quot;order.total&quot;:180},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;app.khayt.samples.sheets&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_created&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
 
       <h2 id="slack">Slack alerts</h2>
-      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/faebf81dbbc602c469ad24c1672c88e260d1bce9/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t23">
+      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t24">
         <table class="ref-table">
-          <caption id="ref-t23">What Slack alerts sends</caption>
+          <caption id="ref-t24">What Slack alerts sends</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>hooks.slack.com</code></th><td data-label="Fields"><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>order.currency</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.total</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>

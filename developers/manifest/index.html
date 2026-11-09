@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/faebf81dbbc602c469ad24c1672c88e260d1bce9/lib/plugin-manifest.js">faebf81db</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/lib/plugin-manifest.js">c8044ca26</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
 
       <h2 id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
@@ -117,6 +117,8 @@
             <tr><th scope="row"><code>order.date</code></th><td data-label="Read from">The order</td><td data-label="Type">date</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
             <tr><th scope="row"><code>order.carrier</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
             <tr><th scope="row"><code>order.trackingNumber</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.amountDue</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.amountDueMinor</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
             <tr><th scope="row"><code>customer.name</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Name</td></tr>
             <tr><th scope="row"><code>customer.company</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Other User Contact Info</td></tr>
             <tr><th scope="row"><code>customer.phone</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Phone Number</td></tr>
@@ -127,6 +129,7 @@
           </tbody>
         </table>
       </div>
+      <p id="amount-due"><code>order.amountDue</code> and <code>order.amountDueMinor</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW.</p>
       <p>Which of them a button can reach depends on where it sits: a customer has no single order, so a button on a customer cannot send <code>order.*</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t3">
         <table class="ref-table">
@@ -139,6 +142,9 @@
         </table>
       </div>
 
+      <h2 id="time">The time</h2>
+      <p>For a link that expires — a payment link, say — a URL, a body template or <code>send</code> can use <code>{now.epochMs}</code>, the time in milliseconds since 1970 (UTC), or <code>{now.plusDays.N.epochMs}</code>, N whole days later, N from 1 to 90. The time is not shop data, so the shop does not grant it and it is not on the consent screen. It is read when each attempt is sent: a retry carries a later time, so its body is not the same bytes as the first attempt’s. Recognise a repeat by its <code>X-Khayt-Delivery</code> id, which every retry keeps, never by comparing bodies. An expiry N days ahead counts from the attempt that reached you, so it always gets its full N days.</p>
+
       <h2 id="actions">Buttons (<code>actions</code>)</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t4">
         <table class="ref-table">
@@ -150,23 +156,32 @@
           </tbody>
         </table>
       </div>
-      <p>A URL must start <code>https://</code> followed by one of your <code>domains</code>, written literally: a placeholder can appear in the path or query, never in the host, so a value from the book can never choose where data goes. A <code>post</code> button can authenticate with <code>auth</code> (a header filled from one of your <code>secrets</code>) and sign the request with <code>signWith</code>. Its <code>response</code> can copy values from your reply into your own fields — <code>{"fields": {"tracking": "data.trackingNumber"}}</code> — and only into fields on the same kind of record as the button.</p>
+      <p>A URL must start <code>https://</code> followed by one of your <code>domains</code>, written literally: a placeholder can appear in the path or query, never in the host, so a value from the book can never choose where data goes. A <code>post</code> button can authenticate with <code>auth</code> (a header filled from one of your <code>secrets</code>) and sign the request with <code>signWith</code>. <code>auth</code> is <code>{"header", "scheme", "secret"}</code>, plus <code>"encode": "basic"</code> when your API takes HTTP Basic (table below). Its <code>response</code> can copy values from your reply into your own fields — <code>{"fields": {"tracking": "data.trackingNumber"}}</code> — and only into fields on the same kind of record as the button.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t5">
         <table class="ref-table">
-          <caption id="ref-t5">Body formats</caption>
+          <caption id="ref-t5">Auth encodings (<code>auth.encode</code>)</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>basic</code></th><td data-label="Meaning">HTTP Basic: the secret, as <code>user:password</code>, in base64 of its UTF-8 bytes, after the scheme <code>Basic</code> unless you name another. A secret with no colon is taken as the user name with an empty password, so a colon is added — the form a payment provider’s secret key usually takes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t6">
+        <table class="ref-table">
+          <caption id="ref-t6">Body formats</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>khayt-v1</code></th><td data-label="Meaning">The default: a JSON object with the fields you listed in <code>send</code>.</td></tr>
-            <tr><th scope="row"><code>json-template</code></th><td data-label="Meaning">Your own JSON shape, up to 4 levels deep, with <code>{placeholders}</code> naming sendable fields.</td></tr>
+            <tr><th scope="row"><code>json-template</code></th><td data-label="Meaning">Your own JSON shape, up to 4 levels deep, with <code>{placeholders}</code> naming sendable fields or <a href="#time">the time</a>.</td></tr>
           </tbody>
         </table>
       </div>
 
       <h2 id="events">Events (<code>events</code>)</h2>
       <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code> and <code>response</code> as a button; a reply can fill your own fields on that order. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t6">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t7">
         <table class="ref-table">
-          <caption id="ref-t6">Events</caption>
+          <caption id="ref-t7">Events</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>order_created</code></th><td data-label="Meaning">An order was created.</td></tr>
@@ -182,9 +197,9 @@
 
       <h2 id="refresh">Refresh (<code>refresh</code>)</h2>
       <p>A refresh asks your service, on a schedule, about jobs your connector already handles — say, a parcel’s delivery status — and fills your own fields from the reply. It runs only on the computer that has the shop’s book open, never on a phone, and only while the connector is switched on. It needs the <code>fields.write</code> scope.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t7">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t8">
         <table class="ref-table">
-          <caption id="ref-t7">Refresh keys</caption>
+          <caption id="ref-t8">Refresh keys</caption>
           <thead><tr><th scope="col">Key</th><th scope="col">What it is</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>every</code></th><td data-label="What it is">Minutes between runs, a whole number from 15 to 1440.</td></tr>
@@ -199,9 +214,9 @@
       <p>Each run asks about open jobs — not cancelled, not archived, not voided and not yet delivered — one request per job, at most 50 a run, the ones asked about least recently first. A refresh is not retried; the job comes round again on a later run. Adding a refresh, or shortening its <code>every</code>, pauses the connector until the shop agrees again.</p>
 
       <h2 id="fields">Your own fields (<code>fields</code>)</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t8">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
         <table class="ref-table">
-          <caption id="ref-t8">Field types</caption>
+          <caption id="ref-t9">Field types</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text.</td></tr>
@@ -212,9 +227,9 @@
           </tbody>
         </table>
       </div>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
         <table class="ref-table">
-          <caption id="ref-t9">Records a field can be added to</caption>
+          <caption id="ref-t10">Records a field can be added to</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>order</code></th><td data-label="Meaning">An order (job).</td></tr>
@@ -227,9 +242,9 @@
 
       <h2 id="settings">Settings (<code>settings</code>)</h2>
       <p>Each entry is <code>{"key", "label", "type"}</code>, with <code>options</code> for an enum, <code>required</code> if the connector cannot work without it, and, for a text setting, a <code>kind</code> saying what the value is. The kind decides the privacy category — a sender’s phone is a phone number, whoever’s it is — so you never name a category. A button or event that uses a required setting the shop has not filled in is not sent, and the error names the missing setting. A value of the wrong type, or text over the limit, is sent as <code>null</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
         <table class="ref-table">
-          <caption id="ref-t10">Setting types</caption>
+          <caption id="ref-t11">Setting types</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text, up to the setting value limit.</td></tr>
@@ -239,9 +254,9 @@
           </tbody>
         </table>
       </div>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
         <table class="ref-table">
-          <caption id="ref-t11">Kinds of text setting</caption>
+          <caption id="ref-t12">Kinds of text setting</caption>
           <thead><tr><th scope="col">Kind</th><th scope="col">Meaning</th><th scope="col">Privacy category</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>name</code></th><td data-label="Meaning">A person’s or business’s name.</td><td data-label="Privacy category">Contact Info › Name</td></tr>
@@ -254,9 +269,9 @@
       </div>
 
       <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
         <table class="ref-table">
-          <caption id="ref-t12">Kinds of secret</caption>
+          <caption id="ref-t13">Kinds of secret</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>apiKey</code></th><td data-label="Meaning">An API key.</td></tr>
@@ -270,9 +285,9 @@
       <p>A secret can be used in a <code>post</code> URL, an <code>auth</code> header or <code>signWith</code>. It can never be sent as a field, put in a body template, or appear in an <code>open</code> link, which a browser would keep in its history.</p>
 
       <h2 id="scopes">Scopes (<code>scopes</code>)</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
         <table class="ref-table">
-          <caption id="ref-t13">Scopes</caption>
+          <caption id="ref-t14">Scopes</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>fields.write</code></th><td data-label="Meaning">Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply. Required by any button with a <code>response</code>.</td></tr>
@@ -280,9 +295,9 @@
         </table>
       </div>
       <p>A connector is told only the fields it sends; that needs no scope. These names are kept for when connectors can reach the shop through Khayt Cloud, and a manifest that asks for one is refused until then:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t15">
         <table class="ref-table">
-          <caption id="ref-t14">Reserved scopes</caption>
+          <caption id="ref-t15">Reserved scopes</caption>
           <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>orders.read</code></th><td data-label="Meaning">Reading the shop’s orders.</td></tr>
@@ -293,9 +308,9 @@
       </div>
 
       <h2 id="limits">Limits</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t15">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
         <table class="ref-table">
-          <caption id="ref-t15">Limits</caption>
+          <caption id="ref-t16">Limits</caption>
           <thead><tr><th scope="col">At most</th><th scope="col">Of</th></tr></thead>
           <tbody>
             <tr><th scope="row">10</th><td data-label="Of">hosts in <code>domains</code></td></tr>
@@ -315,9 +330,9 @@
 
       <h2 id="signing">Review and signing</h2>
       <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
         <table class="ref-table">
-          <caption id="ref-t16">Signing keys</caption>
+          <caption id="ref-t17">Signing keys</caption>
           <thead><tr><th scope="col">Key id</th><th scope="col">Public key (raw ed25519, base64)</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>khayt-2026-11</code></th><td data-label="Public key (raw ed25519, base64)"><code>LGzEHSMW6OGkgSXgYvP9egtqAVSUn+xIyoSxiPDO8sE=</code></td></tr>
@@ -327,9 +342,9 @@
 
       <h2 id="consent">What the shop agrees to</h2>
       <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
         <table class="ref-table">
-          <caption id="ref-t17">Consent screen for the example</caption>
+          <caption id="ref-t18">Consent screen for the example</caption>
           <thead><tr><th scope="col">Host</th><th scope="col">Fields sent there</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>api.courier.example.com</code></th><td data-label="Fields sent there"><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.service</code> <span class="ref-cat">User Content › Other User Content</span><br><code>field.tracking</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
