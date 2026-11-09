@@ -52,6 +52,7 @@ const DOC = {
     fields: 'Fields the connector adds to a record, which the shop can fill in and the connector can send or fill from a reply.',
     actions: 'Buttons the connector adds beside an order or a customer.',
     events: 'Things that happen in the shop that the connector is told about, as they happen.',
+    refresh: 'At most one: a regular check with your service for news on open jobs your connector already handles, such as delivery status.',
     scopes: 'What the connector may change in the shop. In this version that is only its own fields.',
     signature: 'Added by Khayt when a connector passes review: an ed25519 signature over the canonical JSON of everything else. Leave it out while you develop.',
   },
@@ -117,6 +118,8 @@ same('top-level key', M.TOP_KEYS, DOC.top);
 same('scope', M.SCOPES, DOC.scopes);
 same('reserved scope', M.RESERVED_SCOPES, DOC.reservedScopes);
 same('setting type', M.SETTING_TYPES, DOC.settingTypes);
+same('refresh method', M.REFRESH_METHODS, { GET: 1, POST: 1 });
+same('refresh limit', Object.keys(M.REFRESH), { minEvery: 1, maxEvery: 1, jobsPerRun: 1 });
 same('setting kind', Object.keys(M.SETTING_KINDS), DOC.settingKinds);
 same('event', M.EVENTS, DOC.events);
 same('field type', M.FIELD_TYPES, DOC.fieldTypes);
@@ -137,6 +140,23 @@ const EXAMPLE_FILE = 'developers/examples/courier.json';
 const example = JSON.parse(fs.readFileSync(path.join(ROOT, EXAMPLE_FILE), 'utf8'));
 const verdict = M.validateManifest(example);
 if (!verdict.ok) problems.push(`${EXAMPLE_FILE} is refused by validateManifest: ${verdict.errors.join('; ')}`);
+
+// "Open job", as the Refresh section words it, checked against the app's own test.
+const H = require(path.join(ROOT, 'developers', 'vendor', 'plugin-host.js'));
+for (const [job, open] of [
+  [{ id: 'a', status: 'printing' }, true], [{ id: 'a', status: 'completed' }, true],
+  [{ id: 'a', status: 'cancelled' }, false], [{ id: 'a', status: 'completed', deliveredAt: '2026-11-08' }, false],
+  [{ id: 'a', status: 'delivered' }, false], [{ id: 'a', status: 'printing', archived: true }, false],
+  [{ id: 'a', status: 'printing', voidedAt: '2026-11-08' }, false],
+]) if (H.isOpenJob(job) !== open) problems.push(`the Refresh section says ${JSON.stringify(job)} is ${open ? '' : 'not '}open; isOpenJob disagrees`);
+if (!example.refresh || !M.refreshConsent(example, 'en')) problems.push(`${EXAMPLE_FILE} should show a refresh`);
+{ // "Adding a refresh, or shortening its every, pauses the connector until the shop agrees again."
+  const without = Object.assign({}, example); delete without.refresh;
+  const faster = Object.assign({}, example, { refresh: Object.assign({}, example.refresh, { every: example.refresh.every - 15 }) });
+  const slower = Object.assign({}, example, { refresh: Object.assign({}, example.refresh, { every: example.refresh.every + 15 }) });
+  const widens = (from, to) => M.diffPermissions(M.grantFor(from), to).widened;
+  if (!widens(without, example) || !widens(example, faster) || widens(example, slower)) problems.push('the Refresh section’s re-consent rule no longer matches diffPermissions');
+}
 
 if (problems.length) {
   console.error('make-dev-docs: the docs and plugin-manifest.js disagree:\n  ' + problems.join('\n  '));
@@ -208,8 +228,20 @@ const MAIN = `
       ${enumTable('Body formats', DOC.bodyFormats)}
 
       <h2 id="events">Events (<code>events</code>)</h2>
-      <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code> and <code>signWith</code> as a button. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
+      <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code> and <code>response</code> as a button; a reply can fill your own fields on that order. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
       ${enumTable('Events', DOC.events)}
+
+      <h2 id="refresh">Refresh (<code>refresh</code>)</h2>
+      <p>A refresh asks your service, on a schedule, about jobs your connector already handles — say, a parcel’s delivery status — and fills your own fields from the reply. It runs only on the computer that has the shop’s book open, never on a phone, and only while the connector is switched on. It needs the <code>fields.write</code> scope.</p>
+      ${table('Refresh keys', ['Key', 'What it is'], [
+        [code('every'), `Minutes between runs, a whole number from ${M.REFRESH.minEvery} to ${M.REFRESH.maxEvery}.`],
+        [code('when'), 'One of your own fields on an order. Only jobs where it is filled in are asked about — for example a tracking number your <code>book</code> button stored.'],
+        [code('method'), `${M.REFRESH_METHODS.map(code).join(' or ')}; <code>POST</code> if left out. A <code>GET</code> has no body.`],
+        [code('url'), 'As for a button: https, a host in your <code>domains</code>, placeholders only in the path or query.'],
+        [`${code('send')}, ${code('body')}, ${code('auth')}, ${code('signWith')}`, 'As for a button. Everything a refresh sends is on the consent screen.'],
+        [code('response'), 'Required: the reason a refresh exists. Which of your own order fields to fill, and from which path in your reply.'],
+      ])}
+      <p>Each run asks about open jobs — not cancelled, not archived, not voided and not yet delivered — one request per job, at most ${M.REFRESH.jobsPerRun} a run, the ones asked about least recently first. A refresh is not retried; the job comes round again on a later run. Adding a refresh, or shortening its <code>every</code>, pauses the connector until the shop agrees again.</p>
 
       <h2 id="fields">Your own fields (<code>fields</code>)</h2>
       ${enumTable('Field types', DOC.fieldTypes)}
@@ -239,6 +271,7 @@ const MAIN = `
       <h2 id="consent">What the shop agrees to</h2>
       <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
       ${table('Consent screen for the example', ['Host', 'Fields sent there'], consent)}
+      <p>A connector with a refresh adds one line below the hosts. For the example: “${(r => `Every ${r.every} min, while this computer has your book open, it checks ${esc(r.host)} for updates on open jobs that have “${esc(r.fieldLabel)}”, and fills in its own fields from the reply.`)(M.refreshConsent(example, 'en'))}”</p>
 
       <h2 id="example">Example</h2>
       <p>A courier connector: a button that books a pickup and keeps the tracking number from the reply, a link to the tracking page, and an event when an order ships. It passes the app’s validator as written.</p>
@@ -285,18 +318,20 @@ const SAMPLE_SECRET = 'example-signing-key';
 const SAMPLE_MS = Date.parse('2026-11-08T09:00:00Z');
 const sampleCtx = {
   order: { id: 'ORD-1042', invoiceNumber: 'INV-2026-0107', project: 'Bracket set', status: 'completed', price: 180, currency: 'SAR',
-    trackingNumber: '290012345678', plugins: { [example.id]: { service: 'express' } } },
+    trackingNumber: '290012345678', plugins: { [example.id]: { service: 'express', tracking: 'CX-88412' } } },
   customer: { name: 'Sara A.', company: 'Najd Robotics', phone: '+966500000000', address: 'King Fahd Rd, Riyadh' },
 };
 function request(trigger, label) {
   const r = P.payloadFor(example, trigger, sampleCtx);
   if (!r.ok) { console.error(`make-dev-docs: payloadFor(${JSON.stringify(trigger)}) failed: ${r.error}`); process.exit(1); }
-  const name = trigger.event || trigger.action;
-  const lines = [`POST ${r.url}`, 'Content-Type: application/json', `X-Khayt-Event: ${name}`, 'X-Khayt-Delivery: dlv_<a lower-case UUID, the same on every retry>'];
+  const name = trigger.event || trigger.action || 'refresh';
+  const get = r.method === 'GET';
+  const lines = [`${get ? 'GET' : 'POST'} ${r.url}`, ...(get ? [] : ['Content-Type: application/json']), `X-Khayt-Event: ${name}`,
+    `X-Khayt-Delivery: dlv_<a lower-case UUID${trigger.refresh ? '' : ', the same on every retry'}>`];
   if (r.auth) lines.push(`${r.auth.header}: ${r.auth.scheme ? r.auth.scheme + ' ' : ''}<the shop’s ${r.auth.secret}>`);
   if (r.signWith) for (const [k, v] of Object.entries(WS.signatureHeaders(SAMPLE_SECRET, r.body, SAMPLE_MS))) lines.push(`${k}: ${v}`);
   return `<p>${label}</p>
-      <pre class="ref-code"><code>${esc(lines.join('\n') + '\n\n' + r.body)}</code></pre>`;
+      <pre class="ref-code"><code>${esc(lines.join('\n') + (r.body ? '\n\n' + r.body : ''))}</code></pre>`;
 }
 const verifyNode = `const crypto = require('crypto');
 
@@ -369,13 +404,14 @@ const EVENTS_MAIN = `
       <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>${esc(P.PAYLOAD_VERSION)}</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
       ${request({ event: 'order_shipped' }, 'An <code>order_shipped</code> event, with <code>signWith</code>:')}
       ${request({ action: 'book' }, 'The <code>book</code> button, with an <code>auth</code> header and no signature:')}
+      ${request({ refresh: true }, 'The refresh, for one job, as a <code>GET</code> with no body:')}
 
       <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>${SAMPLE_SECRET}</code>.</p>
 
       <h2 id="headers">Headers</h2>
-      ${table('Headers on every request', ['Header', 'When', 'Value'], [
-        [code('Content-Type'), 'Always', code('application/json')],
-        [code('X-Khayt-Event'), 'Always', 'The event name, or the button’s <code>id</code>.'],
+      ${table('Headers', ['Header', 'When', 'Value'], [
+        [code('Content-Type'), 'On a POST', code('application/json')],
+        [code('X-Khayt-Event'), 'Always', 'The event name, the button’s <code>id</code>, or <code>refresh</code>.'],
         [code('X-Khayt-Delivery'), 'Always', '<code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled.'],
         ['Your <code>auth.header</code>', 'If the trigger has <code>auth</code>', 'Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>.'],
         [code('X-Khayt-Timestamp'), 'If the trigger has <code>signWith</code>', 'Unix time in seconds.'],
@@ -391,11 +427,12 @@ const EVENTS_MAIN = `
       <ul>
         <li><strong>Events</strong> are tried up to ${B.MAX_ATTEMPTS} times — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until you answer with any 2xx. <code>410 Gone</code> stops the retries and switches that event off for the shop.</li>
         <li><strong>Buttons</strong> are never retried: a person pressed it and sees the result. Any 2xx is success. Anything else, a timeout (15 seconds) or a redirect (never followed) shows the shop “<em>your connector’s name</em> answered <em>status</em>” or “could not be reached”, and nothing is written.</li>
+        <li><strong>A refresh</strong> is never retried: the job is asked about again on a later run.</li>
         <li>Requests go only over https, only to a host in your <code>domains</code>, and never to a private or local address.</li>
       </ul>
 
       <h2 id="response">Your reply</h2>
-      <p>If a button declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+      <p>If a button, an event or the refresh declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
 
     </div>
    </div>

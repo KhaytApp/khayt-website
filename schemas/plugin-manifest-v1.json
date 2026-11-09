@@ -420,6 +420,7 @@
             "properties": {
               "fields": {
                 "type": "object",
+                "minProperties": 1,
                 "additionalProperties": {
                   "type": "string"
                 }
@@ -530,6 +531,145 @@
           "signWith": {
             "type": "string",
             "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+          },
+          "response": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fields"
+            ],
+            "properties": {
+              "fields": {
+                "type": "object",
+                "minProperties": 1,
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refresh": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "every",
+        "when",
+        "url",
+        "response"
+      ],
+      "properties": {
+        "every": {
+          "type": "integer",
+          "minimum": 15,
+          "maximum": 1440
+        },
+        "when": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+        },
+        "method": {
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 500,
+          "pattern": "^https://[a-z0-9.-]+(/|\\?|#|$)"
+        },
+        "send": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "anyOf": [
+              {
+                "enum": [
+                  "order.id",
+                  "order.number",
+                  "order.title",
+                  "order.status",
+                  "order.total",
+                  "order.currency",
+                  "order.qty",
+                  "order.material",
+                  "order.dueDate",
+                  "order.date",
+                  "order.carrier",
+                  "order.trackingNumber",
+                  "customer.name",
+                  "customer.company",
+                  "customer.phone",
+                  "customer.email",
+                  "customer.address"
+                ]
+              },
+              {
+                "pattern": "^(field|config)\\.[a-z][a-zA-Z0-9_]{0,31}$"
+              }
+            ]
+          }
+        },
+        "body": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "format"
+          ],
+          "properties": {
+            "format": {
+              "enum": [
+                "khayt-v1",
+                "json-template"
+              ]
+            },
+            "template": {
+              "type": "object"
+            }
+          }
+        },
+        "auth": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "header",
+            "secret"
+          ],
+          "properties": {
+            "header": {
+              "type": "string"
+            },
+            "scheme": {
+              "type": "string"
+            },
+            "secret": {
+              "type": "string",
+              "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+            }
+          }
+        },
+        "signWith": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9_]{0,31}$"
+        },
+        "response": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fields"
+          ],
+          "properties": {
+            "fields": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
           }
         }
       }
