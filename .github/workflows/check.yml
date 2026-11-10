@@ -33,3 +33,6 @@ jobs:
 
       - name: Run the site checks
         run: node scripts/check-site.js
+
+      - name: Check the connector list and manifests
+        run: node .github/scripts/check-connectors.js
