@@ -149,7 +149,7 @@ if (!verdict.ok) problems.push(`${EXAMPLE_FILE} is refused by validateManifest: 
   const PAY = require(path.join(ROOT, 'developers', 'vendor', 'plugin-payload.js'));
   const m = JSON.parse(JSON.stringify(example));
   const book = m.actions.find(a => a.kind === 'post');
-  book.send = ['order.amountDue', 'order.amountDueMinor', 'now.epochMs', `now.plusDays.${M.NOW_MAX_DAYS}.epochMs`];
+  book.send = ['order.amountDue', 'order.amountDueMinor', 'order.amountDueCurrency', 'now.epochMs', `now.plusDays.${M.NOW_MAX_DAYS}.epochMs`];
   book.auth = { header: 'Authorization', secret: book.auth.secret, encode: 'basic' };
   delete book.response;
   const v = M.validateManifest(m);
@@ -161,6 +161,12 @@ if (!verdict.ok) problems.push(`${EXAMPLE_FILE} is refused by validateManifest: 
   const r = PAY.payloadFor(m, { action: book.id }, ctx);
   const d = r.ok && JSON.parse(r.body).data;
   if (!d || d['order.amountDue'] !== 1.5 || d['order.amountDueMinor'] !== 1500) problems.push('the Amount due section says 1.5 KWD is 1500 minor units; payloadFor disagrees');
+  if (!d || d['order.amountDueCurrency'] !== 'KWD') problems.push('the Amount due section says amountDueCurrency is the job’s currency; payloadFor disagrees');
+  { // "the job’s own currency, else its customer’s, else the shop’s"
+    const cur = (order, customer) => { const x = PAY.payloadFor(m, { action: book.id }, Object.assign({}, ctx, { order: Object.assign({ id: 'o', price: 10, plugins: {} }, order), customer, settings: { currency: 'SAR' } })); return x.ok && JSON.parse(x.body).data['order.amountDueCurrency']; };
+    if (cur({ currency: 'USD', clientId: 'c1' }, { id: 'c1', currency: 'KWD' }) !== 'USD' || cur({ clientId: 'c1' }, { id: 'c1', currency: 'KWD' }) !== 'KWD' || cur({}, {}) !== 'SAR')
+      problems.push('the Amount due section’s currency order (job, customer, shop) no longer matches payloadFor');
+  }
   if (!d || d['now.epochMs'] !== t0 || d[`now.plusDays.${M.NOW_MAX_DAYS}.epochMs`] !== t0 + M.NOW_MAX_DAYS * 86400000) problems.push('the Time section’s arithmetic no longer matches payloadFor');
   const later = PAY.payloadFor(m, { action: book.id }, Object.assign({}, ctx, { nowMs: t0 + 1000 }));
   if (!later.ok || later.body === r.body) problems.push('the Time section says a retry’s body differs; payloadFor builds the same bytes');
@@ -251,7 +257,7 @@ const MAIN = `
       <h2 id="sendable">Fields a connector can send</h2>
       <p>A connector names what it sends from this list; it cannot ask for anything else. Each field is declared under a fixed privacy category, which the shop sees on the consent screen and which Apple’s App Privacy label for the iPhone app covers. You cannot choose the category.</p>
       ${table('Sendable fields', ['Name', 'Read from', 'Type', 'Privacy category'], sendRows)}
-      <p id="amount-due"><code>order.amountDue</code> and <code>order.amountDueMinor</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW.</p>
+      <p id="amount-due"><code>order.amountDue</code>, <code>order.amountDueMinor</code> and <code>order.amountDueCurrency</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW. <code>amountDueCurrency</code> is the ISO 4217 code both are in: the job’s own currency, else its customer’s, else the shop’s. Send it rather than <code>order.currency</code>, which is empty on a job priced in the shop’s currency. All three need the shop’s settings: if the app cannot read them, the request is not sent rather than sent with the wrong amount.</p>
       <p>Which of them a button can reach depends on where it sits: a customer has no single order, so a button on a customer cannot send <code>order.*</code>.</p>
       ${table('Where a button can sit', ['Placement', 'Can send'], placeRows)}
 

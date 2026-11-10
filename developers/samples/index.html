@@ -72,7 +72,7 @@
       <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
 
       <h2 id="discord">Discord alerts</h2>
-      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t21">
         <table class="ref-table">
           <caption id="ref-t21">What Discord alerts sends</caption>
@@ -89,7 +89,7 @@ Content-Type: application/json
 {&quot;content&quot;:&quot;New job INV-2026-0107: Bracket set&quot;}</code></pre>
 
       <h2 id="lamha">Lamha shipping</h2>
-      <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t22">
         <table class="ref-table">
           <caption id="ref-t22">What Lamha shipping sends</caption>
@@ -103,10 +103,10 @@ Content-Type: application/json
       <pre class="ref-code"><code>POST https://app.lamha.sa/api/v2/create-order
 Content-Type: application/json
 
-{&quot;ShipmentCurrency&quot;:&quot;SAR&quot;,&quot;carrier_id&quot;:&quot;Riyadh&quot;,&quot;create_shippment&quot;:false,&quot;customer&quot;:{&quot;AddressLine1&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;City&quot;:null,&quot;Country&quot;:&quot;SA&quot;,&quot;email&quot;:null,&quot;name&quot;:&quot;Sara A.&quot;,&quot;phone&quot;:&quot;+966500000000&quot;,&quot;phone1&quot;:&quot;+966500000000&quot;},&quot;date&quot;:null,&quot;items&quot;:[{&quot;amount&quot;:180,&quot;name&quot;:&quot;Bracket set&quot;,&quot;quantity&quot;:null,&quot;weight&quot;:&quot;1&quot;}],&quot;order_id&quot;:&quot;INV-2026-0107&quot;,&quot;parcels&quot;:&quot;1&quot;,&quot;payment_method&quot;:&quot;prepaid&quot;,&quot;reference_id&quot;:&quot;ORD-1042&quot;,&quot;shipper&quot;:{&quot;AddressLine1&quot;:&quot;Olaya St, Riyadh&quot;,&quot;City&quot;:&quot;Riyadh&quot;,&quot;Country&quot;:&quot;SA&quot;,&quot;name&quot;:&quot;Athar Studio&quot;,&quot;phone&quot;:&quot;+966511111111&quot;},&quot;total&quot;:180}</code></pre>
+{&quot;ShipmentCurrency&quot;:&quot;SAR&quot;,&quot;carrier_id&quot;:&quot;2&quot;,&quot;create_shippment&quot;:false,&quot;customer&quot;:{&quot;AddressLine1&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;City&quot;:null,&quot;Country&quot;:&quot;SA&quot;,&quot;email&quot;:null,&quot;name&quot;:&quot;Sara A.&quot;,&quot;phone&quot;:&quot;+966500000000&quot;,&quot;phone1&quot;:&quot;+966500000000&quot;},&quot;date&quot;:null,&quot;items&quot;:[{&quot;amount&quot;:180,&quot;name&quot;:&quot;Bracket set&quot;,&quot;quantity&quot;:null,&quot;weight&quot;:&quot;1&quot;}],&quot;order_id&quot;:&quot;INV-2026-0107&quot;,&quot;parcels&quot;:&quot;1&quot;,&quot;payment_method&quot;:&quot;prepaid&quot;,&quot;reference_id&quot;:&quot;ORD-1042&quot;,&quot;shipper&quot;:{&quot;AddressLine1&quot;:&quot;Olaya St, Riyadh&quot;,&quot;City&quot;:&quot;Riyadh&quot;,&quot;Country&quot;:&quot;SA&quot;,&quot;name&quot;:&quot;Athar Studio&quot;,&quot;phone&quot;:&quot;+966511111111&quot;},&quot;total&quot;:180}</code></pre>
 
       <h2 id="sheets">Google Sheets order log</h2>
-      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t23">
         <table class="ref-table">
           <caption id="ref-t23">What Google Sheets order log sends</caption>
@@ -123,7 +123,7 @@ Content-Type: application/json
 {&quot;data&quot;:{&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;order.currency&quot;:&quot;SAR&quot;,&quot;order.date&quot;:null,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;,&quot;order.total&quot;:180},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;app.khayt.samples.sheets&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_created&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
 
       <h2 id="slack">Slack alerts</h2>
-      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t24">
         <table class="ref-table">
           <caption id="ref-t24">What Slack alerts sends</caption>
