@@ -43,6 +43,10 @@ jobs:
 
       - name: Check the connector list and manifests
         run: node .github/scripts/check-connectors.js
+      # TODO (Mac lane): once lib/plugin-update.js is on KhaytApp/Khayt main —
+      # - uses: actions/checkout@v4
+      #   with: { repository: KhaytApp/Khayt, ref: main, path: khayt, sparse-checkout: "scripts/sign-connector.js\nlib/plugin-manifest.js\nlib/plugin-update.js", sparse-checkout-cone-mode: false }
+      # - run: node khayt/scripts/sign-connector.js verify-index --site _site
 
       - name: Assemble _site from the served files
         run: node .github/scripts/assemble-site.js _site
