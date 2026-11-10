@@ -236,6 +236,7 @@
     'why.cmp.h': { en: 'How it compares', ar: 'كيف يقارَن' },
     'why.cmp.caption': { en: 'Khayt compared with FoxTrack, PrintMate and Watchtower', ar: 'مقارنة خيط مع FoxTrack وPrintMate وWatchtower' },
     'why.cmp.col0': { en: 'As of 29 October 2026', ar: 'حتى 29 أكتوبر 2026' },
+    'why.cmp.col1': { en: 'Khayt', ar: 'تطبيق خيط' },
     'why.r1': { en: 'Price', ar: 'السعر' },
     'why.r1.k': { en: 'Free. The optional cloud plans are $7 to $48 a month, and free during beta.', ar: 'مجاني. وخطط السحابة الاختيارية من 7 إلى 48 دولاراً شهرياً، ومجانية أثناء التجربة.' },
     'why.r1.f': { en: 'Free for 1 printer and 10 orders a month; Pro $12 a month; Farm $39 a month.', ar: 'مجاني لطابعة واحدة و10 طلبات شهرياً؛ Pro بـ12 دولاراً شهرياً؛ Farm بـ39 دولاراً شهرياً.' },
