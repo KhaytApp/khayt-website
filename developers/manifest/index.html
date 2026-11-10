@@ -69,7 +69,7 @@
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/c8044ca2674e5c6ca9cb7269d49689ae245e957a/lib/plugin-manifest.js">c8044ca26</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/lib/plugin-manifest.js">0248142ea</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
 
       <h2 id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
@@ -119,6 +119,7 @@
             <tr><th scope="row"><code>order.trackingNumber</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
             <tr><th scope="row"><code>order.amountDue</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
             <tr><th scope="row"><code>order.amountDueMinor</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.amountDueCurrency</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
             <tr><th scope="row"><code>customer.name</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Name</td></tr>
             <tr><th scope="row"><code>customer.company</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Other User Contact Info</td></tr>
             <tr><th scope="row"><code>customer.phone</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Phone Number</td></tr>
@@ -129,7 +130,7 @@
           </tbody>
         </table>
       </div>
-      <p id="amount-due"><code>order.amountDue</code> and <code>order.amountDueMinor</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW.</p>
+      <p id="amount-due"><code>order.amountDue</code>, <code>order.amountDueMinor</code> and <code>order.amountDueCurrency</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW. <code>amountDueCurrency</code> is the ISO 4217 code both are in: the job’s own currency, else its customer’s, else the shop’s. Send it rather than <code>order.currency</code>, which is empty on a job priced in the shop’s currency. All three need the shop’s settings: if the app cannot read them, the request is not sent rather than sent with the wrong amount.</p>
       <p>Which of them a button can reach depends on where it sits: a customer has no single order, so a button on a customer cannot send <code>order.*</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t3">
         <table class="ref-table">

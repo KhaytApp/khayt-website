@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/business-scope.js at c8044ca2674e5c6ca9cb7269d49689ae245e957a.
+// COPIED from KhaytApp/Khayt lib/business-scope.js at 0248142ea23a1952a4a2774b01442e53f325d9fa.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
