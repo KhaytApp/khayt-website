@@ -4,9 +4,10 @@
    (khaytapp.com/connectors/index.json) and the manifests it names.
    ------------------------------------------------------------
    - every .json under connectors/ parses;
-   - every manifest the list names exists, and nothing under connectors/
-     is left unlisted;
-   - each manifest's id and version match its entry.
+   - every entry's file is at connectors/<id>/<version>.json, its url is
+     https://khaytapp.com/connectors/<id>/<version>.json, and its bytes match
+     the index's size and sha256 (so it must never be reformatted);
+   - nothing under connectors/ is left unlisted.
    TODO (Mac lane): run `sign-connector.js verify` on the list and on every
    manifest, once its command and the final JSON shape arrive. Until then
    the list carries "_placeholder" and only parsing is checked.
@@ -36,19 +37,26 @@ for (const f of all) {
   catch (e) { problems.push(`connectors/${f}: not valid JSON (${e.message})`); }
 }
 
+const crypto = require('crypto');
 const list = parsed['index.json'];
 if (!list) problems.push('connectors/index.json is missing or invalid');
 else if (list._placeholder) {
   console.log('check-connectors: index.json is still the placeholder; only parsing was checked');
 } else {
-  const named = new Set();
-  for (const c of list.connectors || []) {
-    named.add(c.manifest);
-    const m = parsed[c.manifest];
-    if (!m) { problems.push(`connectors/index.json names ${c.manifest}, which is not here`); continue; }
-    if (m.id !== c.id || m.version !== c.version) problems.push(`connectors/${c.manifest} is ${m.id}@${m.version}, listed as ${c.id}@${c.version}`);
+  // A cross-check needing no key; sign-connector.js verify-index (TODO below)
+  // is the authority and also checks the signature, serial, expiry and keys.
+  const named = new Set(['index.json']);
+  for (const e of list.entries || []) {
+    if (e.kind !== 'connector') continue;  // devices ignore kinds they do not know
+    const rel = `${e.id}/${e.version}.json`;
+    named.add(rel);
+    if (e.url !== `https://khaytapp.com/connectors/${rel}`) problems.push(`${e.id}@${e.version}: url is ${e.url}`);
+    let bytes;
+    try { bytes = fs.readFileSync(path.join(DIR, rel)); } catch (_) { problems.push(`connectors/${rel} is listed but not here`); continue; }
+    if (bytes.length !== e.size) problems.push(`connectors/${rel}: ${bytes.length} bytes, index says ${e.size}`);
+    if (crypto.createHash('sha256').update(bytes).digest('hex') !== e.sha256) problems.push(`connectors/${rel}: sha256 differs from the index (was it reformatted?)`);
   }
-  for (const f of Object.keys(parsed)) if (f !== 'index.json' && !named.has(f)) problems.push(`connectors/${f} is not in index.json`);
+  for (const f of Object.keys(parsed)) if (!named.has(f)) problems.push(`connectors/${f} is not in index.json`);
 }
 
 if (problems.length) { console.error('check-connectors:\n  ' + problems.join('\n  ')); process.exit(1); }
