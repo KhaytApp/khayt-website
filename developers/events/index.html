@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connector requests — Khayt developers</title>
+<meta name="description" content="What a Khayt connector is sent, how to verify it, and what Khayt does with the reply.">
+<meta property="og:title" content="Connector requests — Khayt developers">
+<meta property="og:description" content="What a Khayt connector is sent, how to verify it, and what Khayt does with the reply.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/developers/events/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="../../blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
+<link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../../#features" data-i18n="nav.features">Features</a>
+      <a href="../../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../../services.html" data-i18n="nav.services">Services</a>
+      <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+      <a href="../../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Requests your connector receives</h1>
+    <p class="lede">What Khayt sends when a shop presses one of your buttons or an event happens, how to check it came from that shop, and what Khayt does with your reply.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at 0248142ea) from the <a href="../manifest/#example">example manifest</a>.</p>
+
+      <h2 id="body">The body</h2>
+      <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>plugin-payload-v1</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
+      <p>An <code>order_shipped</code> event, with <code>signWith</code>:</p>
+      <pre class="ref-code"><code>POST https://api.courier.example.com/v1/khayt/shipped
+Content-Type: application/json
+X-Khayt-Event: order_shipped
+X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
+X-Khayt-Signature: 43f88f47435419c10557f522d05e8960b400a68b4b7264eff8f492d1b6b63b4f
+X-Khayt-Timestamp: 1794128400
+X-Khayt-Signature-V2: 0d7a7b96523aa1d31d875b4c3957b252e77b18c1317fe2a8ae4084d9612fafbb
+
+{&quot;data&quot;:{&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.trackingNumber&quot;:&quot;290012345678&quot;},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;com.example.courier&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_shipped&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+      <p>The <code>book</code> button, with an <code>auth</code> header and no signature:</p>
+      <pre class="ref-code"><code>POST https://api.courier.example.com/v1/shipments
+Content-Type: application/json
+X-Khayt-Event: book
+X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
+Authorization: Bearer &lt;the shop’s apiKey&gt;
+
+{&quot;data&quot;:{&quot;customer.address&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;customer.phone&quot;:&quot;+966500000000&quot;,&quot;field.service&quot;:&quot;express&quot;,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;com.example.courier&quot;,&quot;trigger&quot;:{&quot;action&quot;:&quot;book&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+      <p>The refresh, for one job, as a <code>GET</code> with no body:</p>
+      <pre class="ref-code"><code>GET https://api.courier.example.com/v1/shipments/CX-88412
+X-Khayt-Event: refresh
+X-Khayt-Delivery: dlv_&lt;a lower-case UUID&gt;
+Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
+
+      <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>example-signing-key</code>.</p>
+
+      <h2 id="headers">Headers</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t19">
+        <table class="ref-table">
+          <caption id="ref-t19">Headers</caption>
+          <thead><tr><th scope="col">Header</th><th scope="col">When</th><th scope="col">Value</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>Content-Type</code></th><td data-label="When">On a POST</td><td data-label="Value"><code>application/json</code></td></tr>
+            <tr><th scope="row"><code>X-Khayt-Event</code></th><td data-label="When">Always</td><td data-label="Value">The event name, the button’s <code>id</code>, or <code>refresh</code>.</td></tr>
+            <tr><th scope="row"><code>X-Khayt-Delivery</code></th><td data-label="When">Always</td><td data-label="Value"><code>dlv_</code> and a lower-case UUID: one per button press or event. A retry sends the same id, so you can ignore one you have already handled. Compare ids, not bodies: a body that carries <a href="../manifest/#time">the time</a> changes on each attempt.</td></tr>
+            <tr><th scope="row">Your <code>auth.header</code></th><td data-label="When">If the trigger has <code>auth</code></td><td data-label="Value">Its <code>scheme</code>, a space, and the secret the shop typed in — or just the secret when the trigger sets no <code>scheme</code>. With <code>"encode": "basic"</code>, <code>Basic</code> and the secret in base64 (<a href="../manifest/#actions">see the manifest</a>).</td></tr>
+            <tr><th scope="row"><code>X-Khayt-Timestamp</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">Unix time in seconds.</td></tr>
+            <tr><th scope="row"><code>X-Khayt-Signature</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">HMAC-SHA256 of the body under the signing key, lowercase hex, no prefix.</td></tr>
+            <tr><th scope="row"><code>X-Khayt-Signature-V2</code></th><td data-label="When">If the trigger has <code>signWith</code></td><td data-label="Value">HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>, lowercase hex. Check this one: it also lets you refuse a replay.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="verify">Checking a signature</h2>
+      <p>Compute the HMAC over the raw bytes you received, not over JSON you parsed and wrote out again. This recipe is run against a real signature from the app every time this page is built.</p>
+      <pre class="ref-code"><code>const crypto = require('crypto');
+
+// body: the raw request body, exactly as received (before any JSON parsing).
+function verify(body, headers, signingKey) {
+  const ts = headers['x-khayt-timestamp'];
+  const v2 = headers['x-khayt-signature-v2'];
+  if (!ts || !v2) return false;
+  if (Math.abs(Date.now() / 1000 - Number(ts)) &gt; 300) return false; // refuse replays
+  const want = crypto.createHmac('sha256', signingKey).update(ts + '.' + body).digest('hex');
+  return v2.length === want.length &amp;&amp;
+    crypto.timingSafeEqual(Buffer.from(v2), Buffer.from(want));
+}</code></pre>
+
+      <h2 id="delivery">Delivery</h2>
+      <ul>
+        <li><strong>Events</strong> are tried up to 5 times — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until you answer with any 2xx. <code>410 Gone</code> stops the retries and switches that event off for the shop.</li>
+        <li><strong>Buttons</strong> are never retried: a person pressed it and sees the result. Any 2xx is success. Anything else, a timeout (15 seconds) or a redirect (never followed) shows the shop “<em>your connector’s name</em> answered <em>status</em>” or “could not be reached”, and nothing is written.</li>
+        <li><strong>A refresh</strong> is never retried: the job is asked about again on a later run.</li>
+        <li>Requests go only over https, only to a host in your <code>domains</code>, and never to a private or local address.</li>
+      </ul>
+
+      <h2 id="response">Your reply</h2>
+      <p>If a button, an event or the refresh declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+
+    </div>
+   </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../../#features" data-i18n="nav.features">Features</a>
+          <a href="../../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../../services.html" data-i18n="nav.services">Services</a>
+          <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+          <a href="../../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../../#open-source" data-i18n="foot.license">License</a>
+          <a href="../../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../site.js?v=caf5b6281c"></script>
+</body>
+</html>

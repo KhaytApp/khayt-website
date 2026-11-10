@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connector manifest — Khayt developers</title>
+<meta name="description" content="Every key a Khayt connector manifest can hold, generated from the app’s own rules.">
+<meta property="og:title" content="Connector manifest — Khayt developers">
+<meta property="og:description" content="Every key a Khayt connector manifest can hold, generated from the app’s own rules.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/developers/manifest/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="../../blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
+<link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../../#features" data-i18n="nav.features">Features</a>
+      <a href="../../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../../services.html" data-i18n="nav.services">Services</a>
+      <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+      <a href="../../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Connector manifest</h1>
+    <p class="lede">A connector is a JSON file the app reads, not a program it runs. This page is every key that file can hold, generated from the app’s own rules.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/lib/plugin-manifest.js">0248142ea</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+
+      <h2 id="shape">The file</h2>
+      <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t1">
+        <table class="ref-table">
+          <caption id="ref-t1">Top-level keys</caption>
+          <thead><tr><th scope="col">Key</th><th scope="col">Required</th><th scope="col">What it is</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>khayt</code></th><td data-label="Required">Required</td><td data-label="What it is">Always <code>{"manifest": 1}</code>. Tells the app which version of these rules the file is written to.</td></tr>
+            <tr><th scope="row"><code>id</code></th><td data-label="Required">Required</td><td data-label="What it is">Your connector’s permanent identifier, reverse-DNS in lower case, for example <code>com.example.courier</code>. It never changes between versions.</td></tr>
+            <tr><th scope="row"><code>name</code></th><td data-label="Required">Required</td><td data-label="What it is">The name shops see, as a label: <code>{"en": "…", "ar": "…"}</code>. English is required; other languages are optional.</td></tr>
+            <tr><th scope="row"><code>publisher</code></th><td data-label="Required">Required</td><td data-label="What it is">Who makes the connector, as shops will see it.</td></tr>
+            <tr><th scope="row"><code>version</code></th><td data-label="Required">Required</td><td data-label="What it is">Your version, <code>major.minor.patch</code>. Shops are asked again only when a new version asks for more.</td></tr>
+            <tr><th scope="row"><code>description</code></th><td data-label="Required">Optional</td><td data-label="What it is">One or two sentences on what the connector does, as a label.</td></tr>
+            <tr><th scope="row"><code>homepage</code></th><td data-label="Required">Optional</td><td data-label="What it is">An https page about the connector, including your privacy policy.</td></tr>
+            <tr><th scope="row"><code>domains</code></th><td data-label="Required">Optional</td><td data-label="What it is">Every host the connector sends to or opens, lower case, no scheme. Each must be used by an action or event, and each is shown to the shop before it agrees.</td></tr>
+            <tr><th scope="row"><code>secrets</code></th><td data-label="Required">Optional</td><td data-label="What it is">Values the shop types in once and the device keeps in its own protected storage: API keys, tokens, signing keys. Never synced, never sent to Khayt Cloud.</td></tr>
+            <tr><th scope="row"><code>settings</code></th><td data-label="Required">Optional</td><td data-label="What it is">Values the shop fills in when it sets the connector up — a sender’s name, an account number — which the connector can send as <code>config.&lt;key&gt;</code>.</td></tr>
+            <tr><th scope="row"><code>fields</code></th><td data-label="Required">Optional</td><td data-label="What it is">Fields the connector adds to a record, which the shop can fill in and the connector can send or fill from a reply.</td></tr>
+            <tr><th scope="row"><code>actions</code></th><td data-label="Required">Optional</td><td data-label="What it is">Buttons the connector adds beside an order or a customer.</td></tr>
+            <tr><th scope="row"><code>events</code></th><td data-label="Required">Optional</td><td data-label="What it is">Things that happen in the shop that the connector is told about, as they happen.</td></tr>
+            <tr><th scope="row"><code>refresh</code></th><td data-label="Required">Optional</td><td data-label="What it is">At most one: a regular check with your service for news on open jobs your connector already handles, such as delivery status.</td></tr>
+            <tr><th scope="row"><code>scopes</code></th><td data-label="Required">Optional</td><td data-label="What it is">What the connector may change in the shop. In this version that is only its own fields.</td></tr>
+            <tr><th scope="row"><code>signature</code></th><td data-label="Required">Optional</td><td data-label="What it is">Added by Khayt when a connector passes review: an ed25519 signature over the canonical JSON of everything else. Leave it out while you develop.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="sendable">Fields a connector can send</h2>
+      <p>A connector names what it sends from this list; it cannot ask for anything else. Each field is declared under a fixed privacy category, which the shop sees on the consent screen and which Apple’s App Privacy label for the iPhone app covers. You cannot choose the category.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t2">
+        <table class="ref-table">
+          <caption id="ref-t2">Sendable fields</caption>
+          <thead><tr><th scope="col">Name</th><th scope="col">Read from</th><th scope="col">Type</th><th scope="col">Privacy category</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>order.id</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.number</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.title</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">User Content › Other User Content</td></tr>
+            <tr><th scope="row"><code>order.status</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.total</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.currency</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.qty</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.material</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.dueDate</code></th><td data-label="Read from">The order</td><td data-label="Type">date</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.date</code></th><td data-label="Read from">The order</td><td data-label="Type">date</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.carrier</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.trackingNumber</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.amountDue</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.amountDueMinor</code></th><td data-label="Read from">The order</td><td data-label="Type">number</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>order.amountDueCurrency</code></th><td data-label="Read from">The order</td><td data-label="Type">text</td><td data-label="Privacy category">Purchases › Purchase History</td></tr>
+            <tr><th scope="row"><code>customer.name</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Name</td></tr>
+            <tr><th scope="row"><code>customer.company</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Other User Contact Info</td></tr>
+            <tr><th scope="row"><code>customer.phone</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Phone Number</td></tr>
+            <tr><th scope="row"><code>customer.email</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Email Address</td></tr>
+            <tr><th scope="row"><code>customer.address</code></th><td data-label="Read from">The order’s customer</td><td data-label="Type">text</td><td data-label="Privacy category">Contact Info › Physical Address</td></tr>
+            <tr><th scope="row"><code>field.&lt;key&gt;</code></th><td data-label="Read from">One of your own <code>fields</code></td><td data-label="Type">its type</td><td data-label="Privacy category">User Content › Other User Content</td></tr>
+            <tr><th scope="row"><code>config.&lt;key&gt;</code></th><td data-label="Read from">One of your <code>settings</code></td><td data-label="Type">its type</td><td data-label="Privacy category">Set by its <code>kind</code> (<a href="#settings">below</a>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="amount-due"><code>order.amountDue</code>, <code>order.amountDueMinor</code> and <code>order.amountDueCurrency</code> are worked out when they are sent, not stored: what the customer still owes on the job, in the job’s own currency — the bill as the shop charges it, tax included where the shop adds it, less payments, gift cards and credit notes, and never below zero. <code>amountDueMinor</code> is the same amount as a whole number of the currency’s minor unit (halalas, cents), the integer most payment APIs take: three decimals for currencies such as KWD, BHD and OMR, and none for JPY or KRW. <code>amountDueCurrency</code> is the ISO 4217 code both are in: the job’s own currency, else its customer’s, else the shop’s. Send it rather than <code>order.currency</code>, which is empty on a job priced in the shop’s currency. All three need the shop’s settings: if the app cannot read them, the request is not sent rather than sent with the wrong amount.</p>
+      <p>Which of them a button can reach depends on where it sits: a customer has no single order, so a button on a customer cannot send <code>order.*</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t3">
+        <table class="ref-table">
+          <caption id="ref-t3">Where a button can sit</caption>
+          <thead><tr><th scope="col">Placement</th><th scope="col">Can send</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>order</code></th><td data-label="Can send"><code>order.*</code>, <code>customer.*</code></td></tr>
+            <tr><th scope="row"><code>customer</code></th><td data-label="Can send"><code>customer.*</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="time">The time</h2>
+      <p>For a link that expires — a payment link, say — a URL, a body template or <code>send</code> can use <code>{now.epochMs}</code>, the time in milliseconds since 1970 (UTC), or <code>{now.plusDays.N.epochMs}</code>, N whole days later, N from 1 to 90. The time is not shop data, so the shop does not grant it and it is not on the consent screen. It is read when each attempt is sent: a retry carries a later time, so its body is not the same bytes as the first attempt’s. Recognise a repeat by its <code>X-Khayt-Delivery</code> id, which every retry keeps, never by comparing bodies. An expiry N days ahead counts from the attempt that reached you, so it always gets its full N days.</p>
+
+      <h2 id="actions">Buttons (<code>actions</code>)</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t4">
+        <table class="ref-table">
+          <caption id="ref-t4">Kinds of button</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>post</code></th><td data-label="Meaning">Sends the listed fields to a URL on one of your domains, and can fill your own fields from the reply.</td></tr>
+            <tr><th scope="row"><code>open</code></th><td data-label="Meaning">Opens a URL in the browser. It sends nothing else, and a secret can never appear in it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A URL must start <code>https://</code> followed by one of your <code>domains</code>, written literally: a placeholder can appear in the path or query, never in the host, so a value from the book can never choose where data goes. A <code>post</code> button can authenticate with <code>auth</code> (a header filled from one of your <code>secrets</code>) and sign the request with <code>signWith</code>. <code>auth</code> is <code>{"header", "scheme", "secret"}</code>, plus <code>"encode": "basic"</code> when your API takes HTTP Basic (table below). Its <code>response</code> can copy values from your reply into your own fields — <code>{"fields": {"tracking": "data.trackingNumber"}}</code> — and only into fields on the same kind of record as the button.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t5">
+        <table class="ref-table">
+          <caption id="ref-t5">Auth encodings (<code>auth.encode</code>)</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>basic</code></th><td data-label="Meaning">HTTP Basic: the secret, as <code>user:password</code>, in base64 of its UTF-8 bytes, after the scheme <code>Basic</code> unless you name another. A secret with no colon is taken as the user name with an empty password, so a colon is added — the form a payment provider’s secret key usually takes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t6">
+        <table class="ref-table">
+          <caption id="ref-t6">Body formats</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>khayt-v1</code></th><td data-label="Meaning">The default: a JSON object with the fields you listed in <code>send</code>.</td></tr>
+            <tr><th scope="row"><code>json-template</code></th><td data-label="Meaning">Your own JSON shape, up to 4 levels deep, with <code>{placeholders}</code> naming sendable fields or <a href="#time">the time</a>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="events">Events (<code>events</code>)</h2>
+      <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code> and <code>response</code> as a button; a reply can fill your own fields on that order. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t7">
+        <table class="ref-table">
+          <caption id="ref-t7">Events</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>order_created</code></th><td data-label="Meaning">An order was created.</td></tr>
+            <tr><th scope="row"><code>status_changed</code></th><td data-label="Meaning">An order’s status changed.</td></tr>
+            <tr><th scope="row"><code>order_shipped</code></th><td data-label="Meaning">An order was marked shipped.</td></tr>
+            <tr><th scope="row"><code>order_delivered</code></th><td data-label="Meaning">An order was marked delivered.</td></tr>
+            <tr><th scope="row"><code>payment_received</code></th><td data-label="Meaning">A payment was recorded against an order.</td></tr>
+            <tr><th scope="row"><code>quote_created</code></th><td data-label="Meaning">A quote was created.</td></tr>
+            <tr><th scope="row"><code>quote_approved</code></th><td data-label="Meaning">A customer approved a quote.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="refresh">Refresh (<code>refresh</code>)</h2>
+      <p>A refresh asks your service, on a schedule, about jobs your connector already handles — say, a parcel’s delivery status — and fills your own fields from the reply. It runs only on the computer that has the shop’s book open, never on a phone, and only while the connector is switched on. It needs the <code>fields.write</code> scope.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t8">
+        <table class="ref-table">
+          <caption id="ref-t8">Refresh keys</caption>
+          <thead><tr><th scope="col">Key</th><th scope="col">What it is</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>every</code></th><td data-label="What it is">Minutes between runs, a whole number from 15 to 1440.</td></tr>
+            <tr><th scope="row"><code>when</code></th><td data-label="What it is">One of your own fields on an order. Only jobs where it is filled in are asked about — for example a tracking number your <code>book</code> button stored.</td></tr>
+            <tr><th scope="row"><code>method</code></th><td data-label="What it is"><code>GET</code> or <code>POST</code>; <code>POST</code> if left out. A <code>GET</code> has no body.</td></tr>
+            <tr><th scope="row"><code>url</code></th><td data-label="What it is">As for a button: https, a host in your <code>domains</code>, placeholders only in the path or query.</td></tr>
+            <tr><th scope="row"><code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code></th><td data-label="What it is">As for a button. Everything a refresh sends is on the consent screen.</td></tr>
+            <tr><th scope="row"><code>response</code></th><td data-label="What it is">Required: the reason a refresh exists. Which of your own order fields to fill, and from which path in your reply.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Each run asks about open jobs — not cancelled, not archived, not voided and not yet delivered — one request per job, at most 50 a run, the ones asked about least recently first. A refresh is not retried; the job comes round again on a later run. Adding a refresh, or shortening its <code>every</code>, pauses the connector until the shop agrees again.</p>
+
+      <h2 id="fields">Your own fields (<code>fields</code>)</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
+        <table class="ref-table">
+          <caption id="ref-t9">Field types</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text.</td></tr>
+            <tr><th scope="row"><code>number</code></th><td data-label="Meaning">A number.</td></tr>
+            <tr><th scope="row"><code>bool</code></th><td data-label="Meaning">Yes or no.</td></tr>
+            <tr><th scope="row"><code>enum</code></th><td data-label="Meaning">One of 1–30 <code>options</code>, each <code>{"value", "label"}</code>.</td></tr>
+            <tr><th scope="row"><code>date</code></th><td data-label="Meaning">A calendar date.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t10">
+        <table class="ref-table">
+          <caption id="ref-t10">Records a field can be added to</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>order</code></th><td data-label="Meaning">An order (job).</td></tr>
+            <tr><th scope="row"><code>customer</code></th><td data-label="Meaning">A customer.</td></tr>
+            <tr><th scope="row"><code>machine</code></th><td data-label="Meaning">A printer or other machine.</td></tr>
+            <tr><th scope="row"><code>spool</code></th><td data-label="Meaning">A spool of filament.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="settings">Settings (<code>settings</code>)</h2>
+      <p>Each entry is <code>{"key", "label", "type"}</code>, with <code>options</code> for an enum, <code>required</code> if the connector cannot work without it, and, for a text setting, a <code>kind</code> saying what the value is. The kind decides the privacy category — a sender’s phone is a phone number, whoever’s it is — so you never name a category. A button or event that uses a required setting the shop has not filled in is not sent, and the error names the missing setting. A value of the wrong type, or text over the limit, is sent as <code>null</code>.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
+        <table class="ref-table">
+          <caption id="ref-t11">Setting types</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Free text, up to the setting value limit.</td></tr>
+            <tr><th scope="row"><code>number</code></th><td data-label="Meaning">A number.</td></tr>
+            <tr><th scope="row"><code>bool</code></th><td data-label="Meaning">Yes or no.</td></tr>
+            <tr><th scope="row"><code>enum</code></th><td data-label="Meaning">One of 1–30 <code>options</code>, each <code>{"value", "label"}</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t12">
+        <table class="ref-table">
+          <caption id="ref-t12">Kinds of text setting</caption>
+          <thead><tr><th scope="col">Kind</th><th scope="col">Meaning</th><th scope="col">Privacy category</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>name</code></th><td data-label="Meaning">A person’s or business’s name.</td><td data-label="Privacy category">Contact Info › Name</td></tr>
+            <tr><th scope="row"><code>phone</code></th><td data-label="Meaning">A phone number.</td><td data-label="Privacy category">Contact Info › Phone Number</td></tr>
+            <tr><th scope="row"><code>email</code></th><td data-label="Meaning">An email address.</td><td data-label="Privacy category">Contact Info › Email Address</td></tr>
+            <tr><th scope="row"><code>address</code></th><td data-label="Meaning">A postal address.</td><td data-label="Privacy category">Contact Info › Physical Address</td></tr>
+            <tr><th scope="row"><code>text</code></th><td data-label="Meaning">Anything else. The default when <code>kind</code> is left out.</td><td data-label="Privacy category">User Content › Other User Content</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
+        <table class="ref-table">
+          <caption id="ref-t13">Kinds of secret</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>apiKey</code></th><td data-label="Meaning">An API key.</td></tr>
+            <tr><th scope="row"><code>token</code></th><td data-label="Meaning">An access token.</td></tr>
+            <tr><th scope="row"><code>password</code></th><td data-label="Meaning">A password.</td></tr>
+            <tr><th scope="row"><code>signingKey</code></th><td data-label="Meaning">A key the device signs requests with (<code>signWith</code>).</td></tr>
+            <tr><th scope="row"><code>url</code></th><td data-label="Meaning">A private URL, for example one with a key in it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A secret can be used in a <code>post</code> URL, an <code>auth</code> header or <code>signWith</code>. It can never be sent as a field, put in a body template, or appear in an <code>open</code> link, which a browser would keep in its history.</p>
+
+      <h2 id="scopes">Scopes (<code>scopes</code>)</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
+        <table class="ref-table">
+          <caption id="ref-t14">Scopes</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>fields.write</code></th><td data-label="Meaning">Fill in the connector’s own fields — and nothing else — for example a tracking number from a reply. Required by any button with a <code>response</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A connector is told only the fields it sends; that needs no scope. These names are kept for when connectors can reach the shop through Khayt Cloud, and a manifest that asks for one is refused until then:</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t15">
+        <table class="ref-table">
+          <caption id="ref-t15">Reserved scopes</caption>
+          <thead><tr><th scope="col">Value</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>orders.read</code></th><td data-label="Meaning">Reading the shop’s orders.</td></tr>
+            <tr><th scope="row"><code>customers.read</code></th><td data-label="Meaning">Reading the shop’s customers.</td></tr>
+            <tr><th scope="row"><code>jobs.status</code></th><td data-label="Meaning">Moving a job to another status.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="limits">Limits</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
+        <table class="ref-table">
+          <caption id="ref-t16">Limits</caption>
+          <thead><tr><th scope="col">At most</th><th scope="col">Of</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">10</th><td data-label="Of">hosts in <code>domains</code></td></tr>
+            <tr><th scope="row">5</th><td data-label="Of">entries in <code>secrets</code></td></tr>
+            <tr><th scope="row">20</th><td data-label="Of">entries in <code>fields</code></td></tr>
+            <tr><th scope="row">10</th><td data-label="Of">entries in <code>actions</code></td></tr>
+            <tr><th scope="row">10</th><td data-label="Of">entries in <code>events</code></td></tr>
+            <tr><th scope="row">30</th><td data-label="Of">fields one action or event sends</td></tr>
+            <tr><th scope="row">80</th><td data-label="Of">characters in any label, and in <code>publisher</code></td></tr>
+            <tr><th scope="row">300</th><td data-label="Of">characters in <code>description</code></td></tr>
+            <tr><th scope="row">500</th><td data-label="Of">characters in a URL</td></tr>
+            <tr><th scope="row">10</th><td data-label="Of">entries in <code>settings</code></td></tr>
+            <tr><th scope="row">500</th><td data-label="Of">characters in a text setting’s value</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="signing">Review and signing</h2>
+      <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
+        <table class="ref-table">
+          <caption id="ref-t17">Signing keys</caption>
+          <thead><tr><th scope="col">Key id</th><th scope="col">Public key (raw ed25519, base64)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>khayt-2026-11</code></th><td data-label="Public key (raw ed25519, base64)"><code>LGzEHSMW6OGkgSXgYvP9egtqAVSUn+xIyoSxiPDO8sE=</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="consent">What the shop agrees to</h2>
+      <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
+        <table class="ref-table">
+          <caption id="ref-t18">Consent screen for the example</caption>
+          <thead><tr><th scope="col">Host</th><th scope="col">Fields sent there</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>api.courier.example.com</code></th><td data-label="Fields sent there"><code>customer.address</code> <span class="ref-cat">Contact Info › Physical Address</span><br><code>customer.name</code> <span class="ref-cat">Contact Info › Name</span><br><code>customer.phone</code> <span class="ref-cat">Contact Info › Phone Number</span><br><code>field.service</code> <span class="ref-cat">User Content › Other User Content</span><br><code>field.tracking</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.number</code> <span class="ref-cat">Purchases › Purchase History</span><br><code>order.title</code> <span class="ref-cat">User Content › Other User Content</span><br><code>order.trackingNumber</code> <span class="ref-cat">Purchases › Purchase History</span></td></tr>
+            <tr><th scope="row"><code>track.courier.example.com</code></th><td data-label="Fields sent there"><code>field.tracking</code> <span class="ref-cat">User Content › Other User Content</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A connector with a refresh adds one line below the hosts. For the example: “Every 60 min, while this computer has your book open, it checks api.courier.example.com for updates on open jobs that have “Courier tracking”, and fills in its own fields from the reply.”</p>
+
+      <h2 id="example">Example</h2>
+      <p>A courier connector: a button that books a pickup and keeps the tracking number from the reply, a link to the tracking page, and an event when an order ships. It passes the app’s validator as written.</p>
+      <pre class="ref-code"><code>{
+  &quot;khayt&quot;: {
+    &quot;manifest&quot;: 1
+  },
+  &quot;id&quot;: &quot;com.example.courier&quot;,
+  &quot;name&quot;: {
+    &quot;en&quot;: &quot;Example Courier&quot;,
+    &quot;ar&quot;: &quot;شركة الشحن المثال&quot;
+  },
+  &quot;description&quot;: {
+    &quot;en&quot;: &quot;Book a pickup for an order and keep its tracking number on the job.&quot;
+  },
+  &quot;publisher&quot;: &quot;Example Courier Ltd&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;homepage&quot;: &quot;https://courier.example.com/khayt&quot;,
+  &quot;domains&quot;: [
+    &quot;api.courier.example.com&quot;,
+    &quot;track.courier.example.com&quot;
+  ],
+  &quot;secrets&quot;: [
+    {
+      &quot;name&quot;: &quot;apiKey&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;API key&quot;
+      },
+      &quot;kind&quot;: &quot;apiKey&quot;
+    },
+    {
+      &quot;name&quot;: &quot;hookKey&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Webhook signing key&quot;
+      },
+      &quot;kind&quot;: &quot;signingKey&quot;
+    }
+  ],
+  &quot;fields&quot;: [
+    {
+      &quot;key&quot;: &quot;tracking&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Courier tracking&quot;
+      },
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;attach&quot;: &quot;order&quot;
+    },
+    {
+      &quot;key&quot;: &quot;service&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Service&quot;
+      },
+      &quot;type&quot;: &quot;enum&quot;,
+      &quot;attach&quot;: &quot;order&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;value&quot;: &quot;standard&quot;,
+          &quot;label&quot;: {
+            &quot;en&quot;: &quot;Standard&quot;
+          }
+        },
+        {
+          &quot;value&quot;: &quot;express&quot;,
+          &quot;label&quot;: {
+            &quot;en&quot;: &quot;Express&quot;
+          }
+        }
+      ]
+    },
+    {
+      &quot;key&quot;: &quot;delivery&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Courier status&quot;
+      },
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;attach&quot;: &quot;order&quot;
+    }
+  ],
+  &quot;actions&quot;: [
+    {
+      &quot;id&quot;: &quot;book&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Book pickup&quot;,
+        &quot;ar&quot;: &quot;احجز الاستلام&quot;
+      },
+      &quot;placement&quot;: &quot;order&quot;,
+      &quot;kind&quot;: &quot;post&quot;,
+      &quot;url&quot;: &quot;https://api.courier.example.com/v1/shipments&quot;,
+      &quot;send&quot;: [
+        &quot;order.number&quot;,
+        &quot;order.title&quot;,
+        &quot;customer.name&quot;,
+        &quot;customer.phone&quot;,
+        &quot;customer.address&quot;,
+        &quot;field.service&quot;
+      ],
+      &quot;auth&quot;: {
+        &quot;header&quot;: &quot;Authorization&quot;,
+        &quot;scheme&quot;: &quot;Bearer&quot;,
+        &quot;secret&quot;: &quot;apiKey&quot;
+      },
+      &quot;response&quot;: {
+        &quot;fields&quot;: {
+          &quot;tracking&quot;: &quot;data.trackingNumber&quot;
+        }
+      }
+    },
+    {
+      &quot;id&quot;: &quot;track&quot;,
+      &quot;label&quot;: {
+        &quot;en&quot;: &quot;Track parcel&quot;
+      },
+      &quot;placement&quot;: &quot;order&quot;,
+      &quot;kind&quot;: &quot;open&quot;,
+      &quot;url&quot;: &quot;https://track.courier.example.com/{field.tracking}&quot;
+    }
+  ],
+  &quot;events&quot;: [
+    {
+      &quot;event&quot;: &quot;order_shipped&quot;,
+      &quot;url&quot;: &quot;https://api.courier.example.com/v1/khayt/shipped&quot;,
+      &quot;send&quot;: [
+        &quot;order.number&quot;,
+        &quot;order.trackingNumber&quot;
+      ],
+      &quot;signWith&quot;: &quot;hookKey&quot;
+    }
+  ],
+  &quot;refresh&quot;: {
+    &quot;every&quot;: 60,
+    &quot;when&quot;: &quot;tracking&quot;,
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;url&quot;: &quot;https://api.courier.example.com/v1/shipments/{field.tracking}&quot;,
+    &quot;auth&quot;: {
+      &quot;header&quot;: &quot;Authorization&quot;,
+      &quot;scheme&quot;: &quot;Bearer&quot;,
+      &quot;secret&quot;: &quot;apiKey&quot;
+    },
+    &quot;response&quot;: {
+      &quot;fields&quot;: {
+        &quot;delivery&quot;: &quot;data.status&quot;
+      }
+    }
+  },
+  &quot;scopes&quot;: [
+    &quot;fields.write&quot;
+  ]
+}</code></pre>
+
+    </div>
+   </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../../#features" data-i18n="nav.features">Features</a>
+          <a href="../../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../../services.html" data-i18n="nav.services">Services</a>
+          <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+          <a href="../../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../../#open-source" data-i18n="foot.license">License</a>
+          <a href="../../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../site.js?v=caf5b6281c"></script>
+</body>
+</html>

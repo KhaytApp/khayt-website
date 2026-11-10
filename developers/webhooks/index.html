@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop webhooks — Khayt developers</title>
+<meta name="description" content="The events a Khayt shop can send to its own https address, and how to verify them.">
+<meta property="og:title" content="Shop webhooks — Khayt developers">
+<meta property="og:description" content="The events a Khayt shop can send to its own https address, and how to verify them.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/developers/webhooks/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="../../blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
+<link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../../#features" data-i18n="nav.features">Features</a>
+      <a href="../../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../../services.html" data-i18n="nav.services">Services</a>
+      <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+      <a href="../../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>Shop webhooks</h1>
+    <p class="lede">A shop can send its own events to any https address it sets in Settings — a Zapier or Make hook, or your own server. This is what arrives.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="post-in">
+    <div class="post-body policy">
+
+      <p class="policy-tldr"><strong>Not a connector.</strong> These are addresses a shop types in itself, with no manifest and no review. A connector is sent <a href="../events/">a different body</a>. Everything below is generated from <code>lib/webhook-bus.js</code> at 0248142ea.</p>
+
+      <h2 id="events">Events</h2>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t20">
+        <table class="ref-table">
+          <caption id="ref-t20">Webhook events</caption>
+          <thead><tr><th scope="col">Event</th><th scope="col">When</th><th scope="col">Payload</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>order_created</code></th><td data-label="When">An order was created.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>status</code> <span class="ref-cat">string</span><br><code>price</code> <span class="ref-cat">number</span></td></tr>
+            <tr><th scope="row"><code>status_changed</code></th><td data-label="When">An order moved to another status.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>newStatus</code> <span class="ref-cat">string</span><br><code>client</code> <span class="ref-cat">string|null</span></td></tr>
+            <tr><th scope="row"><code>order_shipped</code></th><td data-label="When">An order was marked shipped.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>carrier</code> <span class="ref-cat">string</span><br><code>trackingNumber</code> <span class="ref-cat">string</span></td></tr>
+            <tr><th scope="row"><code>order_delivered</code></th><td data-label="When">An order was handed over. Delivered is a date on a completed job, not a status, so there is none in the payload.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>client</code> <span class="ref-cat">string|null</span></td></tr>
+            <tr><th scope="row"><code>payment_received</code></th><td data-label="When">A payment was recorded.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>amount</code> <span class="ref-cat">number</span><br><code>paymentStatus</code> <span class="ref-cat">string</span><br><code>client</code> <span class="ref-cat">string|null</span></td></tr>
+            <tr><th scope="row"><code>quote_created</code></th><td data-label="When">A quote was created.</td><td data-label="Payload"><em>Listed, not sent yet</em></td></tr>
+            <tr><th scope="row"><code>quote_approved</code></th><td data-label="When">A customer approved a quote.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>client</code> <span class="ref-cat">string|null</span></td></tr>
+            <tr><th scope="row"><code>low_stock</code></th><td data-label="When">A material fell below its reorder level.</td><td data-label="Payload"><em>Listed, not sent yet</em></td></tr>
+            <tr><th scope="row"><code>printer_alert</code></th><td data-label="When">A printer reported an error or stopped.</td><td data-label="Payload"><code>machineId</code> <span class="ref-cat">string</span><br><code>type</code> <span class="ref-cat">string</span><br><code>state</code> <span class="ref-cat">string</span><br><code>filename</code> <span class="ref-cat">string</span><br><code>progress</code> <span class="ref-cat">number</span><br><code>message</code> <span class="ref-cat">string</span><br><code>at</code> <span class="ref-cat">string</span></td></tr>
+            <tr><th scope="row"><code>intake_submitted</code></th><td data-label="When">A customer sent a request through the intake form.</td><td data-label="Payload"><em>Listed, not sent yet</em></td></tr>
+            <tr><th scope="row"><code>qc_failed</code></th><td data-label="When">A job failed inspection.</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>status</code> <span class="ref-cat">string</span><br><code>qcStatus</code> <span class="ref-cat">string|null</span><br><code>reprintOf</code> <span class="ref-cat">string|null</span><br><code>client</code> <span class="ref-cat">string|null</span></td></tr>
+            <tr><th scope="row"><code>rma_opened</code></th><td data-label="When">A customer reported a problem with a delivered job (desktop only).</td><td data-label="Payload"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>status</code> <span class="ref-cat">string</span><br><code>qcStatus</code> <span class="ref-cat">string|null</span><br><code>reprintOf</code> <span class="ref-cat">string|null</span><br><code>client</code> <span class="ref-cat">string|null</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="body">The body</h2>
+      <p>The request body is an outer object — <code>event</code>, <code>payload</code> and <code>timestamp</code> in milliseconds — with the delivery inside <code>payload</code>. The delivery’s <code>id</code> stays the same on every retry and on a resend from the delivery log, so you can ignore one you have already handled.</p>
+      <pre class="ref-code"><code>Content-Type: application/json
+X-Khayt-Event: order_created
+X-Khayt-Signature: 9b4d21deeeb781b033d132f991cdf3b981782e37f212c0b517408d6433732be6
+X-Khayt-Timestamp: 1794128400
+X-Khayt-Signature-V2: 064d70a6be87f9c9cda62a94ee8bf3b34e75cdfc9b961a584d62794d3ad2af89
+
+{&quot;event&quot;:&quot;order_created&quot;,&quot;payload&quot;:{&quot;id&quot;:&quot;dlv_example_order_created&quot;,&quot;event&quot;:&quot;order_created&quot;,&quot;version&quot;:1,&quot;timestamp&quot;:&quot;2026-11-08T09:00:00.000Z&quot;,&quot;payload&quot;:{&quot;orderId&quot;:&quot;ORD-1042&quot;,&quot;project&quot;:&quot;Bracket set&quot;,&quot;status&quot;:&quot;printing&quot;,&quot;price&quot;:180}},&quot;timestamp&quot;:1794128400000}</code></pre>
+      <p>The older single-address <em>event webhook</em> (Settings: one URL with a switch for created, status and paid) sends the same moments in its own envelope, which its existing receivers expect byte for byte:</p>
+      <pre class="ref-code"><code>Content-Type: application/json
+X-Khayt-Event: order.created
+X-Khayt-Signature: 1a46e2a948126ba0cb52cade542978933881a7f28e87838b3bdefbc8276bccee
+X-Khayt-Timestamp: 1794128400
+X-Khayt-Signature-V2: 1b857966795d5b17444daef01ee503c704c7be6af271e5f186382ff3a10230fb
+
+{&quot;event&quot;:&quot;order.created&quot;,&quot;payload&quot;:{&quot;id&quot;:&quot;evt_ORD-1042_created_2026-11-08T09:00:00.000Z&quot;,&quot;event&quot;:&quot;order.created&quot;,&quot;at&quot;:&quot;2026-11-08T09:00:00.000Z&quot;,&quot;shop&quot;:{&quot;name&quot;:&quot;Khayt&quot;},&quot;order&quot;:{&quot;id&quot;:&quot;ORD-1042&quot;,&quot;project&quot;:&quot;Bracket set&quot;,&quot;status&quot;:&quot;printing&quot;,&quot;paymentStatus&quot;:&quot;paid&quot;,&quot;price&quot;:180,&quot;currency&quot;:&quot;SAR&quot;,&quot;client&quot;:&quot;Sara A.&quot;,&quot;dueDate&quot;:&quot;2026-11-12&quot;}},&quot;timestamp&quot;:1794128400000}</code></pre>
+
+      <h2 id="verify">Checking a signature</h2>
+      <p>When the shop has set a signing secret, three headers are added: <code>X-Khayt-Signature</code> (HMAC-SHA256 of the body, lowercase hex, no prefix), <code>X-Khayt-Timestamp</code> (Unix seconds) and <code>X-Khayt-Signature-V2</code> (HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>). With no secret, none of them is sent. Check V2 with the <a href="../events/#verify">same recipe</a> connectors use.</p>
+
+      <h2 id="delivery">Delivery</h2>
+      <p>Up to 5 attempts — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until a 2xx. <code>410 Gone</code> stops the retries and switches the subscription off. Retries wait on the shop’s computer and survive a restart, so they are only sent while it is on.</p>
+
+    </div>
+   </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../../#features" data-i18n="nav.features">Features</a>
+          <a href="../../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../../services.html" data-i18n="nav.services">Services</a>
+          <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+          <a href="../../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../../#open-source" data-i18n="foot.license">License</a>
+          <a href="../../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../site.js?v=caf5b6281c"></script>
+</body>
+</html>

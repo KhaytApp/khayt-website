@@ -391,6 +391,19 @@ check('Sitemap lastmod dates are not older than the pages', () => {
   return 'current';
 });
 
+check('Connector docs agree with the app\'s manifest rules', () => {
+  // make-dev-docs.js refuses to build when a key, scope or event is in the
+  // vendored plugin-manifest.js and not documented, or the other way round,
+  // or when the example manifest fails the app's own validator; --check also
+  // fails when a generated page is older than its sources.
+  try {
+    execFileSync(process.execPath, ['scripts/make-dev-docs.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error(String(e.stderr || e.message).trim());
+  }
+  return 'current';
+});
+
 check('Every blog post is in the index', () => {
   // A post file with no entry in posts.js is a post nobody can reach.
   require(path.join(ROOT, 'blog', 'posts.js'));

@@ -82,7 +82,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 <link rel="apple-touch-icon" href="khayt-apple-icon.png">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="styles.css?v=ce8ed2f44d">
+<link rel="stylesheet" href="styles.css?v=b0da14c39d">
 <!-- PRERENDER:faqLd:START --><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Where is my shop’s data kept?","acceptedAnswer":{"@type":"Answer","text":"In a file on your own computer. Khayt needs no account and works offline. If you turn on Khayt Cloud, your shop’s data is encrypted on your computer before it is synced, so the server holds only ciphertext. What you publish for customers, such as an order page or the quote form, is kept in a form they can read."}},{"@type":"Question","name":"Can my accountant use what Khayt keeps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Invoices and expenses export as CSV, laid out for QuickBooks, Xero, Zoho Books, Wafeq or Daftra, or as plain CSV. Khayt also works out a VAT return for each month or quarter, with revenue reported net of tax."}},{"@type":"Question","name":"Khayt is free. How is it paid for?","acceptedAnswer":{"@type":"Answer","text":"The app is free to use and will stay free. Khayt Cloud is an optional paid service — sync between devices, team members, customer pages and an encrypted cloud library — and it is free while it is in beta. The cloud plans and sponsors pay for Khayt’s development. You never need the cloud to run your shop."}},{"@type":"Question","name":"Do the Mac and Windows apps do the same things?","acceptedAnswer":{"@type":"Answer","text":"Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: buy-now-pay-later links and HueForge pictures for the Snapmaker U1."}},{"@type":"Question","name":"Which printers does it talk to?","acceptedAnswer":{"@type":"Answer","text":"OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use."}},{"@type":"Question","name":"Is there an iPhone app?","acceptedAnswer":{"@type":"Answer","text":"Yes, in beta on TestFlight. It shows your queue and your printers, and with the Mac app it can pause, resume or stop a print."}}]}</script><!-- PRERENDER:faqLd:END -->
 </head>
 <body class="home">
@@ -532,7 +532,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       <p class="mn-p mn-warn" data-i18n="mn.warn">It is a beta, and it is now Khayt on the Mac. It opens the same book on disk as the desktop app, so there is nothing to move or export. The desktop app’s last macOS build keeps working but gets no further updates on macOS.</p>
       <div class="mn-row">
         <a class="dl-link mn-dl" href="https://github.com/KhaytApp/khayt-mac/releases" data-page data-mac-feed>
-          <div><div class="a" data-i18n="mn.dl">Download for Apple silicon</div><div class="b" dir="ltr" data-mac-version>4.0.0-beta.30 · macOS 26+ · notarized</div></div><span class="arr">→</span>
+          <div><div class="a" data-i18n="mn.dl">Download for Apple silicon</div><div class="b" dir="ltr" data-mac-version>4.0.0-beta.32 · macOS 26+ · notarized</div></div><span class="arr">→</span>
         </a>
         <div class="mn-notes">
           <span class="meta-chip" data-i18n="mn.updates">Updates itself</span>
@@ -547,7 +547,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
          Mac older than macOS 26; the native Mac app above leads (Oct 31). -->
     <h3 class="dl-sub" id="desktop" data-i18n="dl.desk.h">The desktop app for Windows and Linux</h3>
     <div class="dl-channel" id="dlChannel" role="group" aria-label="Release channel" data-i18n-aria="dl.channel">
-      <button type="button" class="on" data-channel="stable" aria-pressed="true"><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.stable">Stable</span> <span class="ver-tag" style="opacity:.7">v4.8.0</span></button>
+      <button type="button" class="on" data-channel="stable" aria-pressed="true"><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.stable">Stable</span> <span class="ver-tag" style="opacity:.7">v4.9.0</span></button>
       <button type="button" class="beta-btn" data-channel="beta" aria-pressed="false" disabled><span class="bdot" aria-hidden="true"></span><span data-i18n="dl.beta">Beta</span> <span class="ver-beta" style="opacity:.7">—</span></button>
     </div>
 
@@ -559,8 +559,8 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
         </div>
         <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.win">Built-in auto-updater</span></div>
         <div class="dl-btns">
-          <a class="dl-link" data-dl="win-exe" href="https://github.com/KhaytApp/Khayt/releases/download/v4.8.0/Khayt-Setup-4.8.0.exe"><div><div class="a" data-i18n="dl.exe">Installer (.exe)</div><div class="b">x64 · 146 MB</div></div><span class="arr">→</span></a>
-          <a class="dl-link" data-dl="win-portable" href="https://github.com/KhaytApp/Khayt/releases/download/v4.8.0/Khayt-4.8.0.exe"><div><div class="a" data-i18n="dl.portable">Portable (.exe)</div><div class="b">x64 · 146 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="win-exe" href="https://github.com/KhaytApp/Khayt/releases/download/v4.9.0/Khayt-Setup-4.9.0.exe"><div><div class="a" data-i18n="dl.exe">Installer (.exe)</div><div class="b">x64 · 146 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="win-portable" href="https://github.com/KhaytApp/Khayt/releases/download/v4.9.0/Khayt-4.9.0.exe"><div><div class="a" data-i18n="dl.portable">Portable (.exe)</div><div class="b">x64 · 146 MB</div></div><span class="arr">→</span></a>
           <a class="dl-link" href="https://apps.microsoft.com/detail/9P4GR79Z84ZG" rel="noopener"><div><div class="a" data-i18n="dl.store">Microsoft Store</div><div class="b" data-i18n="dl.store.b">Updates through the Store</div></div><span class="arr">→</span></a>
         </div>
       </div>
@@ -571,8 +571,8 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
         </div>
         <div class="dl-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="dl.linux">Runs anywhere, no install</span></div>
         <div class="dl-btns">
-          <a class="dl-link" data-dl="linux-appimage" href="https://github.com/KhaytApp/Khayt/releases/download/v4.8.0/Khayt-4.8.0.AppImage"><div><div class="a">AppImage</div><div class="b">x64 · 166 MB</div></div><span class="arr">→</span></a>
-          <a class="dl-link" data-dl="linux-deb" href="https://github.com/KhaytApp/Khayt/releases/download/v4.8.0/khayt_4.8.0_amd64.deb"><div><div class="a" data-i18n="dl.deb">Debian / Ubuntu (.deb)</div><div class="b">amd64 · 133 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="linux-appimage" href="https://github.com/KhaytApp/Khayt/releases/download/v4.9.0/Khayt-4.9.0.AppImage"><div><div class="a">AppImage</div><div class="b">x64 · 166 MB</div></div><span class="arr">→</span></a>
+          <a class="dl-link" data-dl="linux-deb" href="https://github.com/KhaytApp/Khayt/releases/download/v4.9.0/khayt_4.9.0_amd64.deb"><div><div class="a" data-i18n="dl.deb">Debian / Ubuntu (.deb)</div><div class="b">amd64 · 133 MB</div></div><span class="arr">→</span></a>
         </div>
       </div>
       <div class="dl-card">
@@ -589,7 +589,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       </div>
     </div>
     <div class="dl-meta">
-      <span class="meta-chip" id="dlMetaVer"><span class="dot"></span><span class="ver-tag">v4.8.0</span>&nbsp;<span data-i18n="dl.latest">latest</span></span>
+      <span class="meta-chip" id="dlMetaVer"><span class="dot"></span><span class="ver-tag">v4.9.0</span>&nbsp;<span data-i18n="dl.latest">latest</span></span>
       <span class="meta-chip" data-i18n="dl.srcavail">Source available</span>
       <span class="meta-chip" data-i18n="dl.notel">Nothing sent by default</span>
       <a class="meta-chip" href="https://github.com/khaytapp/Khayt/releases" target="_blank" rel="noopener" style="color:var(--brand-2)" data-i18n="dl.allrel">All releases on GitHub →</a>
