@@ -146,6 +146,9 @@ function build() {
   html = one(html, /<meta property="og:url" content="[^"]*">/g, () => `<meta property="og:url" content="${SITE}/ar/">`, 'og:url');
   // The Arabic share card (node scripts/make-og.js --ar).
   html = html.replace(/https:\/\/khaytapp\.com\/og-image\.png/g, SITE + '/og-image-ar.png');
+  // The brand is خيط in Arabic text: the share card's site name and the footer.
+  html = one(html, /<meta property="og:site_name" content="Khayt">/g, () => '<meta property="og:site_name" content="خيط">', 'og:site_name');
+  html = one(html, /(© \d{4}) Khayt</g, (m, a) => a + ' خيط<', 'footer ©');
   html = one(html, /<meta property="og:image:alt" content="[^"]*">/g, () => `<meta property="og:image:alt" content="${attr(ar('meta.ogalt'))}">`, 'og:image:alt');
   // schema.org: the Arabic page describes the app in Arabic, as JSON (\u escapes).
   html = one(html, /  "description": "[^"]*",\n  "license"/g, () => '  "description": ' + JSON.stringify(ar('meta.ld')).replace(/[\u0080-\uffff]/g, c => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0')) + ',\n  "license"', 'ld description');
