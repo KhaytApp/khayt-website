@@ -1,0 +1,9 @@
+{
+  "_placeholder": "Seed only. The Mac lane will send the real shape and the signed manifests; until then check-connectors.js skips the file checks. Do not merge.",
+  "connectors": [
+    { "id": "app.khayt.samples.lamha", "version": "1.1.1", "manifest": "app.khayt.samples.lamha/1.1.1.json" }
+  ],
+  "revoked": [
+    { "id": "app.khayt.samples.lamha", "version": "1.0.0", "reason": "fault" }
+  ]
+}

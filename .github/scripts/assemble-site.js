@@ -59,6 +59,10 @@ const DIRS = [
   { dir: 'fonts/', ext: ['.woff2', '.css', '.txt'] },   // .txt = the OFL licences
   { dir: 'screenshots/', ext: ['.png', '.webp'] },
   { dir: 'video/', ext: ['.mp4'] },
+  // The connector list the apps poll once a day, and the signed manifests it
+  // names. Static JSON only: GitHub Pages sends application/json and an ETag,
+  // sets no cookies, and no page script runs on these paths.
+  { dir: 'connectors/', ext: ['.json'] },
 ];
 
 // ---- What it does not -------------------------------------------------------

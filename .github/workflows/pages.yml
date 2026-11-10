@@ -41,6 +41,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Check the connector list and manifests
+        run: node .github/scripts/check-connectors.js
+
       - name: Assemble _site from the served files
         run: node .github/scripts/assemble-site.js _site
 
