@@ -56,6 +56,13 @@ require(path.join(ROOT, 'render.js'));
 require(path.join(ROOT, 'blog', 'posts.js'));
 require(path.join(ROOT, 'services.js'));
 const DATA = globalThis.KHAYT_DATA;
+// The share card's picture description, from app.js's DICT (as make-ar.js uses it).
+const OG_ALT = (() => {
+  const src = fs.readFileSync(path.join(ROOT, 'app.js'), 'utf8');
+  const m = src.match(/'meta\.ogalt':\s*(\{[^\n]*\}),\n/);
+  if (!m) throw new Error('make-ar-pages: no meta.ogalt in app.js');
+  return vm.runInNewContext('(' + m[1] + ')');
+})();
 const RENDER = globalThis.KHAYT_RENDER;
 const POSTS = globalThis.KHAYT_POSTS;
 const SERVICES = globalThis.KHAYT_SERVICES;
@@ -165,6 +172,14 @@ function build(file, en) {
   html = one(html, /<meta property="og:type" content="[^"]*">\n/g,
     m => m + '<meta property="og:locale" content="ar">\n<meta property="og:locale:alternate" content="en">\n', 'og:type', file);
   html = one(html, /<link rel="canonical" href="[^"]*">/g, () => `<link rel="canonical" href="${arUrl(file)}">`, 'canonical', file);
+  // The brand is خيط in Arabic text: the share card's site name, its picture's
+  // description (app.js's meta.ogalt, as on ar/index.html) and the footer.
+  html = one(html, /<meta property="og:site_name" content="Khayt">/g, () => '<meta property="og:site_name" content="خيط">', 'og:site_name', file);
+  html = one(html, /<meta property="og:image:alt" content="[^"]*">/g, m => {
+    if (unattr(m.match(/content="([^"]*)"/)[1]) !== OG_ALT.en) throw new Error(`make-ar-pages: ${file}: og:image:alt is not app.js's meta.ogalt; give it an Arabic text`);
+    return `<meta property="og:image:alt" content="${attr(OG_ALT.ar)}">`;
+  }, 'og:image:alt', file);
+  html = one(html, /(© \d{4}) Khayt</g, (m, y) => y + ' خيط<', 'footer ©', file);
 
   // A post's structured data describes the Arabic page.
   html = html.replace(/(<script type="application\/ld\+json">\n)([\s\S]*?)(\n<\/script>)/g, (m, a, json, b) => {
