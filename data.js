@@ -195,7 +195,7 @@
     { n: '01',
       t: { en: 'Quote', ar: 'تسعير' },
       d: { en: 'Drop an STL, 3MF or g-code on the calculator. Khayt reads the geometry and prices it against your machine, material and margin.',
-           ar: 'أسقِط ملف STL أو 3MF أو G-code على الحاسبة. يقرأ خيط الشكل نفسه ويسعّره وفق آلتك وموادك وهامشك.' },
+           ar: 'أسقِط ملف STL أو 3MF أو G-code على الحاسبة. يقرأ تطبيق خيط الشكل نفسه ويسعّره وفق آلتك وموادك وهامشك.' },
       tag: { en: 'Calculator', ar: 'الحاسبة' } },
     { n: '02',
       t: { en: 'Schedule', ar: 'جدولة' },
