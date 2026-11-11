@@ -39,7 +39,7 @@
 
     'hero.mac': {
       en: 'Khayt for macOS is now a native Mac app \u2014 try the beta \u2192',
-      ar: 'خيط لماك صار تطبيق ماك أصليًا — جرّب النسخة التجريبية ←'
+      ar: 'تطبيق خيط لماك صار أصليًا — جرّب النسخة التجريبية ←'
     },
 
     'hero.vid':   { en: 'The Khayt Mac app’s sample shop: Today, the production board, a job, the model library and the reports', ar: 'المطبعة التجريبية في تطبيق خيط لماك: شاشة اليوم، ولوحة الإنتاج، ومهمة، ومكتبة المجسّمات، والتقارير' },
@@ -103,7 +103,7 @@
     'modes.sim.alt': { en: 'Analytics in Simple mode on Windows: three report tiles and a CSV download', ar: 'التحليلات في الوضع البسيط على ويندوز: ثلاث بطاقات تقارير وتنزيل CSV' },
     'modes.pro.alt': { en: 'Analytics in Professional mode on Windows: the full reports', ar: 'التحليلات في الوضع الاحترافي على ويندوز: التقارير كاملة' },
     'modes.h2':     { en: 'From side-business to production floor', ar: 'من عمل جانبي إلى أرضية إنتاج' },
-    'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a small side-business to a full production floor, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من عمل جانبي صغير إلى أرضية إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
+    'modes.lede':   { en: 'Choose the mode that fits how you work. Khayt hides what you don’t need and keeps what you do — the same app grows from a small side-business to a full production floor, and you can switch any time.', ar: 'اختر الوضع الذي يناسب طريقة عملك. يخفي تطبيق خيط ما لا تحتاجه ويُبقي ما تحتاجه — التطبيق نفسه ينمو من عمل جانبي صغير إلى أرضية إنتاج كاملة، ويمكنك التبديل في أي وقت.' },
     'modes.sim.pill':{ en: 'Simple', ar: 'بسيط' },
     'modes.sim.t': { en: 'A small shop, made easy', ar: 'متجر صغير بسهولة' },
     'modes.sim.d': { en: 'Everything a side-business needs — orders, clients, invoicing and revenue, plus focused sales reports. The advanced production and accounting depth stays out of the way until you want it.', ar: 'كل ما يحتاجه مشروع جانبي — طلبات، عملاء، فوترة وإيرادات، مع تقارير مبيعات مركّزة. يبقى العمق الإنتاجي والمحاسبي المتقدّم بعيداً حتى تطلبه.' },
@@ -121,7 +121,7 @@
     'nav.beta':    { en: 'Cloud', ar: 'السحابة' },
     'beta.eyebrow':{ en: 'Opt-in', ar: 'اختياري' },
     'beta.h2':     { en: 'An optional cloud. Never a requirement.', ar: 'سحابة اختيارية. وليست شرطاً أبداً.' },
-    'beta.lede':   { en: 'Sync is end-to-end encrypted — the server only ever sees your book as ciphertext, and your sync passphrase never leaves your machine. The customer-facing services hold only what you publish to them. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $7 to $48 a month — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a>', ar: 'المزامنة مشفّرة من طرف إلى طرف — لا يرى الخادم دفترك إلا نصاً مشفّراً، وعبارة مرور المزامنة لا تغادر جهازك. أمّا الخدمات الموجّهة للعملاء فلا تحمل إلا ما تنشره فيها. أطفئ السحابة ويعمل خيط تماماً كما كان. والخطط منشورة — من 7 إلى 48 دولاراً شهرياً — وكلها مجانية ما دامت التجربة قائمة. <a href="/ar/services.html">اطّلع على الخطط وما ترسله كل خدمة ←</a>' },
+    'beta.lede':   { en: 'Sync is end-to-end encrypted — the server only ever sees your book as ciphertext, and your sync passphrase never leaves your machine. The customer-facing services hold only what you publish to them. Turn the cloud off and Khayt works exactly as it always has. The plans are published — $7 to $48 a month — and every one of them is free while the beta runs. <a href="services.html">See the plans and what each service sends →</a>', ar: 'المزامنة مشفّرة من طرف إلى طرف — لا يرى الخادم دفترك إلا نصاً مشفّراً، وعبارة مرور المزامنة لا تغادر جهازك. أمّا الخدمات الموجّهة للعملاء فلا تحمل إلا ما تنشره فيها. أطفئ السحابة ويعمل تطبيق خيط تماماً كما كان. والخطط منشورة — من 7 إلى 48 دولاراً شهرياً — وكلها مجانية ما دامت التجربة قائمة. <a href="/ar/services.html">اطّلع على الخطط وما ترسله كل خدمة ←</a>' },
     'beta.pill':   { en: 'BETA', ar: 'تجريبي' },
 
     'wn.h2':      { en: 'New since you last looked', ar: 'جديد منذ آخر زيارة' },
@@ -171,7 +171,7 @@
     'faq.q4':   { en: 'Do the Mac and Windows apps do the same things?', ar: 'هل يفعل تطبيق الماك وتطبيق ويندوز الأشياء نفسها؟' },
     'faq.a4':   { en: 'Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: buy-now-pay-later links and HueForge pictures for the Snapmaker U1.', ar: 'في معظمها. كلاهما يقرأ دفتر المطبعة نفسه بالقواعد نفسها، وبطاقات المزايا أعلاه تذكر ما يوجد في تطبيق ولم يصل إلى الآخر بعد. على ماك وحده حالياً: نموذج التسعير لموقعك، وخزنة خيط، وإرسال الملفات من برنامج التقطيع. وعلى ويندوز ولينكس وحدهما حالياً: روابط الدفع الآجل، وصور HueForge لطابعة Snapmaker U1.' },
     'faq.q5':   { en: 'Which printers does it talk to?', ar: 'مع أي طابعات يتواصل؟' },
-    'faq.a5':   { en: 'OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use.', ar: 'OctoPrint وKlipper (عبر Moonraker) وBambu Lab وPrusaLink وDuet وRepetier وElegoo. تظهر حرارتها وتقدّمها في قائمة الإنتاج، وحين تنتهي الطباعة يقرأ خيط ما أبلغت عنه الطابعة، فتُحسب تكلفة العرض التالي من الاستخدام الفعلي.' },
+    'faq.a5':   { en: 'OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use.', ar: 'OctoPrint وKlipper (عبر Moonraker) وBambu Lab وPrusaLink وDuet وRepetier وElegoo. تظهر حرارتها وتقدّمها في قائمة الإنتاج، وحين تنتهي الطباعة يقرأ تطبيق خيط ما أبلغت عنه الطابعة، فتُحسب تكلفة العرض التالي من الاستخدام الفعلي.' },
     'faq.q6':   { en: 'Is there an iPhone app?', ar: 'هل يوجد تطبيق للآيفون؟' },
     'faq.a6':   { en: 'Yes, in beta on TestFlight. It shows your queue and your printers, and with the Mac app it can pause, resume or stop a print.', ar: 'نعم، وهو تجريبي على TestFlight. يعرض قائمة الإنتاج وطابعاتك، ومع تطبيق الماك يستطيع إيقاف الطباعة مؤقتاً أو استئنافها أو إيقافها.' },
     'stat.free': { en: 'Free to use', ar: 'مجاني للاستخدام' },
@@ -230,7 +230,7 @@
     'why.p2.t': { en: 'Your data stays on your machine', ar: 'بياناتك تبقى على جهازك' },
     'why.p2.d': { en: 'The shop’s book is a file on your own computer. No account and no server you depend on; sync is optional and end-to-end encrypted.', ar: 'دفتر المطبعة ملف على حاسوبك أنت. بلا حساب ولا خادم تعتمد عليه؛ والمزامنة اختيارية ومشفّرة من طرف إلى طرف.' },
     'why.p3.t': { en: 'Cost from what was really printed', ar: 'التكلفة مما طُبع فعلاً' },
-    'why.p3.d': { en: 'Khayt reads what the printer reports when a job finishes, and the next estimate learns from it — so every quote says whether its rate was measured or assumed.', ar: 'يقرأ خيط ما تُبلغ به الطابعة عند انتهاء المهمة، ويتعلّم منه التقدير التالي — فيذكر كل عرض سعر إن كان معدّله مقيساً أم مفترضاً.' },
+    'why.p3.d': { en: 'Khayt reads what the printer reports when a job finishes, and the next estimate learns from it — so every quote says whether its rate was measured or assumed.', ar: 'يقرأ تطبيق خيط ما تُبلغ به الطابعة عند انتهاء المهمة، ويتعلّم منه التقدير التالي — فيذكر كل عرض سعر إن كان معدّله مقيساً أم مفترضاً.' },
     'why.p4.t': { en: 'Tax invoices that add up', ar: 'فواتير ضريبية تُحسب بدقّة' },
     'why.p4.d': { en: 'VAT added on top or included, the way your country does it, a QR code on invoices — Saudi ZATCA’s included — credit notes, and revenue reported net of tax. A VAT return for each quarter or month can be marked as filed, and a later change lands in the next open period instead of rewriting it. And an expense fills itself in from a supplier receipt’s QR.', ar: 'ضريبة القيمة المضافة مضافة إلى السعر أو مضمّنة فيه كما تفعل دولتك، ورمز QR الخاص بهيئة الزكاة على الفواتير، وإشعارات دائنة، والإيرادات تُحتسب صافية من الضريبة. ويمكن تعليم الإقرار الضريبي لكل ربع أو شهر بأنه قُدِّم، فيُسجَّل أي تغيير لاحق في الفترة المفتوحة التالية بدل أن يعدّله. ويُملأ المصروف تلقائياً من رمز QR في إيصال المورّد.' },
     'why.cmp.h': { en: 'How it compares', ar: 'كيف يقارَن' },
