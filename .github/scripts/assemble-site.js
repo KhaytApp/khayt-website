@@ -73,6 +73,7 @@ const NOT_SERVED = [
   // NOT served until connectors v1 ships (developers/README.md says how to
   // switch them on). Until then they must not reach khaytapp.com at all.
   'developers/',
+  'ar/developers/',    // their Arabic copies — inside ar/, which is otherwise served
   'schemas/',
 ];
 
@@ -83,7 +84,9 @@ function tracked() {
     .split('\0').filter(Boolean);
 }
 
+// NOT_SERVED wins over DIRS: ar/developers/ sits inside the served ar/.
 function served(f) {
+  if (notServed(f)) return false;
   if (FILES.includes(f)) return true;
   return DIRS.some(d => f.startsWith(d.dir) && d.ext.includes(path.extname(f).toLowerCase()));
 }
