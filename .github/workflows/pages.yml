@@ -43,13 +43,33 @@ jobs:
 
       - name: Check the connector list and manifests
         run: node .github/scripts/check-connectors.js
-      # TODO (Mac lane): once lib/plugin-update.js is on KhaytApp/Khayt main —
-      # - uses: actions/checkout@v4
-      #   with: { repository: KhaytApp/Khayt, ref: main, path: khayt, sparse-checkout: "scripts/sign-connector.js\nlib/plugin-manifest.js\nlib/plugin-update.js", sparse-checkout-cone-mode: false }
-      # - run: node khayt/scripts/sign-connector.js verify-index --site _site
 
       - name: Assemble _site from the served files
         run: node .github/scripts/assemble-site.js _site
+
+      # The signature check: Khayt's own sign-connector.js verify-index, which
+      # devices' rules (lib/plugin-update.js checkIndex) back. It needs only the
+      # public keys in lib/plugin-manifest.js; the signing key is never here.
+      - name: Fetch the connector verifier from the Khayt app
+        uses: actions/checkout@v4
+        with:
+          repository: KhaytApp/Khayt
+          ref: main
+          path: .khayt-verifier
+          sparse-checkout: |
+            scripts/sign-connector.js
+            lib/plugin-manifest.js
+            lib/plugin-update.js
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Verify the signed connector list
+        run: |
+          if grep -q '"_placeholder"' _site/connectors/index.json; then
+            echo '::error::connectors/index.json is the unsigned placeholder and must never be served'; exit 1
+          else
+            node .khayt-verifier/scripts/sign-connector.js verify-index --site _site
+          fi
 
       - name: Every local reference resolves inside _site
         run: node .github/scripts/check-site-refs.js _site
