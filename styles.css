@@ -1723,4 +1723,10 @@ body.page .page-head .docs-tabs a[aria-current="page"] { background: var(--on-da
 .docs-pager.prev :is(.docs-pager-k, .docs-pager-t) { grid-column: 2; }
 .docs-pager.prev .docs-pager-a { grid-column: 1; }
 [dir="rtl"] .docs-pager-a { scale: -1 1; }
+/* Inline code in Arabic prose is still code: laid out left-to-right and kept
+   apart from the sentence around it, so {"en": "…"} and config.<key> read as
+   written. Physical direction on purpose: code never flips. */
+[dir="rtl"] .docs-body code, [dir="rtl"] .docs-source code { direction: ltr; unicode-bidi: isolate; }
+/* The pinned "On this page" label is set like the eyebrow; Arabic letters join, so no tracking (as .eyebrow). */
+[dir="rtl"] .docs-toc > summary { letter-spacing: 0; }
 @media (max-width: 999px) { .post-body .docs-pager a { inline-size: 100%; } }
