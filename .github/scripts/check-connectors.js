@@ -8,9 +8,10 @@
      https://khaytapp.com/connectors/<id>/<version>.json, and its bytes match
      the index's size and sha256 (so it must never be reformatted);
    - nothing under connectors/ is left unlisted.
-   TODO (Mac lane): run `sign-connector.js verify` on the list and on every
-   manifest, once its command and the final JSON shape arrive. Until then
-   the list carries "_placeholder" and only parsing is checked.
+   The signatures are checked in the workflows by the Khayt app's own
+   `sign-connector.js verify-index` (public keys only). While the list is
+   still the "_placeholder" seed, only parsing is checked here, and the
+   deploy refuses to serve it.
    ============================================================ */
 'use strict';
 
@@ -43,7 +44,7 @@ if (!list) problems.push('connectors/index.json is missing or invalid');
 else if (list._placeholder) {
   console.log('check-connectors: index.json is still the placeholder; only parsing was checked');
 } else {
-  // A cross-check needing no key; sign-connector.js verify-index (TODO below)
+  // A cross-check needing no key; sign-connector.js verify-index (in the workflows)
   // is the authority and also checks the signature, serial, expiry and keys.
   const named = new Set(['index.json']);
   for (const e of list.entries || []) {
