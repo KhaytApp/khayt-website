@@ -25,7 +25,8 @@
 <link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
 <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+<link rel="stylesheet" href="../../styles.css?v=e4e5168e91">
+<script src="../docs.js" type="module"></script>
 </head>
 <body class="page">
 
@@ -60,21 +61,42 @@
     <span class="eyebrow">Khayt for developers</span>
     <h1>Requests your connector receives</h1>
     <p class="lede">What Khayt sends when a shop presses one of your buttons or an event happens, how to check it came from that shop, and what Khayt does with your reply.</p>
+    <nav class="docs-tabs" aria-label="Developer docs">
+      <a href="../manifest/">Manifest</a>
+      <a href="../events/" aria-current="page">Requests</a>
+      <a href="../webhooks/">Shop webhooks</a>
+      <a href="../samples/">Samples</a>
+    </nav>
    </div>
   </div>
 </section>
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-   <div class="post-in">
-    <div class="post-body policy">
+   <div class="docs-layout">
+    <aside class="docs-aside">
+      <details class="docs-toc">
+        <summary>On this page</summary>
+        <nav aria-label="On this page"><ol>
+          <li><a href="#body">The body</a></li>
+          <li><a href="#headers">Headers</a></li>
+          <li><a href="#verify">Checking a signature</a></li>
+          <li><a href="#delivery">Delivery</a></li>
+          <li><a href="#response">Your reply</a></li>
+        </ol></nav>
+      </details>
+      <p class="docs-source">Built by <code>lib/plugin-payload.js</code> at 0248142ea</p>
+    </aside>
+    <div class="post-body policy docs-body">
 
       <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The requests below are built by the app’s own code (<code>lib/plugin-payload.js</code> at 0248142ea) from the <a href="../manifest/#example">example manifest</a>.</p>
 
-      <h2 id="body">The body</h2>
+      <h2 tabindex="-1" id="body">The body</h2>
       <p>Unless a trigger sets <code>body.format</code> to <code>json-template</code>, Khayt sends a <code>plugin-payload-v1</code> object: your connector’s id and version, which button or event caused it, and under <code>data</code> exactly the fields the trigger lists in <code>send</code>, keyed by their names. A field with no value is <code>null</code>. Keys are sorted, and the body is sent as compact JSON, the same bytes from a Mac, a PC or an iPhone.</p>
       <p>An <code>order_shipped</code> event, with <code>signWith</code>:</p>
-      <pre class="ref-code"><code>POST https://api.courier.example.com/v1/khayt/shipped
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-2">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-2">POST https://api.courier.example.com/v1/khayt/shipped
 Content-Type: application/json
 X-Khayt-Event: order_shipped
 X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
@@ -82,24 +104,31 @@ X-Khayt-Signature: 43f88f47435419c10557f522d05e8960b400a68b4b7264eff8f492d1b6b63
 X-Khayt-Timestamp: 1794128400
 X-Khayt-Signature-V2: 0d7a7b96523aa1d31d875b4c3957b252e77b18c1317fe2a8ae4084d9612fafbb
 
-{&quot;data&quot;:{&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.trackingNumber&quot;:&quot;290012345678&quot;},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;com.example.courier&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_shipped&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+{<span class="tk">&quot;data&quot;</span>:{<span class="tk">&quot;order.number&quot;</span>:<span class="ts">&quot;INV-2026-0107&quot;</span>,<span class="tk">&quot;order.trackingNumber&quot;</span>:<span class="ts">&quot;290012345678&quot;</span>},<span class="tk">&quot;khayt&quot;</span>:<span class="ts">&quot;plugin-payload-v1&quot;</span>,<span class="tk">&quot;plugin&quot;</span>:<span class="ts">&quot;com.example.courier&quot;</span>,<span class="tk">&quot;trigger&quot;</span>:{<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order_shipped&quot;</span>},<span class="tk">&quot;version&quot;</span>:<span class="ts">&quot;1.0.0&quot;</span>}</code></pre>
+      </div>
       <p>The <code>book</code> button, with an <code>auth</code> header and no signature:</p>
-      <pre class="ref-code"><code>POST https://api.courier.example.com/v1/shipments
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-3">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-3">POST https://api.courier.example.com/v1/shipments
 Content-Type: application/json
 X-Khayt-Event: book
 X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
 Authorization: Bearer &lt;the shop’s apiKey&gt;
 
-{&quot;data&quot;:{&quot;customer.address&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;customer.phone&quot;:&quot;+966500000000&quot;,&quot;field.service&quot;:&quot;express&quot;,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;com.example.courier&quot;,&quot;trigger&quot;:{&quot;action&quot;:&quot;book&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+{<span class="tk">&quot;data&quot;</span>:{<span class="tk">&quot;customer.address&quot;</span>:<span class="ts">&quot;King Fahd Rd, Riyadh&quot;</span>,<span class="tk">&quot;customer.name&quot;</span>:<span class="ts">&quot;Sara A.&quot;</span>,<span class="tk">&quot;customer.phone&quot;</span>:<span class="ts">&quot;+966500000000&quot;</span>,<span class="tk">&quot;field.service&quot;</span>:<span class="ts">&quot;express&quot;</span>,<span class="tk">&quot;order.number&quot;</span>:<span class="ts">&quot;INV-2026-0107&quot;</span>,<span class="tk">&quot;order.title&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>},<span class="tk">&quot;khayt&quot;</span>:<span class="ts">&quot;plugin-payload-v1&quot;</span>,<span class="tk">&quot;plugin&quot;</span>:<span class="ts">&quot;com.example.courier&quot;</span>,<span class="tk">&quot;trigger&quot;</span>:{<span class="tk">&quot;action&quot;</span>:<span class="ts">&quot;book&quot;</span>},<span class="tk">&quot;version&quot;</span>:<span class="ts">&quot;1.0.0&quot;</span>}</code></pre>
+      </div>
       <p>The refresh, for one job, as a <code>GET</code> with no body:</p>
-      <pre class="ref-code"><code>GET https://api.courier.example.com/v1/shipments/CX-88412
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-4">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-4">GET https://api.courier.example.com/v1/shipments/CX-88412
 X-Khayt-Event: refresh
 X-Khayt-Delivery: dlv_&lt;a lower-case UUID&gt;
 Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
+      </div>
 
       <p>The bodies above are shown exactly as sent, on one line: the signatures are over these bytes, so you can check the recipe below against them with the key <code>example-signing-key</code>.</p>
 
-      <h2 id="headers">Headers</h2>
+      <h2 tabindex="-1" id="headers">Headers</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t19">
         <table class="ref-table">
           <caption id="ref-t19">Headers</caption>
@@ -116,9 +145,11 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
         </table>
       </div>
 
-      <h2 id="verify">Checking a signature</h2>
+      <h2 tabindex="-1" id="verify">Checking a signature</h2>
       <p>Compute the HMAC over the raw bytes you received, not over JSON you parsed and wrote out again. This recipe is run against a real signature from the app every time this page is built.</p>
-      <pre class="ref-code"><code>const crypto = require('crypto');
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">JavaScript</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-5">Copy<span class="sr-only"> JavaScript</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="JavaScript"><code id="code-5">const crypto = require('crypto');
 
 // body: the raw request body, exactly as received (before any JSON parsing).
 function verify(body, headers, signingKey) {
@@ -130,8 +161,9 @@ function verify(body, headers, signingKey) {
   return v2.length === want.length &amp;&amp;
     crypto.timingSafeEqual(Buffer.from(v2), Buffer.from(want));
 }</code></pre>
+      </div>
 
-      <h2 id="delivery">Delivery</h2>
+      <h2 tabindex="-1" id="delivery">Delivery</h2>
       <ul>
         <li><strong>Events</strong> are tried up to 5 times — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until you answer with any 2xx. <code>410 Gone</code> stops the retries and switches that event off for the shop.</li>
         <li><strong>Buttons</strong> are never retried: a person pressed it and sees the result. Any 2xx is success. Anything else, a timeout (15 seconds) or a redirect (never followed) shows the shop “<em>your connector’s name</em> answered <em>status</em>” or “could not be reached”, and nothing is written.</li>
@@ -139,8 +171,9 @@ function verify(body, headers, signingKey) {
         <li>Requests go only over https, only to a host in your <code>domains</code>, and never to a private or local address.</li>
       </ul>
 
-      <h2 id="response">Your reply</h2>
+      <h2 tabindex="-1" id="response">Your reply</h2>
       <p>If a button, an event or the refresh declares <code>response</code>, answer with JSON of up to 64 KB. Each path it names is read from your reply and written to your connector’s own field on that record, after a check against the field’s type: a number may arrive as numeric text (<code>"2.5"</code>), a date as a full date-time (the date part is kept), and text is cut to 500 characters; a yes/no field takes only <code>true</code> or <code>false</code>, a choice only one of its option values, and anything else of the wrong type is dropped. This needs the <code>fields.write</code> scope. A reply that is not JSON, or too large, still counts as success; nothing is filled in.</p>
+      <nav class="docs-pager" aria-label="Next page"><a href="../webhooks/" rel="next"><span class="docs-pager-k">Next</span><span class="docs-pager-t">Shop webhooks</span><span class="docs-pager-a" aria-hidden="true">→</span></a></nav>
 
     </div>
    </div>

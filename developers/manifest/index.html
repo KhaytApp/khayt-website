@@ -25,7 +25,8 @@
 <link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
 <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+<link rel="stylesheet" href="../../styles.css?v=e4e5168e91">
+<script src="../docs.js" type="module"></script>
 </head>
 <body class="page">
 
@@ -60,18 +61,46 @@
     <span class="eyebrow">Khayt for developers</span>
     <h1>Connector manifest</h1>
     <p class="lede">A connector is a JSON file the app reads, not a program it runs. This page is every key that file can hold, generated from the app’s own rules.</p>
+    <nav class="docs-tabs" aria-label="Developer docs">
+      <a href="../manifest/" aria-current="page">Manifest</a>
+      <a href="../events/">Requests</a>
+      <a href="../webhooks/">Shop webhooks</a>
+      <a href="../samples/">Samples</a>
+    </nav>
    </div>
   </div>
 </section>
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-   <div class="post-in">
-    <div class="post-body policy">
+   <div class="docs-layout">
+    <aside class="docs-aside">
+      <details class="docs-toc">
+        <summary>On this page</summary>
+        <nav aria-label="On this page"><ol>
+          <li><a href="#shape">The file</a></li>
+          <li><a href="#sendable">Fields a connector can send</a></li>
+          <li><a href="#time">The time</a></li>
+          <li><a href="#actions">Buttons</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#refresh">Refresh</a></li>
+          <li><a href="#fields">Your own fields</a></li>
+          <li><a href="#settings">Settings</a></li>
+          <li><a href="#secrets">Secrets</a></li>
+          <li><a href="#scopes">Scopes</a></li>
+          <li><a href="#limits">Limits</a></li>
+          <li><a href="#signing">Review and signing</a></li>
+          <li><a href="#consent">What the shop agrees to</a></li>
+          <li><a href="#example">Example</a></li>
+        </ol></nav>
+      </details>
+      <p class="docs-source"><a class="docs-schema" href="../../schemas/plugin-manifest-v1.json">JSON Schema <span aria-hidden="true">→</span></a><br>Generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/lib/plugin-manifest.js">0248142ea</a></p>
+    </aside>
+    <div class="post-body policy docs-body">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/lib/plugin-manifest.js">0248142ea</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are.</p>
 
-      <h2 id="shape">The file</h2>
+      <h2 tabindex="-1" id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t1">
         <table class="ref-table">
@@ -98,7 +127,7 @@
         </table>
       </div>
 
-      <h2 id="sendable">Fields a connector can send</h2>
+      <h2 tabindex="-1" id="sendable">Fields a connector can send</h2>
       <p>A connector names what it sends from this list; it cannot ask for anything else. Each field is declared under a fixed privacy category, which the shop sees on the consent screen and which Apple’s App Privacy label for the iPhone app covers. You cannot choose the category.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t2">
         <table class="ref-table">
@@ -143,10 +172,10 @@
         </table>
       </div>
 
-      <h2 id="time">The time</h2>
+      <h2 tabindex="-1" id="time">The time</h2>
       <p>For a link that expires — a payment link, say — a URL, a body template or <code>send</code> can use <code>{now.epochMs}</code>, the time in milliseconds since 1970 (UTC), or <code>{now.plusDays.N.epochMs}</code>, N whole days later, N from 1 to 90. The time is not shop data, so the shop does not grant it and it is not on the consent screen. It is read when each attempt is sent: a retry carries a later time, so its body is not the same bytes as the first attempt’s. Recognise a repeat by its <code>X-Khayt-Delivery</code> id, which every retry keeps, never by comparing bodies. An expiry N days ahead counts from the attempt that reached you, so it always gets its full N days.</p>
 
-      <h2 id="actions">Buttons (<code>actions</code>)</h2>
+      <h2 tabindex="-1" id="actions">Buttons (<code>actions</code>)</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t4">
         <table class="ref-table">
           <caption id="ref-t4">Kinds of button</caption>
@@ -178,7 +207,7 @@
         </table>
       </div>
 
-      <h2 id="events">Events (<code>events</code>)</h2>
+      <h2 tabindex="-1" id="events">Events (<code>events</code>)</h2>
       <p>Each entry names an event, the URL it is sent to, and the fields it sends, with the same <code>send</code>, <code>body</code>, <code>auth</code>, <code>signWith</code> and <code>response</code> as a button; a reply can fill your own fields on that order. Every event carries one order. The <a href="../events/">event reference</a> describes each payload.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t7">
         <table class="ref-table">
@@ -196,7 +225,7 @@
         </table>
       </div>
 
-      <h2 id="refresh">Refresh (<code>refresh</code>)</h2>
+      <h2 tabindex="-1" id="refresh">Refresh (<code>refresh</code>)</h2>
       <p>A refresh asks your service, on a schedule, about jobs your connector already handles — say, a parcel’s delivery status — and fills your own fields from the reply. It runs only on the computer that has the shop’s book open, never on a phone, and only while the connector is switched on. It needs the <code>fields.write</code> scope.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t8">
         <table class="ref-table">
@@ -214,7 +243,7 @@
       </div>
       <p>Each run asks about open jobs — not cancelled, not archived, not voided and not yet delivered — one request per job, at most 50 a run, the ones asked about least recently first. A refresh is not retried; the job comes round again on a later run. Adding a refresh, or shortening its <code>every</code>, pauses the connector until the shop agrees again.</p>
 
-      <h2 id="fields">Your own fields (<code>fields</code>)</h2>
+      <h2 tabindex="-1" id="fields">Your own fields (<code>fields</code>)</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t9">
         <table class="ref-table">
           <caption id="ref-t9">Field types</caption>
@@ -241,7 +270,7 @@
         </table>
       </div>
 
-      <h2 id="settings">Settings (<code>settings</code>)</h2>
+      <h2 tabindex="-1" id="settings">Settings (<code>settings</code>)</h2>
       <p>Each entry is <code>{"key", "label", "type"}</code>, with <code>options</code> for an enum, <code>required</code> if the connector cannot work without it, and, for a text setting, a <code>kind</code> saying what the value is. The kind decides the privacy category — a sender’s phone is a phone number, whoever’s it is — so you never name a category. A button or event that uses a required setting the shop has not filled in is not sent, and the error names the missing setting. A value of the wrong type, or text over the limit, is sent as <code>null</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t11">
         <table class="ref-table">
@@ -269,7 +298,7 @@
         </table>
       </div>
 
-      <h2 id="secrets">Secrets (<code>secrets</code>)</h2>
+      <h2 tabindex="-1" id="secrets">Secrets (<code>secrets</code>)</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t13">
         <table class="ref-table">
           <caption id="ref-t13">Kinds of secret</caption>
@@ -285,7 +314,7 @@
       </div>
       <p>A secret can be used in a <code>post</code> URL, an <code>auth</code> header or <code>signWith</code>. It can never be sent as a field, put in a body template, or appear in an <code>open</code> link, which a browser would keep in its history.</p>
 
-      <h2 id="scopes">Scopes (<code>scopes</code>)</h2>
+      <h2 tabindex="-1" id="scopes">Scopes (<code>scopes</code>)</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t14">
         <table class="ref-table">
           <caption id="ref-t14">Scopes</caption>
@@ -308,7 +337,7 @@
         </table>
       </div>
 
-      <h2 id="limits">Limits</h2>
+      <h2 tabindex="-1" id="limits">Limits</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t16">
         <table class="ref-table">
           <caption id="ref-t16">Limits</caption>
@@ -329,7 +358,7 @@
         </table>
       </div>
 
-      <h2 id="signing">Review and signing</h2>
+      <h2 tabindex="-1" id="signing">Review and signing</h2>
       <p>A connector counts as reviewed only when its <code>signature</code> verifies — never because of a flag stored anywhere. Khayt signs a manifest it has reviewed with ed25519 over the UTF-8 bytes of its canonical JSON: every key sorted, no whitespace, <code>signature</code> itself left out. Any change to a signed manifest, even to a URL, breaks the signature and needs a new review. A signature verifies against any of these published keys, so the key can rotate without un-reviewing what was signed before:</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t17">
         <table class="ref-table">
@@ -341,7 +370,7 @@
         </table>
       </div>
 
-      <h2 id="consent">What the shop agrees to</h2>
+      <h2 tabindex="-1" id="consent">What the shop agrees to</h2>
       <p>Before a connector is switched on, the shop sees one row per host with the fields that go there. When a new version asks for another field, another host or another scope, the connector pauses on every device until the shop agrees again; asking for less never does. For the example below, the shop sees:</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t18">
         <table class="ref-table">
@@ -355,153 +384,157 @@
       </div>
       <p>A connector with a refresh adds one line below the hosts. For the example: “Every 60 min, while this computer has your book open, it checks api.courier.example.com for updates on open jobs that have “Courier tracking”, and fills in its own fields from the reply.”</p>
 
-      <h2 id="example">Example</h2>
+      <h2 tabindex="-1" id="example">Example</h2>
       <p>A courier connector: a button that books a pickup and keeps the tracking number from the reply, a link to the tracking page, and an event when an order ships. It passes the app’s validator as written.</p>
-      <pre class="ref-code"><code>{
-  &quot;khayt&quot;: {
-    &quot;manifest&quot;: 1
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">courier.json</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-1">Copy<span class="sr-only"> courier.json</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="courier.json"><code id="code-1">{
+  <span class="tk">&quot;khayt&quot;</span>: {
+    <span class="tk">&quot;manifest&quot;</span>: 1
   },
-  &quot;id&quot;: &quot;com.example.courier&quot;,
-  &quot;name&quot;: {
-    &quot;en&quot;: &quot;Example Courier&quot;,
-    &quot;ar&quot;: &quot;شركة الشحن المثال&quot;
+  <span class="tk">&quot;id&quot;</span>: <span class="ts">&quot;com.example.courier&quot;</span>,
+  <span class="tk">&quot;name&quot;</span>: {
+    <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Example Courier&quot;</span>,
+    <span class="tk">&quot;ar&quot;</span>: <span class="ts">&quot;شركة الشحن المثال&quot;</span>
   },
-  &quot;description&quot;: {
-    &quot;en&quot;: &quot;Book a pickup for an order and keep its tracking number on the job.&quot;
+  <span class="tk">&quot;description&quot;</span>: {
+    <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Book a pickup for an order and keep its tracking number on the job.&quot;</span>
   },
-  &quot;publisher&quot;: &quot;Example Courier Ltd&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;homepage&quot;: &quot;https://courier.example.com/khayt&quot;,
-  &quot;domains&quot;: [
-    &quot;api.courier.example.com&quot;,
-    &quot;track.courier.example.com&quot;
+  <span class="tk">&quot;publisher&quot;</span>: <span class="ts">&quot;Example Courier Ltd&quot;</span>,
+  <span class="tk">&quot;version&quot;</span>: <span class="ts">&quot;1.0.0&quot;</span>,
+  <span class="tk">&quot;homepage&quot;</span>: <span class="ts">&quot;https://courier.example.com/khayt&quot;</span>,
+  <span class="tk">&quot;domains&quot;</span>: [
+    <span class="ts">&quot;api.courier.example.com&quot;</span>,
+    <span class="ts">&quot;track.courier.example.com&quot;</span>
   ],
-  &quot;secrets&quot;: [
+  <span class="tk">&quot;secrets&quot;</span>: [
     {
-      &quot;name&quot;: &quot;apiKey&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;API key&quot;
+      <span class="tk">&quot;name&quot;</span>: <span class="ts">&quot;apiKey&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;API key&quot;</span>
       },
-      &quot;kind&quot;: &quot;apiKey&quot;
+      <span class="tk">&quot;kind&quot;</span>: <span class="ts">&quot;apiKey&quot;</span>
     },
     {
-      &quot;name&quot;: &quot;hookKey&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;Webhook signing key&quot;
+      <span class="tk">&quot;name&quot;</span>: <span class="ts">&quot;hookKey&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Webhook signing key&quot;</span>
       },
-      &quot;kind&quot;: &quot;signingKey&quot;
+      <span class="tk">&quot;kind&quot;</span>: <span class="ts">&quot;signingKey&quot;</span>
     }
   ],
-  &quot;fields&quot;: [
+  <span class="tk">&quot;fields&quot;</span>: [
     {
-      &quot;key&quot;: &quot;tracking&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;Courier tracking&quot;
+      <span class="tk">&quot;key&quot;</span>: <span class="ts">&quot;tracking&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Courier tracking&quot;</span>
       },
-      &quot;type&quot;: &quot;text&quot;,
-      &quot;attach&quot;: &quot;order&quot;
+      <span class="tk">&quot;type&quot;</span>: <span class="ts">&quot;text&quot;</span>,
+      <span class="tk">&quot;attach&quot;</span>: <span class="ts">&quot;order&quot;</span>
     },
     {
-      &quot;key&quot;: &quot;service&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;Service&quot;
+      <span class="tk">&quot;key&quot;</span>: <span class="ts">&quot;service&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Service&quot;</span>
       },
-      &quot;type&quot;: &quot;enum&quot;,
-      &quot;attach&quot;: &quot;order&quot;,
-      &quot;options&quot;: [
+      <span class="tk">&quot;type&quot;</span>: <span class="ts">&quot;enum&quot;</span>,
+      <span class="tk">&quot;attach&quot;</span>: <span class="ts">&quot;order&quot;</span>,
+      <span class="tk">&quot;options&quot;</span>: [
         {
-          &quot;value&quot;: &quot;standard&quot;,
-          &quot;label&quot;: {
-            &quot;en&quot;: &quot;Standard&quot;
+          <span class="tk">&quot;value&quot;</span>: <span class="ts">&quot;standard&quot;</span>,
+          <span class="tk">&quot;label&quot;</span>: {
+            <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Standard&quot;</span>
           }
         },
         {
-          &quot;value&quot;: &quot;express&quot;,
-          &quot;label&quot;: {
-            &quot;en&quot;: &quot;Express&quot;
+          <span class="tk">&quot;value&quot;</span>: <span class="ts">&quot;express&quot;</span>,
+          <span class="tk">&quot;label&quot;</span>: {
+            <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Express&quot;</span>
           }
         }
       ]
     },
     {
-      &quot;key&quot;: &quot;delivery&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;Courier status&quot;
+      <span class="tk">&quot;key&quot;</span>: <span class="ts">&quot;delivery&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Courier status&quot;</span>
       },
-      &quot;type&quot;: &quot;text&quot;,
-      &quot;attach&quot;: &quot;order&quot;
+      <span class="tk">&quot;type&quot;</span>: <span class="ts">&quot;text&quot;</span>,
+      <span class="tk">&quot;attach&quot;</span>: <span class="ts">&quot;order&quot;</span>
     }
   ],
-  &quot;actions&quot;: [
+  <span class="tk">&quot;actions&quot;</span>: [
     {
-      &quot;id&quot;: &quot;book&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;Book pickup&quot;,
-        &quot;ar&quot;: &quot;احجز الاستلام&quot;
+      <span class="tk">&quot;id&quot;</span>: <span class="ts">&quot;book&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Book pickup&quot;</span>,
+        <span class="tk">&quot;ar&quot;</span>: <span class="ts">&quot;احجز الاستلام&quot;</span>
       },
-      &quot;placement&quot;: &quot;order&quot;,
-      &quot;kind&quot;: &quot;post&quot;,
-      &quot;url&quot;: &quot;https://api.courier.example.com/v1/shipments&quot;,
-      &quot;send&quot;: [
-        &quot;order.number&quot;,
-        &quot;order.title&quot;,
-        &quot;customer.name&quot;,
-        &quot;customer.phone&quot;,
-        &quot;customer.address&quot;,
-        &quot;field.service&quot;
+      <span class="tk">&quot;placement&quot;</span>: <span class="ts">&quot;order&quot;</span>,
+      <span class="tk">&quot;kind&quot;</span>: <span class="ts">&quot;post&quot;</span>,
+      <span class="tk">&quot;url&quot;</span>: <span class="ts">&quot;https://api.courier.example.com/v1/shipments&quot;</span>,
+      <span class="tk">&quot;send&quot;</span>: [
+        <span class="ts">&quot;order.number&quot;</span>,
+        <span class="ts">&quot;order.title&quot;</span>,
+        <span class="ts">&quot;customer.name&quot;</span>,
+        <span class="ts">&quot;customer.phone&quot;</span>,
+        <span class="ts">&quot;customer.address&quot;</span>,
+        <span class="ts">&quot;field.service&quot;</span>
       ],
-      &quot;auth&quot;: {
-        &quot;header&quot;: &quot;Authorization&quot;,
-        &quot;scheme&quot;: &quot;Bearer&quot;,
-        &quot;secret&quot;: &quot;apiKey&quot;
+      <span class="tk">&quot;auth&quot;</span>: {
+        <span class="tk">&quot;header&quot;</span>: <span class="ts">&quot;Authorization&quot;</span>,
+        <span class="tk">&quot;scheme&quot;</span>: <span class="ts">&quot;Bearer&quot;</span>,
+        <span class="tk">&quot;secret&quot;</span>: <span class="ts">&quot;apiKey&quot;</span>
       },
-      &quot;response&quot;: {
-        &quot;fields&quot;: {
-          &quot;tracking&quot;: &quot;data.trackingNumber&quot;
+      <span class="tk">&quot;response&quot;</span>: {
+        <span class="tk">&quot;fields&quot;</span>: {
+          <span class="tk">&quot;tracking&quot;</span>: <span class="ts">&quot;data.trackingNumber&quot;</span>
         }
       }
     },
     {
-      &quot;id&quot;: &quot;track&quot;,
-      &quot;label&quot;: {
-        &quot;en&quot;: &quot;Track parcel&quot;
+      <span class="tk">&quot;id&quot;</span>: <span class="ts">&quot;track&quot;</span>,
+      <span class="tk">&quot;label&quot;</span>: {
+        <span class="tk">&quot;en&quot;</span>: <span class="ts">&quot;Track parcel&quot;</span>
       },
-      &quot;placement&quot;: &quot;order&quot;,
-      &quot;kind&quot;: &quot;open&quot;,
-      &quot;url&quot;: &quot;https://track.courier.example.com/{field.tracking}&quot;
+      <span class="tk">&quot;placement&quot;</span>: <span class="ts">&quot;order&quot;</span>,
+      <span class="tk">&quot;kind&quot;</span>: <span class="ts">&quot;open&quot;</span>,
+      <span class="tk">&quot;url&quot;</span>: <span class="ts">&quot;https://track.courier.example.com/{field.tracking}&quot;</span>
     }
   ],
-  &quot;events&quot;: [
+  <span class="tk">&quot;events&quot;</span>: [
     {
-      &quot;event&quot;: &quot;order_shipped&quot;,
-      &quot;url&quot;: &quot;https://api.courier.example.com/v1/khayt/shipped&quot;,
-      &quot;send&quot;: [
-        &quot;order.number&quot;,
-        &quot;order.trackingNumber&quot;
+      <span class="tk">&quot;event&quot;</span>: <span class="ts">&quot;order_shipped&quot;</span>,
+      <span class="tk">&quot;url&quot;</span>: <span class="ts">&quot;https://api.courier.example.com/v1/khayt/shipped&quot;</span>,
+      <span class="tk">&quot;send&quot;</span>: [
+        <span class="ts">&quot;order.number&quot;</span>,
+        <span class="ts">&quot;order.trackingNumber&quot;</span>
       ],
-      &quot;signWith&quot;: &quot;hookKey&quot;
+      <span class="tk">&quot;signWith&quot;</span>: <span class="ts">&quot;hookKey&quot;</span>
     }
   ],
-  &quot;refresh&quot;: {
-    &quot;every&quot;: 60,
-    &quot;when&quot;: &quot;tracking&quot;,
-    &quot;method&quot;: &quot;GET&quot;,
-    &quot;url&quot;: &quot;https://api.courier.example.com/v1/shipments/{field.tracking}&quot;,
-    &quot;auth&quot;: {
-      &quot;header&quot;: &quot;Authorization&quot;,
-      &quot;scheme&quot;: &quot;Bearer&quot;,
-      &quot;secret&quot;: &quot;apiKey&quot;
+  <span class="tk">&quot;refresh&quot;</span>: {
+    <span class="tk">&quot;every&quot;</span>: 60,
+    <span class="tk">&quot;when&quot;</span>: <span class="ts">&quot;tracking&quot;</span>,
+    <span class="tk">&quot;method&quot;</span>: <span class="ts">&quot;GET&quot;</span>,
+    <span class="tk">&quot;url&quot;</span>: <span class="ts">&quot;https://api.courier.example.com/v1/shipments/{field.tracking}&quot;</span>,
+    <span class="tk">&quot;auth&quot;</span>: {
+      <span class="tk">&quot;header&quot;</span>: <span class="ts">&quot;Authorization&quot;</span>,
+      <span class="tk">&quot;scheme&quot;</span>: <span class="ts">&quot;Bearer&quot;</span>,
+      <span class="tk">&quot;secret&quot;</span>: <span class="ts">&quot;apiKey&quot;</span>
     },
-    &quot;response&quot;: {
-      &quot;fields&quot;: {
-        &quot;delivery&quot;: &quot;data.status&quot;
+    <span class="tk">&quot;response&quot;</span>: {
+      <span class="tk">&quot;fields&quot;</span>: {
+        <span class="tk">&quot;delivery&quot;</span>: <span class="ts">&quot;data.status&quot;</span>
       }
     }
   },
-  &quot;scopes&quot;: [
-    &quot;fields.write&quot;
+  <span class="tk">&quot;scopes&quot;</span>: [
+    <span class="ts">&quot;fields.write&quot;</span>
   ]
 }</code></pre>
+      </div>
+      <nav class="docs-pager" aria-label="Next page"><a href="../events/" rel="next"><span class="docs-pager-k">Next</span><span class="docs-pager-t">Requests your connector receives</span><span class="docs-pager-a" aria-hidden="true">→</span></a></nav>
 
     </div>
    </div>

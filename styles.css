@@ -1640,3 +1640,87 @@ body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-
 .changelog:not([open]) > summary { border-bottom: 0; }
 .cl-foot { margin: 0; padding: 12px 20px 16px; text-align: end; }
 .cl-foot a { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--brand-2); }
+
+/* ---------- Developer docs layout (/developers/) ----------
+   Designed in Figma first: khaytapp.com library, page "Developers (hidden)".
+   One frame for the four pages: tabs between them under the title, an
+   "On this page" list (a sticky column when there is room, a disclosure on a
+   phone), dark code blocks that copy, and a link to the next page.
+   make-dev-docs.js writes the markup; developers/docs.js pins the list open on
+   a wide screen, marks the section in view and runs the copy buttons. */
+body.page .page-head:has(.docs-tabs) { padding-bottom: 28px; }
+.page-head:has(.docs-tabs) .post-in { max-width: none; }
+.page-head:has(.docs-tabs) .lede { max-width: 720px; }
+.docs-tabs { display: flex; gap: 8px; margin-top: 28px; overflow-x: auto; scrollbar-width: none; padding-block: 2px; }
+body.page .page-head .docs-tabs a { flex: none; font-weight: 600; font-size: 14.5px; line-height: 1.2; padding: 9px 16px; border-radius: 999px;
+  border: 1px solid var(--navy-line); color: var(--on-dark-soft); text-decoration: none; }
+body.page .page-head .docs-tabs a:hover { color: var(--on-dark); border-color: rgba(255,255,255,0.3); }
+body.page .page-head .docs-tabs a[aria-current="page"] { background: var(--on-dark); border-color: var(--on-dark); color: var(--navy-deep); }
+.docs-tabs a:focus-visible { outline: 2px solid var(--thread); outline-offset: 2px; }
+
+.docs-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 24px; }
+.docs-toc > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-2);
+  font-weight: 600; font-size: 15px; color: var(--ink); }
+.docs-toc > summary::-webkit-details-marker { display: none; }
+.docs-toc > summary::after { content: "▾"; color: var(--muted); transition: rotate .2s; }
+.docs-toc[open] > summary::after { rotate: 180deg; }
+.docs-toc nav { scroll-target-group: auto; }
+.docs-toc ol { list-style: none; margin: 10px 0 0; padding: 0; }
+.docs-toc a { display: block; padding: 6px 14px; border-inline-start: 2px solid var(--line); color: var(--muted);
+  font-size: 14.5px; line-height: 1.35; text-decoration: none; }
+.docs-toc a:hover { color: var(--ink); }
+/* :is() keeps the rule alive where :target-current is unknown; docs.js adds
+   .target-current and aria-current there instead. Weight, not only colour. */
+.docs-toc a:is(:target-current, .target-current, [aria-current="true"]) { border-inline-start-color: var(--brand); color: var(--ink); font-weight: 600; }
+.docs-source { margin-top: 14px; font-size: 13px; line-height: 1.55; color: var(--muted); }
+.docs-source code { font-family: var(--font-mono); font-size: .92em; color: var(--ink-soft); }
+.docs-source a { color: var(--brand-2); font-weight: 600; text-decoration: none; }
+.docs-schema { display: inline-block; margin-bottom: 6px; font-size: 14.5px; }
+.docs-body h2 { scroll-margin-top: 96px; }
+.docs-body h2:focus:not(:focus-visible) { outline: none; }
+.docs-body .ref-table thead th { background: var(--paper-2); }
+@media (min-width: 1000px) {
+  .docs-layout { grid-template-columns: 240px minmax(0, 760px); gap: 80px; align-items: start; padding-top: 56px; }
+  .docs-aside { position: sticky; top: 96px; max-block-size: calc(100dvh - 120px); overflow-y: auto; }
+  .docs-toc[data-pinned] > summary { cursor: default; background: none; border: 0; padding: 0 0 8px;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .docs-toc[data-pinned] > summary::after { content: none; }
+}
+
+/* Code: always the dark palette (the library's Dark mode), always left-to-right. */
+.code-block { --code-bg: #081e38; --code-ink: #eaf2fb; --code-muted: #8aa4c2; --code-line: rgba(255,255,255,0.11);
+  --code-key: #6fb0ff; --code-str: #f2a541;
+  margin-top: 18px; border-radius: var(--radius); background: var(--code-bg); border: 1px solid var(--code-line); overflow: hidden; direction: ltr; }
+.code-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px 8px 16px; border-bottom: 1px solid var(--code-line); }
+.code-file { font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; color: var(--code-muted); }
+.copy { position: relative; display: inline-flex; }
+.copy-button { min-block-size: 28px; min-inline-size: 24px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--code-line);
+  background: var(--code-bg); color: #b3c8de; font: 600 12.5px/1.2 var(--font-body); cursor: pointer; }
+.copy-button:hover { color: var(--code-ink); border-color: rgba(255,255,255,0.3); }
+.copy-button:focus-visible { outline: 2px solid var(--code-key); outline-offset: 2px; }
+.copy-button[data-copied] { color: #2fd07a; border-color: currentColor; }
+.copy-button[data-failed] { color: #ffb4a8; border-color: currentColor; }
+.copy .tip { position: absolute; inset-block-start: 50%; inset-inline-end: calc(100% + 8px); translate: 0 -50%; white-space: nowrap;
+  font: 600 12px/1 var(--font-body); color: var(--code-ink); opacity: 0; transition: opacity .15s; pointer-events: none; }
+.copy .tip:not(:empty) { opacity: 1; }
+.post-body .code-block .ref-code { margin: 0; border: 0; border-radius: 0; background: transparent; color: var(--code-ink); padding: 14px 16px 16px; }
+.code-block .ref-code:focus-visible { outline: 2px solid var(--code-key); outline-offset: -2px; }
+.ref-code .tk { color: var(--code-key); }
+.ref-code .ts { color: var(--code-str); }
+@media (prefers-reduced-motion: reduce) { .copy .tip, .docs-toc > summary::after { transition: none; } }
+
+.docs-pager { display: flex; justify-content: flex-end; margin-top: 64px; }
+.docs-pager.prev { justify-content: flex-start; }
+.post-body .docs-pager a { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; align-items: center;
+  min-inline-size: min(360px, 100%); padding: 18px 22px; border: 1px solid var(--line); border-radius: var(--radius);
+  color: var(--ink); font-weight: 600; text-decoration: none; }
+.post-body .docs-pager a:hover { border-color: var(--brand); }
+.docs-pager-k { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.docs-pager-t { font-size: 16px; margin-top: 4px; }
+.docs-pager-a { grid-column: 2; grid-row: 1 / span 2; color: var(--brand); font-size: 20px; }
+.docs-pager.prev a { grid-template-columns: auto 1fr; }
+.docs-pager.prev :is(.docs-pager-k, .docs-pager-t) { grid-column: 2; }
+.docs-pager.prev .docs-pager-a { grid-column: 1; }
+[dir="rtl"] .docs-pager-a { scale: -1 1; }
+@media (max-width: 999px) { .post-body .docs-pager a { inline-size: 100%; } }
