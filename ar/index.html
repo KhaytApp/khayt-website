@@ -84,7 +84,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 <link rel="apple-touch-icon" href="/khayt-apple-icon.png">
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="/styles.css?v=7b56242119">
+<link rel="stylesheet" href="/styles.css?v=40eceeaa69">
 <!-- PRERENDER:faqLd:START --><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"ar","mainEntity":[{"@type":"Question","name":"أين تُحفظ بيانات مطبعتي؟","acceptedAnswer":{"@type":"Answer","text":"في ملف على جهازك أنت. لا يحتاج خيط إلى حساب، ويعمل دون اتصال. وإن شغّلت سحابة خيط تُشفَّر بيانات مطبعتك على جهازك قبل مزامنتها، فلا يحمل الخادم إلا نصاً مشفّراً. أما ما تنشره لعملائك، مثل صفحة الطلب أو نموذج التسعير، فيُحفظ بصيغة يستطيعون قراءتها."}},{"@type":"Question","name":"هل يستطيع محاسبي استخدام ما يحفظه خيط؟","acceptedAnswer":{"@type":"Answer","text":"نعم. تُصدَّر الفواتير والمصروفات ملفات CSV مرتّبة لـ QuickBooks أو Xero أو Zoho Books أو Wafeq أو Daftra، أو ملف CSV عادياً. ويُعدّ خيط أيضاً إقراراً ضريبياً لكل شهر أو ربع سنة، والإيرادات فيه صافية من الضريبة."}},{"@type":"Question","name":"خيط مجاني، فكيف يُموَّل؟","acceptedAnswer":{"@type":"Answer","text":"التطبيق مجاني وسيبقى مجانياً. أما سحابة خيط فخدمة مدفوعة اختيارية — مزامنة بين الأجهزة، وأعضاء فريق، وصفحات للعملاء، ومكتبة سحابية مشفّرة — وهي مجانية ما دامت تجريبية. ومن خطط السحابة والداعمين يُموَّل تطوير خيط. ولن تحتاج إلى السحابة لتدير مطبعتك أبداً."}},{"@type":"Question","name":"هل يفعل تطبيق الماك وتطبيق ويندوز الأشياء نفسها؟","acceptedAnswer":{"@type":"Answer","text":"في معظمها. كلاهما يقرأ دفتر المطبعة نفسه بالقواعد نفسها، وبطاقات المزايا أعلاه تذكر ما يوجد في تطبيق ولم يصل إلى الآخر بعد. على ماك وحده حالياً: نموذج التسعير لموقعك، وخزنة خيط، وإرسال الملفات من برنامج التقطيع. وعلى ويندوز ولينكس وحدهما حالياً: روابط الدفع الآجل، وصور HueForge لطابعة Snapmaker U1."}},{"@type":"Question","name":"مع أي طابعات يتواصل؟","acceptedAnswer":{"@type":"Answer","text":"OctoPrint وKlipper (عبر Moonraker) وBambu Lab وPrusaLink وDuet وRepetier وElegoo. تظهر حرارتها وتقدّمها في قائمة الإنتاج، وحين تنتهي الطباعة يقرأ تطبيق خيط ما أبلغت عنه الطابعة، فتُحسب تكلفة العرض التالي من الاستخدام الفعلي."}},{"@type":"Question","name":"هل يوجد تطبيق للآيفون؟","acceptedAnswer":{"@type":"Answer","text":"نعم، وهو تجريبي على TestFlight. يعرض قائمة الإنتاج وطابعاتك، ومع تطبيق الماك يستطيع إيقاف الطباعة مؤقتاً أو استئنافها أو إيقافها."}}]}</script><!-- PRERENDER:faqLd:END -->
 </head>
 <body class="home" dir="rtl">
@@ -345,7 +345,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       </article>
     </div>
 
-    <aside class="modes-elsewhere">
+    <div class="modes-elsewhere">
       <p>
         <strong data-i18n="modes.hobby.t">تطبع لنفسك لا لعملاء؟</strong>
         <span data-i18n="modes.hobby.d">خيط مبنيّ حول الطلبات والعملاء والفوترة. إن كنت تريد فقط تجهيز الملفات وتخطيط الألوان ومتابعة الخيوط، فهذا هو Bed Ready — تطبيق مجاني منفصل من الورشة نفسها.</span>
@@ -353,7 +353,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       <a class="btn btn-ghost" href="https://bedready.io" rel="noopener">
         <span data-i18n="modes.hobby.cta">اطّلع على Bed Ready</span> →
       </a>
-    </aside>
+    </div>
 
     <div class="modes-compare">
       <div class="modes-compare-head">
@@ -605,7 +605,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
     <div class="mac-native" id="iphone">
       <div class="mn-head">
         <span class="mn-badge" data-i18n="ip.badge">تجريبي</span>
-        <h3 class="mn-h" data-i18n="ip.h">تطبيق خيط للآيفون</h3>
+        <h3 class="mn-h" id="ipH" data-i18n="ip.h">تطبيق خيط للآيفون</h3>
       </div>
       <p class="mn-p" data-i18n="ip.p">المطبعة في جيبك: الطلبات والمخزون والطابعات والعملاء، مقترنة بجهاز ماك أو الحاسوب عبر شبكة المطبعة، أو عبر سحابة خيط حين تكون بعيداً. تظهر الطباعة كأنشطة حيّة على شاشة القفل وفي الجزيرة الديناميكية، وتبقى تتحدّث حتى والتطبيق مغلق، عند تشغيل خيار تقدّم الطباعة على آيفون في تطبيق ماك. سجّل دفعة عند الكاونتر، وسعّر نموذجاً من مكتبة الطباعة وأرسل السعر للعميل، وأرسل للعميل تحديثاً عبر واتساب مع صورة القطعة المنتهية، وامسح ملصق بكرة أو مهمة لفتحها، واقرأ واكتب بطاقات NFC على البكرات، وابحث عن منتج جديد برمزه الشريطي، وشاهد كاميرا الطابعة. أوامر Siri والاختصارات ومركز التحكم، ومرشّح تركيز لتنبيهات المطبعة، وعرض جنباً إلى جنب على iPhone Duo.</p>
       <!-- Simulator captures of the sample shop (iPhone 18 Pro, iOS 27), from
@@ -613,7 +613,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
            Lock Screen shot is a real Live Activity (build f9fa0d6b, #1903) on
            a demo print; the Arabic system clock's Arabic-Indic digits are
            iOS's own, the card itself uses Western digits. -->
-      <div class="ip-shots">
+      <div class="ip-shots" tabindex="0" role="region" aria-labelledby="ipH">
         <picture><source type="image/webp" srcset="/screenshots/iphone/iphone-home-ar-640w.webp 640w, /screenshots/iphone/iphone-home-ar-1080w.webp 1080w, /screenshots/iphone/iphone-home-ar.webp 1206w" sizes="(max-width: 640px) 62vw, 220px"><img src="/screenshots/iphone/iphone-home-ar.png" width="1206" height="2622" alt="نبض الورشة على الآيفون: قائمة الانتظار والمستحقات وسير العمل وما يحتاج إلى انتباه" data-phone="/screenshots/iphone/iphone-home" data-alt="ip.shot.home" loading="lazy" decoding="async"></picture>
         <picture><source type="image/webp" srcset="/screenshots/iphone/iphone-order-ar-640w.webp 640w, /screenshots/iphone/iphone-order-ar-1080w.webp 1080w, /screenshots/iphone/iphone-order-ar.webp 1206w" sizes="(max-width: 640px) 62vw, 220px"><img src="/screenshots/iphone/iphone-order-ar.png" width="1206" height="2622" alt="طلب على الآيفون، مع تقدّم طباعته والمرحلة التالية" data-phone="/screenshots/iphone/iphone-order" data-alt="ip.shot.order" loading="lazy" decoding="async"></picture>
         <picture><source type="image/webp" srcset="/screenshots/iphone/iphone-inventory-ar-640w.webp 640w, /screenshots/iphone/iphone-inventory-ar-1080w.webp 1080w, /screenshots/iphone/iphone-inventory-ar.webp 1206w" sizes="(max-width: 640px) 62vw, 220px"><img src="/screenshots/iphone/iphone-inventory-ar.png" width="1206" height="2622" alt="المخزون على الآيفون: البكرات والغرامات المتبقية في كلٍّ منها" data-phone="/screenshots/iphone/iphone-inventory" data-alt="ip.shot.inventory" loading="lazy" decoding="async"></picture>

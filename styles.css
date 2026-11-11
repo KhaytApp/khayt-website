@@ -66,6 +66,14 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-ar: "IBM Plex Sans Arabic", "Hanken Grotesk", sans-serif;
   --font-wordmark: "Almarai", "IBM Plex Sans Arabic", sans-serif;
+  /* One "ch" of the body face, pinned. A measure written as 74ch is read from
+     whatever font is on screen, and until the webfont arrives that is the
+     system fallback, whose "0" is ~12% wider: every centred column (a post,
+     a policy) drew 83px wider, then jumped narrower when the font swapped in,
+     a layout shift of up to 0.22 on desktop. calc(N * var(--ch)) is the width
+     the webfont's ch gives, from the first paint. It is a custom property, so
+     its em resolves at each use, against that element's own font size. */
+  --ch: 0.56em;          /* Hanken Grotesk's "0" */
 
   --maxw: 1220px;
   --pad: clamp(20px, 5vw, 60px);
@@ -80,7 +88,7 @@ body {
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   line-height: 1.55; overflow-x: hidden;
 }
-body[dir="rtl"] { font-family: var(--font-ar); }
+body[dir="rtl"] { font-family: var(--font-ar); --ch: 0.5562em; /* IBM Plex Sans Arabic's "0" */ }
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
 ::selection { background: var(--brand); color: var(--on-brand); }
@@ -100,7 +108,7 @@ body[dir="rtl"] .eyebrow { letter-spacing: 0; }
   font-size: clamp(31px, 4.6vw, 52px); text-wrap: balance;
 }
 body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
-.lede { font-size: clamp(16.5px, 1.5vw, 19px); color: var(--muted); max-width: 56ch; text-wrap: pretty; }
+.lede { font-size: clamp(16.5px, 1.5vw, 19px); color: var(--muted); max-width: calc(56 * var(--ch)); text-wrap: pretty; }
 
 /* ===================== BUTTONS ===================== */
 .btn {
@@ -187,13 +195,13 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .hero h1 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.04em; line-height: 0.94; font-size: clamp(46px, 6.6vw, 80px); margin: 22px 0 0; text-wrap: balance; }
 .hero h1 .hl { color: var(--brand-2); }
 .hero h1 .ar { font-family: var(--font-ar); font-weight: 700; letter-spacing: 0; }
-.hero .sub { font-size: clamp(17px, 1.7vw, 19px); color: var(--ink-soft); margin: 20px 0 0; max-width: 44ch; text-wrap: pretty; }
-.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; max-width: 42ch; }
+.hero .sub { font-size: clamp(17px, 1.7vw, 19px); color: var(--ink-soft); margin: 20px 0 0; max-width: calc(44 * var(--ch)); text-wrap: pretty; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; max-width: calc(42 * var(--ch)); }
 .hero-pills span { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--ink-soft); background: var(--paper-2); border: 1px solid var(--line); border-radius: 100px; padding: 6px 12px; }
 /* The native Mac app is the headline announcement on this page, and it was a
    <p class="sub"> with an inline negative margin — grey body copy crashing into
    the pill row above it, with no link affordance but a trailing arrow. */
-.hero-mac { margin-top: 20px; max-width: 46ch; }
+.hero-mac { margin-top: 20px; max-width: calc(46 * var(--ch)); }
 .hero-mac a { display: inline-flex; align-items: baseline; gap: 8px; font-size: 15px; line-height: 1.5;
   color: var(--brand-2); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--tint-2);
   padding-bottom: 2px; transition: border-color .15s, color .15s; }
@@ -242,7 +250,7 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .gallery-cap { display: flex; align-items: flex-start; gap: 16px; margin-top: 22px; max-width: 1080px; margin-inline: auto; }
 .gallery-cap .bar { width: 3px; align-self: stretch; background: var(--brand); border-radius: 3px; flex: none; margin-top: 2px; }
 .gallery-cap h3 { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); font-weight: 800; letter-spacing: -0.02em; }
-.gallery-cap p { color: var(--muted); font-size: 15.5px; margin-top: 4px; text-wrap: pretty; max-width: 74ch; }
+.gallery-cap p { color: var(--muted); font-size: 15.5px; margin-top: 4px; text-wrap: pretty; max-width: calc(74 * var(--ch)); }
 
 /* ===================== FEATURES ===================== */
 .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 42px; }
@@ -262,7 +270,7 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .feat-wide { grid-column: 1 / -1; }
 .plat-note { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; color: var(--muted); font-size: 14px; }
 .plat-note .plat { margin-top: 0; }
-.feat-wide p { max-width: 80ch; }
+.feat-wide p { max-width: calc(80 * var(--ch)); }
 .plat-i { font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-soft); }
 
 /* New-in-3.0 beta cards */
@@ -608,7 +616,7 @@ body[dir="rtl"] .dl-link:hover .arr { transform: translateX(-3px); }
 .modes-elsewhere .btn { flex: 0 0 auto; }
 
 .modes-compare { margin-top: 52px; }
-.modes-compare-head { max-width: 62ch; margin-bottom: 22px; }
+.modes-compare-head { max-width: calc(62 * var(--ch)); margin-bottom: 22px; }
 .modes-compare-head h3 { font-size: clamp(21px, 2.2vw, 26px); font-weight: 800; letter-spacing: -0.015em; color: var(--ink); font-family: 'Archivo', system-ui, sans-serif; }
 .modes-compare-head p { margin-top: 10px; font-size: 15px; color: var(--muted); line-height: 1.55; }
 
@@ -723,7 +731,7 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
   background: var(--ink); color: var(--paper);
 }
 .mn-h { font-family: var(--font-display); font-weight: 800; font-size: 21px; margin: 0; }
-.mn-p { margin: 13px 0 0; color: var(--ink-soft); font-size: 15px; line-height: 1.62; max-width: 70ch; }
+.mn-p { margin: 13px 0 0; color: var(--ink-soft); font-size: 15px; line-height: 1.62; max-width: calc(70 * var(--ch)); }
 .mn-warn { color: var(--ink); font-weight: 500; }
 .mn-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
 .mn-dl { background: var(--card); min-width: 280px; }
@@ -742,7 +750,7 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
 @media (max-width: 640px) { .ip-shots img { width: 62vw; } }
 .beta-fine { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); }
 .beta-fine a { color: var(--brand-2); }
-.mn-road { margin: 16px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 70ch; }
+.mn-road { margin: 16px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: calc(70 * var(--ch)); }
 @media (max-width: 640px) {
   .mac-native { padding: 20px 18px; }
   .mn-dl { min-width: 0; width: 100%; }
@@ -765,10 +773,19 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
   outline-offset: 3px;
   border-radius: 6px;
 }
-/* On the dark fills the brand blue is not separable from the surface, so the
-   ring goes white there and the offset does the separating. */
-.btn-primary:focus-visible, .tab[aria-selected="true"]:focus-visible,
-.theme-chip.on:focus-visible, .dl-channel button.on:focus-visible {
+/* On the navy bands (and the nav that sits on them) the brand blue ring is
+   as low as 2.8:1 against the surface (#0a2a50), under the 3:1 a focus
+   indicator needs, so the ring there takes the light blue the bands already
+   use for links: 7.8:1 to 9.7:1 across the navy shades. */
+:is(.hero, .trust, .flow-section, .beta-section, .dl, .footer, .page-head, body:is(.home, .page) .nav)
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline-color: #9cc2f2;
+}
+/* A filled control on a navy band: the ring goes white and the offset does
+   the separating. Only on the bands: on white paper a white ring is
+   invisible, so a filled control there keeps the brand ring above (5.1:1). */
+:is(.hero, .trust, .flow-section, .beta-section, .dl, .footer, .page-head, body:is(.home, .page) .nav)
+  :is(.btn-primary, .tab[aria-selected="true"], .theme-chip.on, .dl-channel button.on):focus-visible {
   outline-color: #fff; outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(33,109,202,0.55);
 }
@@ -845,7 +862,7 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
 .page-head { padding-block: clamp(96px, 11vw, 150px) clamp(24px, 3vw, 40px); background: var(--paper); }
 .page-head h1 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.035em;
   line-height: 1.02; font-size: clamp(38px, 5.4vw, 64px); margin: 18px 0 0; text-wrap: balance; }
-.page-head .lede { margin-top: 20px; font-size: clamp(17px, 1.6vw, 19px); color: var(--ink-soft); max-width: 62ch; }
+.page-head .lede { margin-top: 20px; font-size: clamp(17px, 1.6vw, 19px); color: var(--ink-soft); max-width: calc(62 * var(--ch)); }
 .section.tight { padding-block: clamp(28px, 4vw, 48px); }
 .section.alt { background: var(--paper-2); border-block: 1px solid var(--line); }
 .nav-links a.here { color: var(--ink); background: var(--paper-3); }
@@ -863,10 +880,10 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
   background: var(--brand); color: var(--on-brand); }
 .promise-mark svg { width: 24px; height: 24px; }
 .promise h2 { font-family: var(--font-display); font-size: clamp(19px, 2.2vw, 24px); font-weight: 800; letter-spacing: -0.02em; }
-.promise p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; margin-top: 9px; text-wrap: pretty; max-width: 74ch; }
+.promise p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; margin-top: 9px; text-wrap: pretty; max-width: calc(74 * var(--ch)); }
 @media (max-width: 560px) { .promise { flex-direction: column; gap: 14px; } }
 
-.fineprint { margin-top: 20px; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 88ch; text-wrap: pretty; }
+.fineprint { margin-top: 20px; color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: calc(88 * var(--ch)); text-wrap: pretty; }
 
 /* The sends table reuses .cmp wholesale — it only needs its own column widths
    and left-aligned body cells, since .cmp centres its tick columns. */
@@ -932,11 +949,11 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
 .post-meta .tag { color: var(--brand-2); background: var(--tint); border-radius: 999px; padding: 3px 10px; letter-spacing: .04em; }
 .post-card h2 { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); font-weight: 800;
   letter-spacing: -0.025em; margin-top: 12px; color: var(--ink); text-wrap: balance; }
-.post-card p { color: var(--muted); font-size: 15px; line-height: 1.6; margin-top: 9px; max-width: 76ch; text-wrap: pretty; }
+.post-card p { color: var(--muted); font-size: 15px; line-height: 1.6; margin-top: 9px; max-width: calc(76 * var(--ch)); text-wrap: pretty; }
 .post-card .more { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--brand-2); }
 
 .post { padding-block: clamp(96px, 11vw, 140px) clamp(48px, 6vw, 80px); }
-.post-in { max-width: 74ch; margin-inline: auto; }
+.post-in { max-width: calc(74 * var(--ch)); margin-inline: auto; }
 .post-in h1 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.035em; line-height: 1.06;
   font-size: clamp(32px, 4.4vw, 50px); margin: 16px 0 0; text-wrap: balance; }
 .post-body { margin-top: 30px; }
@@ -956,7 +973,7 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
 .post-back { display: inline-block; font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
   color: var(--brand-2); text-decoration: none; letter-spacing: .03em; }
 .post-back:hover { color: var(--ink-panel); }
-.post-foot { max-width: 74ch; margin: 48px auto 0; padding-top: 26px; border-top: 1px solid var(--line);
+.post-foot { max-width: calc(74 * var(--ch)); margin: 48px auto 0; padding-top: 26px; border-top: 1px solid var(--line);
   display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 
 /* The "New since you last looked" section summarises a release the blog
@@ -969,7 +986,7 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
 /* Blog index footer: the feed link, then the note. */
 .blog-foot { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line);
   display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: space-between; }
-.blog-foot .fineprint { margin-top: 0; flex: 1 1 34ch; }
+.blog-foot .fineprint { margin-top: 0; flex: 1 1 calc(34 * var(--ch)); }
 .feed-link { display: inline-flex; align-items: center; gap: 9px; flex: none;
   font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; letter-spacing: .02em;
   color: var(--ink-soft); text-decoration: none;
@@ -1413,6 +1430,10 @@ body.deep .frame { background: transparent; }
 .flow-section .lede, .beta-section .lede, .dl .lede { color: var(--on-dark-soft); }
 .flow-section .eyebrow, .beta-section .eyebrow, .dl .eyebrow, .hero .eyebrow { color: var(--thread); }
 .beta-section .lede a, .dl .lede a, .dl-note a, .footer a { color: #9cc2f2; }
+/* A link inside a sentence needs more than its colour to stand out: #9cc2f2
+   against the #b9c7d8 text around it is 1.07:1 (WCAG 1.4.1 asks 3:1, or a
+   second cue). The underline is that cue. */
+.beta-section .lede a, .dl .lede a, .dl-note a { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---- nav: sits on the navy hero ---- */
 body:is(:has(.hero), :has(.page-head)) .nav { background: transparent; border-color: transparent; }
@@ -1617,7 +1638,7 @@ body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-
 }
 .faq-item[open] summary::after { transform: rotate(225deg); }
 .faq-item summary:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-.faq-item p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; line-height: 1.65; max-width: 72ch; }
+.faq-item p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; line-height: 1.65; max-width: calc(72 * var(--ch)); }
 .faq-item p a { color: var(--brand); }
 @media (prefers-reduced-motion: reduce) { .faq-item summary::after { transition: none; } }
 

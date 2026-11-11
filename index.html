@@ -82,7 +82,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 <link rel="apple-touch-icon" href="khayt-apple-icon.png">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="styles.css?v=7b56242119">
+<link rel="stylesheet" href="styles.css?v=40eceeaa69">
 <!-- PRERENDER:faqLd:START --><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Where is my shop’s data kept?","acceptedAnswer":{"@type":"Answer","text":"In a file on your own computer. Khayt needs no account and works offline. If you turn on Khayt Cloud, your shop’s data is encrypted on your computer before it is synced, so the server holds only ciphertext. What you publish for customers, such as an order page or the quote form, is kept in a form they can read."}},{"@type":"Question","name":"Can my accountant use what Khayt keeps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Invoices and expenses export as CSV, laid out for QuickBooks, Xero, Zoho Books, Wafeq or Daftra, or as plain CSV. Khayt also works out a VAT return for each month or quarter, with revenue reported net of tax."}},{"@type":"Question","name":"Khayt is free. How is it paid for?","acceptedAnswer":{"@type":"Answer","text":"The app is free to use and will stay free. Khayt Cloud is an optional paid service — sync between devices, team members, customer pages and an encrypted cloud library — and it is free while it is in beta. The cloud plans and sponsors pay for Khayt’s development. You never need the cloud to run your shop."}},{"@type":"Question","name":"Do the Mac and Windows apps do the same things?","acceptedAnswer":{"@type":"Answer","text":"Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: buy-now-pay-later links and HueForge pictures for the Snapmaker U1."}},{"@type":"Question","name":"Which printers does it talk to?","acceptedAnswer":{"@type":"Answer","text":"OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use."}},{"@type":"Question","name":"Is there an iPhone app?","acceptedAnswer":{"@type":"Answer","text":"Yes, in beta on TestFlight. It shows your queue and your printers, and with the Mac app it can pause, resume or stop a print."}}]}</script><!-- PRERENDER:faqLd:END -->
 </head>
 <body class="home">
@@ -343,7 +343,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       </article>
     </div>
 
-    <aside class="modes-elsewhere">
+    <div class="modes-elsewhere">
       <p>
         <strong data-i18n="modes.hobby.t">Printing for yourself, not for customers?</strong>
         <span data-i18n="modes.hobby.d">Khayt is built around orders, clients and invoicing. If you just want to prep files, plan colours and keep track of filament, that’s Bed Ready — a separate free app from the same workshop.</span>
@@ -351,7 +351,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       <a class="btn btn-ghost" href="https://bedready.io" rel="noopener">
         <span data-i18n="modes.hobby.cta">Take a look at Bed Ready</span> →
       </a>
-    </aside>
+    </div>
 
     <div class="modes-compare">
       <div class="modes-compare-head">
@@ -603,7 +603,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
     <div class="mac-native" id="iphone">
       <div class="mn-head">
         <span class="mn-badge" data-i18n="ip.badge">Beta</span>
-        <h3 class="mn-h" data-i18n="ip.h">Khayt for iPhone</h3>
+        <h3 class="mn-h" id="ipH" data-i18n="ip.h">Khayt for iPhone</h3>
       </div>
       <p class="mn-p" data-i18n="ip.p">The shop in your pocket: orders, inventory, machines and customers, paired with your Mac or PC over the shop’s Wi-Fi, or through Khayt Cloud when you are away. Prints show as Live Activities on the Lock Screen and in the Dynamic Island, and keep updating even with the app closed, with the Mac app’s iPhone progress option turned on. Record a payment at the counter, price a model from your print library and send the customer the price, send the customer a WhatsApp update with a photo of the finished part, scan a spool or job label to open it, read and write NFC spool tags, look up a new product by its barcode, and watch a printer’s camera. Siri, Shortcuts and Control Center actions, a Focus filter for shop alerts, and side-by-side views on iPhone Duo.</p>
       <!-- Simulator captures of the sample shop (iPhone 18 Pro, iOS 27), from
@@ -611,7 +611,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
            Lock Screen shot is a real Live Activity (build f9fa0d6b, #1903) on
            a demo print; the Arabic system clock's Arabic-Indic digits are
            iOS's own, the card itself uses Western digits. -->
-      <div class="ip-shots">
+      <div class="ip-shots" tabindex="0" role="region" aria-labelledby="ipH">
         <picture><source type="image/webp" srcset="screenshots/iphone/iphone-home-en-640w.webp 640w, screenshots/iphone/iphone-home-en-1080w.webp 1080w, screenshots/iphone/iphone-home-en.webp 1206w" sizes="(max-width: 640px) 62vw, 220px"><img src="screenshots/iphone/iphone-home-en.png" width="1206" height="2622" alt="Shop Pulse on iPhone: the queue, money owed, the pipeline and what needs attention" data-phone="screenshots/iphone/iphone-home" data-alt="ip.shot.home" loading="lazy" decoding="async"></picture>
         <picture><source type="image/webp" srcset="screenshots/iphone/iphone-order-en-640w.webp 640w, screenshots/iphone/iphone-order-en-1080w.webp 1080w, screenshots/iphone/iphone-order-en.webp 1206w" sizes="(max-width: 640px) 62vw, 220px"><img src="screenshots/iphone/iphone-order-en.png" width="1206" height="2622" alt="An order on iPhone, with its print progress and the stage to move it to" data-phone="screenshots/iphone/iphone-order" data-alt="ip.shot.order" loading="lazy" decoding="async"></picture>
         <picture><source type="image/webp" srcset="screenshots/iphone/iphone-inventory-en-640w.webp 640w, screenshots/iphone/iphone-inventory-en-1080w.webp 1080w, screenshots/iphone/iphone-inventory-en.webp 1206w" sizes="(max-width: 640px) 62vw, 220px"><img src="screenshots/iphone/iphone-inventory-en.png" width="1206" height="2622" alt="Inventory on iPhone: spools with the grams left on each" data-phone="screenshots/iphone/iphone-inventory" data-alt="ip.shot.inventory" loading="lazy" decoding="async"></picture>
