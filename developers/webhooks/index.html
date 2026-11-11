@@ -25,7 +25,8 @@
 <link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
 <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+<link rel="stylesheet" href="../../styles.css?v=e4e5168e91">
+<script src="../docs.js" type="module"></script>
 </head>
 <body class="page">
 
@@ -60,18 +61,36 @@
     <span class="eyebrow">Khayt for developers</span>
     <h1>Shop webhooks</h1>
     <p class="lede">A shop can send its own events to any https address it sets in Settings — a Zapier or Make hook, or your own server. This is what arrives.</p>
+    <nav class="docs-tabs" aria-label="Developer docs">
+      <a href="../manifest/">Manifest</a>
+      <a href="../events/">Requests</a>
+      <a href="../webhooks/" aria-current="page">Shop webhooks</a>
+      <a href="../samples/">Samples</a>
+    </nav>
    </div>
   </div>
 </section>
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-   <div class="post-in">
-    <div class="post-body policy">
+   <div class="docs-layout">
+    <aside class="docs-aside">
+      <details class="docs-toc">
+        <summary>On this page</summary>
+        <nav aria-label="On this page"><ol>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#body">The body</a></li>
+          <li><a href="#verify">Checking a signature</a></li>
+          <li><a href="#delivery">Delivery</a></li>
+        </ol></nav>
+      </details>
+      <p class="docs-source">Generated from <code>lib/webhook-bus.js</code> at 0248142ea</p>
+    </aside>
+    <div class="post-body policy docs-body">
 
       <p class="policy-tldr"><strong>Not a connector.</strong> These are addresses a shop types in itself, with no manifest and no review. A connector is sent <a href="../events/">a different body</a>. Everything below is generated from <code>lib/webhook-bus.js</code> at 0248142ea.</p>
 
-      <h2 id="events">Events</h2>
+      <h2 tabindex="-1" id="events">Events</h2>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t20">
         <table class="ref-table">
           <caption id="ref-t20">Webhook events</caption>
@@ -93,29 +112,36 @@
         </table>
       </div>
 
-      <h2 id="body">The body</h2>
+      <h2 tabindex="-1" id="body">The body</h2>
       <p>The request body is an outer object — <code>event</code>, <code>payload</code> and <code>timestamp</code> in milliseconds — with the delivery inside <code>payload</code>. The delivery’s <code>id</code> stays the same on every retry and on a resend from the delivery log, so you can ignore one you have already handled.</p>
-      <pre class="ref-code"><code>Content-Type: application/json
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-10">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-10">Content-Type: application/json
 X-Khayt-Event: order_created
 X-Khayt-Signature: 9b4d21deeeb781b033d132f991cdf3b981782e37f212c0b517408d6433732be6
 X-Khayt-Timestamp: 1794128400
 X-Khayt-Signature-V2: 064d70a6be87f9c9cda62a94ee8bf3b34e75cdfc9b961a584d62794d3ad2af89
 
-{&quot;event&quot;:&quot;order_created&quot;,&quot;payload&quot;:{&quot;id&quot;:&quot;dlv_example_order_created&quot;,&quot;event&quot;:&quot;order_created&quot;,&quot;version&quot;:1,&quot;timestamp&quot;:&quot;2026-11-08T09:00:00.000Z&quot;,&quot;payload&quot;:{&quot;orderId&quot;:&quot;ORD-1042&quot;,&quot;project&quot;:&quot;Bracket set&quot;,&quot;status&quot;:&quot;printing&quot;,&quot;price&quot;:180}},&quot;timestamp&quot;:1794128400000}</code></pre>
+{<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order_created&quot;</span>,<span class="tk">&quot;payload&quot;</span>:{<span class="tk">&quot;id&quot;</span>:<span class="ts">&quot;dlv_example_order_created&quot;</span>,<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order_created&quot;</span>,<span class="tk">&quot;version&quot;</span>:1,<span class="tk">&quot;timestamp&quot;</span>:<span class="ts">&quot;2026-11-08T09:00:00.000Z&quot;</span>,<span class="tk">&quot;payload&quot;</span>:{<span class="tk">&quot;orderId&quot;</span>:<span class="ts">&quot;ORD-1042&quot;</span>,<span class="tk">&quot;project&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>,<span class="tk">&quot;status&quot;</span>:<span class="ts">&quot;printing&quot;</span>,<span class="tk">&quot;price&quot;</span>:180}},<span class="tk">&quot;timestamp&quot;</span>:1794128400000}</code></pre>
+      </div>
       <p>The older single-address <em>event webhook</em> (Settings: one URL with a switch for created, status and paid) sends the same moments in its own envelope, which its existing receivers expect byte for byte:</p>
-      <pre class="ref-code"><code>Content-Type: application/json
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-11">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-11">Content-Type: application/json
 X-Khayt-Event: order.created
 X-Khayt-Signature: 1a46e2a948126ba0cb52cade542978933881a7f28e87838b3bdefbc8276bccee
 X-Khayt-Timestamp: 1794128400
 X-Khayt-Signature-V2: 1b857966795d5b17444daef01ee503c704c7be6af271e5f186382ff3a10230fb
 
-{&quot;event&quot;:&quot;order.created&quot;,&quot;payload&quot;:{&quot;id&quot;:&quot;evt_ORD-1042_created_2026-11-08T09:00:00.000Z&quot;,&quot;event&quot;:&quot;order.created&quot;,&quot;at&quot;:&quot;2026-11-08T09:00:00.000Z&quot;,&quot;shop&quot;:{&quot;name&quot;:&quot;Khayt&quot;},&quot;order&quot;:{&quot;id&quot;:&quot;ORD-1042&quot;,&quot;project&quot;:&quot;Bracket set&quot;,&quot;status&quot;:&quot;printing&quot;,&quot;paymentStatus&quot;:&quot;paid&quot;,&quot;price&quot;:180,&quot;currency&quot;:&quot;SAR&quot;,&quot;client&quot;:&quot;Sara A.&quot;,&quot;dueDate&quot;:&quot;2026-11-12&quot;}},&quot;timestamp&quot;:1794128400000}</code></pre>
+{<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order.created&quot;</span>,<span class="tk">&quot;payload&quot;</span>:{<span class="tk">&quot;id&quot;</span>:<span class="ts">&quot;evt_ORD-1042_created_2026-11-08T09:00:00.000Z&quot;</span>,<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order.created&quot;</span>,<span class="tk">&quot;at&quot;</span>:<span class="ts">&quot;2026-11-08T09:00:00.000Z&quot;</span>,<span class="tk">&quot;shop&quot;</span>:{<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Khayt&quot;</span>},<span class="tk">&quot;order&quot;</span>:{<span class="tk">&quot;id&quot;</span>:<span class="ts">&quot;ORD-1042&quot;</span>,<span class="tk">&quot;project&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>,<span class="tk">&quot;status&quot;</span>:<span class="ts">&quot;printing&quot;</span>,<span class="tk">&quot;paymentStatus&quot;</span>:<span class="ts">&quot;paid&quot;</span>,<span class="tk">&quot;price&quot;</span>:180,<span class="tk">&quot;currency&quot;</span>:<span class="ts">&quot;SAR&quot;</span>,<span class="tk">&quot;client&quot;</span>:<span class="ts">&quot;Sara A.&quot;</span>,<span class="tk">&quot;dueDate&quot;</span>:<span class="ts">&quot;2026-11-12&quot;</span>}},<span class="tk">&quot;timestamp&quot;</span>:1794128400000}</code></pre>
+      </div>
 
-      <h2 id="verify">Checking a signature</h2>
+      <h2 tabindex="-1" id="verify">Checking a signature</h2>
       <p>When the shop has set a signing secret, three headers are added: <code>X-Khayt-Signature</code> (HMAC-SHA256 of the body, lowercase hex, no prefix), <code>X-Khayt-Timestamp</code> (Unix seconds) and <code>X-Khayt-Signature-V2</code> (HMAC-SHA256 of <code>&lt;timestamp&gt;.&lt;body&gt;</code>). With no secret, none of them is sent. Check V2 with the <a href="../events/#verify">same recipe</a> connectors use.</p>
 
-      <h2 id="delivery">Delivery</h2>
+      <h2 tabindex="-1" id="delivery">Delivery</h2>
       <p>Up to 5 attempts — at once, then after 30 seconds, 2 minutes, 10 minutes and 1 hour — until a 2xx. <code>410 Gone</code> stops the retries and switches the subscription off. Retries wait on the shop’s computer and survive a restart, so they are only sent while it is on.</p>
+      <nav class="docs-pager" aria-label="Next page"><a href="../samples/" rel="next"><span class="docs-pager-k">Next</span><span class="docs-pager-t">Sample connectors</span><span class="docs-pager-a" aria-hidden="true">→</span></a></nav>
 
     </div>
    </div>

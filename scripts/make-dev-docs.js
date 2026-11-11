@@ -248,7 +248,7 @@ const MAIN = `
    <div class="post-in">
     <div class="post-body policy">
 
-      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are. The rules below are generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/${VENDOR_SHA}/lib/plugin-manifest.js">${VENDOR_SHA.slice(0, 9)}</a>, and the JSON Schema is at <a href="../../schemas/plugin-manifest-v1.json">/schemas/plugin-manifest-v1.json</a>.</p>
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet, and this page may change before they are.</p>
 
       <h2 id="shape">The file</h2>
       <p>A manifest is one JSON object. Keys the app does not know are refused, not ignored, so a typo fails loudly. Labels — <code>name</code>, a field’s or a button’s <code>label</code> — are objects keyed by language, <code>{"en": "Book pickup", "ar": "…"}</code>; English is required and is shown wherever a translation is missing.</p>
@@ -318,13 +318,81 @@ const MAIN = `
 
       <h2 id="example">Example</h2>
       <p>A courier connector: a button that books a pickup and keeps the tracking number from the reply, a link to the tracking page, and an event when an order ships. It passes the app’s validator as written.</p>
-      <pre class="ref-code"><code>${esc(JSON.stringify(example, null, 2))}</code></pre>
+      <pre class="ref-code" data-file="${esc(example.id.split('.').pop())}.json"><code>${esc(JSON.stringify(example, null, 2))}</code></pre>
 
     </div>
    </div>
   </div>
 </section>
 `;
+
+// ---- Docs layout (Figma: khaytapp.com library, page "Developers (hidden)") ---
+// Every page gets the same frame: tabs between the four pages under the title,
+// an "On this page" list built from the page's own h2s (a sticky column on a
+// wide screen, a disclosure on a phone), dark code blocks with a copy button,
+// and a link to the next page. The pages' own text is not touched here.
+const DOCS = [
+  { rel: 'developers/manifest/index.html', tab: 'Manifest', title: 'Connector manifest',
+    source: () => `Generated from <code>lib/plugin-manifest.js</code> at <a href="https://github.com/KhaytApp/Khayt/blob/${VENDOR_SHA}/lib/plugin-manifest.js">${VENDOR_SHA.slice(0, 9)}</a>`,
+    extra: '<a class="docs-schema" href="../../schemas/plugin-manifest-v1.json">JSON Schema <span aria-hidden="true">→</span></a>' },
+  { rel: 'developers/events/index.html', tab: 'Requests', title: 'Requests your connector receives',
+    source: () => `Built by <code>lib/plugin-payload.js</code> at ${VENDOR_SHA.slice(0, 9)}` },
+  { rel: 'developers/webhooks/index.html', tab: 'Shop webhooks', title: 'Shop webhooks',
+    source: () => `Generated from <code>lib/webhook-bus.js</code> at ${VENDOR_SHA.slice(0, 9)}` },
+  { rel: 'developers/samples/index.html', tab: 'Samples', title: 'Sample connectors',
+    source: () => `From <code>plugins/samples/</code> at ${VENDOR_SHA.slice(0, 9)}` },
+];
+const tabHref = (from, to) => '../' + to.rel.split('/')[1] + '/';
+let codeN = 0;
+// Colour JSON keys and strings in already-escaped code. Keys are strings
+// followed by a colon; everything else in quotes is a value.
+function highlight(escaped) {
+  return escaped.replace(/&quot;(?:\\.|(?!&quot;)[^\n\\])*&quot;(\s*:)?/g, (m, colon) =>
+    colon ? `<span class="tk">${m.slice(0, m.length - colon.length)}</span>${colon}` : `<span class="ts">${m}</span>`);
+}
+function codeLabel(text) {
+  const first = text.trimStart();
+  if (/^(POST|GET|PUT|PATCH|DELETE) |^Content-Type:/.test(first)) return 'HTTP';
+  if (/^[{[]/.test(first)) return 'JSON';
+  return 'JavaScript';
+}
+function docsChrome(rel, main) {
+  const i = DOCS.findIndex(d => d.rel === rel);
+  if (i < 0) return main;
+  const d = DOCS[i];
+  const tabs = `<nav class="docs-tabs" aria-label="Developer docs">
+      ${DOCS.map(t => `<a href="${tabHref(d, t)}"${t === d ? ' aria-current="page"' : ''}>${t.tab}</a>`).join('\n      ')}
+    </nav>`;
+  main = main.replace(/(<p class="lede">[\s\S]*?<\/p>)/, `$1\n    ${tabs}`);
+  const heads = [...main.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)];
+  const label = h => h.replace(/\s*\(<code>[^<]*<\/code>\)\s*$/, '').replace(/<[^>]+>/g, '');
+  const toc = `<aside class="docs-aside">
+      <details class="docs-toc">
+        <summary>On this page</summary>
+        <nav aria-label="On this page"><ol>
+${heads.map(([, id, h]) => `          <li><a href="#${id}">${label(h)}</a></li>`).join('\n')}
+        </ol></nav>
+      </details>
+      <p class="docs-source">${d.extra ? d.extra + '<br>' : ''}${d.source()}</p>
+    </aside>`;
+  main = main.replace(/<h2 id="/g, '<h2 tabindex="-1" id="');
+  main = main.replace(/<div class="post-in">\s*<div class="post-body policy">/, `<div class="docs-layout">\n    ${toc}\n    <div class="post-body policy docs-body">`);
+  main = main.replace(/<pre class="ref-code"(?: data-file="([^"]*)")?><code>([\s\S]*?)<\/code><\/pre>/g, (m, file, body) => {
+    const id = `code-${++codeN}`;
+    const name = file || codeLabel(body.replace(/&quot;/g, '"'));
+    return `<div class="code-block">
+        <div class="code-head"><span class="code-file">${name}</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="${id}">Copy<span class="sr-only"> ${name}</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="${name}"><code id="${id}">${highlight(body)}</code></pre>
+      </div>`;
+  });
+  const next = DOCS[i + 1], prev = DOCS[i - 1];
+  const pager = next
+    ? `<nav class="docs-pager" aria-label="Next page"><a href="${tabHref(d, next)}" rel="next"><span class="docs-pager-k">Next</span><span class="docs-pager-t">${next.title}</span><span class="docs-pager-a" aria-hidden="true">→</span></a></nav>`
+    : `<nav class="docs-pager prev" aria-label="Previous page"><a href="${tabHref(d, prev)}" rel="prev"><span class="docs-pager-k">Previous</span><span class="docs-pager-t">${prev.title}</span><span class="docs-pager-a" aria-hidden="true">←</span></a></nav>`;
+  const tail = /(\n\s*<\/div>\n\s*<\/div>\n\s*<\/div>\n<\/section>\n?)\s*$/;
+  if (!tail.test(main)) throw new Error(`make-dev-docs: ${rel} does not end the way docsChrome expects`);
+  return main.replace(tail, `\n      ${pager}$1`);
+}
 
 // ---- Page chrome, borrowed from /privacy/ so it never drifts ----------------
 function page(rel, title, desc, main) {
@@ -345,7 +413,9 @@ function page(rel, title, desc, main) {
     .replace('<meta name="viewport"', '<meta name="robots" content="noindex">\n<meta name="viewport"')
     .replace(/<span hidden\s+data-page-title-en[\s\S]*?><\/span>\n/, '');
   const fixPaths = s => s.replace(/(href|src)="\.\.\//g, `$1="${up}`);
-  return fixPaths(h) + '<main id="top">\n' + main + fixPaths(foot);
+  // After fixPaths: docs.js sits one level up from every docs page.
+  const docsJs = '<script src="../docs.js" type="module"></script>\n</head>';
+  return fixPaths(h).replace('</head>', docsJs) + '<main id="top">\n' + docsChrome(rel, main) + fixPaths(foot);
 }
 
 // ---- /developers/events/ — what a connector is sent --------------------------

@@ -25,7 +25,8 @@
 <link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
 <link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="../../styles.css?v=b0da14c39d">
+<link rel="stylesheet" href="../../styles.css?v=e4e5168e91">
+<script src="../docs.js" type="module"></script>
 </head>
 <body class="page">
 
@@ -60,18 +61,36 @@
     <span class="eyebrow">Khayt for developers</span>
     <h1>Sample connectors</h1>
     <p class="lede">Connectors Khayt has written, reviewed and signed. Copy one as the start of your own.</p>
+    <nav class="docs-tabs" aria-label="Developer docs">
+      <a href="../manifest/">Manifest</a>
+      <a href="../events/">Requests</a>
+      <a href="../webhooks/">Shop webhooks</a>
+      <a href="../samples/" aria-current="page">Samples</a>
+    </nav>
    </div>
   </div>
 </section>
 
 <section class="section" style="padding-top:0">
   <div class="wrap">
-   <div class="post-in">
-    <div class="post-body policy">
+   <div class="docs-layout">
+    <aside class="docs-aside">
+      <details class="docs-toc">
+        <summary>On this page</summary>
+        <nav aria-label="On this page"><ol>
+          <li><a href="#discord">Discord alerts</a></li>
+          <li><a href="#lamha">Lamha shipping</a></li>
+          <li><a href="#sheets">Google Sheets order log</a></li>
+          <li><a href="#slack">Slack alerts</a></li>
+        </ol></nav>
+      </details>
+      <p class="docs-source">From <code>plugins/samples/</code> at 0248142ea</p>
+    </aside>
+    <div class="post-body policy docs-body">
 
       <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
 
-      <h2 id="discord">Discord alerts</h2>
+      <h2 tabindex="-1" id="discord">Discord alerts</h2>
       <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t21">
         <table class="ref-table">
@@ -83,12 +102,15 @@
         </table>
       </div>
       <p>The request for the <code>order_created</code> event, for a sample order:</p>
-      <pre class="ref-code"><code>POST https://discord.com/api/webhooks/YOUR-WEBHOOKPATH
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-6">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-6">POST https://discord.com/api/webhooks/YOUR-WEBHOOKPATH
 Content-Type: application/json
 
-{&quot;content&quot;:&quot;New job INV-2026-0107: Bracket set&quot;}</code></pre>
+{<span class="tk">&quot;content&quot;</span>:<span class="ts">&quot;New job INV-2026-0107: Bracket set&quot;</span>}</code></pre>
+      </div>
 
-      <h2 id="lamha">Lamha shipping</h2>
+      <h2 tabindex="-1" id="lamha">Lamha shipping</h2>
       <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t22">
         <table class="ref-table">
@@ -100,12 +122,15 @@ Content-Type: application/json
         </table>
       </div>
       <p>The request for a <code>record</code> button, for a sample order:</p>
-      <pre class="ref-code"><code>POST https://app.lamha.sa/api/v2/create-order
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-7">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-7">POST https://app.lamha.sa/api/v2/create-order
 Content-Type: application/json
 
-{&quot;ShipmentCurrency&quot;:&quot;SAR&quot;,&quot;carrier_id&quot;:&quot;2&quot;,&quot;create_shippment&quot;:false,&quot;customer&quot;:{&quot;AddressLine1&quot;:&quot;King Fahd Rd, Riyadh&quot;,&quot;City&quot;:null,&quot;Country&quot;:&quot;SA&quot;,&quot;email&quot;:null,&quot;name&quot;:&quot;Sara A.&quot;,&quot;phone&quot;:&quot;+966500000000&quot;,&quot;phone1&quot;:&quot;+966500000000&quot;},&quot;date&quot;:null,&quot;items&quot;:[{&quot;amount&quot;:180,&quot;name&quot;:&quot;Bracket set&quot;,&quot;quantity&quot;:null,&quot;weight&quot;:&quot;1&quot;}],&quot;order_id&quot;:&quot;INV-2026-0107&quot;,&quot;parcels&quot;:&quot;1&quot;,&quot;payment_method&quot;:&quot;prepaid&quot;,&quot;reference_id&quot;:&quot;ORD-1042&quot;,&quot;shipper&quot;:{&quot;AddressLine1&quot;:&quot;Olaya St, Riyadh&quot;,&quot;City&quot;:&quot;Riyadh&quot;,&quot;Country&quot;:&quot;SA&quot;,&quot;name&quot;:&quot;Athar Studio&quot;,&quot;phone&quot;:&quot;+966511111111&quot;},&quot;total&quot;:180}</code></pre>
+{<span class="tk">&quot;ShipmentCurrency&quot;</span>:<span class="ts">&quot;SAR&quot;</span>,<span class="tk">&quot;carrier_id&quot;</span>:<span class="ts">&quot;2&quot;</span>,<span class="tk">&quot;create_shippment&quot;</span>:false,<span class="tk">&quot;customer&quot;</span>:{<span class="tk">&quot;AddressLine1&quot;</span>:<span class="ts">&quot;King Fahd Rd, Riyadh&quot;</span>,<span class="tk">&quot;City&quot;</span>:null,<span class="tk">&quot;Country&quot;</span>:<span class="ts">&quot;SA&quot;</span>,<span class="tk">&quot;email&quot;</span>:null,<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Sara A.&quot;</span>,<span class="tk">&quot;phone&quot;</span>:<span class="ts">&quot;+966500000000&quot;</span>,<span class="tk">&quot;phone1&quot;</span>:<span class="ts">&quot;+966500000000&quot;</span>},<span class="tk">&quot;date&quot;</span>:null,<span class="tk">&quot;items&quot;</span>:[{<span class="tk">&quot;amount&quot;</span>:180,<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>,<span class="tk">&quot;quantity&quot;</span>:null,<span class="tk">&quot;weight&quot;</span>:<span class="ts">&quot;1&quot;</span>}],<span class="tk">&quot;order_id&quot;</span>:<span class="ts">&quot;INV-2026-0107&quot;</span>,<span class="tk">&quot;parcels&quot;</span>:<span class="ts">&quot;1&quot;</span>,<span class="tk">&quot;payment_method&quot;</span>:<span class="ts">&quot;prepaid&quot;</span>,<span class="tk">&quot;reference_id&quot;</span>:<span class="ts">&quot;ORD-1042&quot;</span>,<span class="tk">&quot;shipper&quot;</span>:{<span class="tk">&quot;AddressLine1&quot;</span>:<span class="ts">&quot;Olaya St, Riyadh&quot;</span>,<span class="tk">&quot;City&quot;</span>:<span class="ts">&quot;Riyadh&quot;</span>,<span class="tk">&quot;Country&quot;</span>:<span class="ts">&quot;SA&quot;</span>,<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Athar Studio&quot;</span>,<span class="tk">&quot;phone&quot;</span>:<span class="ts">&quot;+966511111111&quot;</span>},<span class="tk">&quot;total&quot;</span>:180}</code></pre>
+      </div>
 
-      <h2 id="sheets">Google Sheets order log</h2>
+      <h2 tabindex="-1" id="sheets">Google Sheets order log</h2>
       <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t23">
         <table class="ref-table">
@@ -117,12 +142,15 @@ Content-Type: application/json
         </table>
       </div>
       <p>The request for the <code>order_created</code> event, for a sample order:</p>
-      <pre class="ref-code"><code>POST https://script.google.com/macros/s/YOUR-DEPLOYMENTID/exec
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-8">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-8">POST https://script.google.com/macros/s/YOUR-DEPLOYMENTID/exec
 Content-Type: application/json
 
-{&quot;data&quot;:{&quot;customer.name&quot;:&quot;Sara A.&quot;,&quot;order.currency&quot;:&quot;SAR&quot;,&quot;order.date&quot;:null,&quot;order.number&quot;:&quot;INV-2026-0107&quot;,&quot;order.title&quot;:&quot;Bracket set&quot;,&quot;order.total&quot;:180},&quot;khayt&quot;:&quot;plugin-payload-v1&quot;,&quot;plugin&quot;:&quot;app.khayt.samples.sheets&quot;,&quot;trigger&quot;:{&quot;event&quot;:&quot;order_created&quot;},&quot;version&quot;:&quot;1.0.0&quot;}</code></pre>
+{<span class="tk">&quot;data&quot;</span>:{<span class="tk">&quot;customer.name&quot;</span>:<span class="ts">&quot;Sara A.&quot;</span>,<span class="tk">&quot;order.currency&quot;</span>:<span class="ts">&quot;SAR&quot;</span>,<span class="tk">&quot;order.date&quot;</span>:null,<span class="tk">&quot;order.number&quot;</span>:<span class="ts">&quot;INV-2026-0107&quot;</span>,<span class="tk">&quot;order.title&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>,<span class="tk">&quot;order.total&quot;</span>:180},<span class="tk">&quot;khayt&quot;</span>:<span class="ts">&quot;plugin-payload-v1&quot;</span>,<span class="tk">&quot;plugin&quot;</span>:<span class="ts">&quot;app.khayt.samples.sheets&quot;</span>,<span class="tk">&quot;trigger&quot;</span>:{<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order_created&quot;</span>},<span class="tk">&quot;version&quot;</span>:<span class="ts">&quot;1.0.0&quot;</span>}</code></pre>
+      </div>
 
-      <h2 id="slack">Slack alerts</h2>
+      <h2 tabindex="-1" id="slack">Slack alerts</h2>
       <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t24">
         <table class="ref-table">
@@ -134,12 +162,16 @@ Content-Type: application/json
         </table>
       </div>
       <p>The request for the <code>order_created</code> event, for a sample order:</p>
-      <pre class="ref-code"><code>POST https://hooks.slack.com/services/YOUR-WEBHOOKPATH
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-9">Copy<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-9">POST https://hooks.slack.com/services/YOUR-WEBHOOKPATH
 Content-Type: application/json
 
-{&quot;text&quot;:&quot;New job INV-2026-0107: Bracket set for Sara A. (180 SAR)&quot;}</code></pre>
+{<span class="tk">&quot;text&quot;</span>:<span class="ts">&quot;New job INV-2026-0107: Bracket set for Sara A. (180 SAR)&quot;</span>}</code></pre>
+      </div>
 
       <p>A copy you change is no longer signed: load it in developer mode on the Mac while you work on it, then send it for review.</p>
+      <nav class="docs-pager prev" aria-label="Previous page"><a href="../webhooks/" rel="prev"><span class="docs-pager-k">Previous</span><span class="docs-pager-t">Shop webhooks</span><span class="docs-pager-a" aria-hidden="true">←</span></a></nav>
 
     </div>
    </div>
