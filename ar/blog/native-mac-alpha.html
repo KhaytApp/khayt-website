@@ -3,8 +3,10 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+xtxj0262zFDIbbWgzmzFS9fJ2s9Xg0a/UtANBpzE30='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8jZYj3/gQB8oMz5hPOgu9pb3dbub0hmmdTGEVYgnWXI=' 'sha256-+xtxj0262zFDIbbWgzmzFS9fJ2s9Xg0a/UtANBpzE30=' 'sha256-9A9Q4yXYKOjnQ9M6Zkw0iAQH8kJQeRlio8APvoAin5s='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>try{var c=localStorage.getItem('khayt-color-scheme');if(c==='light'||c==='dark')document.querySelector('meta[name="color-scheme"]').content=c}catch(e){}</script>
 <title>خيط لماك، مبنيّ من جديد — أين وصل إصدار الألفا — خيط</title>
 <meta name="description" content="ليس إلكترون بزيّ ماك: نوافذ ماك حقيقية، وشريط القوائم، وQuick Look، والاختصارات. ما يفعله الآن، وماذا يعني وصف &quot;ألفا&quot; لدفتر مطبعة.">
 <meta property="og:title" content="خيط لماك، مبنيّ من جديد — أين وصل إصدار الألفا — خيط">
@@ -32,7 +34,7 @@
 <link rel="apple-touch-icon" href="/khayt-apple-icon.png">
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="/styles.css?v=08be6efa4d">
+<link rel="stylesheet" href="/styles.css?v=e78cb92c3d">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -86,6 +88,7 @@
       <a href="/ar/#download" data-i18n="nav.download">تحميل</a>
     </nav>
     <div class="nav-right">
+      <button class="theme-toggle" id="navTheme" type="button"><svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="sr-only when-light">التبديل إلى المظهر الداكن</span><span class="sr-only when-dark">التبديل إلى المظهر الفاتح</span></button>
       <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">تغيير اللغة إلى </span><span lang="en">English</span></button>
       <a href="/ar/#download" class="btn btn-accent" aria-label="تحميل" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">تحميل</span></a>
       <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
@@ -222,5 +225,6 @@ window.PAGE_STRINGS = {
 };
 </script>
 <script src="/site.js?v=caf5b6281c"></script>
+<script>(function(){var m=document.querySelector('meta[name="color-scheme"]'),b=document.getElementById('navTheme'),K='khayt-color-scheme';if(!m||!b)return;var q=matchMedia('(prefers-color-scheme: dark)');function sys(){return q.matches?'dark':'light'}function shown(){var v=m.content;return v==='light'||v==='dark'?v:sys()}b.addEventListener('click',function(){var t=shown()==='dark'?'light':'dark',p=t===sys()?null:t;m.content=p||'light dark';try{p?localStorage.setItem(K,p):localStorage.removeItem(K)}catch(e){}});addEventListener('storage',function(e){if(e.key===K)m.content=e.newValue==='light'||e.newValue==='dark'?e.newValue:'light dark'})})();</script>
 </body>
 </html>

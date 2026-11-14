@@ -42,14 +42,36 @@
 @font-face { font-family: "Plex Arabic Fallback"; font-weight: 500; src: local("Tahoma"); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; size-adjust: 97.58%; ascent-override: 111.19%; descent-override: 42.53%; line-gap-override: 0%; }
 @font-face { font-family: "Plex Arabic Fallback"; font-weight: 600; src: local("Tahoma Bold"), local("Tahoma-Bold"); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; size-adjust: 87.49%; ascent-override: 124.02%; descent-override: 47.43%; line-gap-override: 0%; }
 @font-face { font-family: "Plex Arabic Fallback"; font-weight: 700; src: local("Tahoma Bold"), local("Tahoma-Bold"); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; size-adjust: 88.89%; ascent-override: 122.06%; descent-override: 46.69%; line-gap-override: 0%; }
+/* ── LIGHT AND DARK ─────────────────────────────────────────────────────
+   The site follows the visitor's system scheme, and the moon/sun button in
+   the nav (site.js) can pin the other one for this site. The pin lives in a
+   <meta name="color-scheme"> that an inline script in every <head> sets
+   before the first paint (scripts/color-scheme.js writes both), so a pinned
+   page never flashes the wrong scheme. CSS reads that meta, not a class: if
+   no script runs, the meta stays "light dark" and the system decides.
+
+   Each colour token is light-dark(LIGHT, DARK), so one declaration serves
+   both schemes and nothing below has to know which is on. The dark values
+   are the services page's (body.deep), already measured there: ink 15.8:1,
+   ink-soft 9.2:1, muted 5.9:1, brand-2 7.1:1 on #06182f. Designed in Figma
+   gOsfKt1QtHxY5GCUhJ3Rsm, the "— Dark" frames, from the same variables.
+
+   A browser without light-dark() (Safari before 17.5, Chrome before 123)
+   gets plain values from the @supports block after this one, following the
+   system scheme through the media query; only the manual pin is lost. */
 :root {
-  --ink:        #101417;
-  --ink-soft:   #3f464d;
-  --muted:      #697079;
-  --paper:      #ffffff;
-  --paper-2:    #f6f8f8;
-  --paper-3:    #eef1f1;
-  --card:       #ffffff;
+  color-scheme: light dark;
+  &:has(> head > meta[name="color-scheme"][content="light"]) { color-scheme: light; }
+  &:has(> head > meta[name="color-scheme"][content="dark"]) { color-scheme: dark; }
+}
+:root {
+  --ink:        light-dark(#101417, #eaf2fb);
+  --ink-soft:   light-dark(#3f464d, #b3c8de);
+  --muted:      light-dark(#697079, #8aa4c2);
+  --paper:      light-dark(#ffffff, #06182f);
+  --paper-2:    light-dark(#f6f8f8, #081e38);
+  --paper-3:    light-dark(#eef1f1, #0d2444);
+  --card:       light-dark(#ffffff, #0d2444);
 
   /* ── THE MARK'S OWN COLOURS ──────────────────────────────────────────
      Khayt's icon is a chrome nozzle extruding one loop of filament in the
@@ -64,32 +86,39 @@
      would have spent the one hue that means "printing" on links and buttons.
 
      Ratios are against white paper, which is what this page is.            */
-  --brand:      #216dca;   /* bright accent          5.12:1 on white       */
-  --brand-2:    #11509c;   /* deeper, for link text  7.92:1 on white       */
-  --ink-panel:  #0a2a50;   /* THE ICON'S OWN NAVY, unaltered               */
+  --brand:      #216dca;   /* bright accent FILL     5.12:1 under white    */
+  --brand-2:    light-dark(#11509c, #6fb0ff); /* link text  7.92 / 7.1:1     */
+  /* --brand as TEXT or an icon: 3.4:1 on dark paper, so it lightens there.  */
+  --brand-ink:  light-dark(#216dca, #6fb0ff);
+  --ink-panel:  #0a2a50;   /* THE ICON'S OWN NAVY, unaltered — a FILL      */
+  /* The navy as TEXT on a light surface; on dark paper it would vanish.     */
+  --navy-ink:   light-dark(#0a2a50, #eaf2fb);
   --on-brand:   #ffffff;   /* ink on a brand fill    5.12:1                */
-  --tint:       rgba(33,109,202,0.10);
-  --tint-2:     rgba(33,109,202,0.16);
-  --wash:       #eef4fc;   /* pale panel wash                              */
-  --wash-2:     #d6e4f5;
+  --tint:       light-dark(rgba(33,109,202,0.10), rgba(111,176,255,0.10));
+  --tint-2:     light-dark(rgba(33,109,202,0.16), rgba(111,176,255,0.26));
+  --wash:       light-dark(#eef4fc, #0a2a50);   /* pale panel wash           */
+  --wash-2:     light-dark(#d6e4f5, #123056);
   /* The filament, kept sparing — and darkened, because it is drawn as TEXT
      on .cl-ver.beta and #df6011 is 3.61:1 on white, under what AA asks of
      body copy. #be520e was not enough either: on the chip's own 10% tint it
      is 4.17:1 (khayt-cloud #177 found the same on its tint). #ad4a0b is
      4.84:1 on the tint and 5.58:1 on white.                               */
-  --amber:      #ad4a0b;   /* warm secondary, sparing  5.58:1 on white     */
+  /* On dark paper #ad4a0b is under 3:1, so as text it becomes the thread
+     orange there, 8.5:1. Where it is a FILL under white text (the services
+     page's primary button) that rule names #ad4a0b itself. */
+  --amber:      light-dark(#ad4a0b, #f2a541); /* sparing  5.58 / 8.5:1     */
   --live:       #1bb55c;   /* the DOT fill — decorative, any ratio is fine */
   /* --live is 2.69:1 on white, which is under what AA asks of the 12px
      assurance lines on the download cards. Same problem --amber already had
      and the same fix: keep the hue, darken it for text only. 4.62:1.        */
-  --live-ink:   #0d7a3c;   /* the green as TEXT        4.62:1 on white     */
+  --live-ink:   light-dark(#0d7a3c, #2fd07a); /* green as TEXT 4.62 / 8.6:1 */
 
-  --line:       rgba(16,20,23,0.10);
-  --line-soft:  rgba(16,20,23,0.06);
+  --line:       light-dark(rgba(16,20,23,0.10), rgba(255,255,255,0.11));
+  --line-soft:  light-dark(rgba(16,20,23,0.06), rgba(255,255,255,0.07));
 
-  --shadow-sm:  0 1px 2px rgba(16,28,36,0.06), 0 2px 6px rgba(16,28,36,0.05);
-  --shadow-md:  0 10px 28px rgba(16,28,36,0.09), 0 3px 10px rgba(16,28,36,0.06);
-  --shadow-lg:  0 40px 90px rgba(10,42,80,0.20), 0 12px 30px rgba(10,42,80,0.10);
+  --shadow-sm:  0 1px 2px light-dark(rgba(16,28,36,0.06), rgba(0,0,0,0.30)), 0 2px 6px light-dark(rgba(16,28,36,0.05), rgba(0,0,0,0.20));
+  --shadow-md:  0 10px 28px light-dark(rgba(16,28,36,0.09), rgba(0,0,0,0.34)), 0 3px 10px light-dark(rgba(16,28,36,0.06), rgba(0,0,0,0.22));
+  --shadow-lg:  0 40px 90px light-dark(rgba(10,42,80,0.20), rgba(0,0,0,0.46)), 0 12px 30px light-dark(rgba(10,42,80,0.10), rgba(0,0,0,0.30));
 
   --font-display: "Archivo", "Archivo Fallback", system-ui, sans-serif;
   --font-body: "Hanken Grotesk", "Hanken Fallback", system-ui, sans-serif;
@@ -108,6 +137,32 @@
   --maxw: 1220px;
   --pad: clamp(20px, 5vw, 60px);
   --radius: 16px;
+}
+/* Before light-dark(): the same values, picked by the system scheme. */
+@supports not (color: light-dark(#fff, #000)) {
+  :root {
+    --ink: #101417; --ink-soft: #3f464d; --muted: #697079;
+    --paper: #ffffff; --paper-2: #f6f8f8; --paper-3: #eef1f1; --card: #ffffff;
+    --brand-2: #11509c; --brand-ink: #216dca; --navy-ink: #0a2a50;
+    --tint: rgba(33,109,202,0.10); --tint-2: rgba(33,109,202,0.16);
+    --wash: #eef4fc; --wash-2: #d6e4f5; --amber: #ad4a0b; --live-ink: #0d7a3c;
+    --line: rgba(16,20,23,0.10); --line-soft: rgba(16,20,23,0.06);
+    --shadow-sm: 0 1px 2px rgba(16,28,36,0.06), 0 2px 6px rgba(16,28,36,0.05);
+    --shadow-md: 0 10px 28px rgba(16,28,36,0.09), 0 3px 10px rgba(16,28,36,0.06);
+    --shadow-lg: 0 40px 90px rgba(10,42,80,0.20), 0 12px 30px rgba(10,42,80,0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #eaf2fb; --ink-soft: #b3c8de; --muted: #8aa4c2;
+      --paper: #06182f; --paper-2: #081e38; --paper-3: #0d2444; --card: #0d2444;
+      --brand-2: #6fb0ff; --brand-ink: #6fb0ff; --navy-ink: #eaf2fb;
+      --tint: rgba(111,176,255,0.10); --tint-2: rgba(111,176,255,0.26);
+      --wash: #0a2a50; --wash-2: #123056; --amber: #f2a541; --live-ink: #2fd07a;
+      --line: rgba(255,255,255,0.11); --line-soft: rgba(255,255,255,0.07);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.30); --shadow-md: 0 10px 28px rgba(0,0,0,0.34);
+      --shadow-lg: 0 40px 90px rgba(0,0,0,0.46);
+    }
+  }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -180,12 +235,26 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .btn svg, .lang-toggle svg, .nav-right svg { flex: none; }
 .nav-links a:hover { background: var(--paper-3); color: var(--ink); }
 .nav-right { margin-inline-start: auto; display: flex; align-items: center; gap: 10px; }
-.lang-toggle {
+.lang-toggle, .theme-toggle {
   font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
   border: 1px solid var(--line); background: var(--card); color: var(--ink-soft);
   padding: 7px 12px; border-radius: 8px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; transition: border-color .15s, color .15s;
 }
-.lang-toggle:hover { border-color: var(--brand); color: var(--ink); }
+.lang-toggle:hover, .theme-toggle:hover { border-color: var(--brand); color: var(--ink); }
+/* The scheme button shows where it would take you: a moon on a light page,
+   a sun on a dark one, with the label to match. Both are in the markup and
+   CSS picks, so it stays right when the system flips with no script. */
+.theme-toggle { padding: 7px; justify-content: center; }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .when-dark { display: none; }
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle .when-light { display: none; }
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle :is(svg.when-dark) { display: block; }
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-toggle :is(span.when-dark) { display: inline; }
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle .when-light { display: none; }
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle svg.when-dark { display: block; }
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-toggle span.when-dark { display: inline; }
+}
 .nav-burger { display: none; width: 42px; height: 38px; border: 1px solid var(--line); background: var(--card); border-radius: 9px; cursor: pointer; place-items: center; }
 .nav-burger span, .nav-burger span::before, .nav-burger span::after { content: ""; display: block; width: 17px; height: 2px; background: var(--ink); border-radius: 2px; position: relative; transition: .2s; }
 .nav-burger span::before { position: absolute; top: -5px; } .nav-burger span::after { position: absolute; top: 5px; }
@@ -235,7 +304,7 @@ body[dir="rtl"] .h2, body[dir="rtl"] .hero h1 { letter-spacing: -0.01em; }
 .hero-mac a { display: inline-flex; align-items: baseline; gap: 8px; font-size: 15px; line-height: 1.5;
   color: var(--brand-2); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--tint-2);
   padding-bottom: 2px; transition: border-color .15s, color .15s; }
-.hero-mac a:hover { color: var(--ink-panel); border-bottom-color: var(--brand); }
+.hero-mac a:hover { color: var(--navy-ink); border-bottom-color: var(--brand); }
 .hero-mac .tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
   text-transform: uppercase; color: var(--on-brand); background: var(--brand); border-radius: 4px;
   padding: 2px 6px; align-self: center; flex: none; }
@@ -338,7 +407,7 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 /* Costing card — a file becomes a set of figures */
 .mk-quote { margin-top: 16px; background: var(--paper-2); border: 1px solid var(--line); border-radius: 13px; padding: 14px; }
 .mk-drop { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border: 1.5px dashed var(--brand); border-radius: 10px; background: var(--tint); }
-.mk-drop .fi { width: 28px; height: 28px; border-radius: 8px; background: var(--brand-2); color: #fff; display: grid; place-items: center; flex: none; }
+.mk-drop .fi { width: 28px; height: 28px; border-radius: 8px; background: #11509c; background: light-dark(#11509c, #216dca); color: #fff; display: grid; place-items: center; flex: none; }
 .mk-drop .fi svg { width: 15px; height: 15px; }
 .mk-drop .fn { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--ink); }
 .mk-drop .fs { margin-inline-start: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); }
@@ -690,7 +759,9 @@ body[dir="rtl"] .cmp-hint svg { transform: scaleX(-1); }
 .cmp thead th { background: var(--paper); text-align: center; vertical-align: bottom; padding: 18px 12px 16px; border-bottom: 1px solid var(--line); }
 .cmp thead th.cmp-feat { border-bottom: 1px solid var(--line); }
 .cmp-chip { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .01em; color: var(--ink-soft); background: var(--paper-2); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; white-space: nowrap; }
-.cmp thead th.cmp-col-hl .cmp-chip { color: #fff; background: var(--brand-2); border-color: var(--brand-2); box-shadow: 0 3px 10px rgba(10,125,143,0.25); }
+.cmp thead th.cmp-col-hl .cmp-chip { color: #fff; background: #11509c; border-color: #11509c;
+  /* a FILL under white: --brand-2 lightens to link-blue in the dark scheme */
+  background: light-dark(#11509c, #216dca); border-color: light-dark(#11509c, #216dca); box-shadow: 0 3px 10px rgba(10,125,143,0.25); }
 
 /* Featured (Professional) column */
 .cmp .cmp-col-hl { background: rgba(17,174,195,0.055); }
@@ -1002,7 +1073,7 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
   color: var(--ink-soft); font-size: 16.5px; line-height: 1.65; }
 .post-back { display: inline-block; font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
   color: var(--brand-2); text-decoration: none; letter-spacing: .03em; }
-.post-back:hover { color: var(--ink-panel); }
+.post-back:hover { color: var(--navy-ink); }
 .post-foot { max-width: calc(74 * var(--ch)); margin: 48px auto 0; padding-top: 26px; border-top: 1px solid var(--line);
   display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 
@@ -1011,7 +1082,7 @@ body[dir="rtl"] .cmp-frame.is-scrollable .cmp.sends tbody th { box-shadow: inset
 .wn-more { margin-top: 18px; }
 .wn-more a { font-size: 15px; font-weight: 600; color: var(--brand-2); text-decoration: none;
   border-bottom: 1px solid var(--tint-2); padding-bottom: 2px; transition: border-color .15s, color .15s; }
-.wn-more a:hover { color: var(--ink-panel); border-bottom-color: var(--brand); }
+.wn-more a:hover { color: var(--navy-ink); border-bottom-color: var(--brand); }
 
 /* Blog index footer: the feed link, then the note. */
 .blog-foot { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line);
@@ -1092,13 +1163,13 @@ body.deep .nav { background: rgba(6,24,47,0.82); backdrop-filter: blur(18px) sat
 body.deep .nav.scrolled { background: rgba(6,24,47,0.94); }
 body.deep .btn-ghost { background: rgba(255,255,255,0.06); color: var(--ink); border-color: var(--line); }
 body.deep .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.28); }
-body.deep .btn-primary { background: var(--amber); color: #fff; }
+body.deep .btn-primary { background: #ad4a0b; color: #fff; }
 body.deep .btn-primary:hover { background: #a8460b; }
 body.deep .nav-burger { background: rgba(255,255,255,0.06); border-color: var(--line); }
 body.deep .nav-burger span, body.deep .nav-burger span::before, body.deep .nav-burger span::after { background: var(--ink); }
 body.deep .nav-links a:hover { background: rgba(255,255,255,0.09); }
-body.deep .lang-toggle { background: transparent; color: var(--ink-soft); border-color: var(--line); }
-body.deep .lang-toggle:hover { color: var(--ink); border-color: rgba(255,255,255,0.4); }
+body.deep :is(.lang-toggle, .theme-toggle) { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+body.deep :is(.lang-toggle, .theme-toggle):hover { color: var(--ink); border-color: rgba(255,255,255,0.4); }
 
 /* One section stays on paper on purpose: the table of what each service sends
    is the page's plainest claim, and it is set in the plain light the rest of
@@ -1115,6 +1186,20 @@ body.deep .section.paper {
   --line:       rgba(16,20,23,0.10);
   --line-soft:  rgba(16,20,23,0.06);
   --live-ink:   #0d7a3c;
+  /* …in the light scheme. In the dark one it is the page around it. */
+  @supports (color: light-dark(#fff, #000)) {
+    --paper:    light-dark(#f4f6f8, #081e38);
+    --paper-2:  light-dark(#ffffff, #0d2444);
+    --paper-3:  light-dark(#eef1f1, #0d2444);
+    --card:     light-dark(#ffffff, #0d2444);
+    --ink:      light-dark(#101417, #eaf2fb);
+    --ink-soft: light-dark(#3f464d, #b3c8de);
+    --muted:    light-dark(#697079, #8aa4c2);
+    --brand-2:  light-dark(#11509c, #6fb0ff);
+    --line:     light-dark(rgba(16,20,23,0.10), rgba(255,255,255,0.11));
+    --line-soft: light-dark(rgba(16,20,23,0.06), rgba(255,255,255,0.07));
+    --live-ink: light-dark(#0d7a3c, #2fd07a);
+  }
   background: var(--paper);
   color: var(--ink);
 }
@@ -1473,8 +1558,8 @@ body:is(.home, .page) .nav .brand { color: var(--on-dark); }
 body:is(.home, .page) .nav .brand .ar { color: var(--thread); }
 body:is(.home, .page) .nav-links a { color: var(--on-dark-soft); }
 body:is(.home, .page) .nav-links a:hover { background: rgba(255,255,255,0.08); color: var(--on-dark); }
-body:is(.home, .page) .nav .lang-toggle { color: var(--on-dark-soft); border-color: rgba(255,255,255,0.18); background: transparent; }
-body:is(.home, .page) .nav .lang-toggle:hover { color: var(--on-dark); border-color: rgba(255,255,255,0.4); }
+body:is(.home, .page) .nav :is(.lang-toggle, .theme-toggle) { color: var(--on-dark-soft); border-color: rgba(255,255,255,0.18); background: transparent; }
+body:is(.home, .page) .nav :is(.lang-toggle, .theme-toggle):hover { color: var(--on-dark); border-color: rgba(255,255,255,0.4); }
 body:is(.home, .page) .nav .btn-accent { background: var(--on-dark); color: var(--ink-panel); box-shadow: none; border-radius: 999px; }
 body:is(.home, .page) .nav .btn-accent:hover { background: #e7eef8; }
 body:is(.home, .page) .nav-burger { background: transparent; border-color: rgba(255,255,255,0.2); }
@@ -1536,7 +1621,7 @@ body[dir="rtl"] .flow::before { transform: scaleX(-1); }
 }
 
 /* ---- screens ---- */
-#screens { background: #eef4fc; }
+#screens { background: var(--wash); }
 .tabs { background: var(--paper); padding: 6px; border-radius: 999px; display: inline-flex; box-shadow: 0 4px 14px rgba(10,42,80,0.08); gap: 4px; }
 .tab { border: 0; border-radius: 999px; background: transparent; }
 .tab[aria-selected="true"] { background: var(--ink-panel); color: var(--on-dark); }
@@ -1631,10 +1716,10 @@ body.page .page-head .lede, body.page .page-head p { color: var(--on-dark-soft);
 body.page .page-head .eyebrow { color: var(--thread); }
 body.page .page-head a:not(.btn) { color: #9cc2f2; }
 body.page .post { padding-top: clamp(56px, 7vw, 88px); }
-body.page .post-back { color: var(--brand); }
+body.page .post-back { color: var(--brand-ink); }
 body:is(.home, .page) .nav-links a.here { color: var(--on-dark); background: rgba(255,255,255,0.12); }
 /* Plan notes were drawn for the old dark page; on paper they take the inks. */
-body.page .plan-now { color: #9a4a0c; background: rgba(223,96,17,0.08); border-color: rgba(223,96,17,0.28); }
+body.page .plan-now { color: #9a4a0c; color: light-dark(#9a4a0c, #f2a541); background: rgba(223,96,17,0.08); border-color: rgba(223,96,17,0.28); }
 body.page .plan-now.free { color: var(--live-ink); background: rgba(27,181,92,0.08); border-color: rgba(27,181,92,0.28); }
 body.page .plan-badge.soon { color: #8a6100; background: rgba(233,196,106,0.18); border-color: rgba(233,196,106,0.5); }
 body.page .seg-btn { color: var(--ink-soft); }
@@ -1669,14 +1754,14 @@ body[dir="rtl"] :is(.post-back, .post-meta, .post-meta *, .tag, .meta-chip, .cl-
 .faq-item[open] summary::after { transform: rotate(225deg); }
 .faq-item summary:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .faq-item p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; line-height: 1.65; max-width: calc(72 * var(--ch)); }
-.faq-item p a { color: var(--brand); }
+.faq-item p a { color: var(--brand-ink); }
 @media (prefers-reduced-motion: reduce) { .faq-item summary::after { transition: none; } }
 
 /* ---- Touch targets ----
    On a touch screen the small controls grow to 44px, Apple's minimum; with a
    mouse they keep their compact desktop size. */
 @media (pointer: coarse) {
-  .nav-burger, .lang-toggle, .nav-right .btn { min-height: 44px; min-width: 44px; }
+  .nav-burger, .lang-toggle, .theme-toggle, .nav-right .btn { min-height: 44px; min-width: 44px; }
   .os-line a { display: inline-block; padding-block: 12px; }
   .seg-btn, .flip-switch button { min-height: 44px; }
   .flip-switch button { min-width: 44px; }
@@ -1769,7 +1854,7 @@ body.page .page-head .docs-tabs a[aria-current="page"] { background: var(--on-da
 .post-body .docs-pager a:hover { border-color: var(--brand); }
 .docs-pager-k { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .docs-pager-t { font-size: 16px; margin-top: 4px; }
-.docs-pager-a { grid-column: 2; grid-row: 1 / span 2; color: var(--brand); font-size: 20px; }
+.docs-pager-a { grid-column: 2; grid-row: 1 / span 2; color: var(--brand-ink); font-size: 20px; }
 .docs-pager.prev a { grid-template-columns: auto 1fr; }
 .docs-pager.prev :is(.docs-pager-k, .docs-pager-t) { grid-column: 2; }
 .docs-pager.prev .docs-pager-a { grid-column: 1; }
