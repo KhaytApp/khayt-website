@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/stamp-assets.js', 'scripts/check-freshness.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/color-scheme.js', 'scripts/stamp-assets.js', 'scripts/check-freshness.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -136,6 +136,19 @@ check('Every page carries a current Content-Security-Policy', () => {
   // inline script without re-running it and the browser refuses that script.
   try {
     execFileSync(process.execPath, ['scripts/csp.js', '--check'], { stdio: 'pipe' });
+  } catch (e) {
+    throw new Error(String(e.stderr || e.message).trim());
+  }
+  return pages().length + ' pages';
+});
+
+check('Every page follows the colour scheme, with the toggle where there is a nav', () => {
+  // scripts/color-scheme.js writes the color-scheme meta and its pre-paint
+  // script into every <head>, and the moon/sun button and its click handler
+  // into every page with a language button. A page without the meta paints
+  // light under a dark pin, then flips: the flash the meta exists to stop.
+  try {
+    execFileSync(process.execPath, ['scripts/color-scheme.js', '--check'], { stdio: 'pipe' });
   } catch (e) {
     throw new Error(String(e.stderr || e.message).trim());
   }

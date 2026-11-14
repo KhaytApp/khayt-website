@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Kt6u0CwnG8wqf+5JCBmZOGVSAa+M0rGIyEy7RLQhCDM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8jZYj3/gQB8oMz5hPOgu9pb3dbub0hmmdTGEVYgnWXI=' 'sha256-Kt6u0CwnG8wqf+5JCBmZOGVSAa+M0rGIyEy7RLQhCDM=' 'sha256-9A9Q4yXYKOjnQ9M6Zkw0iAQH8kJQeRlio8APvoAin5s='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>try{var c=localStorage.getItem('khayt-color-scheme');if(c==='light'||c==='dark')document.querySelector('meta[name="color-scheme"]').content=c}catch(e){}</script>
 <script>/* A reader who chose Arabic goes to /ar/ before anything else loads, not after the
    whole English page has painted (app.js keeps the same rule as a fallback). */
 try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(location.search).get('lang'),l=q||localStorage.getItem('khayt-lang');if(l==='ar'){localStorage.setItem('khayt-lang','ar');location.replace('/ar/'+location.hash)}}}catch(e){}</script>
@@ -82,7 +84,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 <link rel="apple-touch-icon" href="khayt-apple-icon.png">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="styles.css?v=08be6efa4d">
+<link rel="stylesheet" href="styles.css?v=e78cb92c3d">
 <!-- PRERENDER:faqLd:START --><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Where is my shop’s data kept?","acceptedAnswer":{"@type":"Answer","text":"In a file on your own computer. Khayt needs no account and works offline. If you turn on Khayt Cloud, your shop’s data is encrypted on your computer before it is synced, so the server holds only ciphertext. What you publish for customers, such as an order page or the quote form, is kept in a form they can read."}},{"@type":"Question","name":"Can my accountant use what Khayt keeps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Invoices and expenses export as CSV, laid out for QuickBooks, Xero, Zoho Books, Wafeq or Daftra, or as plain CSV. Khayt also works out a VAT return for each month or quarter, with revenue reported net of tax."}},{"@type":"Question","name":"Khayt is free. How is it paid for?","acceptedAnswer":{"@type":"Answer","text":"The app is free to use and will stay free. Khayt Cloud is an optional paid service — sync between devices, team members, customer pages and an encrypted cloud library — and it is free while it is in beta. The cloud plans and sponsors pay for Khayt’s development. You never need the cloud to run your shop."}},{"@type":"Question","name":"Do the Mac and Windows apps do the same things?","acceptedAnswer":{"@type":"Answer","text":"Mostly. Both read the same shop book with the same rules, and the feature cards above say where one app has something the other does not have yet. On the Mac only, for now: the quote form for your website, Khayt Vault and sending files from your slicer. On Windows and Linux only, for now: buy-now-pay-later links and HueForge pictures for the Snapmaker U1."}},{"@type":"Question","name":"Which printers does it talk to?","acceptedAnswer":{"@type":"Answer","text":"OctoPrint, Klipper (through Moonraker), Bambu Lab, PrusaLink, Duet, Repetier and Elegoo. Their temperature and progress show in the queue, and when a print finishes Khayt reads what the printer reported, so the next quote is costed from real use."}},{"@type":"Question","name":"Is there an iPhone app?","acceptedAnswer":{"@type":"Answer","text":"Yes, in beta on TestFlight. It shows your queue and your printers, and with the Mac app it can pause, resume or stop a print."}}]}</script><!-- PRERENDER:faqLd:END -->
 </head>
 <body class="home">
@@ -103,6 +105,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
       <a href="#download" data-i18n="nav.download">Download</a>
     </nav>
     <div class="nav-right">
+      <button class="theme-toggle" id="navTheme" type="button"><svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="sr-only when-light">Switch to dark theme</span><span class="sr-only when-dark">Switch to light theme</span></button>
       <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
       <a href="#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
       <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
@@ -711,5 +714,6 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 <script src="data.js?v=72d2ff713e"></script>
 <script src="render.js?v=ac1ec3bc99"></script>
 <script src="app.js?v=2c75bad85e"></script>
+<script>(function(){var m=document.querySelector('meta[name="color-scheme"]'),b=document.getElementById('navTheme'),K='khayt-color-scheme';if(!m||!b)return;var q=matchMedia('(prefers-color-scheme: dark)');function sys(){return q.matches?'dark':'light'}function shown(){var v=m.content;return v==='light'||v==='dark'?v:sys()}b.addEventListener('click',function(){var t=shown()==='dark'?'light':'dark',p=t===sys()?null:t;m.content=p||'light dark';try{p?localStorage.setItem(K,p):localStorage.removeItem(K)}catch(e){}});addEventListener('storage',function(e){if(e.key===K)m.content=e.newValue==='light'||e.newValue==='dark'?e.newValue:'light dark'})})();</script>
 </body>
 </html>
