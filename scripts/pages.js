@@ -17,7 +17,7 @@ const FLAT = ['index.html', 'services.html', '404.html', 'success.html', 'cancel
 // ar/ is the site in Arabic: the home page (scripts/make-ar.js) and a copy of
 // every sub-page in AR_SOURCES below (scripts/make-ar-pages.js), at the same
 // path under /ar/.
-const DIRS = ['ar', 'ar/blog', 'ar/privacy', 'ar/terms', 'blog', 'privacy', 'terms'];
+const DIRS = ['ar', 'ar/blog', 'ar/connectors', 'ar/privacy', 'ar/terms', 'blog', 'connectors', 'privacy', 'terms'];
 
 module.exports = function pages() {
   const out = [...FLAT];
@@ -45,7 +45,7 @@ module.exports.NOINDEX = new Set(['404.html', 'success.html', 'cancel.html', 'fa
 module.exports.AR_SOURCES = function arSources() {
   const posts = fs.readdirSync(path.join(ROOT, 'blog'))
     .filter(f => f.endsWith('.html') && f !== 'index.html').sort().map(f => 'blog/' + f);
-  return ['services.html', 'privacy/index.html', 'terms/index.html', 'blog/index.html', ...posts];
+  return ['services.html', 'connectors/index.html', 'privacy/index.html', 'terms/index.html', 'blog/index.html', ...posts];
 };
 
 // Where an internal link to `file` (repo-relative, e.g. 'blog/', 'privacy/index.html')

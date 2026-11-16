@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8jZYj3/gQB8oMz5hPOgu9pb3dbub0hmmdTGEVYgnWXI=' 'sha256-9A9Q4yXYKOjnQ9M6Zkw0iAQH8kJQeRlio8APvoAin5s='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>try{var c=localStorage.getItem('khayt-color-scheme');if(c==='light'||c==='dark')document.querySelector('meta[name="color-scheme"]').content=c}catch(e){}</script>
+<title>Khayt for OrcaSlicer — Khayt</title>
+<meta name="description" content="Khayt for OrcaSlicer sends what you slice to your shop and shows your queue in the slicer. It pairs over your shop’s network and never sees your customers.">
+<meta property="og:title" content="Khayt for OrcaSlicer — Khayt">
+<meta property="og:description" content="Khayt for OrcaSlicer sends what you slice to your shop and shows your queue in the slicer. It pairs over your shop’s network and never sees your customers.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/connectors/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="canonical" href="https://khaytapp.com/connectors/">
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/connectors/">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/connectors/">
+<link rel="alternate" hreflang="x-default" href="https://khaytapp.com/connectors/">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="../blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../khayt-apple-icon.png">
+<link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../styles.css?v=2a4079fcbf">
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+<span hidden
+  data-page-title-en="Khayt for OrcaSlicer — Khayt"
+  data-page-title-ar="خيط لبرنامج OrcaSlicer — خيط"
+  data-page-desc-en="Khayt for OrcaSlicer sends what you slice to your shop and shows your queue in the slicer. It pairs over your shop’s network and never sees your customers."
+  data-page-desc-ar="خيط لبرنامج OrcaSlicer يرسل ما تقطّعه إلى متجرك ويعرض قائمة أعمالك داخل برنامج التقطيع. يقترن عبر شبكة متجرك ولا يرى عملاءك أبدًا."></span>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../" class="brand"><img src="../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../#features" data-i18n="nav.features">Features</a>
+      <a href="../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../services.html" data-i18n="nav.services">Services</a>
+      <a href="../blog/" data-i18n="nav.blog">Blog</a>
+      <a href="../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="navTheme" type="button"><svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="sr-only when-light">Switch to dark theme</span><span class="sr-only when-dark">Switch to light theme</span></button>
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+
+<main id="top">
+
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow" data-lang="en">Connectors · Khayt for OrcaSlicer</span><span class="eyebrow" data-lang="ar" hidden>الموصلات · خيط لبرنامج OrcaSlicer</span>
+    <h1 data-lang="en">Khayt, inside your slicer</h1>
+    <h1 data-lang="ar" hidden>خيط، داخل برنامج التقطيع</h1>
+    <p class="lede" data-lang="en">Slice in OrcaSlicer and send the plate straight to your shop. See your queue without leaving the slicer. Pair it once, on your shop’s network, and it never sees your customers.</p>
+    <p class="lede" data-lang="ar" hidden>قطّع في OrcaSlicer وأرسل اللوح مباشرة إلى متجرك، واطّلع على قائمة أعمالك دون مغادرة برنامج التقطيع. اقرنه مرة واحدة عبر شبكة متجرك، ولن يرى عملاءك أبدًا.</p>
+   </div>
+  </div>
+</section>
+
+<section class="section cx" data-lang="en">
+  <div class="wrap">
+    <div class="cx-block">
+    <div class="cx-head">
+      <span class="eyebrow">What it does</span>
+      <h2 class="cx-h2">Two things, both from Orca</h2>
+    </div>
+    <div class="cx-grid cx-2">
+      <div class="cx-card">
+        <h3>Send a slice to Khayt</h3>
+        <p>Send the plate you just sliced to the <strong>From slicer</strong> inbox on your Mac, with the print time and grams. Khayt reads both from the file itself. Nothing becomes a job and no print starts until you open the inbox and decide what it is.</p>
+      </div>
+      <div class="cx-card">
+        <h3>Your queue, in a Khayt tab</h3>
+        <p>A Khayt tab in Orca lists the shop’s open jobs: the job number, its stage, the machine, and the name of the file you sent for it. It also shows your machines and whether each is in use, the shop’s name, and how many files wait in the inbox. Never a job title, because a title can hold a customer’s name. Never a customer, a price or a note.</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="cx-block">
+    <div class="cx-head">
+      <span class="eyebrow">Pair it once</span>
+      <h2 class="cx-h2">Three steps, one number to check</h2>
+    </div>
+    <ol class="cx-grid cx-3 cx-steps">
+      <li class="cx-card"><h3>On the Mac</h3><p>Settings → Online → Connected apps → <strong>Pair a slicer</strong>. The Mac listens for two minutes.</p></li>
+      <li class="cx-card"><h3>In OrcaSlicer</h3><p>Khayt → Pair → On this network, then type the address the Mac shows.</p></li>
+      <li class="cx-card"><h3>Check the number</h3><p>Both screens show the same 6-digit number. If they match, click <strong>Numbers match — approve</strong>. If not, deny.</p></li>
+    </ol>
+    </div>
+
+    <div class="cx-split">
+      <div>
+        <div class="cx-head">
+          <span class="eyebrow">Install</span>
+          <h2 class="cx-h2">Get the plugin</h2>
+        </div>
+        <p class="cx-p">Needs OrcaSlicer 2.5.1 or later, and Khayt for Mac on the same network. The plugin is open source under the MIT licence: <a href="https://github.com/KhaytApp/khayt-orca">github.com/KhaytApp/khayt-orca</a>.</p>
+        <div class="cx-pending">
+          <p class="cx-pending-k">DRAFT, tentative: from the plugin’s design, not a release. Check every step against the first release before this ships.</p>
+          <ol class="cx-install">
+            <li>Download the plugin file (.whl) from the plugin’s releases on GitHub.</li>
+            <li>In OrcaSlicer, install it as a local plugin. Orca fetches what the plugin needs by itself, so it needs internet once, and there is nothing else to install.</li>
+            <li>When Orca asks, approve the plugin’s permissions: network access, to reach your Mac. Orca asks again after each update.</li>
+            <li>Open Khayt → Pair, and follow the three steps above.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="cx-never">
+        <span class="eyebrow">What never reaches the slicer</span>
+        <p class="cx-never-t">Its key opens the slicer’s own routes and nothing else.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Customers: names, phones, emails, addresses</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Job titles, prices, costs and notes</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Your book, and your LAN PIN</span></li>
+        </ul>
+        <p class="cx-note">The Mac keeps the plugin’s key in its Keychain. What the slicer sends stays on your Mac, in the From slicer folder beside your book, and none of it goes to Khayt Cloud. Pairing is on Khayt for Mac only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cx" data-lang="ar" hidden>
+  <div class="wrap">
+    <div class="cx-block">
+    <div class="cx-head">
+      <span class="eyebrow">ماذا يفعل</span>
+      <h2 class="cx-h2">أمران، كلاهما من Orca</h2>
+    </div>
+    <div class="cx-grid cx-2">
+      <div class="cx-card">
+        <h3>أرسل الملف المقطّع إلى خيط</h3>
+        <p>أرسل اللوح الذي قطّعته للتو إلى صندوق <strong>«من برنامج التقطيع»</strong> على جهاز ماك، مع مدة الطباعة والغرامات. يقرأ خيط الاثنين من الملف نفسه. ولا يصبح شيء عملًا ولا تبدأ طباعة حتى تفتح الصندوق وتقرر ما هو.</p>
+      </div>
+      <div class="cx-card">
+        <h3>قائمة أعمالك في تبويب خيط</h3>
+        <p>يعرض تبويب خيط داخل Orca أعمال المتجر المفتوحة: رقم العمل ومرحلته والآلة واسم الملف الذي أرسلته له. ويعرض أيضًا آلاتك وحالة كل منها، واسم المتجر، وعدد الملفات المنتظرة في الصندوق. لا يظهر عنوان العمل أبدًا، لأن العنوان قد يحمل اسم عميل. ولا عميل ولا سعر ولا ملاحظة.</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="cx-block">
+    <div class="cx-head">
+      <span class="eyebrow">اقرنه مرة واحدة</span>
+      <h2 class="cx-h2">ثلاث خطوات، ورقم واحد تتحقق منه</h2>
+    </div>
+    <ol class="cx-grid cx-3 cx-steps">
+      <li class="cx-card"><h3>على جهاز ماك</h3><p>الإعدادات ← الشبكة ← التطبيقات المتصلة ← <strong>إقران برنامج تقطيع</strong>. ينتظر جهاز ماك دقيقتين.</p></li>
+      <li class="cx-card"><h3>في OrcaSlicer</h3><p>«خيط» ← «إقران» ← «على هذه الشبكة»، ثم اكتب العنوان الذي يعرضه جهاز ماك.</p></li>
+      <li class="cx-card"><h3>تحقق من الرقم</h3><p>تعرض الشاشتان الرقم نفسه المكوّن من ٦ خانات. إن تطابقا فانقر <strong>الرقمان متطابقان — موافقة</strong>، وإلا فارفض.</p></li>
+    </ol>
+    </div>
+
+    <div class="cx-split">
+      <div>
+        <div class="cx-head">
+          <span class="eyebrow">التثبيت</span>
+          <h2 class="cx-h2">احصل على الإضافة</h2>
+        </div>
+        <p class="cx-p">يحتاج OrcaSlicer 2.5.1 أو أحدث، وخيط لجهاز ماك على الشبكة نفسها. الإضافة مفتوحة المصدر بترخيص MIT: <a href="https://github.com/KhaytApp/khayt-orca">github.com/KhaytApp/khayt-orca</a>.</p>
+        <div class="cx-pending">
+          <p class="cx-pending-k">مسودة مبدئية: من تصميم الإضافة لا من إصدار. تُراجع كل خطوة على أول إصدار قبل النشر.</p>
+          <ol class="cx-install">
+            <li>نزّل ملف الإضافة (.whl) من إصدارات الإضافة على GitHub.</li>
+            <li>في OrcaSlicer ثبّته كإضافة محلية. يجلب Orca ما تحتاجه الإضافة بنفسه، فيحتاج إلى الإنترنت مرة واحدة، ولا شيء آخر لتثبيته.</li>
+            <li>حين يسألك Orca، وافق على أذونات الإضافة: الوصول إلى الشبكة للاتصال بجهاز ماك. ويسألك Orca مجددًا بعد كل تحديث.</li>
+            <li>افتح «خيط» ← «إقران»، واتبع الخطوات الثلاث أعلاه.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="cx-never">
+        <span class="eyebrow">ما لا يصل إلى برنامج التقطيع أبدًا</span>
+        <p class="cx-never-t">مفتاحه يفتح مسارات برنامج التقطيع وحدها، ولا شيء غيرها.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>العملاء: الأسماء والهواتف والبريد والعناوين</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>عناوين الأعمال والأسعار والتكاليف والملاحظات</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>دفترك، ورمز الشبكة المحلية</span></li>
+        </ul>
+        <p class="cx-note">يحفظ جهاز ماك مفتاح الإضافة في سلسلة المفاتيح. وما يرسله برنامج التقطيع يبقى على جهازك، في مجلد «من برنامج التقطيع» بجانب دفترك، ولا يذهب شيء منه إلى سحابة خيط. الاقتران متاح في خيط لجهاز ماك فقط.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../" class="brand"><img src="../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../#features" data-i18n="nav.features">Features</a>
+          <a href="../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../services.html" data-i18n="nav.services">Services</a>
+          <a href="../blog/" data-i18n="nav.blog">Blog</a>
+          <a href="../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../#open-source" data-i18n="foot.license">License</a>
+          <a href="../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../site.js?v=caf5b6281c"></script>
+<script>(function(){var m=document.querySelector('meta[name="color-scheme"]'),b=document.getElementById('navTheme'),K='khayt-color-scheme';if(!m||!b)return;var q=matchMedia('(prefers-color-scheme: dark)');function sys(){return q.matches?'dark':'light'}function shown(){var v=m.content;return v==='light'||v==='dark'?v:sys()}b.addEventListener('click',function(){var t=shown()==='dark'?'light':'dark',p=t===sys()?null:t;m.content=p||'light dark';try{p?localStorage.setItem(K,p):localStorage.removeItem(K)}catch(e){}});addEventListener('storage',function(e){if(e.key===K)m.content=e.newValue==='light'||e.newValue==='dark'?e.newValue:'light dark'})})();</script>
+</body>
+</html>
