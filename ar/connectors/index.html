@@ -33,7 +33,7 @@
 <link rel="apple-touch-icon" href="/khayt-apple-icon.png">
 <link rel="preload" href="/fonts/ibm-plex-sans-arabic-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css?v=46abfcad90">
-<link rel="stylesheet" href="/styles.css?v=4345f1be13">
+<link rel="stylesheet" href="/styles.css?v=2a4079fcbf">
 </head>
 <body class="page" dir="rtl">
 
@@ -83,6 +83,7 @@
 
 <section class="section cx" data-lang="en" hidden>
   <div class="wrap">
+    <div class="cx-block">
     <div class="cx-head">
       <span class="eyebrow">What it does</span>
       <h2 class="cx-h2">Two things, both from Orca</h2>
@@ -97,7 +98,9 @@
         <p>A Khayt tab in Orca lists the shop’s open jobs: the job number, its stage, the machine, and the name of the file you sent for it. Never a job title, because a title can hold a customer’s name. Never a customer, a price or a note.</p>
       </div>
     </div>
+    </div>
 
+    <div class="cx-block">
     <div class="cx-head">
       <span class="eyebrow">Pair it once</span>
       <h2 class="cx-h2">Three steps, one number to check</h2>
@@ -107,6 +110,7 @@
       <li class="cx-card"><h3>In OrcaSlicer</h3><p>Khayt → Pair → On this network, then type the address the Mac shows.</p></li>
       <li class="cx-card"><h3>Check the number</h3><p>Both screens show the same 6-digit number. If they match, click <strong>Numbers match — approve</strong>. If not, deny.</p></li>
     </ol>
+    </div>
 
     <div class="cx-split">
       <div>
@@ -115,9 +119,15 @@
           <h2 class="cx-h2">Get the plugin</h2>
         </div>
         <p class="cx-p">Needs OrcaSlicer 2.5.1 or later, and Khayt for Mac on the same network. The plugin is open source under the MIT licence: <a href="https://github.com/KhaytApp/khayt-orca">github.com/KhaytApp/khayt-orca</a>.</p>
-        <ol class="cx-install">
-          <li class="cx-pending">[DRAFT: the install steps are not decided yet. Fill them in from the plugin’s first release.]</li>
-        </ol>
+        <div class="cx-pending">
+          <p class="cx-pending-k">DRAFT, tentative: from the plugin’s design, not a release. Check every step against the first release before this ships.</p>
+          <ol class="cx-install">
+            <li>Download the plugin file (.whl) from the plugin’s releases on GitHub.</li>
+            <li>In OrcaSlicer, install it as a local plugin. Orca fetches what the plugin needs by itself, so it needs internet once, and there is nothing else to install.</li>
+            <li>When Orca asks, approve the plugin’s permissions: network access, to reach your Mac. Orca asks again after each update.</li>
+            <li>Open Khayt → Pair, and follow the three steps above.</li>
+          </ol>
+        </div>
       </div>
       <div class="cx-never">
         <span class="eyebrow">What never reaches the slicer</span>
@@ -135,6 +145,7 @@
 
 <section class="section cx" data-lang="ar">
   <div class="wrap">
+    <div class="cx-block">
     <div class="cx-head">
       <span class="eyebrow">ماذا يفعل</span>
       <h2 class="cx-h2">أمران، كلاهما من Orca</h2>
@@ -149,7 +160,9 @@
         <p>يعرض تبويب خيط داخل Orca أعمال المتجر المفتوحة: رقم العمل ومرحلته والآلة واسم الملف الذي أرسلته له. لا يظهر عنوان العمل أبدًا، لأن العنوان قد يحمل اسم عميل. ولا عميل ولا سعر ولا ملاحظة.</p>
       </div>
     </div>
+    </div>
 
+    <div class="cx-block">
     <div class="cx-head">
       <span class="eyebrow">اقرنه مرة واحدة</span>
       <h2 class="cx-h2">ثلاث خطوات، ورقم واحد تتحقق منه</h2>
@@ -159,6 +172,7 @@
       <li class="cx-card"><h3>في OrcaSlicer</h3><p>«خيط» ← «إقران» ← «على هذه الشبكة»، ثم اكتب العنوان الذي يعرضه جهاز ماك.</p></li>
       <li class="cx-card"><h3>تحقق من الرقم</h3><p>تعرض الشاشتان الرقم نفسه المكوّن من ٦ خانات. إن تطابقا فانقر <strong>الرقمان متطابقان — موافقة</strong>، وإلا فارفض.</p></li>
     </ol>
+    </div>
 
     <div class="cx-split">
       <div>
@@ -167,9 +181,15 @@
           <h2 class="cx-h2">احصل على الإضافة</h2>
         </div>
         <p class="cx-p">يحتاج OrcaSlicer 2.5.1 أو أحدث، وخيط لجهاز ماك على الشبكة نفسها. الإضافة مفتوحة المصدر بترخيص MIT: <a href="https://github.com/KhaytApp/khayt-orca">github.com/KhaytApp/khayt-orca</a>.</p>
-        <ol class="cx-install">
-          <li class="cx-pending">[مسودة: خطوات التثبيت لم تتقرر بعد. تُكتب من أول إصدار للإضافة.]</li>
-        </ol>
+        <div class="cx-pending">
+          <p class="cx-pending-k">مسودة مبدئية: من تصميم الإضافة لا من إصدار. تُراجع كل خطوة على أول إصدار قبل النشر.</p>
+          <ol class="cx-install">
+            <li>نزّل ملف الإضافة (.whl) من إصدارات الإضافة على GitHub.</li>
+            <li>في OrcaSlicer ثبّته كإضافة محلية. يجلب Orca ما تحتاجه الإضافة بنفسه، فيحتاج إلى الإنترنت مرة واحدة، ولا شيء آخر لتثبيته.</li>
+            <li>حين يسألك Orca، وافق على أذونات الإضافة: الوصول إلى الشبكة للاتصال بجهاز ماك. ويسألك Orca مجددًا بعد كل تحديث.</li>
+            <li>افتح «خيط» ← «إقران»، واتبع الخطوات الثلاث أعلاه.</li>
+          </ol>
+        </div>
       </div>
       <div class="cx-never">
         <span class="eyebrow">ما لا يصل إلى برنامج التقطيع أبدًا</span>
