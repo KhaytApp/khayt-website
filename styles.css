@@ -1504,6 +1504,8 @@ body.deep .frame { background: transparent; }
 .cx-never ul { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .cx-never li { display: flex; gap: 10px; align-items: flex-start; color: var(--ink-soft); font-size: 16px; line-height: 1.5; }
 .cx-never li svg { flex: none; margin-top: 4px; color: var(--amber); }
+/* DRAFT banner on the help page: delete with the draft. */
+.cx-draft { color: var(--amber); font-weight: 600; }
 .cx-note { margin-top: 16px; color: var(--muted); font-size: 14px; line-height: 1.55; text-wrap: pretty; }
 @media (max-width: 900px) { .cx-3, .cx-split { grid-template-columns: 1fr; } }
 @media (max-width: 680px) { .cx-2 { grid-template-columns: 1fr; } .cx-card, .cx-never { padding: 22px; } }
