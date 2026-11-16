@@ -367,7 +367,7 @@ body[dir="rtl"] .hero-rbg { border-radius: 0 26px 26px 0; inset: 14px 8px -40px 
 .feat-ico svg { width: 21px; height: 21px; }
 .feat h3 { font-family: var(--font-display); font-size: 18.5px; font-weight: 700; letter-spacing: -0.015em; }
 .feat p { color: var(--muted); font-size: 14px; margin-top: 8px; line-height: 1.5; text-wrap: pretty; }
-.feat .num { position: absolute; top: 16px; inset-inline-end: 18px; font-family: var(--font-mono); font-size: 11px; color: var(--line); font-weight: 600; }
+.feat .num { position: absolute; top: 16px; inset-inline-end: 18px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-weight: 600; } /* readable (Turki, option B, Figma 49:408): 5.0:1 light, 6.9:1 dark; still aria-hidden, as the number only counts the cards */
 .plat { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .feat p.plat { margin-top: 14px; }
 /* The newest card leads, across the whole row, so the nine below stay a 3×3. */
