@@ -89,16 +89,16 @@
         <li>Khayt for Mac. Pairing a slicer is not in the Windows or Linux app.</li>
         <li>The LAN server on, with <strong>Listen on all network interfaces (LAN)</strong> turned on, in Settings → Online. Off, the Mac answers only itself and no slicer can reach it.</li>
         <li>OrcaSlicer 2.5.1 or later with the Khayt plugin installed, on a computer on the same network as the Mac.</li>
-        <li>You are the shop’s owner or a manager. Others can’t open pairing.</li>
+        <li>You are the shop’s owner or a manager. Others can’t pair or remove a slicer.</li>
       </ul>
 
       <h2>Pair a slicer, step by step</h2>
       <ol>
-        <li>On the Mac, open Settings → Online → <strong>Connected apps</strong> and click <strong>Pair a slicer</strong>. For the next two minutes a slicer on your network may ask to pair. The Mac shows an address under “In OrcaSlicer, open Khayt, then Pair, then On this network, and enter this address”.</li>
+        <li>On the Mac, open <strong>Connected apps</strong> in the sidebar, under Floor, and click <strong>Pair a slicer</strong>. For the next two minutes a slicer on your network may ask to pair. The Mac shows an address under “In OrcaSlicer, open Khayt, then Pair, then On this network, and enter this address”.</li>
         <li>In OrcaSlicer, open <strong>Khayt → Pair → On this network</strong> and type that address exactly.</li>
         <li>The Mac asks <strong>Approve “name”?</strong> and says which app asked and from which address. Check that this is your slicer.</li>
         <li>Both screens now show a 6-digit number. Under it the Mac asks: <strong>Does the slicer show this number? If not, deny.</strong></li>
-        <li>If the two numbers are the same, click <strong>Numbers match — approve</strong>. The Mac says <strong>Paired “name”.</strong> and the slicer appears under Connected apps.</li>
+        <li>If the two numbers are the same, click <strong>Numbers match — approve</strong>. The Mac says <strong>Paired “name”.</strong> and the slicer appears under Paired slicers.</li>
       </ol>
       <h3>If the numbers are different, deny</h3>
       <p>Click <strong>Deny</strong>. Different numbers mean the request did not come straight from your slicer, so something else on the network may be in between. Don’t approve it to see what happens. Deny, check that the slicer is on your own network, and pair again. One click of Pair a slicer allows three tries; after that, click it again.</p>
@@ -107,15 +107,15 @@
       <p>It may send slices to the From slicer inbox and see the job queue: job numbers, stages and machines only, never titles or customers. Alongside the jobs it sees your machines and whether each is in use, the shop’s name, and how many files wait in the inbox. It can never read your book, customers, prices or settings, and it never sees your LAN PIN. Its key opens the slicer’s own routes and nothing else, and the Mac keeps that key in its Keychain, not in your book.</p>
 
       <h2>The From slicer inbox</h2>
-      <p>What a slicer sends waits in <strong>From Your Slicer</strong>, with the slicer’s own weight and print time. When files are waiting, a bar shows how many, with <strong>Review…</strong> to open it. For each file you choose:</p>
+      <p>What a slicer sends waits under <strong>From Your Slicer</strong> on the Connected apps screen, with the slicer’s own weight and print time, which slicer sent it, and what the slicer asked for (a quote, a job, a print). For each file you choose:</p>
       <ul>
         <li><strong>Add to Library</strong>, <strong>New Job</strong> or <strong>New Quote</strong>, to take it, or</li>
         <li><strong>Discard</strong>, to throw it away.</li>
       </ul>
-      <p>Either way the file leaves the inbox. Nothing becomes a job and no print starts until you choose. There is no time limit: a file waits until you take or discard it. Up to 100 files can wait; after that the slicer is told the inbox is full until you clear some. The inbox is a folder beside your book on this Mac, not part of the book, and Khayt doesn’t sync it or send it anywhere.</p>
+      <p>Either way the file leaves the inbox. Nothing becomes a job and no print starts until you choose: what a slicer asked for is only a suggestion. The same file sent twice is kept once, and Khayt tells you so. There is no time limit: a file waits until you take or discard it. Up to 100 files can wait; after that the slicer is told the inbox is full until you clear some. The inbox is a folder beside your book on this Mac, not part of the book, and Khayt doesn’t sync it or send it anywhere.</p>
 
       <h2>Remove a paired slicer</h2>
-      <p>In Settings → Online → Connected apps, click <strong>Remove…</strong> next to the slicer and confirm. It stops sending to this Mac at once. To use it again, pair it again. Changing the LAN PIN also signs out every paired slicer, together with paired phones.</p>
+      <p>On the Connected apps screen, click <strong>Remove…</strong> next to the slicer and confirm. It stops sending to this Mac at once. To use it again, pair it again. The files it already sent stay in your inbox, and the confirmation says how many. Changing the LAN PIN also signs out every paired slicer, together with paired phones.</p>
 
       <h2>Troubleshooting</h2>
       <h3>Pair a slicer is greyed out</h3>
@@ -133,7 +133,7 @@
       <h3>The LAN PIN couldn’t be read from the Keychain</h3>
       <p>Nothing was paired. Set the LAN PIN again in Settings → Online, then pair the slicer. Setting the PIN signs out paired phones and slicers, so pair those again too.</p>
       <h3>The slicer says the inbox is full</h3>
-      <p>100 files are waiting. Open From Your Slicer on the Mac, take or discard some, and send again.</p>
+      <p>100 files are waiting. Open Connected apps on the Mac, take or discard some under From Your Slicer, and send again.</p>
     </div>
     <div class="post-body policy" data-lang="ar" hidden>
       <p class="policy-tldr"><strong>قبل النشر:</strong> <span class="cx-draft">مسودة. إقران برنامج التقطيع متوقف في إصدارات خيط الحالية، وإضافة OrcaSlicer لم تصدر بعد. تُراجع كل خطوة على التطبيق والإضافة بعد صدورهما قبل نشر هذه الصفحة.</span></p>
@@ -143,16 +143,16 @@
         <li>خيط لجهاز ماك. إقران برنامج التقطيع غير موجود في تطبيق ويندوز أو لينكس.</li>
         <li>خادم الشبكة المحلية مشغّل، مع تفعيل <strong>الاستماع على جميع واجهات الشبكة (LAN)</strong>، في الإعدادات ← الشبكة. وإن كان متوقفًا فلا يجيب جهاز ماك إلا نفسه ولا يصل إليه أي برنامج تقطيع.</li>
         <li>OrcaSlicer 2.5.1 أو أحدث مع إضافة خيط مثبّتة، على جهاز متصل بالشبكة نفسها التي عليها جهاز ماك.</li>
-        <li>أن تكون مالك المتجر أو مديرًا فيه. لا يستطيع غيرهما فتح الإقران.</li>
+        <li>أن تكون مالك المتجر أو مديرًا فيه. لا يستطيع غيرهما إقران برنامج تقطيع أو إزالته.</li>
       </ul>
 
       <h2>إقران برنامج التقطيع خطوة بخطوة</h2>
       <ol>
-        <li>على جهاز ماك افتح الإعدادات ← الشبكة ← <strong>التطبيقات المتصلة</strong> وانقر <strong>إقران برنامج تقطيع</strong>. خلال الدقيقتين التاليتين يستطيع برنامج تقطيع على شبكتك أن يطلب الإقران. ويعرض جهاز ماك عنوانًا تحت «في OrcaSlicer افتح «خيط» ثم «إقران» ثم «على هذه الشبكة»، وأدخل هذا العنوان».</li>
+        <li>على جهاز ماك افتح <strong>التطبيقات المتصلة</strong> في الشريط الجانبي تحت «الورشة»، وانقر <strong>إقران برنامج تقطيع</strong>. خلال الدقيقتين التاليتين يستطيع برنامج تقطيع على شبكتك أن يطلب الإقران. ويعرض جهاز ماك عنوانًا تحت «في OrcaSlicer افتح «خيط» ثم «إقران» ثم «على هذه الشبكة»، وأدخل هذا العنوان».</li>
         <li>في OrcaSlicer افتح <strong>«خيط» ← «إقران» ← «على هذه الشبكة»</strong> واكتب ذلك العنوان كما هو تمامًا.</li>
         <li>يسألك جهاز ماك <strong>الموافقة على «الاسم»؟</strong> ويذكر التطبيق الذي طلب والعنوان الذي جاء منه. تأكد أنه برنامج التقطيع الخاص بك.</li>
         <li>تعرض الشاشتان الآن رقمًا من ٦ خانات، ويسأل جهاز ماك تحته: <strong>هل يظهر هذا الرقم في برنامج التقطيع؟ إن لم يظهر فارفض.</strong></li>
-        <li>إن كان الرقمان متطابقين فانقر <strong>الرقمان متطابقان — موافقة</strong>. يقول جهاز ماك <strong>تم إقران «الاسم».</strong> ويظهر البرنامج تحت التطبيقات المتصلة.</li>
+        <li>إن كان الرقمان متطابقين فانقر <strong>الرقمان متطابقان — موافقة</strong>. يقول جهاز ماك <strong>تم إقران «الاسم».</strong> ويظهر البرنامج تحت «برامج التقطيع المقترنة».</li>
       </ol>
       <h3>إن اختلف الرقمان فارفض</h3>
       <p>انقر <strong>رفض</strong>. اختلاف الرقمين يعني أن الطلب لم يأتِ من برنامج التقطيع مباشرة، فقد يكون شيء آخر على الشبكة في المنتصف. لا توافق لترى ما يحدث. ارفض، وتأكد أن برنامج التقطيع على شبكتك أنت، ثم أعد الإقران. تتيح النقرة الواحدة على «إقران برنامج تقطيع» ثلاث محاولات، وبعدها انقرها من جديد.</p>
@@ -161,15 +161,15 @@
       <p>يمكنه إرسال الملفات المقطّعة إلى صندوق «من برنامج التقطيع» ورؤية قائمة الأعمال: أرقام الأعمال ومراحلها والآلات فقط، دون العناوين أو العملاء. ويرى مع الأعمال آلاتك وحالة كل منها، واسم المتجر، وعدد الملفات المنتظرة في الصندوق. ولا يمكنه أبدًا قراءة دفترك أو عملائك أو أسعارك أو إعداداتك، ولا يرى رمز الشبكة المحلية أبدًا. ومفتاحه لا يفتح إلا مسارات برنامج التقطيع، ويحفظه جهاز ماك في سلسلة المفاتيح لا في دفترك.</p>
 
       <h2>صندوق «من برنامج التقطيع»</h2>
-      <p>ينتظر ما يرسله برنامج التقطيع في <strong>من برنامج التقطيع</strong>، بالوزن وزمن الطباعة كما حسبهما البرنامج. وحين تنتظر ملفات يظهر شريط بعددها، ومعه زر لفتح الصندوق. ولكل ملف تختار:</p>
+      <p>ينتظر ما يرسله برنامج التقطيع تحت <strong>من برنامج التقطيع</strong> في شاشة التطبيقات المتصلة، بالوزن وزمن الطباعة كما حسبهما البرنامج، واسم البرنامج الذي أرسله، وما طلبه (عرض سعر أو عمل أو طباعة). ولكل ملف تختار:</p>
       <ul>
         <li><strong>إضافة إلى المكتبة</strong> أو <strong>عمل جديد</strong> أو <strong>عرض سعر جديد</strong>، لتأخذه، أو</li>
         <li><strong>تجاهل</strong>، لتتخلص منه.</li>
       </ul>
-      <p>وفي الحالتين يخرج الملف من الصندوق. ولا يصبح شيء عملًا ولا تبدأ طباعة حتى تختار. ولا حدّ زمنيًا: ينتظر الملف حتى تأخذه أو تتجاهله. ويتسع الصندوق لـ ١٠٠ ملف، وبعدها يُبلَّغ برنامج التقطيع أن الصندوق ممتلئ حتى تفرغ بعضه. والصندوق مجلد بجانب دفترك على هذا الجهاز، وليس جزءًا من الدفتر، ولا يزامنه خيط ولا يرسله إلى أي مكان.</p>
+      <p>وفي الحالتين يخرج الملف من الصندوق. ولا يصبح شيء عملًا ولا تبدأ طباعة حتى تختار: ما طلبه البرنامج اقتراح فقط. والملف نفسه إذا أُرسل مرتين يُحفظ مرة واحدة، ويخبرك خيط بذلك. ولا حدّ زمنيًا: ينتظر الملف حتى تأخذه أو تتجاهله. ويتسع الصندوق لـ ١٠٠ ملف، وبعدها يُبلَّغ برنامج التقطيع أن الصندوق ممتلئ حتى تفرغ بعضه. والصندوق مجلد بجانب دفترك على هذا الجهاز، وليس جزءًا من الدفتر، ولا يزامنه خيط ولا يرسله إلى أي مكان.</p>
 
       <h2>إزالة برنامج تقطيع مقترن</h2>
-      <p>في الإعدادات ← الشبكة ← التطبيقات المتصلة، انقر <strong>إزالة…</strong> بجانب البرنامج وأكّد. يتوقف عن الإرسال إلى هذا الماك فورًا. لاستخدامه مجددًا، اقرنه من جديد. وتغيير رمز الشبكة المحلية يسجّل خروج كل برامج التقطيع المقترنة أيضًا، مع الهواتف المقترنة.</p>
+      <p>في شاشة التطبيقات المتصلة، انقر <strong>إزالة…</strong> بجانب البرنامج وأكّد. يتوقف عن الإرسال إلى هذا الماك فورًا. لاستخدامه مجددًا، اقرنه من جديد. والملفات التي أرسلها تبقى في صندوقك، ويذكر لك التأكيد عددها. وتغيير رمز الشبكة المحلية يسجّل خروج كل برامج التقطيع المقترنة أيضًا، مع الهواتف المقترنة.</p>
 
       <h2>حل المشكلات</h2>
       <h3>زر «إقران برنامج تقطيع» غير متاح</h3>
@@ -187,7 +187,7 @@
       <h3>تعذّرت قراءة رمز الشبكة المحلية من سلسلة المفاتيح</h3>
       <p>لم يُقرن شيء. عيّن رمز الشبكة المحلية مجددًا في الإعدادات ← الشبكة، ثم أقرِن برنامج التقطيع. وتعيين الرمز يسجّل خروج الهواتف وبرامج التقطيع المقترنة، فأعد إقرانها أيضًا.</p>
       <h3>يقول برنامج التقطيع إن الصندوق ممتلئ</h3>
-      <p>ينتظر ١٠٠ ملف. افتح «من برنامج التقطيع» على جهاز ماك، وخذ بعضها أو تجاهله، ثم أعد الإرسال.</p>
+      <p>ينتظر ١٠٠ ملف. افتح «التطبيقات المتصلة» على جهاز ماك، وخذ بعضها أو تجاهله تحت «من برنامج التقطيع»، ثم أعد الإرسال.</p>
     </div>
    </div>
   </div>
