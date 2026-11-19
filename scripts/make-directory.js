@@ -39,8 +39,11 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const CHECK = process.argv.includes('--check');
+// --listings FILE --dry: refuse-or-pass only, for scripts/test-make-directory.js.
+const argAt = k => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : null; };
+const DRY = process.argv.includes('--dry');
 const M = require(path.join(ROOT, 'developers', 'vendor', 'plugin-manifest.js'));
-const LIST = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory', 'listings.json'), 'utf8'));
+const LIST = JSON.parse(fs.readFileSync(argAt('--listings') || path.join(ROOT, 'directory', 'listings.json'), 'utf8'));
 const STR = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory', 'strings.json'), 'utf8'));
 
 // The deep link that opens the app's own consent sheet is not built yet
@@ -99,28 +102,39 @@ const KINDS = {
   addon: ['Add-on', 'إضافة'], plugin: ['Plugin', 'إضافة برمجية'],
 };
 
+// A publisher's domain shows as verified only when it is proven. Until
+// publisher accounts exist (phase 2: a DNS TXT record or a .well-known file),
+// the only proven domain is this site's own, for Khayt's own items.
+const PROVEN_DOMAINS = new Set(['khaytapp.com']);
+const publishers = new Map((LIST.publishers || []).map(P => {
+  if (!/^[a-z0-9-]+$/.test(P.slug)) fail(`publisher ${P.slug}: a slug is lower case letters, digits and dashes`);
+  return [P.slug, Object.assign({}, P, { verified: !!P.domain && PROVEN_DOMAINS.has(P.domain) })];
+}));
 const items = LIST.items.map(L => {
+  if (!publishers.has(L.publisher_slug)) fail(`${L.slug}: no publisher ${L.publisher_slug} in listings.json`);
   if (!/^[a-z0-9-]+$/.test(L.slug)) fail(`${L.slug}: a slug is lower case letters, digits and dashes`);
   if (!CATEGORIES[L.category]) fail(`${L.slug}: unknown category ${L.category}`);
   for (const k of ['licence', 'source', 'privacy', 'support']) if (!L[k]) fail(`${L.slug}: no ${k}`);
   if (L.kind === 'connector') {
-    const bytes = fs.readFileSync(path.join(ROOT, L.manifest));
+    const bytes = fs.readFileSync(path.resolve(ROOT, L.manifest));
     const m = JSON.parse(bytes.toString('utf8'));
     const v = M.validateManifest(m);
     if (!v.ok) fail(`${L.slug}: ${L.manifest} is refused by the app's validator: ${v.errors.join('; ')}`);
     const keyId = signedBy(M.canonicalJSON(m), m.signature);
     if (!keyId) fail(`${L.slug}: ${L.manifest} is not signed by a published key`);
+    const P = publishers.get(L.publisher_slug);
+    if (P && m.publisher !== P.name) fail(`${L.slug}: the signed manifest says publisher "${m.publisher}", the listing says ${P.name}`);
     const rows = M.consentRows(m);
     for (const r of rows) if (!publicHost(r.host)) fail(`${L.slug}: ${r.host} is not a public host name`);
     return {
       slug: L.slug, kind: 'connector', id: m.id, version: m.version, name: m.name, description: m.description || {},
       publisher: m.publisher, category: L.category, licence: L.licence, source: L.source, privacy: L.privacy, support: L.support,
-      keyId, file: '/' + L.manifest, fileName: path.basename(L.manifest), sha256: sha256(bytes), size: bytes.length,
+      pub: L.publisher_slug, keyId, file: '/' + L.manifest, fileName: path.basename(L.manifest), sha256: sha256(bytes), size: bytes.length,
       rows, scopes: (m.scopes || []).slice(), refresh: M.refreshConsent(m, 'en') ? m : null, manifest: m,
     };
   }
   if (L.kind === 'slicer') {
-    const it = Object.assign({}, L, { released: false });
+    const it = Object.assign({}, L, { pub: L.publisher_slug, released: false });
     // A download needs a released file AND a signed index row with its hash.
     if (L.package) {
       const index = signedIndex();
@@ -149,6 +163,7 @@ if (problems.length) {
   console.error('make-directory: refused\n  ' + problems.join('\n  '));
   process.exit(1);
 }
+if (DRY) { console.log(`make-directory: ${items.length} items would build`); process.exit(0); }
 
 // ---- Shared pieces -----------------------------------------------------------
 // An item's own words in this page's language when it has them; otherwise
@@ -172,20 +187,23 @@ function badge(it, lang) {
 }
 
 // ---- The list ----------------------------------------------------------------
-function listPage(lang) {
+function card(it, lang, up = '') {
   const t = tFor(lang);
-  const card = it => {
+  {
     const desc = it.description && (lang === 'ar' && it.description.ar ? esc(it.description.ar) : `<span${lang === 'ar' ? ' lang="en" dir="ltr"' : ''}>${esc(it.description.en)}</span>`);
     const hay = [it.name.en, it.name.ar, it.description.en, it.description.ar, it.publisher, ...CATEGORIES[it.category]].filter(Boolean).join(' ').toLowerCase();
     return `
       <li class="dir-card" data-kind="${it.kind}" data-text="${esc(hay)}">
         <div class="dir-tags"><span class="dir-kind">${kindLabel(it.kind, lang)}</span>${badge(it, lang)}</div>
-        <h2 class="dir-card-t"><a href="${it.slug}/">${own(it.name, lang)}</a></h2>
+        <h2 class="dir-card-t"><a href="${up}${it.slug}/">${own(it.name, lang)}</a></h2>
         <p class="dir-by">${t('by', 'من')} ${esc(it.publisher)}</p>
         <p class="dir-card-p">${desc}</p>
         <p class="dir-meta"><span>${esc(it.licence)}</span><span>${t('Free', 'مجاني')}</span><span>${CATEGORIES[it.category][lang === 'ar' ? 1 : 0]}</span></p>
       </li>`;
-  };
+  }
+}
+function listPage(lang) {
+  const t = tFor(lang);
   const coming = (LIST.coming || []).map(c => `
       <li class="dir-card dir-card-coming" data-kind="${c.kind}" data-text="${esc([...KINDS[c.kind]].join(' ').toLowerCase())}">
         <div class="dir-tags"><span class="dir-kind">${kindLabel(c.kind, lang)}</span><span class="dir-badge dir-badge-wait">${t('Coming', 'قريبًا')}</span></div>
@@ -217,7 +235,7 @@ function listPage(lang) {
       </div>
     </search>
     <p class="dir-count" id="dirCount" role="status"></p>
-    <ul class="dir-grid" id="dirGrid">${items.map(card).join('')}${coming}
+    <ul class="dir-grid" id="dirGrid">${items.map(it => card(it, lang)).join('')}${coming}
     </ul>
     <p class="dir-note">${t('Want your connector or plugin here?', 'تريد أن يظهر موصلك أو إضافتك هنا؟')} <a href="review/">${t('How Khayt reviews and lists items', 'كيف تراجع خيط العناصر وتدرجها')}</a>.</p>
   </div>
@@ -338,7 +356,7 @@ function details(it, lang) {
   const row = (k, v) => `\n        <div><dt>${k}</dt><dd>${v}</dd></div>`;
   return `
     <aside class="dir-side">
-      <dl class="dir-dl-list">${row(t('Version', 'الإصدار'), `<span dir="ltr">${version}</span>`)}${row(t('Kind', 'النوع'), kind)}${row(t('Publisher', 'الناشر'), esc(it.publisher))}${row(t('Licence', 'الترخيص'), `<span dir="ltr">${esc(it.licence)}</span>`)}${row(t('Price', 'السعر'), t('Free', 'مجاني'))}${row(t('Source', 'الكود المصدري'), link(it.source, strip(it.source)))}${row(t('Privacy statement', 'بيان الخصوصية'), link(it.privacy, strip(it.privacy)))}${row(t('Support', 'الدعم'), `<a href="mailto:${esc(it.support)}" dir="ltr">${esc(it.support)}</a>`)}${row(t('Works in', 'يعمل في'), works)}
+      <dl class="dir-dl-list">${row(t('Version', 'الإصدار'), `<span dir="ltr">${version}</span>`)}${row(t('Kind', 'النوع'), kind)}${row(t('Publisher', 'الناشر'), `<a href="../publisher/${it.pub}/">${esc(it.publisher)}</a>`)}${row(t('Licence', 'الترخيص'), `<span dir="ltr">${esc(it.licence)}</span>`)}${row(t('Price', 'السعر'), t('Free', 'مجاني'))}${row(t('Source', 'الكود المصدري'), link(it.source, strip(it.source)))}${row(t('Privacy statement', 'بيان الخصوصية'), link(it.privacy, strip(it.privacy)))}${row(t('Support', 'الدعم'), `<a href="mailto:${esc(it.support)}" dir="ltr">${esc(it.support)}</a>`)}${row(t('Works in', 'يعمل في'), works)}
       </dl>
       <button type="button" class="dir-report-b" command="show-modal" commandfor="report">${t('Report this item', 'أبلغ عن هذا العنصر')}</button>
     </aside>`;
@@ -397,7 +415,7 @@ function itemPage(it, lang) {
     <a class="dir-back" href="../"><span aria-hidden="true" class="dir-flip">←</span> ${t('All connectors and plugins', 'كل الموصلات والإضافات')}</a>
     <span class="eyebrow">${eyebrow}</span>
     <h1>${own(it.name, lang)}</h1>
-    <p class="dir-head-by">${t('by', 'من')} ${esc(it.publisher)} ${badge(it, lang)}</p>
+    <p class="dir-head-by">${t('by', 'من')} <a href="../publisher/${it.pub}/">${esc(it.publisher)}</a> ${badge(it, lang)}</p>
     ${desc}
     <div class="dir-install">${install}</div>
    </div>
@@ -418,6 +436,39 @@ function itemPage(it, lang) {
   </div>
 </section>
 ${reportDialog(it, lang)}
+`;
+}
+
+// ---- A publisher -----------------------------------------------------------------
+function publisherPage(P, lang) {
+  const t = tFor(lang);
+  const mine = items.filter(it => it.pub === P.slug);
+  const verified = P.verified
+    ? `<span class="dir-badge dir-badge-ok">${ICON_CHECK}${t('Verified', 'موثَّق')}: <span dir="ltr">${esc(P.domain)}</span></span>`
+    : '';
+  return `
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in dir-head">
+    <a class="dir-back" href="../../"><span aria-hidden="true" class="dir-flip">←</span> ${t('All connectors and plugins', 'كل الموصلات والإضافات')}</a>
+    <span class="eyebrow">${t('Publisher', 'الناشر')}</span>
+    <h1>${esc(P.name)}</h1>
+    <p class="dir-head-by">${verified}</p>
+    <p>${t('Support', 'الدعم')}: <a href="mailto:${esc(P.support)}" dir="ltr">${esc(P.support)}</a></p>
+   </div>
+  </div>
+</section>
+
+<section class="section dir">
+  <div class="wrap">
+    <p class="dir-draft">${t('DRAFT, hidden: this directory is not public, and nothing on it can be installed yet.', 'مسودة مخفية: هذا الدليل ليس عامًّا، ولا يمكن تثبيت شيء منه بعد.')}</p>
+    <h2 class="dir-h2">${t(`${mine.length} ${mine.length === 1 ? 'item' : 'items'}`, `العناصر: ${mine.length}`)}</h2>
+    <ul class="dir-grid">${mine.map(it => card(it, lang, '../../')).join('')}
+    </ul>
+    <p class="dir-note">${t('A verified badge means the publisher proved they control that domain. It is not a review of their items: every item is reviewed on its own.',
+      'تعني شارة التوثيق أن الناشر أثبت أنه يملك ذلك النطاق. وليست مراجعة لعناصره: فكل عنصر يُراجَع وحده.')}</p>
+  </div>
+</section>
 `;
 }
 
@@ -540,6 +591,11 @@ for (const lang of ['en', 'ar']) {
   OUT[pre + 'directory/review/index.html'] = page('directory/review/index.html',
     ['How Khayt reviews what it lists — Khayt', 'كيف تراجع خيط ما تدرجه — خيط'][i],
     ['The checks, the review and the signing every listed item goes through, and how to list yours.', 'الفحوص والمراجعة والتوقيع التي يمر بها كل عنصر مُدرج، وكيف تدرج عنصرك.'][i], reviewPage(lang), lang);
+  for (const P of publishers.values()) {
+    OUT[pre + `directory/publisher/${P.slug}/index.html`] = page(`directory/publisher/${P.slug}/index.html`,
+      `${P.name} — ${['Khayt directory', 'دليل خيط'][i]}`,
+      [`Connectors and plugins published by ${P.name}.`, `الموصلات والإضافات التي نشرها ${P.name}.`][i], publisherPage(P, lang), lang);
+  }
   for (const it of items) {
     OUT[pre + `directory/${it.slug}/index.html`] = page(`directory/${it.slug}/index.html`,
       `${plainName(it, lang)} — ${['Khayt directory', 'دليل خيط'][i]}`,

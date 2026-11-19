@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/color-scheme.js', 'scripts/stamp-assets.js', 'scripts/check-freshness.js', 'scripts/make-directory.js', 'directory/directory.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/color-scheme.js', 'scripts/stamp-assets.js', 'scripts/check-freshness.js', 'scripts/make-directory.js', 'scripts/test-make-directory.js', 'directory/directory.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });
@@ -424,6 +424,9 @@ check('The hidden directory is built from signed manifests, and stays hidden', (
   // not in a signed index. --check also fails when a page is stale.
   try {
     execFileSync(process.execPath, ['scripts/make-directory.js', '--check'], { stdio: 'pipe' });
+    // ...and that it still refuses a tampered manifest, a mismatched publisher,
+    // an unsigned slicer download, and the rest of scripts/test-make-directory.js.
+    execFileSync(process.execPath, ['scripts/test-make-directory.js'], { stdio: 'pipe' });
   } catch (e) {
     throw new Error(String(e.stderr || e.message).trim());
   }
