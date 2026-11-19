@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.10.3",
+   "name": "Khayt v4.10.3",
+   "date": "2026-11-19",
+   "prerelease": false,
+   "note": "If you are updating from 4.9 or earlier, Settings, the job page, Simple mode and the stage colours have changed: read this before you update.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.10.3",
+   "assets": [
+    {
+     "name": "Khayt-4.10.3.AppImage",
+     "size": 174455696,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-4.10.3.AppImage"
+    },
+    {
+     "name": "Khayt-4.10.3.exe",
+     "size": 153258956,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-4.10.3.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.10.3.exe",
+     "size": 153523713,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-Setup-4.10.3.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.10.3.exe.blockmap",
+     "size": 160960,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-Setup-4.10.3.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.10.3_amd64.deb",
+     "size": 140272748,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/khayt_4.10.3_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 518,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 342,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.10.2",
    "name": "Khayt v4.10.2",
    "date": "2026-11-17",
    "prerelease": false,
    "note": "If you are updating from 4.9 or earlier, Settings, the job page, Simple mode and the stage colours have changed: read this before you update.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.10.2",
-   "assets": [
-    {
-     "name": "Khayt-4.10.2.AppImage",
-     "size": 174450549,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/Khayt-4.10.2.AppImage"
-    },
-    {
-     "name": "Khayt-4.10.2.exe",
-     "size": 153258258,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/Khayt-4.10.2.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.10.2.exe",
-     "size": 153523060,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/Khayt-Setup-4.10.2.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.10.2.exe.blockmap",
-     "size": 160886,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/Khayt-Setup-4.10.2.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.10.2_amd64.deb",
-     "size": 140293328,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/khayt_4.10.2_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 518,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 342,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.2/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.10.2"
   },
   {
    "tag": "v4.10.1",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "A saved product price never changes on its own, since 3.11.25.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.26"
-  },
-  {
-   "tag": "v3.11.25",
-   "name": "Khayt v3.11.25",
-   "date": "2026-10-21",
-   "prerelease": false,
-   "note": "VAT is now counted when the invoice is issued, not when the job is finished.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.25"
   }
  ]
 }
