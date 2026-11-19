@@ -120,12 +120,12 @@
         </div>
         <p class="cx-p">Needs OrcaSlicer 2.5.1 or later, and Khayt for Mac on the same network. The plugin is open source under the MIT licence: <a href="https://github.com/KhaytApp/khayt-orca">github.com/KhaytApp/khayt-orca</a>.</p>
         <div class="cx-pending">
-          <p class="cx-pending-k">DRAFT, tentative: from the plugin’s design, not a release. Check every step against the first release before this ships.</p>
+          <p class="cx-pending-k">DRAFT: steps 2 to 4 were checked in a real OrcaSlicer 2.5.1 run on 19 Nov 2026. Step 1 waits for the plugin’s first release.</p>
           <ol class="cx-install">
             <li>Download the plugin file (.whl) from the plugin’s releases on GitHub.</li>
-            <li>In OrcaSlicer, install it as a local plugin. Orca fetches what the plugin needs by itself, so it needs internet once, and there is nothing else to install.</li>
-            <li>When Orca asks, approve the plugin’s permissions: network access, to reach your Mac. Orca asks again after each update.</li>
-            <li>Pair it with your Mac: the three steps above.</li>
+            <li>In OrcaSlicer, install it with <strong>Install local plugin</strong>. Orca asks nothing at this step.</li>
+            <li>Turn sending on: in <strong>Prepare</strong>, open the process settings, switch <strong>Advanced</strong> on, then under <strong>Others</strong> set <strong>Slicing Pipeline Plugin</strong> to <strong>Khayt: send to inbox</strong>. Until you do, nothing is sent.</li>
+            <li>Pair it with your Mac: the three steps above. At the first Pair, Orca asks once to allow network access to your Mac’s address. Choose <strong>Allow</strong>.</li>
           </ol>
         </div>
       </div>
@@ -182,12 +182,12 @@
         </div>
         <p class="cx-p">يحتاج OrcaSlicer 2.5.1 أو أحدث، وخيط لجهاز ماك على الشبكة نفسها. الإضافة مفتوحة المصدر بترخيص MIT: <a href="https://github.com/KhaytApp/khayt-orca">github.com/KhaytApp/khayt-orca</a>.</p>
         <div class="cx-pending">
-          <p class="cx-pending-k">مسودة مبدئية: من تصميم الإضافة لا من إصدار. تُراجع كل خطوة على أول إصدار قبل النشر.</p>
+          <p class="cx-pending-k">مسودة: جُرّبت الخطوات من ٢ إلى ٤ في تشغيل فعلي لـ OrcaSlicer 2.5.1 في ١٩ نوفمبر ٢٠٢٦. والخطوة ١ تنتظر أول إصدار للإضافة.</p>
           <ol class="cx-install">
             <li>نزّل ملف الإضافة (.whl) من إصدارات الإضافة على GitHub.</li>
-            <li>في OrcaSlicer ثبّته كإضافة محلية. يجلب Orca ما تحتاجه الإضافة بنفسه، فيحتاج إلى الإنترنت مرة واحدة، ولا شيء آخر لتثبيته.</li>
-            <li>حين يسألك Orca، وافق على أذونات الإضافة: الوصول إلى الشبكة للاتصال بجهاز ماك. ويسألك Orca مجددًا بعد كل تحديث.</li>
-            <li>اقرنه بجهاز ماك: الخطوات الثلاث أعلاه.</li>
+            <li>في OrcaSlicer ثبّته من <strong>Install local plugin</strong>. لا يسألك Orca شيئًا في هذه الخطوة.</li>
+            <li>شغّل الإرسال: في <strong>Prepare</strong> افتح إعدادات المعالجة، وفعّل <strong>Advanced</strong>، ثم من <strong>Others</strong> اختر في <strong>Slicing Pipeline Plugin</strong> الخيار <strong>Khayt: send to inbox</strong>. وقبل ذلك لا يُرسل شيء.</li>
+            <li>اقرنه بجهاز ماك: الخطوات الثلاث أعلاه. وعند أول إقران يسألك Orca مرة واحدة أن تسمح بالوصول إلى عنوان جهاز ماك عبر الشبكة. اختر <strong>Allow</strong>.</li>
           </ol>
         </div>
       </div>
