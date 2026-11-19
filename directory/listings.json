@@ -9,7 +9,8 @@
       "licence": "MIT",
       "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
       "privacy": "https://khaytapp.com/privacy/",
-      "support": "support@khaytapp.com"
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
     },
     {
       "slug": "slack",
@@ -19,7 +20,8 @@
       "licence": "MIT",
       "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
       "privacy": "https://khaytapp.com/privacy/",
-      "support": "support@khaytapp.com"
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
     },
     {
       "slug": "discord",
@@ -29,7 +31,8 @@
       "licence": "MIT",
       "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
       "privacy": "https://khaytapp.com/privacy/",
-      "support": "support@khaytapp.com"
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
     },
     {
       "slug": "sheets",
@@ -39,7 +42,8 @@
       "licence": "MIT",
       "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
       "privacy": "https://khaytapp.com/privacy/",
-      "support": "support@khaytapp.com"
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
     },
     {
       "slug": "orcaslicer",
@@ -68,12 +72,21 @@
       "licence": "MIT",
       "source": "https://github.com/KhaytApp/khayt-orca",
       "privacy": "https://khaytapp.com/privacy/",
-      "support": "support@khaytapp.com"
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
     }
   ],
   "coming": [
     {
       "kind": "plugin"
+    }
+  ],
+  "publishers": [
+    {
+      "slug": "khayt",
+      "name": "Khayt",
+      "domain": "khaytapp.com",
+      "support": "support@khaytapp.com"
     }
   ]
 }
