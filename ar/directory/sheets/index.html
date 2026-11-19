@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="/styles.css?v=9cae2369c9">
 <link rel="alternate" hreflang="en" href="https://khaytapp.com/directory/sheets/">
 <link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/directory/sheets/">
-<script src="/directory/directory.js?v=a8b4d4dc63" type="module"></script>
+<script src="/directory/directory.js?v=ea42574244" type="module"></script>
 </head>
 <body class="page" dir="rtl">
 
@@ -128,9 +128,9 @@
         <div><dt>الناشر</dt><dd><a href="../publisher/khayt/">Khayt</a></dd></div>
         <div><dt>الترخيص</dt><dd><span dir="ltr">MIT</span></dd></div>
         <div><dt>السعر</dt><dd>مجاني</dd></div>
-        <div><dt>الكود المصدري</dt><dd><a href="https://github.com/KhaytApp/Khayt/tree/main/plugins/samples" dir="ltr">github.com/KhaytApp/Khayt/tree/main/plugins/samples</a></dd></div>
-        <div><dt>بيان الخصوصية</dt><dd><a href="https://khaytapp.com/privacy/" dir="ltr">khaytapp.com/privacy</a></dd></div>
-        <div><dt>الدعم</dt><dd><a href="mailto:support@khaytapp.com" dir="ltr">support@khaytapp.com</a></dd></div>
+        <div><dt>الكود المصدري</dt><dd><a href="https://github.com/KhaytApp/Khayt/tree/main/plugins/samples" rel="noopener noreferrer" dir="ltr">github.com/KhaytApp/Khayt/tree/main/plugins/samples</a></dd></div>
+        <div><dt>بيان الخصوصية</dt><dd><a href="https://khaytapp.com/privacy/" rel="noopener noreferrer" dir="ltr">khaytapp.com/privacy</a></dd></div>
+        <div><dt>الدعم</dt><dd><a href="mailto:support@khaytapp.com" rel="noopener noreferrer" dir="ltr">support@khaytapp.com</a></dd></div>
         <div><dt>يعمل في</dt><dd>خيط للماك وويندوز ولينكس، وعلى الآيفون بعد تثبيته من حاسوبك</dd></div>
       </dl>
       <button type="button" class="dir-report-b" command="show-modal" commandfor="report">أبلغ عن هذا العنصر</button>
@@ -152,7 +152,7 @@
       <label class="dir-radio"><input type="radio" name="reason" value="other"> شيء آخر</label>
     </fieldset>
     <label class="dir-field"><span>ماذا حدث</span>
-      <textarea name="what" rows="4" maxlength="2000" required placeholder="أي إصدار، وماذا رأيت."></textarea></label>
+      <textarea name="what" rows="4" maxlength="2048" data-max-bytes="2048" required placeholder="أي إصدار، وماذا رأيت."></textarea></label>
     <p class="dir-form-k">يفتح زر الإرسال تطبيق البريد لديك وفيه البلاغ موجّهًا إلى support@khaytapp.com. ولا يحمل إلا ما تكتبه هنا، والعنصر وإصداره.</p>
     <div class="dir-form-a">
       <button type="button" class="btn btn-ghost" command="close" commandfor="report">إلغاء</button>
@@ -161,7 +161,7 @@
     <p class="dir-form-k">هذا ليس للمساعدة في استخدام العنصر: استخدم رابط الدعم الخاص به.</p>
   </form>
 </dialog>
-<p class="dir-sent" id="reportSent" role="status" hidden>يُفترض أن يفتح تطبيق البريد وفيه البلاغ. وإن لم يفتح فاكتب إلى support@khaytapp.com.</p>
+<p class="dir-sent" id="reportSent" role="status" hidden data-mail="يُفترض أن يفتح تطبيق البريد وفيه البلاغ. وإن لم يفتح فاكتب إلى support@khaytapp.com." data-sent="شكرًا، وصل بلاغك. يقرأ شخص في خيط كل بلاغ." data-long="هذا طويل جدًّا: اجعله أقل من 2 كيلوبايت."></p>
 </main>
 
 <footer class="footer">

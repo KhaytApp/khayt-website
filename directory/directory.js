@@ -88,19 +88,35 @@ for (const box of document.querySelectorAll('.dir-check')) {
 }
 
 // ---- Report -----------------------------------------------------------------------
-// Opens the visitor's email app with the report filled in. Nothing is sent
-// from this page, and the page keeps nothing.
+// With data-endpoint (khayt-cloud's /v1/directory/reports, once switched on)
+// the report is posted there; otherwise, or if that fails, it opens the
+// visitor's email app with the report filled in. The page keeps nothing.
 const dialog = document.getElementById('report');
 if (dialog) {
   const form = dialog.querySelector('form');
-  form.addEventListener('submit', e => {
+  const sent = document.getElementById('reportSent');
+  const what = form.elements.what;
+  const max = Number(what.dataset.maxBytes);
+  // The limit is in bytes, as the server counts it: Arabic takes two per letter.
+  what.addEventListener('input', () => {
+    what.setCustomValidity(new TextEncoder().encode(what.value).length > max ? sent.dataset.long : '');
+  });
+  const say = msg => { sent.textContent = msg; sent.hidden = false; };
+  form.addEventListener('submit', async e => {
     if (e.submitter && e.submitter.value !== 'send') return;
     const data = new FormData(form);
-    const { to, item, version } = dialog.dataset;
-    const subject = `Report: ${item} ${version} (${data.get('reason')})`;
-    const body = `Item: ${item}\nVersion: ${version}\nReason: ${data.get('reason')}\nPage: ${location.href}\n\n${data.get('what')}\n`;
-    location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const { to, item, version, endpoint } = dialog.dataset;
+    const report = { itemId: item, version, reason: data.get('reason'), detail: data.get('what') };
     form.reset();
-    document.getElementById('reportSent').hidden = false;
+    if (endpoint) {
+      try {
+        const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(report), credentials: 'omit' });
+        if (r.ok) { say(sent.dataset.sent); return; }
+      } catch (_) { /* fall back to email below */ }
+    }
+    const subject = `Report: ${item} ${version} (${report.reason})`;
+    const body = `Item: ${item}\nVersion: ${version}\nReason: ${report.reason}\nPage: ${location.href}\n\n${report.detail}\n`;
+    location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    say(sent.dataset.mail);
   });
 }

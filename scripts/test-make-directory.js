@@ -78,6 +78,11 @@ else {
     if (/<script>alert|<img src=x|<b>"خيط"/.test(html)) { console.error(`${rel}: listing markup is not escaped`); bad++; }
     if (!/&lt;script&gt;alert\(&quot;x&quot;\)|&lt;img src=x/.test(html)) { console.error(`${rel}: the escaped text is missing`); bad++; }
   }
+  // Every link to somewhere else carries rel="noopener noreferrer".
+  const item = fs.readFileSync(path.join(out, 'directory/orcaslicer/index.html'), 'utf8');
+  const main = item.slice(item.indexOf('<main'), item.indexOf('</main>'));
+  const ext = [...main.matchAll(/<a href="(https?:|mailto:)[^"]*"([^>]*)>/g)];
+  if (!ext.length || ext.some(m => !/rel="noopener noreferrer"/.test(m[2]))) { console.error('an outside link has no rel="noopener noreferrer"'); bad++; }
   // Downloads are https links on khaytapp.com.
   const lamha = fs.readFileSync(path.join(out, 'directory/lamha/index.html'), 'utf8');
   const dl = [...lamha.matchAll(/class="dir-dl" href="([^"]+)"/g)].map(m => m[1]);

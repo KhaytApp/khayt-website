@@ -50,6 +50,10 @@ const STR = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory', 'strings.jso
 // (the Mac owns the khayt:// shapes). Until it is, the button says "coming".
 const INSTALL_LINK = false;
 const REPORT_TO = 'support@khaytapp.com';
+// khayt-cloud #220: POST {itemId, version, reason, detail <= 2 KB}, CORS for
+// https://khaytapp.com only. 404 until Turki switches it on; until then this
+// stays null and the form opens the visitor's email app instead.
+const REPORT_ENDPOINT = null; // 'https://cloud.khaytapp.com/v1/directory/reports'
 
 const problems = [];
 const fail = msg => problems.push(msg);
@@ -384,7 +388,7 @@ function getIt(it, lang) {
 
 function details(it, lang) {
   const t = tFor(lang);
-  const link = (href, text) => `<a href="${esc(href)}" dir="ltr">${esc(text)}</a>`;
+  const link = (href, text) => `<a href="${esc(href)}" rel="noopener noreferrer" dir="ltr">${esc(text)}</a>`;
   const strip = u => u.replace(/^https:\/\//, '').replace(/\/$/, '');
   const works = it.kind === 'slicer'
     ? t(`${esc(it.host.name)} ${esc(it.host.version.replace('>=', ''))} or later, paired with Khayt for Mac`, `${esc(it.host.name)} ‏${esc(it.host.version.replace('>=', ''))} أو أحدث، مقترنًا بخيط للماك`)
@@ -394,7 +398,7 @@ function details(it, lang) {
   const row = (k, v) => `\n        <div><dt>${k}</dt><dd>${v}</dd></div>`;
   return `
     <aside class="dir-side">
-      <dl class="dir-dl-list">${row(t('Version', 'الإصدار'), `<span dir="ltr">${version}</span>`)}${row(t('Kind', 'النوع'), kind)}${row(t('Publisher', 'الناشر'), `<a href="../publisher/${it.pub}/">${esc(it.publisher)}</a>`)}${row(t('Licence', 'الترخيص'), `<span dir="ltr">${esc(it.licence)}</span>`)}${row(t('Price', 'السعر'), t('Free', 'مجاني'))}${row(t('Source', 'الكود المصدري'), link(it.source, strip(it.source)))}${row(t('Privacy statement', 'بيان الخصوصية'), link(it.privacy, strip(it.privacy)))}${row(t('Support', 'الدعم'), `<a href="mailto:${esc(it.support)}" dir="ltr">${esc(it.support)}</a>`)}${row(t('Works in', 'يعمل في'), works)}
+      <dl class="dir-dl-list">${row(t('Version', 'الإصدار'), `<span dir="ltr">${version}</span>`)}${row(t('Kind', 'النوع'), kind)}${row(t('Publisher', 'الناشر'), `<a href="../publisher/${it.pub}/">${esc(it.publisher)}</a>`)}${row(t('Licence', 'الترخيص'), `<span dir="ltr">${esc(it.licence)}</span>`)}${row(t('Price', 'السعر'), t('Free', 'مجاني'))}${row(t('Source', 'الكود المصدري'), link(it.source, strip(it.source)))}${row(t('Privacy statement', 'بيان الخصوصية'), link(it.privacy, strip(it.privacy)))}${row(t('Support', 'الدعم'), `<a href="mailto:${esc(it.support)}" rel="noopener noreferrer" dir="ltr">${esc(it.support)}</a>`)}${row(t('Works in', 'يعمل في'), works)}
       </dl>
       <button type="button" class="dir-report-b" command="show-modal" commandfor="report">${t('Report this item', 'أبلغ عن هذا العنصر')}</button>
     </aside>`;
@@ -410,7 +414,7 @@ function reportDialog(it, lang) {
     ['other', t('Something else', 'شيء آخر')],
   ];
   return `
-<dialog id="report" class="dir-dialog" closedby="any" aria-labelledby="reportTitle" data-to="${esc(REPORT_TO)}" data-item="${esc(it.id)}" data-version="${esc(it.version)}">
+<dialog id="report" class="dir-dialog" closedby="any" aria-labelledby="reportTitle" data-to="${esc(REPORT_TO)}"${REPORT_ENDPOINT ? ` data-endpoint="${esc(REPORT_ENDPOINT)}"` : ''} data-item="${esc(it.id)}" data-version="${esc(it.version)}">
   <form class="dir-form" method="dialog">
     <h2 id="reportTitle">${t('Report', 'أبلغ عن')} ${own(it.name, lang)}</h2>
     <p class="dir-form-p">${t('A person at Khayt reads every report. If an item is unsafe, Khayt can withdraw a version, and that turns it off in every shop that has it.', 'يقرأ شخص في خيط كل بلاغ. وإن كان العنصر غير آمن تستطيع خيط سحب إصدار منه، فيتوقف في كل متجر يستخدمه.')}</p>
@@ -419,9 +423,11 @@ function reportDialog(it, lang) {
       <label class="dir-radio"><input type="radio" name="reason" value="${v}"${i === 0 ? ' required' : ''}> ${l}</label>`).join('')}
     </fieldset>
     <label class="dir-field"><span>${t('What happened', 'ماذا حدث')}</span>
-      <textarea name="what" rows="4" maxlength="2000" required placeholder="${t('Which version, and what you saw.', 'أي إصدار، وماذا رأيت.')}"></textarea></label>
-    <p class="dir-form-k">${t(`Send opens your email app with the report addressed to ${REPORT_TO}. It holds only what you type here, the item and its version.`,
-      `يفتح زر الإرسال تطبيق البريد لديك وفيه البلاغ موجّهًا إلى ${REPORT_TO}. ولا يحمل إلا ما تكتبه هنا، والعنصر وإصداره.`)}</p>
+      <textarea name="what" rows="4" maxlength="2048" data-max-bytes="2048" required placeholder="${t('Which version, and what you saw.', 'أي إصدار، وماذا رأيت.')}"></textarea></label>
+    <p class="dir-form-k">${REPORT_ENDPOINT
+      ? t('A report holds only what you type here, the item and its version.', 'لا يحمل البلاغ إلا ما تكتبه هنا، والعنصر وإصداره.')
+      : t(`Send opens your email app with the report addressed to ${REPORT_TO}. It holds only what you type here, the item and its version.`,
+        `يفتح زر الإرسال تطبيق البريد لديك وفيه البلاغ موجّهًا إلى ${REPORT_TO}. ولا يحمل إلا ما تكتبه هنا، والعنصر وإصداره.`)}</p>
     <div class="dir-form-a">
       <button type="button" class="btn btn-ghost" command="close" commandfor="report">${t('Cancel', 'إلغاء')}</button>
       <button type="submit" class="btn btn-accent" value="send">${t('Send report', 'أرسل البلاغ')}</button>
@@ -429,7 +435,7 @@ function reportDialog(it, lang) {
     <p class="dir-form-k">${t('Not for help with an item: use its support link.', 'هذا ليس للمساعدة في استخدام العنصر: استخدم رابط الدعم الخاص به.')}</p>
   </form>
 </dialog>
-<p class="dir-sent" id="reportSent" role="status" hidden>${t(`Your email app should open with the report. If it does not, write to ${REPORT_TO}.`, `يُفترض أن يفتح تطبيق البريد وفيه البلاغ. وإن لم يفتح فاكتب إلى ${REPORT_TO}.`)}</p>`;
+<p class="dir-sent" id="reportSent" role="status" hidden data-mail="${esc(t(`Your email app should open with the report. If it does not, write to ${REPORT_TO}.`, `يُفترض أن يفتح تطبيق البريد وفيه البلاغ. وإن لم يفتح فاكتب إلى ${REPORT_TO}.`))}" data-sent="${esc(t('Thanks: your report is in. A person at Khayt reads every report.', 'شكرًا، وصل بلاغك. يقرأ شخص في خيط كل بلاغ.'))}" data-long="${esc(t('That is too long: keep it under 2 KB.', 'هذا طويل جدًّا: اجعله أقل من 2 كيلوبايت.'))}"></p>`;
 }
 
 function itemPage(it, lang) {

@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="../../styles.css?v=9cae2369c9">
 <link rel="alternate" hreflang="en" href="https://khaytapp.com/directory/discord/">
 <link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/directory/discord/">
-<script src="/directory/directory.js?v=a8b4d4dc63" type="module"></script>
+<script src="/directory/directory.js?v=ea42574244" type="module"></script>
 </head>
 <body class="page">
 
@@ -125,9 +125,9 @@
         <div><dt>Publisher</dt><dd><a href="../publisher/khayt/">Khayt</a></dd></div>
         <div><dt>Licence</dt><dd><span dir="ltr">MIT</span></dd></div>
         <div><dt>Price</dt><dd>Free</dd></div>
-        <div><dt>Source</dt><dd><a href="https://github.com/KhaytApp/Khayt/tree/main/plugins/samples" dir="ltr">github.com/KhaytApp/Khayt/tree/main/plugins/samples</a></dd></div>
-        <div><dt>Privacy statement</dt><dd><a href="https://khaytapp.com/privacy/" dir="ltr">khaytapp.com/privacy</a></dd></div>
-        <div><dt>Support</dt><dd><a href="mailto:support@khaytapp.com" dir="ltr">support@khaytapp.com</a></dd></div>
+        <div><dt>Source</dt><dd><a href="https://github.com/KhaytApp/Khayt/tree/main/plugins/samples" rel="noopener noreferrer" dir="ltr">github.com/KhaytApp/Khayt/tree/main/plugins/samples</a></dd></div>
+        <div><dt>Privacy statement</dt><dd><a href="https://khaytapp.com/privacy/" rel="noopener noreferrer" dir="ltr">khaytapp.com/privacy</a></dd></div>
+        <div><dt>Support</dt><dd><a href="mailto:support@khaytapp.com" rel="noopener noreferrer" dir="ltr">support@khaytapp.com</a></dd></div>
         <div><dt>Works in</dt><dd>Khayt for Mac, Windows and Linux, and on iPhone once installed from your computer</dd></div>
       </dl>
       <button type="button" class="dir-report-b" command="show-modal" commandfor="report">Report this item</button>
@@ -149,7 +149,7 @@
       <label class="dir-radio"><input type="radio" name="reason" value="other"> Something else</label>
     </fieldset>
     <label class="dir-field"><span>What happened</span>
-      <textarea name="what" rows="4" maxlength="2000" required placeholder="Which version, and what you saw."></textarea></label>
+      <textarea name="what" rows="4" maxlength="2048" data-max-bytes="2048" required placeholder="Which version, and what you saw."></textarea></label>
     <p class="dir-form-k">Send opens your email app with the report addressed to support@khaytapp.com. It holds only what you type here, the item and its version.</p>
     <div class="dir-form-a">
       <button type="button" class="btn btn-ghost" command="close" commandfor="report">Cancel</button>
@@ -158,7 +158,7 @@
     <p class="dir-form-k">Not for help with an item: use its support link.</p>
   </form>
 </dialog>
-<p class="dir-sent" id="reportSent" role="status" hidden>Your email app should open with the report. If it does not, write to support@khaytapp.com.</p>
+<p class="dir-sent" id="reportSent" role="status" hidden data-mail="Your email app should open with the report. If it does not, write to support@khaytapp.com." data-sent="Thanks: your report is in. A person at Khayt reads every report." data-long="That is too long: keep it under 2 KB."></p>
 </main>
 
 <footer class="footer">
