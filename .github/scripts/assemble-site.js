@@ -75,6 +75,10 @@ const NOT_SERVED = [
   'developers/',
   'ar/developers/',    // their Arabic copies — inside ar/, which is otherwise served
   'schemas/',
+  // The connector and plugin directory: built and checked, but NOT served until
+  // Turki says so (directory/README.md says how to switch it on).
+  'directory/',
+  'ar/directory/',
 ];
 
 // ----------------------------------------------------------------------------
