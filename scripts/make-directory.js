@@ -102,16 +102,51 @@ const KINDS = {
   addon: ['Add-on', 'إضافة'], plugin: ['Plugin', 'إضافة برمجية'],
 };
 
-// A publisher's domain shows as verified only when it is proven. Until
-// publisher accounts exist (phase 2: a DNS TXT record or a .well-known file),
-// the only proven domain is this site's own, for Khayt's own items.
-const PROVEN_DOMAINS = new Set(['khaytapp.com']);
-const publishers = new Map((LIST.publishers || []).map(P => {
+// ---- Identity comes from the registry, never from a listing ----------------
+// directory/publishers.json (Khayt edits it; phase 2 replaces it with Cloud
+// publisher accounts) holds each publisher's name, id namespaces and verified
+// domain. A listing names its publisher by slug and nothing else: it cannot
+// set a name, a namespace or a domain, and any key it is not allowed to set
+// is refused rather than ignored.
+const REG = JSON.parse(fs.readFileSync(argAt('--publishers') || path.join(ROOT, 'directory', 'publishers.json'), 'utf8'));
+const publishers = new Map();
+for (const P of REG.publishers || []) {
   if (!/^[a-z0-9-]+$/.test(P.slug)) fail(`publisher ${P.slug}: a slug is lower case letters, digits and dashes`);
-  return [P.slug, Object.assign({}, P, { verified: !!P.domain && PROVEN_DOMAINS.has(P.domain) })];
-}));
+  if (!Array.isArray(P.namespaces) || !P.namespaces.length || P.namespaces.some(n => !/^[a-z0-9]+(\.[a-z0-9-]+)+\.$/.test(n))) fail(`publisher ${P.slug}: namespaces are reverse-DNS prefixes ending in a dot`);
+  for (const [o, Q] of publishers) for (const n of P.namespaces || []) for (const q of Q.namespaces) {
+    if (n.startsWith(q) || q.startsWith(n)) fail(`publishers ${o} and ${P.slug} overlap on ${n} / ${q}`);
+  }
+  publishers.set(P.slug, Object.assign({}, P, { verified: !!P.verifiedDomain }));
+}
+const ownerOf = id => [...publishers.values()].find(P => P.namespaces.some(n => id.startsWith(n)));
+
+const TOP_KEYS = ['_', 'items', 'coming'];
+const ITEM_KEYS = {
+  connector: ['slug', 'kind', 'manifest', 'category', 'licence', 'source', 'privacy', 'support', 'publisher_slug'],
+  slicer: ['slug', 'kind', 'id', 'name', 'description', 'version', 'host', 'scopes', 'status', 'package', 'category', 'licence', 'source', 'privacy', 'support', 'publisher_slug'],
+};
+for (const k of Object.keys(LIST)) if (!TOP_KEYS.includes(k)) fail(`listings.json: "${k}" is not a key a listing file may set`);
+const httpsUrl = u => { try { const x = new URL(u); return x.protocol === 'https:' && !x.username && !x.password; } catch (_) { return false; } };
+const label = v => v && typeof v === 'object' && typeof v.en === 'string' && v.en.trim() && Object.values(v).every(x => typeof x === 'string');
+// A download is served by this site, over https, or not at all.
+const SITE = 'https://khaytapp.com';
+const siteUrl = rel => { const u = new URL(rel, SITE + '/'); if (u.origin !== SITE) throw new Error(`make-directory: ${rel} is not on ${SITE}`); return u.href; };
+
 const items = LIST.items.map(L => {
-  if (!publishers.has(L.publisher_slug)) fail(`${L.slug}: no publisher ${L.publisher_slug} in listings.json`);
+  const allowed = ITEM_KEYS[L.kind] || [];
+  for (const k of Object.keys(L)) if (allowed.length && !allowed.includes(k)) fail(`${L.slug}: "${k}" is not a key a listing may set`);
+  const P = publishers.get(L.publisher_slug);
+  if (!P) fail(`${L.slug}: no publisher ${L.publisher_slug} in the registry`);
+  if (!httpsUrl(L.source)) fail(`${L.slug}: source is an https URL`);
+  if (!httpsUrl(L.privacy)) fail(`${L.slug}: privacy is an https URL`);
+  if (!/^[^\s@<>"']+@[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(L.support || '')) fail(`${L.slug}: support is an email address`);
+  if (!/^[A-Za-z0-9.+-]+( (AND|OR|WITH) [A-Za-z0-9.+-]+)*$/.test(L.licence || '')) fail(`${L.slug}: licence is an SPDX expression`);
+  // The id must sit in its own publisher's namespace, and no one else's.
+  const claim = id => {
+    const owner = ownerOf(String(id || ''));
+    if (!owner) fail(`${L.slug}: ${id} is in no registered publisher's namespace`);
+    else if (P && owner.slug !== P.slug) fail(`${L.slug}: ${id} is in ${owner.name}'s namespace, not ${P.name}'s`);
+  };
   if (!/^[a-z0-9-]+$/.test(L.slug)) fail(`${L.slug}: a slug is lower case letters, digits and dashes`);
   if (!CATEGORIES[L.category]) fail(`${L.slug}: unknown category ${L.category}`);
   for (const k of ['licence', 'source', 'privacy', 'support']) if (!L[k]) fail(`${L.slug}: no ${k}`);
@@ -122,19 +157,23 @@ const items = LIST.items.map(L => {
     if (!v.ok) fail(`${L.slug}: ${L.manifest} is refused by the app's validator: ${v.errors.join('; ')}`);
     const keyId = signedBy(M.canonicalJSON(m), m.signature);
     if (!keyId) fail(`${L.slug}: ${L.manifest} is not signed by a published key`);
-    const P = publishers.get(L.publisher_slug);
+    claim(m.id);
     if (P && m.publisher !== P.name) fail(`${L.slug}: the signed manifest says publisher "${m.publisher}", the listing says ${P.name}`);
     const rows = M.consentRows(m);
     for (const r of rows) if (!publicHost(r.host)) fail(`${L.slug}: ${r.host} is not a public host name`);
     return {
       slug: L.slug, kind: 'connector', id: m.id, version: m.version, name: m.name, description: m.description || {},
       publisher: m.publisher, category: L.category, licence: L.licence, source: L.source, privacy: L.privacy, support: L.support,
-      pub: L.publisher_slug, keyId, file: '/' + L.manifest, fileName: path.basename(L.manifest), sha256: sha256(bytes), size: bytes.length,
+      pub: L.publisher_slug, keyId, file: siteUrl(L.manifest), fileName: path.basename(L.manifest), sha256: sha256(bytes), size: bytes.length,
       rows, scopes: (m.scopes || []).slice(), refresh: M.refreshConsent(m, 'en') ? m : null, manifest: m,
     };
   }
   if (L.kind === 'slicer') {
-    const it = Object.assign({}, L, { pub: L.publisher_slug, released: false });
+    claim(L.id);
+    if (!label(L.name) || !label(L.description)) fail(`${L.slug}: name and description are labels with English text`);
+    if (!/^\d+\.\d+\.\d+$/.test(L.version || '')) fail(`${L.slug}: version is major.minor.patch`);
+    if (!L.host || !['OrcaSlicer'].includes(L.host.name) || !/^>=\d+\.\d+(\.\d+)?$/.test(L.host.version || '')) fail(`${L.slug}: host is a known slicer and a >= version`);
+    const it = Object.assign({}, L, { pub: L.publisher_slug, publisher: P ? P.name : '', released: false });
     // A download needs a released file AND a signed index row with its hash.
     if (L.package) {
       const index = signedIndex();
@@ -145,7 +184,7 @@ const items = LIST.items.map(L => {
       else {
         const bytes = fs.readFileSync(file);
         if (sha256(bytes) !== row.sha256 || bytes.length !== row.size) fail(`${L.slug}: ${L.package.file} does not match its signed index row`);
-        else Object.assign(it, { released: true, file: '/' + L.package.file, fileName: path.basename(L.package.file), sha256: row.sha256, size: row.size });
+        else Object.assign(it, { released: true, file: siteUrl(L.package.file), fileName: path.basename(L.package.file), sha256: row.sha256, size: row.size });
       }
     } else if (L.status !== 'not-released') {
       fail(`${L.slug}: a slicer plugin without a signed package must say status "not-released"`);
@@ -163,7 +202,6 @@ if (problems.length) {
   console.error('make-directory: refused\n  ' + problems.join('\n  '));
   process.exit(1);
 }
-if (DRY) { console.log(`make-directory: ${items.length} items would build`); process.exit(0); }
 
 // ---- Shared pieces -----------------------------------------------------------
 // An item's own words in this page's language when it has them; otherwise
@@ -444,7 +482,7 @@ function publisherPage(P, lang) {
   const t = tFor(lang);
   const mine = items.filter(it => it.pub === P.slug);
   const verified = P.verified
-    ? `<span class="dir-badge dir-badge-ok">${ICON_CHECK}${t('Verified', 'موثَّق')}: <span dir="ltr">${esc(P.domain)}</span></span>`
+    ? `<span class="dir-badge dir-badge-ok">${ICON_CHECK}${t('Verified', 'موثَّق')}: <span dir="ltr">${esc(P.verifiedDomain)}</span></span>`
     : '';
   return `
 <section class="page-head">
@@ -603,6 +641,13 @@ for (const lang of ['en', 'ar']) {
   }
 }
 
+if (DRY) {
+  // --out DIR: write the pages there instead, for the test to read.
+  const out = argAt('--out');
+  if (out) for (const [rel, html] of Object.entries(OUT)) { fs.mkdirSync(path.dirname(path.join(out, rel)), { recursive: true }); fs.writeFileSync(path.join(out, rel), html); }
+  console.log(`make-directory: ${items.length} items would build`);
+  process.exit(0);
+}
 let stale = 0;
 const want = new Set(Object.keys(OUT));
 for (const [rel, html] of Object.entries(OUT)) {

@@ -1,0 +1,12 @@
+{
+  "_": "Publisher registry for the hidden directory. Identity comes from here, never from a listing: a listing names a publisher by slug, and the build takes the name, namespaces and verified domain from this file. Only Khayt edits it; in phase 2 it is replaced by publisher accounts on Khayt Cloud, where a domain is verified by a DNS TXT record or a .well-known file.",
+  "publishers": [
+    {
+      "slug": "khayt",
+      "name": "Khayt",
+      "namespaces": ["app.khayt."],
+      "verifiedDomain": "khaytapp.com",
+      "support": "support@khaytapp.com"
+    }
+  ]
+}
