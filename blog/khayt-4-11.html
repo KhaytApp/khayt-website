@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8jZYj3/gQB8oMz5hPOgu9pb3dbub0hmmdTGEVYgnWXI=' 'sha256-+xtxj0262zFDIbbWgzmzFS9fJ2s9Xg0a/UtANBpzE30=' 'sha256-9A9Q4yXYKOjnQ9M6Zkw0iAQH8kJQeRlio8APvoAin5s='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>try{var c=localStorage.getItem('khayt-color-scheme');if(c==='light'||c==='dark')document.querySelector('meta[name="color-scheme"]').content=c}catch(e){}</script>
+<title>Khayt 4.11: one job page, costs counted once — Khayt</title>
+<meta name="description" content="Khayt 4.11 and Mac beta.42: a job page, labour counted once, printers read correctly, role checks on sending, and what comes next.">
+<meta property="og:title" content="Khayt 4.11: one job page, costs counted once — Khayt">
+<meta property="og:description" content="Since 3 November: the Windows and Linux app went from 4.2 to 4.11, the Mac beta from 19 to 42, and the iPhone gained printer care and finished-print photos. Labour is counted once, printers read busy when they are busy, and only the right people can send a print. Plus what we are working on next.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/blog/khayt-4-11.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Khayt">
+<meta property="article:published_time" content="2026-11-20">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="canonical" href="https://khaytapp.com/blog/khayt-4-11.html">
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/blog/khayt-4-11.html">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/blog/khayt-4-11.html">
+<link rel="alternate" hreflang="x-default" href="https://khaytapp.com/blog/khayt-4-11.html">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="feed.xml">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../khayt-apple-icon.png">
+<link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../styles.css?v=3100119cd9">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Khayt 4.11: one job page, costs counted once",
+  "description": "Since 3 November: the Windows and Linux app went from 4.2 to 4.11, the Mac beta from 19 to 42, and the iPhone gained printer care and finished-print photos. Labour is counted once, printers read busy when they are busy, and only the right people can send a print. Plus what we are working on next.",
+  "datePublished": "2026-11-20",
+  "dateModified": "2026-11-20",
+  "inLanguage": [
+    "en",
+    "ar"
+  ],
+  "image": "https://khaytapp.com/og-image.png",
+  "mainEntityOfPage": "https://khaytapp.com/blog/khayt-4-11.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Khayt",
+    "url": "https://github.com/KhaytApp"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Khayt",
+    "url": "https://khaytapp.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://khaytapp.com/khayt-icon.png",
+      "width": 256,
+      "height": 256
+    }
+  }
+}
+</script>
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+<span hidden
+  data-page-title-en="Khayt 4.11: one job page, costs counted once — Khayt"
+  data-page-title-ar="خيط 4.11: صفحة واحدة للمهمة وتكاليف تُحسب مرة — خيط"
+  data-page-desc-en="Khayt 4.11 and Mac beta.42: a job page, labour counted once, printers read correctly, role checks on sending, and what comes next."
+  data-page-desc-ar="خيط 4.11 والإصدار التجريبي 42 للماك: صفحة للمهمة، والعمالة تُحسب مرة، وحالة الطابعات صحيحة، والصلاحيات عند الإرسال، وما التالي."></span>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../" class="brand"><img src="../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../#features" data-i18n="nav.features">Features</a>
+      <a href="../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../services.html" data-i18n="nav.services">Services</a>
+      <a href="./" class="here" data-i18n="nav.blog">Blog</a>
+      <a href="../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="navTheme" type="button"><svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="sr-only when-light">Switch to dark theme</span><span class="sr-only when-dark">Switch to light theme</span></button>
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<article class="post">
+  <div class="wrap">
+    <div class="post-in">
+      <a class="post-back" href="./" data-i18n="back.blog">← All posts</a>
+      <div class="post-meta" style="margin-top:16px">
+        <span class="tag" data-lang="en">Update</span><span class="tag" data-lang="ar" hidden>تحديث</span>
+        <time datetime="2026-11-20">20 November 2026</time>
+      </div>
+      <h1 data-lang="en">Khayt 4.11: one job page, costs counted once</h1>
+      <h1 data-lang="ar" hidden>خيط 4.11: صفحة واحدة للمهمة وتكاليف تُحسب مرة</h1>
+
+      <div class="post-body" data-lang="en">
+        <p>Since the last post on 3 November, the Windows and Linux app has gone from 4.2 to <strong>4.11.0</strong>, the Mac beta from beta.19 to <strong>beta.42</strong>, and the iPhone app has a new TestFlight build. Most of the work went into three things: one page for a job, costs that count each thing once, and printers whose state you can trust. Each item says which app has it.</p>
+
+        <h2>Before you update</h2>
+        <p>4.11.0 and Mac beta.42 ask you to read two things before they install:</p>
+        <ul>
+          <li><strong>Update every computer before you use a product’s own rates.</strong> A product with its own rates now charges its labour once, on the job. A computer on an older version would charge that labour again on each part.</li>
+          <li><strong>With the staff lock on, someone has to be signed in to send a file or control a printer.</strong> If nobody is signed in, Khayt opens as a viewer and sends nothing to a printer, automatic dispatch included, until someone signs in. “Lock now” opens the PIN pad.</li>
+        </ul>
+        <p>On Windows and Linux, the updater now shows these notes for every release you skipped, not only the newest one.</p>
+
+        <h2>One page for a job (Windows and Linux)</h2>
+        <p>4.3 gave the desktop app the same look as the Mac and this website, with the sidebar arranged by what you are doing. 4.10 put Settings in one window with fourteen panes, and gave every job its own page, with one sheet for editing it (Job, Parts, Price) and a <strong>Markup</strong> field that shows the new total before you save. In 4.11 everything that was only in the old full editor has moved to the page or the sheet: each part’s colour, shipping, extra charges and the loyalty discount, notes and tags, photos, files, comments, customer updates, the operator and the actual start and finish times.</p>
+        <p>A payment plan now has its own dialog, and a row in it is marked paid only by recording the payment. Ticking a row could mark money as paid that was never recorded. Rows ticked that way in the past say so, and nothing in your book is rewritten.</p>
+
+        <h2>Costs that count each thing once (all apps)</h2>
+        <ul>
+          <li><strong>Prep is charged once per line, post-processing per piece, and packaging by the box.</strong> A line of ten used to pay its prep ten times. A product can say how many pieces fit in one box.</li>
+          <li><strong>A product’s labour is counted once</strong>, not once for each of its parts, and the job carries it in one place, so reports and reprints match the catalogue. Products saved before this keep their price until you choose to use the new cost.</li>
+          <li><strong>Recalculate from parts</strong> prices a job again the way a new job would be priced today, and shows the old and new price first. It is on Windows, Linux and the Mac.</li>
+          <li><strong>A job in another currency</strong> has its cost counted in your own currency, as it is. Cost of goods and the average margin had converted it a second time, so past margins on those jobs will now read higher, and correctly.</li>
+          <li>Changing the price of a finished, invoiced job now asks first. A job whose invoice has been reported, voided, credited or cancelled keeps its money as it is.</li>
+        </ul>
+
+        <h2>Printers you can trust</h2>
+        <ul>
+          <li><strong>A paused, preparing or waiting printer is no longer shown as free</strong> (all apps). Khayt now reads each make’s own states from one list, so the dashboard, the job board and automatic dispatch agree. Dispatch no longer offers a printer whose cancelled or stopped print is still on the bed until you mark the bed clear.</li>
+          <li><strong>Sending a print and controlling one are checked when they happen</strong>, against the person signed in, not only hidden on screen (Windows and Linux, with the staff lock on). Viewers can see printers and do nothing else.</li>
+          <li><strong>A printer’s access code or API key goes only to that printer</strong> (Windows and Linux): to the address it was saved with, and nowhere else on the network.</li>
+          <li>Also on Windows and Linux since 4.5: smart plugs (with the energy each print used), pause, resume and cancel for Bambu and Elegoo resin printers, why a Bambu stopped, printer alerts to your phone with ntfy, and care plans per printer model.</li>
+        </ul>
+
+        <h2>Also on Windows and Linux</h2>
+        <ul>
+          <li>Off-site backup, and restoring a backup works again.</li>
+          <li>Import spools from Spoolman.</li>
+          <li>A photo of every finished print, which a paired phone can add.</li>
+          <li>Automatic customer updates on WhatsApp, and pickup hours and a map link on the customer’s order page.</li>
+          <li>Split a project with several plates into one file per plate.</li>
+          <li>A delivery log for webhooks, with Resend.</li>
+          <li>Simple mode, with four columns on the board: Quote, Queued, Printing, Ready.</li>
+          <li>Two ways the whole book could be written over with an almost empty one are fixed, and a crafted 3MF, G-code or zip file can no longer freeze Khayt.</li>
+          <li><strong>Privacy</strong> (4.10.3): crash reporting no longer contacts Sentry at all unless you turned crash reports on.</li>
+        </ul>
+
+        <h2>On the Mac: beta.20 to beta.42</h2>
+        <ul>
+          <li><strong>Caught up with Windows and Linux</strong> on most of what only they could do, including printer care plans, a file per plate for the Snapmaker U1, photos from a paired iPhone, and pickup details for customers.</li>
+          <li><strong>Every job has its own page</strong>, with its next step pinned at the top, and New Job and Edit Job are now the same form.</li>
+          <li>Customers have an address book, and Settings is in groups: General, Shop, Pricing &amp; Tax, Invoices &amp; Payments, Production, and Team &amp; Access.</li>
+          <li>Library models show the colours their print really uses, not every spool the printer had loaded.</li>
+          <li>Beta.42 adds the costing changes above, Recalculate from parts, and a Snapmaker U1 camera that stays awake while you watch it, with its chamber light switchable from Khayt.</li>
+          <li>From now on, Mac betas come at most once a week, each after a full review.</li>
+        </ul>
+
+        <h2>On the iPhone</h2>
+        <p>The TestFlight builds since the last post, the newest from 20 November, bring printer care (tasks, Done or Not needed, and parts to buy), a photo of a finished print taken from the phone, your shop’s papers and quotes on the go, a Money widget, a shopping list and the energy a print drew, and the job list beside the job’s page on an iPad or an unfolded phone.</p>
+
+        <h2>Coming next</h2>
+        <p>None of this is in a release yet, and none of it has a date. This is what we are working on:</p>
+        <ul>
+          <li>Clearer printer problems: every make’s errors in plain words, with what to do, the worst first.</li>
+          <li>Each printer showing only the buttons its model supports.</li>
+          <li>A success rate for each printer, next to its hours and use.</li>
+          <li>A “waiting at the machine” state (a bed to clear, a filament runout, a finished print to take off) that survives a restart.</li>
+          <li>A warning before sending to a bed that may not be clear.</li>
+          <li>Your own clicks going ahead of the status checks Khayt runs in the background.</li>
+          <li>For the Snapmaker U1: spool tags, the filament each head used, and an optional time-lapse kept as the customer’s proof.</li>
+          <li>An OrcaSlicer plugin that sends a sliced file straight to Khayt’s inbox.</li>
+          <li>One switch that turns off every outside connection. This one is still being designed.</li>
+        </ul>
+
+        <h2>Tell us</h2>
+        <p>If something is wrong, or missing, say so: from the app’s Help menu, at <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>, or on <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener">r/khayt</a>. The full notes for every release are on <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener">GitHub</a>. <a href="../#download">Download Khayt</a>.</p>
+      </div>
+      <div class="post-body" data-lang="ar" hidden>
+        <p>منذ المقال السابق في 3 نوفمبر، انتقل تطبيق ويندوز ولينكس من 4.2 إلى <strong>4.11.0</strong>، والنسخة التجريبية للماك من 19 إلى <strong>42</strong>، وصدرت لتطبيق الآيفون نسخة جديدة على TestFlight. وذهب معظم العمل إلى ثلاثة أشياء: صفحة واحدة لكل مهمة، وتكاليف تحسب كل شيء مرة واحدة، وطابعات يمكنك الوثوق بحالتها. وكل بند يذكر التطبيق الذي فيه.</p>
+
+        <h2>قبل أن تحدّث</h2>
+        <p>يطلب منك الإصدار 4.11.0 والنسخة التجريبية 42 للماك قراءة أمرين قبل التثبيت:</p>
+        <ul>
+          <li><strong>حدّث كل أجهزتك قبل أن تستعمل أسعار المنتج الخاصة به.</strong> المنتج الذي له أسعاره الخاصة صار يحتسب عمالته مرة واحدة، على المهمة. أما الجهاز الذي بقي على إصدار أقدم فيحتسب تلك العمالة مرة أخرى على كل قطعة.</li>
+          <li><strong>إذا كان قفل الموظفين مفعّلاً، فلا بد أن يكون أحدٌ مسجّلاً دخوله لإرسال ملف أو التحكم بطابعة.</strong> إن لم يسجّل أحد دخوله، يفتح خيط بصلاحية المشاهدة فقط ولا يرسل شيئاً إلى أي طابعة، بما في ذلك التوزيع التلقائي، حتى يسجّل أحدٌ دخوله. و«اقفل الآن» يفتح لوحة الرمز.</li>
+        </ul>
+        <p>وعلى ويندوز ولينكس صار المحدِّث يعرض هذه الملاحظات لكل إصدار تخطّيته، لا لأحدثها وحده.</p>
+
+        <h2>صفحة واحدة للمهمة (ويندوز ولينكس)</h2>
+        <p>أعطى الإصدار 4.3 تطبيق الحاسوب مظهر الماك وهذا الموقع نفسه، بشريط جانبي مرتّب بحسب ما تفعله. ووضع الإصدار 4.10 الإعدادات في نافذة واحدة من أربعة عشر قسماً، وأعطى كل مهمة صفحتها الخاصة، مع نموذج واحد لتعديلها (المهمة، القطع، السعر) وحقل <strong>هامش الربح</strong> الذي يُظهر الإجمالي الجديد قبل الحفظ. وفي 4.11 انتقل كل ما كان في المحرّر الكامل القديم وحده إلى الصفحة أو النموذج: لون كل قطعة، والشحن، والرسوم الإضافية، وخصم الولاء، والملاحظات والوسوم، والصور والملفات والتعليقات وتحديثات العميل، والمشغّل، ووقتا البدء والانتهاء الفعليان.</p>
+        <p>وصار لخطة الدفع نافذتها الخاصة، ولا يُعلَّم سطر فيها مدفوعاً إلا بتسجيل الدفعة. فقد كان وضع علامة على السطر يجعل مالاً لم يُسجَّل قطّ يبدو مدفوعاً. والأسطر التي عُلّمت بهذه الطريقة سابقاً تقول ذلك، ولا يُعاد كتابة شيء في دفترك.</p>
+
+        <h2>تكاليف تحسب كل شيء مرة واحدة (كل التطبيقات)</h2>
+        <ul>
+          <li><strong>التجهيز يُحتسب مرة لكل سطر، والتشطيب لكل قطعة، والتغليف بالصندوق.</strong> كان سطر من عشر قطع يدفع تجهيزه عشر مرات. ويمكن للمنتج أن يذكر عدد القطع التي يتّسع لها صندوق واحد.</li>
+          <li><strong>عمالة المنتج تُحسب مرة واحدة</strong>، لا مرة لكل قطعة من قطعه، وتحملها المهمة في موضع واحد، فتطابق التقارير وإعادات الطباعة الكتالوج. والمنتجات المحفوظة قبل هذا تحتفظ بسعرها حتى تختار استعمال التكلفة الجديدة.</li>
+          <li><strong>«أعد الحساب من القطع»</strong> يسعّر المهمة من جديد كما تُسعَّر مهمة جديدة اليوم، ويعرض السعر القديم والجديد أولاً. وهو على ويندوز ولينكس والماك.</li>
+          <li><strong>المهمة بعملة أخرى</strong> تُحسب تكلفتها بعملتك كما هي. فقد كانت تكلفة البضاعة المباعة ومتوسط الهامش يحوّلانها مرة ثانية، لذا ستظهر الهوامش السابقة لتلك المهام أعلى، وهي الصحيحة.</li>
+          <li>تغيير سعر مهمة منتهية صدرت فاتورتها صار يسأل أولاً. والمهمة التي أُبلغ عن فاتورتها أو أُلغيت أو صدر لها إشعار دائن تبقى أموالها كما هي.</li>
+        </ul>
+
+        <h2>طابعات يمكنك الوثوق بها</h2>
+        <ul>
+          <li><strong>الطابعة المتوقفة مؤقتاً أو التي تستعد أو تنتظر أحداً لم تعد تظهر متاحة</strong> (كل التطبيقات). صار خيط يقرأ حالات كل نوع من قائمة واحدة، فتتّفق لوحة التحكم ولوحة المهام والتوزيع التلقائي. ولم يعد التوزيع يعرض طابعةً ما تزال طبعتها الملغاة أو الموقوفة على السطح حتى تعلّم أن السطح فارغ.</li>
+          <li><strong>إرسال الطباعة والتحكم بها يُتحقَّق منهما لحظة حدوثهما</strong>، بحسب الشخص المسجّل دخوله، لا بإخفائهما من الشاشة فقط (ويندوز ولينكس، مع قفل الموظفين). ومن له صلاحية المشاهدة يرى الطابعات ولا يفعل غير ذلك.</li>
+          <li><strong>رمز الوصول أو مفتاح API للطابعة لا يذهب إلا إليها</strong> (ويندوز ولينكس): إلى العنوان الذي حُفظ معه، لا إلى أي جهاز آخر على الشبكة.</li>
+          <li>وعلى ويندوز ولينكس أيضاً منذ 4.5: المقابس الذكية (مع الطاقة التي استهلكتها كل طبعة)، والإيقاف المؤقت والاستئناف والإلغاء لطابعات Bambu وطابعات الريزن من Elegoo، وسبب توقّف طابعة Bambu، وتنبيهات الطابعات إلى هاتفك عبر ntfy، وخطط العناية لكل طراز طابعة.</li>
+        </ul>
+
+        <h2>وأيضاً على ويندوز ولينكس</h2>
+        <ul>
+          <li>نسخ احتياطي خارج الجهاز، واستعادة النسخة الاحتياطية تعمل من جديد.</li>
+          <li>استيراد البكرات من Spoolman.</li>
+          <li>صورة لكل طبعة منتهية، ويمكن للهاتف المقترن أن يضيفها.</li>
+          <li>تحديثات تلقائية للعملاء عبر واتساب، وساعات الاستلام ورابط الخريطة في صفحة طلب العميل.</li>
+          <li>تقسيم المشروع ذي الألواح المتعددة إلى ملف لكل لوح.</li>
+          <li>سجلّ تسليم للـ webhooks، مع إعادة الإرسال.</li>
+          <li>الوضع المبسّط، بأربعة أعمدة في اللوحة: عرض سعر، في الانتظار، قيد الطباعة، جاهز.</li>
+          <li>أُصلح طريقان كان يمكن بهما أن يُكتب فوق الدفتر كله بدفتر شبه فارغ، ولم يعد ملف 3MF أو G-code أو zip مصنوع بخبث قادراً على تجميد خيط.</li>
+          <li><strong>الخصوصية</strong> (4.10.3): لم يعد الإبلاغ عن الأعطال يتصل بـ Sentry إطلاقاً ما لم تفعّل تقارير الأعطال بنفسك.</li>
+        </ul>
+
+        <h2>على الماك: من النسخة التجريبية 20 إلى 42</h2>
+        <ul>
+          <li><strong>لحق بويندوز ولينكس</strong> في معظم ما كانا وحدهما يفعلانه، ومن ذلك خطط العناية بالطابعات، وملف لكل لوح لطابعة Snapmaker U1، والصور من آيفون مقترن، وتفاصيل الاستلام للعملاء.</li>
+          <li><strong>لكل مهمة صفحتها الخاصة</strong>، وخطوتها التالية مثبّتة في أعلاها، وصار «مهمة جديدة» و«تعديل المهمة» النموذج نفسه.</li>
+          <li>للعملاء دفتر عناوين، والإعدادات في مجموعات: عام، المتجر، التسعير والضريبة، الفواتير والمدفوعات، الإنتاج، الفريق والوصول.</li>
+          <li>مجسّمات المكتبة تُظهر الألوان التي تستعملها طباعتها فعلاً، لا كل بكرة كانت محمّلة في الطابعة.</li>
+          <li>تضيف النسخة 42 تغييرات التكلفة السابقة، و«أعد الحساب من القطع»، وكاميرا Snapmaker U1 التي تبقى مستيقظة ما دمت تشاهدها، مع إمكان تشغيل إضاءة الحجرة من خيط.</li>
+          <li>من الآن، تصدر نسخ الماك التجريبية مرة في الأسبوع على الأكثر، كلٌّ بعد مراجعة كاملة.</li>
+        </ul>
+
+        <h2>على الآيفون</h2>
+        <p>تجلب نسخ TestFlight منذ المقال السابق، وأحدثها من 20 نوفمبر، العناية بالطابعات (المهام، و«تم» أو «غير لازم»، والقطع المطلوب شراؤها)، وصورة الطبعة المنتهية من الهاتف، وأوراق متجرك وعروض الأسعار أينما كنت، وأداة المال على الشاشة الرئيسية، وقائمة مشتريات والطاقة التي استهلكتها الطبعة، وقائمة المهام بجانب صفحة المهمة على الآيباد أو الهاتف المفرود.</p>
+
+        <h2>ما التالي</h2>
+        <p>لا شيء من هذا في إصدار بعد، ولا موعد لأي منه. هذا ما نعمل عليه:</p>
+        <ul>
+          <li>مشكلات طابعات أوضح: أخطاء كل نوع بكلمات بسيطة، مع ما يجب فعله، والأخطر أولاً.</li>
+          <li>أن تُظهر كل طابعة الأزرار التي يدعمها طرازها فقط.</li>
+          <li>نسبة نجاح لكل طابعة، بجانب ساعاتها واستعمالها.</li>
+          <li>حالة «بانتظارك عند الطابعة» (سطح يجب تفريغه، أو نفاد الخيط، أو طبعة منتهية يجب رفعها) تبقى بعد إعادة التشغيل.</li>
+          <li>تنبيه قبل الإرسال إلى سطح قد لا يكون فارغاً.</li>
+          <li>أن تتقدّم نقراتك على فحوص الحالة التي يجريها خيط في الخلفية.</li>
+          <li>لطابعة Snapmaker U1: وسوم البكرات، والخيط الذي استهلكه كل رأس، وفيديو تسريع زمني اختياري يُحفظ دليلاً للعميل.</li>
+          <li>إضافة لبرنامج OrcaSlicer ترسل الملف المقطَّع مباشرة إلى صندوق خيط.</li>
+          <li>مفتاح واحد يوقف كل اتصال خارجي. وما زال هذا قيد التصميم.</li>
+        </ul>
+
+        <h2>أخبرنا</h2>
+        <p>إن كان شيء خاطئاً أو ناقصاً فقل لنا: من قائمة المساعدة في التطبيق، أو على <a href="mailto:support@khaytapp.com">support@khaytapp.com</a>، أو في <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener">r/khayt</a>. والملاحظات الكاملة لكل إصدار على <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener">GitHub</a>. <a href="../#download">نزّل خيط</a>.</p>
+      </div>
+    </div>
+
+    <div class="post-foot">
+      <a class="post-back" href="./" data-i18n="back.blog">← All posts</a>
+      <a class="btn btn-primary" href="../#download" data-i18n="post.dl">Download Khayt</a>
+    </div>
+  </div>
+</article>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../" class="brand"><img src="../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../#features" data-i18n="nav.features">Features</a>
+          <a href="../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../services.html" data-i18n="nav.services">Services</a>
+          <a href="./" data-i18n="nav.blog">Blog</a>
+          <a href="../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../#open-source" data-i18n="foot.license">License</a>
+          <a href="../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.PAGE_STRINGS = {
+  'post.dl': { en: 'Download Khayt', ar: 'حمّل خيط' }
+};
+</script>
+<script src="../site.js?v=caf5b6281c"></script>
+<script>(function(){var m=document.querySelector('meta[name="color-scheme"]'),b=document.getElementById('navTheme'),K='khayt-color-scheme';if(!m||!b)return;var q=matchMedia('(prefers-color-scheme: dark)');function sys(){return q.matches?'dark':'light'}function shown(){var v=m.content;return v==='light'||v==='dark'?v:sys()}b.addEventListener('click',function(){var t=shown()==='dark'?'light':'dark',p=t===sys()?null:t;m.content=p||'light dark';try{p?localStorage.setItem(K,p):localStorage.removeItem(K)}catch(e){}});addEventListener('storage',function(e){if(e.key===K)m.content=e.newValue==='light'||e.newValue==='dark'?e.newValue:'light dark'})})();</script>
+</body>
+</html>
