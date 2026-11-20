@@ -20,6 +20,23 @@
   'use strict';
   root.KHAYT_POSTS = [
   {
+    slug: 'khayt-4-11',
+    date: '2026-11-20',
+    tag: { en: 'Update', ar: 'تحديث' },
+    t: {
+      en: 'Khayt 4.11: one job page, costs counted once',
+      ar: 'خيط 4.11: صفحة واحدة للمهمة وتكاليف تُحسب مرة'
+    },
+    d: {
+      en: 'Since 3 November: the Windows and Linux app went from 4.2 to 4.11, the Mac beta from 19 to 42, and the iPhone gained printer care and finished-print photos. Labour is counted once, printers read busy when they are busy, and only the right people can send a print. Plus what we are working on next.',
+      ar: 'منذ 3 نوفمبر: انتقل تطبيق ويندوز ولينكس من 4.2 إلى 4.11، والنسخة التجريبية للماك من 19 إلى 42، واكتسب الآيفون العناية بالطابعات وصور الطبعات المنتهية. العمالة تُحسب مرة واحدة، والطابعة المشغولة تظهر مشغولة، ولا يرسل طبعة إلا من يحق له. وما نعمل عليه بعد ذلك.'
+    },
+    m: {
+      en: 'Khayt 4.11 and Mac beta.42: a job page, labour counted once, printers read correctly, role checks on sending, and what comes next.',
+      ar: 'خيط 4.11 والإصدار التجريبي 42 للماك: صفحة للمهمة، والعمالة تُحسب مرة، وحالة الطابعات صحيحة، والصلاحيات عند الإرسال، وما التالي.'
+    }
+  },
+  {
     slug: 'version-4',
     date: '2026-11-03',
     tag: { en: 'Update', ar: 'تحديث' },

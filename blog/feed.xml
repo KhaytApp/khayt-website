@@ -5,9 +5,29 @@
   <link href="https://khaytapp.com/blog/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://khaytapp.com/blog/" rel="alternate" type="text/html"/>
   <id>https://khaytapp.com/blog/</id>
-  <updated>2026-11-03T12:00:00Z</updated>
+  <updated>2026-11-20T12:00:00Z</updated>
   <author><name>Khayt</name><uri>https://khaytapp.com/</uri></author>
   <rights>FSL-1.1-Apache-2.0 · © 2026 Khayt</rights>
+
+  <entry xml:lang="en">
+    <title>Khayt 4.11: one job page, costs counted once</title>
+    <link href="https://khaytapp.com/blog/khayt-4-11.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-11-20:/blog/khayt-4-11/en</id>
+    <published>2026-11-20T12:00:00Z</published>
+    <updated>2026-11-20T12:00:00Z</updated>
+    <category term="Update"/>
+    <summary type="text">Since 3 November: the Windows and Linux app went from 4.2 to 4.11, the Mac beta from 19 to 42, and the iPhone gained printer care and finished-print photos. Labour is counted once, printers read busy when they are busy, and only the right people can send a print. Plus what we are working on next.</summary>
+  </entry>
+
+  <entry xml:lang="ar">
+    <title>خيط 4.11: صفحة واحدة للمهمة وتكاليف تُحسب مرة</title>
+    <link href="https://khaytapp.com/ar/blog/khayt-4-11.html" rel="alternate" type="text/html"/>
+    <id>tag:khaytapp.com,2026-11-20:/blog/khayt-4-11/ar</id>
+    <published>2026-11-20T12:00:00Z</published>
+    <updated>2026-11-20T12:00:00Z</updated>
+    <category term="تحديث"/>
+    <summary type="text">منذ 3 نوفمبر: انتقل تطبيق ويندوز ولينكس من 4.2 إلى 4.11، والنسخة التجريبية للماك من 19 إلى 42، واكتسب الآيفون العناية بالطابعات وصور الطبعات المنتهية. العمالة تُحسب مرة واحدة، والطابعة المشغولة تظهر مشغولة، ولا يرسل طبعة إلا من يحق له. وما نعمل عليه بعد ذلك.</summary>
+  </entry>
 
   <entry xml:lang="en">
     <title>Khayt 4: nine languages, HueForge and a store quote form</title>
