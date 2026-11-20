@@ -1,54 +1,62 @@
 {
  "releases": [
   {
+   "tag": "v4.11.0",
+   "name": "Khayt v4.11.0",
+   "date": "2026-11-20",
+   "prerelease": false,
+   "note": "Update Khayt on every computer before you use product rates.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.11.0",
+   "assets": [
+    {
+     "name": "Khayt-4.11.0.AppImage",
+     "size": 174554289,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-4.11.0.AppImage"
+    },
+    {
+     "name": "Khayt-4.11.0.exe",
+     "size": 153335051,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-4.11.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.11.0.exe",
+     "size": 153599801,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-Setup-4.11.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.11.0.exe.blockmap",
+     "size": 161359,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-Setup-4.11.0.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.11.0_amd64.deb",
+     "size": 140358000,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/khayt_4.11.0_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 518,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 342,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/latest.yml"
+    }
+   ]
+  },
+  {
    "tag": "v4.10.3",
    "name": "Khayt v4.10.3",
    "date": "2026-11-19",
    "prerelease": false,
    "note": "If you are updating from 4.9 or earlier, Settings, the job page, Simple mode and the stage colours have changed: read this before you update.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.10.3",
-   "assets": [
-    {
-     "name": "Khayt-4.10.3.AppImage",
-     "size": 174455696,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-4.10.3.AppImage"
-    },
-    {
-     "name": "Khayt-4.10.3.exe",
-     "size": 153258956,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-4.10.3.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.10.3.exe",
-     "size": 153523713,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-Setup-4.10.3.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.10.3.exe.blockmap",
-     "size": 160960,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/Khayt-Setup-4.10.3.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.10.3_amd64.deb",
-     "size": 140272748,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/khayt_4.10.3_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 518,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 342,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.10.3/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.10.3"
   },
   {
    "tag": "v4.10.2",
@@ -273,14 +281,6 @@
    "prerelease": false,
    "note": "The catalogue now counts each part's quantity in a product's cost.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.27"
-  },
-  {
-   "tag": "v3.11.26",
-   "name": "Khayt v3.11.26",
-   "date": "2026-10-21",
-   "prerelease": false,
-   "note": "A saved product price never changes on its own, since 3.11.25.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.26"
   }
  ]
 }
