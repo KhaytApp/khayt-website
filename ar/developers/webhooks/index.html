@@ -74,6 +74,8 @@
       <a href="../events/">الطلبات الواردة</a>
       <a href="../webhooks/" aria-current="page">خطافات الويب</a>
       <a href="../samples/">أمثلة</a>
+      <a href="../updates/">التحديثات</a>
+      <a href="../directory/">الدليل</a>
     </nav>
    </div>
   </div>
@@ -92,16 +94,16 @@
           <li><a href="#delivery">التسليم</a></li>
         </ol></nav>
       </details>
-      <p class="docs-source">مولَّدة من <code>lib/webhook-bus.js</code> عند 0248142ea</p>
+      <p class="docs-source">مولَّدة من <code>lib/webhook-bus.js</code> عند 9d0d89462</p>
     </aside>
     <div class="post-body policy docs-body">
 
-      <p class="policy-tldr"><strong>ليست موصلاً.</strong> هذه عناوين تكتبها المطبعة بنفسها، دون ملف تعريف ودون مراجعة. أما الموصل فيُرسل إليه <a href="../events/">جسم مختلف</a>. كل ما يلي مولَّد من <code>lib/webhook-bus.js</code> عند 0248142ea.</p>
+      <p class="policy-tldr"><strong>ليست موصلاً.</strong> هذه عناوين تكتبها المطبعة بنفسها، دون ملف تعريف ودون مراجعة. أما الموصل فيُرسل إليه <a href="../events/">جسم مختلف</a>. كل ما يلي مولَّد من <code>lib/webhook-bus.js</code> عند 9d0d89462.</p>
 
       <h2 tabindex="-1" id="events">الأحداث</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t44">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t48">
         <table class="ref-table">
-          <caption id="ref-t44">أحداث خطافات الويب</caption>
+          <caption id="ref-t48">أحداث خطافات الويب</caption>
           <thead><tr><th scope="col">الحدث</th><th scope="col">متى</th><th scope="col">الحمولة</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>order_created</code></th><td data-label="متى">أُنشئ طلب.</td><td data-label="الحمولة"><code>orderId</code> <span class="ref-cat">string</span><br><code>project</code> <span class="ref-cat">string</span><br><code>status</code> <span class="ref-cat">string</span><br><code>price</code> <span class="ref-cat">number</span></td></tr>
@@ -123,8 +125,8 @@
       <h2 tabindex="-1" id="body">الجسم</h2>
       <p>جسم الطلب كائن خارجي — <code>event</code> و<code>payload</code> و<code>timestamp</code> بالمللي ثانية — والتسليم داخل <code>payload</code>. ويبقى <code>id</code> التسليم نفسه في كل محاولة معادة وفي إعادة الإرسال من سجل التسليم، فيمكنك تجاهل ما عالجته من قبل.</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-21">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-21">Content-Type: application/json
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-24">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-24">Content-Type: application/json
 X-Khayt-Event: order_created
 X-Khayt-Signature: 9b4d21deeeb781b033d132f991cdf3b981782e37f212c0b517408d6433732be6
 X-Khayt-Timestamp: 1794128400
@@ -134,8 +136,8 @@ X-Khayt-Signature-V2: 064d70a6be87f9c9cda62a94ee8bf3b34e75cdfc9b961a584d62794d3a
       </div>
       <p>أما <em>خطاف الأحداث</em> الأقدم ذو العنوان الواحد (في الإعدادات: رابط واحد بمفتاح للإنشاء والحالة والدفع) فيرسل اللحظات نفسها في غلافه الخاص، الذي ينتظره مستقبلوه الحاليون بايتاً ببايت:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-22">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-22">Content-Type: application/json
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-25">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-25">Content-Type: application/json
 X-Khayt-Event: order.created
 X-Khayt-Signature: 1a46e2a948126ba0cb52cade542978933881a7f28e87838b3bdefbc8276bccee
 X-Khayt-Timestamp: 1794128400

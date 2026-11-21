@@ -33,6 +33,7 @@ const REF = process.argv[3] || 'origin/main';
 const SRCS = ['lib/plugin-manifest.js', 'lib/plugin-payload.js',
   'lib/webhook-bus.js', 'lib/webhooks.js', 'lib/webhook-send.js', 'lib/host-ranges.js',
   'lib/plugin-host.js',   // plugin-host.js: which jobs a refresh asks about
+  'lib/plugin-update.js', // plugin-update.js: how a new version reaches a shop (/developers/updates/)
   // order.amountDue: plugin-payload.js requires these three from its own folder.
   'lib/order-money.js', 'lib/tax.js', 'lib/business-scope.js'];
 
@@ -44,6 +45,19 @@ for (const SRC of SRCS) {
     `// Do not edit here: run scripts/sync-plugin-manifest.js. The docs under\n` +
     `// developers/ are generated from this file by scripts/make-dev-docs.js.\n`;
   fs.writeFileSync(path.join(ROOT, 'developers', 'vendor', path.basename(SRC)), header + git('show', `${sha}:${SRC}`));
+}
+// The directory's listing rules (lib/plugin-directory.js) are still a draft
+// PR in the app repo (KhaytApp/Khayt#2598), so they are copied from that
+// PR's branch at its own pinned commit, for the hidden /developers/directory/
+// page. When #2598 merges, move it into SRCS above and delete this block.
+const DRAFT = [['lib/plugin-directory.js', process.env.DIRECTORY_REF || 'origin/plugin-directory-lib']];
+for (const [SRC, ref] of DRAFT) {
+  let dsha = null;
+  try { dsha = git('rev-parse', ref).trim(); } catch (_) { console.warn(`${SRC}: ${ref} not found, kept the copy already here`); continue; }
+  const header = `// COPIED from KhaytApp/Khayt ${SRC} at ${dsha} (DRAFT: KhaytApp/Khayt#2598, not merged).\n` +
+    `// Do not edit here: run scripts/sync-plugin-manifest.js. The docs under\n` +
+    `// developers/ are generated from this file by scripts/make-dev-docs.js.\n`;
+  fs.writeFileSync(path.join(ROOT, 'developers', 'vendor', path.basename(SRC)), header + git('show', `${dsha}:${SRC}`));
 }
 const vendor = path.join(ROOT, 'developers', 'vendor', 'plugin-manifest.js');
 

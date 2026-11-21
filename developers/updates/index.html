@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8jZYj3/gQB8oMz5hPOgu9pb3dbub0hmmdTGEVYgnWXI=' 'sha256-9A9Q4yXYKOjnQ9M6Zkw0iAQH8kJQeRlio8APvoAin5s='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com https://cloud.khaytapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>try{var c=localStorage.getItem('khayt-color-scheme');if(c==='light'||c==='dark')document.querySelector('meta[name="color-scheme"]').content=c}catch(e){}</script>
+<title>How updates reach shops — Khayt developers</title>
+<meta name="description" content="How a new connector version reaches Khayt shops through one signed index, and when a shop is asked.">
+<meta property="og:title" content="How updates reach shops — Khayt developers">
+<meta property="og:description" content="How a new connector version reaches Khayt shops through one signed index, and when a shop is asked.">
+<meta property="og:image" content="https://khaytapp.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Khayt, “One desk runs the whole shop”: the production queue window beside the tagline — free, source available, for macOS, Windows and Linux.">
+<meta property="og:url" content="https://khaytapp.com/developers/updates/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Khayt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a2a50">
+<link rel="alternate" type="application/atom+xml" title="Khayt blog" href="../../blog/feed.xml">
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../../khayt-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../khayt-favicon-16.png">
+<link rel="apple-touch-icon" href="../../khayt-apple-icon.png">
+<link rel="preload" href="../../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../fonts/fonts.css?v=46abfcad90">
+<link rel="stylesheet" href="../../styles.css?v=3100119cd9">
+<link rel="alternate" hreflang="en" href="https://khaytapp.com/developers/updates/">
+<link rel="alternate" hreflang="ar" href="https://khaytapp.com/ar/developers/updates/">
+<script src="../docs.js" type="module"></script>
+</head>
+<body class="page">
+
+<a class="skip-link" href="#top" data-i18n="a11y.skip">Skip to content</a>
+
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+      <a href="../../#modes" data-i18n="nav.modes">Modes</a>
+      <a href="../../#features" data-i18n="nav.features">Features</a>
+      <a href="../../#languages" data-i18n="nav.languages">Languages</a>
+      <a href="../../services.html" data-i18n="nav.services">Services</a>
+      <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+      <a href="../../#download" data-i18n="nav.download">Download</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="navTheme" type="button"><svg class="when-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="when-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="sr-only when-light">Switch to dark theme</span><span class="sr-only when-dark">Switch to light theme</span></button>
+      <button class="lang-toggle" id="navLang"><span aria-hidden="true">🌐</span> <span class="sr-only">Switch language to </span><span lang="ar">العربية</span></button>
+      <a href="../../#download" class="btn btn-accent" aria-label="Download" data-i18n-aria="nav.download"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg><span class="hide-sm" data-i18n="nav.download">Download</span></a>
+      <button class="nav-burger" id="burger" aria-label="Menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="page-head">
+  <div class="wrap">
+   <div class="post-in">
+    <span class="eyebrow">Khayt for developers</span>
+    <h1>How updates reach shops</h1>
+    <p class="lede">Shops never download a connector from you. Khayt signs each version that passes review and lists it in one signed index on khaytapp.com, which every device checks. This is what a device does with it.</p>
+    <nav class="docs-tabs" aria-label="Developer docs">
+      <a href="../manifest/">Manifest</a>
+      <a href="../events/">Requests</a>
+      <a href="../webhooks/">Shop webhooks</a>
+      <a href="../samples/">Samples</a>
+      <a href="../updates/" aria-current="page">Updates</a>
+      <a href="../directory/">Directory</a>
+    </nav>
+   </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+   <div class="docs-layout">
+    <aside class="docs-aside">
+      <details class="docs-toc">
+        <summary>On this page</summary>
+        <nav aria-label="On this page"><ol>
+          <li><a href="#index">The signed index</a></li>
+          <li><a href="#outcomes">What a device does with a new version</a></li>
+          <li><a href="#revert">Revert</a></li>
+          <li><a href="#fail-safe">When the index cannot be trusted</a></li>
+          <li><a href="#you">What this means for you</a></li>
+        </ol></nav>
+      </details>
+      <p class="docs-source">Generated from <code>lib/plugin-update.js</code> at 9d0d89462</p>
+    </aside>
+    <div class="post-body policy docs-body">
+
+      <p class="policy-tldr"><strong>Draft.</strong> Connectors are not switched on yet, and the index is not published. Everything below is generated from <code>lib/plugin-update.js</code> at 9d0d89462; the example index passes its <code>checkIndex</code>.</p>
+
+      <h2 tabindex="-1" id="index">The signed index</h2>
+      <p>One file, <code>https://khaytapp.com/<wbr>connectors/<wbr>index.json</code>, with one row per item. It says which version is current; what that version may do is still only what Khayt signed into its manifest. The signature is ed25519 over <code>khayt-index-v1\n</code> followed by the canonical JSON of everything except <code>signature</code>, so an index signature can never pass as a manifest’s, or the other way round. The <code>serial</code> only ever rises.</p>
+      <div class="code-block">
+        <div class="code-head"><span class="code-file">index.json</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-12">Copy<span class="sr-only"> index.json</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="index.json"><code id="code-12">{
+  <span class="tk">&quot;khaytIndex&quot;</span>: 1,
+  <span class="tk">&quot;serial&quot;</span>: 12,
+  <span class="tk">&quot;issuedAt&quot;</span>: <span class="ts">&quot;2026-11-21T08:00:00Z&quot;</span>,
+  <span class="tk">&quot;expires&quot;</span>: <span class="ts">&quot;2027-01-05T08:00:00Z&quot;</span>,
+  <span class="tk">&quot;entries&quot;</span>: [
+    {
+      <span class="tk">&quot;kind&quot;</span>: <span class="ts">&quot;connector&quot;</span>,
+      <span class="tk">&quot;id&quot;</span>: <span class="ts">&quot;com.example.courier&quot;</span>,
+      <span class="tk">&quot;version&quot;</span>: <span class="ts">&quot;1.2.0&quot;</span>,
+      <span class="tk">&quot;url&quot;</span>: <span class="ts">&quot;https://khaytapp.com/connectors/com.example.courier/1.2.0.json&quot;</span>,
+      <span class="tk">&quot;sha256&quot;</span>: <span class="ts">&quot;a3f1c2d4e5b6978877665544332211ffeeddccbbaa99887766554433221100ab&quot;</span>,
+      <span class="tk">&quot;size&quot;</span>: 4210,
+      <span class="tk">&quot;requires&quot;</span>: {
+        <span class="tk">&quot;schema&quot;</span>: 1,
+        <span class="tk">&quot;mac&quot;</span>: <span class="ts">&quot;4.0.0-beta.42&quot;</span>,
+        <span class="tk">&quot;desktop&quot;</span>: <span class="ts">&quot;4.11.0&quot;</span>
+      },
+      <span class="tk">&quot;revoked&quot;</span>: [
+        {
+          <span class="tk">&quot;version&quot;</span>: <span class="ts">&quot;1.0.0&quot;</span>,
+          <span class="tk">&quot;reason&quot;</span>: <span class="ts">&quot;Sent the customer’s phone to the wrong address.&quot;</span>
+        }
+      ]
+    }
+  ],
+  <span class="tk">&quot;signature&quot;</span>: {
+    <span class="tk">&quot;alg&quot;</span>: <span class="ts">&quot;ed25519&quot;</span>,
+    <span class="tk">&quot;keyId&quot;</span>: <span class="ts">&quot;khayt-2026-11&quot;</span>,
+    <span class="tk">&quot;value&quot;</span>: <span class="ts">&quot;BASE64…&quot;</span>
+  }
+}</code></pre>
+      </div>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t25">
+        <table class="ref-table">
+          <caption id="ref-t25">An index row</caption>
+          <thead><tr><th scope="col">Key</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>kind</code></th><td data-label="Meaning">What it is: one of <code>connector</code>, <code>plugin</code>, <code>addon</code>. A row of a kind this app version does not know is skipped, not an error.</td></tr>
+            <tr><th scope="row"><code>id</code></th><td data-label="Meaning">The manifest’s <code>id</code>.</td></tr>
+            <tr><th scope="row"><code>version</code></th><td data-label="Meaning">The current version. Older versions are not listed; a device only ever moves forward.</td></tr>
+            <tr><th scope="row"><code>url</code></th><td data-label="Meaning">Where the signed manifest is: https, on khaytapp.com.</td></tr>
+            <tr><th scope="row"><code>sha256</code></th><td data-label="Meaning">SHA-256 of the file at <code>url</code>, 64 lower-case hex digits. A download that does not match is thrown away.</td></tr>
+            <tr><th scope="row"><code>size</code></th><td data-label="Meaning">Optional: the file’s size in bytes, checked with the hash.</td></tr>
+            <tr><th scope="row"><code>requires</code></th><td data-label="Meaning">Optional: <code>schema</code>, the manifest format the version needs, and the oldest app version per platform (<code>mac</code>, <code>desktop</code>, <code>ios</code>). An older app is told the update needs a newer Khayt, and keeps the version it has.</td></tr>
+            <tr><th scope="row"><code>revoked</code></th><td data-label="Meaning">Optional: versions Khayt has withdrawn, each <code>{ version, reason }</code>. The reason is shown to the shop, up to 200 characters.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 tabindex="-1" id="outcomes">What a device does with a new version</h2>
+      <p>A device downloads the manifest from the row’s <code>url</code>, checks its SHA-256, then the manifest’s own signature, then compares what it asks for with what the shop agreed to.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t26">
+        <table class="ref-table">
+          <caption id="ref-t26">Update outcomes</caption>
+          <thead><tr><th scope="col">When the new version…</th><th scope="col">What happens</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">asks for nothing new</th><td data-label="What happens">Installs by itself on the Mac and on Windows and Linux, with a quiet “Updated to 1.2.0 · Revert” note. Nothing new means the same fields to the same hosts, with the same scopes and refresh: a field sent to a different host counts as new.</td></tr>
+            <tr><th scope="row">asks for more</th><td data-label="What happens">Waits for the shop’s yes on a sheet that shows what is new, and the installed version keeps running until then. “Not now” asks again only for a newer version.</td></tr>
+            <tr><th scope="row">needs a newer Khayt</th><td data-label="What happens">The shop is told the update needs a newer Khayt, and keeps the version it has.</td></tr>
+            <tr><th scope="row">is withdrawn</th><td data-label="What happens">It is paused on every device, with the reason. This is the one case a running connector stops without the shop’s word. A withdrawn version is never kept to revert to.</td></tr>
+            <tr><th scope="row">is a plugin (<code>plugin</code>)</th><td data-label="What happens">It never updates by itself, even asking for nothing new, until there is a sandbox for it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The iPhone shows updates and the previous version, and takes the change from the shop’s Mac.</p>
+
+      <h2 tabindex="-1" id="revert">Revert</h2>
+      <p>After an update, the shop can go back to the version it had, with the permissions it had. A version a shop reverted is never installed by itself again; a later version can be.</p>
+
+      <h2 tabindex="-1" id="fail-safe">When the index cannot be trusted</h2>
+      <p>Nothing changes: no update, no pause, and every connector keeps running as it is. A device remembers the highest serial it has accepted, so an older index cannot bring back a version withdrawn since.</p>
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t27">
+        <table class="ref-table">
+          <caption id="ref-t27">Why an index is refused</caption>
+          <thead><tr><th scope="col">Reason</th><th scope="col">Meaning</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>unreadable</code></th><td data-label="Meaning">The index is not in the format this app reads, or a row is malformed.</td></tr>
+            <tr><th scope="row"><code>unsigned</code></th><td data-label="Meaning">No signature from a published Khayt key.</td></tr>
+            <tr><th scope="row"><code>old_serial</code></th><td data-label="Meaning">Its serial is lower than one this device has already accepted: an older index served again.</td></tr>
+            <tr><th scope="row"><code>expired</code></th><td data-label="Meaning">Past its <code>expires</code> date. Khayt re-signs the index every 30 days, and each is good for 45.</td></tr>
+            <tr><th scope="row"><code>from_future</code></th><td data-label="Meaning">Issued more than a day ahead of this device’s clock.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 tabindex="-1" id="you">What this means for you</h2>
+      <p>Raise <code>version</code> for every change you send for review. If a version sends the same fields to the same hosts as the one before, shops get it without being asked. If it sends anything new, every shop is asked, and some will say not now: keep the old behaviour working on your side until they agree.</p>
+      <nav class="docs-pager" aria-label="Next page"><a href="../directory/" rel="next"><span class="docs-pager-k">Next</span><span class="docs-pager-t">Listing in the directory</span><span class="docs-pager-a" aria-hidden="true">→</span></a></nav>
+
+    </div>
+   </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../../" class="brand"><img src="../../khayt-icon-128.png" width="128" height="128" alt="" aria-hidden="true">Khayt <span class="ar" lang="ar">خيط</span></a>
+        <p data-i18n="foot.desc">The all-in-one production desk for 3D print shops — quoting, queue, invoicing and inventory, entirely offline.</p>
+        <p class="ar-sub">خيط — مدير إنتاج الطباعة ثلاثية الأبعاد</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h2 data-i18n="foot.product">Product</h2>
+          <a href="../../#screens" data-i18n="nav.screens">Screens</a>
+          <a href="../../#features" data-i18n="nav.features">Features</a>
+          <a href="../../#beta" data-i18n="nav.beta">Cloud</a>
+          <a href="../../services.html" data-i18n="nav.services">Services</a>
+          <a href="../../blog/" data-i18n="nav.blog">Blog</a>
+          <a href="../../#download" data-i18n="nav.download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h2 data-i18n="foot.project">Project</h2>
+          <a href="https://github.com/KhaytApp/Khayt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/KhaytApp/Khayt/releases" target="_blank" rel="noopener" data-i18n="foot.releases">Releases</a>
+          <a href="https://www.reddit.com/r/khayt" target="_blank" rel="noopener" data-i18n="foot.community">Community</a>
+          <a href="https://github.com/sponsors/Alballaa" target="_blank" rel="noopener" data-i18n="foot.sponsor">Sponsor</a>
+          <a href="../../#open-source" data-i18n="foot.license">License</a>
+          <a href="../../privacy/" data-i18n="foot.privacy">Privacy</a>
+          <a href="../../terms/" data-i18n="foot.terms">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.made">Made with ♥ for the 3D printing community · Built with the help of AI</span>
+      <span>FSL-1.1-Apache-2.0 · © 2026 Khayt</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../site.js?v=caf5b6281c"></script>
+<script>(function(){var m=document.querySelector('meta[name="color-scheme"]'),b=document.getElementById('navTheme'),K='khayt-color-scheme';if(!m||!b)return;var q=matchMedia('(prefers-color-scheme: dark)');function sys(){return q.matches?'dark':'light'}function shown(){var v=m.content;return v==='light'||v==='dark'?v:sys()}b.addEventListener('click',function(){var t=shown()==='dark'?'light':'dark',p=t===sys()?null:t;m.content=p||'light dark';try{p?localStorage.setItem(K,p):localStorage.removeItem(K)}catch(e){}});addEventListener('storage',function(e){if(e.key===K)m.content=e.newValue==='light'||e.newValue==='dark'?e.newValue:'light dark'})})();</script>
+</body>
+</html>
