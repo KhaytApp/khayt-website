@@ -1,0 +1,10 @@
+{
+  "_placeholder": "Seed only, not signed. The Mac lane replaces this file with the output of sign-connector.js publish; never edit the real one by hand. Do not merge.",
+  "khaytIndex": 1,
+  "serial": 0,
+  "entries": [
+    { "kind": "connector", "id": "app.khayt.samples.lamha", "version": "1.1.1",
+      "url": "https://khaytapp.com/connectors/app.khayt.samples.lamha/1.1.1.json",
+      "revoked": [ { "version": "1.0.0", "reason": "Reports a refused order as sent." } ] }
+  ]
+}
