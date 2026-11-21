@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/plugin-manifest.js at 0248142ea23a1952a4a2774b01442e53f325d9fa.
+// COPIED from KhaytApp/Khayt lib/plugin-manifest.js at 9d0d89462fcdf4eb75a9583f05c83cc8106d95fd.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
@@ -307,6 +307,9 @@
    * A `response`: which of the connector's own fields on `placement` a reply
    * fills, and from which path in it. Nothing else can be named.
    */
+  /** How many paths one reply field may try, in order. */
+  const RESPONSE_PATHS_MAX = 5;
+
   function checkResponse(errors, where, response, placement, fieldsByKey) {
     if (response === undefined) return;
     if (!isObj(response) || !isObj(response.fields)) { errors.push(`${where}: {"fields": {"<own field>": "path.in.reply"}}`); return; }
@@ -316,7 +319,13 @@
       const f = fieldsByKey.get(k);
       if (!f) errors.push(`${where}.fields: no field named "${k}" — a reply can only fill the plugin's own fields`);
       else if (f.attach !== placement) errors.push(`${where}.fields.${k}: is on a ${f.attach}, the reply is about a ${placement}`);
-      if (typeof p !== 'string' || !/^[A-Za-z0-9_]+(\.[A-Za-z0-9_]+){0,5}$/.test(p)) errors.push(`${where}.fields.${k}: a dotted path, like "data.tracking"`);
+      // One path, or a short list tried in order — the first that holds a
+      // value wins (Lamha answers `order_id` on one call and `data.id` on another).
+      const paths = Array.isArray(p) ? p : [p];
+      const okPath = (x) => typeof x === 'string' && /^[A-Za-z0-9_]+(\.[A-Za-z0-9_]+){0,5}$/.test(x);
+      if (!paths.length || paths.length > RESPONSE_PATHS_MAX || !paths.every(okPath)) {
+        errors.push(`${where}.fields.${k}: a dotted path, like "data.tracking", or a list of up to ${RESPONSE_PATHS_MAX} tried in order`);
+      }
     }
   }
 
@@ -565,9 +574,57 @@
       scopes: Array.from(new Set(Array.isArray(m && m.scopes) ? m.scopes : [])).sort(),
       categories: Array.from(categories).sort(),
     };
+    out.routes = routesOf(m);
     // How often it may check on its own, in minutes — only when it does.
     const every = refreshEvery(m);
     if (every) out.refresh = every;
+    return out;
+  }
+
+  /**
+   * WHICH FIELD GOES TO WHICH HOST, and which key: one "host field" or
+   * "host secret:name" string per pair, sorted.
+   *
+   * A grant used to be two flat lists, the fields and the hosts. So a new
+   * version that sent the customer's phone to host B where the shop had
+   * agreed to host A asked for nothing "more" — same fields, same hosts —
+   * and with updates that install on their own when nothing widens, that
+   * would have moved a customer's phone number to another company without a
+   * question. The consent sheet has always shown the pairs; this is the grant
+   * remembering them.
+   */
+  function routesOf(m) {
+    const routes = new Set();
+    for (const t of triggersOf(m)) {
+      const h = hostOf(t && t.url);
+      if (!h) continue;
+      refsOf(t).forEach(r => routes.add(h + ' ' + r));
+      const secrets = new Set();
+      if (isObj(t.auth) && typeof t.auth.secret === 'string' && t.auth.secret) secrets.add(t.auth.secret);
+      const texts = [String(t.url || '')];
+      if (isObj(t.body) && t.body.format === 'json-template') texts.push(...templateStrings(t.body.template, []));
+      for (const text of texts) {
+        placeholders(text).forEach(r => { if (r.startsWith('secret.')) secrets.add(r.slice('secret.'.length)); });
+      }
+      secrets.forEach(name => routes.add(h + ' secret:' + name));
+    }
+    return Array.from(routes).sort();
+  }
+
+  /**
+   * The pairs a stored grant covers. A grant from before pairs were kept has
+   * none: it is read as every field it lists to every host it lists, which is
+   * what it allowed then — so nothing already installed is paused by this —
+   * and it gains real pairs the next time the shop agrees to anything.
+   */
+  function grantedRoutes(g) {
+    if (Array.isArray(g.routes)) return new Set(g.routes);
+    const out = new Set();
+    const fields = Array.isArray(g.fields) ? g.fields : [];
+    for (const h of Array.isArray(g.domains) ? g.domains : []) {
+      fields.forEach(f => out.add(h + ' ' + f));
+      out.add(h + ' secret:*');
+    }
     return out;
   }
 
@@ -593,14 +650,24 @@
     // it agreed to, is asking for more. Checking less often is not.
     const grantedEvery = Number(g.refresh);
     out.refresh = !!want.refresh && !(Number.isFinite(grantedEvery) && grantedEvery > 0 && grantedEvery <= want.refresh);
-    out.widened = out.fields.length > 0 || out.domains.length > 0 || out.scopes.length > 0 || out.refresh;
+    // A field, or a key, going to a host it did not go to before — even when
+    // both the field and the host were already agreed to separately.
+    const routes = grantedRoutes(g);
+    const legacy = !Array.isArray(g.routes);
+    out.routes = want.routes.filter(r => {
+      if (routes.has(r)) return false;
+      const at = r.indexOf(' secret:');
+      return !(legacy && at > 0 && routes.has(r.slice(0, at) + ' secret:*'));
+    });
+    out.widened = out.fields.length > 0 || out.domains.length > 0 || out.scopes.length > 0
+      || out.routes.length > 0 || out.refresh;
     return out;
   }
 
   /** The grant to store once a shop agrees: exactly what it was shown. */
   function grantFor(manifest) {
     const p = permissionsOf(manifest);
-    const g = { version: p.version, fields: p.fields, domains: p.domains, scopes: p.scopes };
+    const g = { version: p.version, fields: p.fields, domains: p.domains, scopes: p.scopes, routes: p.routes };
     if (p.refresh) g.refresh = p.refresh;
     return g;
   }
@@ -653,7 +720,11 @@
   function checkEntry(e) {
     const errors = [];
     if (!isObj(e)) return { ok: false, errors: ['an entry is an object'], paused: true };
-    checkOnly(errors, 'entry', e, ['id', 'version', 'enabled', 'manifest', 'granted', 'config', 'secrets']);
+    // `ext` is room to grow (Nov 10): any later per-entry data goes in it, so a
+    // shape change never again turns every older build's connectors invalid —
+    // the reason update state lives beside the entries (lib/plugin-update.js).
+    checkOnly(errors, 'entry', e, ['id', 'version', 'enabled', 'manifest', 'granted', 'config', 'secrets', 'ext']);
+    if (e.ext !== undefined && !isObj(e.ext)) errors.push('ext: an object');
     const v = validateManifest(e.manifest);
     v.errors.forEach(x => errors.push('manifest: ' + x));
     if (isObj(e.manifest) && (e.id !== e.manifest.id || e.version !== e.manifest.version)) {
@@ -672,7 +743,9 @@
     // what may be sent without a new signature or a new consent.
     if (isObj(e.granted) && isObj(e.manifest)) {
       const declared = permissionsOf(e.manifest);
-      for (const k of ['fields', 'domains', 'scopes']) {
+      // `routes` too (Nov 11): the pairs are what an update is measured
+      // against, so a pair the manifest never sends is a grant nobody gave.
+      for (const k of ['fields', 'domains', 'scopes', 'routes']) {
         const extra = (Array.isArray(e.granted[k]) ? e.granted[k] : []).filter(x => !declared[k].includes(x));
         if (extra.length) errors.push(`granted.${k}: ${extra.join(', ')} not in the manifest`);
       }
@@ -723,7 +796,8 @@
     const auth = { type: 'object', additionalProperties: false, required: ['header', 'secret'],
       properties: { header: { type: 'string' }, scheme: { type: 'string' }, secret: key, encode: { enum: AUTH_ENCODINGS } } };
     const response = { type: 'object', additionalProperties: false, required: ['fields'],
-      properties: { fields: { type: 'object', minProperties: 1, additionalProperties: { type: 'string' } } } };
+      properties: { fields: { type: 'object', minProperties: 1, additionalProperties: {
+        oneOf: [{ type: 'string' }, { type: 'array', minItems: 1, maxItems: RESPONSE_PATHS_MAX, items: { type: 'string' } }] } } } };
     return {
       $schema: 'https://json-schema.org/draft/2020-12/schema',
       $id: 'https://khaytapp.com/schemas/plugin-manifest-v1.json',
@@ -770,10 +844,11 @@
   }
 
   const api = {
+    RESPONSE_PATHS_MAX,
     MANIFEST_VERSION, SIGNING_KEYS, SENDABLE_FIELDS, OWN_FIELD_CATEGORY, PLACEMENT_SOURCES,
     FIELD_TYPES, FIELD_ATTACH, SETTING_TYPES, SETTING_KINDS, ACTION_KINDS, SECRET_KINDS, SCOPES, RESERVED_SCOPES, EVENTS, BODY_FORMATS, LIMITS, TOP_KEYS,
     REFRESH, REFRESH_METHODS, NOW_MAX_DAYS, AUTH_ENCODINGS, nowDays,
-    validateManifest, permissionsOf, diffPermissions, grantFor, consentRows, refreshConsent, refreshEvery, categoryOf, checkEntry, mayWriteFields,
+    validateManifest, permissionsOf, routesOf, diffPermissions, grantFor, consentRows, refreshConsent, refreshEvery, categoryOf, checkEntry, mayWriteFields,
     canonicalJSON, manifestJsonSchema, isAllowedHost, placeholders,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

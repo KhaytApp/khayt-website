@@ -89,14 +89,14 @@
           <li><a href="#slack">Slack alerts</a></li>
         </ol></nav>
       </details>
-      <p class="docs-source">From <code>plugins/samples/</code> at 0248142ea</p>
+      <p class="docs-source">From <code>plugins/samples/</code> at 9d0d89462</p>
     </aside>
     <div class="post-body policy docs-body">
 
       <p class="policy-tldr"><strong>Draft.</strong> Connectors are not released yet. Each sample below is checked when this page is built: it passes the app’s validator and its signature verifies against a <a href="../manifest/#signing">published key</a>. The requests are built by the app’s own code. Secrets in a URL are shown as <code>YOUR-…</code>.</p>
 
       <h2 tabindex="-1" id="discord">Discord alerts</h2>
-      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Posts to a Discord channel when a job comes in or ships. It reacts to the <code>order_created</code> event and the <code>order_shipped</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t21">
         <table class="ref-table">
           <caption id="ref-t21">What Discord alerts sends</caption>
@@ -116,7 +116,7 @@ Content-Type: application/json
       </div>
 
       <h2 tabindex="-1" id="lamha">Lamha shipping</h2>
-      <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Records a job as an order in your Lamha account, ready for you to book a courier there. It never books or pays for a shipment by itself. It reacts to a <code>record</code> button. File: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t22">
         <table class="ref-table">
           <caption id="ref-t22">What Lamha shipping sends</caption>
@@ -136,7 +136,7 @@ Content-Type: application/json
       </div>
 
       <h2 tabindex="-1" id="sheets">Google Sheets order log</h2>
-      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t23">
         <table class="ref-table">
           <caption id="ref-t23">What Google Sheets order log sends</caption>
@@ -156,7 +156,7 @@ Content-Type: application/json
       </div>
 
       <h2 tabindex="-1" id="slack">Slack alerts</h2>
-      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/0248142ea23a1952a4a2774b01442e53f325d9fa/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
+      <p>Posts a message to a Slack channel when a job comes in or is paid. It reacts to the <code>order_created</code> event and the <code>payment_received</code> event. File: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>, signed with <code>khayt-2026-11</code>.</p>
       <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t24">
         <table class="ref-table">
           <caption id="ref-t24">What Slack alerts sends</caption>

@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/order-money.js at 0248142ea23a1952a4a2774b01442e53f325d9fa.
+// COPIED from KhaytApp/Khayt lib/order-money.js at 9d0d89462fcdf4eb75a9583f05c83cc8106d95fd.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';
@@ -87,6 +87,29 @@
     const code = o && o.currency;
     if (code && (!known || known[code])) return code;
     return clientCurrency(o && o.clientId, ctx);
+  }
+
+  /**
+   * Write on each of a customer's jobs the currency it is in today, BEFORE
+   * that customer's currency changes.
+   *
+   * A job in the shop's own currency carries no `currency` and is read in its
+   * customer's. So giving a customer with ten finished SAR jobs the currency
+   * EUR turned every one of them into EUR: a paid 1,000 became 4,100 of
+   * revenue. Call this with the clients AS THEY WERE; it stamps the jobs that
+   * have none and returns the ones it changed. A job that already says its
+   * currency is left alone.
+   */
+  function pinCurrenciesOf(orders, clientId, ctx) {
+    const changed = [];
+    if (clientId == null || clientId === '') return changed;
+    for (const o of Array.isArray(orders) ? orders : []) {
+      if (!o || typeof o !== 'object' || o.currency) continue;
+      if (String(o.clientId) !== String(clientId)) continue;
+      o.currency = orderCurrency(o, ctx);
+      changed.push(o);
+    }
+    return changed;
   }
 
   /**
@@ -315,8 +338,100 @@
     return globalThis.KhaytTax.netOfTax(charged, profile);
   }
 
+  /**
+   * A job's costs that are not its parts, in the SHOP's currency, as stored:
+   * componentsCost, overheadCost, and a product's labourCost and packagingCost
+   * (order-level since Nov 19). `opts`: { components, overhead, labour,
+   * packaging } — each true unless false, so a reader keeps exactly the costs
+   * it always summed (the Orders Log leaves overhead out; the dashboard's cost
+   * of goods leaves components out). The ONE place these fields are read
+   * (test/job-cost-ratchet.test.js).
+   */
+  /**
+   * The labour of ONE LINE of work, before any failure buffer: prep ONCE for
+   * the line, post-processing / assembly PER PIECE (Turki, Nov 19):
+   *   (prepTime + postTime × qty) × laborRate.
+   * A line is a part (its own qty), or a product (qty = how many of it, the
+   * product's own hours; its parts' qty do not multiply post: assembly is per
+   * finished product), or a store order's line of N products. The ONE rule:
+   * the calculator's part cost (lib/calculator-cost.js), a product's labour
+   * (lib/product-pricing.js) and store orders (lib/store-order-job.js) all
+   * call it, and so do the Mac and the phone. It used to be (prep + post) ×
+   * rate per PIECE, so prep was charged qty times: +24.75 a piece by default.
+   */
+  /**
+   * How many boxes a line of `qty` pieces ships in (Turki, Nov 19: "depends
+   * on size"): `perBox` is how many fit one box. A whole number >= 1 gives
+   * ceil(qty / perBox); unsaid (or not a usable number) is ONE box for the
+   * line, a hand part's packaging as it always was. A product passes its own
+   * perBox, 1 by default (a box each, as before).
+   */
+  function lineBoxes(qty, perBox) {
+    const q = Math.max(1, Math.floor(+qty || 1));
+    const b = Math.floor(+perBox);
+    if (!(perBox !== undefined && perBox !== null && perBox !== '' && b >= 1)) return 1;
+    return Math.ceil(q / b);
+  }
+
+  function lineLabour(line) {
+    const l = line || {};
+    const pos = (v) => Math.max(0, +v || 0);
+    const qty = Math.max(1, +l.qty || 1);
+    // ONLY a line marked `labourPerLine: true` is costed the new way. An
+    // unmarked line is the OLD sum, prep and post on every piece, so every
+    // record written before this (a stored job's parts, a product without
+    // rates) and every path that does not know the mark costs exactly what
+    // it did (money review of #2586, HIGH 1 and 2): stored jobs stay frozen
+    // and a product keeps its catalogue figure until "Use the new cost"
+    // (Turki, Nov 19, option ii). New parts are marked where they are made:
+    // the calculator, the job sheet, a quote, a product with its own rates.
+    if (l.labourPerLine !== true) return (pos(l.prepTime) + pos(l.postTime)) * qty * pos(l.laborRate);
+    return (pos(l.prepTime) + pos(l.postTime) * qty) * pos(l.laborRate);
+  }
+
+  function jobFixedCost(order, opts) {
+    const o = order || {};
+    const x = opts || {};
+    const pos = (v) => Math.max(0, +v || 0);
+    return (x.components === false ? 0 : pos(o.componentsCost))
+      + (x.overhead === false ? 0 : pos(o.overheadCost))
+      + (x.labour === false ? 0 : pos(o.labourCost))
+      + (x.packaging === false ? 0 : pos(o.packagingCost));
+  }
+
+  /**
+   * A job's cost, shop currency: its parts' `baseCost` plus jobFixedCost(opts).
+   * A job without labourCost / packagingCost (every job before Nov 19) costs
+   * exactly what each reader summed before (test/job-cost-sample-book.test.js).
+   */
+  /**
+   * Whether a part added BY HAND to an existing job carries `orderLevelCosts`
+   * (costed without labour and packaging, which the order carries once). THE
+   * rule, in one place, for the desktop's job sheet and calculator and the
+   * Mac's partsForSave. A product's parts (productJobParts), and parts edited
+   * from them, keep their mark whatever this says.
+   *
+   * Turki, Nov 19: a hand-added part gets its OWN labour, so false.
+   * `api.HAND_PARTS_SHARE_ONCE` is the switch: read at call time, so a test
+   * can flip it and see both settings price alike.
+   */
+  function addedPartMark(order) {
+    if (api.HAND_PARTS_SHARE_ONCE !== true) return false;
+    return jobFixedCost(order, { components: false, overhead: false }) > 0;
+  }
+
+  function jobCost(order, opts) {
+    const parts = (order && Array.isArray(order.parts) ? order.parts : []);
+    return parts.reduce((s, p) => s + Math.max(0, +(p && p.baseCost) || 0), 0) + jobFixedCost(order, opts);
+  }
+
   const api = {
-    convertToBase, clientCurrency, orderCurrency,
+    lineLabour,
+    lineBoxes,
+    HAND_PARTS_SHARE_ONCE: false,   // Turki, Nov 19 (see addedPartMark)
+    addedPartMark,
+    jobCost, jobFixedCost,
+    convertToBase, clientCurrency, orderCurrency, pinCurrenciesOf,
     orderRevenueBase, orderCreditedRaw, orderCreditedBase,
     orderNetRevenueBase, orderOwedRaw, orderOwedBase,
     orderGrossRaw, orderDueRaw, settledBeforeTaxOnTop, orderEarnedBase,

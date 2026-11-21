@@ -1,4 +1,4 @@
-// COPIED from KhaytApp/Khayt lib/webhooks.js at 0248142ea23a1952a4a2774b01442e53f325d9fa.
+// COPIED from KhaytApp/Khayt lib/webhooks.js at 9d0d89462fcdf4eb75a9583f05c83cc8106d95fd.
 // Do not edit here: run scripts/sync-plugin-manifest.js. The docs under
 // developers/ are generated from this file by scripts/make-dev-docs.js.
 'use strict';

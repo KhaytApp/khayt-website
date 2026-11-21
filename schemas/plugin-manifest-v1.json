@@ -433,7 +433,19 @@
                 "type": "object",
                 "minProperties": 1,
                 "additionalProperties": {
-                  "type": "string"
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 5,
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -565,7 +577,19 @@
                 "type": "object",
                 "minProperties": 1,
                 "additionalProperties": {
-                  "type": "string"
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 5,
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -700,7 +724,19 @@
               "type": "object",
               "minProperties": 1,
               "additionalProperties": {
-                "type": "string"
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 5,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               }
             }
           }
