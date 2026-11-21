@@ -47,6 +47,21 @@
 @font-face { font-family: "Plex Arabic Fallback"; font-weight: 500; src: local("Tahoma"); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; size-adjust: 92.69%; ascent-override: 117.06%; descent-override: 44.77%; line-gap-override: 0%; }
 @font-face { font-family: "Plex Arabic Fallback"; font-weight: 600; src: local("Tahoma Bold"), local("Tahoma-Bold"); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; size-adjust: 80.52%; ascent-override: 134.77%; descent-override: 51.54%; line-gap-override: 0%; }
 @font-face { font-family: "Plex Arabic Fallback"; font-weight: 700; src: local("Tahoma Bold"), local("Tahoma-Bold"); unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF; size-adjust: 83.26%; ascent-override: 130.31%; descent-override: 49.84%; line-gap-override: 0%; }
+/* Latin, digits and spaces on an Arabic page are drawn by IBM Plex Sans
+   Arabic's own Latin, not by Hanken Grotesk, so before Plex arrives they need
+   a fallback sized to Plex's Latin. They fell through to the Hanken fallback,
+   up to 5.6% off (bold), and a line mixing Arabic with names such as "HueForge" or
+   "Snapmaker U1" re-wrapped when the font arrived (/ar/blog/version-4 moved
+   0.027 of its 0.036 on a phone). Sized on the Latin letters, digits and
+   punctuation of every Arabic page, grouped by the weight they are drawn at.
+   Spaces are left out of the range: between Arabic words they already match,
+   and including them made /ar/privacy and /ar/blog/mac-beta worse. Vertical
+   metrics are
+   Plex Sans Arabic's (ascent 1.0848, descent 0.4149 of the em). */
+@font-face { font-family: "Plex Latin Fallback"; font-weight: 400; src: local("Arial"), local("ArialMT"); unicode-range: U+0021-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2010-2027, U+2030-205E, U+20AC, U+2122, U+2212; size-adjust: 98.99%; ascent-override: 109.59%; descent-override: 41.91%; line-gap-override: 0%; }
+@font-face { font-family: "Plex Latin Fallback"; font-weight: 500; src: local("Arial"), local("ArialMT"); unicode-range: U+0021-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2010-2027, U+2030-205E, U+20AC, U+2122, U+2212; size-adjust: 101.73%; ascent-override: 106.64%; descent-override: 40.78%; line-gap-override: 0%; }
+@font-face { font-family: "Plex Latin Fallback"; font-weight: 600; src: local("Arial Bold"), local("Arial-BoldMT"); unicode-range: U+0021-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2010-2027, U+2030-205E, U+20AC, U+2122, U+2212; size-adjust: 98.23%; ascent-override: 110.43%; descent-override: 42.24%; line-gap-override: 0%; }
+@font-face { font-family: "Plex Latin Fallback"; font-weight: 700; src: local("Arial Bold"), local("Arial-BoldMT"); unicode-range: U+0021-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2010-2027, U+2030-205E, U+20AC, U+2122, U+2212; size-adjust: 102.50%; ascent-override: 105.83%; descent-override: 40.48%; line-gap-override: 0%; }
 /* ── LIGHT AND DARK ─────────────────────────────────────────────────────
    The site follows the visitor's system scheme, and the moon/sun button in
    the nav (site.js) can pin the other one for this site. The pin lives in a
@@ -128,7 +143,7 @@
   --font-display: "Archivo", "Archivo Fallback", system-ui, sans-serif;
   --font-body: "Hanken Grotesk", "Hanken Fallback", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-ar: "IBM Plex Sans Arabic", "Plex Arabic Fallback", "Hanken Grotesk", "Hanken Fallback", sans-serif;
+  --font-ar: "IBM Plex Sans Arabic", "Plex Arabic Fallback", "Plex Latin Fallback", "Hanken Grotesk", "Hanken Fallback", sans-serif;
   --font-wordmark: "Almarai", "IBM Plex Sans Arabic", sans-serif;
   /* One "ch" of the body face, pinned. A measure written as 74ch is read from
      whatever font is on screen, and until the webfont arrives that is the
