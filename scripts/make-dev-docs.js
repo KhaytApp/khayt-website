@@ -436,6 +436,8 @@ return `
 // an "On this page" list built from the page's own h2s (a sticky column on a
 // wide screen, a disclosure on a phone), dark code blocks with a copy button,
 // and a link to the next page. The pages' own text is not touched here.
+// /developers/updates/ and /developers/directory/: scripts/dev-docs-trust.js.
+const TRUST = require('./dev-docs-trust.js')({ ROOT, VENDOR_SHA, table, esc, code, tFor, problems });
 const DOCS = [
   { rel: 'developers/manifest/index.html', tab: 'Manifest', title: 'Connector manifest',
     tabAr: 'ملف التعريف', titleAr: 'ملف تعريف الموصل',
@@ -455,6 +457,7 @@ const DOCS = [
     tabAr: 'أمثلة', titleAr: 'موصلات للبدء منها',
     source: () => `From <code>plugins/samples/</code> at ${VENDOR_SHA.slice(0, 9)}`,
     sourceAr: () => `من <code>plugins/samples/</code> عند ${VENDOR_SHA.slice(0, 9)}` },
+  ...TRUST.docs,
 ];
 const tabHref = (from, to) => '../' + to.rel.split('/')[1] + '/';
 let codeN = 0;
@@ -896,7 +899,8 @@ ${samples.map(s => sampleSection(s, lang)).join('\n')}
 // with: English first, as it always was.
 const MAINS = {};
 for (const lang of ['en', 'ar']) {
-  MAINS[lang] = { manifest: mainPage(lang), events: eventsPage(lang), webhooks: webhooksPage(lang), samples: samplesPage(lang) };
+  MAINS[lang] = { manifest: mainPage(lang), events: eventsPage(lang), webhooks: webhooksPage(lang), samples: samplesPage(lang),
+    updates: TRUST.pages.updates(lang), directory: TRUST.pages.directory(lang) };
 }
 const META = {
   manifest: { title: ['Connector manifest — Khayt developers', 'ملف تعريف الموصل — خيط للمطوّرين'],
@@ -908,9 +912,10 @@ const META = {
   webhooks: { title: ['Shop webhooks — Khayt developers', 'خطافات الويب للمطبعة — خيط للمطوّرين'],
     desc: ['The events a Khayt shop can send to its own https address, and how to verify them.', 'الأحداث التي ترسلها مطبعة خيط إلى عنوان https تختاره، وكيف تتحقق منها.'] },
 };
+Object.assign(META, TRUST.meta);
 const OUT = {};
 for (const [lang, i, prefix] of [['en', 0, ''], ['ar', 1, 'ar/']]) {
-  for (const key of ['manifest', 'events', 'samples', 'webhooks']) {
+  for (const key of ['manifest', 'events', 'samples', 'webhooks', 'updates', 'directory']) {
     const rel = `developers/${key}/index.html`;
     OUT[prefix + rel] = page(rel, META[key].title[i], META[key].desc[i], MAINS[lang][key], lang);
   }

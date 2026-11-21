@@ -74,6 +74,8 @@
       <a href="../events/" aria-current="page">الطلبات الواردة</a>
       <a href="../webhooks/">خطافات الويب</a>
       <a href="../samples/">أمثلة</a>
+      <a href="../updates/">التحديثات</a>
+      <a href="../directory/">الدليل</a>
     </nav>
    </div>
   </div>
@@ -103,8 +105,8 @@
       <p>ما لم يضبط المشغّل <code>body.format</code> على <code>json-template</code>، يرسل خيط كائن <code>plugin-payload-v1</code>: معرّف موصلك وإصداره، وأي زر أو حدث تسبّب فيه، وتحت <code>data</code> الحقول التي يذكرها المشغّل في <code>send</code> بالضبط، مفاتيحها أسماؤها. والحقل الذي لا قيمة له يكون <code>null</code>. المفاتيح مرتبة، ويُرسل الجسم JSON مضغوطاً، بالبايتات نفسها من ماك أو حاسوب شخصي أو آيفون.</p>
       <p>حدث <code>order_shipped</code>، مع <code>signWith</code>:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-13">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-13">POST https://api.courier.example.com/v1/khayt/shipped
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-16">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-16">POST https://api.courier.example.com/v1/khayt/shipped
 Content-Type: application/json
 X-Khayt-Event: order_shipped
 X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
@@ -116,8 +118,8 @@ X-Khayt-Signature-V2: 0d7a7b96523aa1d31d875b4c3957b252e77b18c1317fe2a8ae4084d961
       </div>
       <p>زر <code>book</code>، مع ترويسة <code>auth</code> ودون توقيع:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-14">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-14">POST https://api.courier.example.com/v1/shipments
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-17">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-17">POST https://api.courier.example.com/v1/shipments
 Content-Type: application/json
 X-Khayt-Event: book
 X-Khayt-Delivery: dlv_&lt;a lower-case UUID, the same on every retry&gt;
@@ -127,8 +129,8 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;
       </div>
       <p>التحديث لعمل واحد، طلب <code>GET</code> دون جسم:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-15">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-15">GET https://api.courier.example.com/v1/shipments/CX-88412
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-18">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-18">GET https://api.courier.example.com/v1/shipments/CX-88412
 X-Khayt-Event: refresh
 X-Khayt-Delivery: dlv_&lt;a lower-case UUID&gt;
 Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
@@ -137,9 +139,9 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
       <p>تظهر الأجسام أعلاه كما تُرسل تماماً، في سطر واحد: فالتوقيعات على هذه البايتات، ويمكنك اختبار الوصفة أدناه عليها بالمفتاح <code>example-signing-key</code>.</p>
 
       <h2 tabindex="-1" id="headers">الترويسات</h2>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t43">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t47">
         <table class="ref-table">
-          <caption id="ref-t43">الترويسات</caption>
+          <caption id="ref-t47">الترويسات</caption>
           <thead><tr><th scope="col">الترويسة</th><th scope="col">متى</th><th scope="col">القيمة</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>Content-Type</code></th><td data-label="متى">في طلب POST</td><td data-label="القيمة"><code>application/json</code></td></tr>
@@ -156,8 +158,8 @@ Authorization: Bearer &lt;the shop’s apiKey&gt;</code></pre>
       <h2 tabindex="-1" id="verify">التحقق من التوقيع</h2>
       <p>احسب HMAC على البايتات الخام التي استقبلتها، لا على JSON حلّلته ثم كتبته من جديد. تُختبر هذه الوصفة على توقيع حقيقي من التطبيق في كل مرة تُبنى فيها هذه الصفحة.</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">JavaScript</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-16">نسخ<span class="sr-only"> JavaScript</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="JavaScript"><code id="code-16">const crypto = require('crypto');
+        <div class="code-head"><span class="code-file">JavaScript</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-19">نسخ<span class="sr-only"> JavaScript</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="JavaScript"><code id="code-19">const crypto = require('crypto');
 
 // body: the raw request body, exactly as received (before any JSON parsing).
 function verify(body, headers, signingKey) {

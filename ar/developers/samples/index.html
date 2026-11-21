@@ -74,6 +74,8 @@
       <a href="../events/">الطلبات الواردة</a>
       <a href="../webhooks/">خطافات الويب</a>
       <a href="../samples/" aria-current="page">أمثلة</a>
+      <a href="../updates/">التحديثات</a>
+      <a href="../directory/">الدليل</a>
     </nav>
    </div>
   </div>
@@ -101,9 +103,9 @@
       <h2 tabindex="-1" id="discord">تنبيهات Discord</h2>
       <p lang="en" dir="ltr">Posts to a Discord channel when a job comes in or ships.</p>
       <p>يستجيب للحدث <code>order_created</code> وللحدث <code>order_shipped</code>. الملف: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/discord-notifier.json">plugins/samples/discord-notifier.json</a>، موقَّع بـ <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t45">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t49">
         <table class="ref-table">
-          <caption id="ref-t45">ما يرسله تنبيهات Discord</caption>
+          <caption id="ref-t49">ما يرسله تنبيهات Discord</caption>
           <thead><tr><th scope="col">المضيف</th><th scope="col">الحقول</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>discord.com</code></th><td data-label="الحقول"><code>order.carrier</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.number</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.title</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>order.trackingNumber</code> <span class="ref-cat">المشتريات › سجل الشراء</span></td></tr>
@@ -112,8 +114,8 @@
       </div>
       <p>الطلب المرسل للحدث <code>order_created</code>، لطلب مثال:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-17">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-17">POST https://discord.com/api/webhooks/YOUR-WEBHOOKPATH
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-20">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-20">POST https://discord.com/api/webhooks/YOUR-WEBHOOKPATH
 Content-Type: application/json
 
 {<span class="tk">&quot;content&quot;</span>:<span class="ts">&quot;New job INV-2026-0107: Bracket set&quot;</span>}</code></pre>
@@ -121,9 +123,9 @@ Content-Type: application/json
 
       <h2 tabindex="-1" id="lamha">شحن لمحة</h2>
       <p>يسجّل العمل كطلب في حسابك على لمحة لتختار شركة الشحن هناك. لا يحجز شحنة ولا يدفع عنها بنفسه. يستجيب لزر <code>record</code>. الملف: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/lamha-shipping.json">plugins/samples/lamha-shipping.json</a>، موقَّع بـ <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t46">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t50">
         <table class="ref-table">
-          <caption id="ref-t46">ما يرسله شحن لمحة</caption>
+          <caption id="ref-t50">ما يرسله شحن لمحة</caption>
           <thead><tr><th scope="col">المضيف</th><th scope="col">الحقول</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>app.lamha.sa</code></th><td data-label="الحقول"><code>config.carrierId</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>config.senderAddress</code> <span class="ref-cat">معلومات التواصل › العنوان</span><br><code>config.senderCity</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>config.senderName</code> <span class="ref-cat">معلومات التواصل › الاسم</span><br><code>config.senderPhone</code> <span class="ref-cat">معلومات التواصل › رقم الهاتف</span><br><code>customer.address</code> <span class="ref-cat">معلومات التواصل › العنوان</span><br><code>customer.email</code> <span class="ref-cat">معلومات التواصل › البريد الإلكتروني</span><br><code>customer.name</code> <span class="ref-cat">معلومات التواصل › الاسم</span><br><code>customer.phone</code> <span class="ref-cat">معلومات التواصل › رقم الهاتف</span><br><code>field.city</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>order.currency</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.date</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.id</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.number</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.qty</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.title</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>order.total</code> <span class="ref-cat">المشتريات › سجل الشراء</span></td></tr>
@@ -132,8 +134,8 @@ Content-Type: application/json
       </div>
       <p>الطلب المرسل لزر <code>record</code>، لطلب مثال:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-18">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-18">POST https://app.lamha.sa/api/v2/create-order
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-21">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-21">POST https://app.lamha.sa/api/v2/create-order
 Content-Type: application/json
 
 {<span class="tk">&quot;ShipmentCurrency&quot;</span>:<span class="ts">&quot;SAR&quot;</span>,<span class="tk">&quot;carrier_id&quot;</span>:<span class="ts">&quot;2&quot;</span>,<span class="tk">&quot;create_shippment&quot;</span>:false,<span class="tk">&quot;customer&quot;</span>:{<span class="tk">&quot;AddressLine1&quot;</span>:<span class="ts">&quot;King Fahd Rd, Riyadh&quot;</span>,<span class="tk">&quot;City&quot;</span>:null,<span class="tk">&quot;Country&quot;</span>:<span class="ts">&quot;SA&quot;</span>,<span class="tk">&quot;email&quot;</span>:null,<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Sara A.&quot;</span>,<span class="tk">&quot;phone&quot;</span>:<span class="ts">&quot;+966500000000&quot;</span>,<span class="tk">&quot;phone1&quot;</span>:<span class="ts">&quot;+966500000000&quot;</span>},<span class="tk">&quot;date&quot;</span>:null,<span class="tk">&quot;items&quot;</span>:[{<span class="tk">&quot;amount&quot;</span>:180,<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>,<span class="tk">&quot;quantity&quot;</span>:null,<span class="tk">&quot;weight&quot;</span>:<span class="ts">&quot;1&quot;</span>}],<span class="tk">&quot;order_id&quot;</span>:<span class="ts">&quot;INV-2026-0107&quot;</span>,<span class="tk">&quot;parcels&quot;</span>:<span class="ts">&quot;1&quot;</span>,<span class="tk">&quot;payment_method&quot;</span>:<span class="ts">&quot;prepaid&quot;</span>,<span class="tk">&quot;reference_id&quot;</span>:<span class="ts">&quot;ORD-1042&quot;</span>,<span class="tk">&quot;shipper&quot;</span>:{<span class="tk">&quot;AddressLine1&quot;</span>:<span class="ts">&quot;Olaya St, Riyadh&quot;</span>,<span class="tk">&quot;City&quot;</span>:<span class="ts">&quot;Riyadh&quot;</span>,<span class="tk">&quot;Country&quot;</span>:<span class="ts">&quot;SA&quot;</span>,<span class="tk">&quot;name&quot;</span>:<span class="ts">&quot;Athar Studio&quot;</span>,<span class="tk">&quot;phone&quot;</span>:<span class="ts">&quot;+966511111111&quot;</span>},<span class="tk">&quot;total&quot;</span>:180}</code></pre>
@@ -142,9 +144,9 @@ Content-Type: application/json
       <h2 tabindex="-1" id="sheets">سجل الطلبات في Google Sheets</h2>
       <p lang="en" dir="ltr">Adds a row to a Google Sheet for every new and paid job, through an Apps Script web app you deploy.</p>
       <p>يستجيب للحدث <code>order_created</code> وللحدث <code>payment_received</code>. الملف: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/sheets-log.json">plugins/samples/sheets-log.json</a>، موقَّع بـ <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t47">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t51">
         <table class="ref-table">
-          <caption id="ref-t47">ما يرسله سجل الطلبات في Google Sheets</caption>
+          <caption id="ref-t51">ما يرسله سجل الطلبات في Google Sheets</caption>
           <thead><tr><th scope="col">المضيف</th><th scope="col">الحقول</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>script.google.com</code></th><td data-label="الحقول"><code>customer.name</code> <span class="ref-cat">معلومات التواصل › الاسم</span><br><code>order.currency</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.date</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.number</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.title</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>order.total</code> <span class="ref-cat">المشتريات › سجل الشراء</span></td></tr>
@@ -153,8 +155,8 @@ Content-Type: application/json
       </div>
       <p>الطلب المرسل للحدث <code>order_created</code>، لطلب مثال:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-19">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-19">POST https://script.google.com/macros/s/YOUR-DEPLOYMENTID/exec
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-22">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-22">POST https://script.google.com/macros/s/YOUR-DEPLOYMENTID/exec
 Content-Type: application/json
 
 {<span class="tk">&quot;data&quot;</span>:{<span class="tk">&quot;customer.name&quot;</span>:<span class="ts">&quot;Sara A.&quot;</span>,<span class="tk">&quot;order.currency&quot;</span>:<span class="ts">&quot;SAR&quot;</span>,<span class="tk">&quot;order.date&quot;</span>:null,<span class="tk">&quot;order.number&quot;</span>:<span class="ts">&quot;INV-2026-0107&quot;</span>,<span class="tk">&quot;order.title&quot;</span>:<span class="ts">&quot;Bracket set&quot;</span>,<span class="tk">&quot;order.total&quot;</span>:180},<span class="tk">&quot;khayt&quot;</span>:<span class="ts">&quot;plugin-payload-v1&quot;</span>,<span class="tk">&quot;plugin&quot;</span>:<span class="ts">&quot;app.khayt.samples.sheets&quot;</span>,<span class="tk">&quot;trigger&quot;</span>:{<span class="tk">&quot;event&quot;</span>:<span class="ts">&quot;order_created&quot;</span>},<span class="tk">&quot;version&quot;</span>:<span class="ts">&quot;1.0.0&quot;</span>}</code></pre>
@@ -163,9 +165,9 @@ Content-Type: application/json
       <h2 tabindex="-1" id="slack">تنبيهات Slack</h2>
       <p lang="en" dir="ltr">Posts a message to a Slack channel when a job comes in or is paid.</p>
       <p>يستجيب للحدث <code>order_created</code> وللحدث <code>payment_received</code>. الملف: <a href="https://github.com/KhaytApp/Khayt/blob/9d0d89462fcdf4eb75a9583f05c83cc8106d95fd/plugins/samples/slack-notifier.json">plugins/samples/slack-notifier.json</a>، موقَّع بـ <code>khayt-2026-11</code>.</p>
-      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t48">
+      <div class="ref-scroll" tabindex="0" role="region" aria-labelledby="ref-t52">
         <table class="ref-table">
-          <caption id="ref-t48">ما يرسله تنبيهات Slack</caption>
+          <caption id="ref-t52">ما يرسله تنبيهات Slack</caption>
           <thead><tr><th scope="col">المضيف</th><th scope="col">الحقول</th></tr></thead>
           <tbody>
             <tr><th scope="row"><code>hooks.slack.com</code></th><td data-label="الحقول"><code>customer.name</code> <span class="ref-cat">معلومات التواصل › الاسم</span><br><code>order.currency</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.number</code> <span class="ref-cat">المشتريات › سجل الشراء</span><br><code>order.title</code> <span class="ref-cat">محتوى المستخدم › محتوى آخر</span><br><code>order.total</code> <span class="ref-cat">المشتريات › سجل الشراء</span></td></tr>
@@ -174,15 +176,15 @@ Content-Type: application/json
       </div>
       <p>الطلب المرسل للحدث <code>order_created</code>، لطلب مثال:</p>
       <div class="code-block">
-        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-20">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
-        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-20">POST https://hooks.slack.com/services/YOUR-WEBHOOKPATH
+        <div class="code-head"><span class="code-file">HTTP</span><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code-23">نسخ<span class="sr-only"> HTTP</span></button><span class="tip" role="status"></span></span></div>
+        <pre class="ref-code" tabindex="0" aria-label="HTTP"><code id="code-23">POST https://hooks.slack.com/services/YOUR-WEBHOOKPATH
 Content-Type: application/json
 
 {<span class="tk">&quot;text&quot;</span>:<span class="ts">&quot;New job INV-2026-0107: Bracket set for Sara A. (180 SAR)&quot;</span>}</code></pre>
       </div>
 
       <p>النسخة التي تعدّلها لم تعد موقَّعة: حمّلها في وضع المطوّر على الماك أثناء عملك عليها، ثم أرسلها للمراجعة.</p>
-      <nav class="docs-pager prev" aria-label="الصفحة السابقة"><a href="../webhooks/" rel="prev"><span class="docs-pager-k">السابق</span><span class="docs-pager-t">خطافات الويب للمطبعة</span><span class="docs-pager-a" aria-hidden="true">←</span></a></nav>
+      <nav class="docs-pager" aria-label="الصفحة التالية"><a href="../updates/" rel="next"><span class="docs-pager-k">التالي</span><span class="docs-pager-t">كيف تصل التحديثات إلى المطابع</span><span class="docs-pager-a" aria-hidden="true">→</span></a></nav>
 
     </div>
    </div>
