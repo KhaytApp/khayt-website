@@ -1,0 +1,83 @@
+{
+  "_": "Listing text for the hidden directory (/directory/). Not signed: what an item may DO comes from its signed manifest, read by scripts/make-directory.js. Edit by PR. Nothing here can add a permission, a download or a review record the build cannot check.",
+  "items": [
+    {
+      "slug": "lamha",
+      "kind": "connector",
+      "manifest": "developers/samples/lamha-shipping.json",
+      "category": "shipping",
+      "licence": "MIT",
+      "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
+      "privacy": "https://khaytapp.com/privacy/",
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
+    },
+    {
+      "slug": "slack",
+      "kind": "connector",
+      "manifest": "developers/samples/slack-notifier.json",
+      "category": "notifications",
+      "licence": "MIT",
+      "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
+      "privacy": "https://khaytapp.com/privacy/",
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
+    },
+    {
+      "slug": "discord",
+      "kind": "connector",
+      "manifest": "developers/samples/discord-notifier.json",
+      "category": "notifications",
+      "licence": "MIT",
+      "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
+      "privacy": "https://khaytapp.com/privacy/",
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
+    },
+    {
+      "slug": "sheets",
+      "kind": "connector",
+      "manifest": "developers/samples/sheets-log.json",
+      "category": "spreadsheets",
+      "licence": "MIT",
+      "source": "https://github.com/KhaytApp/Khayt/tree/main/plugins/samples",
+      "privacy": "https://khaytapp.com/privacy/",
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
+    },
+    {
+      "slug": "orcaslicer",
+      "kind": "slicer",
+      "id": "app.khayt.orca",
+      "name": {
+        "en": "Khayt for OrcaSlicer",
+        "ar": "خيط لبرنامج OrcaSlicer"
+      },
+      "description": {
+        "en": "Send the plate you sliced to the From slicer inbox on your Mac, and see your shop’s queue in a Khayt tab in Orca. It pairs over your shop’s network and never sees your customers.",
+        "ar": "أرسل اللوح الذي قطّعته إلى صندوق «من برنامج التقطيع» على جهاز ماك، وشاهد أعمال متجرك في تبويب خيط داخل Orca. يقترن عبر شبكة متجرك ولا يرى عملاءك أبدًا."
+      },
+      "version": "0.1.0",
+      "host": {
+        "name": "OrcaSlicer",
+        "version": ">=2.5.1"
+      },
+      "scopes": [
+        "slices:send",
+        "queue:read"
+      ],
+      "status": "not-released",
+      "category": "slicers",
+      "licence": "MIT",
+      "source": "https://github.com/KhaytApp/khayt-orca",
+      "privacy": "https://khaytapp.com/privacy/",
+      "support": "support@khaytapp.com",
+      "publisher_slug": "khayt"
+    }
+  ],
+  "coming": [
+    {
+      "kind": "plugin"
+    }
+  ]
+}
