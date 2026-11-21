@@ -45,7 +45,7 @@ check('JavaScript parses', () => {
     'blog/posts.js', 'scripts/prerender.js', 'scripts/check-site.js',
     'scripts/check-links.js', 'scripts/pages.js', 'scripts/stamp-posts.js',
     'scripts/stamp-sitemap.js', 'scripts/make-feed.js', 'scripts/new-post.js',
-    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/color-scheme.js', 'scripts/stamp-assets.js', 'scripts/check-freshness.js', 'scripts/make-directory.js', 'scripts/test-make-directory.js', 'directory/directory.js'];
+    'scripts/make-webp.js', 'scripts/make-fonts.js', 'scripts/make-releases.js', 'scripts/sync-static-text.js', 'scripts/make-ar.js', 'scripts/make-ar-pages.js', 'scripts/csp.js', 'scripts/color-scheme.js', 'scripts/stamp-assets.js', 'scripts/check-freshness.js', 'scripts/make-directory.js', 'scripts/test-make-directory.js', 'scripts/directory-install.js', 'directory/directory.js'];
   for (const f of files) execFileSync(process.execPath, ['--check', f]);
   return files.length + ' files';
 });

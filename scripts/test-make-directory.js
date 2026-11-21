@@ -88,6 +88,32 @@ else {
   const dl = [...lamha.matchAll(/class="dir-dl" href="([^"]+)"/g)].map(m => m[1]);
   if (!dl.length || dl.some(u => !u.startsWith('https://khaytapp.com/'))) { console.error('a download link is not https on khaytapp.com: ' + dl.join(', ')); bad++; }
 }
+// "Install in Khayt" (KhaytApp/Khayt#2622): exactly id and version, and only
+// for a connector the verified index lists at that version, not withdrawn.
+{
+  const { installHref } = require('./directory-install.js');
+  const it = { kind: 'connector', id: 'app.khayt.samples.lamha', version: '1.1.1' };
+  const row = { kind: 'connector', id: it.id, version: it.version, url: 'https://khaytapp.com/connectors/app.khayt.samples.lamha/1.1.1.json', sha256: 'a'.repeat(64) };
+  const ix = rows => ({ entries: rows });
+  const want = 'khayt://plugin/install?id=app.khayt.samples.lamha&version=1.1.1';
+  const got = installHref(it, ix([row]));
+  if (got !== want) { console.error(`install link is ${got}, want ${want}`); bad++; }
+  const none = [
+    ['no verified index', installHref(it, null)],
+    ['not listed', installHref(it, ix([]))],
+    ['another version listed', installHref(it, ix([Object.assign({}, row, { version: '1.1.2' })]))],
+    ['this version withdrawn', installHref(it, ix([Object.assign({}, row, { revoked: [{ version: '1.1.1', reason: 'x' }] })]))],
+    ['a slicer row, not a connector', installHref(it, ix([Object.assign({}, row, { kind: 'slicer' })]))],
+    ['a slicer item', installHref(Object.assign({}, it, { kind: 'slicer' }), ix([row]))],
+    ['an id that would add a field', installHref(Object.assign({}, it, { id: 'app.khayt.x&url=https://evil' }), ix([Object.assign({}, row, { id: 'app.khayt.x&url=https://evil' })]))],
+    ['a version that is not a version', installHref(Object.assign({}, it, { version: '1.1.1&x=1' }), ix([Object.assign({}, row, { version: '1.1.1&x=1' })]))],
+  ];
+  for (const [why, v] of none) if (v !== null) { console.error(`install link offered when ${why}: ${v}`); bad++; }
+  // Switched off (today), no page carries a khayt:// link at all.
+  for (const rel of ['directory/lamha/index.html', 'ar/directory/lamha/index.html', 'directory/index.html']) {
+    if (fs.existsSync(path.join(out, rel)) && /khayt:\/\//.test(fs.readFileSync(path.join(out, rel), 'utf8'))) { console.error(`${rel}: an install link while the switch is off`); bad++; }
+  }
+}
 fs.rmSync(tmp, { recursive: true, force: true });
 if (bad) process.exit(1);
-console.log(`test-make-directory: the real listing builds; ${cases.length} tampered ones are refused; markup in listing text is escaped; downloads are https on khaytapp.com`);
+console.log(`test-make-directory: the real listing builds; ${cases.length} tampered ones are refused; markup in listing text is escaped; downloads are https on khaytapp.com; the install link is id and version only, for a listed version`);

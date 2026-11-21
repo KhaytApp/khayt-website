@@ -46,9 +46,12 @@ const M = require(path.join(ROOT, 'developers', 'vendor', 'plugin-manifest.js'))
 const LIST = JSON.parse(fs.readFileSync(argAt('--listings') || path.join(ROOT, 'directory', 'listings.json'), 'utf8'));
 const STR = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory', 'strings.json'), 'utf8'));
 
-// The deep link that opens the app's own consent sheet is not built yet
-// (the Mac owns the khayt:// shapes). Until it is, the button says "coming".
+// "Install in Khayt": khayt://plugin/install?id=<id>&version=<version>, the
+// one shape the Mac accepts (KhaytApp/Khayt#2622, a draft). Off until that
+// ships: the button says "coming". On, it is offered only for a connector the
+// verified signed index lists at exactly this version (scripts/directory-install.js).
 const INSTALL_LINK = false;
+const { installHref } = require('./directory-install.js');
 const REPORT_TO = 'support@khaytapp.com';
 // khayt-cloud #220: POST {itemId, version, reason, detail <= 2 KB}, CORS for
 // https://khaytapp.com only. 404 until Turki switches it on; until then this
@@ -446,10 +449,13 @@ function itemPage(it, lang) {
   const desc = it.description.en ? (lang === 'ar' && !it.description.ar
     ? `<p class="lede" lang="en" dir="ltr">${esc(it.description.en)}</p>`
     : `<p class="lede">${own(it.description, lang)}</p>`) : '';
+  const href = INSTALL_LINK ? installHref(it, signedIndex()) : null;
   const install = it.kind === 'connector'
-    ? (INSTALL_LINK
-      ? `<a class="btn btn-accent btn-lg" href="khayt://plugin/install?id=${encodeURIComponent(it.id)}&amp;version=${encodeURIComponent(it.version)}">${t('Install in Khayt', 'ثبّت في خيط')}</a>`
-      : `<span class="dir-install-off">${t('Install in Khayt: coming', 'التثبيت في خيط: قريبًا')}</span>`) +
+    ? (href
+      ? `<a class="btn btn-accent btn-lg" href="${esc(href)}">${t('Install in Khayt', 'ثبّت في خيط')}</a>`
+      : INSTALL_LINK
+        ? `<span class="dir-install-off">${t('Install in Khayt: not in Khayt’s signed list yet', 'التثبيت في خيط: ليس في قائمة خيط الموقَّعة بعد')}</span>`
+        : `<span class="dir-install-off">${t('Install in Khayt: coming', 'التثبيت في خيط: قريبًا')}</span>`) +
       `<p class="dir-install-k">${t('Opens Khayt, which shows what it sends before anything is installed.', 'يفتح خيط، فيعرض ما يرسله قبل تثبيت أي شيء.')}</p>`
     : '';
   return `

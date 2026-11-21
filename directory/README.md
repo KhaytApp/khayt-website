@@ -27,6 +27,6 @@ signed off):
 2. Drop `noindex` and the DRAFT line in make-directory.js; add canonicals, `scripts/pages.js`
    entries (so the CSP and colour-scheme checks cover them), the sitemap and a nav or footer link;
    remove the "stays hidden" half of the check-site check.
-3. Set `INSTALL_LINK = true` once the Mac opens `khayt://plugin/install`.
+3. Set `INSTALL_LINK = true` once the Mac ships `khayt://plugin/install?id=<id>&version=<version>` (KhaytApp/Khayt#2622). The button then shows only for a connector the signed `connectors/index.json` (#158) lists at exactly that version, not withdrawn; otherwise it says "not in Khayt’s signed list yet".
 4. Point the report form at the Cloud reports endpoint once it exists (today it opens the visitor's
    email app, addressed to support@khaytapp.com).
