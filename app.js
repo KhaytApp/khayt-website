@@ -21,8 +21,8 @@
       ar: 'خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد'
     },
     'meta.desc': {
-      en: 'Free desktop app for 3D print shops: production queue, cost calculator, e-invoicing, live printers, inventory and analytics \u2014 offline, with an optional cloud.',
-      ar: 'تطبيق مجاني لمطابع الطباعة ثلاثية الأبعاد: قائمة الإنتاج وحاسبة التكلفة والفوترة الإلكترونية وربط الطابعات والمخزون والتحليلات — دون اتصال، مع سحابة اختيارية.'
+      en: 'Khayt runs a 3D print shop from your own Mac and iPhone, or Windows and Linux: quotes, production queue, filament stock, tax invoices. Free, offline-first.',
+      ar: 'يدير خيط مطبعة الطباعة ثلاثية الأبعاد من ماك وآيفون، وعلى ويندوز ولينكس: عروض أسعار وقائمة إنتاج ومخزون خيوط وفواتير ضريبية. مجاني ويعمل دون اتصال.'
     },
 
     'a11y.skip': { en: 'Skip to content', ar: 'تخطّ إلى المحتوى' },
