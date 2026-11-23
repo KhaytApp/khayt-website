@@ -12,9 +12,9 @@
    whole English page has painted (app.js keeps the same rule as a fallback). */
 try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(location.search).get('lang'),l=q||localStorage.getItem('khayt-lang');if(l==='ar'){localStorage.setItem('khayt-lang','ar');location.replace('/ar/'+location.hash)}}}catch(e){}</script>
 <title>خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد</title>
-<meta name="description" content="تطبيق مجاني لمطابع الطباعة ثلاثية الأبعاد: قائمة الإنتاج وحاسبة التكلفة والفوترة الإلكترونية وربط الطابعات والمخزون والتحليلات — دون اتصال، مع سحابة اختيارية.">
+<meta name="description" content="يدير خيط مطبعة الطباعة ثلاثية الأبعاد من ماك وآيفون، وعلى ويندوز ولينكس: عروض أسعار وقائمة إنتاج ومخزون خيوط وفواتير ضريبية. مجاني ويعمل دون اتصال.">
 <meta property="og:title" content="خيط — برنامج مجاني لإدارة مطابع الطباعة ثلاثية الأبعاد">
-<meta property="og:description" content="تطبيق مجاني لمطابع الطباعة ثلاثية الأبعاد: قائمة الإنتاج وحاسبة التكلفة والفوترة الإلكترونية وربط الطابعات والمخزون والتحليلات — دون اتصال، مع سحابة اختيارية.">
+<meta property="og:description" content="يدير خيط مطبعة الطباعة ثلاثية الأبعاد من ماك وآيفون، وعلى ويندوز ولينكس: عروض أسعار وقائمة إنتاج ومخزون خيوط وفواتير ضريبية. مجاني ويعمل دون اتصال.">
 <meta property="og:image" content="https://khaytapp.com/og-image-ar.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -715,7 +715,7 @@ try{if(!/^\/ar(\/|$)/.test(location.pathname)){var q=new URLSearchParams(locatio
 
 <script src="/data.js?v=72d2ff713e"></script>
 <script src="/render.js?v=ac1ec3bc99"></script>
-<script src="/app.js?v=2c75bad85e"></script>
+<script src="/app.js?v=885d8c5b1e"></script>
 <script>(function(){var m=document.querySelector('meta[name="color-scheme"]'),b=document.getElementById('navTheme'),K='khayt-color-scheme';if(!m||!b)return;var q=matchMedia('(prefers-color-scheme: dark)');function sys(){return q.matches?'dark':'light'}function shown(){var v=m.content;return v==='light'||v==='dark'?v:sys()}b.addEventListener('click',function(){var t=shown()==='dark'?'light':'dark',p=t===sys()?null:t;m.content=p||'light dark';try{p?localStorage.setItem(K,p):localStorage.removeItem(K)}catch(e){}});addEventListener('storage',function(e){if(e.key===K)m.content=e.newValue==='light'||e.newValue==='dark'?e.newValue:'light dark'})})();</script>
 </body>
 </html>
