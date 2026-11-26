@@ -136,8 +136,10 @@ for (const f of all.filter(f => f.endsWith('.css'))) {
 for (const f of ['sitemap.xml', 'blog/feed.xml', 'mac/appcast.xml']) {
   if (!have.has(f)) { miss(f, '(required feed)'); continue; }
   const xml = fs.readFileSync(path.join(SITE, f), 'utf8');
-  for (const m of xml.matchAll(new RegExp('https?://(?:www\\.)?' + HOST.replace('.', '\\.') + '(/[^"\'<\\s]*)?', 'gi'))) {
-    check(m[0], f, '');
+  // A feed's notes are prose: a URL there can sit in `code`, (brackets) or end a
+  // sentence, so stop at a backtick or a closing bracket and drop trailing punctuation.
+  for (const m of xml.matchAll(new RegExp('https?://(?:www\\.)?' + HOST.replace('.', '\\.') + '(/[^"\'<\\s`)\\]]*)?', 'gi'))) {
+    check(m[0].replace(/[.,;:!?]+$/, ''), f, '');
   }
 }
 
