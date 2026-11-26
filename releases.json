@@ -1,54 +1,67 @@
 {
  "releases": [
   {
+   "tag": "v4.12.0",
+   "name": "Khayt v4.12.0",
+   "date": "2026-11-26",
+   "prerelease": false,
+   "note": "Windows/Linux: Settings ▸ General ▸ Internet use, the \"Make no internet calls\" switch.",
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.12.0",
+   "assets": [
+    {
+     "name": "Khayt-4.12.0.AppImage",
+     "size": 174857095,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/Khayt-4.12.0.AppImage"
+    },
+    {
+     "name": "Khayt-4.12.0.exe",
+     "size": 153593184,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/Khayt-4.12.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.12.0.exe",
+     "size": 153857940,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/Khayt-Setup-4.12.0.exe"
+    },
+    {
+     "name": "Khayt-Setup-4.12.0.exe.blockmap",
+     "size": 161818,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/Khayt-Setup-4.12.0.exe.blockmap"
+    },
+    {
+     "name": "khayt_4.12.0_amd64.deb",
+     "size": 140645468,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/khayt_4.12.0_amd64.deb"
+    },
+    {
+     "name": "latest-linux.yml",
+     "size": 518,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/latest-linux.yml"
+    },
+    {
+     "name": "latest-mac.yml",
+     "size": 543,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/latest-mac.yml"
+    },
+    {
+     "name": "latest.yml",
+     "size": 342,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/latest.yml"
+    },
+    {
+     "name": "release-gates.json",
+     "size": 104530,
+     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.12.0/release-gates.json"
+    }
+   ]
+  },
+  {
    "tag": "v4.11.0",
    "name": "Khayt v4.11.0",
    "date": "2026-11-20",
    "prerelease": false,
    "note": "Update Khayt on every computer before you use product rates.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.11.0",
-   "assets": [
-    {
-     "name": "Khayt-4.11.0.AppImage",
-     "size": 174554289,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-4.11.0.AppImage"
-    },
-    {
-     "name": "Khayt-4.11.0.exe",
-     "size": 153335051,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-4.11.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.11.0.exe",
-     "size": 153599801,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-Setup-4.11.0.exe"
-    },
-    {
-     "name": "Khayt-Setup-4.11.0.exe.blockmap",
-     "size": 161359,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/Khayt-Setup-4.11.0.exe.blockmap"
-    },
-    {
-     "name": "khayt_4.11.0_amd64.deb",
-     "size": 140358000,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/khayt_4.11.0_amd64.deb"
-    },
-    {
-     "name": "latest-linux.yml",
-     "size": 518,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/latest-linux.yml"
-    },
-    {
-     "name": "latest-mac.yml",
-     "size": 543,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/latest-mac.yml"
-    },
-    {
-     "name": "latest.yml",
-     "size": 342,
-     "browser_download_url": "https://github.com/KhaytApp/Khayt/releases/download/v4.11.0/latest.yml"
-    }
-   ]
+   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v4.11.0"
   },
   {
    "tag": "v4.10.3",
@@ -273,14 +286,6 @@
    "prerelease": false,
    "note": "WhatsApp Business campaigns now send a template Meta has approved, and only to customers who agreed to offers on WhatsApp.",
    "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.28"
-  },
-  {
-   "tag": "v3.11.27",
-   "name": "Khayt v3.11.27",
-   "date": "2026-10-23",
-   "prerelease": false,
-   "note": "The catalogue now counts each part's quantity in a product's cost.",
-   "html_url": "https://github.com/KhaytApp/Khayt/releases/tag/v3.11.27"
   }
  ]
 }
